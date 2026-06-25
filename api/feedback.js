@@ -53,8 +53,12 @@ Respond with ONLY valid JSON, no markdown, no commentary, in this exact shape:
       assessment = { valid: false, summary: 'Could not parse assessment', suggestedFix: '', severity: 'low' };
     }
 
+    // Log EVERY submission by email (valid or not) so the inbox doubles as a searchable
+    // feedback log — Vercel functions are stateless, so there's no real filesystem to
+    // write a persistent log file to; email is the practical equivalent without new infra.
     let emailSent = false;
-    if (assessment.valid && resendKey) {
+    if (resendKey) {
+      const tag = assessment.valid ? `Validated (${assessment.severity})` : 'Not actionable';
       const emailResp = await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
@@ -64,16 +68,17 @@ Respond with ONLY valid JSON, no markdown, no commentary, in this exact shape:
         body: JSON.stringify({
           from: 'Website Feedback <onboarding@resend.dev>',
           to: ['usmanqureshi645@gmail.com'],
-          subject: `Validated Feedback (${assessment.severity}): ${assessment.summary}`,
+          subject: `[Feedback Log] ${tag}: ${assessment.summary || feedback.slice(0, 60)}`,
           html: `
-            <h2>Validated Website Feedback</h2>
-            <p>A visitor submitted feedback that the technical agent confirmed as a valid, actionable issue.</p>
+            <h2>Website Feedback Log Entry</h2>
+            <p><strong>Status:</strong> ${tag}</p>
             <p><strong>Page:</strong> ${pageContext || 'unknown'}</p>
+            <p><strong>Submitted at:</strong> ${new Date().toISOString()}</p>
             <p><strong>Original feedback:</strong> ${feedback}</p>
-            <p><strong>Agent's summary:</strong> ${assessment.summary}</p>
-            <p><strong>Suggested fix:</strong> ${assessment.suggestedFix}</p>
-            <p><strong>Severity:</strong> ${assessment.severity}</p>
-            <p>To act on this, open your Claude Code session for this website and ask it to apply the suggested fix, or describe what you'd like changed.</p>
+            <p><strong>Agent's summary:</strong> ${assessment.summary || '—'}</p>
+            <p><strong>Suggested fix:</strong> ${assessment.suggestedFix || '—'}</p>
+            <p><strong>Severity:</strong> ${assessment.severity || '—'}</p>
+            ${assessment.valid ? `<p>To act on this, open your Claude Code session for this website and ask it to apply the suggested fix.</p>` : `<p><em>The technical agent judged this not specific/actionable enough to act on automatically — review and decide if it still needs attention.</em></p>`}
           `,
         }),
       });

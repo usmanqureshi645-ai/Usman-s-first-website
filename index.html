@@ -2291,6 +2291,39 @@ animation:pulseRing 2.4s ease-out infinite;
   <button class="welcome-bot-toggle" id="feedbackToggle" title="Spot a bug? Tell us" style="background:linear-gradient(135deg,#e0c99a,#8899aa)">🐞</button>
 </div>
 
+<!-- SIGN UP WIDGET -->
+<div class="welcome-bot" style="bottom:218px">
+  <div class="welcome-bot-panel" id="signupPanel">
+    <div class="welcome-bot-header">
+      <span>✨ Sign Up</span>
+      <button class="welcome-bot-close" onclick="toggleSignup(false)">&times;</button>
+    </div>
+    <div class="welcome-bot-messages" id="signupMessages" style="gap:1rem">
+      <div class="wb-msg bot"><div class="wb-bubble">Sign up free to get your own personal AI assistant on this site, and the occasional update on new tools here.</div></div>
+      <input type="text" id="signupName" placeholder="Your name" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
+      <input type="email" id="signupEmail" placeholder="Your email" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
+      <button class="pub-btn" id="signupSubmitBtn" onclick="submitSignup()">Sign Up Free</button>
+    </div>
+  </div>
+  <button class="welcome-bot-toggle" id="signupToggle" title="Sign up free" style="background:linear-gradient(135deg,#5fd97a,#C8A96E)">✨</button>
+</div>
+
+<!-- PERSONAL GPT WIDGET -->
+<div class="welcome-bot" style="bottom:282px">
+  <div class="welcome-bot-panel" id="askPanel" style="max-height:520px">
+    <div class="welcome-bot-header">
+      <span id="askPanelTitle">💬 AskAI</span>
+      <button class="welcome-bot-close" onclick="toggleAsk(false)">&times;</button>
+    </div>
+    <div class="welcome-bot-messages" id="askMessages"></div>
+    <div style="padding:.75rem;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:.5rem">
+      <input type="text" id="askInput" placeholder="Ask me anything…" style="flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.5rem .75rem;color:var(--cream);font-family:inherit;font-size:.78rem">
+      <button class="wb-option-btn" onclick="sendAsk()">Send</button>
+    </div>
+  </div>
+  <button class="welcome-bot-toggle" id="askToggle" title="Your personal AI assistant" style="background:linear-gradient(135deg,#8899aa,#0A1628);color:#fff">🤖</button>
+</div>
+
 
 <div class="pub-modal" id="ifrs18modal">
 <div class="pub-inner">
@@ -2612,7 +2645,9 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
 
     function startConversation(){
       if(wrap.childElementCount>0) return; // don't repeat the script if already shown this session
-      addMsg('bot', "👋 Hi there! I'm the site guide. Want to know what this website is for?", [
+      const u=window.getSiteUser?.();
+      const greeting=u ? `👋 Welcome back, ${u.name.split(' ')[0]}! Want a refresher on what this website is for?` : "👋 Hi there! I'm the site guide. Want to know what this website is for?";
+      addMsg('bot', greeting, [
         { label:'Yes, tell me!', action:()=>{
             addMsg('user', 'Yes, tell me!');
             explainSite();
@@ -2707,6 +2742,124 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     };
     document.getElementById('feedbackInput').addEventListener('keydown', e=>{
       if(e.key==='Enter') window.submitFeedback();
+    });
+  })();
+
+  // Sign-up widget — stores the visitor locally so the site can personalise return visits
+  (function(){
+    const panel=document.getElementById('signupPanel');
+    const toggleBtn=document.getElementById('signupToggle');
+    let suOpened=false;
+
+    function getUser(){
+      try{ return JSON.parse(localStorage.getItem('site_user')||'null'); }catch(e){ return null; }
+    }
+    window.getSiteUser=getUser;
+
+    function reflectSignedInState(){
+      const u=getUser();
+      if(u){
+        toggleBtn.textContent='👋';
+        toggleBtn.title=`Signed up as ${u.name}`;
+      }
+    }
+    reflectSignedInState();
+
+    window.toggleSignup=function(force){
+      const u=getUser();
+      if(u){ alert(`You're already signed up as ${u.name} (${u.email}). Thanks for coming back!`); return; }
+      suOpened = typeof force==='boolean' ? force : !suOpened;
+      panel.classList.toggle('open', suOpened);
+    };
+    toggleBtn.addEventListener('click', ()=>window.toggleSignup());
+
+    window.submitSignup=async function(){
+      const name=document.getElementById('signupName').value.trim();
+      const email=document.getElementById('signupEmail').value.trim();
+      if(!name || !email.includes('@')){ alert('Please enter your name and a valid email.'); return; }
+      const btn=document.getElementById('signupSubmitBtn');
+      btn.disabled=true; btn.textContent='Signing up…';
+      try{
+        const r=await fetch('/api/signup',{
+          method:'POST',
+          headers:{'content-type':'application/json'},
+          body:JSON.stringify({name, email})
+        });
+        const data=await r.json();
+        if(!r.ok){ alert('Sorry, something went wrong: '+(data.error||'unknown error')); return; }
+        localStorage.setItem('site_user', JSON.stringify({name, email}));
+        reflectSignedInState();
+        document.getElementById('signupMessages').innerHTML=`<div class="wb-msg bot"><div class="wb-bubble">You're in, ${name.split(' ')[0]}! Check your inbox for a welcome note. Look for your personal assistant — it's now called "${name.split(' ')[0]}'sGPT" — near the chat bubble.</div></div>`;
+        updateAskBranding();
+      }catch(e){
+        alert('Connection issue — please try again.');
+      }finally{
+        btn.disabled=false; btn.textContent='Sign Up Free';
+      }
+    };
+  })();
+
+  // Personal AI assistant ("AskAI" / "[Name]'sGPT" once signed up)
+  (function(){
+    const panel=document.getElementById('askPanel');
+    const toggleBtn=document.getElementById('askToggle');
+    const wrap=document.getElementById('askMessages');
+    let askOpened=false, askHistory=[];
+
+    window.updateAskBranding=function(){
+      const u=window.getSiteUser?.();
+      document.getElementById('askPanelTitle').textContent = u ? `🤖 ${u.name.split(' ')[0]}'sGPT` : '💬 AskAI';
+    };
+    updateAskBranding();
+
+    function addAskMsg(role, html){
+      const div=document.createElement('div');
+      div.className='wb-msg '+(role==='user'?'user':'bot');
+      div.innerHTML=`<div class="wb-bubble">${html}</div>`;
+      wrap.appendChild(div);
+      wrap.scrollTop=wrap.scrollHeight;
+    }
+
+    window.toggleAsk=function(force){
+      askOpened = typeof force==='boolean' ? force : !askOpened;
+      panel.classList.toggle('open', askOpened);
+      if(askOpened && wrap.childElementCount===0){
+        const u=window.getSiteUser?.();
+        addAskMsg('bot', u ? `Hey ${u.name.split(' ')[0]}! Ask me anything — I'm a general-purpose assistant, separate from the site's specialised tools.` : "Hi! Ask me anything — general questions, not just finance. Sign up above to make this your own personalised assistant.");
+      }
+    };
+    toggleBtn.addEventListener('click', ()=>window.toggleAsk());
+
+    window.sendAsk=async function(){
+      const input=document.getElementById('askInput');
+      const text=input.value.trim();
+      if(!text) return;
+      addAskMsg('user', escapeHtml(text));
+      askHistory.push({role:'user', content:text});
+      input.value='';
+      const typing=document.createElement('div');
+      typing.className='wb-msg bot'; typing.id='askTyping';
+      typing.innerHTML=`<div class="wb-bubble"><span class="mr-typing"><span></span><span></span><span></span></span></div>`;
+      wrap.appendChild(typing); wrap.scrollTop=wrap.scrollHeight;
+      try{
+        const u=window.getSiteUser?.();
+        const r=await fetch('/api/ask',{
+          method:'POST',
+          headers:{'content-type':'application/json'},
+          body:JSON.stringify({history:askHistory, userName:u?.name})
+        });
+        const data=await r.json();
+        document.getElementById('askTyping')?.remove();
+        if(!r.ok){ addAskMsg('bot', "Sorry, I'm temporarily unavailable — please try again shortly."); return; }
+        askHistory.push({role:'assistant', content:data.text});
+        addAskMsg('bot', renderMarkdown(data.text));
+      }catch(e){
+        document.getElementById('askTyping')?.remove();
+        addAskMsg('bot', 'Connection issue — please try again.');
+      }
+    };
+    document.getElementById('askInput').addEventListener('keydown', e=>{
+      if(e.key==='Enter') window.sendAsk();
     });
   })();
 
@@ -2925,7 +3078,14 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
     trackIdx=(trackIdx+1)%order.length;
     if(trackIdx===0) order=[...playlist].sort(()=>Math.random()-0.5); // reshuffle each full cycle
     player.src=order[trackIdx];
-    if(playing) player.play().catch(()=>{});
+    if(playing) player.play().catch(()=>{}); // if this rejects, the watchdog below will retry on next interaction
+  });
+  // Also handle the (rare) case where a track errors out instead of firing 'ended'
+  player.addEventListener('error', ()=>{
+    if(!playing) return;
+    trackIdx=(trackIdx+1)%order.length;
+    player.src=order[trackIdx];
+    player.play().catch(()=>{});
   });
 
   function fadeTo(target, ms){
@@ -2971,6 +3131,18 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
   window.addEventListener('touchstart', autoStartOnce, { once:true });
   window.addEventListener('keydown', autoStartOnce, { once:true });
   window.addEventListener('scroll', autoStartOnce, { once:true });
+
+  // Watchdog: browsers sometimes silently pause background-tab audio (autoplay
+  // policy, tab throttling) without firing any event we listen to. If the user
+  // still intends music to be playing but it's actually paused, resume on the
+  // next real interaction or whenever the tab regains focus/visibility.
+  function resumeIfStuck(){
+    if(playing && player.paused){ player.play().catch(()=>{}); }
+  }
+  document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) resumeIfStuck(); });
+  window.addEventListener('focus', resumeIfStuck);
+  window.addEventListener('click', resumeIfStuck);
+  window.addEventListener('scroll', resumeIfStuck);
 
   // Ducking — temporarily silences the music (without losing "playing" state)
   // whenever the visitor is using a voice feature or inside an interactive tool section.

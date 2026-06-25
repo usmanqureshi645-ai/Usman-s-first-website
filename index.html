@@ -1405,6 +1405,403 @@ animation:pulseRing 2.4s ease-out infinite;
 
 <hr class="gold-rule">
 
+<!-- MEETING ROOM -->
+<section id="meetingroom">
+<div class="section-inner flow-reveal">
+<div class="section-header">
+<p class="section-eyebrow">Knowledge Centre</p>
+<h2 class="section-title">The Meeting Room</h2>
+<p class="section-sub">Walk into a virtual room of senior finance specialists. Pick who you want in the room, then have a real, interactive conversation — they'll ask you questions too, flag risks, share links to source material, and keep the discussion on track.</p>
+<span class="mr-usp-badge">🟢 Live AI Panel — first of its kind</span>
+</div>
+
+<div class="mr-layout">
+  <div class="mr-panel">
+    <p class="mr-pick-title">Choose who joins the room (you can add/remove anyone at any time):</p>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Sarah Chen" checked><div class="mr-avatar">SC</div><div><div class="mr-agent-name">Sarah Chen</div><div class="mr-agent-role">Big 4 Audit Partner</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="David Whitfield" checked><div class="mr-avatar">DW</div><div><div class="mr-agent-name">David Whitfield</div><div class="mr-agent-role">IFRS/FRS Technical Regulator</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Amara Singh" checked><div class="mr-avatar">AS</div><div><div class="mr-agent-name">Amara Singh</div><div class="mr-agent-role">Big 4 Tax Partner</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Marcus Lee"><div class="mr-avatar">ML</div><div><div class="mr-agent-name">Marcus Lee</div><div class="mr-agent-role">Forensic &amp; Valuations Specialist</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Elena Rossi"><div class="mr-avatar">ER</div><div><div class="mr-agent-name">Elena Rossi</div><div class="mr-agent-role">ESG &amp; Sustainability Reporting</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="James Carter"><div class="mr-avatar">JC</div><div><div class="mr-agent-name">James Carter</div><div class="mr-agent-role">Legal &amp; Regulatory Advisor</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Priya Nair"><div class="mr-avatar">PN</div><div><div class="mr-agent-name">Priya Nair</div><div class="mr-agent-role">Technical Accounting Consultant</div></div></label>
+    <button class="pub-btn" id="mrStartBtn" onclick="mrStartMeeting()" style="width:100%;margin-top:1rem">Start the Meeting</button>
+    <p class="mr-note">Simulated AI panel for technical discussion &amp; education — not formal advice.</p>
+  </div>
+
+  <div class="mr-chat">
+    <div class="mr-messages" id="mrMessages"></div>
+    <div class="mr-chips" id="mrChips" style="display:none">
+      <button class="mr-chip" onclick="mrAsk('What are the key risks under IFRS 9 ECL modelling?')">IFRS 9 ECL risks</button>
+      <button class="mr-chip" onclick="mrAsk('How should we account for a business combination under IFRS 3?')">IFRS 3 business combos</button>
+      <button class="mr-chip" onclick="mrAsk('What is changing under IFRS 18 for our income statement?')">IFRS 18 impact</button>
+      <button class="mr-chip" onclick="mrAsk('What tax risks come with a cross-border group restructuring?')">Cross-border tax risk</button>
+      <button class="mr-chip" id="mrEndBtn" onclick="mrEndMeeting()" style="border-color:var(--steel);color:var(--steel-light)">End meeting &amp; email me a summary</button>
+    </div>
+    <div class="mr-inputbar" id="mrInputBar" style="display:none">
+      <button id="mrMic" class="mr-mic" title="Speak your question">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
+        <span class="mr-mic-label">Speak</span>
+      </button>
+      <button id="mrVoiceToggle" class="mr-mic" title="Hear the panel's replies aloud" onclick="mrToggleVoice()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
+        <span class="mr-mic-label">Hear</span>
+      </button>
+      <select class="voice-gender-select" title="Voice accent">
+        <option value="female">Female voice</option>
+        <option value="male">Male voice</option>
+      </select>
+      <input type="text" id="mrInput" placeholder="Ask the panel a technical accounting question…" />
+      <button id="mrSend" onclick="mrSendMessage()">Send</button>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+<hr class="gold-rule">
+
+<!-- TEST YOUR KNOWLEDGE -->
+<section id="knowledgetest">
+<div class="section-inner flow-reveal">
+<div class="section-header">
+<p class="section-eyebrow">Interview &amp; Exam Prep</p>
+<h2 class="section-title">Test Your Knowledge</h2>
+<p class="section-sub">Not a test — a friend who helps you prepare. Pick a level, and get asked real accounting, audit, tax and interpersonal/leadership questions one at a time, with feedback and the "why this matters for interviews" context after every answer.</p>
+</div>
+
+<div id="qzLevels" class="train-grid">
+  <div class="knowledge-card" style="text-align:center;cursor:pointer" onclick="qzStart('Beginner')">
+    <span class="sector-icon">🌱</span>
+    <h3>Beginner</h3>
+    <p>Foundational accounting, audit and tax concepts — ideal for students or early-career candidates.</p>
+  </div>
+  <div class="knowledge-card" style="text-align:center;cursor:pointer" onclick="qzStart('Intermediate')">
+    <span class="sector-icon">📈</span>
+    <h3>Intermediate</h3>
+    <p>Applied technical scenarios and behavioural questions — for those with 1-4 years' experience.</p>
+  </div>
+  <div class="knowledge-card" style="text-align:center;cursor:pointer" onclick="qzStart('Expert')">
+    <span class="sector-icon">🎯</span>
+    <h3>Expert</h3>
+    <p>Senior-level technical judgement, leadership and stakeholder-management scenarios for manager+ interviews.</p>
+  </div>
+</div>
+
+<div class="mr-chat" id="qzChatWrap" style="height:560px;max-width:900px;margin:2rem auto 0;display:none">
+  <div class="mr-messages" id="qzMessages"></div>
+  <div class="mr-chips">
+    <button class="mr-chip" id="qzEndBtn" onclick="qzEndSession()" style="border-color:var(--steel);color:var(--steel-light)">End session &amp; email my feedback</button>
+  </div>
+  <div class="mr-inputbar">
+    <button id="qzMic" class="mr-mic" title="Speak your answer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
+      <span class="mr-mic-label">Speak</span>
+    </button>
+    <button id="qzVoiceToggle" class="mr-mic" title="Hear the coach's questions aloud" onclick="qzToggleVoice()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
+      <span class="mr-mic-label">Hear</span>
+    </button>
+    <select class="voice-gender-select" title="Voice accent">
+      <option value="female">Female voice</option>
+      <option value="male">Male voice</option>
+    </select>
+    <input type="text" id="qzInput" placeholder="Type your answer…" />
+    <button id="qzSend" onclick="qzSendMessage()">Send</button>
+  </div>
+</div>
+<p class="mr-note" id="qzNote" style="text-align:center;margin-top:1rem;display:none">Simulated AI interview coach — for practice and education, not a guarantee of real interview outcomes.</p>
+
+</div>
+</section>
+
+<hr class="gold-rule">
+
+<!-- LOOKING FOR A JOB -->
+<section id="jobhub">
+<div class="section-inner flow-reveal">
+<div class="section-header">
+<p class="section-eyebrow">Career Toolkit</p>
+<h2 class="section-title">Looking for a Job</h2>
+<p class="section-sub">A quick way to search live finance roles, then tailor your CV and cover letter to a specific posting with AI — in your own words, in minutes. No data is stored; everything happens in this session.</p>
+</div>
+
+<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Quick Search — Audit, Advisory &amp; Tax Roles</h3>
+<div class="job-filters" style="display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2.5rem">
+  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.linkedin.com/jobs/search/?keywords=audit&location=United%20Kingdom">LinkedIn — Audit, UK</a>
+  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.linkedin.com/jobs/search/?keywords=tax%20advisory&location=United%20Kingdom">LinkedIn — Tax Advisory, UK</a>
+  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.linkedin.com/jobs/search/?keywords=financial%20reporting&location=United%20Kingdom">LinkedIn — Financial Reporting, UK</a>
+  <a class="mr-chip" target="_blank" rel="noopener" href="https://uk.indeed.com/jobs?q=audit&l=United+Kingdom">Indeed — Audit, UK</a>
+  <a class="mr-chip" target="_blank" rel="noopener" href="https://uk.indeed.com/jobs?q=tax+advisory&l=United+Kingdom">Indeed — Tax Advisory, UK</a>
+  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.totaljobs.com/jobs/audit">TotalJobs — Audit</a>
+  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.efinancialcareers.co.uk/jobs-Audit">eFinancialCareers — Audit</a>
+</div>
+<p class="mr-note" style="margin-bottom:2.5rem">These open the relevant search directly on each site — by design, this site does not scrape or auto-apply to jobs (LinkedIn/Indeed Terms of Service prohibit automated scraping and applications). Browse there, then bring a posting back here to tailor your application.</p>
+
+<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">AI CV &amp; ATS Review</h3>
+<p class="mr-note" style="margin-bottom:1.5rem">Upload your documents — no need to retype anything. We'll act as a skeptical recruiter and ATS reviewer, score your CV, and only change what you approve.</p>
+
+<div class="job-tailor-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
+  <div>
+    <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.5rem">1. Upload your CV (.pdf, .docx, or .txt) — required</label>
+    <div class="job-upload-box" id="jobCvUploadBox" onclick="document.getElementById('jobCvFile').click()">
+      <input type="file" id="jobCvFile" accept=".pdf,.docx,.txt" style="display:none" onchange="jobHandleFile(this,'cv')">
+      <span id="jobCvUploadLabel">📄 Click to upload your CV</span>
+    </div>
+    <label style="font-size:.78rem;color:var(--steel-light);display:block;margin:1rem 0 .5rem">Optional: upload your cover letter too</label>
+    <div class="job-upload-box" id="jobCoverUploadBox" onclick="document.getElementById('jobCoverFile').click()">
+      <input type="file" id="jobCoverFile" accept=".pdf,.docx,.txt" style="display:none" onchange="jobHandleFile(this,'cover')">
+      <span id="jobCoverUploadLabel">✉️ Click to upload your cover letter (optional)</span>
+    </div>
+  </div>
+  <div>
+    <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.5rem">2. Paste the job posting (title, company, description)</label>
+    <textarea id="jobDescInput" placeholder="Paste the job description text here…" style="width:100%;min-height:260px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
+  </div>
+</div>
+<div style="text-align:center;margin-bottom:2rem">
+  <button class="pub-btn" id="jobReviewBtn" onclick="jobReviewCv()">Score My CV</button>
+</div>
+
+<!-- Step: ATS review results -->
+<div id="jobReviewResults" style="display:none;margin-bottom:2.5rem">
+  <div class="knowledge-card" style="max-width:800px;margin:0 auto">
+    <h3 style="display:flex;align-items:center;gap:.75rem">ATS &amp; Recruiter Score: <span id="jobScoreNum" style="color:var(--gold);font-size:1.4rem">—</span>/100</h3>
+    <div id="jobReviewBody" style="color:var(--steel-light);line-height:1.8;font-size:.88rem"></div>
+    <div style="text-align:center;margin-top:1.5rem;display:flex;gap:1rem;justify-content:center">
+      <button class="pub-btn" id="jobApplyChangesBtn" onclick="jobApplyChanges()">Yes, apply these changes</button>
+      <button class="pub-btn" style="background:transparent;border:1px solid var(--steel);color:var(--steel-light)" onclick="document.getElementById('jobReviewResults').style.display='none'">No, just show the score</button>
+    </div>
+  </div>
+</div>
+
+<!-- Step: tailored results -->
+<div id="jobResults" style="display:none">
+  <div class="job-tailor-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+    <div class="knowledge-card">
+      <h3>Updated CV</h3>
+      <pre id="jobCvOutput" style="white-space:pre-wrap;font-family:inherit;font-size:.82rem;color:var(--steel-light);max-height:420px;overflow-y:auto"></pre>
+      <button class="pub-btn" style="margin-top:1rem" onclick="jobDownload('jobCvOutput','updated-cv.txt')">Download CV (.txt)</button>
+    </div>
+    <div class="knowledge-card">
+      <h3>Cover Letter</h3>
+      <pre id="jobCoverOutput" style="white-space:pre-wrap;font-family:inherit;font-size:.82rem;color:var(--steel-light);max-height:420px;overflow-y:auto"></pre>
+      <button class="pub-btn" style="margin-top:1rem" onclick="jobDownload('jobCoverOutput','cover-letter.txt')">Download Letter (.txt)</button>
+    </div>
+  </div>
+  <p class="mr-note" style="text-align:center;margin-top:1.5rem">Review carefully before sending — this is an AI-generated draft, not a substitute for your own judgement. Apply directly on the employer's site or LinkedIn/Indeed — this tool does not submit applications on your behalf.</p>
+
+  <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin:2.5rem 0 1rem;text-align:center">Want a Polished Template Instead?</h3>
+  <p class="mr-note" style="text-align:center;margin-bottom:1.5rem">Free, original templates — your updated content gets dropped straight in, ready to download.</p>
+  <div class="train-grid">
+    <div class="knowledge-card" style="text-align:center"><h3>Classic Professional</h3><p>Clean serif headings, single column — works well for audit, tax and traditional finance roles.</p><button class="pub-btn" onclick="jobRenderTemplate('classic')">Use This Template</button></div>
+    <div class="knowledge-card" style="text-align:center"><h3>Modern Minimal</h3><p>Sans-serif, gold accent line, generous whitespace — works well for advisory and tech-adjacent roles.</p><button class="pub-btn" onclick="jobRenderTemplate('modern')">Use This Template</button></div>
+    <div class="knowledge-card" style="text-align:center"><h3>Compact Two-Column</h3><p>Sidebar for skills/contact, main column for experience — fits more onto one page.</p><button class="pub-btn" onclick="jobRenderTemplate('compact')">Use This Template</button></div>
+  </div>
+</div>
+
+<!-- Template preview modal -->
+<div class="pub-modal" id="jobTemplateModal">
+<div class="pub-inner" style="max-width:850px">
+<span class="closepub" onclick="closePub('jobTemplateModal')">&times;</span>
+<div style="text-align:center;margin-bottom:1rem">
+  <button class="pub-btn" onclick="window.print()">Download as PDF (Print)</button>
+</div>
+<div id="jobTemplatePreview" style="background:#fff;color:#111;border-radius:8px;overflow:hidden"></div>
+</div>
+</div>
+
+</div>
+</section>
+
+<hr class="gold-rule">
+
+<!-- IFRS VS LOCAL GAAP COMPARISON -->
+<section id="gaapcompare">
+<div class="section-inner flow-reveal">
+<div class="section-header">
+<p class="section-eyebrow">Comparative Technical Library</p>
+<h2 class="section-title">IFRS Comparison with Local GAAPs</h2>
+<p class="section-sub">This tool compares IFRS against your chosen local GAAP, topic by topic, and includes a live AI research assistant that answers comparison questions in plain language — grounded in IFRS, PCAOB and Big 4 guidance.</p>
+</div>
+
+<div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem">
+  <label for="gaapJurisdiction" style="font-size:.78rem;color:var(--gold);font-weight:700;letter-spacing:.05em;text-transform:uppercase">Compare IFRS against:</label>
+  <select id="gaapJurisdiction" class="voice-gender-select" style="height:42px" onchange="renderGaapTable()">
+    <option value="usgaap">United States — US GAAP</option>
+    <option value="ukgaap">United Kingdom — FRS 102</option>
+    <option value="irishgaap">Ireland — Irish GAAP / FRS 102</option>
+    <option value="luxgaap">Luxembourg — Lux GAAP</option>
+    <option value="ausgaap">Australia — AASB</option>
+  </select>
+</div>
+
+<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Quick Comparison Table</h3>
+<div class="gaap-table-wrap" style="overflow-x:auto;margin-bottom:1rem">
+<table class="gaap-table" style="width:100%;border-collapse:collapse;background:rgba(255,255,255,.03);border-radius:12px;overflow:hidden">
+<thead>
+<tr style="background:rgba(200,169,110,.12)">
+<th style="text-align:left;padding:.9rem 1rem;color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em">Topic</th>
+<th style="text-align:left;padding:.9rem 1rem;color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em">IFRS</th>
+<th style="text-align:left;padding:.9rem 1rem;color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em" id="gaapLocalHeader">Local GAAP</th>
+<th style="text-align:left;padding:.9rem 1rem;color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em">Slide</th>
+</tr>
+</thead>
+<tbody id="gaapTableBody" style="font-size:.85rem;color:var(--steel-light)"></tbody>
+</table>
+</div>
+<p class="section-sub" style="margin-top:0;margin-bottom:2rem">This table is a working summary, not exhaustive. Click "View Slide" on any row for a clean side-by-side breakdown, see the source documents in Further Reading below, or ask the assistant underneath.</p>
+
+<div class="further-reading" style="border-top:none;padding-top:0;margin-bottom:2.5rem">
+<h2>Further Reading &amp; Authoritative Sources</h2>
+<ul>
+<li><a href="training-assets/kpmg-ifrs-compared-to-us-gaap-2025.pdf" target="_blank" rel="noopener"><strong>KPMG — IFRS Compared to US GAAP Handbook (2025)</strong> — full clause-by-clause comparison (PDF)</a></li>
+<li><a href="https://www.ifrs.org/" target="_blank" rel="noopener">IFRS Foundation — Full Standards Library</a></li>
+<li><a href="https://pcaobus.org/" target="_blank" rel="noopener">PCAOB — Auditing Standards &amp; Guidance</a></li>
+<li><a href="https://kpmg.com/xx/en/home/insights/2022/03/ifrs-compared-to-us-gaap.html" target="_blank" rel="noopener">KPMG — IFRS Compared to US GAAP</a></li>
+<li><a href="https://www.pwc.com/us/en/cfodirect/issues/ifrs-us-gaap.html" target="_blank" rel="noopener">PwC — IFRS &amp; US GAAP: Similarities and Differences</a></li>
+<li><a href="https://www.ey.com/en_gl/ifrs-technical-resources/ifrs-vs-us-gaap" target="_blank" rel="noopener">EY — IFRS vs US GAAP Comparisons</a></li>
+<li><a href="https://www2.deloitte.com/us/en/pages/audit/articles/ifrs-us-gaap-comparison.html" target="_blank" rel="noopener">Deloitte — IFRS &amp; US GAAP Comparison Series</a></li>
+<li><a href="https://www.frc.org.uk/library/standards-codes-policy/accounting-and-reporting/frs-102/" target="_blank" rel="noopener">FRC — FRS 102 (UK &amp; Ireland basis)</a></li>
+<li><a href="https://www.aasb.gov.au/" target="_blank" rel="noopener">AASB — Australian Accounting Standards Board</a></li>
+<li><a href="https://www.cssf.lu/en/" target="_blank" rel="noopener">CSSF Luxembourg — Accounting &amp; Reporting Guidance</a></li>
+</ul>
+</div>
+
+<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Ask the GAAP Research Assistant</h3>
+<div class="mr-chat" id="gaapChatWrap" style="height:520px;max-width:900px;margin:0 auto">
+  <div class="mr-messages" id="gaapMessages"></div>
+  <div class="mr-chips" id="gaapChips">
+    <button class="mr-chip" onclick="gaapAsk('In plain English, what is the biggest practical difference between IFRS and US GAAP for leases?')">Leases: biggest difference?</button>
+    <button class="mr-chip" onclick="gaapAsk('Why does US GAAP use CECL instead of the IFRS 9 staged ECL model?')">CECL vs IFRS 9 ECL</button>
+    <button class="mr-chip" onclick="gaapAsk('Can a US company use LIFO under IFRS?')">LIFO under IFRS?</button>
+  </div>
+  <div class="mr-inputbar">
+    <button id="gaapMic" class="mr-mic" title="Speak your question">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
+      <span class="mr-mic-label">Speak</span>
+    </button>
+    <button id="gaapVoiceToggle" class="mr-mic" title="Hear the assistant's replies aloud" onclick="gaapToggleVoice()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
+      <span class="mr-mic-label">Hear</span>
+    </button>
+    <select class="voice-gender-select" title="Voice accent">
+      <option value="female">Female voice</option>
+      <option value="male">Male voice</option>
+    </select>
+    <input type="text" id="gaapInput" placeholder="Ask in plain language — e.g. 'How does goodwill differ under IFRS vs US GAAP?'" />
+    <button id="gaapSend" onclick="gaapSendMessage()">Ask</button>
+  </div>
+</div>
+<p class="mr-note" style="text-align:center;margin-top:1rem">Simulated AI research assistant grounded in IFRS, PCAOB and Big 4 comparison guidance — for education, not formal advice.</p>
+
+</div>
+</section>
+
+<hr class="gold-rule">
+
+<!-- HOT MARKET TOPICS -->
+<section id="hottopics">
+<div class="section-inner flow-reveal">
+<div class="section-header">
+<p class="section-eyebrow">Stay Current</p>
+<h2 class="section-title">Hot Market Topics</h2>
+<p class="section-sub">Curated, plain-English briefings on what's actively moving in audit, IFRS and finance right now — each with direct links to the official source for the full story. Updated periodically rather than live-streamed, so always check the linked source for the latest.</p>
+</div>
+
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem">
+  <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin:0">Industry News — Auto-Refreshed</h3>
+  <span id="newsUpdatedAt" style="font-size:.7rem;color:var(--steel)"></span>
+</div>
+<div class="knowledge-grid" id="industryNewsGrid" style="margin-bottom:3rem">
+  <div class="knowledge-card"><p class="mr-note">Loading the latest industry news…</p></div>
+</div>
+
+<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Curated Briefings</h3>
+<div class="knowledge-grid">
+
+<div class="knowledge-card">
+<span class="sector-icon">📑</span>
+<h3>IFRS 18 Transition Planning Underway</h3>
+<p>With the 1 January 2027 effective date approaching, FTSE and Fortune-listed groups are now running dry-run restatements. Audit committees are increasingly asking for early MPM reconciliation drafts well ahead of the deadline.</p>
+<div class="further-reading" style="border-top:none;padding-top:0">
+<ul>
+<li><a href="https://www.ifrs.org/news-and-events/news/" target="_blank" rel="noopener">IFRS Foundation — News &amp; Events</a></li>
+<li><a href="https://www2.deloitte.com/global/en/pages/audit/articles/ifrs-in-focus.html" target="_blank" rel="noopener">Deloitte — IFRS in Focus</a></li>
+</ul>
+</div>
+</div>
+
+<div class="knowledge-card">
+<span class="sector-icon">🌍</span>
+<h3>ISSB Adoption Accelerating Globally</h3>
+<p>The UK, Australia, Japan, Hong Kong, Singapore and Nigeria have all confirmed ISSB-aligned adoption pathways. The interoperability gap with the EU's CSRD/ESRS regime remains the single biggest practical headache for multinational reporters.</p>
+<div class="further-reading" style="border-top:none;padding-top:0">
+<ul>
+<li><a href="https://www.ifrs.org/sustainability/" target="_blank" rel="noopener">IFRS Foundation — ISSB Standards</a></li>
+<li><a href="https://www.efrag.org/en/sustainability-reporting" target="_blank" rel="noopener">EFRAG — ESRS &amp; CSRD</a></li>
+</ul>
+</div>
+</div>
+
+<div class="knowledge-card">
+<span class="sector-icon">🤖</span>
+<h3>AI-Assisted Audit Evidence Under Regulatory Scrutiny</h3>
+<p>The IAASB and FRC are both actively consulting on how professional scepticism standards should evolve as firms lean further into AI-assisted full-population testing. Expect formal standards updates within the next 1-2 reporting cycles.</p>
+<div class="further-reading" style="border-top:none;padding-top:0">
+<ul>
+<li><a href="https://www.iaasb.org/focus-areas/technology" target="_blank" rel="noopener">IAASB — Technology &amp; AI in Auditing</a></li>
+<li><a href="https://www.frc.org.uk/news/" target="_blank" rel="noopener">FRC — News &amp; Publications</a></li>
+</ul>
+</div>
+</div>
+
+<div class="knowledge-card">
+<span class="sector-icon">💳</span>
+<h3>ECL Modelling Under the Macro Spotlight</h3>
+<p>With interest rate and macro uncertainty continuing, regulators (PRA, APRA) are pushing banks to show more rigorous, multi-scenario forward-looking adjustments in their IFRS 9 ECL models rather than relying on a single base case.</p>
+<div class="further-reading" style="border-top:none;padding-top:0">
+<ul>
+<li><a href="https://www.bankofengland.co.uk/prudential-regulation/publication" target="_blank" rel="noopener">Bank of England PRA — Publications</a></li>
+<li><a href="https://kpmg.com/xx/en/our-insights/ifrg/ifrs-9-financial-instruments.html" target="_blank" rel="noopener">KPMG — IFRS 9 Insights</a></li>
+</ul>
+</div>
+</div>
+
+<div class="knowledge-card">
+<span class="sector-icon">🏛️</span>
+<h3>FRS 102 Periodic Review: Live Implementation</h3>
+<p>UK and Irish entities are now in active transition planning for the IFRS 15/16-aligned revenue and lease changes — the modified vs full retrospective transition choice is the most-debated practical question among mid-market preparers.</p>
+<div class="further-reading" style="border-top:none;padding-top:0">
+<ul>
+<li><a href="https://www.frc.org.uk/library/standards-codes-policy/accounting-and-reporting/frs-102/" target="_blank" rel="noopener">FRC — FRS 102 &amp; Periodic Review</a></li>
+<li><a href="https://www.bdo.co.uk/en-gb/insights/business-edge/frs-102" target="_blank" rel="noopener">BDO UK — FRS 102 Practical Guidance</a></li>
+</ul>
+</div>
+</div>
+
+<div class="knowledge-card">
+<span class="sector-icon">💼</span>
+<h3>Big 4 Hiring &amp; Skills Shift</h3>
+<p>Big 4 firms are increasingly recruiting for hybrid technical-plus-data profiles — IFRS/ISA depth combined with data analytics and the judgement to challenge AI-generated audit evidence rather than accept it at face value.</p>
+<div class="further-reading" style="border-top:none;padding-top:0">
+<ul>
+<li><a href="https://www.linkedin.com/company/deloitte/" target="_blank" rel="noopener">Deloitte — LinkedIn</a></li>
+<li><a href="https://www.linkedin.com/company/pwc/" target="_blank" rel="noopener">PwC — LinkedIn</a></li>
+<li><a href="https://www.linkedin.com/company/kpmg/" target="_blank" rel="noopener">KPMG — LinkedIn</a></li>
+<li><a href="https://www.linkedin.com/company/ey/" target="_blank" rel="noopener">EY — LinkedIn</a></li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<p class="mr-note" style="margin-top:2rem">Want to discuss how any of these affect your specific business? Bring it to the <a href="#meetingroom" style="color:var(--gold)">Meeting Room</a>.</p>
+
+</div>
+</section>
+
+<hr class="gold-rule">
 
 <section id="trust">
 <div class="section-inner flow-reveal">
@@ -1781,68 +2178,10 @@ animation:pulseRing 2.4s ease-out infinite;
 
 <hr class="gold-rule">
 
-<!-- MEETING ROOM -->
-<section id="meetingroom">
-<div class="section-inner flow-reveal">
-<div class="section-header">
-<p class="section-eyebrow">Knowledge Centre</p>
-<h2 class="section-title">The Meeting Room</h2>
-<p class="section-sub">Walk into a virtual room of senior finance specialists. Pick who you want in the room, then have a real, interactive conversation — they'll ask you questions too, flag risks, share links to source material, and keep the discussion on track.</p>
-<span class="mr-usp-badge">🟢 Live AI Panel — first of its kind</span>
-</div>
-
-<div class="mr-layout">
-  <div class="mr-panel">
-    <p class="mr-pick-title">Choose who joins the room (you can add/remove anyone at any time):</p>
-    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Sarah Chen" checked><div class="mr-avatar">SC</div><div><div class="mr-agent-name">Sarah Chen</div><div class="mr-agent-role">Big 4 Audit Partner</div></div></label>
-    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="David Whitfield" checked><div class="mr-avatar">DW</div><div><div class="mr-agent-name">David Whitfield</div><div class="mr-agent-role">IFRS/FRS Technical Regulator</div></div></label>
-    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Amara Singh" checked><div class="mr-avatar">AS</div><div><div class="mr-agent-name">Amara Singh</div><div class="mr-agent-role">Big 4 Tax Partner</div></div></label>
-    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Marcus Lee"><div class="mr-avatar">ML</div><div><div class="mr-agent-name">Marcus Lee</div><div class="mr-agent-role">Forensic &amp; Valuations Specialist</div></div></label>
-    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Elena Rossi"><div class="mr-avatar">ER</div><div><div class="mr-agent-name">Elena Rossi</div><div class="mr-agent-role">ESG &amp; Sustainability Reporting</div></div></label>
-    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="James Carter"><div class="mr-avatar">JC</div><div><div class="mr-agent-name">James Carter</div><div class="mr-agent-role">Legal &amp; Regulatory Advisor</div></div></label>
-    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Priya Nair"><div class="mr-avatar">PN</div><div><div class="mr-agent-name">Priya Nair</div><div class="mr-agent-role">Technical Accounting Consultant</div></div></label>
-    <button class="pub-btn" id="mrStartBtn" onclick="mrStartMeeting()" style="width:100%;margin-top:1rem">Start the Meeting</button>
-    <p class="mr-note">Simulated AI panel for technical discussion &amp; education — not formal advice.</p>
-  </div>
-
-  <div class="mr-chat">
-    <div class="mr-messages" id="mrMessages"></div>
-    <div class="mr-chips" id="mrChips" style="display:none">
-      <button class="mr-chip" onclick="mrAsk('What are the key risks under IFRS 9 ECL modelling?')">IFRS 9 ECL risks</button>
-      <button class="mr-chip" onclick="mrAsk('How should we account for a business combination under IFRS 3?')">IFRS 3 business combos</button>
-      <button class="mr-chip" onclick="mrAsk('What is changing under IFRS 18 for our income statement?')">IFRS 18 impact</button>
-      <button class="mr-chip" onclick="mrAsk('What tax risks come with a cross-border group restructuring?')">Cross-border tax risk</button>
-      <button class="mr-chip" id="mrEndBtn" onclick="mrEndMeeting()" style="border-color:var(--steel);color:var(--steel-light)">End meeting &amp; email me a summary</button>
-    </div>
-    <div class="mr-inputbar" id="mrInputBar" style="display:none">
-      <button id="mrMic" class="mr-mic" title="Speak your question">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
-        <span class="mr-mic-label">Speak</span>
-      </button>
-      <button id="mrVoiceToggle" class="mr-mic" title="Hear the panel's replies aloud" onclick="mrToggleVoice()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
-        <span class="mr-mic-label">Hear</span>
-      </button>
-      <select class="voice-gender-select" title="Voice accent">
-        <option value="female">Female voice</option>
-        <option value="male">Male voice</option>
-      </select>
-      <input type="text" id="mrInput" placeholder="Ask the panel a technical accounting question…" />
-      <button id="mrSend" onclick="mrSendMessage()">Send</button>
-    </div>
-  </div>
-</div>
-</div>
-</section>
-
-<hr class="gold-rule">
-
 <!-- CONTACT -->
 
 <hr class="gold-rule">
 
-
-<hr class="gold-rule">
 <section id="clientexp">
 <div class="section-inner">
 <div class="section-header">
@@ -1961,90 +2300,6 @@ animation:pulseRing 2.4s ease-out infinite;
 </div>
 </div>
 
-<hr class="gold-rule">
-
-<!-- IFRS VS LOCAL GAAP COMPARISON -->
-<section id="gaapcompare">
-<div class="section-inner flow-reveal">
-<div class="section-header">
-<p class="section-eyebrow">Comparative Technical Library</p>
-<h2 class="section-title">IFRS Comparison with Local GAAPs</h2>
-<p class="section-sub">This tool compares IFRS against your chosen local GAAP, topic by topic, and includes a live AI research assistant that answers comparison questions in plain language — grounded in IFRS, PCAOB and Big 4 guidance.</p>
-</div>
-
-<div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem">
-  <label for="gaapJurisdiction" style="font-size:.78rem;color:var(--gold);font-weight:700;letter-spacing:.05em;text-transform:uppercase">Compare IFRS against:</label>
-  <select id="gaapJurisdiction" class="voice-gender-select" style="height:42px" onchange="renderGaapTable()">
-    <option value="usgaap">United States — US GAAP</option>
-    <option value="ukgaap">United Kingdom — FRS 102</option>
-    <option value="irishgaap">Ireland — Irish GAAP / FRS 102</option>
-    <option value="luxgaap">Luxembourg — Lux GAAP</option>
-    <option value="ausgaap">Australia — AASB</option>
-  </select>
-</div>
-
-<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Quick Comparison Table</h3>
-<div class="gaap-table-wrap" style="overflow-x:auto;margin-bottom:1rem">
-<table class="gaap-table" style="width:100%;border-collapse:collapse;background:rgba(255,255,255,.03);border-radius:12px;overflow:hidden">
-<thead>
-<tr style="background:rgba(200,169,110,.12)">
-<th style="text-align:left;padding:.9rem 1rem;color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em">Topic</th>
-<th style="text-align:left;padding:.9rem 1rem;color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em">IFRS</th>
-<th style="text-align:left;padding:.9rem 1rem;color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em" id="gaapLocalHeader">Local GAAP</th>
-<th style="text-align:left;padding:.9rem 1rem;color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em">Slide</th>
-</tr>
-</thead>
-<tbody id="gaapTableBody" style="font-size:.85rem;color:var(--steel-light)"></tbody>
-</table>
-</div>
-<p class="section-sub" style="margin-top:0;margin-bottom:2rem">This table is a working summary, not exhaustive. Click "View Slide" on any row for a clean side-by-side breakdown, see the source documents in Further Reading below, or ask the assistant underneath.</p>
-
-<div class="further-reading" style="border-top:none;padding-top:0;margin-bottom:2.5rem">
-<h2>Further Reading &amp; Authoritative Sources</h2>
-<ul>
-<li><a href="training-assets/kpmg-ifrs-compared-to-us-gaap-2025.pdf" target="_blank" rel="noopener"><strong>KPMG — IFRS Compared to US GAAP Handbook (2025)</strong> — full clause-by-clause comparison (PDF)</a></li>
-<li><a href="https://www.ifrs.org/" target="_blank" rel="noopener">IFRS Foundation — Full Standards Library</a></li>
-<li><a href="https://pcaobus.org/" target="_blank" rel="noopener">PCAOB — Auditing Standards &amp; Guidance</a></li>
-<li><a href="https://kpmg.com/xx/en/home/insights/2022/03/ifrs-compared-to-us-gaap.html" target="_blank" rel="noopener">KPMG — IFRS Compared to US GAAP</a></li>
-<li><a href="https://www.pwc.com/us/en/cfodirect/issues/ifrs-us-gaap.html" target="_blank" rel="noopener">PwC — IFRS &amp; US GAAP: Similarities and Differences</a></li>
-<li><a href="https://www.ey.com/en_gl/ifrs-technical-resources/ifrs-vs-us-gaap" target="_blank" rel="noopener">EY — IFRS vs US GAAP Comparisons</a></li>
-<li><a href="https://www2.deloitte.com/us/en/pages/audit/articles/ifrs-us-gaap-comparison.html" target="_blank" rel="noopener">Deloitte — IFRS &amp; US GAAP Comparison Series</a></li>
-<li><a href="https://www.frc.org.uk/library/standards-codes-policy/accounting-and-reporting/frs-102/" target="_blank" rel="noopener">FRC — FRS 102 (UK &amp; Ireland basis)</a></li>
-<li><a href="https://www.aasb.gov.au/" target="_blank" rel="noopener">AASB — Australian Accounting Standards Board</a></li>
-<li><a href="https://www.cssf.lu/en/" target="_blank" rel="noopener">CSSF Luxembourg — Accounting &amp; Reporting Guidance</a></li>
-</ul>
-</div>
-
-<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Ask the GAAP Research Assistant</h3>
-<div class="mr-chat" id="gaapChatWrap" style="height:520px;max-width:900px;margin:0 auto">
-  <div class="mr-messages" id="gaapMessages"></div>
-  <div class="mr-chips" id="gaapChips">
-    <button class="mr-chip" onclick="gaapAsk('In plain English, what is the biggest practical difference between IFRS and US GAAP for leases?')">Leases: biggest difference?</button>
-    <button class="mr-chip" onclick="gaapAsk('Why does US GAAP use CECL instead of the IFRS 9 staged ECL model?')">CECL vs IFRS 9 ECL</button>
-    <button class="mr-chip" onclick="gaapAsk('Can a US company use LIFO under IFRS?')">LIFO under IFRS?</button>
-  </div>
-  <div class="mr-inputbar">
-    <button id="gaapMic" class="mr-mic" title="Speak your question">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
-      <span class="mr-mic-label">Speak</span>
-    </button>
-    <button id="gaapVoiceToggle" class="mr-mic" title="Hear the assistant's replies aloud" onclick="gaapToggleVoice()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
-      <span class="mr-mic-label">Hear</span>
-    </button>
-    <select class="voice-gender-select" title="Voice accent">
-      <option value="female">Female voice</option>
-      <option value="male">Male voice</option>
-    </select>
-    <input type="text" id="gaapInput" placeholder="Ask in plain language — e.g. 'How does goodwill differ under IFRS vs US GAAP?'" />
-    <button id="gaapSend" onclick="gaapSendMessage()">Ask</button>
-  </div>
-</div>
-<p class="mr-note" style="text-align:center;margin-top:1rem">Simulated AI research assistant grounded in IFRS, PCAOB and Big 4 comparison guidance — for education, not formal advice.</p>
-
-</div>
-</section>
-
 <!-- GAAP comparison slide modal -->
 <div class="pub-modal" id="gaapSlideModal">
 <div class="pub-inner" style="max-width:920px">
@@ -2052,264 +2307,6 @@ animation:pulseRing 2.4s ease-out infinite;
 <div id="gaapSlideContent"></div>
 </div>
 </div>
-
-<hr class="gold-rule">
-
-<!-- HOT MARKET TOPICS -->
-<section id="hottopics">
-<div class="section-inner flow-reveal">
-<div class="section-header">
-<p class="section-eyebrow">Stay Current</p>
-<h2 class="section-title">Hot Market Topics</h2>
-<p class="section-sub">Curated, plain-English briefings on what's actively moving in audit, IFRS and finance right now — each with direct links to the official source for the full story. Updated periodically rather than live-streamed, so always check the linked source for the latest.</p>
-</div>
-
-<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem">
-  <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin:0">Industry News — Auto-Refreshed</h3>
-  <span id="newsUpdatedAt" style="font-size:.7rem;color:var(--steel)"></span>
-</div>
-<div class="knowledge-grid" id="industryNewsGrid" style="margin-bottom:3rem">
-  <div class="knowledge-card"><p class="mr-note">Loading the latest industry news…</p></div>
-</div>
-
-<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Curated Briefings</h3>
-<div class="knowledge-grid">
-
-<div class="knowledge-card">
-<span class="sector-icon">📑</span>
-<h3>IFRS 18 Transition Planning Underway</h3>
-<p>With the 1 January 2027 effective date approaching, FTSE and Fortune-listed groups are now running dry-run restatements. Audit committees are increasingly asking for early MPM reconciliation drafts well ahead of the deadline.</p>
-<div class="further-reading" style="border-top:none;padding-top:0">
-<ul>
-<li><a href="https://www.ifrs.org/news-and-events/news/" target="_blank" rel="noopener">IFRS Foundation — News &amp; Events</a></li>
-<li><a href="https://www2.deloitte.com/global/en/pages/audit/articles/ifrs-in-focus.html" target="_blank" rel="noopener">Deloitte — IFRS in Focus</a></li>
-</ul>
-</div>
-</div>
-
-<div class="knowledge-card">
-<span class="sector-icon">🌍</span>
-<h3>ISSB Adoption Accelerating Globally</h3>
-<p>The UK, Australia, Japan, Hong Kong, Singapore and Nigeria have all confirmed ISSB-aligned adoption pathways. The interoperability gap with the EU's CSRD/ESRS regime remains the single biggest practical headache for multinational reporters.</p>
-<div class="further-reading" style="border-top:none;padding-top:0">
-<ul>
-<li><a href="https://www.ifrs.org/sustainability/" target="_blank" rel="noopener">IFRS Foundation — ISSB Standards</a></li>
-<li><a href="https://www.efrag.org/en/sustainability-reporting" target="_blank" rel="noopener">EFRAG — ESRS &amp; CSRD</a></li>
-</ul>
-</div>
-</div>
-
-<div class="knowledge-card">
-<span class="sector-icon">🤖</span>
-<h3>AI-Assisted Audit Evidence Under Regulatory Scrutiny</h3>
-<p>The IAASB and FRC are both actively consulting on how professional scepticism standards should evolve as firms lean further into AI-assisted full-population testing. Expect formal standards updates within the next 1-2 reporting cycles.</p>
-<div class="further-reading" style="border-top:none;padding-top:0">
-<ul>
-<li><a href="https://www.iaasb.org/focus-areas/technology" target="_blank" rel="noopener">IAASB — Technology &amp; AI in Auditing</a></li>
-<li><a href="https://www.frc.org.uk/news/" target="_blank" rel="noopener">FRC — News &amp; Publications</a></li>
-</ul>
-</div>
-</div>
-
-<div class="knowledge-card">
-<span class="sector-icon">💳</span>
-<h3>ECL Modelling Under the Macro Spotlight</h3>
-<p>With interest rate and macro uncertainty continuing, regulators (PRA, APRA) are pushing banks to show more rigorous, multi-scenario forward-looking adjustments in their IFRS 9 ECL models rather than relying on a single base case.</p>
-<div class="further-reading" style="border-top:none;padding-top:0">
-<ul>
-<li><a href="https://www.bankofengland.co.uk/prudential-regulation/publication" target="_blank" rel="noopener">Bank of England PRA — Publications</a></li>
-<li><a href="https://kpmg.com/xx/en/our-insights/ifrg/ifrs-9-financial-instruments.html" target="_blank" rel="noopener">KPMG — IFRS 9 Insights</a></li>
-</ul>
-</div>
-</div>
-
-<div class="knowledge-card">
-<span class="sector-icon">🏛️</span>
-<h3>FRS 102 Periodic Review: Live Implementation</h3>
-<p>UK and Irish entities are now in active transition planning for the IFRS 15/16-aligned revenue and lease changes — the modified vs full retrospective transition choice is the most-debated practical question among mid-market preparers.</p>
-<div class="further-reading" style="border-top:none;padding-top:0">
-<ul>
-<li><a href="https://www.frc.org.uk/library/standards-codes-policy/accounting-and-reporting/frs-102/" target="_blank" rel="noopener">FRC — FRS 102 &amp; Periodic Review</a></li>
-<li><a href="https://www.bdo.co.uk/en-gb/insights/business-edge/frs-102" target="_blank" rel="noopener">BDO UK — FRS 102 Practical Guidance</a></li>
-</ul>
-</div>
-</div>
-
-<div class="knowledge-card">
-<span class="sector-icon">💼</span>
-<h3>Big 4 Hiring &amp; Skills Shift</h3>
-<p>Big 4 firms are increasingly recruiting for hybrid technical-plus-data profiles — IFRS/ISA depth combined with data analytics and the judgement to challenge AI-generated audit evidence rather than accept it at face value.</p>
-<div class="further-reading" style="border-top:none;padding-top:0">
-<ul>
-<li><a href="https://www.linkedin.com/company/deloitte/" target="_blank" rel="noopener">Deloitte — LinkedIn</a></li>
-<li><a href="https://www.linkedin.com/company/pwc/" target="_blank" rel="noopener">PwC — LinkedIn</a></li>
-<li><a href="https://www.linkedin.com/company/kpmg/" target="_blank" rel="noopener">KPMG — LinkedIn</a></li>
-<li><a href="https://www.linkedin.com/company/ey/" target="_blank" rel="noopener">EY — LinkedIn</a></li>
-</ul>
-</div>
-</div>
-
-</div>
-
-<p class="mr-note" style="margin-top:2rem">Want to discuss how any of these affect your specific business? Bring it to the <a href="#meetingroom" style="color:var(--gold)">Meeting Room</a>.</p>
-
-</div>
-</section>
-
-<hr class="gold-rule">
-
-<!-- LOOKING FOR A JOB -->
-<section id="jobhub">
-<div class="section-inner flow-reveal">
-<div class="section-header">
-<p class="section-eyebrow">Career Toolkit</p>
-<h2 class="section-title">Looking for a Job</h2>
-<p class="section-sub">A quick way to search live finance roles, then tailor your CV and cover letter to a specific posting with AI — in your own words, in minutes. No data is stored; everything happens in this session.</p>
-</div>
-
-<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Quick Search — Audit, Advisory &amp; Tax Roles</h3>
-<div class="job-filters" style="display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2.5rem">
-  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.linkedin.com/jobs/search/?keywords=audit&location=United%20Kingdom">LinkedIn — Audit, UK</a>
-  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.linkedin.com/jobs/search/?keywords=tax%20advisory&location=United%20Kingdom">LinkedIn — Tax Advisory, UK</a>
-  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.linkedin.com/jobs/search/?keywords=financial%20reporting&location=United%20Kingdom">LinkedIn — Financial Reporting, UK</a>
-  <a class="mr-chip" target="_blank" rel="noopener" href="https://uk.indeed.com/jobs?q=audit&l=United+Kingdom">Indeed — Audit, UK</a>
-  <a class="mr-chip" target="_blank" rel="noopener" href="https://uk.indeed.com/jobs?q=tax+advisory&l=United+Kingdom">Indeed — Tax Advisory, UK</a>
-  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.totaljobs.com/jobs/audit">TotalJobs — Audit</a>
-  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.efinancialcareers.co.uk/jobs-Audit">eFinancialCareers — Audit</a>
-</div>
-<p class="mr-note" style="margin-bottom:2.5rem">These open the relevant search directly on each site — by design, this site does not scrape or auto-apply to jobs (LinkedIn/Indeed Terms of Service prohibit automated scraping and applications). Browse there, then bring a posting back here to tailor your application.</p>
-
-<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">AI CV &amp; ATS Review</h3>
-<p class="mr-note" style="margin-bottom:1.5rem">Upload your documents — no need to retype anything. We'll act as a skeptical recruiter and ATS reviewer, score your CV, and only change what you approve.</p>
-
-<div class="job-tailor-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
-  <div>
-    <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.5rem">1. Upload your CV (.pdf, .docx, or .txt) — required</label>
-    <div class="job-upload-box" id="jobCvUploadBox" onclick="document.getElementById('jobCvFile').click()">
-      <input type="file" id="jobCvFile" accept=".pdf,.docx,.txt" style="display:none" onchange="jobHandleFile(this,'cv')">
-      <span id="jobCvUploadLabel">📄 Click to upload your CV</span>
-    </div>
-    <label style="font-size:.78rem;color:var(--steel-light);display:block;margin:1rem 0 .5rem">Optional: upload your cover letter too</label>
-    <div class="job-upload-box" id="jobCoverUploadBox" onclick="document.getElementById('jobCoverFile').click()">
-      <input type="file" id="jobCoverFile" accept=".pdf,.docx,.txt" style="display:none" onchange="jobHandleFile(this,'cover')">
-      <span id="jobCoverUploadLabel">✉️ Click to upload your cover letter (optional)</span>
-    </div>
-  </div>
-  <div>
-    <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.5rem">2. Paste the job posting (title, company, description)</label>
-    <textarea id="jobDescInput" placeholder="Paste the job description text here…" style="width:100%;min-height:260px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
-  </div>
-</div>
-<div style="text-align:center;margin-bottom:2rem">
-  <button class="pub-btn" id="jobReviewBtn" onclick="jobReviewCv()">Score My CV</button>
-</div>
-
-<!-- Step: ATS review results -->
-<div id="jobReviewResults" style="display:none;margin-bottom:2.5rem">
-  <div class="knowledge-card" style="max-width:800px;margin:0 auto">
-    <h3 style="display:flex;align-items:center;gap:.75rem">ATS &amp; Recruiter Score: <span id="jobScoreNum" style="color:var(--gold);font-size:1.4rem">—</span>/100</h3>
-    <div id="jobReviewBody" style="color:var(--steel-light);line-height:1.8;font-size:.88rem"></div>
-    <div style="text-align:center;margin-top:1.5rem;display:flex;gap:1rem;justify-content:center">
-      <button class="pub-btn" id="jobApplyChangesBtn" onclick="jobApplyChanges()">Yes, apply these changes</button>
-      <button class="pub-btn" style="background:transparent;border:1px solid var(--steel);color:var(--steel-light)" onclick="document.getElementById('jobReviewResults').style.display='none'">No, just show the score</button>
-    </div>
-  </div>
-</div>
-
-<!-- Step: tailored results -->
-<div id="jobResults" style="display:none">
-  <div class="job-tailor-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
-    <div class="knowledge-card">
-      <h3>Updated CV</h3>
-      <pre id="jobCvOutput" style="white-space:pre-wrap;font-family:inherit;font-size:.82rem;color:var(--steel-light);max-height:420px;overflow-y:auto"></pre>
-      <button class="pub-btn" style="margin-top:1rem" onclick="jobDownload('jobCvOutput','updated-cv.txt')">Download CV (.txt)</button>
-    </div>
-    <div class="knowledge-card">
-      <h3>Cover Letter</h3>
-      <pre id="jobCoverOutput" style="white-space:pre-wrap;font-family:inherit;font-size:.82rem;color:var(--steel-light);max-height:420px;overflow-y:auto"></pre>
-      <button class="pub-btn" style="margin-top:1rem" onclick="jobDownload('jobCoverOutput','cover-letter.txt')">Download Letter (.txt)</button>
-    </div>
-  </div>
-  <p class="mr-note" style="text-align:center;margin-top:1.5rem">Review carefully before sending — this is an AI-generated draft, not a substitute for your own judgement. Apply directly on the employer's site or LinkedIn/Indeed — this tool does not submit applications on your behalf.</p>
-
-  <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin:2.5rem 0 1rem;text-align:center">Want a Polished Template Instead?</h3>
-  <p class="mr-note" style="text-align:center;margin-bottom:1.5rem">Free, original templates — your updated content gets dropped straight in, ready to download.</p>
-  <div class="train-grid">
-    <div class="knowledge-card" style="text-align:center"><h3>Classic Professional</h3><p>Clean serif headings, single column — works well for audit, tax and traditional finance roles.</p><button class="pub-btn" onclick="jobRenderTemplate('classic')">Use This Template</button></div>
-    <div class="knowledge-card" style="text-align:center"><h3>Modern Minimal</h3><p>Sans-serif, gold accent line, generous whitespace — works well for advisory and tech-adjacent roles.</p><button class="pub-btn" onclick="jobRenderTemplate('modern')">Use This Template</button></div>
-    <div class="knowledge-card" style="text-align:center"><h3>Compact Two-Column</h3><p>Sidebar for skills/contact, main column for experience — fits more onto one page.</p><button class="pub-btn" onclick="jobRenderTemplate('compact')">Use This Template</button></div>
-  </div>
-</div>
-
-<!-- Template preview modal -->
-<div class="pub-modal" id="jobTemplateModal">
-<div class="pub-inner" style="max-width:850px">
-<span class="closepub" onclick="closePub('jobTemplateModal')">&times;</span>
-<div style="text-align:center;margin-bottom:1rem">
-  <button class="pub-btn" onclick="window.print()">Download as PDF (Print)</button>
-</div>
-<div id="jobTemplatePreview" style="background:#fff;color:#111;border-radius:8px;overflow:hidden"></div>
-</div>
-</div>
-
-</div>
-</section>
-
-<hr class="gold-rule">
-
-<!-- TEST YOUR KNOWLEDGE -->
-<section id="knowledgetest">
-<div class="section-inner flow-reveal">
-<div class="section-header">
-<p class="section-eyebrow">Interview &amp; Exam Prep</p>
-<h2 class="section-title">Test Your Knowledge</h2>
-<p class="section-sub">Not a test — a friend who helps you prepare. Pick a level, and get asked real accounting, audit, tax and interpersonal/leadership questions one at a time, with feedback and the "why this matters for interviews" context after every answer.</p>
-</div>
-
-<div id="qzLevels" class="train-grid">
-  <div class="knowledge-card" style="text-align:center;cursor:pointer" onclick="qzStart('Beginner')">
-    <span class="sector-icon">🌱</span>
-    <h3>Beginner</h3>
-    <p>Foundational accounting, audit and tax concepts — ideal for students or early-career candidates.</p>
-  </div>
-  <div class="knowledge-card" style="text-align:center;cursor:pointer" onclick="qzStart('Intermediate')">
-    <span class="sector-icon">📈</span>
-    <h3>Intermediate</h3>
-    <p>Applied technical scenarios and behavioural questions — for those with 1-4 years' experience.</p>
-  </div>
-  <div class="knowledge-card" style="text-align:center;cursor:pointer" onclick="qzStart('Expert')">
-    <span class="sector-icon">🎯</span>
-    <h3>Expert</h3>
-    <p>Senior-level technical judgement, leadership and stakeholder-management scenarios for manager+ interviews.</p>
-  </div>
-</div>
-
-<div class="mr-chat" id="qzChatWrap" style="height:560px;max-width:900px;margin:2rem auto 0;display:none">
-  <div class="mr-messages" id="qzMessages"></div>
-  <div class="mr-chips">
-    <button class="mr-chip" id="qzEndBtn" onclick="qzEndSession()" style="border-color:var(--steel);color:var(--steel-light)">End session &amp; email my feedback</button>
-  </div>
-  <div class="mr-inputbar">
-    <button id="qzMic" class="mr-mic" title="Speak your answer">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
-      <span class="mr-mic-label">Speak</span>
-    </button>
-    <button id="qzVoiceToggle" class="mr-mic" title="Hear the coach's questions aloud" onclick="qzToggleVoice()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
-      <span class="mr-mic-label">Hear</span>
-    </button>
-    <select class="voice-gender-select" title="Voice accent">
-      <option value="female">Female voice</option>
-      <option value="male">Male voice</option>
-    </select>
-    <input type="text" id="qzInput" placeholder="Type your answer…" />
-    <button id="qzSend" onclick="qzSendMessage()">Send</button>
-  </div>
-</div>
-<p class="mr-note" id="qzNote" style="text-align:center;margin-top:1rem;display:none">Simulated AI interview coach — for practice and education, not a guarantee of real interview outcomes.</p>
-
-</div>
-</section>
 
 <hr class="gold-rule">
 

@@ -2358,47 +2358,80 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
     master=ctx.createGain();
     master.gain.value=0;
     master.connect(ctx.destination);
-    master.gain.linearRampToValueAtTime(0.045, ctx.currentTime+3);
+    master.gain.linearRampToValueAtTime(0.22, ctx.currentTime+2); // clearly audible, not background-only
 
     reverb=makeReverb(ctx);
-    const wet=ctx.createGain(); wet.gain.value=0.35;
+    const wet=ctx.createGain(); wet.gain.value=0.3;
     reverb.connect(wet); wet.connect(master);
 
-    // soft low pad — just one gentle sustained note, sits underneath the melody
-    const osc=ctx.createOscillator();
-    osc.type='sine';
-    osc.frequency.value=scale[0]/2;
-    const filt=ctx.createBiquadFilter();
-    filt.type='lowpass';
-    filt.frequency.value=500;
-    const g=ctx.createGain();
-    g.gain.value=0;
-    g.gain.linearRampToValueAtTime(0.2, ctx.currentTime+4);
-    osc.connect(filt); filt.connect(g); g.connect(master); g.connect(reverb);
-    osc.start();
-    droneNodes.push(osc);
+    // ping-pong delay — bounces echoes left/right for a lively, spacious feel
+    const delayL=ctx.createDelay(1); delayL.delayTime.value=0.28;
+    const delayR=ctx.createDelay(1); delayR.delayTime.value=0.28;
+    const panL=ctx.createStereoPanner(); panL.pan.value=-0.8;
+    const panR=ctx.createStereoPanner(); panR.pan.value=0.8;
+    const fb=ctx.createGain(); fb.gain.value=0.32;
+    delayL.connect(panL); panL.connect(delayR); delayR.connect(panR); panR.connect(fb); fb.connect(delayL);
+    const pingpongOut=ctx.createGain(); pingpongOut.gain.value=0.5;
+    panL.connect(pingpongOut); panR.connect(pingpongOut); pingpongOut.connect(master);
 
-    // lively but light melodic sequence — a simple, pleasant repeating phrase
-    // (triangle wave = warmer & more "musical" than a flat sine, still soft)
-    const phrase=[0,2,4,2,5,4,2,0,4,6,4,2]; // scale-degree sequence, gives real melodic shape
+    // soft low pad underneath — gentle sustained bass note
+    const padOsc=ctx.createOscillator();
+    padOsc.type='sine';
+    padOsc.frequency.value=scale[0]/2;
+    const padFilt=ctx.createBiquadFilter();
+    padFilt.type='lowpass';
+    padFilt.frequency.value=500;
+    const padGain=ctx.createGain();
+    padGain.gain.value=0;
+    padGain.gain.linearRampToValueAtTime(0.16, ctx.currentTime+3);
+    padOsc.connect(padFilt); padFilt.connect(padGain); padGain.connect(master);
+    padOsc.start();
+    droneNodes.push(padOsc);
+
+    // melodic phrase — alternates "piano" plucks and "flute" sustains for variety
+    const phrase=[0,2,4,2,5,4,2,0,4,6,4,2];
     let step=0;
+
+    function pianoNote(f, now){
+      // two detuned oscillators (fundamental + octave) with a fast pluck-like decay
+      const o1=ctx.createOscillator(); o1.type='triangle'; o1.frequency.value=f;
+      const o2=ctx.createOscillator(); o2.type='sine'; o2.frequency.value=f*2;
+      const g1=ctx.createGain(); g1.gain.value=0;
+      const g2=ctx.createGain(); g2.gain.value=0;
+      o1.connect(g1); o2.connect(g2);
+      g1.connect(master); g2.connect(master);
+      g1.connect(reverb); g1.connect(delayL);
+      g1.gain.linearRampToValueAtTime(0.42, now+0.012);
+      g1.gain.exponentialRampToValueAtTime(0.001, now+0.9);
+      g2.gain.linearRampToValueAtTime(0.14, now+0.012);
+      g2.gain.exponentialRampToValueAtTime(0.001, now+0.5);
+      o1.start(now); o1.stop(now+0.95);
+      o2.start(now); o2.stop(now+0.55);
+    }
+
+    function fluteNote(f, now){
+      // a sine with gentle vibrato and a softer, slower swell — airy, breathy feel
+      const osc=ctx.createOscillator(); osc.type='sine'; osc.frequency.value=f;
+      const vibrato=ctx.createOscillator(); vibrato.type='sine'; vibrato.frequency.value=5;
+      const vibratoGain=ctx.createGain(); vibratoGain.gain.value=4;
+      vibrato.connect(vibratoGain); vibratoGain.connect(osc.frequency);
+      const g=ctx.createGain(); g.gain.value=0;
+      osc.connect(g); g.connect(master); g.connect(reverb); g.connect(delayR);
+      g.gain.linearRampToValueAtTime(0.28, now+0.25);
+      g.gain.linearRampToValueAtTime(0, now+1.4);
+      vibrato.start(now); osc.start(now);
+      vibrato.stop(now+1.4); osc.stop(now+1.4);
+    }
+
     function playNote(){
       if(!playing) return;
       const idx=phrase[step % phrase.length];
-      step++;
-      const f=scale[idx % scale.length];
-      const osc=ctx.createOscillator();
-      osc.type='triangle';
-      osc.frequency.value=f;
-      const g=ctx.createGain();
-      g.gain.value=0;
-      osc.connect(g); g.connect(master); g.connect(reverb);
+      const octaveUp = step % 8 === 3 || step % 8 === 7; // occasional higher accent note
+      const f=scale[idx % scale.length] * (octaveUp ? 2 : 1);
       const now=ctx.currentTime;
-      g.gain.linearRampToValueAtTime(0.22, now+0.12);
-      g.gain.linearRampToValueAtTime(0, now+1.05);
-      osc.start(now);
-      osc.stop(now+1.1);
-      noteTimer=setTimeout(playNote, 480); // steady, lively tempo — ~125bpm feel
+      if(step % 2 === 0){ pianoNote(f, now); } else { fluteNote(f, now); }
+      step++;
+      noteTimer=setTimeout(playNote, 420); // lively, danceable tempo (~140bpm feel)
     }
     playNote();
   }

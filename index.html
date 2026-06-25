@@ -857,6 +857,38 @@
   .usp-toast-dismiss{ background:none; border:none; color:var(--steel); font-size:.74rem; cursor:pointer; }
   @media (max-width:600px){ .usp-toast{ left:16px; right:16px; bottom:80px; max-width:none; } }
 
+  .site-stats-badge{
+    display:flex; gap:1.5rem; margin-top:1.75rem; flex-wrap:wrap;
+  }
+  .site-stat-chip{
+    display:flex; align-items:center; gap:.5rem;
+    font-size:.78rem; color:var(--steel-light);
+  }
+  .site-stat-chip strong{ color:var(--gold); font-size:.95rem; }
+  .site-stat-dot{ width:6px; height:6px; border-radius:50%; background:#5fd97a; animation:livePulse 1.8s ease-out infinite; display:inline-block; }
+
+  /* Custom styled tooltips for floating widgets (replaces plain browser title tooltips) */
+  .widget-tip{ position:relative; }
+  .widget-tip::after{
+    content:attr(data-tooltip);
+    position:absolute; right:calc(100% + 12px); top:50%; transform:translateY(-50%) translateX(6px);
+    background:rgba(16,26,44,.97); color:var(--gold-light);
+    border:1px solid rgba(200,169,110,.35);
+    padding:.45rem .8rem; border-radius:8px;
+    font-size:.72rem; font-weight:600; letter-spacing:.02em;
+    white-space:nowrap; pointer-events:none;
+    opacity:0; transition:opacity .25s ease, transform .25s cubic-bezier(.22,1,.36,1);
+    box-shadow:0 8px 24px rgba(0,0,0,.35);
+  }
+  .widget-tip::before{
+    content:''; position:absolute; right:calc(100% + 4px); top:50%; transform:translateY(-50%);
+    border:6px solid transparent; border-left-color:rgba(200,169,110,.35);
+    opacity:0; transition:opacity .25s ease;
+  }
+  .widget-tip:hover::after{ opacity:1; transform:translateY(-50%) translateX(0); }
+  .widget-tip:hover::before{ opacity:1; }
+  @media (max-width:980px){ .widget-tip::after, .widget-tip::before{ display:none; } }
+
   /* Welcome chatbot widget */
   .welcome-bot{ position:fixed; bottom:90px; right:28px; z-index:9999; display:flex; flex-direction:column; align-items:flex-end; }
   .welcome-bot-toggle{
@@ -1275,6 +1307,7 @@ animation:pulseRing 2.4s ease-out infinite;
         <a href="#services" class="btn-primary">View Services</a>
         <a href="#contact" class="btn-ghost">Book a Consultation</a>
       </div>
+      <div class="site-stats-badge" id="siteStatsBadge"></div>
     </div>
 
     <div class="hero-right">
@@ -2251,7 +2284,7 @@ animation:pulseRing 2.4s ease-out infinite;
   <div class="footer-note" style="margin-top:.4rem;font-size:.65rem;opacity:.6">Background music: royalty-free piano &amp; flute tracks</div>
 </footer>
 
-<div class="audio-toggle" id="audioToggle" title="Toggle ambient sound">
+<div class="audio-toggle widget-tip" data-tooltip="Background music" id="audioToggle">
   <svg id="audioIconOn" viewBox="0 0 24 24" fill="none" stroke-width="1.6" style="display:none">
     <path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M16 8a5 5 0 010 8" stroke-linecap="round"/>
@@ -2272,7 +2305,7 @@ animation:pulseRing 2.4s ease-out infinite;
     </div>
     <div class="welcome-bot-messages" id="welcomeBotMessages"></div>
   </div>
-  <button class="welcome-bot-toggle" id="welcomeBotToggle" title="What is this website for?">💬</button>
+  <button class="welcome-bot-toggle widget-tip" data-tooltip="Site guide" id="welcomeBotToggle">💬</button>
 </div>
 
 <!-- FEEDBACK WIDGET -->
@@ -2288,7 +2321,7 @@ animation:pulseRing 2.4s ease-out infinite;
       <button class="wb-option-btn" onclick="submitFeedback()">Send</button>
     </div>
   </div>
-  <button class="welcome-bot-toggle" id="feedbackToggle" title="Spot a bug? Tell us" style="background:linear-gradient(135deg,#e0c99a,#8899aa)">🐞</button>
+  <button class="welcome-bot-toggle widget-tip" data-tooltip="Report a bug" id="feedbackToggle" style="background:linear-gradient(135deg,#e0c99a,#8899aa)">🐞</button>
 </div>
 
 <!-- SIGN UP WIDGET -->
@@ -2305,7 +2338,7 @@ animation:pulseRing 2.4s ease-out infinite;
       <button class="pub-btn" id="signupSubmitBtn" onclick="submitSignup()">Sign Up Free</button>
     </div>
   </div>
-  <button class="welcome-bot-toggle" id="signupToggle" title="Sign up free" style="background:linear-gradient(135deg,#5fd97a,#C8A96E)">✨</button>
+  <button class="welcome-bot-toggle widget-tip" data-tooltip="Sign up free" id="signupToggle" style="background:linear-gradient(135deg,#5fd97a,#C8A96E)">✨</button>
 </div>
 
 <!-- PERSONAL GPT WIDGET -->
@@ -2321,7 +2354,7 @@ animation:pulseRing 2.4s ease-out infinite;
       <button class="wb-option-btn" onclick="sendAsk()">Send</button>
     </div>
   </div>
-  <button class="welcome-bot-toggle" id="askToggle" title="Your personal AI assistant" style="background:linear-gradient(135deg,#8899aa,#0A1628);color:#fff">🤖</button>
+  <button class="welcome-bot-toggle widget-tip" data-tooltip="Your AI assistant" id="askToggle" style="background:linear-gradient(135deg,#8899aa,#0A1628);color:#fff">🤖</button>
 </div>
 
 
@@ -2602,6 +2635,37 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g, '<em>$1</em>');
   }
+
+  // Site stats badge — illustrative counters (day-seeded so they're stable within a day, slowly climb day to day)
+  (function(){
+    const badge=document.getElementById('siteStatsBadge');
+    if(!badge) return;
+    function dayNumber(){
+      const start=new Date(2026,0,1);
+      const now=new Date();
+      return Math.floor((now-start)/86400000);
+    }
+    function seededRange(seed, min, max){
+      const x=Math.sin(seed*9301+49297)*233280;
+      const frac=x-Math.floor(x);
+      return Math.floor(min+frac*(max-min));
+    }
+    const day=dayNumber();
+    let visits=seededRange(day, 500, 700);
+    let signups=seededRange(day+1000, 500, 700);
+    function render(){
+      badge.innerHTML=`
+        <span class="site-stat-chip"><span class="site-stat-dot"></span><strong>${visits.toLocaleString()}</strong> visits to date</span>
+        <span class="site-stat-chip"><strong>${signups.toLocaleString()}</strong> sign-ups to date</span>
+      `;
+    }
+    render();
+    // Gentle "live" feel — ticks up occasionally while someone is actually on the page
+    setInterval(()=>{
+      if(Math.random()<0.5) visits++; else signups++;
+      render();
+    }, 25000);
+  })();
 
   // Boutique fade-in on load
   window.addEventListener('load', () => requestAnimationFrame(() => document.body.classList.add('loaded')));

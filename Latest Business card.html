@@ -2190,7 +2190,7 @@ animation:pulseRing 2.4s ease-out infinite;
 <footer>
   <div class="footer-logo">Usman · ACCA · ACA</div>
   <div class="footer-note">Audit, IFRS & Technical Accounting & Financial Reporting Advisory Advisory · London, UK</div>
-  <div class="footer-note" style="margin-top:.4rem;font-size:.65rem;opacity:.6">Background music: "Wallpaper" by Kevin MacLeod (incompetech.com) — Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:inherit">Creative Commons BY 4.0</a></div>
+  <div class="footer-note" style="margin-top:.4rem;font-size:.65rem;opacity:.6">Background music: royalty-free piano &amp; flute tracks</div>
 </footer>
 
 <div class="audio-toggle" id="audioToggle" title="Toggle ambient sound">
@@ -2848,17 +2848,27 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
   card.addEventListener('mouseleave', ()=>{ card.style.transform=''; });
 });
 
-/* ── Ambient background music (real track, not synthesized — avoids repetitive looping) ── */
+/* ── Ambient background music: real tracks, cycled as a playlist (piano + flute + soft mix) ── */
 (function(){
   let playing=false;
   const toggle=document.getElementById('audioToggle');
   const iconOn=document.getElementById('audioIconOn');
   const iconOff=document.getElementById('audioIconOff');
 
-  const player=new Audio('audio/ambient-wallpaper.mp3');
-  player.loop=true;
+  const playlist=['audio/soft-piano.mp3','audio/flute-melody.mp3','audio/soft-background.mp3'];
+  let order=[...playlist].sort(()=>Math.random()-0.5);
+  let trackIdx=0;
+
+  const player=new Audio(order[trackIdx]);
+  player.loop=false; // advance to the next track instead of repeating the same one
   player.volume=0; // fade in once playing, never starts silent-then-jumpy
   player.preload='auto';
+  player.addEventListener('ended', ()=>{
+    trackIdx=(trackIdx+1)%order.length;
+    if(trackIdx===0) order=[...playlist].sort(()=>Math.random()-0.5); // reshuffle each full cycle
+    player.src=order[trackIdx];
+    if(playing) player.play().catch(()=>{});
+  });
 
   function fadeTo(target, ms){
     const start=player.volume;

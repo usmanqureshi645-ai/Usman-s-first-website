@@ -876,6 +876,76 @@ body{background:linear-gradient(180deg,#050b15,#0a1628)}
 .closepub{float:right;font-size:32px;color:#C8A96E;cursor:pointer}
 .toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:20px 0}
 .toc div{background:rgba(255,255,255,.04);padding:12px;border-radius:10px}
+
+/* ── Modal fade/scale transition ── */
+.pub-modal{opacity:0;transition:opacity .45s cubic-bezier(.22,1,.36,1);backdrop-filter:blur(4px)}
+.pub-modal.active{opacity:1}
+.pub-inner{transform:translateY(30px) scale(.97);opacity:0;transition:all .5s cubic-bezier(.22,1,.36,1)}
+.pub-modal.active .pub-inner{transform:translateY(0) scale(1);opacity:1}
+.pub-inner h2{color:var(--gold);margin:1.5rem 0 .6rem;font-size:1.15rem;letter-spacing:.01em}
+.pub-inner p,.pub-inner li{color:var(--steel-light);line-height:1.8;font-size:.92rem}
+.pub-inner a{color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(200,169,110,.35)}
+.pub-inner a:hover{color:var(--gold)}
+.further-reading{margin-top:2rem;padding-top:1.5rem;border-top:1px solid rgba(200,169,110,.15)}
+.further-reading ul{list-style:none}
+.further-reading li{margin-bottom:.5rem;padding-left:1rem;position:relative}
+.further-reading li::before{content:'↗';position:absolute;left:0;color:var(--gold)}
+
+/* ── Boutique card tilt ── */
+.knowledge-card,.sector-card,.service-card,.trust-card,.client-card{will-change:transform;transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s ease,border-color .4s ease}
+
+/* ── Ambient audio toggle ── */
+.audio-toggle{
+position:fixed;bottom:28px;right:28px;z-index:9998;
+width:52px;height:52px;border-radius:50%;
+background:rgba(20,32,52,.7);backdrop-filter:blur(14px);
+border:1px solid rgba(200,169,110,.3);
+display:flex;align-items:center;justify-content:center;
+cursor:pointer;transition:all .4s cubic-bezier(.22,1,.36,1);
+box-shadow:0 8px 30px rgba(0,0,0,.3);
+}
+.audio-toggle:hover{border-color:var(--gold);transform:scale(1.08)}
+.audio-toggle svg{width:20px;height:20px;stroke:var(--gold)}
+.audio-toggle.playing{box-shadow:0 0 0 0 rgba(200,169,110,.5)}
+.audio-toggle.playing::after{
+content:'';position:absolute;inset:0;border-radius:50%;
+border:1px solid rgba(200,169,110,.5);
+animation:pulseRing 2.4s ease-out infinite;
+}
+@keyframes pulseRing{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.6);opacity:0}}
+
+/* ── Meeting Room ── */
+#meetingroom{background:linear-gradient(160deg,rgba(30,58,95,.25),var(--navy) 70%)}
+.mr-layout{display:grid;grid-template-columns:280px 1fr;gap:2rem;margin-top:2rem}
+@media (max-width:900px){.mr-layout{grid-template-columns:1fr}}
+.mr-panel{background:rgba(255,255,255,.04);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.5rem}
+.mr-agent{display:flex;align-items:center;gap:.85rem;padding:.7rem;border-radius:10px;margin-bottom:.4rem;transition:background .3s}
+.mr-agent:hover{background:rgba(200,169,110,.07)}
+.mr-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold-light),var(--gold));display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--navy);flex-shrink:0;font-size:.85rem}
+.mr-agent-name{font-size:.82rem;font-weight:600;color:var(--white)}
+.mr-agent-role{font-size:.7rem;color:var(--steel-light)}
+.mr-chat{background:rgba(255,255,255,.04);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);border-radius:16px;display:flex;flex-direction:column;height:560px;overflow:hidden}
+.mr-messages{flex:1;overflow-y:auto;padding:1.75rem;display:flex;flex-direction:column;gap:1.1rem}
+.mr-msg{max-width:80%;animation:msgIn .4s cubic-bezier(.22,1,.36,1)}
+@keyframes msgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.mr-msg.user{align-self:flex-end}
+.mr-bubble{padding:.85rem 1.1rem;border-radius:14px;font-size:.86rem;line-height:1.7}
+.mr-msg.agent .mr-bubble{background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.18);color:var(--cream)}
+.mr-msg.user .mr-bubble{background:var(--gold);color:var(--navy);font-weight:500}
+.mr-msg-name{font-size:.7rem;font-weight:700;color:var(--gold);margin-bottom:.3rem;letter-spacing:.04em;text-transform:uppercase}
+.mr-typing{display:flex;gap:4px;padding:.6rem 1rem}
+.mr-typing span{width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.4;animation:typingDot 1.2s infinite}
+.mr-typing span:nth-child(2){animation-delay:.2s}
+.mr-typing span:nth-child(3){animation-delay:.4s}
+@keyframes typingDot{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+.mr-inputbar{display:flex;gap:.75rem;padding:1rem 1.25rem;border-top:1px solid rgba(255,255,255,.08)}
+.mr-inputbar input{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.75rem 1rem;color:var(--cream);font-family:inherit;font-size:.88rem}
+.mr-inputbar input:focus{outline:none;border-color:var(--gold)}
+.mr-inputbar button{background:var(--gold);color:var(--navy);border:none;border-radius:10px;padding:.75rem 1.5rem;font-weight:700;cursor:pointer;transition:background .3s,transform .2s}
+.mr-inputbar button:hover{background:var(--gold-light);transform:translateY(-1px)}
+.mr-inputbar button:disabled{opacity:.5;cursor:default;transform:none}
+.mr-enter-wrap{text-align:center;margin-top:1.5rem}
+.mr-note{font-size:.72rem;color:var(--steel);margin-top:.75rem;font-style:italic}
 </style>
 
 </head>
@@ -889,6 +959,7 @@ body{background:linear-gradient(180deg,#050b15,#0a1628)}
 <li><a href="#about">About</a></li>
 <li><a href="#services">Services</a></li>
 <li><a href="#publications">Publications</a></li>
+<li><a href="#meetingroom">Meeting Room</a></li>
 <li><a href="#contact">Contact</a></li>
 </ul>
 
@@ -1345,17 +1416,22 @@ body{background:linear-gradient(180deg,#050b15,#0a1628)}
 </div>
 <div class="knowledge-grid">
 <div class="knowledge-card">
+<span class="sector-icon">📘</span>
 <h3>IFRS 18 – Executive Masterclass</h3>
 <p>Complete technical guide covering implementation, MPMs, transition requirements, industry impacts, FTSE case studies and readiness planning.</p>
-<button class="pub-btn" onclick="document.getElementById('ifrs18modal').classList.add('active')">Open Publication</button>
+<button class="pub-btn" onclick="openPub('ifrs18modal')">Open Publication</button>
 </div>
 <div class="knowledge-card">
-<h3>FRS 102 Amendments</h3>
-<p>Revenue recognition, lease accounting, transition planning and practical implementation considerations.</p>
+<span class="sector-icon">📗</span>
+<h3>FRS 102 Amendments (2024/2026)</h3>
+<p>Revenue recognition (IFRS 15-aligned model), on-balance-sheet leases, transition options and practical implementation considerations for UK GAAP preparers.</p>
+<button class="pub-btn" onclick="openPub('frs102modal')">Open Publication</button>
 </div>
 <div class="knowledge-card">
+<span class="sector-icon">🤖</span>
 <h3>AI, Audit & Future of Finance</h3>
-<p>How AI is reshaping audit delivery, technical accounting and finance leadership.</p>
+<p>How AI is reshaping audit delivery, technical accounting and finance leadership — and what it means for the next decade of the profession.</p>
+<button class="pub-btn" onclick="openPub('aiauditmodal')">Open Publication</button>
 </div>
 </div>
 </div>
@@ -1405,16 +1481,60 @@ body{background:linear-gradient(180deg,#050b15,#0a1628)}
   </div>
 </section>
 
+<!-- MEETING ROOM -->
+<section id="meetingroom">
+<div class="section-inner flow-reveal">
+<div class="section-header">
+<p class="section-eyebrow">Knowledge Centre</p>
+<h2 class="section-title">The Meeting Room</h2>
+<p class="section-sub">Walk into a virtual room of senior finance specialists — an Audit Partner, an IFRS/FRS technical regulator, a Tax Partner and a Forensic &amp; Valuations specialist. Ask a technical question, or just listen as they proactively raise the issues that matter.</p>
+</div>
+
+<div class="mr-layout">
+  <div class="mr-panel">
+    <div class="mr-agent"><div class="mr-avatar">SC</div><div><div class="mr-agent-name">Sarah Chen</div><div class="mr-agent-role">Big 4 Audit Partner</div></div></div>
+    <div class="mr-agent"><div class="mr-avatar">DW</div><div><div class="mr-agent-name">David Whitfield</div><div class="mr-agent-role">IFRS/FRS Technical Regulator</div></div></div>
+    <div class="mr-agent"><div class="mr-avatar">AS</div><div><div class="mr-agent-name">Amara Singh</div><div class="mr-agent-role">Big 4 Tax Partner</div></div></div>
+    <div class="mr-agent"><div class="mr-avatar">ML</div><div><div class="mr-agent-name">Marcus Lee</div><div class="mr-agent-role">Forensic &amp; Valuations Specialist</div></div></div>
+    <div class="mr-agent"><div class="mr-avatar">ER</div><div><div class="mr-agent-name">Elena Rossi</div><div class="mr-agent-role">ESG &amp; Sustainability Reporting</div></div></div>
+    <p class="mr-note">Simulated AI panel for technical discussion &amp; education — not formal advice.</p>
+  </div>
+
+  <div class="mr-chat">
+    <div class="mr-messages" id="mrMessages"></div>
+    <div class="mr-inputbar">
+      <input type="text" id="mrInput" placeholder="Ask the panel a technical accounting question…" />
+      <button id="mrSend" onclick="mrSendMessage()">Send</button>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+<hr class="gold-rule">
+
 <!-- FOOTER -->
 <footer>
   <div class="footer-logo">Usman · ACCA</div>
   <div class="footer-note">Audit, IFRS & Technical Accounting & Financial Reporting Advisory Advisory · London, UK</div>
 </footer>
 
+<div class="audio-toggle" id="audioToggle" title="Toggle ambient sound">
+  <svg id="audioIconOn" viewBox="0 0 24 24" fill="none" stroke-width="1.6" style="display:none">
+    <path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M16 8a5 5 0 010 8" stroke-linecap="round"/>
+    <path d="M19 5a9 9 0 010 14" stroke-linecap="round"/>
+  </svg>
+  <svg id="audioIconOff" viewBox="0 0 24 24" fill="none" stroke-width="1.6">
+    <path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M16 9l5 6M21 9l-5 6" stroke-linecap="round"/>
+  </svg>
+</div>
+
 
 <div class="pub-modal" id="ifrs18modal">
 <div class="pub-inner">
-<span class="closepub" onclick="document.getElementById('ifrs18modal').classList.remove('active')">&times;</span>
+<span class="closepub" onclick="closePub('ifrs18modal')">&times;</span>
 <h1>IFRS 18 – Presentation of Financial Statements</h1>
 <p><strong>Author:</strong> Usman ACCA | Executive Technical Training Programme</p>
 <div class="toc">
@@ -1436,7 +1556,109 @@ body{background:linear-gradient(180deg,#050b15,#0a1628)}
 <p>Gap Assessment → Policy Design → Systems Changes → Dry Run Comparatives → Go Live.</p>
 <h2>Learning Outcomes</h2>
 <p>Participants will be able to perform impact assessments, design MPM reconciliations, update policies and prepare IFRS 18 compliant reporting.</p>
+<div class="further-reading">
+<h2>Further Reading &amp; Authoritative Sources</h2>
+<ul>
+<li><a href="https://www.ifrs.org/issued-standards/list-of-standards/ifrs-18-presentation-and-disclosure-in-financial-statements/" target="_blank" rel="noopener">IFRS Foundation — IFRS 18 Standard &amp; Project Summary</a></li>
+<li><a href="https://www2.deloitte.com/global/en/pages/audit/articles/ifrs-in-focus.html" target="_blank" rel="noopener">Deloitte IFRS in Focus — IFRS 18 Publications</a></li>
+<li><a href="https://www.pwc.com/gx/en/services/audit-assurance/ifrs-reporting.html" target="_blank" rel="noopener">PwC — IFRS 18 Reporting Guidance</a></li>
+<li><a href="https://kpmg.com/xx/en/our-insights/ifrg/2024/ifrs-18-presentation-disclosure.html" target="_blank" rel="noopener">KPMG — IFRS 18 Presentation &amp; Disclosure Insights</a></li>
+<li><a href="https://www.ey.com/en_gl/ifrs-technical-resources" target="_blank" rel="noopener">EY — IFRS Technical Resources</a></li>
+</ul>
+</div>
 </div></div>
+
+<div class="pub-modal" id="frs102modal">
+<div class="pub-inner">
+<span class="closepub" onclick="closePub('frs102modal')">&times;</span>
+<h1>FRS 102 — The Financial Reporting Standard Applicable in the UK and Republic of Ireland</h1>
+<p><strong>Author:</strong> Usman ACCA | Executive Technical Training Programme</p>
+<div class="toc">
+<div>Why the Changes</div><div>Effective Date</div><div>Revenue Model</div><div>On-BS Leases</div><div>Transition Choices</div><div>Who's Impacted</div><div>Implementation Plan</div><div>CPD Outcomes</div>
+</div>
+<h2>Background</h2>
+<p>The FRC's periodic review aligns FRS 102 more closely with IFRS 15 (revenue) and IFRS 16 (leases), closing a long-standing gap between UK GAAP and full IFRS for two of the most judgemental areas of financial reporting. The amendments apply for accounting periods beginning on or after 1 January 2026, with early adoption permitted.</p>
+<h2>Key Changes</h2>
+<ul>
+<li>New five-step revenue recognition model mirroring IFRS 15 — replacing the existing risk-and-rewards approach</li>
+<li>Identification of performance obligations and allocation of transaction price</li>
+<li>Most operating leases brought on-balance-sheet via a right-of-use asset and lease liability, IFRS 16-style</li>
+<li>Recognition exemptions for short-life and low-value leases</li>
+<li>Transition reliefs — modified retrospective vs full retrospective application</li>
+</ul>
+<h2>Who Is Most Impacted?</h2>
+<p>Construction and long-term contracting, software/SaaS, retail and leisure groups with significant property leases, and any UK GAAP reporter with multi-element or subscription-style revenue arrangements.</p>
+<h2>Readiness Roadmap</h2>
+<p>Contract &amp; Lease Population Review → Accounting Policy Redesign → Transition Method Decision → Systems &amp; Disclosure Update → Comparative Dry Run → Go Live.</p>
+<h2>Learning Outcomes</h2>
+<p>Participants will be able to map existing revenue streams and leases to the new requirements, choose an appropriate transition method, and prepare FRS 102-compliant disclosures ahead of the effective date.</p>
+<div class="further-reading">
+<h2>Further Reading &amp; Authoritative Sources</h2>
+<ul>
+<li><a href="https://www.frc.org.uk/library/standards-codes-policy/accounting-and-reporting/frs-102/" target="_blank" rel="noopener">Financial Reporting Council — FRS 102 &amp; Periodic Review</a></li>
+<li><a href="https://www2.deloitte.com/uk/en/pages/audit/articles/frs-102.html" target="_blank" rel="noopener">Deloitte UK — FRS 102 Amendments Guidance</a></li>
+<li><a href="https://www.pwc.co.uk/audit-assurance/assets/frs-102.html" target="_blank" rel="noopener">PwC UK — UK GAAP &amp; FRS 102 Insights</a></li>
+<li><a href="https://kpmg.com/uk/en/home/insights/2023/12/frs-102-periodic-review.html" target="_blank" rel="noopener">KPMG UK — FRS 102 Periodic Review Insights</a></li>
+<li><a href="https://www.bdo.co.uk/en-gb/insights/business-edge/frs-102" target="_blank" rel="noopener">BDO UK — FRS 102 Practical Guidance</a></li>
+</ul>
+</div>
+</div></div>
+
+<div class="pub-modal" id="aiauditmodal">
+<div class="pub-inner">
+<span class="closepub" onclick="closePub('aiauditmodal')">&times;</span>
+<h1>AI, Audit &amp; the Future of Finance</h1>
+<p><strong>Author:</strong> Usman ACCA | Executive Technical Training Programme</p>
+<div class="toc">
+<div>Why It Matters</div><div>Audit Use Cases</div><div>Risk &amp; Controls</div><div>Regulatory View</div><div>Skills Shift</div><div>5-Year Outlook</div><div>CPD Outcomes</div>
+</div>
+<h2>Why AI Matters to the Profession</h2>
+<p>AI-enabled audit tools — full-population testing, anomaly detection and automated journal entry analysis — are moving audit from sample-based assurance toward continuous, data-driven assurance. Big Four firms now run proprietary platforms (e.g. Deloitte Omnia, PwC Halo, KPMG Clara, EY Helix) embedding AI directly into the audit file.</p>
+<h2>Core Use Cases</h2>
+<ul>
+<li>Full-population journal entry testing and anomaly/fraud-risk scoring</li>
+<li>Automated contract and lease abstraction for IFRS 15 / IFRS 16</li>
+<li>Predictive analytics for going concern and impairment indicators</li>
+<li>Natural-language drafting support for technical memos and disclosures</li>
+<li>Continuous controls monitoring in ERP environments</li>
+</ul>
+<h2>Risk, Controls &amp; Professional Scepticism</h2>
+<p>Regulators (FRC, PCAOB, IAASB) are clear that AI augments — not replaces — professional judgement. Firms must evidence challenge of AI outputs, manage model risk, and maintain ISA 200-level professional scepticism even where tools generate the initial analysis.</p>
+<h2>Regulatory Direction</h2>
+<p>The IAASB's evolving guidance and the FRC's technology strategy both point toward standards updates addressing automated tools, audit evidence from AI systems, and firm-level governance over algorithmic risk.</p>
+<h2>Skills Shift for Finance Professionals</h2>
+<p>Demand is rising for hybrid technical-plus-data skillsets: IFRS/ISA technical depth combined with data analytics, prompt design and the judgement to interrogate AI-generated output rather than accept it at face value.</p>
+<h2>Learning Outcomes</h2>
+<p>Participants will understand current AI audit tooling, the professional scepticism implications of AI-assisted evidence, and how to position their own skillset for an AI-augmented finance function.</p>
+<div class="further-reading">
+<h2>Further Reading &amp; Authoritative Sources</h2>
+<ul>
+<li><a href="https://www.iaasb.org/focus-areas/technology" target="_blank" rel="noopener">IAASB — Technology &amp; AI in Auditing</a></li>
+<li><a href="https://www.frc.org.uk/about-the-frc/who-we-are-and-what-we-do/our-strategy/" target="_blank" rel="noopener">Financial Reporting Council — Technology Strategy</a></li>
+<li><a href="https://www2.deloitte.com/global/en/pages/audit/solutions/audit-innovation.html" target="_blank" rel="noopener">Deloitte — Audit Innovation &amp; Omnia</a></li>
+<li><a href="https://www.pwc.com/gx/en/issues/data-and-analytics.html" target="_blank" rel="noopener">PwC — Halo &amp; Audit Data Analytics</a></li>
+<li><a href="https://kpmg.com/xx/en/home/insights/2023/01/kpmg-clara.html" target="_blank" rel="noopener">KPMG Clara — Smart Audit Platform</a></li>
+</ul>
+</div>
+</div></div>
+
+<script>
+function openPub(id){
+  const m=document.getElementById(id);
+  m.style.display='block';
+  requestAnimationFrame(()=>m.classList.add('active'));
+  document.body.style.overflow='hidden';
+}
+function closePub(id){
+  const m=document.getElementById(id);
+  m.classList.remove('active');
+  document.body.style.overflow='';
+  setTimeout(()=>{ m.style.display=''; }, 480);
+}
+document.querySelectorAll('.pub-modal').forEach(m=>{
+  m.addEventListener('click', e=>{ if(e.target===m) closePub(m.id); });
+});
+</script>
 
 <script>
   // Animate trail items on scroll
@@ -1508,6 +1730,166 @@ if(entry.isIntersecting){entry.target.classList.add('visible');}
 });
 },{threshold:.15});
 flowItems.forEach(el=>flowObserver.observe(el));
+
+/* ── Boutique card tilt ── */
+document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-card,.client-card').forEach(card=>{
+  card.addEventListener('mousemove', e=>{
+    const r=card.getBoundingClientRect();
+    const x=(e.clientX-r.left)/r.width-0.5;
+    const y=(e.clientY-r.top)/r.height-0.5;
+    card.style.transform=`perspective(800px) rotateX(${(-y*4).toFixed(2)}deg) rotateY(${(x*4).toFixed(2)}deg) translateY(-6px)`;
+  });
+  card.addEventListener('mouseleave', ()=>{ card.style.transform=''; });
+});
+
+/* ── Ambient background melody (synthesized, no external file) ── */
+(function(){
+  let ctx=null, master=null, playing=false, droneNodes=[];
+  const toggle=document.getElementById('audioToggle');
+  const iconOn=document.getElementById('audioIconOn');
+  const iconOff=document.getElementById('audioIconOff');
+
+  const scale=[261.63,293.66,329.63,392.00,440.00,523.25]; // C major pentatonic-ish, soft
+
+  function startAmbient(){
+    ctx=new (window.AudioContext||window.webkitAudioContext)();
+    master=ctx.createGain();
+    master.gain.value=0;
+    master.connect(ctx.destination);
+    master.gain.linearRampToValueAtTime(0.05, ctx.currentTime+2.5);
+
+    // soft pad drone (two detuned oscillators through a slow filter)
+    const padFreqs=[scale[0]/2, scale[2]/2];
+    padFreqs.forEach((f,i)=>{
+      const osc=ctx.createOscillator();
+      osc.type='sine';
+      osc.frequency.value=f;
+      const filt=ctx.createBiquadFilter();
+      filt.type='lowpass';
+      filt.frequency.value=800;
+      const g=ctx.createGain();
+      g.gain.value=0.5;
+      osc.connect(filt); filt.connect(g); g.connect(master);
+      osc.start();
+      droneNodes.push(osc);
+    });
+
+    // gentle slow melody notes, randomly spaced, soft attack/release
+    function playNote(){
+      if(!playing) return;
+      const f=scale[Math.floor(Math.random()*scale.length)];
+      const osc=ctx.createOscillator();
+      osc.type='sine';
+      osc.frequency.value=f;
+      const g=ctx.createGain();
+      g.gain.value=0;
+      osc.connect(g); g.connect(master);
+      const now=ctx.currentTime;
+      g.gain.linearRampToValueAtTime(0.4, now+1.2);
+      g.gain.linearRampToValueAtTime(0, now+4.5);
+      osc.start(now);
+      osc.stop(now+5);
+      setTimeout(playNote, 3500+Math.random()*3500);
+    }
+    playNote();
+  }
+
+  function stopAmbient(){
+    if(!master||!ctx) return;
+    const now=ctx.currentTime;
+    master.gain.linearRampToValueAtTime(0, now+1.2);
+    setTimeout(()=>{ droneNodes.forEach(n=>{try{n.stop();}catch(e){}}); ctx.close(); ctx=null; droneNodes=[]; }, 1300);
+  }
+
+  toggle.addEventListener('click', ()=>{
+    playing=!playing;
+    toggle.classList.toggle('playing', playing);
+    iconOn.style.display = playing ? 'block' : 'none';
+    iconOff.style.display = playing ? 'none' : 'block';
+    if(playing) startAmbient(); else stopAmbient();
+  });
+})();
+
+/* ── Meeting Room chat ── */
+const mrHistory=[];
+let mrIntroduced=false;
+function mrAppendMessage(role, name, text){
+  const wrap=document.getElementById('mrMessages');
+  const div=document.createElement('div');
+  div.className='mr-msg '+(role==='user'?'user':'agent');
+  div.innerHTML = role==='user'
+    ? `<div class="mr-bubble">${text}</div>`
+    : `<div class="mr-msg-name">${name}</div><div class="mr-bubble">${text}</div>`;
+  wrap.appendChild(div);
+  wrap.scrollTop=wrap.scrollHeight;
+}
+function mrShowTyping(){
+  const wrap=document.getElementById('mrMessages');
+  const div=document.createElement('div');
+  div.className='mr-msg agent'; div.id='mrTypingIndicator';
+  div.innerHTML=`<div class="mr-bubble mr-typing"><span></span><span></span><span></span></div>`;
+  wrap.appendChild(div); wrap.scrollTop=wrap.scrollHeight;
+}
+function mrHideTyping(){
+  const t=document.getElementById('mrTypingIndicator');
+  if(t) t.remove();
+}
+async function mrCallApi(userText){
+  mrShowTyping();
+  document.getElementById('mrSend').disabled=true;
+  try{
+    const r=await fetch('/api/meeting',{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({history:mrHistory})
+    });
+    const data=await r.json();
+    mrHideTyping();
+    if(!r.ok){
+      mrAppendMessage('agent','Meeting Room','Sorry — the panel is temporarily unavailable. Please try again shortly.');
+      return;
+    }
+    mrHistory.push({role:'assistant', content:data.text});
+    mrRenderPanelReply(data.text);
+  }catch(e){
+    mrHideTyping();
+    mrAppendMessage('agent','Meeting Room','Connection issue — please try again.');
+  }finally{
+    document.getElementById('mrSend').disabled=false;
+  }
+}
+function mrRenderPanelReply(text){
+  // Splits "**Name (Role):** message" segments into separate bubbles
+  const parts=text.split(/\*\*([^*]+)\*\*:?\s*/).filter(Boolean);
+  if(parts.length<=1){ mrAppendMessage('agent','Panel', text.trim()); return; }
+  for(let i=0;i<parts.length;i+=2){
+    const name=parts[i]; const msg=parts[i+1];
+    if(name && msg) mrAppendMessage('agent', name.trim(), msg.trim());
+  }
+}
+function mrSendMessage(){
+  const input=document.getElementById('mrInput');
+  const text=input.value.trim();
+  if(!text) return;
+  mrAppendMessage('user','You', text);
+  mrHistory.push({role:'user', content:text});
+  input.value='';
+  mrCallApi(text);
+}
+document.getElementById('mrInput').addEventListener('keydown', e=>{
+  if(e.key==='Enter') mrSendMessage();
+});
+const mrSectionObserver=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    if(entry.isIntersecting && !mrIntroduced){
+      mrIntroduced=true;
+      mrHistory.push({role:'user', content:'[The user has just entered the Meeting Room. Introduce yourselves briefly as the panel — each member in 1-2 sentences — and proactively raise one current, relevant technical accounting or audit topic each, without waiting to be asked.]'});
+      mrCallApi();
+      mrSectionObserver.unobserve(entry.target);
+    }
+  });
+},{threshold:.3});
+mrSectionObserver.observe(document.getElementById('meetingroom'));
 </script>
 
 </body>

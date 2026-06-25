@@ -371,9 +371,11 @@
   /* ── SECTORS ── */
   .sectors-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 1.5px;
     background: rgba(200,169,110,0.1);
+    max-width: 1200px;
+    margin: 0 auto;
   }
 
   .sector-card {
@@ -910,6 +912,20 @@
   }
   .hover-tag.show{ opacity:1; transform:translate(-50%,-150%) scale(1); }
   @media (max-width:980px){ .hover-tag{ display:none; } }
+
+/* Job hub: upload boxes & templates */
+.job-upload-box{
+  border:2px dashed rgba(200,169,110,.35); border-radius:10px; padding:1.5rem;
+  text-align:center; cursor:pointer; transition:all .3s ease;
+  font-size:.85rem; color:var(--steel-light); background:rgba(255,255,255,.03);
+}
+.job-upload-box:hover{ border-color:var(--gold); background:rgba(200,169,110,.06); }
+.job-upload-box.has-file{ border-style:solid; border-color:rgba(95,217,122,.5); color:var(--cream); background:rgba(95,217,122,.06); }
+@media print{
+  body *{ visibility:hidden; }
+  #jobTemplatePreview, #jobTemplatePreview *{ visibility:visible; }
+  #jobTemplatePreview{ position:absolute; top:0; left:0; width:100%; }
+}
 
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
@@ -1677,7 +1693,7 @@ animation:pulseRing 2.4s ease-out infinite;
 
 <div class="mr-layout">
   <div class="mr-panel">
-    <p class="mr-pick-title">Choose who joins the room:</p>
+    <p class="mr-pick-title">Choose who joins the room (you can add/remove anyone at any time):</p>
     <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Sarah Chen" checked><div class="mr-avatar">SC</div><div><div class="mr-agent-name">Sarah Chen</div><div class="mr-agent-role">Big 4 Audit Partner</div></div></label>
     <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="David Whitfield" checked><div class="mr-avatar">DW</div><div><div class="mr-agent-name">David Whitfield</div><div class="mr-agent-role">IFRS/FRS Technical Regulator</div></div></label>
     <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Amara Singh" checked><div class="mr-avatar">AS</div><div><div class="mr-agent-name">Amara Singh</div><div class="mr-agent-role">Big 4 Tax Partner</div></div></label>
@@ -2054,27 +2070,50 @@ animation:pulseRing 2.4s ease-out infinite;
 </div>
 <p class="mr-note" style="margin-bottom:2.5rem">These open the relevant search directly on each site — by design, this site does not scrape or auto-apply to jobs (LinkedIn/Indeed Terms of Service prohibit automated scraping and applications). Browse there, then bring a posting back here to tailor your application.</p>
 
-<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">AI CV &amp; Cover Letter Tailoring</h3>
+<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">AI CV &amp; ATS Review</h3>
+<p class="mr-note" style="margin-bottom:1.5rem">Upload your documents — no need to retype anything. We'll act as a skeptical recruiter and ATS reviewer, score your CV, and only change what you approve.</p>
+
 <div class="job-tailor-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
   <div>
-    <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.5rem">1. Paste your current CV text</label>
-    <textarea id="jobCvInput" placeholder="Paste your CV content here (plain text)…" style="width:100%;min-height:220px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
+    <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.5rem">1. Upload your CV (.pdf, .docx, or .txt) — required</label>
+    <div class="job-upload-box" id="jobCvUploadBox" onclick="document.getElementById('jobCvFile').click()">
+      <input type="file" id="jobCvFile" accept=".pdf,.docx,.txt" style="display:none" onchange="jobHandleFile(this,'cv')">
+      <span id="jobCvUploadLabel">📄 Click to upload your CV</span>
+    </div>
+    <label style="font-size:.78rem;color:var(--steel-light);display:block;margin:1rem 0 .5rem">Optional: upload your cover letter too</label>
+    <div class="job-upload-box" id="jobCoverUploadBox" onclick="document.getElementById('jobCoverFile').click()">
+      <input type="file" id="jobCoverFile" accept=".pdf,.docx,.txt" style="display:none" onchange="jobHandleFile(this,'cover')">
+      <span id="jobCoverUploadLabel">✉️ Click to upload your cover letter (optional)</span>
+    </div>
   </div>
   <div>
     <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.5rem">2. Paste the job posting (title, company, description)</label>
-    <textarea id="jobDescInput" placeholder="Paste the job description text here…" style="width:100%;min-height:220px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
+    <textarea id="jobDescInput" placeholder="Paste the job description text here…" style="width:100%;min-height:260px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
   </div>
 </div>
 <div style="text-align:center;margin-bottom:2rem">
-  <button class="pub-btn" id="jobTailorBtn" onclick="jobTailor()">Tailor My CV &amp; Cover Letter</button>
+  <button class="pub-btn" id="jobReviewBtn" onclick="jobReviewCv()">Score My CV</button>
 </div>
 
+<!-- Step: ATS review results -->
+<div id="jobReviewResults" style="display:none;margin-bottom:2.5rem">
+  <div class="knowledge-card" style="max-width:800px;margin:0 auto">
+    <h3 style="display:flex;align-items:center;gap:.75rem">ATS &amp; Recruiter Score: <span id="jobScoreNum" style="color:var(--gold);font-size:1.4rem">—</span>/100</h3>
+    <div id="jobReviewBody" style="color:var(--steel-light);line-height:1.8;font-size:.88rem"></div>
+    <div style="text-align:center;margin-top:1.5rem;display:flex;gap:1rem;justify-content:center">
+      <button class="pub-btn" id="jobApplyChangesBtn" onclick="jobApplyChanges()">Yes, apply these changes</button>
+      <button class="pub-btn" style="background:transparent;border:1px solid var(--steel);color:var(--steel-light)" onclick="document.getElementById('jobReviewResults').style.display='none'">No, just show the score</button>
+    </div>
+  </div>
+</div>
+
+<!-- Step: tailored results -->
 <div id="jobResults" style="display:none">
   <div class="job-tailor-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
     <div class="knowledge-card">
-      <h3>Tailored CV</h3>
+      <h3>Updated CV</h3>
       <pre id="jobCvOutput" style="white-space:pre-wrap;font-family:inherit;font-size:.82rem;color:var(--steel-light);max-height:420px;overflow-y:auto"></pre>
-      <button class="pub-btn" style="margin-top:1rem" onclick="jobDownload('jobCvOutput','tailored-cv.txt')">Download CV (.txt)</button>
+      <button class="pub-btn" style="margin-top:1rem" onclick="jobDownload('jobCvOutput','updated-cv.txt')">Download CV (.txt)</button>
     </div>
     <div class="knowledge-card">
       <h3>Cover Letter</h3>
@@ -2082,7 +2121,26 @@ animation:pulseRing 2.4s ease-out infinite;
       <button class="pub-btn" style="margin-top:1rem" onclick="jobDownload('jobCoverOutput','cover-letter.txt')">Download Letter (.txt)</button>
     </div>
   </div>
-  <p class="mr-note" style="text-align:center;margin-top:1.5rem">Review carefully before sending — this is an AI-generated first draft, not a substitute for your own judgement. Apply directly on the employer's site or LinkedIn/Indeed — this tool does not submit applications on your behalf.</p>
+  <p class="mr-note" style="text-align:center;margin-top:1.5rem">Review carefully before sending — this is an AI-generated draft, not a substitute for your own judgement. Apply directly on the employer's site or LinkedIn/Indeed — this tool does not submit applications on your behalf.</p>
+
+  <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin:2.5rem 0 1rem;text-align:center">Want a Polished Template Instead?</h3>
+  <p class="mr-note" style="text-align:center;margin-bottom:1.5rem">Free, original templates — your updated content gets dropped straight in, ready to download.</p>
+  <div class="train-grid">
+    <div class="knowledge-card" style="text-align:center"><h3>Classic Professional</h3><p>Clean serif headings, single column — works well for audit, tax and traditional finance roles.</p><button class="pub-btn" onclick="jobRenderTemplate('classic')">Use This Template</button></div>
+    <div class="knowledge-card" style="text-align:center"><h3>Modern Minimal</h3><p>Sans-serif, gold accent line, generous whitespace — works well for advisory and tech-adjacent roles.</p><button class="pub-btn" onclick="jobRenderTemplate('modern')">Use This Template</button></div>
+    <div class="knowledge-card" style="text-align:center"><h3>Compact Two-Column</h3><p>Sidebar for skills/contact, main column for experience — fits more onto one page.</p><button class="pub-btn" onclick="jobRenderTemplate('compact')">Use This Template</button></div>
+  </div>
+</div>
+
+<!-- Template preview modal -->
+<div class="pub-modal" id="jobTemplateModal">
+<div class="pub-inner" style="max-width:850px">
+<span class="closepub" onclick="closePub('jobTemplateModal')">&times;</span>
+<div style="text-align:center;margin-bottom:1rem">
+  <button class="pub-btn" onclick="window.print()">Download as PDF (Print)</button>
+</div>
+<div id="jobTemplatePreview" style="background:#fff;color:#111;border-radius:8px;overflow:hidden"></div>
+</div>
 </div>
 
 </div>
@@ -2153,7 +2211,7 @@ animation:pulseRing 2.4s ease-out infinite;
         <ul class="contact-info-list">
           <li>
             <span class="contact-icon">✉</span>
-            <a href="mailto:qusman238@gmail.com" class="contact-link">qusman238@gmail.com</a>
+            <a href="mailto:usmanqureshi645@gmail.com" class="contact-link">usmanqureshi645@gmail.com</a>
           </li>
           <li>
             <span class="contact-icon">📞</span>
@@ -2681,18 +2739,18 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       toastEl.querySelector('.usp-toast-dismiss').addEventListener('click', hideToast);
     }
     function showToast(){
-      if(shown>=4) return; // cap how many times we interrupt a single session
+      if(shown>=12) return; // generous cap — this is a USP we want visible, not naggy
       renderToast(toasts[i % toasts.length]);
       i++;
       requestAnimationFrame(()=>toastEl.classList.add('show'));
       shown++;
       sessionStorage.setItem(seenKey, shown);
-      setTimeout(hideToast, 9000);
+      setTimeout(hideToast, 10000);
     }
     function hideToast(){ toastEl.classList.remove('show'); }
 
-    setTimeout(showToast, 8000); // first nudge after settling in
-    setInterval(showToast, 45000); // then a gentle reminder every 45s, capped at 4/session
+    setTimeout(showToast, 4000); // first nudge shortly after arrival
+    setInterval(showToast, 30000); // then a reminder every 30s, capped at 12/session
   })();
 
   // Cursor-reactive hover tags on key feature cards
@@ -3105,18 +3163,36 @@ function wireMic(micBtnId, inputId, sendFn){
 wireMic('mrMic','mrInput', mrSendMessage);
 
 let mrSelectedAgents=[];
+let mrMeetingStarted=false;
 function mrStartMeeting(){
   mrSelectedAgents=Array.from(document.querySelectorAll('.mr-agent-check:checked')).map(c=>c.value);
   if(mrSelectedAgents.length===0){ alert('Please pick at least one specialist to join the room.'); return; }
-  document.querySelector('.mr-pick-title').parentElement.querySelectorAll('.mr-agent-pick').forEach(el=>{
-    if(!el.querySelector('input').checked) el.style.display='none';
-  });
-  document.getElementById('mrStartBtn').style.display='none';
+  mrMeetingStarted=true;
+  document.getElementById('mrStartBtn').textContent='Meeting in progress — tick/untick anyone above to add or remove them';
+  document.getElementById('mrStartBtn').disabled=true;
   document.getElementById('mrChips').style.display='flex';
   document.getElementById('mrInputBar').style.display='flex';
   mrHistory.push({role:'user', content:`[The user has just entered the Meeting Room. The following specialists are present: ${mrSelectedAgents.join(', ')}. Greet the user warmly as the panel (briefly, 1-2 sentences total from one spokesperson), explain in one sentence what the Meeting Room is for, then ask for the user's name. Do not discuss any technical topic yet — just greet and ask their name.]`});
   mrCallApi();
 }
+
+// Allow adding/removing specialists mid-conversation, not just before it starts
+document.querySelectorAll('.mr-agent-check').forEach(checkbox=>{
+  checkbox.addEventListener('change', ()=>{
+    if(!mrMeetingStarted) return;
+    const name=checkbox.value;
+    const nowSelected=Array.from(document.querySelectorAll('.mr-agent-check:checked')).map(c=>c.value);
+    if(nowSelected.length===0){
+      checkbox.checked=true; // never allow an empty room mid-conversation
+      alert('At least one specialist needs to stay in the room.');
+      return;
+    }
+    const joined=checkbox.checked;
+    mrSelectedAgents=nowSelected;
+    mrHistory.push({role:'user', content:`[${name} has just ${joined ? 'joined' : 'left'} the meeting room. Current specialists present: ${mrSelectedAgents.join(', ')}. Briefly acknowledge this change in one short sentence from any present member, then continue the discussion naturally — do not restart the conversation or re-greet the user.]`});
+    mrCallApi();
+  });
+});
 
 function mrEndMeeting(){
   const email=prompt("What email address should I send the discussion summary to?");
@@ -3572,18 +3648,96 @@ document.getElementById('qzInput').addEventListener('keydown', e=>{
 });
 wireMic('qzMic','qzInput', qzSendMessage);
 
-/* ── Job hub: AI CV & cover letter tailoring ── */
-async function jobTailor(){
-  const cv=document.getElementById('jobCvInput').value.trim();
+/* ── Job hub: file upload, ATS review, tailoring, templates ── */
+let jobCvText='', jobCoverText='';
+
+function loadScriptOnce(src){
+  return new Promise((resolve, reject)=>{
+    if(document.querySelector(`script[src="${src}"]`)){ resolve(); return; }
+    const s=document.createElement('script');
+    s.src=src; s.onload=resolve; s.onerror=reject;
+    document.head.appendChild(s);
+  });
+}
+
+async function extractFileText(file){
+  const ext=file.name.split('.').pop().toLowerCase();
+  if(ext==='txt'){
+    return await file.text();
+  }
+  if(ext==='pdf'){
+    await loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js');
+    window.pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+    const buf=await file.arrayBuffer();
+    const pdf=await window.pdfjsLib.getDocument({data:buf}).promise;
+    let text='';
+    for(let i=1;i<=pdf.numPages;i++){
+      const page=await pdf.getPage(i);
+      const content=await page.getTextContent();
+      text += content.items.map(it=>it.str).join(' ') + '\n';
+    }
+    return text;
+  }
+  if(ext==='docx'){
+    await loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js');
+    const buf=await file.arrayBuffer();
+    const result=await window.mammoth.extractRawText({arrayBuffer:buf});
+    return result.value;
+  }
+  throw new Error('Unsupported file type');
+}
+
+async function jobHandleFile(input, kind){
+  const file=input.files[0];
+  if(!file) return;
+  const box=document.getElementById(kind==='cv' ? 'jobCvUploadBox' : 'jobCoverUploadBox');
+  const label=document.getElementById(kind==='cv' ? 'jobCvUploadLabel' : 'jobCoverUploadLabel');
+  label.textContent=`Extracting text from ${file.name}…`;
+  try{
+    const text=await extractFileText(file);
+    if(kind==='cv') jobCvText=text; else jobCoverText=text;
+    box.classList.add('has-file');
+    label.textContent=`✓ ${file.name} — ${text.trim().split(/\s+/).length} words extracted`;
+  }catch(e){
+    label.textContent=`Couldn't read ${file.name} — try a .txt, .pdf or .docx file`;
+    box.classList.remove('has-file');
+  }
+}
+
+async function jobReviewCv(){
   const jd=document.getElementById('jobDescInput').value.trim();
-  if(!cv || !jd){ alert('Please paste both your CV text and the job posting text first.'); return; }
-  const btn=document.getElementById('jobTailorBtn');
-  btn.disabled=true; btn.textContent='Tailoring…';
+  if(!jobCvText){ alert('Please upload your CV first.'); return; }
+  if(!jd){ alert('Please paste the job description first.'); return; }
+  const btn=document.getElementById('jobReviewBtn');
+  btn.disabled=true; btn.textContent='Reviewing…';
+  try{
+    const r=await fetch('/api/cv-review',{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({cv:jobCvText, jobDescription:jd})
+    });
+    const data=await r.json();
+    if(!r.ok){ alert('Sorry, something went wrong: '+(data.error||'unknown error')); return; }
+    document.getElementById('jobScoreNum').textContent=data.score ?? '—';
+    document.getElementById('jobReviewBody').innerHTML=renderMarkdown(data.review||'');
+    document.getElementById('jobReviewResults').style.display='block';
+    document.getElementById('jobReviewResults').scrollIntoView({behavior:'smooth'});
+  }catch(e){
+    alert('Connection issue — please try again.');
+  }finally{
+    btn.disabled=false; btn.textContent='Score My CV';
+  }
+}
+
+async function jobApplyChanges(){
+  const jd=document.getElementById('jobDescInput').value.trim();
+  const btn=document.getElementById('jobApplyChangesBtn');
+  btn.disabled=true; btn.textContent='Updating…';
   try{
     const r=await fetch('/api/tailor',{
       method:'POST',
       headers:{'content-type':'application/json'},
-      body:JSON.stringify({cv, jobDescription:jd})
+      body:JSON.stringify({cv:jobCvText, jobDescription:jd, coverLetter:jobCoverText})
     });
     const data=await r.json();
     if(!r.ok){ alert('Sorry, something went wrong: '+(data.error||'unknown error')); return; }
@@ -3594,9 +3748,10 @@ async function jobTailor(){
   }catch(e){
     alert('Connection issue — please try again.');
   }finally{
-    btn.disabled=false; btn.textContent='Tailor My CV & Cover Letter';
+    btn.disabled=false; btn.textContent='Yes, apply these changes';
   }
 }
+
 function jobDownload(elId, filename){
   const text=document.getElementById(elId).textContent;
   const blob=new Blob([text], {type:'text/plain'});
@@ -3605,6 +3760,35 @@ function jobDownload(elId, filename){
   a.href=url; a.download=filename;
   document.body.appendChild(a); a.click(); a.remove();
   URL.revokeObjectURL(url);
+}
+
+function jobRenderTemplate(style){
+  const cv=document.getElementById('jobCvOutput').textContent || jobCvText;
+  const lines=cv.split('\n').filter(l=>l.trim());
+  const nameLine=lines[0]||'Your Name';
+  const bodyHtml=lines.slice(1).map(l=>{
+    const t=l.trim();
+    if(/^[A-Z][A-Z\s&]{3,40}$/.test(t)) return `<h3 style="margin-top:1.2em">${t}</h3>`;
+    if(/^[-•]/.test(t)) return `<li>${t.replace(/^[-•]\s*/,'')}</li>`;
+    return `<p style="margin:.3em 0">${t}</p>`;
+  }).join('\n');
+
+  const templates={
+    classic:`<div style="font-family:Georgia,serif;padding:3rem;max-width:800px;margin:0 auto">
+      <h1 style="border-bottom:2px solid #333;padding-bottom:.5rem">${nameLine}</h1>
+      <div style="font-size:.95rem;line-height:1.6">${bodyHtml}</div>
+    </div>`,
+    modern:`<div style="font-family:Arial,sans-serif;padding:3rem;max-width:800px;margin:0 auto">
+      <h1 style="color:#C8A96E;border-left:4px solid #C8A96E;padding-left:1rem">${nameLine}</h1>
+      <div style="font-size:.9rem;line-height:1.7;color:#222">${bodyHtml}</div>
+    </div>`,
+    compact:`<div style="font-family:Arial,sans-serif;display:grid;grid-template-columns:220px 1fr;min-height:600px">
+      <div style="background:#0A1628;color:#fff;padding:2rem"><h2 style="color:#C8A96E">${nameLine}</h2></div>
+      <div style="padding:2rem;font-size:.88rem;line-height:1.6">${bodyHtml}</div>
+    </div>`,
+  };
+  document.getElementById('jobTemplatePreview').innerHTML=templates[style]||templates.classic;
+  openPub('jobTemplateModal');
 }
 </script>
 

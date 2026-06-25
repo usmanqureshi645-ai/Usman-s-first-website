@@ -2064,6 +2064,15 @@ animation:pulseRing 2.4s ease-out infinite;
 <p class="section-sub">Curated, plain-English briefings on what's actively moving in audit, IFRS and finance right now — each with direct links to the official source for the full story. Updated periodically rather than live-streamed, so always check the linked source for the latest.</p>
 </div>
 
+<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem">
+  <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin:0">Industry News — Auto-Refreshed</h3>
+  <span id="newsUpdatedAt" style="font-size:.7rem;color:var(--steel)"></span>
+</div>
+<div class="knowledge-grid" id="industryNewsGrid" style="margin-bottom:3rem">
+  <div class="knowledge-card"><p class="mr-note">Loading the latest industry news…</p></div>
+</div>
+
+<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Curated Briefings</h3>
 <div class="knowledge-grid">
 
 <div class="knowledge-card">
@@ -2736,6 +2745,27 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       if(Math.random()<0.3 && signups < visits - 50) signups++;
       render();
     }, 25000);
+  })();
+
+  // Industry News — fetches the auto-refreshed JSON (kept current by a background research agent)
+  (function(){
+    const grid=document.getElementById('industryNewsGrid');
+    if(!grid) return;
+    fetch('data/market-news.json').then(r=>r.json()).then(data=>{
+      const updated=new Date(data.updatedAt);
+      document.getElementById('newsUpdatedAt').textContent=`Last updated ${updated.toLocaleString(undefined,{dateStyle:'medium',timeStyle:'short'})}`;
+      grid.innerHTML=data.items.map(item=>`
+        <div class="knowledge-card">
+          <span class="sector-icon">📰</span>
+          <h3>${item.title}</h3>
+          <p>${item.summary}</p>
+          <div class="further-reading" style="border-top:none;padding-top:0">
+            <ul><li><a href="${item.url}" target="_blank" rel="noopener">${item.source} — Read more</a></li></ul>
+          </div>
+        </div>`).join('');
+    }).catch(()=>{
+      grid.innerHTML=`<div class="knowledge-card"><p class="mr-note">Couldn't load the latest news right now — see the curated briefings below instead.</p></div>`;
+    });
   })();
 
   // Boutique office parallax background — moves with the cursor, depth-layered

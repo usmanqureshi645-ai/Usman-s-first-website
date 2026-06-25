@@ -727,13 +727,13 @@
   }
 
   /* ── RESPONSIVE ── */
-  @media (max-width: 1180px) {
+  @media (max-width: 1380px) {
     nav { padding: 0 1.75rem; }
     .nav-links { gap: 1.1rem; }
     .nav-links a { font-size: 0.68rem; }
   }
 
-  @media (max-width: 980px) {
+  @media (max-width: 1300px) {
     .nav-toggle{ display:flex; }
     .nav-links{
       position:fixed;
@@ -825,7 +825,7 @@
     transition:opacity .4s ease;
     will-change:transform;
   }
-  @media (max-width:980px){ .cursor-glow{ display:none; } }
+  @media (max-width:1300px){ .cursor-glow{ display:none; } }
 
   .btn-primary, .btn-ghost, .pub-btn, .mr-inputbar button{ will-change:transform; }
 
@@ -1005,6 +1005,8 @@ body{background:linear-gradient(180deg,#050b15,#0a1628)}
 .pub-modal.active{opacity:1}
 .pub-inner{transform:translateY(30px) scale(.97);opacity:0;transition:all .5s cubic-bezier(.22,1,.36,1)}
 .pub-modal.active .pub-inner{transform:translateY(0) scale(1);opacity:1}
+.pub-back{display:inline-flex;align-items:center;gap:.4rem;color:var(--steel-light);font-size:.78rem;text-decoration:none;border:none!important;margin-bottom:1rem;cursor:pointer;background:none;font-family:inherit}
+.pub-back:hover{color:var(--gold)}
 .pub-inner h2{color:var(--gold);margin:1.5rem 0 .6rem;font-size:1.15rem;letter-spacing:.01em}
 .pub-inner p,.pub-inner li{color:var(--steel-light);line-height:1.8;font-size:.92rem}
 .pub-inner a{color:var(--gold-light);text-decoration:none;border-bottom:1px solid rgba(200,169,110,.35)}
@@ -1100,6 +1102,7 @@ animation:pulseRing 2.4s ease-out infinite;
   background:rgba(200,169,110,.25);border-color:var(--gold);
   animation:micPulse 1.3s ease-in-out infinite;
 }
+.mr-mic.active{ background:rgba(200,169,110,.22); border-color:var(--gold); color:var(--gold-light); }
 @keyframes micPulse{0%,100%{box-shadow:0 0 0 0 rgba(200,169,110,.5)}50%{box-shadow:0 0 0 8px rgba(200,169,110,0)}}
 </style>
 
@@ -1116,6 +1119,8 @@ animation:pulseRing 2.4s ease-out infinite;
 <li><a href="#publications">Publications</a></li>
 <li><a href="#trainings">Trainings</a></li>
 <li><a href="#gaapcompare">GAAP Compare</a></li>
+<li><a href="#jobhub">Job Search</a></li>
+<li><a href="#knowledgetest">Knowledge Test</a></li>
 <li><a href="#meetingroom" class="nav-meetingroom">Meeting Room <span class="live-dot"></span></a></li>
 <li><a href="#contact">Contact</a></li>
 </ul>
@@ -1218,40 +1223,36 @@ animation:pulseRing 2.4s ease-out infinite;
       <div class="trail-item">
         <div class="trail-dot"></div>
         <div class="trail-period">June 2025 – Present</div>
-        <div class="trail-role">Field Manager</div>
         <div class="trail-company">
           <span class="firm-badge">Deloitte UK</span>
           London, UK
         </div>
-        <p class="trail-desc">Leading multi-location audit teams of up to 22 people across complex, multi-jurisdiction engagements. Responsible for a portfolio of approximately £20–30M in combined fees, overseeing quality, commercial performance and stakeholder relationships at the highest level. Mentoring and developing the next generation of audit professionals.</p>
+        <p class="trail-desc">Leading multi-location audit teams of up to 22 people across complex, multi-jurisdiction engagements at Deloitte UK. Responsible for a portfolio of approximately £20–30M in combined fees, overseeing quality, commercial performance and stakeholder relationships at the highest level. Mentoring and developing the next generation of audit professionals.</p>
       </div>
 
       <div class="trail-item">
         <div class="trail-dot"></div>
         <div class="trail-period">November 2022 – June 2025</div>
-        <div class="trail-role">Assistant Manager (I → II → III)</div>
         <div class="trail-company">
           <span class="firm-badge">Deloitte UK</span>
           London, UK
         </div>
-        <p class="trail-desc">Progressed rapidly through three levels of Assistant Manager in under three years. Led end-to-end audit delivery across banking, automotive and media sectors. Built technical authority in IFRS 9 modelling, IFRS 15 revenue recognition and IFRS 3 acquisition accounting. Established strong client relationships and represented Deloitte at senior management and board level.</p>
+        <p class="trail-desc">Progressed rapidly at Deloitte UK in under three years. Led end-to-end audit delivery across banking, automotive and media sectors. Built technical authority in IFRS 9 modelling, IFRS 15 revenue recognition and IFRS 3 acquisition accounting. Established strong client relationships and represented Deloitte at senior management and board level.</p>
       </div>
 
       <div class="trail-item">
         <div class="trail-dot"></div>
         <div class="trail-period">February 2022 – July 2022</div>
-        <div class="trail-role">Senior Audit Executive (Secondment)</div>
         <div class="trail-company">
           <span class="firm-badge">BDO Bahrain</span>
           Manama, Bahrain
         </div>
-        <p class="trail-desc">Six-month international secondment managing audit engagements in the Gulf market. Expanded international outlook and exposure to IFRS application in a Middle Eastern regulatory environment, including banking and financial services clients.</p>
+        <p class="trail-desc">Six-month international secondment with BDO Bahrain, managing audit engagements in the Gulf market. Expanded international outlook and exposure to IFRS application in a Middle Eastern regulatory environment, including banking and financial services clients.</p>
       </div>
 
       <div class="trail-item">
         <div class="trail-dot"></div>
         <div class="trail-period">June 2017 – December 2021</div>
-        <div class="trail-role">Senior Associate (I → II)</div>
         <div class="trail-company">
           <span class="firm-badge">PwC</span>
           Pakistan
@@ -1579,6 +1580,9 @@ animation:pulseRing 2.4s ease-out infinite;
       <button id="mrMic" class="mr-mic" title="Speak your question">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
       </button>
+      <button id="mrVoiceToggle" class="mr-mic" title="Hear the panel's replies aloud" onclick="mrToggleVoice()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
+      </button>
       <input type="text" id="mrInput" placeholder="Ask the panel a technical accounting question…" />
       <button id="mrSend" onclick="mrSendMessage()">Send</button>
     </div>
@@ -1602,7 +1606,12 @@ animation:pulseRing 2.4s ease-out infinite;
 <h2 class="section-title">Representative Engagement Portfolio</h2>
 </div>
 <div class="client-showcase">
-<div class="client-card"><h3>Dowlais Group Plc</h3><p>FTSE listed group • Going Concern • IAS 36 • IFRS 10 • Acquisition Accounting</p></div>
+<div class="client-card"><h3>Dowlais Group Plc</h3><p>FTSE listed group (UK) • Going Concern • IAS 36 • IFRS 10 • Acquisition Accounting</p></div>
+<div class="client-card"><h3>Lloyds Bank plc</h3><p>UK listed bank • Credit Risk • Regulatory Capital • Treasury Audits</p></div>
+<div class="client-card"><h3>Group 1 Automotive UK</h3><p>UK dealership group • Inventory Valuation • Manufacturer Rebates • IFRS 2</p></div>
+<div class="client-card"><h3>GKN Automotive Ltd</h3><p>UK automotive manufacturer • Group Reporting • Impairment • IAS 36</p></div>
+<div class="client-card"><h3>Moonbug Entertainment Ltd</h3><p>UK media &amp; IP group • IFRS 15 • Royalty Income • Revenue Modelling</p></div>
+<div class="client-card"><h3>Birmingham Women &amp; Children's NHS</h3><p>UK NHS Trust • Public Sector Reporting • Going Concern</p></div>
 <div class="client-card"><h3>Askari Bank Ltd</h3><p>IFRS 9 • ECL Modelling • Treasury • Regulatory Capital • Credit Risk</p></div>
 <div class="client-card"><h3>Cisco LLC</h3><p>Technology • IFRS 15 • IT Controls • Data Governance</p></div>
 <div class="client-card"><h3>Pharmanovia Holdco</h3><p>Pharmaceuticals • Global Audit • Acquisitions • Provisions</p></div>
@@ -1751,6 +1760,104 @@ animation:pulseRing 2.4s ease-out infinite;
 
 <hr class="gold-rule">
 
+<!-- LOOKING FOR A JOB -->
+<section id="jobhub">
+<div class="section-inner flow-reveal">
+<div class="section-header">
+<p class="section-eyebrow">Career Toolkit</p>
+<h2 class="section-title">Looking for a Job</h2>
+<p class="section-sub">A quick way to search live finance roles, then tailor your CV and cover letter to a specific posting with AI — in your own words, in minutes. No data is stored; everything happens in this session.</p>
+</div>
+
+<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Quick Search — Audit, Advisory &amp; Tax Roles</h3>
+<div class="job-filters" style="display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2.5rem">
+  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.linkedin.com/jobs/search/?keywords=audit&location=United%20Kingdom">LinkedIn — Audit, UK</a>
+  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.linkedin.com/jobs/search/?keywords=tax%20advisory&location=United%20Kingdom">LinkedIn — Tax Advisory, UK</a>
+  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.linkedin.com/jobs/search/?keywords=financial%20reporting&location=United%20Kingdom">LinkedIn — Financial Reporting, UK</a>
+  <a class="mr-chip" target="_blank" rel="noopener" href="https://uk.indeed.com/jobs?q=audit&l=United+Kingdom">Indeed — Audit, UK</a>
+  <a class="mr-chip" target="_blank" rel="noopener" href="https://uk.indeed.com/jobs?q=tax+advisory&l=United+Kingdom">Indeed — Tax Advisory, UK</a>
+  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.totaljobs.com/jobs/audit">TotalJobs — Audit</a>
+  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.efinancialcareers.co.uk/jobs-Audit">eFinancialCareers — Audit</a>
+</div>
+<p class="mr-note" style="margin-bottom:2.5rem">These open the relevant search directly on each site — by design, this site does not scrape or auto-apply to jobs (LinkedIn/Indeed Terms of Service prohibit automated scraping and applications). Browse there, then bring a posting back here to tailor your application.</p>
+
+<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">AI CV &amp; Cover Letter Tailoring</h3>
+<div class="job-tailor-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
+  <div>
+    <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.5rem">1. Paste your current CV text</label>
+    <textarea id="jobCvInput" placeholder="Paste your CV content here (plain text)…" style="width:100%;min-height:220px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
+  </div>
+  <div>
+    <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.5rem">2. Paste the job posting (title, company, description)</label>
+    <textarea id="jobDescInput" placeholder="Paste the job description text here…" style="width:100%;min-height:220px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
+  </div>
+</div>
+<div style="text-align:center;margin-bottom:2rem">
+  <button class="pub-btn" id="jobTailorBtn" onclick="jobTailor()">Tailor My CV &amp; Cover Letter</button>
+</div>
+
+<div id="jobResults" style="display:none">
+  <div class="job-tailor-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+    <div class="knowledge-card">
+      <h3>Tailored CV</h3>
+      <pre id="jobCvOutput" style="white-space:pre-wrap;font-family:inherit;font-size:.82rem;color:var(--steel-light);max-height:420px;overflow-y:auto"></pre>
+      <button class="pub-btn" style="margin-top:1rem" onclick="jobDownload('jobCvOutput','tailored-cv.txt')">Download CV (.txt)</button>
+    </div>
+    <div class="knowledge-card">
+      <h3>Cover Letter</h3>
+      <pre id="jobCoverOutput" style="white-space:pre-wrap;font-family:inherit;font-size:.82rem;color:var(--steel-light);max-height:420px;overflow-y:auto"></pre>
+      <button class="pub-btn" style="margin-top:1rem" onclick="jobDownload('jobCoverOutput','cover-letter.txt')">Download Letter (.txt)</button>
+    </div>
+  </div>
+  <p class="mr-note" style="text-align:center;margin-top:1.5rem">Review carefully before sending — this is an AI-generated first draft, not a substitute for your own judgement. Apply directly on the employer's site or LinkedIn/Indeed — this tool does not submit applications on your behalf.</p>
+</div>
+
+</div>
+</section>
+
+<hr class="gold-rule">
+
+<!-- TEST YOUR KNOWLEDGE -->
+<section id="knowledgetest">
+<div class="section-inner flow-reveal">
+<div class="section-header">
+<p class="section-eyebrow">Interview &amp; Exam Prep</p>
+<h2 class="section-title">Test Your Knowledge</h2>
+<p class="section-sub">Not a test — a friend who helps you prepare. Pick a level, and get asked real accounting, audit, tax and interpersonal/leadership questions one at a time, with feedback and the "why this matters for interviews" context after every answer.</p>
+</div>
+
+<div id="qzLevels" class="train-grid">
+  <div class="knowledge-card" style="text-align:center;cursor:pointer" onclick="qzStart('Beginner')">
+    <span class="sector-icon">🌱</span>
+    <h3>Beginner</h3>
+    <p>Foundational accounting, audit and tax concepts — ideal for students or early-career candidates.</p>
+  </div>
+  <div class="knowledge-card" style="text-align:center;cursor:pointer" onclick="qzStart('Intermediate')">
+    <span class="sector-icon">📈</span>
+    <h3>Intermediate</h3>
+    <p>Applied technical scenarios and behavioural questions — for those with 1-4 years' experience.</p>
+  </div>
+  <div class="knowledge-card" style="text-align:center;cursor:pointer" onclick="qzStart('Expert')">
+    <span class="sector-icon">🎯</span>
+    <h3>Expert</h3>
+    <p>Senior-level technical judgement, leadership and stakeholder-management scenarios for manager+ interviews.</p>
+  </div>
+</div>
+
+<div class="mr-chat" id="qzChatWrap" style="height:560px;max-width:900px;margin:2rem auto 0;display:none">
+  <div class="mr-messages" id="qzMessages"></div>
+  <div class="mr-inputbar">
+    <input type="text" id="qzInput" placeholder="Type your answer…" />
+    <button id="qzSend" onclick="qzSendMessage()">Send</button>
+  </div>
+</div>
+<p class="mr-note" id="qzNote" style="text-align:center;margin-top:1rem;display:none">Simulated AI interview coach — for practice and education, not a guarantee of real interview outcomes.</p>
+
+</div>
+</section>
+
+<hr class="gold-rule">
+
 <section id="contact">
   <div class="section-inner flow-reveal">
     <div class="contact-layout">
@@ -1783,8 +1890,8 @@ animation:pulseRing 2.4s ease-out infinite;
         <div class="quals-sub">ACCA Member since 2021</div>
         <ul class="quals-list">
           <li>Qualified ACCA member with full professional certification</li>
-          <li>3.5+ years at Deloitte UK, progressing from AM I to Field Manager</li>
-          <li>4.5 years at PwC with Senior Associate II level attainment</li>
+          <li>3.5+ years at Deloitte UK across complex, multi-jurisdiction audit engagements</li>
+          <li>4.5 years at PwC across banking, microfinance, pharmaceuticals and healthcare</li>
           <li>International experience via BDO Bahrain secondment (2022)</li>
           <li>Regular presenter and trainer on IFRS and audit methodology</li>
           <li>Recognised for audit quality, team coaching and client relationship management</li>
@@ -1816,6 +1923,7 @@ animation:pulseRing 2.4s ease-out infinite;
 <div class="pub-modal" id="ifrs18modal">
 <div class="pub-inner">
 <span class="closepub" onclick="closePub('ifrs18modal')">&times;</span>
+<button class="pub-back" onclick="closePub('ifrs18modal')">&larr; Back to Publications</button>
 <h1>IFRS 18 – Presentation of Financial Statements</h1>
 <p><strong>Author:</strong> Usman ACCA | Executive Technical Training Programme</p>
 <div class="toc">
@@ -1852,6 +1960,7 @@ animation:pulseRing 2.4s ease-out infinite;
 <div class="pub-modal" id="frs102modal">
 <div class="pub-inner">
 <span class="closepub" onclick="closePub('frs102modal')">&times;</span>
+<button class="pub-back" onclick="closePub('frs102modal')">&larr; Back to Publications</button>
 <h1>FRS 102 — The Financial Reporting Standard Applicable in the UK and Republic of Ireland</h1>
 <p><strong>Author:</strong> Usman ACCA | Executive Technical Training Programme</p>
 <div class="toc">
@@ -1897,6 +2006,7 @@ animation:pulseRing 2.4s ease-out infinite;
 <div class="pub-modal" id="ifrs9modal">
 <div class="pub-inner">
 <span class="closepub" onclick="closePub('ifrs9modal')">&times;</span>
+<button class="pub-back" onclick="closePub('ifrs9modal')">&larr; Back to Publications</button>
 <h1>IFRS 9 — Financial Instruments</h1>
 <p><strong>Author:</strong> Usman ACCA | Executive Technical Training Programme</p>
 <div class="toc">
@@ -1925,6 +2035,7 @@ animation:pulseRing 2.4s ease-out infinite;
 <div class="pub-modal" id="ifrss12modal">
 <div class="pub-inner">
 <span class="closepub" onclick="closePub('ifrss12modal')">&times;</span>
+<button class="pub-back" onclick="closePub('ifrss12modal')">&larr; Back to Publications</button>
 <h1>IFRS S1 &amp; S2 — Sustainability Disclosures</h1>
 <p><strong>Author:</strong> Usman ACCA | Executive Technical Training Programme</p>
 <div class="toc">
@@ -1953,6 +2064,7 @@ animation:pulseRing 2.4s ease-out infinite;
 <div class="pub-modal" id="aiauditmodal">
 <div class="pub-inner">
 <span class="closepub" onclick="closePub('aiauditmodal')">&times;</span>
+<button class="pub-back" onclick="closePub('aiauditmodal')">&larr; Back to Publications</button>
 <h1>AI, Audit &amp; the Future of Finance</h1>
 <p><strong>Author:</strong> Usman ACCA | Executive Technical Training Programme</p>
 <div class="toc">
@@ -2247,15 +2359,36 @@ const mrRoles={
   'Marcus Lee':'Forensic & Valuations Specialist',
   'Elena Rossi':'ESG & Sustainability Reporting'
 };
-let mrVoiceEnabled=true;
+let mrVoiceEnabled=false; // opt-in only — avoids clashing with ambient music & unwanted auto-speech
+let mrBestVoice=null;
+if('speechSynthesis' in window){
+  const pickVoice=()=>{
+    const voices=speechSynthesis.getVoices();
+    // Prefer a natural-sounding British/English voice for clear, plain-English pronunciation
+    mrBestVoice = voices.find(v=>/en-GB/i.test(v.lang) && /Google|Natural|Online/i.test(v.name))
+      || voices.find(v=>/en-GB/i.test(v.lang))
+      || voices.find(v=>/^en/i.test(v.lang))
+      || voices[0] || null;
+  };
+  pickVoice();
+  speechSynthesis.onvoiceschanged = pickVoice;
+}
 function mrSpeak(name, text){
   if(!mrVoiceEnabled || !('speechSynthesis' in window)) return;
-  const utter=new SpeechSynthesisUtterance(text.replace(/[*_#]/g,''));
-  const pitches={'Sarah Chen':1.05,'David Whitfield':0.85,'Amara Singh':1.1,'Marcus Lee':0.8,'Elena Rossi':1.15};
+  const clean=text.replace(/[*_#]/g,'');
+  const utter=new SpeechSynthesisUtterance(clean);
+  if(mrBestVoice) utter.voice=mrBestVoice;
+  const pitches={'Sarah Chen':1.04,'David Whitfield':0.92,'Amara Singh':1.08,'Marcus Lee':0.88,'Elena Rossi':1.12};
   utter.pitch=pitches[name]||1;
-  utter.rate=1.02;
+  utter.rate=0.97; // slightly slower than default reads less robotic, more conversational
   utter.volume=0.85;
   speechSynthesis.speak(utter);
+}
+function mrToggleVoice(){
+  mrVoiceEnabled=!mrVoiceEnabled;
+  const btn=document.getElementById('mrVoiceToggle');
+  if(btn) btn.classList.toggle('active', mrVoiceEnabled);
+  if(!mrVoiceEnabled && 'speechSynthesis' in window) speechSynthesis.cancel();
 }
 function mrAppendMessage(role, name, text){
   const wrap=document.getElementById('mrMessages');
@@ -2425,6 +2558,107 @@ function gaapAsk(question){
 document.getElementById('gaapInput').addEventListener('keydown', e=>{
   if(e.key==='Enter') gaapSendMessage();
 });
+
+/* ── Test Your Knowledge (interview prep coach) ── */
+const qzHistory=[];
+function qzAppendMessage(role, text){
+  const wrap=document.getElementById('qzMessages');
+  const div=document.createElement('div');
+  div.className='mr-msg '+(role==='user'?'user':'agent');
+  div.innerHTML = role==='user'
+    ? `<div class="mr-bubble">${text}</div>`
+    : `<div class="mr-msg-name">Interview Coach</div><div class="mr-bubble">${text}</div>`;
+  wrap.appendChild(div);
+  wrap.scrollTop=wrap.scrollHeight;
+}
+function qzShowTyping(){
+  const wrap=document.getElementById('qzMessages');
+  const div=document.createElement('div');
+  div.className='mr-msg agent'; div.id='qzTypingIndicator';
+  div.innerHTML=`<div class="mr-bubble mr-typing"><span></span><span></span><span></span></div>`;
+  wrap.appendChild(div); wrap.scrollTop=wrap.scrollHeight;
+}
+function qzHideTyping(){
+  const t=document.getElementById('qzTypingIndicator');
+  if(t) t.remove();
+}
+async function qzCallApi(){
+  qzShowTyping();
+  document.getElementById('qzSend').disabled=true;
+  try{
+    const r=await fetch('/api/quiz',{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({history:qzHistory})
+    });
+    const data=await r.json();
+    qzHideTyping();
+    if(!r.ok){ qzAppendMessage('agent','Sorry — the coach is temporarily unavailable. Please try again shortly.'); return; }
+    qzHistory.push({role:'assistant', content:data.text});
+    qzAppendMessage('agent', data.text);
+  }catch(e){
+    qzHideTyping();
+    qzAppendMessage('agent','Connection issue — please try again.');
+  }finally{
+    document.getElementById('qzSend').disabled=false;
+  }
+}
+function qzStart(level){
+  document.getElementById('qzLevels').style.display='none';
+  document.getElementById('qzChatWrap').style.display='flex';
+  document.getElementById('qzNote').style.display='block';
+  document.getElementById('qzMessages').innerHTML='';
+  qzHistory.length=0;
+  qzHistory.push({role:'user', content:`[Start a new interview-prep session at ${level} level. Greet me briefly, explain how this works in one sentence, then ask your first question.]`});
+  qzCallApi();
+}
+function qzSendMessage(){
+  const input=document.getElementById('qzInput');
+  const text=input.value.trim();
+  if(!text) return;
+  qzAppendMessage('user', text);
+  qzHistory.push({role:'user', content:text});
+  input.value='';
+  qzCallApi();
+}
+document.getElementById('qzInput').addEventListener('keydown', e=>{
+  if(e.key==='Enter') qzSendMessage();
+});
+
+/* ── Job hub: AI CV & cover letter tailoring ── */
+async function jobTailor(){
+  const cv=document.getElementById('jobCvInput').value.trim();
+  const jd=document.getElementById('jobDescInput').value.trim();
+  if(!cv || !jd){ alert('Please paste both your CV text and the job posting text first.'); return; }
+  const btn=document.getElementById('jobTailorBtn');
+  btn.disabled=true; btn.textContent='Tailoring…';
+  try{
+    const r=await fetch('/api/tailor',{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({cv, jobDescription:jd})
+    });
+    const data=await r.json();
+    if(!r.ok){ alert('Sorry, something went wrong: '+(data.error||'unknown error')); return; }
+    document.getElementById('jobCvOutput').textContent=data.cv||'';
+    document.getElementById('jobCoverOutput').textContent=data.coverLetter||'';
+    document.getElementById('jobResults').style.display='block';
+    document.getElementById('jobResults').scrollIntoView({behavior:'smooth'});
+  }catch(e){
+    alert('Connection issue — please try again.');
+  }finally{
+    btn.disabled=false; btn.textContent='Tailor My CV & Cover Letter';
+  }
+}
+function jobDownload(elId, filename){
+  const text=document.getElementById(elId).textContent;
+  const blob=new Blob([text], {type:'text/plain'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download=filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
 </script>
 
 </body>

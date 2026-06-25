@@ -835,6 +835,40 @@
 
   ::selection{ background:rgba(200,169,110,.3); color:#fff; }
 
+  /* USP toast notifications */
+  .usp-toast{
+    position:fixed; bottom:28px; left:28px; z-index:9997;
+    max-width:320px;
+    background:rgba(16,26,44,.92); backdrop-filter:blur(20px);
+    border:1px solid rgba(200,169,110,.35);
+    border-radius:14px; padding:1.1rem 1.3rem;
+    box-shadow:0 16px 50px rgba(0,0,0,.35);
+    transform:translateY(20px) scale(.96); opacity:0;
+    transition:all .5s cubic-bezier(.22,1,.36,1);
+    pointer-events:none;
+  }
+  .usp-toast.show{ transform:translateY(0) scale(1); opacity:1; pointer-events:auto; }
+  .usp-toast-title{ font-size:.78rem; font-weight:700; color:var(--gold); margin-bottom:.4rem; display:flex; align-items:center; gap:.4rem; }
+  .usp-toast-body{ font-size:.8rem; color:var(--steel-light); line-height:1.55; margin-bottom:.8rem; }
+  .usp-toast-actions{ display:flex; gap:.6rem; align-items:center; }
+  .usp-toast-cta{ background:var(--gold); color:var(--navy); border:none; padding:.45rem 1rem; border-radius:8px; font-size:.74rem; font-weight:700; cursor:pointer; }
+  .usp-toast-dismiss{ background:none; border:none; color:var(--steel); font-size:.74rem; cursor:pointer; }
+  @media (max-width:600px){ .usp-toast{ left:16px; right:16px; bottom:80px; max-width:none; } }
+
+  /* Cursor-reactive hover tag */
+  .hover-tag{
+    position:fixed; z-index:9996; pointer-events:none;
+    background:var(--gold); color:var(--navy);
+    font-size:.68rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase;
+    padding:.35rem .75rem; border-radius:20px;
+    opacity:0; transform:translate(-50%,-130%) scale(.85);
+    transition:opacity .25s ease, transform .25s cubic-bezier(.22,1,.36,1);
+    white-space:nowrap;
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
+  }
+  .hover-tag.show{ opacity:1; transform:translate(-50%,-150%) scale(1); }
+  @media (max-width:980px){ .hover-tag{ display:none; } }
+
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
 .service-grid,.trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem}
@@ -1222,22 +1256,12 @@ animation:pulseRing 2.4s ease-out infinite;
 
       <div class="trail-item">
         <div class="trail-dot"></div>
-        <div class="trail-period">June 2025 – Present</div>
+        <div class="trail-period">November 2022 – Present</div>
         <div class="trail-company">
           <span class="firm-badge">Deloitte UK</span>
           London, UK
         </div>
-        <p class="trail-desc">Leading multi-location audit teams of up to 22 people across complex, multi-jurisdiction engagements at Deloitte UK. Responsible for a portfolio of approximately £20–30M in combined fees, overseeing quality, commercial performance and stakeholder relationships at the highest level. Mentoring and developing the next generation of audit professionals.</p>
-      </div>
-
-      <div class="trail-item">
-        <div class="trail-dot"></div>
-        <div class="trail-period">November 2022 – June 2025</div>
-        <div class="trail-company">
-          <span class="firm-badge">Deloitte UK</span>
-          London, UK
-        </div>
-        <p class="trail-desc">Progressed rapidly at Deloitte UK in under three years. Led end-to-end audit delivery across banking, automotive and media sectors. Built technical authority in IFRS 9 modelling, IFRS 15 revenue recognition and IFRS 3 acquisition accounting. Established strong client relationships and represented Deloitte at senior management and board level.</p>
+        <p class="trail-desc">Progressed rapidly at Deloitte UK, now leading multi-location audit teams of up to 22 people across complex, multi-jurisdiction engagements. Responsible for a portfolio of approximately £20–30M in combined fees, overseeing quality, commercial performance and stakeholder relationships at the highest level, while mentoring and developing the next generation of audit professionals. Led end-to-end audit delivery across banking, automotive and media sectors, building technical authority in IFRS 9 modelling, IFRS 15 revenue recognition and IFRS 3 acquisition accounting, and representing Deloitte at senior management and board level.</p>
       </div>
 
       <div class="trail-item">
@@ -2134,6 +2158,69 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     });
   }
 
+  // USP toast notifications — gently invite visitors to try the standout features
+  (function(){
+    const toasts=[
+      { title:'🟢 Try the Meeting Room', body:"Talk live with an AI Audit Partner, Tax Partner, IFRS Regulator and more — type or speak. First of its kind on a personal site.", cta:'Open it', target:'#meetingroom' },
+      { title:'🎯 Test Your Knowledge', body:"Prepping for an interview or exam? Get asked real questions one at a time, with feedback after every answer — like a friend coaching you.", cta:'Start practising', target:'#knowledgetest' },
+      { title:'💼 Looking for a job?', body:"Paste your CV and a job posting — get an AI-tailored CV and cover letter in minutes, plus quick search links to live roles.", cta:'Try it', target:'#jobhub' },
+    ];
+    let i=0;
+    const toastEl=document.createElement('div');
+    toastEl.className='usp-toast';
+    document.body.appendChild(toastEl);
+    const seenKey='usp_toasts_shown';
+    let shown=parseInt(sessionStorage.getItem(seenKey)||'0',10);
+
+    function renderToast(t){
+      toastEl.innerHTML=`
+        <div class="usp-toast-title">${t.title}</div>
+        <div class="usp-toast-body">${t.body}</div>
+        <div class="usp-toast-actions">
+          <button class="usp-toast-cta">${t.cta}</button>
+          <button class="usp-toast-dismiss">Not now</button>
+        </div>`;
+      toastEl.querySelector('.usp-toast-cta').addEventListener('click', ()=>{
+        document.querySelector(t.target)?.scrollIntoView({behavior:'smooth'});
+        hideToast();
+      });
+      toastEl.querySelector('.usp-toast-dismiss').addEventListener('click', hideToast);
+    }
+    function showToast(){
+      if(shown>=4) return; // cap how many times we interrupt a single session
+      renderToast(toasts[i % toasts.length]);
+      i++;
+      requestAnimationFrame(()=>toastEl.classList.add('show'));
+      shown++;
+      sessionStorage.setItem(seenKey, shown);
+      setTimeout(hideToast, 9000);
+    }
+    function hideToast(){ toastEl.classList.remove('show'); }
+
+    setTimeout(showToast, 8000); // first nudge after settling in
+    setInterval(showToast, 45000); // then a gentle reminder every 45s, capped at 4/session
+  })();
+
+  // Cursor-reactive hover tags on key feature cards
+  (function(){
+    const tag=document.createElement('div');
+    tag.className='hover-tag';
+    document.body.appendChild(tag);
+    const hints={
+      '#meetingroom .mr-agent':'Click to ask me something',
+      '#knowledgetest .knowledge-card':'Tap to start practising',
+      '#jobhub .mr-chip':'Opens a live job search',
+      '#trainings .knowledge-card':'Download or open',
+    };
+    Object.entries(hints).forEach(([selector, text])=>{
+      document.querySelectorAll(selector).forEach(el=>{
+        el.addEventListener('mouseenter', ()=>{ tag.textContent=text; tag.classList.add('show'); });
+        el.addEventListener('mousemove', e=>{ tag.style.left=e.clientX+'px'; tag.style.top=e.clientY+'px'; });
+        el.addEventListener('mouseleave', ()=>{ tag.classList.remove('show'); });
+      });
+    });
+  })();
+
   // Magnetic buttons
   document.querySelectorAll('.btn-primary, .btn-ghost, .pub-btn').forEach(btn => {
     btn.addEventListener('mousemove', e => {
@@ -2272,43 +2359,41 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
     const wet=ctx.createGain(); wet.gain.value=0.35;
     reverb.connect(wet); wet.connect(master);
 
-    // warm pad drone — two slightly detuned sines through a slow filter
-    const padFreqs=[scale[0]/2, scale[2]/2, scale[0]];
-    padFreqs.forEach((f)=>{
-      const osc=ctx.createOscillator();
-      osc.type='sine';
-      osc.frequency.value=f;
-      const filt=ctx.createBiquadFilter();
-      filt.type='lowpass';
-      filt.frequency.value=600;
-      const g=ctx.createGain();
-      g.gain.value=0;
-      g.gain.linearRampToValueAtTime(0.35, ctx.currentTime+4);
-      osc.connect(filt); filt.connect(g); g.connect(master); g.connect(reverb);
-      osc.start();
-      droneNodes.push(osc);
-    });
+    // soft low pad — just one gentle sustained note, sits underneath the melody
+    const osc=ctx.createOscillator();
+    osc.type='sine';
+    osc.frequency.value=scale[0]/2;
+    const filt=ctx.createBiquadFilter();
+    filt.type='lowpass';
+    filt.frequency.value=500;
+    const g=ctx.createGain();
+    g.gain.value=0;
+    g.gain.linearRampToValueAtTime(0.2, ctx.currentTime+4);
+    osc.connect(filt); filt.connect(g); g.connect(master); g.connect(reverb);
+    osc.start();
+    droneNodes.push(osc);
 
-    // gentle, slow, slightly arpeggiated melody — soft attack/release, no harsh edges
-    let lastIdx=0;
+    // lively but light melodic sequence — a simple, pleasant repeating phrase
+    // (triangle wave = warmer & more "musical" than a flat sine, still soft)
+    const phrase=[0,2,4,2,5,4,2,0,4,6,4,2]; // scale-degree sequence, gives real melodic shape
+    let step=0;
     function playNote(){
       if(!playing) return;
-      let idx=Math.floor(Math.random()*scale.length);
-      if(Math.abs(idx-lastIdx)>3) idx=lastIdx+(idx>lastIdx?1:-1); // keep steps melodic, not jumpy
-      lastIdx=idx;
-      const f=scale[idx];
+      const idx=phrase[step % phrase.length];
+      step++;
+      const f=scale[idx % scale.length];
       const osc=ctx.createOscillator();
-      osc.type='sine';
+      osc.type='triangle';
       osc.frequency.value=f;
       const g=ctx.createGain();
       g.gain.value=0;
       osc.connect(g); g.connect(master); g.connect(reverb);
       const now=ctx.currentTime;
-      g.gain.linearRampToValueAtTime(0.32, now+1.4);
-      g.gain.linearRampToValueAtTime(0, now+5.2);
+      g.gain.linearRampToValueAtTime(0.22, now+0.12);
+      g.gain.linearRampToValueAtTime(0, now+1.05);
       osc.start(now);
-      osc.stop(now+5.3);
-      noteTimer=setTimeout(playNote, 2800+Math.random()*2600);
+      osc.stop(now+1.1);
+      noteTimer=setTimeout(playNote, 480); // steady, lively tempo — ~125bpm feel
     }
     playNote();
   }

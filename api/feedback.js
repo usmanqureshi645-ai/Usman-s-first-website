@@ -6,6 +6,8 @@ export default async function handler(req, res) {
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   const resendKey = process.env.RESEND_API_KEY;
+  const kvUrl = process.env.UPSTASH_REDIS_REST_URL;
+  const kvToken = process.env.UPSTASH_REDIS_REST_TOKEN;
   if (!apiKey) {
     res.status(500).json({ error: 'AI service not configured' });
     return;
@@ -53,9 +55,28 @@ Respond with ONLY valid JSON, no markdown, no commentary, in this exact shape:
       assessment = { valid: false, summary: 'Could not parse assessment', suggestedFix: '', severity: 'low' };
     }
 
-    // Log EVERY submission by email (valid or not) so the inbox doubles as a searchable
-    // feedback log — Vercel functions are stateless, so there's no real filesystem to
-    // write a persistent log file to; email is the practical equivalent without new infra.
+    // Persist every submission to Upstash Redis so it can be listed/queried on demand
+    const entry = {
+      feedback,
+      pageContext: pageContext || 'unknown',
+      submittedAt: new Date().toISOString(),
+      ...assessment,
+    };
+    if (kvUrl && kvToken) {
+      try {
+        await fetch(`${kvUrl}/lpush/feedback_log/${encodeURIComponent(JSON.stringify(entry))}`, {
+          headers: { authorization: `Bearer ${kvToken}` },
+        });
+        // keep the log bounded so it doesn't grow unbounded
+        await fetch(`${kvUrl}/ltrim/feedback_log/0/499`, {
+          headers: { authorization: `Bearer ${kvToken}` },
+        });
+      } catch {
+        // non-fatal — still proceed to email even if KV write fails
+      }
+    }
+
+    // Also log EVERY submission by email (valid or not) as a secondary, human-readable trail
     let emailSent = false;
     if (resendKey) {
       const tag = assessment.valid ? `Validated (${assessment.severity})` : 'Not actionable';

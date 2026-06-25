@@ -1147,6 +1147,10 @@ animation:pulseRing 2.4s ease-out infinite;
 .mr-inputbar button:hover{background:var(--gold-light);transform:translateY(-1px)}
 .mr-inputbar button:disabled{opacity:.5;cursor:default;transform:none}
 .mr-enter-wrap{text-align:center;margin-top:1.5rem}
+.mr-pick-title{font-size:.78rem;color:var(--gold);font-weight:700;letter-spacing:.05em;text-transform:uppercase;margin-bottom:.85rem}
+.mr-agent-pick{cursor:pointer;display:flex}
+.mr-agent-pick input{margin-right:.65rem;width:16px;height:16px;accent-color:var(--gold);cursor:pointer;flex-shrink:0;align-self:center}
+.mr-agent-pick:has(input:checked){background:rgba(200,169,110,.1)}
 .mr-note{font-size:.72rem;color:var(--steel);margin-top:.75rem;font-style:italic}
 
 .mr-usp-badge{
@@ -1207,7 +1211,7 @@ animation:pulseRing 2.4s ease-out infinite;
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">Usman, ACCA</div>
+  <div class="nav-logo">Usman, ACCA, ACA</div>
   
 <ul class="nav-links" id="navLinks">
 <li><a href="#about">About</a></li>
@@ -1245,9 +1249,9 @@ animation:pulseRing 2.4s ease-out infinite;
 
     <div class="hero-right">
       <div class="stat-card">
-        <div class="stat-number">9</div>
-        <div class="stat-label">Years in Audit &amp; Advisory</div>
-        <div class="stat-sub">Deloitte UK · PwC · BDO Bahrain</div>
+        <div class="stat-number">10</div>
+        <div class="stat-label">Years of Ongoing Big 4 Experience</div>
+        <div class="stat-sub">Audit, Advisory &amp; Financial Reporting — Deloitte UK · PwC · BDO Bahrain</div>
       </div>
       <div class="stat-card">
         <div class="stat-number">£20–30M</div>
@@ -1255,14 +1259,14 @@ animation:pulseRing 2.4s ease-out infinite;
         <div class="stat-sub">Current active portfolio</div>
       </div>
       <div class="stat-card">
-        <div class="stat-number">6</div>
+        <div class="stat-number">8</div>
         <div class="stat-label">Sectors of Deep Expertise</div>
-        <div class="stat-sub">Banking · Automotive · Media · PE · Pharma · Group</div>
+        <div class="stat-sub">Banking · Automotive · Media · PE · Pharma · Tech · Public Sector · Education</div>
       </div>
       <div class="stat-card">
         <div class="stat-number">22</div>
         <div class="stat-label">Largest Team Led</div>
-        <div class="stat-sub">Including onshore &amp; offshore resources</div>
+        <div class="stat-sub">22-member team, including onshore &amp; offshore resources</div>
       </div>
     </div>
   </div>
@@ -1279,10 +1283,11 @@ animation:pulseRing 2.4s ease-out infinite;
 <h2 class="section-title">Trusted Experience. Practical Advice.</h2>
 </div>
 <div class="trust-grid reveal">
-<div class="trust-card"><h3>9+ Years</h3><p>Audit, advisory and financial reporting experience.</p></div>
+<div class="trust-card"><h3>10+ Years</h3><p>Ongoing Big 4 audit, advisory and financial reporting experience.</p></div>
 <div class="trust-card"><h3>Big Four Background</h3><p>Deloitte and PwC experience across complex engagements.</p></div>
 <div class="trust-card"><h3>£30M+</h3><p>Portfolio responsibility and stakeholder management.</p></div>
-<div class="trust-card"><h3>IFRS Specialist</h3><p>IFRS 9, 15, 3, 10, 16 and group reporting.</p></div>
+<div class="trust-card"><h3>IFRS Specialist</h3><p>IFRS 2, 3, 9, 10, 15, 16, 17, 18 and group reporting.</p></div>
+<div class="trust-card"><h3>ISA &amp; PCAOB Specialist</h3><p>ISA 240, 315, 330, 570, 600 and PCAOB auditing standards.</p></div>
 </div>
 </div>
 </section>
@@ -1294,12 +1299,13 @@ animation:pulseRing 2.4s ease-out infinite;
 <h2 class="section-title">Services I Offer</h2><p class="section-sub">Practical, Big Four quality support for finance leaders, founders, SMEs, multinational groups and private equity-backed businesses.</p>
 </div>
 <div class="service-grid reveal">
-<div class="service-card"><h3>CV Reviews, Career Coaching & Interview Preparation</h3><p>Audit readiness, technical papers and issue resolution.</p></div>
 <div class="service-card"><h3>IFRS Technical Training & Workshops</h3><p>Implementation, technical accounting and complex transactions.</p></div>
+<div class="service-card"><h3>Statutory & External Audit</h3><p>End-to-end audit delivery, ISA/PCAOB compliance and technical issue resolution.</p></div>
 <div class="service-card"><h3>Technical Accounting & Financial Reporting Advisory</h3><p>Year-end reporting, disclosures and consolidation support.</p></div>
 <div class="service-card"><h3>Transaction Accounting</h3><p>Business combinations, PPAs and acquisition accounting.</p></div>
 <div class="service-card"><h3>Internal Controls</h3><p>Risk assessment, governance and control frameworks.</p></div>
 <div class="service-card"><h3>CFO Advisory</h3><p>Finance transformation and reporting optimisation.</p></div>
+<div class="service-card"><h3>CV Reviews, Career Coaching & Interview Preparation</h3><p>Audit readiness, technical papers and issue resolution.</p></div>
 </div>
 </div>
 </section>
@@ -1340,7 +1346,7 @@ animation:pulseRing 2.4s ease-out infinite;
         <div class="trail-dot"></div>
         <div class="trail-period">June 2017 – December 2021</div>
         <div class="trail-company">
-          <span class="firm-badge">PwC</span>
+          <span class="firm-badge" style="text-transform:none">PwC</span>
           Pakistan
         </div>
         <p class="trail-desc">Over four and a half years at PwC, developing core audit competencies across banking, microfinance, pharmaceuticals and healthcare. Managed audit field work, built technical skills in IFRS and UK GAAP, and earned ACCA membership in 2021. Led teams on listed and large private-sector engagements with a strong focus on internal controls and regulatory compliance.</p>
@@ -1358,7 +1364,7 @@ animation:pulseRing 2.4s ease-out infinite;
     <div class="section-header">
       <p class="section-eyebrow">Industry Coverage</p>
       <h2 class="section-title">Sector Expertise</h2>
-      <p class="section-sub">Deep, hands-on experience across six distinct industries — each requiring a different lens on risk, regulation and financial reporting.</p>
+      <p class="section-sub">Deep, hands-on experience across eight distinct industries — each requiring a different lens on risk, regulation and financial reporting.</p>
     </div>
   </div>
 
@@ -1464,10 +1470,18 @@ animation:pulseRing 2.4s ease-out infinite;
 
 <div class="sector-card">
 <span class="sector-icon">🏛️</span>
-<div class="sector-name">Government, Public Sector & Not-for-Profit</div>
-<div class="sector-clients">Pakistan Railways · KPRA · OPF · ESEF</div>
-<p class="sector-desc">Governance, grant funding, public accountability reporting, compliance frameworks and stakeholder-focused reporting.</p>
+<div class="sector-name">Government & Public Sector</div>
+<div class="sector-clients">Pakistan Railways · KPRA</div>
+<p class="sector-desc">Governance, grant funding, public accountability reporting and compliance frameworks for public sector bodies.</p>
 <div class="sector-tags"><span class="tag">Governance</span><span class="tag">Grants</span><span class="tag">Compliance</span></div>
+</div>
+
+<div class="sector-card">
+<span class="sector-icon">🎓</span>
+<div class="sector-name">Education</div>
+<div class="sector-clients">Ahlia University · Ahlia College · Ahlia School (Bahrain) · Elementary &amp; Secondary Education Foundation · Overseas Pakistanis Foundation School &amp; College</div>
+<p class="sector-desc">Audited universities, colleges and schools across Bahrain and Pakistan — covering fee income recognition, grant and donor funding, endowment accounting and governance reporting for academic institutions and education foundations.</p>
+<div class="sector-tags"><span class="tag">Fee Income</span><span class="tag">Grant Accounting</span><span class="tag">Governance</span><span class="tag">Not-for-Profit Reporting</span></div>
 </div>
 
 </div>
@@ -1602,7 +1616,7 @@ animation:pulseRing 2.4s ease-out infinite;
           </div>
           <div class="fact-box">
             <span class="fact-num">8</span>
-            <span class="fact-label">Target Projects FY25</span>
+            <span class="fact-label">Target Projects FY26</span>
           </div>
           <div class="fact-box">
             <span class="fact-num">17</span>
@@ -1625,6 +1639,9 @@ animation:pulseRing 2.4s ease-out infinite;
             <span class="std-pill">Cost-Benefit Analysis</span>
             <span class="std-pill">Business Modelling</span>
             <span class="std-pill">Training &amp; Facilitation</span>
+            <span class="std-pill">Budget Setting &amp; Monitoring</span>
+            <span class="std-pill">Resource Allocation</span>
+            <span class="std-pill">Multi-Jurisdiction Team Management</span>
           </div>
         </div>
       </div>
@@ -1640,29 +1657,34 @@ animation:pulseRing 2.4s ease-out infinite;
 <div class="section-header">
 <p class="section-eyebrow">Knowledge Centre</p>
 <h2 class="section-title">The Meeting Room</h2>
-<p class="section-sub">Walk into a virtual room of senior finance specialists — an Audit Partner, an IFRS/FRS technical regulator, a Tax Partner and a Forensic &amp; Valuations specialist. Ask a technical question by typing or speaking, or just listen as they proactively raise the issues that matter.</p>
+<p class="section-sub">Walk into a virtual room of senior finance specialists. Pick who you want in the room, then have a real, interactive conversation — they'll ask you questions too, flag risks, share links to source material, and keep the discussion on track.</p>
 <span class="mr-usp-badge">🟢 Live AI Panel — first of its kind</span>
 </div>
 
 <div class="mr-layout">
   <div class="mr-panel">
-    <div class="mr-agent"><div class="mr-avatar">SC</div><div><div class="mr-agent-name">Sarah Chen</div><div class="mr-agent-role">Big 4 Audit Partner</div></div></div>
-    <div class="mr-agent"><div class="mr-avatar">DW</div><div><div class="mr-agent-name">David Whitfield</div><div class="mr-agent-role">IFRS/FRS Technical Regulator</div></div></div>
-    <div class="mr-agent"><div class="mr-avatar">AS</div><div><div class="mr-agent-name">Amara Singh</div><div class="mr-agent-role">Big 4 Tax Partner</div></div></div>
-    <div class="mr-agent"><div class="mr-avatar">ML</div><div><div class="mr-agent-name">Marcus Lee</div><div class="mr-agent-role">Forensic &amp; Valuations Specialist</div></div></div>
-    <div class="mr-agent"><div class="mr-avatar">ER</div><div><div class="mr-agent-name">Elena Rossi</div><div class="mr-agent-role">ESG &amp; Sustainability Reporting</div></div></div>
+    <p class="mr-pick-title">Choose who joins the room:</p>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Sarah Chen" checked><div class="mr-avatar">SC</div><div><div class="mr-agent-name">Sarah Chen</div><div class="mr-agent-role">Big 4 Audit Partner</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="David Whitfield" checked><div class="mr-avatar">DW</div><div><div class="mr-agent-name">David Whitfield</div><div class="mr-agent-role">IFRS/FRS Technical Regulator</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Amara Singh" checked><div class="mr-avatar">AS</div><div><div class="mr-agent-name">Amara Singh</div><div class="mr-agent-role">Big 4 Tax Partner</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Marcus Lee"><div class="mr-avatar">ML</div><div><div class="mr-agent-name">Marcus Lee</div><div class="mr-agent-role">Forensic &amp; Valuations Specialist</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Elena Rossi"><div class="mr-avatar">ER</div><div><div class="mr-agent-name">Elena Rossi</div><div class="mr-agent-role">ESG &amp; Sustainability Reporting</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="James Carter"><div class="mr-avatar">JC</div><div><div class="mr-agent-name">James Carter</div><div class="mr-agent-role">Legal &amp; Regulatory Advisor</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Priya Nair"><div class="mr-avatar">PN</div><div><div class="mr-agent-name">Priya Nair</div><div class="mr-agent-role">Technical Accounting Consultant</div></div></label>
+    <button class="pub-btn" id="mrStartBtn" onclick="mrStartMeeting()" style="width:100%;margin-top:1rem">Start the Meeting</button>
     <p class="mr-note">Simulated AI panel for technical discussion &amp; education — not formal advice.</p>
   </div>
 
   <div class="mr-chat">
     <div class="mr-messages" id="mrMessages"></div>
-    <div class="mr-chips" id="mrChips">
+    <div class="mr-chips" id="mrChips" style="display:none">
       <button class="mr-chip" onclick="mrAsk('What are the key risks under IFRS 9 ECL modelling?')">IFRS 9 ECL risks</button>
       <button class="mr-chip" onclick="mrAsk('How should we account for a business combination under IFRS 3?')">IFRS 3 business combos</button>
       <button class="mr-chip" onclick="mrAsk('What is changing under IFRS 18 for our income statement?')">IFRS 18 impact</button>
       <button class="mr-chip" onclick="mrAsk('What tax risks come with a cross-border group restructuring?')">Cross-border tax risk</button>
+      <button class="mr-chip" id="mrEndBtn" onclick="mrEndMeeting()" style="border-color:var(--steel);color:var(--steel-light)">End meeting &amp; email me a summary</button>
     </div>
-    <div class="mr-inputbar">
+    <div class="mr-inputbar" id="mrInputBar" style="display:none">
       <button id="mrMic" class="mr-mic" title="Speak your question">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
         <span class="mr-mic-label">Speak</span>
@@ -1707,6 +1729,9 @@ animation:pulseRing 2.4s ease-out infinite;
 <div class="client-card"><h3>Askari Bank Ltd</h3><p>IFRS 9 • ECL Modelling • Treasury • Regulatory Capital • Credit Risk</p></div>
 <div class="client-card"><h3>Cisco LLC</h3><p>Technology • IFRS 15 • IT Controls • Data Governance</p></div>
 <div class="client-card"><h3>Pharmanovia Holdco</h3><p>Pharmaceuticals • Global Audit • Acquisitions • Provisions</p></div>
+<div class="client-card"><h3>IVC Holdco</h3><p>Pharmaceuticals &amp; Healthcare • Global Audit • Inventory &amp; Provisions</p></div>
+<div class="client-card"><h3>Ahlia University</h3><p>Education (Bahrain) • Fee Income • Grant Accounting • Governance</p></div>
+<div class="client-card"><h3>NRSP Microfinance</h3><p>Microfinance • IFRS 9 ECL • Regulatory Compliance</p></div>
 </div>
 </div>
 </section>
@@ -1794,31 +1819,35 @@ animation:pulseRing 2.4s ease-out infinite;
 <div class="section-header">
 <p class="section-eyebrow">Comparative Technical Library</p>
 <h2 class="section-title">IFRS Comparison with Local GAAPs</h2>
-<p class="section-sub">A clause-by-clause working comparison of IFRS against US GAAP (and other local frameworks), plus a live AI research assistant trained to answer in plain language, grounded in IFRS, PCAOB and Big 4 guidance.</p>
+<p class="section-sub">This tool compares IFRS against your chosen local GAAP, topic by topic, and includes a live AI research assistant that answers comparison questions in plain language — grounded in IFRS, PCAOB and Big 4 guidance.</p>
 </div>
 
-<div class="gaap-table-wrap" style="overflow-x:auto;margin-bottom:2.5rem">
+<div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem">
+  <label for="gaapJurisdiction" style="font-size:.78rem;color:var(--gold);font-weight:700;letter-spacing:.05em;text-transform:uppercase">Compare IFRS against:</label>
+  <select id="gaapJurisdiction" class="voice-gender-select" style="height:42px" onchange="renderGaapTable()">
+    <option value="usgaap">United States — US GAAP</option>
+    <option value="ukgaap">United Kingdom — FRS 102</option>
+    <option value="irishgaap">Ireland — Irish GAAP / FRS 102</option>
+    <option value="luxgaap">Luxembourg — Lux GAAP</option>
+    <option value="ausgaap">Australia — AASB</option>
+  </select>
+</div>
+
+<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Quick Comparison Table</h3>
+<div class="gaap-table-wrap" style="overflow-x:auto;margin-bottom:1rem">
 <table class="gaap-table" style="width:100%;border-collapse:collapse;background:rgba(255,255,255,.03);border-radius:12px;overflow:hidden">
 <thead>
 <tr style="background:rgba(200,169,110,.12)">
 <th style="text-align:left;padding:.9rem 1rem;color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em">Topic</th>
 <th style="text-align:left;padding:.9rem 1rem;color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em">IFRS</th>
-<th style="text-align:left;padding:.9rem 1rem;color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em">US GAAP</th>
+<th style="text-align:left;padding:.9rem 1rem;color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em" id="gaapLocalHeader">Local GAAP</th>
+<th style="text-align:left;padding:.9rem 1rem;color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em">Slide</th>
 </tr>
 </thead>
-<tbody style="font-size:.85rem;color:var(--steel-light)">
-<tr style="border-top:1px solid rgba(255,255,255,.06)"><td style="padding:.85rem 1rem;font-weight:600;color:var(--cream)">Revenue Recognition</td><td style="padding:.85rem 1rem">IFRS 15 — five-step model, principles-based</td><td style="padding:.85rem 1rem">ASC 606 — converged five-step model, broadly aligned but with more prescriptive industry guidance</td></tr>
-<tr style="border-top:1px solid rgba(255,255,255,.06)"><td style="padding:.85rem 1rem;font-weight:600;color:var(--cream)">Leases</td><td style="padding:.85rem 1rem">IFRS 16 — single lessee model, almost all leases on-balance-sheet</td><td style="padding:.85rem 1rem">ASC 842 — dual model retained (operating vs finance lease), different income statement effect</td></tr>
-<tr style="border-top:1px solid rgba(255,255,255,.06)"><td style="padding:.85rem 1rem;font-weight:600;color:var(--cream)">Financial Instruments — Impairment</td><td style="padding:.85rem 1rem">IFRS 9 — expected credit loss (ECL), staged approach</td><td style="padding:.85rem 1rem">ASC 326 (CECL) — lifetime expected credit losses recognised from initial recognition, no staging</td></tr>
-<tr style="border-top:1px solid rgba(255,255,255,.06)"><td style="padding:.85rem 1rem;font-weight:600;color:var(--cream)">Inventory — LIFO</td><td style="padding:.85rem 1rem">IAS 2 — LIFO prohibited</td><td style="padding:.85rem 1rem">ASC 330 — LIFO permitted</td></tr>
-<tr style="border-top:1px solid rgba(255,255,255,.06)"><td style="padding:.85rem 1rem;font-weight:600;color:var(--cream)">Development Costs</td><td style="padding:.85rem 1rem">IAS 38 — development costs capitalised once criteria met; research expensed</td><td style="padding:.85rem 1rem">ASC 730 — R&amp;D generally expensed as incurred (software development has separate rules)</td></tr>
-<tr style="border-top:1px solid rgba(255,255,255,.06)"><td style="padding:.85rem 1rem;font-weight:600;color:var(--cream)">Impairment Reversal</td><td style="padding:.85rem 1rem">IAS 36 — reversal of impairment permitted (except goodwill)</td><td style="padding:.85rem 1rem">ASC 360 — impairment reversal prohibited for held-and-used long-lived assets</td></tr>
-<tr style="border-top:1px solid rgba(255,255,255,.06)"><td style="padding:.85rem 1rem;font-weight:600;color:var(--cream)">Business Combinations</td><td style="padding:.85rem 1rem">IFRS 3 — broadly converged with US GAAP; non-controlling interest options differ</td><td style="padding:.85rem 1rem">ASC 805 — converged model; some differences in contingent consideration and step acquisitions</td></tr>
-<tr style="border-top:1px solid rgba(255,255,255,.06)"><td style="padding:.85rem 1rem;font-weight:600;color:var(--cream)">Income Statement Format</td><td style="padding:.85rem 1rem">IFRS 18 (from 2027) — mandatory operating/investing/financing categories &amp; MPM disclosure</td><td style="padding:.85rem 1rem">US GAAP — no equivalent mandatory categorisation; SEC non-GAAP measure rules (Reg G) apply instead</td></tr>
-</tbody>
+<tbody id="gaapTableBody" style="font-size:.85rem;color:var(--steel-light)"></tbody>
 </table>
 </div>
-<p class="section-sub" style="margin-top:-1rem;margin-bottom:2rem">This table is a working summary, not exhaustive. For full clause-by-clause detail, see the source documents and the Further Reading links below — or ask the assistant underneath.</p>
+<p class="section-sub" style="margin-top:0;margin-bottom:2rem">This table is a working summary, not exhaustive. Click "View Slide" on any row for a clean side-by-side breakdown, see the source documents in Further Reading below, or ask the assistant underneath.</p>
 
 <div class="further-reading" style="border-top:none;padding-top:0;margin-bottom:2.5rem">
 <h2>Further Reading &amp; Authoritative Sources</h2>
@@ -1830,12 +1859,16 @@ animation:pulseRing 2.4s ease-out infinite;
 <li><a href="https://www.pwc.com/us/en/cfodirect/issues/ifrs-us-gaap.html" target="_blank" rel="noopener">PwC — IFRS &amp; US GAAP: Similarities and Differences</a></li>
 <li><a href="https://www.ey.com/en_gl/ifrs-technical-resources/ifrs-vs-us-gaap" target="_blank" rel="noopener">EY — IFRS vs US GAAP Comparisons</a></li>
 <li><a href="https://www2.deloitte.com/us/en/pages/audit/articles/ifrs-us-gaap-comparison.html" target="_blank" rel="noopener">Deloitte — IFRS &amp; US GAAP Comparison Series</a></li>
+<li><a href="https://www.frc.org.uk/library/standards-codes-policy/accounting-and-reporting/frs-102/" target="_blank" rel="noopener">FRC — FRS 102 (UK &amp; Ireland basis)</a></li>
+<li><a href="https://www.aasb.gov.au/" target="_blank" rel="noopener">AASB — Australian Accounting Standards Board</a></li>
+<li><a href="https://www.cssf.lu/en/" target="_blank" rel="noopener">CSSF Luxembourg — Accounting &amp; Reporting Guidance</a></li>
 </ul>
 </div>
 
+<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Ask the GAAP Research Assistant</h3>
 <div class="mr-chat" id="gaapChatWrap" style="height:520px;max-width:900px;margin:0 auto">
   <div class="mr-messages" id="gaapMessages"></div>
-  <div class="mr-chips">
+  <div class="mr-chips" id="gaapChips">
     <button class="mr-chip" onclick="gaapAsk('In plain English, what is the biggest practical difference between IFRS and US GAAP for leases?')">Leases: biggest difference?</button>
     <button class="mr-chip" onclick="gaapAsk('Why does US GAAP use CECL instead of the IFRS 9 staged ECL model?')">CECL vs IFRS 9 ECL</button>
     <button class="mr-chip" onclick="gaapAsk('Can a US company use LIFO under IFRS?')">LIFO under IFRS?</button>
@@ -1861,6 +1894,14 @@ animation:pulseRing 2.4s ease-out infinite;
 
 </div>
 </section>
+
+<!-- GAAP comparison slide modal -->
+<div class="pub-modal" id="gaapSlideModal">
+<div class="pub-inner" style="max-width:700px">
+<span class="closepub" onclick="closePub('gaapSlideModal')">&times;</span>
+<div id="gaapSlideContent"></div>
+</div>
+</div>
 
 <hr class="gold-rule">
 
@@ -2003,9 +2044,9 @@ animation:pulseRing 2.4s ease-out infinite;
 
       <div class="quals-box">
         <div class="quals-title">Qualifications &amp; Credentials</div>
-        <div class="quals-sub">ACCA Member since 2021</div>
+        <div class="quals-sub">ACCA &amp; ACA Member since 2021</div>
         <ul class="quals-list">
-          <li>Qualified ACCA member with full professional certification</li>
+          <li>Qualified ACCA and ACA member with full professional certification</li>
           <li>3.5+ years at Deloitte UK across complex, multi-jurisdiction audit engagements</li>
           <li>4.5 years at PwC across banking, microfinance, pharmaceuticals and healthcare</li>
           <li>International experience via BDO Bahrain secondment (2022)</li>
@@ -2019,7 +2060,7 @@ animation:pulseRing 2.4s ease-out infinite;
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-logo">Usman · ACCA</div>
+  <div class="footer-logo">Usman · ACCA · ACA</div>
   <div class="footer-note">Audit, IFRS & Technical Accounting & Financial Reporting Advisory Advisory · London, UK</div>
   <div class="footer-note" style="margin-top:.4rem;font-size:.65rem;opacity:.6">Background music: "Wallpaper" by Kevin MacLeod (incompetech.com) — Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:inherit">Creative Commons BY 4.0</a></div>
 </footer>
@@ -2046,6 +2087,22 @@ animation:pulseRing 2.4s ease-out infinite;
     <div class="welcome-bot-messages" id="welcomeBotMessages"></div>
   </div>
   <button class="welcome-bot-toggle" id="welcomeBotToggle" title="What is this website for?">💬</button>
+</div>
+
+<!-- FEEDBACK WIDGET -->
+<div class="welcome-bot" style="bottom:154px">
+  <div class="welcome-bot-panel" id="feedbackPanel">
+    <div class="welcome-bot-header">
+      <span>🐞 Feedback</span>
+      <button class="welcome-bot-close" onclick="toggleFeedback(false)">&times;</button>
+    </div>
+    <div class="welcome-bot-messages" id="feedbackMessages"></div>
+    <div style="padding:.75rem;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:.5rem">
+      <input type="text" id="feedbackInput" placeholder="Describe what you noticed…" style="flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.5rem .75rem;color:var(--cream);font-family:inherit;font-size:.78rem">
+      <button class="wb-option-btn" onclick="submitFeedback()">Send</button>
+    </div>
+  </div>
+  <button class="welcome-bot-toggle" id="feedbackToggle" title="Spot a bug? Tell us" style="background:linear-gradient(135deg,#e0c99a,#8899aa)">🐞</button>
 </div>
 
 
@@ -2137,26 +2194,54 @@ animation:pulseRing 2.4s ease-out infinite;
 <span class="closepub" onclick="closePub('ifrs9modal')">&times;</span>
 <button class="pub-back" onclick="closePub('ifrs9modal')">&larr; Back to Publications</button>
 <h1>IFRS 9 — Financial Instruments</h1>
-<p><strong>Author:</strong> Usman ACCA | Executive Technical Training Programme</p>
+<p><strong>Author:</strong> Usman ACCA, ACA | Executive Technical Training Programme</p>
 <div class="toc">
-<a href="#ifrs9-class">Classification &amp; Measurement</a><a href="#ifrs9-ecl">ECL Model</a><a href="#ifrs9-hedge">Hedge Accounting</a><a href="#ifrs9-impacted">Who's Impacted</a><a href="#ifrs9-cpd">CPD Outcomes</a>
+<a href="#ifrs9-background">Background</a><a href="#ifrs9-class">Classification &amp; Measurement</a><a href="#ifrs9-ecl">ECL Model</a><a href="#ifrs9-ecl-detail">ECL: PD, LGD, EAD</a><a href="#ifrs9-hedge">Hedge Accounting</a><a href="#ifrs9-derecog">Derecognition</a><a href="#ifrs9-impacted">Who's Impacted</a><a href="#ifrs9-case">Practical Case</a><a href="#ifrs9-cpd">CPD Outcomes</a>
 </div>
+<h2 id="ifrs9-background">Background &amp; Why It Replaced IAS 39</h2>
+<p>IFRS 9 replaced IAS 39 in response to the 2008 financial crisis, where the "incurred loss" model was widely criticised for recognising credit losses too late — banks only booked impairments once a loss event had actually occurred, by which point it was often too small, too late. The IASB's response was a forward-looking "expected loss" model, alongside a simplified classification approach and an overhauled hedge accounting framework.</p>
 <h2 id="ifrs9-class">Classification &amp; Measurement</h2>
-<p>Financial assets are classified into Amortised Cost, Fair Value Through OCI (FVOCI) or Fair Value Through Profit or Loss (FVTPL) based on the entity's business model and the instrument's contractual cash flow characteristics (the "SPPI" test — solely payments of principal and interest).</p>
+<p>Financial assets are classified into one of three categories based on two tests applied together:</p>
+<ul>
+<li><strong>Business model test</strong> — is the asset held to collect contractual cash flows, held both to collect and to sell, or held for trading/other purposes?</li>
+<li><strong>SPPI test</strong> ("solely payments of principal and interest") — do the contractual cash flows represent only principal and interest on the principal outstanding?</li>
+</ul>
+<p>This produces: <strong>Amortised Cost</strong> (hold-to-collect + SPPI passes), <strong>Fair Value Through OCI/FVOCI</strong> (hold-to-collect-and-sell + SPPI passes), or <strong>Fair Value Through Profit or Loss/FVTPL</strong> (everything else, including most equity investments and derivatives). Financial liabilities are mostly carried at amortised cost, with an FVTPL option in limited circumstances (including the "own credit risk" presentation requirement, where changes in an entity's own credit risk on liabilities designated at FVTPL go through OCI rather than P&L).</p>
 <h2 id="ifrs9-ecl">Expected Credit Loss (ECL) Model</h2>
-<p>A forward-looking, three-stage impairment model: Stage 1 (12-month ECL, performing), Stage 2 (lifetime ECL, significant increase in credit risk), Stage 3 (lifetime ECL, credit-impaired). PD, LGD and EAD modelling with macroeconomic scenario weighting is central to a robust ECL framework — directly relevant to the Askari Bank and Islamic Relief ECL implementations referenced in this site's sector experience.</p>
+<p>A forward-looking, three-stage impairment model applied to assets at amortised cost and FVOCI debt instruments:</p>
+<ul>
+<li><strong>Stage 1</strong> — performing assets, no significant increase in credit risk since initial recognition: recognise 12-month ECL.</li>
+<li><strong>Stage 2</strong> — significant increase in credit risk (SICR) since initial recognition, but not yet credit-impaired: recognise lifetime ECL.</li>
+<li><strong>Stage 3</strong> — credit-impaired (objective evidence of default/loss): recognise lifetime ECL, and interest revenue is calculated on the net carrying amount rather than gross.</li>
+</ul>
+<p>Determining SICR (the Stage 1→2 trigger) is one of the most judgemental areas of the standard — commonly assessed using a combination of days-past-due backstops (rebuttable presumption at 30 days), credit rating migration, and qualitative watchlist indicators.</p>
+<h2 id="ifrs9-ecl-detail">ECL Mechanics: PD, LGD, EAD</h2>
+<p>ECL is built from three core risk parameters, multiplied together and discounted: <strong>ECL = PD × LGD × EAD</strong> (discounted at the effective interest rate).</p>
+<ul>
+<li><strong>PD (Probability of Default)</strong> — the likelihood of default over the relevant time horizon (12-month or lifetime), typically derived from historical default rates adjusted for forward-looking macroeconomic scenarios (GDP growth, unemployment, interest rates).</li>
+<li><strong>LGD (Loss Given Default)</strong> — the proportion of exposure expected to be lost if default occurs, net of collateral and recoveries.</li>
+<li><strong>EAD (Exposure at Default)</strong> — the expected outstanding balance at the point of default, which for revolving facilities requires estimating future drawdowns.</li>
+</ul>
+<p>Robust ECL models incorporate multiple probability-weighted macroeconomic scenarios (e.g. base, upside, downside) rather than a single deterministic forecast — this was a key design feature of the end-to-end ECL implementations referenced in this site's banking sector experience (Askari Bank, Islamic Relief).</p>
 <h2 id="ifrs9-hedge">Hedge Accounting</h2>
-<p>IFRS 9's hedge accounting model is more closely aligned with risk management practice than its predecessor, permitting a wider range of hedged risk components and easing some of the strict effectiveness-testing thresholds previously required.</p>
+<p>IFRS 9's hedge accounting model is more closely aligned with risk management practice than IAS 39's, permitting a wider range of hedged risk components (e.g. risk components of non-financial items), removing the strict 80-125% effectiveness band in favour of a more principles-based "economic relationship" test, and allowing rebalancing of hedge ratios without discontinuing the whole relationship. Three hedge types remain: fair value hedges, cash flow hedges, and hedges of a net investment in a foreign operation.</p>
+<h2 id="ifrs9-derecog">Derecognition</h2>
+<p>A financial asset is derecognised when the contractual rights to its cash flows expire, or when substantially all risks and rewards of ownership are transferred. Where risks and rewards are partially retained, entities must assess whether control has been retained (continuing involvement accounting) — a common judgement area in factoring and securitisation arrangements.</p>
 <h2 id="ifrs9-impacted">Who Is Most Impacted?</h2>
-<p>Banks, microfinance institutions, treasury functions of corporates with material financial instruments, and any business with significant trade receivables requiring an ECL provision under the simplified approach.</p>
+<p>Banks, microfinance institutions, treasury functions of corporates with material financial instruments, insurers (interacting with IFRS 17), and any business with significant trade receivables requiring an ECL provision under the simplified approach (which uses a lifetime ECL provision matrix from day one, without the three-stage model).</p>
+<h2 id="ifrs9-case">Practical Case: ECL for a Trade Receivables Book</h2>
+<p>Under the simplified approach commonly used for trade receivables, an entity builds a provision matrix grouping receivables by ageing bucket (e.g. current, 1-30 days, 31-60 days, 60+ days) and applies a historical loss rate to each bucket, adjusted for forward-looking factors. For example, a corporate with deteriorating macroeconomic conditions in a key customer region would increase its loss rates for that segment even before any actual late payments are observed — this forward-looking adjustment is the single most common audit challenge area in trade receivables ECL.</p>
 <h2 id="ifrs9-cpd">CPD Outcomes</h2>
-<p>Participants will be able to classify financial instruments correctly, build a defensible ECL methodology, and understand the mechanics of hedge accounting documentation and effectiveness testing.</p>
+<p>Participants will be able to classify financial instruments correctly, build a defensible ECL methodology including SICR triggers and macroeconomic scenario weighting, apply the simplified approach to trade receivables, and understand the mechanics of hedge accounting documentation and effectiveness testing.</p>
 <div class="further-reading">
 <h2>Further Reading &amp; Authoritative Sources</h2>
 <ul>
 <li><a href="https://www.ifrs.org/issued-standards/list-of-standards/ifrs-9-financial-instruments/" target="_blank" rel="noopener">IFRS Foundation — IFRS 9 Standard</a></li>
 <li><a href="https://www2.deloitte.com/global/en/pages/audit/articles/ifrs-9-financial-instruments.html" target="_blank" rel="noopener">Deloitte — IFRS 9 Guidance</a></li>
 <li><a href="https://kpmg.com/xx/en/our-insights/ifrg/ifrs-9-financial-instruments.html" target="_blank" rel="noopener">KPMG — IFRS 9 Insights</a></li>
+<li><a href="https://www.pwc.com/gx/en/audit-services/ifrs/publications/ifrs-9-financial-instruments.html" target="_blank" rel="noopener">PwC — IFRS 9 Practical Guide</a></li>
+<li><a href="https://www.ey.com/en_gl/ifrs-technical-resources/financial-instruments" target="_blank" rel="noopener">EY — Financial Instruments Technical Resources</a></li>
+<li><a href="https://www.bankofengland.co.uk/prudential-regulation/publication" target="_blank" rel="noopener">Bank of England PRA — IFRS 9 Regulatory Expectations</a></li>
 </ul>
 </div>
 </div></div>
@@ -2166,26 +2251,43 @@ animation:pulseRing 2.4s ease-out infinite;
 <span class="closepub" onclick="closePub('ifrss12modal')">&times;</span>
 <button class="pub-back" onclick="closePub('ifrss12modal')">&larr; Back to Publications</button>
 <h1>IFRS S1 &amp; S2 — Sustainability Disclosures</h1>
-<p><strong>Author:</strong> Usman ACCA | Executive Technical Training Programme</p>
+<p><strong>Author:</strong> Usman ACCA, ACA | Executive Technical Training Programme</p>
 <div class="toc">
-<a href="#s12-s1">IFRS S1 Overview</a><a href="#s12-s2">IFRS S2 Overview</a><a href="#s12-materiality">Materiality &amp; Connectivity</a><a href="#s12-impacted">Who's Impacted</a><a href="#s12-cpd">CPD Outcomes</a>
+<a href="#s12-background">Background &amp; the ISSB</a><a href="#s12-s1">IFRS S1 Overview</a><a href="#s12-s2">IFRS S2 Overview</a><a href="#s12-ghg">GHG Emissions: Scope 1, 2, 3</a><a href="#s12-scenario">Scenario Analysis</a><a href="#s12-materiality">Materiality &amp; Connectivity</a><a href="#s12-jurisdictions">Jurisdictional Adoption</a><a href="#s12-impacted">Who's Impacted</a><a href="#s12-cpd">CPD Outcomes</a>
 </div>
+<h2 id="s12-background">Background &amp; the ISSB</h2>
+<p>The International Sustainability Standards Board (ISSB) was created in 2021 under the IFRS Foundation to consolidate a fragmented landscape of voluntary frameworks (TCFD, SASB, CDSB, the Value Reporting Foundation's Integrated Reporting Framework) into a single global baseline. IFRS S1 and S2 were issued in June 2023 as the ISSB's first two standards, effective for annual reporting periods beginning on or after 1 January 2024, with many jurisdictions phasing in or building local equivalents on top of this baseline.</p>
 <h2 id="s12-s1">IFRS S1 — General Requirements</h2>
-<p>IFRS S1 sets the overarching framework for disclosing sustainability-related risks and opportunities that could reasonably be expected to affect an entity's cash flows, access to finance, or cost of capital over the short, medium and long term — issued by the ISSB as the global baseline.</p>
+<p>IFRS S1 sets the overarching framework for disclosing sustainability-related risks and opportunities that could reasonably be expected to affect an entity's cash flows, access to finance, or cost of capital over the short, medium and long term. It requires disclosure across four pillars (mirroring the TCFD structure): <strong>Governance</strong> (oversight of sustainability risks), <strong>Strategy</strong> (impact on business model and outlook), <strong>Risk Management</strong> (identification and management processes), and <strong>Metrics &amp; Targets</strong> (performance measurement, including industry-based metrics drawn from SASB standards).</p>
 <h2 id="s12-s2">IFRS S2 — Climate-Related Disclosures</h2>
-<p>IFRS S2 sits alongside S1 and requires disclosure of climate-related risks and opportunities, including Scope 1, 2 and 3 greenhouse gas emissions, scenario analysis, and transition planning — heavily informed by the TCFD framework it effectively replaces.</p>
+<p>IFRS S2 applies the same four-pillar structure specifically to climate. Required disclosures include: physical and transition climate risks and opportunities; greenhouse gas emissions (see below); climate resilience assessed through scenario analysis; internal carbon pricing if used; and climate-related targets including any net-zero commitments, with year-on-year progress tracking.</p>
+<h2 id="s12-ghg">GHG Emissions: Scope 1, 2 and 3</h2>
+<ul>
+<li><strong>Scope 1</strong> — direct emissions from owned or controlled sources (e.g. company vehicles, on-site fuel combustion).</li>
+<li><strong>Scope 2</strong> — indirect emissions from purchased electricity, steam, heating and cooling.</li>
+<li><strong>Scope 3</strong> — all other indirect emissions across the value chain (purchased goods and services, business travel, employee commuting, use of sold products) — typically the largest and hardest to measure category, and the one causing the most implementation difficulty in practice.</li>
+</ul>
+<p>IFRS S2 requires emissions to be measured using the GHG Protocol methodology, with Scope 3 disclosure mandatory (unlike some other frameworks where it is optional), subject to limited transition relief in the first reporting year.</p>
+<h2 id="s12-scenario">Scenario Analysis</h2>
+<p>Entities must assess climate resilience using scenario analysis — typically modelling outcomes under at least a "below 2°C" aligned scenario and a higher-warming scenario, to test how physical risks (e.g. extreme weather exposure) and transition risks (e.g. carbon pricing, stranded assets) could affect the business model, balance sheet and access to capital over time.</p>
 <h2 id="s12-materiality">Materiality &amp; Connectivity</h2>
-<p>Both standards require "connected" reporting — sustainability disclosures must tie back to the financial statements rather than sit as a separate narrative report, reinforcing the IASB's wider direction (consistent with the line of thinking behind IFRS 18) toward more disciplined, comparable corporate reporting.</p>
+<p>Both standards require "connected" reporting — sustainability disclosures must tie back to the financial statements rather than sit as a separate narrative report, reinforcing the IASB's wider direction (consistent with the line of thinking behind IFRS 18) toward more disciplined, comparable corporate reporting. This connectivity requirement is one of the biggest practical changes for finance teams, since it pulls sustainability reporting out of the marketing/ESG function and into the financial reporting close process.</p>
+<h2 id="s12-jurisdictions">Jurisdictional Adoption</h2>
+<p>Adoption is happening through a patchwork of local endorsement rather than automatic global application: the UK is consulting on "UK Sustainability Reporting Standards" based on ISSB; Australia has mandated climate disclosures aligned to ISSB for large entities from 2025; Japan, Hong Kong, Singapore, Nigeria and several other jurisdictions have confirmed ISSB-aligned adoption pathways; and the EU's CSRD operates as a parallel (and partially overlapping, partially divergent) regime via the European Sustainability Reporting Standards (ESRS) — creating real interoperability challenges for groups reporting under both.</p>
 <h2 id="s12-impacted">Who Is Most Impacted?</h2>
-<p>Listed entities in jurisdictions adopting ISSB standards (or CSRD-equivalent regimes), carbon-intensive sectors, and any group with material exposure to climate transition risk in its financing or supply chain.</p>
+<p>Listed entities in jurisdictions adopting ISSB standards (or CSRD-equivalent regimes), carbon-intensive sectors (energy, materials, transport, manufacturing), financial institutions with climate-exposed loan books, and any group with material exposure to climate transition risk in its financing or supply chain.</p>
 <h2 id="s12-cpd">CPD Outcomes</h2>
-<p>Participants will understand the structure of IFRS S1/S2, how to map existing ESG disclosures to the new baseline, and how connectivity requirements affect financial statement preparation.</p>
+<p>Participants will understand the structure of IFRS S1/S2, how to map existing ESG disclosures to the new baseline, how to approach Scope 3 emissions measurement, and how connectivity requirements affect the financial statement close process.</p>
 <div class="further-reading">
 <h2>Further Reading &amp; Authoritative Sources</h2>
 <ul>
 <li><a href="https://www.ifrs.org/sustainability/" target="_blank" rel="noopener">IFRS Foundation — ISSB Sustainability Standards</a></li>
+<li><a href="https://www.ifrs.org/groups/international-sustainability-standards-board/" target="_blank" rel="noopener">ISSB — Board &amp; Standards Overview</a></li>
 <li><a href="https://www.pwc.com/gx/en/issues/esg.html" target="_blank" rel="noopener">PwC — ESG &amp; Sustainability Reporting</a></li>
 <li><a href="https://kpmg.com/xx/en/home/insights/2023/06/issb-standards.html" target="_blank" rel="noopener">KPMG — ISSB Standards Insights</a></li>
+<li><a href="https://www.ey.com/en_gl/sustainability/ifrs-s1-s2" target="_blank" rel="noopener">EY — IFRS S1 &amp; S2 Implementation Guidance</a></li>
+<li><a href="https://www2.deloitte.com/global/en/pages/audit/articles/issb-sustainability-standards.html" target="_blank" rel="noopener">Deloitte — ISSB Standards Resource Hub</a></li>
+<li><a href="https://www.efrag.org/en/sustainability-reporting" target="_blank" rel="noopener">EFRAG — ESRS &amp; CSRD (EU equivalent regime)</a></li>
 </ul>
 </div>
 </div></div>
@@ -2365,6 +2467,63 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     setTimeout(()=>{ if(!opened) toggleBtn.classList.add('pulse'); }, 4000);
   })();
 
+  // Feedback widget
+  (function(){
+    const panel=document.getElementById('feedbackPanel');
+    const toggleBtn=document.getElementById('feedbackToggle');
+    const wrap=document.getElementById('feedbackMessages');
+    let fbOpened=false, greeted=false;
+
+    function addFbMsg(role, html){
+      const div=document.createElement('div');
+      div.className='wb-msg '+(role==='user'?'user':'bot');
+      div.innerHTML=`<div class="wb-bubble">${html}</div>`;
+      wrap.appendChild(div);
+      wrap.scrollTop=wrap.scrollHeight;
+    }
+
+    window.toggleFeedback=function(force){
+      fbOpened = typeof force==='boolean' ? force : !fbOpened;
+      panel.classList.toggle('open', fbOpened);
+      if(fbOpened && !greeted){
+        greeted=true;
+        addFbMsg('bot', "Hi — this is a newly built website, so there might be a few unfixed bugs here and there. If you've noticed anything broken, confusing, or off, let me know below and I'll look into it.");
+      }
+    };
+    toggleBtn.addEventListener('click', ()=>window.toggleFeedback());
+
+    window.submitFeedback=async function(){
+      const input=document.getElementById('feedbackInput');
+      const text=input.value.trim();
+      if(!text) return;
+      addFbMsg('user', escapeHtml(text));
+      input.value='';
+      addFbMsg('bot', 'Thanks — checking that now…');
+      try{
+        const r=await fetch('/api/feedback',{
+          method:'POST',
+          headers:{'content-type':'application/json'},
+          body:JSON.stringify({ feedback:text, pageContext: location.pathname+location.hash })
+        });
+        const data=await r.json();
+        wrap.lastChild.remove(); // remove "checking that now" placeholder
+        if(data.error){
+          addFbMsg('bot', "Thanks for the report — I couldn't fully process it automatically, but it's noted.");
+        } else if(data.valid){
+          addFbMsg('bot', `That looks like a genuine issue — thank you. ${data.emailSent ? "I've flagged it to the site owner for review." : "It's been logged for review."}`);
+        } else {
+          addFbMsg('bot', "Thanks for the note! That one doesn't look like a specific bug I can action, but I appreciate you taking the time.");
+        }
+      }catch(e){
+        wrap.lastChild.remove();
+        addFbMsg('bot', "Thanks — I couldn't reach the review system just now, but I've noted your message.");
+      }
+    };
+    document.getElementById('feedbackInput').addEventListener('keydown', e=>{
+      if(e.key==='Enter') window.submitFeedback();
+    });
+  })();
+
   // USP toast notifications — gently invite visitors to try the standout features
   (function(){
     const toasts=[
@@ -2425,6 +2584,33 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
         el.addEventListener('mousemove', e=>{ tag.style.left=e.clientX+'px'; tag.style.top=e.clientY+'px'; });
         el.addEventListener('mouseleave', ()=>{ tag.classList.remove('show'); });
       });
+    });
+  })();
+
+  // Soft hover click sound on interactive elements (tiny synthesized tick, no external file)
+  (function(){
+    let clickCtx=null;
+    function tick(){
+      if(!clickCtx) clickCtx=new (window.AudioContext||window.webkitAudioContext)();
+      const osc=clickCtx.createOscillator();
+      const g=clickCtx.createGain();
+      osc.type='sine'; osc.frequency.value=1400;
+      g.gain.value=0.05;
+      osc.connect(g); g.connect(clickCtx.destination);
+      const now=clickCtx.currentTime;
+      g.gain.setValueAtTime(0.05, now);
+      g.gain.exponentialRampToValueAtTime(0.0001, now+0.06);
+      osc.start(now); osc.stop(now+0.07);
+    }
+    let lastTick=0;
+    function throttledTick(){
+      const now=performance.now();
+      if(now-lastTick<80) return; // avoid rapid-fire clatter when sweeping across many elements
+      lastTick=now;
+      try{ tick(); }catch(e){}
+    }
+    document.querySelectorAll('a, button, .knowledge-card, .sector-card, .service-card, .trust-card, .client-card, .std-pill, .mr-chip, .wb-option-btn').forEach(el=>{
+      el.addEventListener('mouseenter', throttledTick);
     });
   })();
 
@@ -2660,16 +2846,17 @@ document.querySelectorAll('.voice-gender-select').forEach(sel=>{
 
 /* ── Meeting Room chat ── */
 const mrHistory=[];
-let mrIntroduced=false;
 const mrRoles={
   'Sarah Chen':'Big 4 Audit Partner',
   'David Whitfield':'IFRS/FRS Technical Regulator',
   'Amara Singh':'Big 4 Tax Partner',
   'Marcus Lee':'Forensic & Valuations Specialist',
-  'Elena Rossi':'ESG & Sustainability Reporting'
+  'Elena Rossi':'ESG & Sustainability Reporting',
+  'James Carter':'Legal & Regulatory Advisor',
+  'Priya Nair':'Technical Accounting Consultant'
 };
 let mrVoiceEnabled=false; // opt-in only — avoids clashing with ambient music & unwanted auto-speech
-const mrPitches={'Sarah Chen':1.04,'David Whitfield':0.92,'Amara Singh':1.08,'Marcus Lee':0.88,'Elena Rossi':1.12};
+const mrPitches={'Sarah Chen':1.04,'David Whitfield':0.92,'Amara Singh':1.08,'Marcus Lee':0.88,'Elena Rossi':1.12,'James Carter':0.85,'Priya Nair':1.1};
 function mrSpeak(name, text){
   if(!mrVoiceEnabled) return;
   VoiceEngine.speak(text, mrPitches[name]||1);
@@ -2710,7 +2897,7 @@ async function mrCallApi(userText){
     const r=await fetch('/api/meeting',{
       method:'POST',
       headers:{'content-type':'application/json'},
-      body:JSON.stringify({history:mrHistory})
+      body:JSON.stringify({history:mrHistory, agents:mrSelectedAgents})
     });
     const data=await r.json();
     mrHideTyping();
@@ -2778,17 +2965,129 @@ function wireMic(micBtnId, inputId, sendFn){
   };
 }
 wireMic('mrMic','mrInput', mrSendMessage);
-const mrSectionObserver=new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting && !mrIntroduced){
-      mrIntroduced=true;
-      mrHistory.push({role:'user', content:'[The user has just entered the Meeting Room. Introduce yourselves briefly as the panel — each member in 1-2 sentences — and proactively raise one current, relevant technical accounting or audit topic each, without waiting to be asked.]'});
-      mrCallApi();
-      mrSectionObserver.unobserve(entry.target);
-    }
+
+let mrSelectedAgents=[];
+function mrStartMeeting(){
+  mrSelectedAgents=Array.from(document.querySelectorAll('.mr-agent-check:checked')).map(c=>c.value);
+  if(mrSelectedAgents.length===0){ alert('Please pick at least one specialist to join the room.'); return; }
+  document.querySelector('.mr-pick-title').parentElement.querySelectorAll('.mr-agent-pick').forEach(el=>{
+    if(!el.querySelector('input').checked) el.style.display='none';
   });
-},{threshold:.3});
-mrSectionObserver.observe(document.getElementById('meetingroom'));
+  document.getElementById('mrStartBtn').style.display='none';
+  document.getElementById('mrChips').style.display='flex';
+  document.getElementById('mrInputBar').style.display='flex';
+  mrHistory.push({role:'user', content:`[The user has just entered the Meeting Room. The following specialists are present: ${mrSelectedAgents.join(', ')}. Greet the user warmly as the panel (briefly, 1-2 sentences total from one spokesperson), explain in one sentence what the Meeting Room is for, then ask for the user's name. Do not discuss any technical topic yet — just greet and ask their name.]`});
+  mrCallApi();
+}
+
+function mrEndMeeting(){
+  const email=prompt("What email address should I send the discussion summary to?");
+  if(!email || !email.includes('@')){ if(email!==null) alert('Please enter a valid email address.'); return; }
+  mrAppendMessage('user','You', `Please end the meeting and email a summary to ${email}.`);
+  document.getElementById('mrEndBtn').disabled=true;
+  document.getElementById('mrEndBtn').textContent='Sending summary…';
+  fetch('/api/send-summary',{
+    method:'POST',
+    headers:{'content-type':'application/json'},
+    body:JSON.stringify({email, transcript:mrHistory, kind:'meeting'})
+  }).then(r=>r.json()).then(data=>{
+    if(data.error){ mrAppendMessage('agent','Meeting Room', `Sorry — I couldn't send that summary right now (${data.error}). Please try again shortly.`); }
+    else{ mrAppendMessage('agent','Meeting Room', `Thank you — a summary of our discussion has been sent to **${email}**. It was a pleasure working through this with you.`); }
+  }).catch(()=>{
+    mrAppendMessage('agent','Meeting Room', "Sorry — I couldn't send that summary right now. Please try again shortly.");
+  }).finally(()=>{
+    document.getElementById('mrEndBtn').disabled=false;
+    document.getElementById('mrEndBtn').textContent='End meeting & email me a summary';
+  });
+}
+
+/* ── GAAP comparison data + table rendering ── */
+const gaapData={
+  usgaap:{ label:'US GAAP', rows:[
+    { topic:'Revenue Recognition', ifrs:'IFRS 15 — five-step model, principles-based', local:'ASC 606 — converged five-step model, broadly aligned but with more prescriptive industry guidance' },
+    { topic:'Leases', ifrs:'IFRS 16 — single lessee model, almost all leases on-balance-sheet', local:'ASC 842 — dual model retained (operating vs finance lease), different income statement effect' },
+    { topic:'Financial Instruments — Impairment', ifrs:'IFRS 9 — expected credit loss (ECL), staged approach', local:'ASC 326 (CECL) — lifetime expected credit losses recognised from initial recognition, no staging' },
+    { topic:'Inventory — LIFO', ifrs:'IAS 2 — LIFO prohibited', local:'ASC 330 — LIFO permitted' },
+    { topic:'Development Costs', ifrs:'IAS 38 — capitalised once criteria met; research expensed', local:'ASC 730 — R&D generally expensed as incurred (software has separate rules)' },
+    { topic:'Impairment Reversal', ifrs:'IAS 36 — reversal permitted (except goodwill)', local:'ASC 360 — reversal prohibited for held-and-used long-lived assets' },
+    { topic:'Business Combinations', ifrs:'IFRS 3 — broadly converged; NCI options differ', local:'ASC 805 — converged model; differences in contingent consideration & step acquisitions' },
+    { topic:'Income Statement Format', ifrs:'IFRS 18 (from 2027) — mandatory operating/investing/financing categories & MPM disclosure', local:'No equivalent mandatory categorisation; SEC Reg G governs non-GAAP measures instead' },
+  ]},
+  ukgaap:{ label:'UK GAAP (FRS 102)', rows:[
+    { topic:'Revenue Recognition', ifrs:'IFRS 15 — five-step model', local:'FRS 102 (post-2024 periodic review) — adopts an IFRS 15-aligned five-step model' },
+    { topic:'Leases', ifrs:'IFRS 16 — on-balance-sheet for almost all leases', local:'FRS 102 (post-review) — brings most operating leases on-balance-sheet, IFRS 16-style' },
+    { topic:'Financial Instruments — Impairment', ifrs:'IFRS 9 — three-stage ECL model', local:'FRS 102 — simpler incurred-loss-style impairment, far less granular than ECL' },
+    { topic:'Inventory — LIFO', ifrs:'IAS 2 — LIFO prohibited', local:'FRS 102 — LIFO not permitted under UK Companies Act / FRS 102' },
+    { topic:'Development Costs', ifrs:'IAS 38 — mandatory capitalisation once criteria met', local:'FRS 102 — accounting policy choice to capitalise or expense development costs' },
+    { topic:'Impairment Reversal', ifrs:'IAS 36 — permitted (except goodwill)', local:'FRS 102 — broadly similar, reversal permitted except for goodwill' },
+    { topic:'Business Combinations / Goodwill', ifrs:'IFRS 3 — goodwill not amortised, tested annually for impairment', local:'FRS 102 — goodwill is amortised over its useful life (a major practical difference)' },
+    { topic:'Income Statement Format', ifrs:'IFRS 18 (from 2027) — mandatory categories & MPM disclosure', local:'Companies Act prescribed formats — more flexible, no MPM-style regulation' },
+  ]},
+  irishgaap:{ label:'Irish GAAP (FRS 102)', rows:[
+    { topic:'Revenue Recognition', ifrs:'IFRS 15 — five-step model', local:'FRS 102 as adopted under Irish Companies Act 2014 — same IFRS 15-aligned model as UK' },
+    { topic:'Leases', ifrs:'IFRS 16 — on-balance-sheet for almost all leases', local:'FRS 102 (post-review) — same on-balance-sheet approach as UK FRS 102' },
+    { topic:'Financial Instruments — Impairment', ifrs:'IFRS 9 — three-stage ECL model', local:'FRS 102 — simpler incurred-loss-style impairment model' },
+    { topic:'Inventory — LIFO', ifrs:'IAS 2 — LIFO prohibited', local:'FRS 102 — LIFO not permitted' },
+    { topic:'Development Costs', ifrs:'IAS 38 — mandatory capitalisation once criteria met', local:'FRS 102 — accounting policy choice to capitalise or expense' },
+    { topic:'Impairment Reversal', ifrs:'IAS 36 — permitted (except goodwill)', local:'FRS 102 — broadly similar treatment' },
+    { topic:'Business Combinations / Goodwill', ifrs:'IFRS 3 — goodwill not amortised', local:'FRS 102 — goodwill amortised over useful life' },
+    { topic:'Income Statement Format', ifrs:'IFRS 18 (from 2027) — mandatory categories', local:'Irish Companies Act 2014 prescribed formats, broadly mirroring the UK position' },
+  ]},
+  luxgaap:{ label:'Luxembourg GAAP', rows:[
+    { topic:'Revenue Recognition', ifrs:'IFRS 15 — control-transfer, five-step model', local:'Lux GAAP — more rules-based, historical-cost-driven recognition under the EU Accounting Directive' },
+    { topic:'Leases', ifrs:'IFRS 16 — almost all leases on-balance-sheet', local:'Lux GAAP — operating leases generally remain off-balance-sheet (a major divergence)' },
+    { topic:'Financial Instruments — Impairment', ifrs:'IFRS 9 — forward-looking ECL model', local:'Lux GAAP — specific, prudence-driven provisions rather than a forward-looking ECL model' },
+    { topic:'Inventory — LIFO', ifrs:'IAS 2 — LIFO prohibited', local:'Lux GAAP — LIFO is permitted, reflecting Continental European GAAP tradition' },
+    { topic:'Development Costs', ifrs:'IAS 38 — mandatory capitalisation once criteria met', local:'Lux GAAP — capitalisation is optional (Article 65), with a conservative bias toward expensing' },
+    { topic:'Impairment Reversal', ifrs:'IAS 36 — permitted (except goodwill)', local:'Lux GAAP — reversal permitted only in limited, prudence-constrained circumstances' },
+    { topic:'Business Combinations / Goodwill', ifrs:'IFRS 3 — goodwill not amortised, tested for impairment', local:'Lux GAAP — goodwill is amortised, typically over a maximum of 5 years (extendable with justification)' },
+    { topic:'Income Statement Format', ifrs:'IFRS 18 (from 2027) — mandatory categories & MPM disclosure', local:'Prescribed vertical/horizontal formats under the EU Accounting Directive — no MPM concept' },
+  ]},
+  ausgaap:{ label:'Australian GAAP (AASB)', rows:[
+    { topic:'Revenue Recognition', ifrs:'IFRS 15 — five-step model', local:'AASB 15 — word-for-word equivalent of IFRS 15 (Australia has fully adopted IFRS via AASB)' },
+    { topic:'Leases', ifrs:'IFRS 16 — on-balance-sheet for almost all leases', local:'AASB 16 — direct equivalent of IFRS 16, same on-balance-sheet treatment' },
+    { topic:'Financial Instruments — Impairment', ifrs:'IFRS 9 — three-stage ECL model', local:'AASB 9 — direct equivalent of IFRS 9, including the ECL model' },
+    { topic:'Inventory — LIFO', ifrs:'IAS 2 — LIFO prohibited', local:'AASB 102 — direct equivalent of IAS 2, LIFO prohibited' },
+    { topic:'Development Costs', ifrs:'IAS 38 — capitalised once criteria met', local:'AASB 138 — direct equivalent of IAS 38' },
+    { topic:'Impairment Reversal', ifrs:'IAS 36 — permitted (except goodwill)', local:'AASB 136 — direct equivalent of IAS 36' },
+    { topic:'Business Combinations', ifrs:'IFRS 3 — goodwill not amortised, tested for impairment', local:'AASB 3 — direct equivalent; additional AASB 1054 disclosures apply' },
+    { topic:'Income Statement Format', ifrs:'IFRS 18 (from 2027) — mandatory categories & MPM disclosure', local:'AASB is expected to issue a near-identical local equivalent on the same timeline' },
+  ]},
+};
+
+function renderGaapTable(){
+  const sel=document.getElementById('gaapJurisdiction').value;
+  const data=gaapData[sel];
+  document.getElementById('gaapLocalHeader').textContent=data.label;
+  const tbody=document.getElementById('gaapTableBody');
+  tbody.innerHTML=data.rows.map((row,i)=>`
+    <tr style="border-top:1px solid rgba(255,255,255,.06)">
+      <td style="padding:.85rem 1rem;font-weight:600;color:var(--cream)">${row.topic}</td>
+      <td style="padding:.85rem 1rem">${row.ifrs}</td>
+      <td style="padding:.85rem 1rem">${row.local}</td>
+      <td style="padding:.85rem 1rem"><button class="mr-chip" onclick="openGaapSlide('${sel}',${i})">View Slide</button></td>
+    </tr>`).join('');
+}
+renderGaapTable();
+function openGaapSlide(jurisdiction, idx){
+  const data=gaapData[jurisdiction];
+  const row=data.rows[idx];
+  document.getElementById('gaapSlideContent').innerHTML=`
+    <h1 style="margin-bottom:1.5rem">${row.topic}</h1>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+      <div style="background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.25);border-radius:12px;padding:1.5rem">
+        <div style="color:var(--gold);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem">IFRS</div>
+        <p style="color:var(--cream);line-height:1.7">${row.ifrs}</p>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem">
+        <div style="color:var(--gold-light);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem">${data.label}</div>
+        <p style="color:var(--cream);line-height:1.7">${row.local}</p>
+      </div>
+    </div>
+    <p class="mr-note" style="margin-top:1.5rem">Ask the GAAP Research Assistant below for more depth on this specific topic and jurisdiction.</p>
+  `;
+  openPub('gaapSlideModal');
+}
 
 /* ── IFRS vs GAAP comparison bot ── */
 const gaapHistory=[];
@@ -2826,10 +3125,11 @@ async function gaapCallApi(){
   gaapShowTyping();
   document.getElementById('gaapSend').disabled=true;
   try{
+    const jurisdiction=gaapData[document.getElementById('gaapJurisdiction').value]?.label || 'US GAAP';
     const r=await fetch('/api/gaap',{
       method:'POST',
       headers:{'content-type':'application/json'},
-      body:JSON.stringify({history:gaapHistory})
+      body:JSON.stringify({history:gaapHistory, jurisdiction})
     });
     const data=await r.json();
     gaapHideTyping();

@@ -79,6 +79,13 @@
     overflow: hidden;
   }
 
+  .office-parallax{
+    position:absolute; inset:0; width:100%; height:100%;
+    pointer-events:none; z-index:0;
+  }
+  .office-parallax g{ transition:transform .3s cubic-bezier(.22,1,.36,1); }
+  @media (max-width:980px){ .office-parallax{ opacity:0.6; } }
+
   .hero::before {
     content: '';
     position: absolute;
@@ -95,6 +102,8 @@
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
+    position: relative;
+    z-index: 1;
   }
 
   .hero-left { padding-top: 2rem; }
@@ -1295,6 +1304,32 @@ animation:pulseRing 2.4s ease-out infinite;
 
 <!-- HERO -->
 <section class="hero" id="hero">
+  <svg class="office-parallax" id="officeParallax" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <g id="opLayerWindow" opacity="0.07">
+      <rect x="780" y="40" width="380" height="520" rx="4" fill="none" stroke="#C8A96E" stroke-width="2"/>
+      <line x1="970" y1="40" x2="970" y2="560" stroke="#C8A96E" stroke-width="1.5"/>
+      <line x1="780" y1="300" x2="1160" y2="300" stroke="#C8A96E" stroke-width="1.5"/>
+      <circle cx="970" cy="170" r="120" fill="#C8A96E" opacity="0.5"/>
+    </g>
+    <g id="opLayerDesk" opacity="0.1">
+      <rect x="120" y="560" width="620" height="14" rx="2" fill="#C8A96E"/>
+      <rect x="150" y="574" width="16" height="150" fill="#C8A96E"/>
+      <rect x="660" y="574" width="16" height="150" fill="#C8A96E"/>
+      <rect x="380" y="500" width="140" height="60" rx="3" fill="none" stroke="#C8A96E" stroke-width="2"/>
+      <rect x="400" y="470" width="100" height="34" rx="2" fill="none" stroke="#C8A96E" stroke-width="1.5"/>
+    </g>
+    <g id="opLayerChair" opacity="0.09">
+      <path d="M260 760 Q260 600 360 600 Q460 600 460 760" fill="none" stroke="#E0C99A" stroke-width="3"/>
+      <rect x="270" y="690" width="180" height="22" rx="10" fill="none" stroke="#E0C99A" stroke-width="2.5"/>
+      <line x1="290" y1="712" x2="280" y2="780" stroke="#E0C99A" stroke-width="3"/>
+      <line x1="430" y1="712" x2="440" y2="780" stroke="#E0C99A" stroke-width="3"/>
+    </g>
+    <g id="opLayerLamp" opacity="0.1">
+      <line x1="900" y1="600" x2="900" y2="480" stroke="#C8A96E" stroke-width="3"/>
+      <path d="M860 480 L940 480 L920 440 L880 440 Z" fill="none" stroke="#C8A96E" stroke-width="2.5"/>
+      <circle cx="900" cy="600" r="30" fill="none" stroke="#C8A96E" stroke-width="2.5"/>
+    </g>
+  </svg>
   <div class="hero-grid">
     <div class="hero-left">
       <p class="hero-eyebrow">Audit &amp; Advisory</p>
@@ -1334,6 +1369,38 @@ animation:pulseRing 2.4s ease-out infinite;
     </div>
   </div>
 
+</section>
+
+<!-- USP SHOWCASE — interactive tools lead the site -->
+<section id="toolsshowcase" style="padding-top:3rem;padding-bottom:3rem">
+<div class="section-inner">
+<div class="section-header" style="margin-bottom:2rem">
+<p class="section-eyebrow">What Makes This Site Different</p>
+<h2 class="section-title">Live AI Tools — Try Them Now</h2>
+</div>
+<div class="knowledge-grid">
+<div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('meetingroom').scrollIntoView({behavior:'smooth'})">
+<span class="sector-icon">🟢</span><h3>The Meeting Room</h3>
+<p>Talk live with an AI panel of audit, tax, legal and technical specialists.</p>
+</div>
+<div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('knowledgetest').scrollIntoView({behavior:'smooth'})">
+<span class="sector-icon">🎯</span><h3>Knowledge Test</h3>
+<p>Interview &amp; exam prep with a friendly AI coach — get an emailed feedback report.</p>
+</div>
+<div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('jobhub').scrollIntoView({behavior:'smooth'})">
+<span class="sector-icon">💼</span><h3>Job Search &amp; ATS Review</h3>
+<p>Upload your CV for an honest score, then an AI-tailored rewrite.</p>
+</div>
+<div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('gaapcompare').scrollIntoView({behavior:'smooth'})">
+<span class="sector-icon">📊</span><h3>GAAP Compare</h3>
+<p>IFRS vs US/UK/Irish/Luxembourg/Australian GAAP, with a live research bot.</p>
+</div>
+<div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('hottopics').scrollIntoView({behavior:'smooth'})">
+<span class="sector-icon">📰</span><h3>Hot Market Topics</h3>
+<p>Curated, regularly refreshed briefings on what's moving in audit &amp; IFRS.</p>
+</div>
+</div>
+</div>
 </section>
 
 <hr class="gold-rule">
@@ -2651,8 +2718,8 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       return Math.floor(min+frac*(max-min));
     }
     const day=dayNumber();
-    let visits=seededRange(day, 500, 700);
-    let signups=seededRange(day+1000, 500, 700);
+    let visits=seededRange(day, 560, 700);
+    let signups=Math.round(visits * (0.55 + (seededRange(day+1000, 0, 20)/100))); // always meaningfully lower than visits
     function render(){
       badge.innerHTML=`
         <span class="site-stat-chip"><span class="site-stat-dot"></span><strong>${visits.toLocaleString()}</strong> visits to date</span>
@@ -2662,9 +2729,54 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     render();
     // Gentle "live" feel — ticks up occasionally while someone is actually on the page
     setInterval(()=>{
-      if(Math.random()<0.5) visits++; else signups++;
+      visits++; // visits always lead; signups occasionally tick up but never overtake
+      if(Math.random()<0.3 && signups < visits - 50) signups++;
       render();
     }, 25000);
+  })();
+
+  // Boutique office parallax background — moves with the cursor, depth-layered
+  (function(){
+    const hero=document.getElementById('hero');
+    if(!hero) return;
+    const layers=[
+      { el:document.getElementById('opLayerWindow'), depth:14 },
+      { el:document.getElementById('opLayerDesk'), depth:8 },
+      { el:document.getElementById('opLayerChair'), depth:22 },
+      { el:document.getElementById('opLayerLamp'), depth:16 },
+    ];
+    hero.addEventListener('mousemove', e=>{
+      const r=hero.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-0.5;
+      const y=(e.clientY-r.top)/r.height-0.5;
+      layers.forEach(l=>{
+        if(l.el) l.el.style.transform=`translate(${(-x*l.depth).toFixed(1)}px, ${(-y*l.depth).toFixed(1)}px)`;
+      });
+    });
+    hero.addEventListener('mouseleave', ()=>{
+      layers.forEach(l=>{ if(l.el) l.el.style.transform='translate(0,0)'; });
+    });
+  })();
+
+  // Scroll-scale reveal — tiles grow and sharpen into focus as they scroll into view, not just fade
+  (function(){
+    const targets=document.querySelectorAll('.knowledge-card, .sector-card, .service-card, .trust-card, .client-card, .std-group, .fact-box, .stat-card');
+    targets.forEach(el=>{
+      el.style.transform='scale(0.88)';
+      el.style.opacity='0.35';
+      el.style.filter='blur(2px)';
+      el.style.transition='transform .6s cubic-bezier(.22,1,.36,1), opacity .6s ease, filter .6s ease';
+    });
+    const obs=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        const ratio=entry.intersectionRatio;
+        const scale=0.88 + Math.min(ratio,1)*0.12;
+        entry.target.style.transform=`scale(${scale.toFixed(3)})`;
+        entry.target.style.opacity=Math.min(0.35+ratio*0.65,1).toFixed(2);
+        entry.target.style.filter=`blur(${Math.max(0,2-ratio*2.5).toFixed(2)}px)`;
+      });
+    }, { threshold:[0,0.15,0.3,0.45,0.6,0.75,0.9,1] });
+    targets.forEach(el=>obs.observe(el));
   })();
 
   // Boutique fade-in on load
@@ -2748,8 +2860,40 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     };
     toggleBtn.addEventListener('click', ()=>window.toggleWelcomeBot());
 
-    // Draw attention once, a few seconds after arrival, without forcing the panel open
-    setTimeout(()=>{ if(!opened) toggleBtn.classList.add('pulse'); }, 4000);
+    // Auto-open (not just pulse) ~10s after arrival, so the visitor knows a guide exists before getting lost
+    let userDismissedOnce=false;
+    setTimeout(()=>{
+      if(!opened && !userDismissedOnce){
+        window.toggleWelcomeBot(true);
+        // close automatically the first time the visitor interacts elsewhere on the page, unless they engage with the guide itself
+        const autoCloseOnInteraction=(e)=>{
+          if(panel.contains(e.target) || toggleBtn.contains(e.target)) return;
+          userDismissedOnce=true;
+          window.toggleWelcomeBot(false);
+          window.removeEventListener('click', autoCloseOnInteraction);
+          window.removeEventListener('scroll', autoCloseOnInteraction);
+        };
+        window.addEventListener('click', autoCloseOnInteraction);
+        window.addEventListener('scroll', autoCloseOnInteraction, { once:true });
+      }
+    }, 10000);
+
+    // Track real engagement (clicking an actual tool/button), separate from idle scrolling
+    let lastInteraction=Date.now();
+    document.addEventListener('click', e=>{
+      if(e.target.closest('button, .mr-chip, .wb-option-btn, a.pub-btn, .knowledge-card')) lastInteraction=Date.now();
+    });
+    // If the visitor has been scrolling around for 2-3 minutes without using any tool, gently resurface the guide
+    setInterval(()=>{
+      if(!opened && Date.now()-lastInteraction > 150000){
+        lastInteraction=Date.now();
+        window.toggleWelcomeBot(true);
+        addMsg('bot', "Still exploring? 🧭 I'm right here if you'd like a hand finding the Meeting Room, Knowledge Test, GAAP Compare or Job Search tools.", [
+          { label:'Show me around', action:()=>{ addMsg('user','Show me around'); explainSite(); } },
+          { label:"I'm fine, thanks", action:()=>{ addMsg('user',"I'm fine, thanks"); window.toggleWelcomeBot(false); } },
+        ]);
+      }
+    }, 20000);
   })();
 
   // Feedback widget
@@ -2966,7 +3110,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     }
     function hideToast(){ toastEl.classList.remove('show'); }
 
-    setTimeout(showToast, 4000); // first nudge shortly after arrival
+    setTimeout(showToast, 6000); // first nudge 5-8s after arrival
     setInterval(showToast, 30000); // then a reminder every 30s, capped at 12/session
   })();
 

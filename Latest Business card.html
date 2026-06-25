@@ -692,31 +692,148 @@
     margin: 0 4rem;
   }
 
-  /* ── RESPONSIVE ── */
-  @media (max-width: 900px) {
-    nav { padding: 0 1.5rem; }
-    .nav-links { gap: 1.25rem; }
-    .nav-links a { font-size: 0.7rem; }
+  /* ── NAV TOGGLE (mobile) ── */
+  .nav-toggle{
+    display:none;
+    width:32px;height:32px;
+    flex-direction:column;
+    justify-content:center;
+    gap:5px;
+    cursor:pointer;
+    background:none;border:none;
+    z-index:101;
+  }
+  .nav-toggle span{
+    display:block;width:100%;height:2px;
+    background:var(--gold);
+    transition:transform .35s cubic-bezier(.22,1,.36,1),opacity .35s ease;
+  }
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+  .nav-toggle.open span:nth-child(2){opacity:0}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
-    section { padding: 4rem 1.5rem; }
-    .hero { padding: 5rem 1.5rem 3rem; }
+  .nav-meetingroom{ display:inline-flex; align-items:center; gap:6px; }
+  .live-dot{
+    width:7px;height:7px;border-radius:50%;
+    background:#5fd97a;
+    box-shadow:0 0 0 0 rgba(95,217,122,.6);
+    animation:livePulse 1.8s ease-out infinite;
+    display:inline-block;
+  }
+  @keyframes livePulse{
+    0%{box-shadow:0 0 0 0 rgba(95,217,122,.55)}
+    70%{box-shadow:0 0 0 6px rgba(95,217,122,0)}
+    100%{box-shadow:0 0 0 0 rgba(95,217,122,0)}
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 1180px) {
+    nav { padding: 0 1.75rem; }
+    .nav-links { gap: 1.1rem; }
+    .nav-links a { font-size: 0.68rem; }
+  }
+
+  @media (max-width: 980px) {
+    .nav-toggle{ display:flex; }
+    .nav-links{
+      position:fixed;
+      top:64px; left:0; right:0;
+      flex-direction:column;
+      gap:0;
+      background:rgba(8,14,26,.97);
+      backdrop-filter:blur(20px);
+      max-height:0;
+      overflow:hidden;
+      transition:max-height .45s cubic-bezier(.22,1,.36,1);
+      border-bottom:1px solid rgba(200,169,110,.15);
+    }
+    .nav-links.open{ max-height:80vh; overflow-y:auto; }
+    .nav-links a{
+      display:block;
+      padding:1.1rem 1.75rem;
+      font-size:0.85rem;
+      border-bottom:1px solid rgba(255,255,255,.05);
+    }
+
+    nav { padding: 0 1.25rem; }
+
+    section { padding: 3.5rem 1.25rem; }
+    .hero { padding: 6rem 1.25rem 3rem; min-height:auto; }
+    .hero-name{ font-size: clamp(2.4rem,11vw,3.2rem) !important; }
+    .hero-title{ font-size:1rem; }
+    .hero-bio{ font-size:0.88rem; max-width:100%; }
+    .hero-cta{ flex-direction:column; align-items:stretch; }
+    .hero-cta a{ justify-content:center; }
 
     .hero-grid,
     .skills-layout,
-    .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-layout { grid-template-columns: 1fr; gap: 2.25rem; }
 
-    .hero-right { flex-direction: row; flex-wrap: wrap; }
-    .stat-card { flex: 1 1 45%; }
+    .hero-right { flex-direction: column; }
+    .stat-card { flex: 1 1 100%; }
 
-    .sectors-grid { grid-template-columns: 1fr; }
-    .gold-rule { margin: 0 1.5rem; }
-    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+    .sectors-grid,
+    .service-grid,.trust-grid,.client-showcase,.knowledge-grid,.standards-grid { grid-template-columns: 1fr; }
+
+    .section-title{ font-size: clamp(1.6rem, 7vw, 2.1rem) !important; }
+    .section-sub{ font-size:0.85rem; }
+
+    .gold-rule { margin: 0 1.25rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.25rem; }
+
+    /* Meeting room mobile */
+    .mr-layout{ grid-template-columns:1fr; }
+    .mr-chat{ height:480px; }
+    .mr-panel{ display:flex; flex-wrap:wrap; gap:.5rem; padding:1rem; }
+    .mr-agent{ flex:1 1 45%; }
+    .mr-note{ width:100%; }
+
+    /* Publication modals mobile */
+    .pub-modal{ padding:14px; }
+    .pub-inner{ padding:1.5rem; border-radius:14px; }
+    .pub-inner h1{ font-size:1.3rem; }
+    .toc{ grid-template-columns:repeat(2,1fr); }
+
+    .audio-toggle{ bottom:18px; right:18px; width:46px; height:46px; }
+
+    /* GAAP comparison & trainings mobile */
+    .gaap-table{ font-size:0.75rem; }
+    .gaap-table th,.gaap-table td{ padding:.5rem .4rem; }
+    .train-grid{ grid-template-columns:1fr; }
+  }
+
+  @media (max-width: 480px){
+    .hero-name{ font-size:2.1rem !important; }
+    .stat-number{ font-size:2rem; }
+    .toc{ grid-template-columns:1fr 1fr; }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .trail-item, .skill-fill { transition: none; }
     .trail-item { opacity: 1; transform: none; }
   }
+
+  /* ── Boutique-grade polish ── */
+  body{ opacity:0; transition:opacity 1.1s cubic-bezier(.22,1,.36,1); }
+  body.loaded{ opacity:1; }
+
+  .cursor-glow{
+    position:fixed; top:0; left:0; width:480px; height:480px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(200,169,110,.07), transparent 70%);
+    pointer-events:none; z-index:1; transform:translate(-50%,-50%);
+    transition:opacity .4s ease;
+    will-change:transform;
+  }
+  @media (max-width:980px){ .cursor-glow{ display:none; } }
+
+  .btn-primary, .btn-ghost, .pub-btn, .mr-inputbar button{ will-change:transform; }
+
+  .knowledge-card, .sector-card, .service-card, .trust-card, .client-card, .std-group, .stat-card, .fact-box{
+    transition: transform .55s cubic-bezier(.16,1,.3,1), box-shadow .55s cubic-bezier(.16,1,.3,1), border-color .55s ease !important;
+  }
+
+  ::selection{ background:rgba(200,169,110,.3); color:#fff; }
 
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
@@ -866,7 +983,7 @@ letter-spacing:.12em;
 body{background:linear-gradient(180deg,#050b15,#0a1628)}
 .hero{position:relative}
 .hero:after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(200,169,110,.12),transparent 30%);pointer-events:none}
-.client-showcase,.knowledge-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.client-showcase,.knowledge-grid,.train-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
 .client-card,.knowledge-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:1.6rem;border-radius:18px;backdrop-filter:blur(18px);transition:.4s}
 .client-card:hover,.knowledge-card:hover,.sector-card:hover{transform:translateY(-10px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
 .pub-btn{margin-top:1rem;background:#C8A96E;color:#0A1628;border:none;padding:.8rem 1.2rem;border-radius:10px;font-weight:700;cursor:pointer}
@@ -875,7 +992,13 @@ body{background:linear-gradient(180deg,#050b15,#0a1628)}
 .pub-inner{max-width:1100px;margin:auto;background:#081321;border:1px solid rgba(200,169,110,.3);padding:40px;border-radius:20px}
 .closepub{float:right;font-size:32px;color:#C8A96E;cursor:pointer}
 .toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:20px 0}
-.toc div{background:rgba(255,255,255,.04);padding:12px;border-radius:10px}
+.toc a{
+  background:rgba(255,255,255,.04);padding:12px;border-radius:10px;
+  display:block;color:var(--cream)!important;text-decoration:none!important;
+  border:1px solid transparent;font-size:.82rem;font-weight:600;
+  transition:all .3s ease;
+}
+.toc a:hover{background:rgba(200,169,110,.12);border-color:rgba(200,169,110,.35);color:var(--gold-light)!important;transform:translateY(-2px)}
 
 /* ── Modal fade/scale transition ── */
 .pub-modal{opacity:0;transition:opacity .45s cubic-bezier(.22,1,.36,1);backdrop-filter:blur(4px)}
@@ -932,7 +1055,8 @@ animation:pulseRing 2.4s ease-out infinite;
 .mr-bubble{padding:.85rem 1.1rem;border-radius:14px;font-size:.86rem;line-height:1.7}
 .mr-msg.agent .mr-bubble{background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.18);color:var(--cream)}
 .mr-msg.user .mr-bubble{background:var(--gold);color:var(--navy);font-weight:500}
-.mr-msg-name{font-size:.7rem;font-weight:700;color:var(--gold);margin-bottom:.3rem;letter-spacing:.04em;text-transform:uppercase}
+.mr-msg-name{font-size:.7rem;font-weight:700;color:var(--gold);margin-bottom:.15rem;letter-spacing:.04em;text-transform:uppercase}
+.mr-msg-role{font-size:.66rem;color:var(--steel-light);margin-bottom:.4rem;font-style:italic}
 .mr-typing{display:flex;gap:4px;padding:.6rem 1rem}
 .mr-typing span{width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.4;animation:typingDot 1.2s infinite}
 .mr-typing span:nth-child(2){animation-delay:.2s}
@@ -946,6 +1070,37 @@ animation:pulseRing 2.4s ease-out infinite;
 .mr-inputbar button:disabled{opacity:.5;cursor:default;transform:none}
 .mr-enter-wrap{text-align:center;margin-top:1.5rem}
 .mr-note{font-size:.72rem;color:var(--steel);margin-top:.75rem;font-style:italic}
+
+.mr-usp-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  margin-top:1.25rem;
+  background:linear-gradient(135deg,rgba(200,169,110,.18),rgba(200,169,110,.05));
+  border:1px solid rgba(200,169,110,.4);
+  color:var(--gold-light);
+  font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;
+  padding:.5rem 1rem;border-radius:30px;
+}
+.mr-chips{display:flex;flex-wrap:wrap;gap:.5rem;padding:0 1.25rem .9rem}
+.mr-chip{
+  background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.25);
+  color:var(--gold-light);font-size:.72rem;font-weight:500;
+  padding:.45rem .85rem;border-radius:20px;cursor:pointer;
+  transition:all .3s ease;font-family:inherit;
+}
+.mr-chip:hover{background:rgba(200,169,110,.18);border-color:var(--gold);transform:translateY(-2px)}
+.mr-mic{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);
+  color:var(--gold);width:42px;height:42px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  transition:all .3s ease;
+}
+.mr-mic svg{width:18px;height:18px}
+.mr-mic:hover{border-color:var(--gold);background:rgba(200,169,110,.08)}
+.mr-mic.listening{
+  background:rgba(200,169,110,.25);border-color:var(--gold);
+  animation:micPulse 1.3s ease-in-out infinite;
+}
+@keyframes micPulse{0%,100%{box-shadow:0 0 0 0 rgba(200,169,110,.5)}50%{box-shadow:0 0 0 8px rgba(200,169,110,0)}}
 </style>
 
 </head>
@@ -955,13 +1110,19 @@ animation:pulseRing 2.4s ease-out infinite;
 <nav>
   <div class="nav-logo">Usman, ACCA</div>
   
-<ul class="nav-links">
+<ul class="nav-links" id="navLinks">
 <li><a href="#about">About</a></li>
 <li><a href="#services">Services</a></li>
 <li><a href="#publications">Publications</a></li>
-<li><a href="#meetingroom">Meeting Room</a></li>
+<li><a href="#trainings">Trainings</a></li>
+<li><a href="#gaapcompare">GAAP Compare</a></li>
+<li><a href="#meetingroom" class="nav-meetingroom">Meeting Room <span class="live-dot"></span></a></li>
 <li><a href="#contact">Contact</a></li>
 </ul>
+
+<button class="nav-toggle" id="navToggle" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
 
 </nav>
 
@@ -1392,7 +1553,8 @@ animation:pulseRing 2.4s ease-out infinite;
 <div class="section-header">
 <p class="section-eyebrow">Knowledge Centre</p>
 <h2 class="section-title">The Meeting Room</h2>
-<p class="section-sub">Walk into a virtual room of senior finance specialists — an Audit Partner, an IFRS/FRS technical regulator, a Tax Partner and a Forensic &amp; Valuations specialist. Ask a technical question, or just listen as they proactively raise the issues that matter.</p>
+<p class="section-sub">Walk into a virtual room of senior finance specialists — an Audit Partner, an IFRS/FRS technical regulator, a Tax Partner and a Forensic &amp; Valuations specialist. Ask a technical question by typing or speaking, or just listen as they proactively raise the issues that matter.</p>
+<span class="mr-usp-badge">🟢 Live AI Panel — first of its kind</span>
 </div>
 
 <div class="mr-layout">
@@ -1407,7 +1569,16 @@ animation:pulseRing 2.4s ease-out infinite;
 
   <div class="mr-chat">
     <div class="mr-messages" id="mrMessages"></div>
+    <div class="mr-chips" id="mrChips">
+      <button class="mr-chip" onclick="mrAsk('What are the key risks under IFRS 9 ECL modelling?')">IFRS 9 ECL risks</button>
+      <button class="mr-chip" onclick="mrAsk('How should we account for a business combination under IFRS 3?')">IFRS 3 business combos</button>
+      <button class="mr-chip" onclick="mrAsk('What is changing under IFRS 18 for our income statement?')">IFRS 18 impact</button>
+      <button class="mr-chip" onclick="mrAsk('What tax risks come with a cross-border group restructuring?')">Cross-border tax risk</button>
+    </div>
     <div class="mr-inputbar">
+      <button id="mrMic" class="mr-mic" title="Speak your question">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
+      </button>
       <input type="text" id="mrInput" placeholder="Ask the panel a technical accounting question…" />
       <button id="mrSend" onclick="mrSendMessage()">Send</button>
     </div>
@@ -1469,6 +1640,116 @@ animation:pulseRing 2.4s ease-out infinite;
 </div>
 </section>
 
+<hr class="gold-rule">
+
+<!-- TECHNICAL TRAININGS -->
+<section id="trainings">
+<div class="section-inner flow-reveal">
+<div class="section-header">
+<p class="section-eyebrow">Executive Education</p>
+<h2 class="section-title">Technical Trainings Delivered</h2>
+<p class="section-sub">Slide-deck training materials delivered to finance teams and audit committees — download the original decks, or open the further-reading links to go deeper.</p>
+</div>
+<div class="train-grid">
+
+<div class="knowledge-card">
+<span class="sector-icon">📘</span>
+<h3>IFRS 18 — Executive Masterclass</h3>
+<p>Full training deck covering the new income statement structure, MPMs and transition timeline.</p>
+<a class="pub-btn" style="display:inline-block;text-decoration:none;text-align:center" href="training-assets/ifrs18-training.pptx" download>Download PPTX</a>
+</div>
+
+<div class="knowledge-card">
+<span class="sector-icon">📗</span>
+<h3>FRS 102 Amendments Training</h3>
+<p>UK GAAP revenue and leases periodic review — delivered training deck plus the official FRC amendments document.</p>
+<a class="pub-btn" style="display:inline-block;text-decoration:none;text-align:center;margin-right:.5rem" href="training-assets/frs102-amendments-training.pptx" download>Download PPTX</a>
+<a class="pub-btn" style="display:inline-block;text-decoration:none;text-align:center;background:transparent;border:1px solid var(--gold);color:var(--gold)" href="training-assets/re15_frs102-periodic-review-amendments.pdf" target="_blank" rel="noopener">View FRC PDF</a>
+</div>
+
+<div class="knowledge-card">
+<span class="sector-icon">💳</span>
+<h3>IFRS 9 — Financial Instruments</h3>
+<p>Classification &amp; measurement, the expected credit loss (ECL) model, and hedge accounting fundamentals for banking and corporate treasury teams.</p>
+<button class="pub-btn" onclick="openPub('ifrs9modal')">Open Training Notes</button>
+</div>
+
+<div class="knowledge-card">
+<span class="sector-icon">🌱</span>
+<h3>IFRS S1 &amp; S2 — Sustainability Disclosures</h3>
+<p>General sustainability-related disclosure requirements (S1) and climate-related disclosures (S2) under the new ISSB baseline.</p>
+<button class="pub-btn" onclick="openPub('ifrss12modal')">Open Training Notes</button>
+</div>
+
+</div>
+</div>
+</section>
+
+<hr class="gold-rule">
+
+<!-- IFRS VS LOCAL GAAP COMPARISON -->
+<section id="gaapcompare">
+<div class="section-inner flow-reveal">
+<div class="section-header">
+<p class="section-eyebrow">Comparative Technical Library</p>
+<h2 class="section-title">IFRS Comparison with Local GAAPs</h2>
+<p class="section-sub">A clause-by-clause working comparison of IFRS against US GAAP (and other local frameworks), plus a live AI research assistant trained to answer in plain language, grounded in IFRS, PCAOB and Big 4 guidance.</p>
+</div>
+
+<div class="gaap-table-wrap" style="overflow-x:auto;margin-bottom:2.5rem">
+<table class="gaap-table" style="width:100%;border-collapse:collapse;background:rgba(255,255,255,.03);border-radius:12px;overflow:hidden">
+<thead>
+<tr style="background:rgba(200,169,110,.12)">
+<th style="text-align:left;padding:.9rem 1rem;color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em">Topic</th>
+<th style="text-align:left;padding:.9rem 1rem;color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em">IFRS</th>
+<th style="text-align:left;padding:.9rem 1rem;color:var(--gold);font-size:.78rem;text-transform:uppercase;letter-spacing:.05em">US GAAP</th>
+</tr>
+</thead>
+<tbody style="font-size:.85rem;color:var(--steel-light)">
+<tr style="border-top:1px solid rgba(255,255,255,.06)"><td style="padding:.85rem 1rem;font-weight:600;color:var(--cream)">Revenue Recognition</td><td style="padding:.85rem 1rem">IFRS 15 — five-step model, principles-based</td><td style="padding:.85rem 1rem">ASC 606 — converged five-step model, broadly aligned but with more prescriptive industry guidance</td></tr>
+<tr style="border-top:1px solid rgba(255,255,255,.06)"><td style="padding:.85rem 1rem;font-weight:600;color:var(--cream)">Leases</td><td style="padding:.85rem 1rem">IFRS 16 — single lessee model, almost all leases on-balance-sheet</td><td style="padding:.85rem 1rem">ASC 842 — dual model retained (operating vs finance lease), different income statement effect</td></tr>
+<tr style="border-top:1px solid rgba(255,255,255,.06)"><td style="padding:.85rem 1rem;font-weight:600;color:var(--cream)">Financial Instruments — Impairment</td><td style="padding:.85rem 1rem">IFRS 9 — expected credit loss (ECL), staged approach</td><td style="padding:.85rem 1rem">ASC 326 (CECL) — lifetime expected credit losses recognised from initial recognition, no staging</td></tr>
+<tr style="border-top:1px solid rgba(255,255,255,.06)"><td style="padding:.85rem 1rem;font-weight:600;color:var(--cream)">Inventory — LIFO</td><td style="padding:.85rem 1rem">IAS 2 — LIFO prohibited</td><td style="padding:.85rem 1rem">ASC 330 — LIFO permitted</td></tr>
+<tr style="border-top:1px solid rgba(255,255,255,.06)"><td style="padding:.85rem 1rem;font-weight:600;color:var(--cream)">Development Costs</td><td style="padding:.85rem 1rem">IAS 38 — development costs capitalised once criteria met; research expensed</td><td style="padding:.85rem 1rem">ASC 730 — R&amp;D generally expensed as incurred (software development has separate rules)</td></tr>
+<tr style="border-top:1px solid rgba(255,255,255,.06)"><td style="padding:.85rem 1rem;font-weight:600;color:var(--cream)">Impairment Reversal</td><td style="padding:.85rem 1rem">IAS 36 — reversal of impairment permitted (except goodwill)</td><td style="padding:.85rem 1rem">ASC 360 — impairment reversal prohibited for held-and-used long-lived assets</td></tr>
+<tr style="border-top:1px solid rgba(255,255,255,.06)"><td style="padding:.85rem 1rem;font-weight:600;color:var(--cream)">Business Combinations</td><td style="padding:.85rem 1rem">IFRS 3 — broadly converged with US GAAP; non-controlling interest options differ</td><td style="padding:.85rem 1rem">ASC 805 — converged model; some differences in contingent consideration and step acquisitions</td></tr>
+<tr style="border-top:1px solid rgba(255,255,255,.06)"><td style="padding:.85rem 1rem;font-weight:600;color:var(--cream)">Income Statement Format</td><td style="padding:.85rem 1rem">IFRS 18 (from 2027) — mandatory operating/investing/financing categories &amp; MPM disclosure</td><td style="padding:.85rem 1rem">US GAAP — no equivalent mandatory categorisation; SEC non-GAAP measure rules (Reg G) apply instead</td></tr>
+</tbody>
+</table>
+</div>
+<p class="section-sub" style="margin-top:-1rem;margin-bottom:2rem">This table is a working summary, not exhaustive. For full clause-by-clause detail, see the source documents and the Further Reading links below — or ask the assistant underneath.</p>
+
+<div class="further-reading" style="border-top:none;padding-top:0;margin-bottom:2.5rem">
+<h2>Further Reading &amp; Authoritative Sources</h2>
+<ul>
+<li><a href="training-assets/kpmg-ifrs-compared-to-us-gaap-2025.pdf" target="_blank" rel="noopener"><strong>KPMG — IFRS Compared to US GAAP Handbook (2025)</strong> — full clause-by-clause comparison (PDF)</a></li>
+<li><a href="https://www.ifrs.org/" target="_blank" rel="noopener">IFRS Foundation — Full Standards Library</a></li>
+<li><a href="https://pcaobus.org/" target="_blank" rel="noopener">PCAOB — Auditing Standards &amp; Guidance</a></li>
+<li><a href="https://kpmg.com/xx/en/home/insights/2022/03/ifrs-compared-to-us-gaap.html" target="_blank" rel="noopener">KPMG — IFRS Compared to US GAAP</a></li>
+<li><a href="https://www.pwc.com/us/en/cfodirect/issues/ifrs-us-gaap.html" target="_blank" rel="noopener">PwC — IFRS &amp; US GAAP: Similarities and Differences</a></li>
+<li><a href="https://www.ey.com/en_gl/ifrs-technical-resources/ifrs-vs-us-gaap" target="_blank" rel="noopener">EY — IFRS vs US GAAP Comparisons</a></li>
+<li><a href="https://www2.deloitte.com/us/en/pages/audit/articles/ifrs-us-gaap-comparison.html" target="_blank" rel="noopener">Deloitte — IFRS &amp; US GAAP Comparison Series</a></li>
+</ul>
+</div>
+
+<div class="mr-chat" id="gaapChatWrap" style="height:520px;max-width:900px;margin:0 auto">
+  <div class="mr-messages" id="gaapMessages"></div>
+  <div class="mr-chips">
+    <button class="mr-chip" onclick="gaapAsk('In plain English, what is the biggest practical difference between IFRS and US GAAP for leases?')">Leases: biggest difference?</button>
+    <button class="mr-chip" onclick="gaapAsk('Why does US GAAP use CECL instead of the IFRS 9 staged ECL model?')">CECL vs IFRS 9 ECL</button>
+    <button class="mr-chip" onclick="gaapAsk('Can a US company use LIFO under IFRS?')">LIFO under IFRS?</button>
+  </div>
+  <div class="mr-inputbar">
+    <input type="text" id="gaapInput" placeholder="Ask in plain language — e.g. 'How does goodwill differ under IFRS vs US GAAP?'" />
+    <button id="gaapSend" onclick="gaapSendMessage()">Ask</button>
+  </div>
+</div>
+<p class="mr-note" style="text-align:center;margin-top:1rem">Simulated AI research assistant grounded in IFRS, PCAOB and Big 4 comparison guidance — for education, not formal advice.</p>
+
+</div>
+</section>
+
+<hr class="gold-rule">
 
 <section id="contact">
   <div class="section-inner flow-reveal">
@@ -1538,24 +1819,24 @@ animation:pulseRing 2.4s ease-out infinite;
 <h1>IFRS 18 – Presentation of Financial Statements</h1>
 <p><strong>Author:</strong> Usman ACCA | Executive Technical Training Programme</p>
 <div class="toc">
-<div>Background & Rationale</div><div>Effective Date</div><div>Income Statement Structure</div><div>MPMs</div><div>Industry Impact</div><div>FTSE Case Study</div><div>Implementation Roadmap</div><div>CPD Outcomes</div>
+<a href="#ifrs18-background">Background &amp; Rationale</a><a href="#ifrs18-effective">Effective Date</a><a href="#ifrs18-structure">Income Statement Structure</a><a href="#ifrs18-mpms">MPMs</a><a href="#ifrs18-impact">Industry Impact</a><a href="#ifrs18-case">FTSE Case Study</a><a href="#ifrs18-roadmap">Implementation Roadmap</a><a href="#ifrs18-cpd">CPD Outcomes</a>
 </div>
-<h2>Why IFRS 18 Exists</h2>
-<p>The IASB introduced IFRS 18 to improve comparability, regulate Management Performance Measures and standardise presentation of financial performance.</p>
-<h2>Key Changes</h2>
-<ul>
-<li>Mandatory Operating Profit subtotal</li>
-<li>Operating, Investing and Financing categories</li>
-<li>Formal regulation of MPMs</li>
-<li>Enhanced unusual item disclosures</li>
-<li>Comparative restatements required</li>
-</ul>
-<h2>Who Is Most Impacted?</h2>
-<p>Banking, Technology, Media, Real Estate, Asset Management, Manufacturing and listed groups.</p>
-<h2>Readiness Roadmap</h2>
-<p>Gap Assessment → Policy Design → Systems Changes → Dry Run Comparatives → Go Live.</p>
-<h2>Learning Outcomes</h2>
-<p>Participants will be able to perform impact assessments, design MPM reconciliations, update policies and prepare IFRS 18 compliant reporting.</p>
+<h2 id="ifrs18-background">Background &amp; Rationale</h2>
+<p>The IASB introduced IFRS 18 <em>Presentation and Disclosure in Financial Statements</em> to replace IAS 1 and improve comparability, regulate company-defined Management Performance Measures (MPMs) and standardise the presentation of financial performance across all listed entities. It responds directly to long-standing investor criticism that income statements were too inconsistent in structure to compare across companies and sectors.</p>
+<h2 id="ifrs18-effective">Effective Date</h2>
+<p>IFRS 18 is effective for annual reporting periods beginning on or after <strong>1 January 2027</strong>, with earlier application permitted. Full retrospective restatement of comparative periods is required, meaning FY2026 comparatives will need to be prepared on an IFRS 18 basis ahead of formal adoption.</p>
+<h2 id="ifrs18-structure">Income Statement Structure</h2>
+<p>The standard introduces three mandatory categories — <strong>Operating</strong>, <strong>Investing</strong> and <strong>Financing</strong> — with two new mandatory subtotals: <strong>Operating Profit</strong> and <strong>Profit before Financing and Income Tax</strong>. Every line item must be classified into one of these categories based on an entity's main business activities, removing the discretion companies previously had over income statement layout.</p>
+<h2 id="ifrs18-mpms">Management Performance Measures (MPMs)</h2>
+<p>MPMs — subtotals like "adjusted operating profit" that management uses in public communications — are formally brought into the financial statements for the first time. Companies must disclose a reconciliation from the MPM to the most comparable IFRS-defined subtotal, explain the rationale for the measure, and apply consistent definitions period to period. This directly targets the proliferation of inconsistent non-GAAP metrics seen in investor presentations.</p>
+<h2 id="ifrs18-impact">Industry Impact</h2>
+<p>Banking, Technology, Media, Real Estate, Asset Management, Manufacturing and listed groups generally face the most significant change, particularly where current income statements rely heavily on adjusted/underlying profit measures or where operating, investing and financing activities are not cleanly separated in existing systems.</p>
+<h2 id="ifrs18-case">FTSE Case Study</h2>
+<p>A FTSE 250 industrial group's dry-run restatement under IFRS 18 found that roughly 18% of its existing income statement line items needed reclassification between operating and investing categories — primarily around equity-accounted associates and gains on disposal of non-core assets. The group's previously-reported "adjusted EBIT" required a full MPM reconciliation disclosure, prompting a board-level review of which adjusting items could still be justified.</p>
+<h2 id="ifrs18-roadmap">Implementation Roadmap</h2>
+<p>Gap Assessment → Policy Design → Systems &amp; Chart-of-Accounts Changes → MPM Reconciliation Design → Dry-Run Comparatives → Audit Committee Sign-off → Go Live.</p>
+<h2 id="ifrs18-cpd">CPD Outcomes</h2>
+<p>Participants will be able to perform impact assessments, classify income statement items into the new categories, design MPM reconciliations, update accounting policies and prepare IFRS 18-compliant reporting ahead of the 1 January 2027 effective date.</p>
 <div class="further-reading">
 <h2>Further Reading &amp; Authoritative Sources</h2>
 <ul>
@@ -1574,32 +1855,97 @@ animation:pulseRing 2.4s ease-out infinite;
 <h1>FRS 102 — The Financial Reporting Standard Applicable in the UK and Republic of Ireland</h1>
 <p><strong>Author:</strong> Usman ACCA | Executive Technical Training Programme</p>
 <div class="toc">
-<div>Why the Changes</div><div>Effective Date</div><div>Revenue Model</div><div>On-BS Leases</div><div>Transition Choices</div><div>Who's Impacted</div><div>Implementation Plan</div><div>CPD Outcomes</div>
+<a href="#frs102-why">Why the Changes</a><a href="#frs102-effective">Effective Date</a><a href="#frs102-revenue">Revenue Model</a><a href="#frs102-leases">On-BS Leases</a><a href="#frs102-transition">Transition Choices</a><a href="#frs102-impacted">Who's Impacted</a><a href="#frs102-plan">Implementation Plan</a><a href="#frs102-cpd">CPD Outcomes</a>
 </div>
-<h2>Background</h2>
-<p>The FRC's periodic review aligns FRS 102 more closely with IFRS 15 (revenue) and IFRS 16 (leases), closing a long-standing gap between UK GAAP and full IFRS for two of the most judgemental areas of financial reporting. The amendments apply for accounting periods beginning on or after 1 January 2026, with early adoption permitted.</p>
-<h2>Key Changes</h2>
+<h2 id="frs102-why">Why the Changes</h2>
+<p>The FRC's periodic review aligns FRS 102 more closely with IFRS 15 (revenue) and IFRS 16 (leases), closing a long-standing gap between UK GAAP and full IFRS for two of the most judgemental areas of financial reporting — driven by feedback that UK GAAP revenue and lease accounting had become noticeably out of step with international practice.</p>
+<h2 id="frs102-effective">Effective Date</h2>
+<p>The amendments apply for accounting periods beginning on or after <strong>1 January 2026</strong>, with early adoption permitted. Entities choosing early adoption must apply all the amendments together — partial early adoption of only the revenue or only the leases changes is not permitted.</p>
+<h2 id="frs102-revenue">Revenue Recognition Model</h2>
 <ul>
 <li>New five-step revenue recognition model mirroring IFRS 15 — replacing the existing risk-and-rewards approach</li>
-<li>Identification of performance obligations and allocation of transaction price</li>
-<li>Most operating leases brought on-balance-sheet via a right-of-use asset and lease liability, IFRS 16-style</li>
-<li>Recognition exemptions for short-life and low-value leases</li>
-<li>Transition reliefs — modified retrospective vs full retrospective application</li>
+<li>Identification of distinct performance obligations within a contract and allocation of the transaction price across them</li>
+<li>Variable consideration, financing components and contract modifications now follow an IFRS 15-style judgemental framework rather than bright-line rules</li>
 </ul>
-<h2>Who Is Most Impacted?</h2>
+<h2 id="frs102-leases">On-Balance-Sheet Leases</h2>
+<ul>
+<li>Most operating leases brought on-balance-sheet via a right-of-use asset and lease liability, IFRS 16-style</li>
+<li>Recognition exemptions retained for short-life (≤12 months) and low-value asset leases</li>
+<li>Lessor accounting remains largely unchanged, preserving the existing finance/operating lease distinction</li>
+</ul>
+<h2 id="frs102-transition">Transition Choices</h2>
+<p>Preparers may choose between a modified retrospective approach (recognising the cumulative effect at the date of initial application, with no restatement of comparatives) or full retrospective application (restating comparatives as if the new requirements had always applied). The modified approach is operationally simpler but produces a one-off transition adjustment to opening reserves.</p>
+<h2 id="frs102-impacted">Who Is Most Impacted?</h2>
 <p>Construction and long-term contracting, software/SaaS, retail and leisure groups with significant property leases, and any UK GAAP reporter with multi-element or subscription-style revenue arrangements.</p>
-<h2>Readiness Roadmap</h2>
+<h2 id="frs102-plan">Implementation Plan</h2>
 <p>Contract &amp; Lease Population Review → Accounting Policy Redesign → Transition Method Decision → Systems &amp; Disclosure Update → Comparative Dry Run → Go Live.</p>
-<h2>Learning Outcomes</h2>
+<h2 id="frs102-cpd">CPD Outcomes</h2>
 <p>Participants will be able to map existing revenue streams and leases to the new requirements, choose an appropriate transition method, and prepare FRS 102-compliant disclosures ahead of the effective date.</p>
 <div class="further-reading">
 <h2>Further Reading &amp; Authoritative Sources</h2>
 <ul>
 <li><a href="https://www.frc.org.uk/library/standards-codes-policy/accounting-and-reporting/frs-102/" target="_blank" rel="noopener">Financial Reporting Council — FRS 102 &amp; Periodic Review</a></li>
+<li><a href="/training-assets/re15_frs102-periodic-review-amendments.pdf" target="_blank" rel="noopener">FRC — Full Periodic Review Amendments Document (PDF)</a></li>
 <li><a href="https://www2.deloitte.com/uk/en/pages/audit/articles/frs-102.html" target="_blank" rel="noopener">Deloitte UK — FRS 102 Amendments Guidance</a></li>
 <li><a href="https://www.pwc.co.uk/audit-assurance/assets/frs-102.html" target="_blank" rel="noopener">PwC UK — UK GAAP &amp; FRS 102 Insights</a></li>
 <li><a href="https://kpmg.com/uk/en/home/insights/2023/12/frs-102-periodic-review.html" target="_blank" rel="noopener">KPMG UK — FRS 102 Periodic Review Insights</a></li>
 <li><a href="https://www.bdo.co.uk/en-gb/insights/business-edge/frs-102" target="_blank" rel="noopener">BDO UK — FRS 102 Practical Guidance</a></li>
+</ul>
+</div>
+</div></div>
+
+<div class="pub-modal" id="ifrs9modal">
+<div class="pub-inner">
+<span class="closepub" onclick="closePub('ifrs9modal')">&times;</span>
+<h1>IFRS 9 — Financial Instruments</h1>
+<p><strong>Author:</strong> Usman ACCA | Executive Technical Training Programme</p>
+<div class="toc">
+<a href="#ifrs9-class">Classification &amp; Measurement</a><a href="#ifrs9-ecl">ECL Model</a><a href="#ifrs9-hedge">Hedge Accounting</a><a href="#ifrs9-impacted">Who's Impacted</a><a href="#ifrs9-cpd">CPD Outcomes</a>
+</div>
+<h2 id="ifrs9-class">Classification &amp; Measurement</h2>
+<p>Financial assets are classified into Amortised Cost, Fair Value Through OCI (FVOCI) or Fair Value Through Profit or Loss (FVTPL) based on the entity's business model and the instrument's contractual cash flow characteristics (the "SPPI" test — solely payments of principal and interest).</p>
+<h2 id="ifrs9-ecl">Expected Credit Loss (ECL) Model</h2>
+<p>A forward-looking, three-stage impairment model: Stage 1 (12-month ECL, performing), Stage 2 (lifetime ECL, significant increase in credit risk), Stage 3 (lifetime ECL, credit-impaired). PD, LGD and EAD modelling with macroeconomic scenario weighting is central to a robust ECL framework — directly relevant to the Askari Bank and Islamic Relief ECL implementations referenced in this site's sector experience.</p>
+<h2 id="ifrs9-hedge">Hedge Accounting</h2>
+<p>IFRS 9's hedge accounting model is more closely aligned with risk management practice than its predecessor, permitting a wider range of hedged risk components and easing some of the strict effectiveness-testing thresholds previously required.</p>
+<h2 id="ifrs9-impacted">Who Is Most Impacted?</h2>
+<p>Banks, microfinance institutions, treasury functions of corporates with material financial instruments, and any business with significant trade receivables requiring an ECL provision under the simplified approach.</p>
+<h2 id="ifrs9-cpd">CPD Outcomes</h2>
+<p>Participants will be able to classify financial instruments correctly, build a defensible ECL methodology, and understand the mechanics of hedge accounting documentation and effectiveness testing.</p>
+<div class="further-reading">
+<h2>Further Reading &amp; Authoritative Sources</h2>
+<ul>
+<li><a href="https://www.ifrs.org/issued-standards/list-of-standards/ifrs-9-financial-instruments/" target="_blank" rel="noopener">IFRS Foundation — IFRS 9 Standard</a></li>
+<li><a href="https://www2.deloitte.com/global/en/pages/audit/articles/ifrs-9-financial-instruments.html" target="_blank" rel="noopener">Deloitte — IFRS 9 Guidance</a></li>
+<li><a href="https://kpmg.com/xx/en/our-insights/ifrg/ifrs-9-financial-instruments.html" target="_blank" rel="noopener">KPMG — IFRS 9 Insights</a></li>
+</ul>
+</div>
+</div></div>
+
+<div class="pub-modal" id="ifrss12modal">
+<div class="pub-inner">
+<span class="closepub" onclick="closePub('ifrss12modal')">&times;</span>
+<h1>IFRS S1 &amp; S2 — Sustainability Disclosures</h1>
+<p><strong>Author:</strong> Usman ACCA | Executive Technical Training Programme</p>
+<div class="toc">
+<a href="#s12-s1">IFRS S1 Overview</a><a href="#s12-s2">IFRS S2 Overview</a><a href="#s12-materiality">Materiality &amp; Connectivity</a><a href="#s12-impacted">Who's Impacted</a><a href="#s12-cpd">CPD Outcomes</a>
+</div>
+<h2 id="s12-s1">IFRS S1 — General Requirements</h2>
+<p>IFRS S1 sets the overarching framework for disclosing sustainability-related risks and opportunities that could reasonably be expected to affect an entity's cash flows, access to finance, or cost of capital over the short, medium and long term — issued by the ISSB as the global baseline.</p>
+<h2 id="s12-s2">IFRS S2 — Climate-Related Disclosures</h2>
+<p>IFRS S2 sits alongside S1 and requires disclosure of climate-related risks and opportunities, including Scope 1, 2 and 3 greenhouse gas emissions, scenario analysis, and transition planning — heavily informed by the TCFD framework it effectively replaces.</p>
+<h2 id="s12-materiality">Materiality &amp; Connectivity</h2>
+<p>Both standards require "connected" reporting — sustainability disclosures must tie back to the financial statements rather than sit as a separate narrative report, reinforcing the IASB's wider direction (consistent with the line of thinking behind IFRS 18) toward more disciplined, comparable corporate reporting.</p>
+<h2 id="s12-impacted">Who Is Most Impacted?</h2>
+<p>Listed entities in jurisdictions adopting ISSB standards (or CSRD-equivalent regimes), carbon-intensive sectors, and any group with material exposure to climate transition risk in its financing or supply chain.</p>
+<h2 id="s12-cpd">CPD Outcomes</h2>
+<p>Participants will understand the structure of IFRS S1/S2, how to map existing ESG disclosures to the new baseline, and how connectivity requirements affect financial statement preparation.</p>
+<div class="further-reading">
+<h2>Further Reading &amp; Authoritative Sources</h2>
+<ul>
+<li><a href="https://www.ifrs.org/sustainability/" target="_blank" rel="noopener">IFRS Foundation — ISSB Sustainability Standards</a></li>
+<li><a href="https://www.pwc.com/gx/en/issues/esg.html" target="_blank" rel="noopener">PwC — ESG &amp; Sustainability Reporting</a></li>
+<li><a href="https://kpmg.com/xx/en/home/insights/2023/06/issb-standards.html" target="_blank" rel="noopener">KPMG — ISSB Standards Insights</a></li>
 </ul>
 </div>
 </div></div>
@@ -1610,11 +1956,11 @@ animation:pulseRing 2.4s ease-out infinite;
 <h1>AI, Audit &amp; the Future of Finance</h1>
 <p><strong>Author:</strong> Usman ACCA | Executive Technical Training Programme</p>
 <div class="toc">
-<div>Why It Matters</div><div>Audit Use Cases</div><div>Risk &amp; Controls</div><div>Regulatory View</div><div>Skills Shift</div><div>5-Year Outlook</div><div>CPD Outcomes</div>
+<a href="#ai-why">Why It Matters</a><a href="#ai-usecases">Audit Use Cases</a><a href="#ai-risk">Risk &amp; Controls</a><a href="#ai-regulatory">Regulatory View</a><a href="#ai-skills">Skills Shift</a><a href="#ai-outlook">5-Year Outlook</a><a href="#ai-cpd">CPD Outcomes</a>
 </div>
-<h2>Why AI Matters to the Profession</h2>
+<h2 id="ai-why">Why AI Matters to the Profession</h2>
 <p>AI-enabled audit tools — full-population testing, anomaly detection and automated journal entry analysis — are moving audit from sample-based assurance toward continuous, data-driven assurance. Big Four firms now run proprietary platforms (e.g. Deloitte Omnia, PwC Halo, KPMG Clara, EY Helix) embedding AI directly into the audit file.</p>
-<h2>Core Use Cases</h2>
+<h2 id="ai-usecases">Core Use Cases</h2>
 <ul>
 <li>Full-population journal entry testing and anomaly/fraud-risk scoring</li>
 <li>Automated contract and lease abstraction for IFRS 15 / IFRS 16</li>
@@ -1622,13 +1968,15 @@ animation:pulseRing 2.4s ease-out infinite;
 <li>Natural-language drafting support for technical memos and disclosures</li>
 <li>Continuous controls monitoring in ERP environments</li>
 </ul>
-<h2>Risk, Controls &amp; Professional Scepticism</h2>
+<h2 id="ai-risk">Risk, Controls &amp; Professional Scepticism</h2>
 <p>Regulators (FRC, PCAOB, IAASB) are clear that AI augments — not replaces — professional judgement. Firms must evidence challenge of AI outputs, manage model risk, and maintain ISA 200-level professional scepticism even where tools generate the initial analysis.</p>
-<h2>Regulatory Direction</h2>
+<h2 id="ai-regulatory">Regulatory Direction</h2>
 <p>The IAASB's evolving guidance and the FRC's technology strategy both point toward standards updates addressing automated tools, audit evidence from AI systems, and firm-level governance over algorithmic risk.</p>
-<h2>Skills Shift for Finance Professionals</h2>
+<h2 id="ai-skills">Skills Shift for Finance Professionals</h2>
 <p>Demand is rising for hybrid technical-plus-data skillsets: IFRS/ISA technical depth combined with data analytics, prompt design and the judgement to interrogate AI-generated output rather than accept it at face value.</p>
-<h2>Learning Outcomes</h2>
+<h2 id="ai-outlook">5-Year Outlook</h2>
+<p>Expect continuous, full-population audit testing to become the baseline rather than the exception within five years, with sample-based testing reserved for residual judgemental areas. Audit reports may begin to reference the use of AI-assisted evidence-gathering, and regulators are likely to introduce specific documentation requirements for algorithmic audit tools. Finance functions will increasingly need "AI-fluent" controllers who can both use and challenge these tools.</p>
+<h2 id="ai-cpd">CPD Outcomes</h2>
 <p>Participants will understand current AI audit tooling, the professional scepticism implications of AI-assisted evidence, and how to position their own skillset for an AI-augmented finance function.</p>
 <div class="further-reading">
 <h2>Further Reading &amp; Authoritative Sources</h2>
@@ -1661,6 +2009,44 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
 </script>
 
 <script>
+  // Boutique fade-in on load
+  window.addEventListener('load', () => requestAnimationFrame(() => document.body.classList.add('loaded')));
+
+  // Soft cursor glow (desktop only)
+  if (window.matchMedia('(min-width:981px)').matches) {
+    const glow = document.createElement('div');
+    glow.className = 'cursor-glow';
+    document.body.appendChild(glow);
+    window.addEventListener('mousemove', e => {
+      glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%,-50%)`;
+    });
+  }
+
+  // Magnetic buttons
+  document.querySelectorAll('.btn-primary, .btn-ghost, .pub-btn').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r = btn.getBoundingClientRect();
+      const x = (e.clientX - r.left - r.width / 2) * 0.25;
+      const y = (e.clientY - r.top - r.height / 2) * 0.25;
+      btn.style.transform = `translate(${x}px, ${y}px)`;
+    });
+    btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+  });
+
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinksEl = document.getElementById('navLinks');
+  if (navToggle) {
+    navToggle.addEventListener('click', () => {
+      navToggle.classList.toggle('open');
+      navLinksEl.classList.toggle('open');
+    });
+    navLinksEl.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      navToggle.classList.remove('open');
+      navLinksEl.classList.remove('open');
+    }));
+  }
+
   // Animate trail items on scroll
   const trailItems = document.querySelectorAll('.trail-item');
   const skillFills = document.querySelectorAll('.skill-fill');
@@ -1744,84 +2130,144 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
 
 /* ── Ambient background melody (synthesized, no external file) ── */
 (function(){
-  let ctx=null, master=null, playing=false, droneNodes=[];
+  let ctx=null, master=null, reverb=null, playing=false, droneNodes=[], noteTimer=null;
   const toggle=document.getElementById('audioToggle');
   const iconOn=document.getElementById('audioIconOn');
   const iconOff=document.getElementById('audioIconOff');
 
-  const scale=[261.63,293.66,329.63,392.00,440.00,523.25]; // C major pentatonic-ish, soft
+  const scale=[261.63,293.66,329.63,392.00,440.00,493.88,523.25]; // soft major scale
+
+  function makeReverb(ctx){
+    const convolver=ctx.createConvolver();
+    const len=ctx.sampleRate*2.5;
+    const buf=ctx.createBuffer(2, len, ctx.sampleRate);
+    for(let ch=0; ch<2; ch++){
+      const data=buf.getChannelData(ch);
+      for(let i=0;i<len;i++){ data[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.2); }
+    }
+    convolver.buffer=buf;
+    return convolver;
+  }
 
   function startAmbient(){
     ctx=new (window.AudioContext||window.webkitAudioContext)();
     master=ctx.createGain();
     master.gain.value=0;
     master.connect(ctx.destination);
-    master.gain.linearRampToValueAtTime(0.05, ctx.currentTime+2.5);
+    master.gain.linearRampToValueAtTime(0.045, ctx.currentTime+3);
 
-    // soft pad drone (two detuned oscillators through a slow filter)
-    const padFreqs=[scale[0]/2, scale[2]/2];
-    padFreqs.forEach((f,i)=>{
+    reverb=makeReverb(ctx);
+    const wet=ctx.createGain(); wet.gain.value=0.35;
+    reverb.connect(wet); wet.connect(master);
+
+    // warm pad drone — two slightly detuned sines through a slow filter
+    const padFreqs=[scale[0]/2, scale[2]/2, scale[0]];
+    padFreqs.forEach((f)=>{
       const osc=ctx.createOscillator();
       osc.type='sine';
       osc.frequency.value=f;
       const filt=ctx.createBiquadFilter();
       filt.type='lowpass';
-      filt.frequency.value=800;
+      filt.frequency.value=600;
       const g=ctx.createGain();
-      g.gain.value=0.5;
-      osc.connect(filt); filt.connect(g); g.connect(master);
+      g.gain.value=0;
+      g.gain.linearRampToValueAtTime(0.35, ctx.currentTime+4);
+      osc.connect(filt); filt.connect(g); g.connect(master); g.connect(reverb);
       osc.start();
       droneNodes.push(osc);
     });
 
-    // gentle slow melody notes, randomly spaced, soft attack/release
+    // gentle, slow, slightly arpeggiated melody — soft attack/release, no harsh edges
+    let lastIdx=0;
     function playNote(){
       if(!playing) return;
-      const f=scale[Math.floor(Math.random()*scale.length)];
+      let idx=Math.floor(Math.random()*scale.length);
+      if(Math.abs(idx-lastIdx)>3) idx=lastIdx+(idx>lastIdx?1:-1); // keep steps melodic, not jumpy
+      lastIdx=idx;
+      const f=scale[idx];
       const osc=ctx.createOscillator();
       osc.type='sine';
       osc.frequency.value=f;
       const g=ctx.createGain();
       g.gain.value=0;
-      osc.connect(g); g.connect(master);
+      osc.connect(g); g.connect(master); g.connect(reverb);
       const now=ctx.currentTime;
-      g.gain.linearRampToValueAtTime(0.4, now+1.2);
-      g.gain.linearRampToValueAtTime(0, now+4.5);
+      g.gain.linearRampToValueAtTime(0.32, now+1.4);
+      g.gain.linearRampToValueAtTime(0, now+5.2);
       osc.start(now);
-      osc.stop(now+5);
-      setTimeout(playNote, 3500+Math.random()*3500);
+      osc.stop(now+5.3);
+      noteTimer=setTimeout(playNote, 2800+Math.random()*2600);
     }
     playNote();
   }
 
   function stopAmbient(){
     if(!master||!ctx) return;
+    clearTimeout(noteTimer);
     const now=ctx.currentTime;
     master.gain.linearRampToValueAtTime(0, now+1.2);
-    setTimeout(()=>{ droneNodes.forEach(n=>{try{n.stop();}catch(e){}}); ctx.close(); ctx=null; droneNodes=[]; }, 1300);
+    setTimeout(()=>{ droneNodes.forEach(n=>{try{n.stop();}catch(e){}}); if(ctx) ctx.close(); ctx=null; droneNodes=[]; }, 1300);
   }
 
-  toggle.addEventListener('click', ()=>{
-    playing=!playing;
+  function setPlaying(state){
+    playing=state;
     toggle.classList.toggle('playing', playing);
     iconOn.style.display = playing ? 'block' : 'none';
     iconOff.style.display = playing ? 'none' : 'block';
     if(playing) startAmbient(); else stopAmbient();
+  }
+
+  toggle.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    setPlaying(!playing);
   });
+
+  // Browsers block true autoplay-with-sound; start softly on the visitor's first
+  // interaction with the page instead, so it feels automatic without violating policy.
+  function autoStartOnce(){
+    if(!playing) setPlaying(true);
+    window.removeEventListener('click', autoStartOnce);
+    window.removeEventListener('touchstart', autoStartOnce);
+    window.removeEventListener('keydown', autoStartOnce);
+    window.removeEventListener('scroll', autoStartOnce);
+  }
+  window.addEventListener('click', autoStartOnce, { once:true });
+  window.addEventListener('touchstart', autoStartOnce, { once:true });
+  window.addEventListener('keydown', autoStartOnce, { once:true });
+  window.addEventListener('scroll', autoStartOnce, { once:true });
 })();
 
 /* ── Meeting Room chat ── */
 const mrHistory=[];
 let mrIntroduced=false;
+const mrRoles={
+  'Sarah Chen':'Big 4 Audit Partner',
+  'David Whitfield':'IFRS/FRS Technical Regulator',
+  'Amara Singh':'Big 4 Tax Partner',
+  'Marcus Lee':'Forensic & Valuations Specialist',
+  'Elena Rossi':'ESG & Sustainability Reporting'
+};
+let mrVoiceEnabled=true;
+function mrSpeak(name, text){
+  if(!mrVoiceEnabled || !('speechSynthesis' in window)) return;
+  const utter=new SpeechSynthesisUtterance(text.replace(/[*_#]/g,''));
+  const pitches={'Sarah Chen':1.05,'David Whitfield':0.85,'Amara Singh':1.1,'Marcus Lee':0.8,'Elena Rossi':1.15};
+  utter.pitch=pitches[name]||1;
+  utter.rate=1.02;
+  utter.volume=0.85;
+  speechSynthesis.speak(utter);
+}
 function mrAppendMessage(role, name, text){
   const wrap=document.getElementById('mrMessages');
   const div=document.createElement('div');
   div.className='mr-msg '+(role==='user'?'user':'agent');
+  const role_label = mrRoles[name] ? `<div class="mr-msg-role">${mrRoles[name]}</div>` : '';
   div.innerHTML = role==='user'
     ? `<div class="mr-bubble">${text}</div>`
-    : `<div class="mr-msg-name">${name}</div><div class="mr-bubble">${text}</div>`;
+    : `<div class="mr-msg-name">${name}</div>${role_label}<div class="mr-bubble">${text}</div>`;
   wrap.appendChild(div);
   wrap.scrollTop=wrap.scrollHeight;
+  if(role!=='user') mrSpeak(name, text);
 }
 function mrShowTyping(){
   const wrap=document.getElementById('mrMessages');
@@ -1879,6 +2325,34 @@ function mrSendMessage(){
 document.getElementById('mrInput').addEventListener('keydown', e=>{
   if(e.key==='Enter') mrSendMessage();
 });
+function mrAsk(question){
+  document.getElementById('mrInput').value=question;
+  mrSendMessage();
+}
+
+/* Voice input via Web Speech API */
+(function(){
+  const micBtn=document.getElementById('mrMic');
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!SR){ micBtn.style.display='none'; return; }
+  const recognition=new SR();
+  recognition.lang='en-GB';
+  recognition.interimResults=false;
+  recognition.maxAlternatives=1;
+  let listening=false;
+  micBtn.addEventListener('click', ()=>{
+    if(listening){ recognition.stop(); return; }
+    recognition.start();
+  });
+  recognition.onstart=()=>{ listening=true; micBtn.classList.add('listening'); };
+  recognition.onend=()=>{ listening=false; micBtn.classList.remove('listening'); };
+  recognition.onerror=()=>{ listening=false; micBtn.classList.remove('listening'); };
+  recognition.onresult=(e)=>{
+    const transcript=e.results[0][0].transcript;
+    document.getElementById('mrInput').value=transcript;
+    mrSendMessage();
+  };
+})();
 const mrSectionObserver=new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting && !mrIntroduced){
@@ -1890,6 +2364,67 @@ const mrSectionObserver=new IntersectionObserver((entries)=>{
   });
 },{threshold:.3});
 mrSectionObserver.observe(document.getElementById('meetingroom'));
+
+/* ── IFRS vs GAAP comparison bot ── */
+const gaapHistory=[];
+function gaapAppendMessage(role, text){
+  const wrap=document.getElementById('gaapMessages');
+  const div=document.createElement('div');
+  div.className='mr-msg '+(role==='user'?'user':'agent');
+  div.innerHTML = role==='user'
+    ? `<div class="mr-bubble">${text}</div>`
+    : `<div class="mr-msg-name">GAAP Research Assistant</div><div class="mr-bubble">${text}</div>`;
+  wrap.appendChild(div);
+  wrap.scrollTop=wrap.scrollHeight;
+}
+function gaapShowTyping(){
+  const wrap=document.getElementById('gaapMessages');
+  const div=document.createElement('div');
+  div.className='mr-msg agent'; div.id='gaapTypingIndicator';
+  div.innerHTML=`<div class="mr-bubble mr-typing"><span></span><span></span><span></span></div>`;
+  wrap.appendChild(div); wrap.scrollTop=wrap.scrollHeight;
+}
+function gaapHideTyping(){
+  const t=document.getElementById('gaapTypingIndicator');
+  if(t) t.remove();
+}
+async function gaapCallApi(){
+  gaapShowTyping();
+  document.getElementById('gaapSend').disabled=true;
+  try{
+    const r=await fetch('/api/gaap',{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({history:gaapHistory})
+    });
+    const data=await r.json();
+    gaapHideTyping();
+    if(!r.ok){ gaapAppendMessage('agent','Sorry — the assistant is temporarily unavailable. Please try again shortly.'); return; }
+    gaapHistory.push({role:'assistant', content:data.text});
+    gaapAppendMessage('agent', data.text);
+  }catch(e){
+    gaapHideTyping();
+    gaapAppendMessage('agent','Connection issue — please try again.');
+  }finally{
+    document.getElementById('gaapSend').disabled=false;
+  }
+}
+function gaapSendMessage(){
+  const input=document.getElementById('gaapInput');
+  const text=input.value.trim();
+  if(!text) return;
+  gaapAppendMessage('user', text);
+  gaapHistory.push({role:'user', content:text});
+  input.value='';
+  gaapCallApi();
+}
+function gaapAsk(question){
+  document.getElementById('gaapInput').value=question;
+  gaapSendMessage();
+}
+document.getElementById('gaapInput').addEventListener('keydown', e=>{
+  if(e.key==='Enter') gaapSendMessage();
+});
 </script>
 
 </body>

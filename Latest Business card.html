@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Usman | Audit & Advisory Professional</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0A1628;
+    --slate: #1E3A5F;
+    --slate-mid: #2A4A72;
+    --gold: #C8A96E;
+    --gold-light: #E0C99A;
+    --cream: #F0EDE6;
+    --steel: #8899AA;
+    --steel-light: #B8C8D8;
+    --white: #FFFFFF;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Manrope', 'Century Gothic', sans-serif;
+    background: var(--navy);
+    color: var(--cream);
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 4rem;
+    height: 64px;
+    background: rgba(10,22,40,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,169,110,0.15);
+  }
+
+  .nav-logo {
+    font-family: 'Manrope', 'Century Gothic', sans-serif;
+    font-size: 1.25rem;
+    color: var(--gold);
+    letter-spacing: 0.03em;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: var(--steel-light);
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 0 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -20%; right: -10%;
+    width: 700px; height: 700px;
+    background: radial-gradient(circle, rgba(200,169,110,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-left { padding-top: 2rem; }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--gold);
+  }
+
+  .hero-name {
+    font-family: 'Manrope', 'Century Gothic', sans-serif;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Manrope', 'Century Gothic', sans-serif;
+    font-size: clamp(1.1rem, 2vw, 1.5rem);
+    font-weight: 400;
+    color: var(--gold);
+    margin-bottom: 1.75rem;
+    font-style: italic;
+  }
+
+  .hero-bio {
+    font-size: 0.95rem;
+    line-height: 1.85;
+    color: var(--steel-light);
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--gold);
+    color: var(--navy);
+    padding: 0.75rem 1.75rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border: 1px solid rgba(200,169,110,0.4);
+    color: var(--gold);
+    padding: 0.75rem 1.75rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .btn-ghost:hover { border-color: var(--gold); background: rgba(200,169,110,0.06); }
+
+  /* Hero stats */
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .stat-card {
+    background: rgba(30,58,95,0.4);
+    border: 1px solid rgba(200,169,110,0.12);
+    padding: 1.5rem 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+
+  .stat-card:hover { border-color: rgba(200,169,110,0.35); }
+
+  .stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px; height: 100%;
+    background: var(--gold);
+  }
+
+  .stat-number {
+    font-family: 'Manrope', 'Century Gothic', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.35rem;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--steel-light);
+  }
+
+  .stat-sub {
+    font-size: 0.78rem;
+    color: var(--steel);
+    margin-top: 0.25rem;
+  }
+
+  /* ── SECTION SHARED ── */
+  section {
+    padding: 6rem 4rem;
+  }
+
+  .section-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    margin-bottom: 4rem;
+  }
+
+  .section-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px; height: 1px;
+    background: var(--gold);
+  }
+
+  .section-title {
+    font-family: 'Manrope', 'Century Gothic', sans-serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.15;
+  }
+
+  .section-sub {
+    font-size: 0.95rem;
+    color: var(--steel-light);
+    line-height: 1.8;
+    max-width: 600px;
+    margin-top: 1rem;
+  }
+
+  /* ── AUDIT TRAIL / EXPERIENCE TIMELINE ── */
+  #experience { background: rgba(30,58,95,0.15); }
+
+  .trail {
+    position: relative;
+    padding-left: 2rem;
+  }
+
+  .trail::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 1px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--gold), rgba(200,169,110,0.1));
+  }
+
+  .trail-item {
+    position: relative;
+    padding: 0 0 3rem 2.5rem;
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .trail-item.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .trail-dot {
+    position: absolute;
+    left: -0.45rem;
+    top: 0.35rem;
+    width: 0.9rem; height: 0.9rem;
+    background: var(--gold);
+    border-radius: 50%;
+    border: 2px solid var(--navy);
+  }
+
+  .trail-period {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+  }
+
+  .trail-role {
+    font-family: 'Manrope', 'Century Gothic', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.2rem;
+  }
+
+  .trail-company {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--steel-light);
+    margin-bottom: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .firm-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.55rem;
+    border: 1px solid rgba(200,169,110,0.35);
+    color: var(--gold);
+  }
+
+  .trail-desc {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: var(--steel-light);
+    max-width: 700px;
+  }
+
+  /* ── SECTORS ── */
+  .sectors-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5px;
+    background: rgba(200,169,110,0.1);
+  }
+
+  .sector-card {
+    background: var(--navy);
+    padding: 2.5rem;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s;
+    overflow: hidden;
+  }
+
+  .sector-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0; height: 2px;
+    background: var(--gold);
+    transition: width 0.4s ease;
+  }
+
+  .sector-card:hover { background: rgba(30,58,95,0.6); }
+  .sector-card:hover::after { width: 100%; }
+
+  .sector-icon {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .sector-name {
+    font-family: 'Manrope', 'Century Gothic', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .sector-clients {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .sector-desc {
+    font-size: 0.85rem;
+    line-height: 1.8;
+    color: var(--steel-light);
+    margin-bottom: 1.25rem;
+  }
+
+  .sector-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--steel-light);
+    border: 1px solid rgba(136,153,170,0.3);
+    padding: 0.2rem 0.6rem;
+    transition: color 0.2s, border-color 0.2s;
+  }
+
+  .sector-card:hover .tag {
+    color: var(--gold-light);
+    border-color: rgba(200,169,110,0.35);
+  }
+
+  /* ── STANDARDS ── */
+  #standards { background: rgba(30,58,95,0.12); }
+
+  .standards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .std-group {
+    background: rgba(30,58,95,0.35);
+    border: 1px solid rgba(200,169,110,0.1);
+    padding: 1.75rem;
+    transition: border-color 0.3s;
+  }
+
+  .std-group:hover { border-color: rgba(200,169,110,0.3); }
+
+  .std-group-title {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+
+  .std-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .std-pill {
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--cream);
+    background: rgba(200,169,110,0.1);
+    border: 1px solid rgba(200,169,110,0.2);
+    padding: 0.3rem 0.7rem;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+
+  .std-pill:hover { background: rgba(200,169,110,0.2); }
+
+  /* ── SKILLS ── */
+  .skills-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .skill-block { margin-bottom: 2rem; }
+
+  .skill-block-title {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+  }
+
+  .skill-item {
+    margin-bottom: 1.1rem;
+  }
+
+  .skill-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 0.4rem;
+  }
+
+  .skill-bar {
+    height: 2px;
+    background: rgba(136,153,170,0.2);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skill-fill {
+    position: absolute;
+    top: 0; left: 0; bottom: 0;
+    background: var(--gold);
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .skill-fill.animated { transform: scaleX(1); }
+
+  /* Skills right side – portfolio facts */
+  .portfolio-facts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .fact-box {
+    background: rgba(30,58,95,0.4);
+    border: 1px solid rgba(200,169,110,0.12);
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .fact-num {
+    font-family: 'Manrope', 'Century Gothic', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--gold);
+    display: block;
+    margin-bottom: 0.35rem;
+  }
+
+  .fact-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--steel-light);
+  }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: linear-gradient(135deg, rgba(30,58,95,0.5) 0%, var(--navy) 60%);
+  }
+
+  .contact-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+
+  .contact-info-list {
+    list-style: none;
+    margin-top: 1.5rem;
+  }
+
+  .contact-info-list li {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid rgba(136,153,170,0.15);
+    font-size: 0.9rem;
+    color: var(--steel-light);
+  }
+
+  .contact-info-list li:first-child { border-top: 1px solid rgba(136,153,170,0.15); }
+
+  .contact-icon {
+    font-size: 1.1rem;
+    color: var(--gold);
+    width: 1.5rem;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .contact-link {
+    color: var(--cream);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .contact-link:hover { color: var(--gold); }
+
+  .quals-box {
+    background: rgba(30,58,95,0.35);
+    border: 1px solid rgba(200,169,110,0.15);
+    padding: 2.5rem;
+  }
+
+  .quals-title {
+    font-family: 'Manrope', 'Century Gothic', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.35rem;
+  }
+
+  .quals-sub {
+    font-size: 0.82rem;
+    color: var(--gold);
+    margin-bottom: 1.75rem;
+    font-style: italic;
+  }
+
+  .quals-list {
+    list-style: none;
+  }
+
+  .quals-list li {
+    font-size: 0.85rem;
+    color: var(--steel-light);
+    line-height: 1.7;
+    padding-left: 1.25rem;
+    position: relative;
+    margin-bottom: 0.5rem;
+  }
+
+  .quals-list li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--gold);
+    font-size: 0.7rem;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 2rem 4rem;
+    border-top: 1px solid rgba(200,169,110,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo {
+    font-family: 'Manrope', 'Century Gothic', sans-serif;
+    font-size: 1rem;
+    color: var(--gold);
+  }
+
+  .footer-note {
+    font-size: 0.75rem;
+    color: var(--steel);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── DIVIDER ── */
+  .gold-rule {
+    border: none;
+    height: 1px;
+    background: linear-gradient(to right, rgba(200,169,110,0.5), transparent);
+    margin: 0 4rem;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 1.5rem; }
+    .nav-links { gap: 1.25rem; }
+    .nav-links a { font-size: 0.7rem; }
+
+    section { padding: 4rem 1.5rem; }
+    .hero { padding: 5rem 1.5rem 3rem; }
+
+    .hero-grid,
+    .skills-layout,
+    .contact-layout { grid-template-columns: 1fr; gap: 3rem; }
+
+    .hero-right { flex-direction: row; flex-wrap: wrap; }
+    .stat-card { flex: 1 1 45%; }
+
+    .sectors-grid { grid-template-columns: 1fr; }
+    .gold-rule { margin: 0 1.5rem; }
+    footer { flex-direction: column; gap: 1rem; text-align: center; padding: 2rem 1.5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .trail-item, .skill-fill { transition: none; }
+    .trail-item { opacity: 1; transform: none; }
+  }
+
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.service-grid,.trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem}
+.service-card,.trust-card{
+background:rgba(255,255,255,.03);
+backdrop-filter:blur(12px);
+border:1px solid rgba(255,255,255,.06);
+padding:2rem;
+transition:transform .35s ease,box-shadow .35s ease,border-color .35s ease}
+.service-card:hover,.trust-card:hover,.stat-card:hover,.std-group:hover,.fact-box:hover{
+transform:translateY(-4px);
+box-shadow:0 12px 30px rgba(0,0,0,.18)}
+.btn-primary,.btn-ghost{transition:transform .35s ease,box-shadow .35s ease,background .35s ease}
+.btn-primary:hover{box-shadow:0 10px 25px rgba(200,169,110,.25)}
+.hero::after{content:'';position:absolute;inset:0;background:
+radial-gradient(circle at 80% 20%,rgba(200,169,110,.08),transparent 40%),
+radial-gradient(circle at 20% 80%,rgba(42,74,114,.18),transparent 50%);pointer-events:none}
+
+
+html{scroll-padding-top:90px}
+body{
+background:
+radial-gradient(circle at top right, rgba(200,169,110,.08), transparent 35%),
+linear-gradient(180deg,#07111f,#0a1628);
+}
+
+section{padding:8rem 4rem}
+
+.stat-card,.service-card,.trust-card,.std-group,.fact-box,.sector-card{
+background:rgba(255,255,255,.04)!important;
+backdrop-filter:blur(18px);
+-webkit-backdrop-filter:blur(18px);
+border:1px solid rgba(255,255,255,.08)!important;
+box-shadow:0 8px 40px rgba(0,0,0,.15);
+}
+
+.hero-name,.section-title{
+letter-spacing:-0.03em;
+font-weight:800;
+}
+
+.flow-reveal{
+opacity:0;
+transform:translateY(40px) scale(.98);
+transition:all 1s cubic-bezier(.22,1,.36,1);
+}
+.flow-reveal.visible{
+opacity:1;
+transform:translateY(0) scale(1);
+}
+
+.service-card:hover,.trust-card:hover,.sector-card:hover,.stat-card:hover{
+transform:translateY(-8px) scale(1.02);
+box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.nav-links a{
+position:relative;
+}
+.nav-links a:after{
+content:'';
+position:absolute;
+left:0;bottom:-6px;
+width:0;height:2px;
+background:#C8A96E;
+transition:.4s ease;
+}
+.nav-links a:hover:after{width:100%}
+
+.hero::before{
+animation:floatGlow 12s ease-in-out infinite;
+}
+@keyframes floatGlow{
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-25px)}
+}
+
+
+.nav-logo{
+font-size:1.4rem;
+font-weight:800;
+letter-spacing:.15em;
+text-transform:uppercase;
+background:linear-gradient(135deg,#fff,#e0c99a,#c8a96e);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+nav{
+background:rgba(8,14,26,.55)!important;
+backdrop-filter:blur(24px);
+border:1px solid rgba(255,255,255,.06);
+}
+
+body::before{
+content:'';
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 15% 20%, rgba(200,169,110,.10), transparent 30%),
+radial-gradient(circle at 80% 30%, rgba(200,169,110,.08), transparent 25%),
+radial-gradient(circle at 60% 80%, rgba(200,169,110,.06), transparent 30%);
+pointer-events:none;
+z-index:-1;
+}
+
+.stat-card,.service-card,.trust-card,.fact-box,.std-group{
+background:rgba(255,255,255,.05)!important;
+backdrop-filter:blur(22px)!important;
+border:1px solid rgba(255,255,255,.08)!important;
+}
+
+.hero-name{
+font-size:clamp(4rem,7vw,6rem);
+}
+
+.flow-reveal{
+opacity:0;
+filter:blur(10px);
+transform:translateY(60px);
+transition:all 1.4s cubic-bezier(.19,1,.22,1);
+}
+.flow-reveal.visible{
+opacity:1;
+filter:blur(0);
+transform:translateY(0);
+}
+
+.service-card:hover,.trust-card:hover,.stat-card:hover{
+transform:translateY(-10px) scale(1.03);
+}
+
+.gold-rule{
+background:linear-gradient(90deg,transparent,rgba(200,169,110,.7),transparent);
+}
+
+.nav-links a{
+font-weight:700;
+letter-spacing:.12em;
+}
+
+</style>
+
+<style id="premium-upgrade">
+:root{--glow:rgba(200,169,110,.25)}
+body{background:linear-gradient(180deg,#050b15,#0a1628)}
+.hero{position:relative}
+.hero:after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(200,169,110,.12),transparent 30%);pointer-events:none}
+.client-showcase,.knowledge-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.client-card,.knowledge-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:1.6rem;border-radius:18px;backdrop-filter:blur(18px);transition:.4s}
+.client-card:hover,.knowledge-card:hover,.sector-card:hover{transform:translateY(-10px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.pub-btn{margin-top:1rem;background:#C8A96E;color:#0A1628;border:none;padding:.8rem 1.2rem;border-radius:10px;font-weight:700;cursor:pointer}
+.pub-modal{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;z-index:99999;padding:30px;overflow:auto}
+.pub-modal.active{display:block}
+.pub-inner{max-width:1100px;margin:auto;background:#081321;border:1px solid rgba(200,169,110,.3);padding:40px;border-radius:20px}
+.closepub{float:right;font-size:32px;color:#C8A96E;cursor:pointer}
+.toc{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:20px 0}
+.toc div{background:rgba(255,255,255,.04);padding:12px;border-radius:10px}
+</style>
+
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">Usman, ACCA</div>
+  
+<ul class="nav-links">
+<li><a href="#about">About</a></li>
+<li><a href="#services">Services</a></li>
+<li><a href="#publications">Publications</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Audit &amp; Advisory</p>
+      <h1 class="hero-name">Usman</h1>
+      <p class="hero-title">Audit • IFRS Technical Training & Workshops • Technical Accounting & Financial Reporting Advisory</p>
+      <p class="hero-bio">
+        Helping growing and complex businesses navigate statutory audits, IFRS implementation, financial reporting challenges and transaction-related accounting with Big Four expertise and practical commercial insight.
+      </p>
+      <div class="hero-cta">
+        <a href="#services" class="btn-primary">View Services</a>
+        <a href="#contact" class="btn-ghost">Book a Consultation</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="stat-card">
+        <div class="stat-number">9</div>
+        <div class="stat-label">Years in Audit &amp; Advisory</div>
+        <div class="stat-sub">Deloitte UK · PwC · BDO Bahrain</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">£20–30M</div>
+        <div class="stat-label">Combined Annual Fees Managed</div>
+        <div class="stat-sub">Current active portfolio</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">6</div>
+        <div class="stat-label">Sectors of Deep Expertise</div>
+        <div class="stat-sub">Banking · Automotive · Media · PE · Pharma · Group</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">22</div>
+        <div class="stat-label">Largest Team Led</div>
+        <div class="stat-sub">Including onshore &amp; offshore resources</div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<hr class="gold-rule">
+
+
+<section id="trust">
+<div class="section-inner flow-reveal">
+<div class="section-header">
+<p class="section-eyebrow">Why Clients Engage</p>
+<h2 class="section-title">Trusted Experience. Practical Advice.</h2>
+</div>
+<div class="trust-grid reveal">
+<div class="trust-card"><h3>9+ Years</h3><p>Audit, advisory and financial reporting experience.</p></div>
+<div class="trust-card"><h3>Big Four Background</h3><p>Deloitte and PwC experience across complex engagements.</p></div>
+<div class="trust-card"><h3>£30M+</h3><p>Portfolio responsibility and stakeholder management.</p></div>
+<div class="trust-card"><h3>IFRS Specialist</h3><p>IFRS 9, 15, 3, 10, 16 and group reporting.</p></div>
+</div>
+</div>
+</section>
+
+<section id="services">
+<div class="section-inner flow-reveal">
+<div class="section-header">
+<p class="section-eyebrow">Services</p>
+<h2 class="section-title">Services I Offer</h2><p class="section-sub">Practical, Big Four quality support for finance leaders, founders, SMEs, multinational groups and private equity-backed businesses.</p>
+</div>
+<div class="service-grid reveal">
+<div class="service-card"><h3>CV Reviews, Career Coaching & Interview Preparation</h3><p>Audit readiness, technical papers and issue resolution.</p></div>
+<div class="service-card"><h3>IFRS Technical Training & Workshops</h3><p>Implementation, technical accounting and complex transactions.</p></div>
+<div class="service-card"><h3>Technical Accounting & Financial Reporting Advisory</h3><p>Year-end reporting, disclosures and consolidation support.</p></div>
+<div class="service-card"><h3>Transaction Accounting</h3><p>Business combinations, PPAs and acquisition accounting.</p></div>
+<div class="service-card"><h3>Internal Controls</h3><p>Risk assessment, governance and control frameworks.</p></div>
+<div class="service-card"><h3>CFO Advisory</h3><p>Finance transformation and reporting optimisation.</p></div>
+</div>
+</div>
+</section>
+
+
+<!-- EXPERIENCE TIMELINE -->
+<section id="about">
+  <div class="section-inner flow-reveal">
+    <div class="section-header">
+      <p class="section-eyebrow">Professional Background</p>
+      <h2 class="section-title">About Me</h2>
+      <p class="section-sub">A track record built across two Big Four firms, a mid-tier firm and an international secondment — each stage sharpening both technical depth and leadership breadth.</p>
+    </div>
+
+    <div class="trail">
+
+      <div class="trail-item">
+        <div class="trail-dot"></div>
+        <div class="trail-period">June 2025 – Present</div>
+        <div class="trail-role">Field Manager</div>
+        <div class="trail-company">
+          <span class="firm-badge">Deloitte UK</span>
+          London, UK
+        </div>
+        <p class="trail-desc">Leading multi-location audit teams of up to 22 people across complex, multi-jurisdiction engagements. Responsible for a portfolio of approximately £20–30M in combined fees, overseeing quality, commercial performance and stakeholder relationships at the highest level. Mentoring and developing the next generation of audit professionals.</p>
+      </div>
+
+      <div class="trail-item">
+        <div class="trail-dot"></div>
+        <div class="trail-period">November 2022 – June 2025</div>
+        <div class="trail-role">Assistant Manager (I → II → III)</div>
+        <div class="trail-company">
+          <span class="firm-badge">Deloitte UK</span>
+          London, UK
+        </div>
+        <p class="trail-desc">Progressed rapidly through three levels of Assistant Manager in under three years. Led end-to-end audit delivery across banking, automotive and media sectors. Built technical authority in IFRS 9 modelling, IFRS 15 revenue recognition and IFRS 3 acquisition accounting. Established strong client relationships and represented Deloitte at senior management and board level.</p>
+      </div>
+
+      <div class="trail-item">
+        <div class="trail-dot"></div>
+        <div class="trail-period">February 2022 – July 2022</div>
+        <div class="trail-role">Senior Audit Executive (Secondment)</div>
+        <div class="trail-company">
+          <span class="firm-badge">BDO Bahrain</span>
+          Manama, Bahrain
+        </div>
+        <p class="trail-desc">Six-month international secondment managing audit engagements in the Gulf market. Expanded international outlook and exposure to IFRS application in a Middle Eastern regulatory environment, including banking and financial services clients.</p>
+      </div>
+
+      <div class="trail-item">
+        <div class="trail-dot"></div>
+        <div class="trail-period">June 2017 – December 2021</div>
+        <div class="trail-role">Senior Associate (I → II)</div>
+        <div class="trail-company">
+          <span class="firm-badge">PwC</span>
+          Pakistan
+        </div>
+        <p class="trail-desc">Over four and a half years at PwC, developing core audit competencies across banking, microfinance, pharmaceuticals and healthcare. Managed audit field work, built technical skills in IFRS and UK GAAP, and earned ACCA membership in 2021. Led teams on listed and large private-sector engagements with a strong focus on internal controls and regulatory compliance.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="gold-rule">
+
+<!-- SECTORS -->
+<section id="sectors">
+  <div class="section-inner flow-reveal">
+    <div class="section-header">
+      <p class="section-eyebrow">Industry Coverage</p>
+      <h2 class="section-title">Sector Expertise</h2>
+      <p class="section-sub">Deep, hands-on experience across six distinct industries — each requiring a different lens on risk, regulation and financial reporting.</p>
+    </div>
+  </div>
+
+  <div class="sectors-grid">
+
+    <div class="sector-card">
+      <span class="sector-icon">🏦</span>
+      <div class="sector-name">Banking &amp; Financial Services</div>
+      <div class="sector-clients">Lloyds Bank · Askari Bank · NRSP Microfinance · Mobilink Microfinance</div>
+      <p class="sector-desc">Extensive experience auditing listed and large private banks, microfinance institutions and financial services organisations. Deep focus on credit risk, regulatory capital and complex financial instruments — including a full end-to-end IFRS 9 ECL implementation for Askari Bank and Islamic Relief.</p>
+      <div class="sector-tags">
+        <span class="tag">IFRS 9 / ECL Modelling</span>
+        <span class="tag">PD · LGD · EAD</span>
+        <span class="tag">Capital Adequacy</span>
+        <span class="tag">Regulatory Reporting</span>
+        <span class="tag">Credit Risk</span>
+        <span class="tag">Treasury Audits</span>
+      </div>
+    </div>
+
+    <div class="sector-card">
+      <span class="sector-icon">🚗</span>
+      <div class="sector-name">Automotive &amp; Dealership Groups</div>
+      <div class="sector-clients">Group 1 Automotive UK · GKN Automotive · Dowlais Group Plc</div>
+      <p class="sector-desc">Led audits of large multi-location automotive dealership groups — up to 180 dealerships — examining complex working capital cycles, manufacturer incentive schemes, vehicle financing and debt factoring. Challenged management on impairment assumptions and share-based payment schemes under IFRS 2.</p>
+      <div class="sector-tags">
+        <span class="tag">Inventory Valuation</span>
+        <span class="tag">Manufacturer Rebates</span>
+        <span class="tag">Debt Factoring</span>
+        <span class="tag">IFRS 2 (SBP)</span>
+        <span class="tag">Going Concern</span>
+        <span class="tag">Multi-site Controls</span>
+      </div>
+    </div>
+
+    <div class="sector-card">
+      <span class="sector-icon">🎵</span>
+      <div class="sector-name">Media, Entertainment &amp; IP</div>
+      <div class="sector-clients">Moonbug Entertainment Limited</div>
+      <p class="sector-desc">Specialised in highly complex revenue recognition involving music publishing royalties, licensing arrangements and multiple performance obligations under IFRS 15. Developed a bespoke Music Publishing Revenue Model and analysed large volumes of transactional data to identify and resolve recognition issues.</p>
+      <div class="sector-tags">
+        <span class="tag">IFRS 15 Revenue Recognition</span>
+        <span class="tag">Royalty Income</span>
+        <span class="tag">Licensing Arrangements</span>
+        <span class="tag">Revenue Modelling</span>
+        <span class="tag">Data Analytics</span>
+      </div>
+    </div>
+
+    <div class="sector-card">
+      <span class="sector-icon">📊</span>
+      <div class="sector-name">Private Equity &amp; Acquisition Accounting</div>
+      <div class="sector-clients">Chambers &amp; Partners · Melrose Group</div>
+      <p class="sector-desc">Directed complex group audits for PE-backed and acquisition-led businesses spanning UK, Europe, US and Canada. Built strong capability in purchase price allocations, goodwill, contingent consideration and group consolidation. Advised on fair value assessments and investor reporting requirements under IFRS 3 and IFRS 10.</p>
+      <div class="sector-tags">
+        <span class="tag">IFRS 3 Acquisition Accounting</span>
+        <span class="tag">Purchase Price Allocation</span>
+        <span class="tag">Goodwill &amp; Impairment</span>
+        <span class="tag">IFRS 10 Consolidation</span>
+        <span class="tag">IAS 36</span>
+        <span class="tag">Investor Reporting</span>
+      </div>
+    </div>
+
+    <div class="sector-card">
+      <span class="sector-icon">💊</span>
+      <div class="sector-name">Pharmaceuticals &amp; Healthcare</div>
+      <div class="sector-clients">Pharmanovia Holdco · IVC Holdco · Northwest General Hospital · Birmingham Women &amp; Children's NHS</div>
+      <p class="sector-desc">Led audits across regulated pharma groups and NHS trusts. Developed strong understanding of R&amp;D expenditure, rebate provisions and regulatory compliance matters. Gained extensive experience evaluating complex management estimates and forecasting processes in highly controlled operating environments.</p>
+      <div class="sector-tags">
+        <span class="tag">R&amp;D Expenditure</span>
+        <span class="tag">Inventory &amp; Provisions</span>
+        <span class="tag">Revenue Recognition</span>
+        <span class="tag">NHS Reporting</span>
+        <span class="tag">Regulatory Compliance</span>
+        <span class="tag">Going Concern</span>
+      </div>
+    </div>
+
+    <div class="sector-card">
+      <span class="sector-icon">🌍</span>
+      <div class="sector-name">Group Reporting &amp; Multinationals</div>
+      <div class="sector-clients">Group 1 Automotive · Dowlais Group · Moonbug Entertainment</div>
+      <p class="sector-desc">Managed group audits across multiple jurisdictions, coordinating component auditors and cross-border teams. Applied deep knowledge of IFRS 10 consolidation, foreign currency translation, intercompany eliminations and group reporting under PCAOB, ISA and IFRS frameworks.</p>
+      <div class="sector-tags">
+        <span class="tag">ISA 600 Group Audits</span>
+        <span class="tag">Foreign Currency (IAS 21)</span>
+        <span class="tag">Intercompany Eliminations</span>
+        <span class="tag">PCAOB</span>
+        <span class="tag">Component Auditors</span>
+        <span class="tag">Multi-jurisdiction</span>
+      </div>
+    </div>
+
+  
+<div class="sector-card">
+<span class="sector-icon">💻</span>
+<div class="sector-name">Technology, Data Analytics & Cyber Security</div>
+<div class="sector-clients">Cisco · NCR Global · Dunnhumby · Almoayed Data Group</div>
+<p class="sector-desc">Complex software revenue streams, SaaS arrangements, IT controls, cyber governance and technology-focused reporting matters.</p>
+<div class="sector-tags"><span class="tag">IFRS 15</span><span class="tag">IAS 38</span><span class="tag">ITGCs</span><span class="tag">Cyber Security</span></div>
+</div>
+
+<div class="sector-card">
+<span class="sector-icon">🏛️</span>
+<div class="sector-name">Government, Public Sector & Not-for-Profit</div>
+<div class="sector-clients">Pakistan Railways · KPRA · OPF · ESEF</div>
+<p class="sector-desc">Governance, grant funding, public accountability reporting, compliance frameworks and stakeholder-focused reporting.</p>
+<div class="sector-tags"><span class="tag">Governance</span><span class="tag">Grants</span><span class="tag">Compliance</span></div>
+</div>
+
+</div>
+</section>
+
+<hr class="gold-rule">
+
+<!-- STANDARDS -->
+<section id="standards">
+  <div class="section-inner flow-reveal">
+    <div class="section-header">
+      <p class="section-eyebrow">Technical Mastery</p>
+      <h2 class="section-title">Standards &amp; Frameworks</h2>
+      <p class="section-sub">A breadth of technical coverage rarely held by a single professional — spanning financial reporting, auditing, regulatory and governance frameworks across multiple jurisdictions.</p>
+    </div>
+
+    <div class="standards-grid">
+      <div class="std-group">
+        <div class="std-group-title">IFRS Standards</div>
+        <div class="std-list">
+          <span class="std-pill">IFRS 2</span>
+          <span class="std-pill">IFRS 3</span>
+          <span class="std-pill">IFRS 9</span>
+          <span class="std-pill">IFRS 10</span>
+          <span class="std-pill">IFRS 15</span>
+          <span class="std-pill">IFRS 16</span>
+          <span class="std-pill">IFRS 18</span>
+          <span class="std-pill">IAS 21</span>
+          <span class="std-pill">IAS 36</span>
+        </div>
+      </div>
+
+      <div class="std-group">
+        <div class="std-group-title">Auditing Standards</div>
+        <div class="std-list">
+          <span class="std-pill">ISA 240</span>
+          <span class="std-pill">ISA 570</span>
+          <span class="std-pill">ISA 600</span>
+          <span class="std-pill">PCAOB</span>
+          <span class="std-pill">ISAs (Full Suite)</span>
+        </div>
+      </div>
+
+      <div class="std-group">
+        <div class="std-group-title">Reporting Frameworks</div>
+        <div class="std-list">
+          <span class="std-pill">UK GAAP (FRS 101)</span>
+          <span class="std-pill">UK GAAP (FRS 102)</span>
+          <span class="std-pill">US GAAP</span>
+          <span class="std-pill">IFRS (Full)</span>
+        </div>
+      </div>
+
+      <div class="std-group">
+        <div class="std-group-title">Controls &amp; Governance</div>
+        <div class="std-list">
+          <span class="std-pill">SOX Compliance</span>
+          <span class="std-pill">Internal Controls</span>
+          <span class="std-pill">Risk Assessment</span>
+          <span class="std-pill">Regulatory Compliance</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="gold-rule">
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner flow-reveal">
+    <div class="section-header">
+      <p class="section-eyebrow">Capabilities</p>
+      <h2 class="section-title">Core Skills</h2>
+    </div>
+
+    <div class="skills-layout">
+      <div>
+        <div class="skill-block">
+          <div class="skill-block-title">Audit &amp; Technical Accounting & Financial Reporting Advisory</div>
+
+          <div class="skill-item">
+            <div class="skill-label"><span>External &amp; Statutory Audit</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="0.98"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>IFRS Technical Accounting</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="0.96"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>Group &amp; Consolidation Audits</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="0.93"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>Risk Assessment &amp; Internal Controls</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="0.95"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>Financial Modelling &amp; ECL Models</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="0.9"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-block">
+          <div class="skill-block-title">Leadership &amp; Management</div>
+
+          <div class="skill-item">
+            <div class="skill-label"><span>Team Leadership &amp; Coaching</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="0.95"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>Stakeholder &amp; Client Management</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="0.94"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>Engagement Budget &amp; Resource Planning</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="0.9"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>Data Analytics &amp; Power BI</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="0.85"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="skill-block-title" style="margin-bottom:1.25rem;">Current Portfolio at a Glance</p>
+        <div class="portfolio-facts">
+          <div class="fact-box">
+            <span class="fact-num">4</span>
+            <span class="fact-label">Active Audit Projects</span>
+          </div>
+          <div class="fact-box">
+            <span class="fact-num">8</span>
+            <span class="fact-label">Target Projects FY25</span>
+          </div>
+          <div class="fact-box">
+            <span class="fact-num">17</span>
+            <span class="fact-label">Avg. Team Size</span>
+          </div>
+          <div class="fact-box">
+            <span class="fact-num">6–8</span>
+            <span class="fact-label">Direct Reports</span>
+          </div>
+        </div>
+
+        <div style="margin-top:2rem;">
+          <p class="skill-block-title">Also Proficient In</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem;">
+            <span class="std-pill">Advanced Excel</span>
+            <span class="std-pill">Power BI</span>
+            <span class="std-pill">AI-Enabled Audit Tools</span>
+            <span class="std-pill">SOX Testing</span>
+            <span class="std-pill">Technical Paper Writing</span>
+            <span class="std-pill">Cost-Benefit Analysis</span>
+            <span class="std-pill">Business Modelling</span>
+            <span class="std-pill">Training &amp; Facilitation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="gold-rule">
+
+<!-- CONTACT -->
+
+<hr class="gold-rule">
+
+
+<hr class="gold-rule">
+<section id="clientexp">
+<div class="section-inner">
+<div class="section-header">
+<p class="section-eyebrow">Selected Client Experience</p>
+<h2 class="section-title">Representative Engagement Portfolio</h2>
+</div>
+<div class="client-showcase">
+<div class="client-card"><h3>Dowlais Group Plc</h3><p>FTSE listed group • Going Concern • IAS 36 • IFRS 10 • Acquisition Accounting</p></div>
+<div class="client-card"><h3>Askari Bank Ltd</h3><p>IFRS 9 • ECL Modelling • Treasury • Regulatory Capital • Credit Risk</p></div>
+<div class="client-card"><h3>Cisco LLC</h3><p>Technology • IFRS 15 • IT Controls • Data Governance</p></div>
+<div class="client-card"><h3>Pharmanovia Holdco</h3><p>Pharmaceuticals • Global Audit • Acquisitions • Provisions</p></div>
+</div>
+</div>
+</section>
+
+<section id="publications">
+<div class="section-inner flow-reveal">
+<div class="section-header">
+<p class="section-eyebrow">Knowledge Centre</p>
+<h2 class="section-title">Technical Publications & Executive Training</h2>
+<p class="section-sub">Deep-dive technical content designed for CFOs, Finance Directors, Controllers, Audit Committees and Audit Professionals.</p>
+</div>
+<div class="knowledge-grid">
+<div class="knowledge-card">
+<h3>IFRS 18 – Executive Masterclass</h3>
+<p>Complete technical guide covering implementation, MPMs, transition requirements, industry impacts, FTSE case studies and readiness planning.</p>
+<button class="pub-btn" onclick="document.getElementById('ifrs18modal').classList.add('active')">Open Publication</button>
+</div>
+<div class="knowledge-card">
+<h3>FRS 102 Amendments</h3>
+<p>Revenue recognition, lease accounting, transition planning and practical implementation considerations.</p>
+</div>
+<div class="knowledge-card">
+<h3>AI, Audit & Future of Finance</h3>
+<p>How AI is reshaping audit delivery, technical accounting and finance leadership.</p>
+</div>
+</div>
+</div>
+</section>
+
+
+<section id="contact">
+  <div class="section-inner flow-reveal">
+    <div class="contact-layout">
+      <div>
+        <p class="section-eyebrow">Let's Connect</p>
+        <h2 class="section-title">Book a Consultation</h2>
+        <p class="section-sub">Open to conversations about senior audit, advisory and finance leadership opportunities. Based in London, open to relocation, with a one-month notice period.</p>
+        <ul class="contact-info-list">
+          <li>
+            <span class="contact-icon">✉</span>
+            <a href="mailto:qusman238@gmail.com" class="contact-link">qusman238@gmail.com</a>
+          </li>
+          <li>
+            <span class="contact-icon">📞</span>
+            <a href="tel:+447447747254" class="contact-link">+44 7447 747 254</a>
+          </li>
+          <li>
+            <span class="contact-icon">📍</span>
+            <span>London, UK · Open to relocation</span>
+          </li>
+          <li>
+            <span class="contact-icon">⏱</span>
+            <span>One month notice period</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="quals-box">
+        <div class="quals-title">Qualifications &amp; Credentials</div>
+        <div class="quals-sub">ACCA Member since 2021</div>
+        <ul class="quals-list">
+          <li>Qualified ACCA member with full professional certification</li>
+          <li>3.5+ years at Deloitte UK, progressing from AM I to Field Manager</li>
+          <li>4.5 years at PwC with Senior Associate II level attainment</li>
+          <li>International experience via BDO Bahrain secondment (2022)</li>
+          <li>Regular presenter and trainer on IFRS and audit methodology</li>
+          <li>Recognised for audit quality, team coaching and client relationship management</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Usman · ACCA</div>
+  <div class="footer-note">Audit, IFRS & Technical Accounting & Financial Reporting Advisory Advisory · London, UK</div>
+</footer>
+
+
+<div class="pub-modal" id="ifrs18modal">
+<div class="pub-inner">
+<span class="closepub" onclick="document.getElementById('ifrs18modal').classList.remove('active')">&times;</span>
+<h1>IFRS 18 – Presentation of Financial Statements</h1>
+<p><strong>Author:</strong> Usman ACCA | Executive Technical Training Programme</p>
+<div class="toc">
+<div>Background & Rationale</div><div>Effective Date</div><div>Income Statement Structure</div><div>MPMs</div><div>Industry Impact</div><div>FTSE Case Study</div><div>Implementation Roadmap</div><div>CPD Outcomes</div>
+</div>
+<h2>Why IFRS 18 Exists</h2>
+<p>The IASB introduced IFRS 18 to improve comparability, regulate Management Performance Measures and standardise presentation of financial performance.</p>
+<h2>Key Changes</h2>
+<ul>
+<li>Mandatory Operating Profit subtotal</li>
+<li>Operating, Investing and Financing categories</li>
+<li>Formal regulation of MPMs</li>
+<li>Enhanced unusual item disclosures</li>
+<li>Comparative restatements required</li>
+</ul>
+<h2>Who Is Most Impacted?</h2>
+<p>Banking, Technology, Media, Real Estate, Asset Management, Manufacturing and listed groups.</p>
+<h2>Readiness Roadmap</h2>
+<p>Gap Assessment → Policy Design → Systems Changes → Dry Run Comparatives → Go Live.</p>
+<h2>Learning Outcomes</h2>
+<p>Participants will be able to perform impact assessments, design MPM reconciliations, update policies and prepare IFRS 18 compliant reporting.</p>
+</div></div>
+
+<script>
+  // Animate trail items on scroll
+  const trailItems = document.querySelectorAll('.trail-item');
+  const skillFills = document.querySelectorAll('.skill-fill');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  trailItems.forEach((item, i) => {
+    item.style.transitionDelay = `${i * 0.12}s`;
+    observer.observe(item);
+  });
+
+  // Animate skill bars
+  const skillObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const fills = entry.target.querySelectorAll('.skill-fill');
+        fills.forEach((fill, i) => {
+          const w = fill.getAttribute('data-width');
+          setTimeout(() => {
+            fill.style.transform = `scaleX(${w})`;
+          }, i * 80);
+        });
+        skillObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  const skillsSection = document.getElementById('skills');
+  if (skillsSection) skillObserver.observe(skillsSection);
+
+  // Active nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.style.color = link.getAttribute('href') === `#${entry.target.id}`
+            ? 'var(--gold)'
+            : '';
+        });
+      }
+    });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+
+  sections.forEach(s => navObserver.observe(s));
+
+const reveals=document.querySelectorAll('.reveal');
+const revealObserver=new IntersectionObserver(entries=>{
+entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
+},{threshold:.15});
+reveals.forEach(r=>revealObserver.observe(r));
+
+
+const flowItems=document.querySelectorAll('.flow-reveal');
+const flowObserver=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){entry.target.classList.add('visible');}
+});
+},{threshold:.15});
+flowItems.forEach(el=>flowObserver.observe(el));
+</script>
+
+</body>
+</html>

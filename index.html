@@ -2277,6 +2277,9 @@ animation:pulseRing 2.4s ease-out infinite;
 
 <div class="mr-chat" id="qzChatWrap" style="height:560px;max-width:900px;margin:2rem auto 0;display:none">
   <div class="mr-messages" id="qzMessages"></div>
+  <div class="mr-chips">
+    <button class="mr-chip" id="qzEndBtn" onclick="qzEndSession()" style="border-color:var(--steel);color:var(--steel-light)">End session &amp; email my feedback</button>
+  </div>
   <div class="mr-inputbar">
     <button id="qzMic" class="mr-mic" title="Speak your answer">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
@@ -4011,8 +4014,27 @@ function qzStart(level){
   document.getElementById('qzNote').style.display='block';
   document.getElementById('qzMessages').innerHTML='';
   qzHistory.length=0;
-  qzHistory.push({role:'user', content:`[Start a new interview-prep session at ${level} level. Greet me briefly, explain how this works in one sentence, then ask your first question.]`});
+  qzHistory.push({role:'user', content:`[Start a new interview-prep session at ${level} level. Follow your onboarding flow: introduce yourself as a friend helping with interview prep, ask what role they're applying for, then ask about their experience — do not start interview questions yet.]`});
   qzCallApi();
+}
+function qzEndSession(){
+  const email=prompt("What email address should I send your feedback report to?");
+  if(!email || !email.includes('@')){ if(email!==null) alert('Please enter a valid email address.'); return; }
+  qzAppendMessage('user', `I'd like to wrap up — please email my feedback to ${email}.`);
+  const btn=document.getElementById('qzEndBtn');
+  btn.disabled=true; btn.textContent='Preparing your feedback…';
+  fetch('/api/qz-summary',{
+    method:'POST',
+    headers:{'content-type':'application/json'},
+    body:JSON.stringify({email, transcript:qzHistory})
+  }).then(r=>r.json()).then(data=>{
+    if(data.error){ qzAppendMessage('agent', `I couldn't send that just now (${data.error}) — please try again shortly.`); }
+    else{ qzAppendMessage('agent', `All done — your personalised feedback report is on its way to **${email}**! You did really well practising today. 🌟`); }
+  }).catch(()=>{
+    qzAppendMessage('agent', "I couldn't send that just now — please try again shortly.");
+  }).finally(()=>{
+    btn.disabled=false; btn.textContent='End session & email my feedback';
+  });
 }
 function qzSendMessage(){
   const input=document.getElementById('qzInput');

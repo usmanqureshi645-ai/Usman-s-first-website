@@ -1092,6 +1092,19 @@ body{background:linear-gradient(180deg,#050b15,#0a1628)}
 .further-reading li{margin-bottom:.5rem;padding-left:1rem;position:relative}
 .further-reading li::before{content:'↗';position:absolute;left:0;color:var(--gold)}
 
+/* Flowcharts */
+.fc-wrap{display:flex;flex-direction:column;align-items:center;gap:0;padding:.5rem 0}
+.fc-box{background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.35);border-radius:10px;padding:.9rem 1.3rem;text-align:center;max-width:480px;color:var(--cream);font-size:.85rem;line-height:1.5}
+.fc-box.fc-start{background:var(--gold);color:var(--navy);font-weight:700;border:none}
+.fc-box.fc-decision{background:rgba(255,255,255,.05);border:1px dashed var(--gold-light);font-weight:600}
+.fc-box.fc-end{background:rgba(95,217,122,.12);border:1px solid rgba(95,217,122,.4)}
+.fc-arrow{width:2px;height:26px;background:var(--gold);position:relative}
+.fc-arrow::after{content:'';position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);border-left:6px solid transparent;border-right:6px solid transparent;border-top:8px solid var(--gold)}
+.fc-branches{display:flex;gap:2rem;justify-content:center;width:100%;margin-top:0}
+.fc-branch{display:flex;flex-direction:column;align-items:center;flex:1}
+.fc-branch-label{font-size:.7rem;color:var(--gold);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.4rem}
+@media (max-width:600px){ .fc-branches{flex-direction:column;gap:1rem} .fc-box{max-width:100%;font-size:.8rem} }
+
 /* ── Boutique card tilt ── */
 .knowledge-card,.sector-card,.service-card,.trust-card,.client-card{will-change:transform;transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .4s ease,border-color .4s ease}
 
@@ -1219,6 +1232,7 @@ animation:pulseRing 2.4s ease-out infinite;
 <li><a href="#publications">Publications</a></li>
 <li><a href="#trainings">Trainings</a></li>
 <li><a href="#gaapcompare">GAAP Compare</a></li>
+<li><a href="#hottopics">Hot Market Topics</a></li>
 <li><a href="#jobhub">Job Search</a></li>
 <li><a href="#knowledgetest">Knowledge Test</a></li>
 <li><a href="#meetingroom" class="nav-meetingroom">Meeting Room <span class="live-dot"></span></a></li>
@@ -1808,8 +1822,28 @@ animation:pulseRing 2.4s ease-out infinite;
 </div>
 
 </div>
+
+<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin:3rem 0 1rem">IFRS Flowcharts — At a Glance</h3>
+<p class="section-sub" style="margin-bottom:1.5rem">Original decision-flow diagrams summarising how each standard actually works step by step — built for quick revision, not a substitute for the full standard text.</p>
+<div class="train-grid">
+<div class="knowledge-card"><span class="sector-icon">📊</span><h3>IFRS 15 — Revenue</h3><p>The five-step model from contract to recognition.</p><button class="pub-btn" onclick="openFlowchart('ifrs15')">View Flowchart</button></div>
+<div class="knowledge-card"><span class="sector-icon">📋</span><h3>IFRS 16 — Leases</h3><p>Recognition exemptions and the on-balance-sheet model.</p><button class="pub-btn" onclick="openFlowchart('ifrs16')">View Flowchart</button></div>
+<div class="knowledge-card"><span class="sector-icon">🏦</span><h3>IFRS 9 — Classification</h3><p>Business model + SPPI test decision tree.</p><button class="pub-btn" onclick="openFlowchart('ifrs9')">View Flowchart</button></div>
+<div class="knowledge-card"><span class="sector-icon">📉</span><h3>IAS 36 — Impairment</h3><p>From trigger event to impairment loss recognition.</p><button class="pub-btn" onclick="openFlowchart('ias36')">View Flowchart</button></div>
+<div class="knowledge-card"><span class="sector-icon">🤝</span><h3>IFRS 3 — Business Combinations</h3><p>The acquisition method, step by step.</p><button class="pub-btn" onclick="openFlowchart('ifrs3')">View Flowchart</button></div>
+<div class="knowledge-card"><span class="sector-icon">📑</span><h3>IFRS 18 — Income Statement</h3><p>Classifying each line into Operating, Investing or Financing.</p><button class="pub-btn" onclick="openFlowchart('ifrs18')">View Flowchart</button></div>
+</div>
+
 </div>
 </section>
+
+<!-- FLOWCHART MODAL -->
+<div class="pub-modal" id="flowchartModal">
+<div class="pub-inner" style="max-width:760px">
+<span class="closepub" onclick="closePub('flowchartModal')">&times;</span>
+<div id="flowchartContent"></div>
+</div>
+</div>
 
 <hr class="gold-rule">
 
@@ -1897,11 +1931,105 @@ animation:pulseRing 2.4s ease-out infinite;
 
 <!-- GAAP comparison slide modal -->
 <div class="pub-modal" id="gaapSlideModal">
-<div class="pub-inner" style="max-width:700px">
+<div class="pub-inner" style="max-width:920px">
 <span class="closepub" onclick="closePub('gaapSlideModal')">&times;</span>
 <div id="gaapSlideContent"></div>
 </div>
 </div>
+
+<hr class="gold-rule">
+
+<!-- HOT MARKET TOPICS -->
+<section id="hottopics">
+<div class="section-inner flow-reveal">
+<div class="section-header">
+<p class="section-eyebrow">Stay Current</p>
+<h2 class="section-title">Hot Market Topics</h2>
+<p class="section-sub">Curated, plain-English briefings on what's actively moving in audit, IFRS and finance right now — each with direct links to the official source for the full story. Updated periodically rather than live-streamed, so always check the linked source for the latest.</p>
+</div>
+
+<div class="knowledge-grid">
+
+<div class="knowledge-card">
+<span class="sector-icon">📑</span>
+<h3>IFRS 18 Transition Planning Underway</h3>
+<p>With the 1 January 2027 effective date approaching, FTSE and Fortune-listed groups are now running dry-run restatements. Audit committees are increasingly asking for early MPM reconciliation drafts well ahead of the deadline.</p>
+<div class="further-reading" style="border-top:none;padding-top:0">
+<ul>
+<li><a href="https://www.ifrs.org/news-and-events/news/" target="_blank" rel="noopener">IFRS Foundation — News &amp; Events</a></li>
+<li><a href="https://www2.deloitte.com/global/en/pages/audit/articles/ifrs-in-focus.html" target="_blank" rel="noopener">Deloitte — IFRS in Focus</a></li>
+</ul>
+</div>
+</div>
+
+<div class="knowledge-card">
+<span class="sector-icon">🌍</span>
+<h3>ISSB Adoption Accelerating Globally</h3>
+<p>The UK, Australia, Japan, Hong Kong, Singapore and Nigeria have all confirmed ISSB-aligned adoption pathways. The interoperability gap with the EU's CSRD/ESRS regime remains the single biggest practical headache for multinational reporters.</p>
+<div class="further-reading" style="border-top:none;padding-top:0">
+<ul>
+<li><a href="https://www.ifrs.org/sustainability/" target="_blank" rel="noopener">IFRS Foundation — ISSB Standards</a></li>
+<li><a href="https://www.efrag.org/en/sustainability-reporting" target="_blank" rel="noopener">EFRAG — ESRS &amp; CSRD</a></li>
+</ul>
+</div>
+</div>
+
+<div class="knowledge-card">
+<span class="sector-icon">🤖</span>
+<h3>AI-Assisted Audit Evidence Under Regulatory Scrutiny</h3>
+<p>The IAASB and FRC are both actively consulting on how professional scepticism standards should evolve as firms lean further into AI-assisted full-population testing. Expect formal standards updates within the next 1-2 reporting cycles.</p>
+<div class="further-reading" style="border-top:none;padding-top:0">
+<ul>
+<li><a href="https://www.iaasb.org/focus-areas/technology" target="_blank" rel="noopener">IAASB — Technology &amp; AI in Auditing</a></li>
+<li><a href="https://www.frc.org.uk/news/" target="_blank" rel="noopener">FRC — News &amp; Publications</a></li>
+</ul>
+</div>
+</div>
+
+<div class="knowledge-card">
+<span class="sector-icon">💳</span>
+<h3>ECL Modelling Under the Macro Spotlight</h3>
+<p>With interest rate and macro uncertainty continuing, regulators (PRA, APRA) are pushing banks to show more rigorous, multi-scenario forward-looking adjustments in their IFRS 9 ECL models rather than relying on a single base case.</p>
+<div class="further-reading" style="border-top:none;padding-top:0">
+<ul>
+<li><a href="https://www.bankofengland.co.uk/prudential-regulation/publication" target="_blank" rel="noopener">Bank of England PRA — Publications</a></li>
+<li><a href="https://kpmg.com/xx/en/our-insights/ifrg/ifrs-9-financial-instruments.html" target="_blank" rel="noopener">KPMG — IFRS 9 Insights</a></li>
+</ul>
+</div>
+</div>
+
+<div class="knowledge-card">
+<span class="sector-icon">🏛️</span>
+<h3>FRS 102 Periodic Review: Live Implementation</h3>
+<p>UK and Irish entities are now in active transition planning for the IFRS 15/16-aligned revenue and lease changes — the modified vs full retrospective transition choice is the most-debated practical question among mid-market preparers.</p>
+<div class="further-reading" style="border-top:none;padding-top:0">
+<ul>
+<li><a href="https://www.frc.org.uk/library/standards-codes-policy/accounting-and-reporting/frs-102/" target="_blank" rel="noopener">FRC — FRS 102 &amp; Periodic Review</a></li>
+<li><a href="https://www.bdo.co.uk/en-gb/insights/business-edge/frs-102" target="_blank" rel="noopener">BDO UK — FRS 102 Practical Guidance</a></li>
+</ul>
+</div>
+</div>
+
+<div class="knowledge-card">
+<span class="sector-icon">💼</span>
+<h3>Big 4 Hiring &amp; Skills Shift</h3>
+<p>Big 4 firms are increasingly recruiting for hybrid technical-plus-data profiles — IFRS/ISA depth combined with data analytics and the judgement to challenge AI-generated audit evidence rather than accept it at face value.</p>
+<div class="further-reading" style="border-top:none;padding-top:0">
+<ul>
+<li><a href="https://www.linkedin.com/company/deloitte/" target="_blank" rel="noopener">Deloitte — LinkedIn</a></li>
+<li><a href="https://www.linkedin.com/company/pwc/" target="_blank" rel="noopener">PwC — LinkedIn</a></li>
+<li><a href="https://www.linkedin.com/company/kpmg/" target="_blank" rel="noopener">KPMG — LinkedIn</a></li>
+<li><a href="https://www.linkedin.com/company/ey/" target="_blank" rel="noopener">EY — LinkedIn</a></li>
+</ul>
+</div>
+</div>
+
+</div>
+
+<p class="mr-note" style="margin-top:2rem">Want to discuss how any of these affect your specific business? Bring it to the <a href="#meetingroom" style="color:var(--gold)">Meeting Room</a>.</p>
+
+</div>
+</section>
 
 <hr class="gold-rule">
 
@@ -3001,57 +3129,249 @@ function mrEndMeeting(){
   });
 }
 
+/* ── IFRS flowcharts (original diagrams, not reproduced from any third-party publication) ── */
+const flowcharts={
+  ifrs15:{ title:'IFRS 15 — Revenue Recognition: The Five-Step Model', html:`
+    <div class="fc-wrap">
+      <div class="fc-box fc-start">Contract with a customer enters into scope</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-box">1. Identify the contract</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-box">2. Identify the performance obligations (distinct promises to transfer goods/services)</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-box">3. Determine the transaction price (including variable consideration, constrained to "highly probable")</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-box">4. Allocate the transaction price to each performance obligation (based on relative stand-alone selling prices)</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-box fc-decision">Does control transfer over time, or at a point in time?</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-branches">
+        <div class="fc-branch"><div class="fc-branch-label">Over Time</div><div class="fc-box fc-end">5a. Recognise revenue progressively as the obligation is satisfied (e.g. % completion)</div></div>
+        <div class="fc-branch"><div class="fc-branch-label">Point in Time</div><div class="fc-box fc-end">5b. Recognise revenue when control passes to the customer</div></div>
+      </div>
+    </div>` },
+  ifrs16:{ title:'IFRS 16 — Lease Recognition', html:`
+    <div class="fc-wrap">
+      <div class="fc-box fc-start">New lease arrangement identified</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-box fc-decision">Is it a short-term lease (≤12 months) OR a low-value underlying asset?</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-branches">
+        <div class="fc-branch"><div class="fc-branch-label">Yes</div><div class="fc-box fc-end">Exempt — recognise lease payments as an expense, typically straight-line over the lease term</div></div>
+        <div class="fc-branch"><div class="fc-branch-label">No</div><div class="fc-box fc-end">Recognise a Right-of-Use asset and a Lease Liability, measured at the present value of remaining lease payments</div></div>
+      </div>
+    </div>` },
+  ifrs9:{ title:'IFRS 9 — Financial Asset Classification', html:`
+    <div class="fc-wrap">
+      <div class="fc-box fc-start">Financial asset recognised</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-box fc-decision">Business model test: how is the asset managed?</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-branches">
+        <div class="fc-branch"><div class="fc-branch-label">Hold to Collect</div><div class="fc-box fc-decision">Passes SPPI test (solely payments of principal &amp; interest)?</div><div class="fc-arrow"></div><div class="fc-box fc-end">Yes → Amortised Cost</div></div>
+        <div class="fc-branch"><div class="fc-branch-label">Hold to Collect &amp; Sell</div><div class="fc-box fc-decision">Passes SPPI test?</div><div class="fc-arrow"></div><div class="fc-box fc-end">Yes → FVOCI</div></div>
+        <div class="fc-branch"><div class="fc-branch-label">Other / Trading</div><div class="fc-box fc-decision">Fails SPPI or held for trading</div><div class="fc-arrow"></div><div class="fc-box fc-end">FVTPL</div></div>
+      </div>
+    </div>` },
+  ias36:{ title:'IAS 36 — Impairment Testing', html:`
+    <div class="fc-wrap">
+      <div class="fc-box fc-start">Reporting date / possible trigger event</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-box fc-decision">Is there an indicator of impairment? (external: market value decline, adverse changes; internal: obsolescence, restructuring)</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-branches">
+        <div class="fc-branch"><div class="fc-branch-label">No</div><div class="fc-box fc-end">No impairment test required (unless mandatory annual test applies — e.g. goodwill, indefinite-life intangibles)</div></div>
+        <div class="fc-branch"><div class="fc-branch-label">Yes</div>
+          <div class="fc-box">Estimate Recoverable Amount = higher of (Fair Value less Costs to Sell) and (Value in Use)</div>
+          <div class="fc-arrow"></div>
+          <div class="fc-box fc-decision">Is Carrying Amount &gt; Recoverable Amount?</div>
+          <div class="fc-arrow"></div>
+          <div class="fc-branches">
+            <div class="fc-branch"><div class="fc-branch-label">No</div><div class="fc-box fc-end">No impairment loss</div></div>
+            <div class="fc-branch"><div class="fc-branch-label">Yes</div><div class="fc-box fc-end">Impairment loss = Carrying Amount − Recoverable Amount</div></div>
+          </div>
+        </div>
+      </div>
+    </div>` },
+  ifrs3:{ title:'IFRS 3 — Business Combinations: The Acquisition Method', html:`
+    <div class="fc-wrap">
+      <div class="fc-box fc-start">Business combination identified</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-box">1. Identify the acquirer</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-box">2. Determine the acquisition date (when control passes)</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-box">3. Recognise &amp; measure identifiable assets acquired, liabilities assumed, and any NCI — all at fair value</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-box fc-decision">Is consideration paid &gt; net identifiable assets acquired?</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-branches">
+        <div class="fc-branch"><div class="fc-branch-label">Yes</div><div class="fc-box fc-end">4a. Recognise Goodwill (never amortised — tested annually for impairment)</div></div>
+        <div class="fc-branch"><div class="fc-branch-label">No</div><div class="fc-box fc-end">4b. Recognise a gain on a bargain purchase immediately in profit or loss</div></div>
+      </div>
+    </div>` },
+  ifrs18:{ title:'IFRS 18 — Classifying Income Statement Line Items', html:`
+    <div class="fc-wrap">
+      <div class="fc-box fc-start">Income or expense line item</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-box fc-decision">Does it relate to the entity's main business activities?</div>
+      <div class="fc-arrow"></div>
+      <div class="fc-branches">
+        <div class="fc-branch"><div class="fc-branch-label">Yes</div><div class="fc-box fc-end">Operating category</div></div>
+        <div class="fc-branch"><div class="fc-branch-label">No</div>
+          <div class="fc-box fc-decision">Does it relate to returns on investments (associates, JVs, investment property)?</div>
+          <div class="fc-arrow"></div>
+          <div class="fc-branches">
+            <div class="fc-branch"><div class="fc-branch-label">Yes</div><div class="fc-box fc-end">Investing category</div></div>
+            <div class="fc-branch"><div class="fc-branch-label">No</div><div class="fc-box fc-end">Financing category (e.g. interest income/expense, other financing items)</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="fc-arrow"></div>
+      <div class="fc-box" style="margin-top:.5rem">Mandatory subtotals: <strong>Operating Profit</strong> and <strong>Profit before Financing &amp; Income Tax</strong>. Any company-defined subtotal (MPM) must be reconciled to the nearest IFRS subtotal.</div>
+    </div>` },
+};
+function openFlowchart(key){
+  const fc=flowcharts[key];
+  document.getElementById('flowchartContent').innerHTML=`<h1 style="margin-bottom:1.5rem">${fc.title}</h1>${fc.html}<p class="mr-note" style="margin-top:1.5rem">Original diagram for quick revision — not a substitute for the full standard text. See the related publication in the Knowledge Centre for full detail, or ask the Meeting Room.</p>`;
+  openPub('flowchartModal');
+}
+
 /* ── GAAP comparison data + table rendering ── */
+// Shared IFRS-side detail bullets — IFRS itself doesn't change by jurisdiction, only the local comparator does
+const ifrsDetails={
+  'Revenue Recognition':[
+    'Five-step model: (1) identify the contract, (2) identify performance obligations, (3) determine the transaction price, (4) allocate the price to obligations, (5) recognise revenue as/when each obligation is satisfied.',
+    'Recognition can be over time (e.g. construction contracts) or at a point in time, depending on when control transfers to the customer.',
+    'Variable consideration is only included in the transaction price to the extent it is "highly probable" a significant reversal will not occur.',
+  ],
+  'Leases':[
+    'Single lessee model: a right-of-use asset and a lease liability are recognised for almost every lease, eliminating the old operating/finance lease distinction for lessees.',
+    'Narrow exemptions remain for short-term leases (≤12 months) and leases of low-value underlying assets.',
+    'The lease liability is measured at the present value of remaining payments, discounted at the rate implicit in the lease or the lessee\'s incremental borrowing rate.',
+  ],
+  'Financial Instruments — Impairment':[
+    'Three-stage expected credit loss (ECL) model: 12-month ECL for performing assets (Stage 1), lifetime ECL once there is a significant increase in credit risk (Stage 2) or the asset is credit-impaired (Stage 3).',
+    'The model is explicitly forward-looking, requiring probability-weighted macroeconomic scenarios rather than waiting for a loss event to occur.',
+    'A simplified approach is available for trade receivables — lifetime ECL is recognised from initial recognition via a provision matrix, without staging.',
+  ],
+  'Inventory — LIFO':[
+    'Inventory is measured at the lower of cost and net realisable value (NRV).',
+    'Permitted cost formulas are FIFO or weighted average cost — LIFO is explicitly prohibited because the IASB views it as producing a balance sheet figure that poorly reflects current replacement cost.',
+    'A previous write-down to NRV must be reversed (up to the original cost) if NRV subsequently recovers.',
+  ],
+  'Development Costs':[
+    'Research costs are always expensed as incurred — there is no capitalisation option.',
+    'Development costs must be capitalised once six specific criteria are met: technical feasibility, intention to complete, ability to use/sell, how it will generate future economic benefits, availability of resources, and ability to measure costs reliably.',
+    'Internally generated goodwill and internally generated brands are never recognised as assets.',
+  ],
+  'Impairment Reversal':[
+    'An impairment loss is recognised when an asset\'s carrying amount exceeds its recoverable amount (the higher of fair value less costs to sell, and value in use).',
+    'If the recoverable amount later increases, the impairment can be reversed — but only up to what the carrying amount would have been (net of depreciation) had no impairment occurred.',
+    'Goodwill impairment is the one major exception: once impaired, goodwill can never be reversed.',
+  ],
+  'Business Combinations':[
+    'Applies the acquisition method: identify the acquirer, determine the acquisition date, recognise and measure identifiable assets/liabilities acquired at fair value, then recognise any resulting goodwill.',
+    'Non-controlling interest (NCI) can be measured at fair value ("full goodwill" method) or at its proportionate share of the acquiree\'s net identifiable assets — an accounting policy choice made on each acquisition.',
+    'Goodwill is never amortised; instead it is tested for impairment at least annually.',
+  ],
+  'Income Statement Format':[
+    'From 2027, IFRS 18 mandates three categories on the face of the income statement: Operating, Investing and Financing.',
+    'Two new mandatory subtotals are introduced: "Operating Profit" and "Profit before Financing and Income Tax".',
+    'Management Performance Measures (company-defined subtotals like "adjusted EBIT") must now be disclosed with a formal reconciliation to the nearest IFRS-defined subtotal.',
+  ],
+};
+
 const gaapData={
   usgaap:{ label:'US GAAP', rows:[
-    { topic:'Revenue Recognition', ifrs:'IFRS 15 — five-step model, principles-based', local:'ASC 606 — converged five-step model, broadly aligned but with more prescriptive industry guidance' },
-    { topic:'Leases', ifrs:'IFRS 16 — single lessee model, almost all leases on-balance-sheet', local:'ASC 842 — dual model retained (operating vs finance lease), different income statement effect' },
-    { topic:'Financial Instruments — Impairment', ifrs:'IFRS 9 — expected credit loss (ECL), staged approach', local:'ASC 326 (CECL) — lifetime expected credit losses recognised from initial recognition, no staging' },
-    { topic:'Inventory — LIFO', ifrs:'IAS 2 — LIFO prohibited', local:'ASC 330 — LIFO permitted' },
-    { topic:'Development Costs', ifrs:'IAS 38 — capitalised once criteria met; research expensed', local:'ASC 730 — R&D generally expensed as incurred (software has separate rules)' },
-    { topic:'Impairment Reversal', ifrs:'IAS 36 — reversal permitted (except goodwill)', local:'ASC 360 — reversal prohibited for held-and-used long-lived assets' },
-    { topic:'Business Combinations', ifrs:'IFRS 3 — broadly converged; NCI options differ', local:'ASC 805 — converged model; differences in contingent consideration & step acquisitions' },
-    { topic:'Income Statement Format', ifrs:'IFRS 18 (from 2027) — mandatory operating/investing/financing categories & MPM disclosure', local:'No equivalent mandatory categorisation; SEC Reg G governs non-GAAP measures instead' },
+    { topic:'Revenue Recognition', ifrs:'IFRS 15 — five-step model, principles-based', local:'ASC 606 — converged five-step model, broadly aligned but with more prescriptive industry guidance',
+      localDetail:['ASC 606 was issued jointly with IFRS 15 and uses the same five-step model, so the two are highly converged at a conceptual level.','US GAAP includes more detailed, industry-specific implementation guidance (e.g. software, real estate) than IFRS 15\'s more principles-based approach.','Practical expedients and transition options sometimes differ in detail, which can produce different timing outcomes even on similar contracts.'] },
+    { topic:'Leases', ifrs:'IFRS 16 — single lessee model, almost all leases on-balance-sheet', local:'ASC 842 — dual model retained (operating vs finance lease), different income statement effect',
+      localDetail:['ASC 842 keeps the operating vs finance lease distinction for lessees — IFRS 16 abolished it entirely.','For an ASC 842 operating lease, the expense is a single straight-line "lease cost" — under IFRS 16 every lease shows separate depreciation and interest, typically front-loading expense.','This is one of the most consequential US GAAP vs IFRS differences for EBITDA-style metrics, since IFRS 16 leases add back depreciation/interest while ASC 842 operating leases do not.'] },
+    { topic:'Financial Instruments — Impairment', ifrs:'IFRS 9 — expected credit loss (ECL), staged approach', local:'ASC 326 (CECL) — lifetime expected credit losses recognised from initial recognition, no staging',
+      localDetail:['CECL ("Current Expected Credit Loss") requires lifetime expected losses to be recognised immediately on initial recognition — there is no 12-month Stage 1 like IFRS 9.','This generally front-loads loss recognition compared to IFRS 9, especially for long-dated, high-quality assets.','Both models are forward-looking and macroeconomic-scenario-based, but CECL\'s lack of staging is the single biggest practical and numerical difference.'] },
+    { topic:'Inventory — LIFO', ifrs:'IAS 2 — LIFO prohibited', local:'ASC 330 — LIFO permitted',
+      localDetail:['US tax law\'s "LIFO conformity rule" requires a company using LIFO for tax to also use it for financial reporting — a major reason LIFO persists in US practice despite criticism.','A US company reporting under IFRS must switch to FIFO or weighted-average, which can increase reported profit and tax in inflationary periods.','This is one of the most-tested points in IFRS-vs-US-GAAP interviews because of its direct P&L and tax impact.'] },
+    { topic:'Development Costs', ifrs:'IAS 38 — capitalised once criteria met; research expensed', local:'ASC 730 — R&D generally expensed as incurred (software has separate rules)',
+      localDetail:['Under ASC 730, R&D is expensed as incurred with no equivalent to IAS 38\'s mandatory capitalisation once technical/commercial feasibility criteria are met.','Software development costs are a notable exception, governed by separate, more detailed US GAAP guidance (ASC 985-20 / ASC 350-40) depending on whether the software is for sale or internal use.','This is a frequent source of reconciling items for dual IFRS/US GAAP reporters with R&D-heavy operations.'] },
+    { topic:'Impairment Reversal', ifrs:'IAS 36 — reversal permitted (except goodwill)', local:'ASC 360 — reversal prohibited for held-and-used long-lived assets',
+      localDetail:['Once a long-lived asset is impaired under US GAAP, the new (lower) carrying amount becomes its new cost basis — reversal is not permitted even if value recovers.','IFRS\'s permission to reverse (excluding goodwill) reflects its more "current value" oriented philosophy versus US GAAP\'s more conservative, transaction-cost-based tradition.','This means identical facts can produce a materially different balance sheet depending on the framework used.'] },
+    { topic:'Business Combinations', ifrs:'IFRS 3 — broadly converged with US GAAP; non-controlling interest options differ', local:'ASC 805 — converged model; some differences in contingent consideration and step acquisitions',
+      localDetail:['Both frameworks use the acquisition method and prohibit goodwill amortisation, making this one of the more converged areas overall.','Differences remain in the measurement of contingent consideration, the treatment of step acquisitions, and some bargain purchase mechanics.','Push-down accounting and certain private-company alternatives under US GAAP have no direct IFRS equivalent.'] },
+    { topic:'Income Statement Format', ifrs:'IFRS 18 (from 2027) — mandatory operating/investing/financing categories & MPM disclosure', local:'No equivalent mandatory categorisation; SEC Reg G governs non-GAAP measures instead',
+      localDetail:['US GAAP has no IFRS 18 equivalent — there is no mandatory three-category income statement structure.','Instead, the SEC\'s Regulation G governs how non-GAAP measures (the rough equivalent of MPMs) must be reconciled and presented in public disclosures.','This divergence is expected to widen, not narrow, once IFRS 18 takes effect in 2027, since there is no active FASB project to mirror it.'] },
   ]},
   ukgaap:{ label:'UK GAAP (FRS 102)', rows:[
-    { topic:'Revenue Recognition', ifrs:'IFRS 15 — five-step model', local:'FRS 102 (post-2024 periodic review) — adopts an IFRS 15-aligned five-step model' },
-    { topic:'Leases', ifrs:'IFRS 16 — on-balance-sheet for almost all leases', local:'FRS 102 (post-review) — brings most operating leases on-balance-sheet, IFRS 16-style' },
-    { topic:'Financial Instruments — Impairment', ifrs:'IFRS 9 — three-stage ECL model', local:'FRS 102 — simpler incurred-loss-style impairment, far less granular than ECL' },
-    { topic:'Inventory — LIFO', ifrs:'IAS 2 — LIFO prohibited', local:'FRS 102 — LIFO not permitted under UK Companies Act / FRS 102' },
-    { topic:'Development Costs', ifrs:'IAS 38 — mandatory capitalisation once criteria met', local:'FRS 102 — accounting policy choice to capitalise or expense development costs' },
-    { topic:'Impairment Reversal', ifrs:'IAS 36 — permitted (except goodwill)', local:'FRS 102 — broadly similar, reversal permitted except for goodwill' },
-    { topic:'Business Combinations / Goodwill', ifrs:'IFRS 3 — goodwill not amortised, tested annually for impairment', local:'FRS 102 — goodwill is amortised over its useful life (a major practical difference)' },
-    { topic:'Income Statement Format', ifrs:'IFRS 18 (from 2027) — mandatory categories & MPM disclosure', local:'Companies Act prescribed formats — more flexible, no MPM-style regulation' },
+    { topic:'Revenue Recognition', ifrs:'IFRS 15 — five-step model', local:'FRS 102 (post-2024 periodic review) — adopts an IFRS 15-aligned five-step model',
+      localDetail:['The FRC\'s periodic review brought FRS 102 onto an IFRS 15-style five-step model, replacing the older risk-and-rewards approach.','Effective for periods beginning on or after 1 January 2026, with early adoption permitted (but only alongside the leases changes, not standalone).','Smaller UK entities will face new judgement calls — performance obligations and variable consideration — that the old model never required.'] },
+    { topic:'Leases', ifrs:'IFRS 16 — on-balance-sheet for almost all leases', local:'FRS 102 (post-review) — brings most operating leases on-balance-sheet, IFRS 16-style',
+      localDetail:['Most operating leases move on-balance-sheet via a right-of-use asset and lease liability, closely mirroring IFRS 16.','Exemptions remain for short-life and low-value asset leases, similar to IFRS 16\'s thresholds.','This is a major balance sheet and gearing-ratio change for UK GAAP preparers with significant property or equipment leases.'] },
+    { topic:'Financial Instruments — Impairment', ifrs:'IFRS 9 — three-stage ECL model', local:'FRS 102 — simpler incurred-loss-style impairment, far less granular than ECL',
+      localDetail:['FRS 102 retains a simpler, more judgement-based impairment model rather than IFRS 9\'s formal three-stage ECL framework.','There is no equivalent requirement for PD/LGD/EAD modelling or probability-weighted macroeconomic scenarios.','This makes FRS 102 impairment assessments considerably less resource-intensive, but also less forward-looking, than IFRS 9.'] },
+    { topic:'Inventory — LIFO', ifrs:'IAS 2 — LIFO prohibited', local:'FRS 102 — LIFO not permitted under UK Companies Act / FRS 102',
+      localDetail:['UK Companies Act and FRS 102 both align with IFRS in prohibiting LIFO.','FIFO and weighted average cost are the standard accepted methods.','This is one of the few areas of full alignment between IFRS and FRS 102 on inventory.'] },
+    { topic:'Development Costs', ifrs:'IAS 38 — mandatory capitalisation once criteria met', local:'FRS 102 — accounting policy choice to capitalise or expense development costs',
+      localDetail:['Unlike IFRS, FRS 102 gives entities an accounting policy choice: capitalise development costs meeting the criteria, or expense everything.','Once chosen, the policy must be applied consistently across similar projects.','This flexibility is often cited by UK GAAP preparers as a genuine simplification versus full IFRS.'] },
+    { topic:'Impairment Reversal', ifrs:'IAS 36 — permitted (except goodwill)', local:'FRS 102 — broadly similar, reversal permitted except for goodwill',
+      localDetail:['FRS 102\'s impairment reversal rules closely mirror IAS 36 — reversal is permitted if recoverable amount recovers, capped at the un-impaired carrying amount.','As under IFRS, goodwill impairment can never be reversed.','The recoverable amount test (higher of value in use and fair value less costs to sell) is conceptually the same as IAS 36.'] },
+    { topic:'Business Combinations / Goodwill', ifrs:'IFRS 3 — goodwill not amortised, tested annually for impairment', local:'FRS 102 — goodwill is amortised over its useful life (a major practical difference)',
+      localDetail:['This is one of the most significant FRS 102 vs IFRS differences: FRS 102 requires goodwill to be amortised (typically over 5-10 years, or up to 20 in limited cases) rather than tested annually for impairment only.','This generally produces a steadier, more predictable profit profile under FRS 102 versus the potential for large, lumpy impairment charges under IFRS 3.','Groups transitioning from FRS 102 to IFRS (or vice versa) must restate their goodwill accounting policy entirely.'] },
+    { topic:'Income Statement Format', ifrs:'IFRS 18 (from 2027) — mandatory categories & MPM disclosure', local:'Companies Act prescribed formats — more flexible, no MPM-style regulation',
+      localDetail:['FRS 102 preparers follow the Companies Act 2006\'s prescribed profit and loss formats, which long predate IFRS 18\'s new categorisation logic.','There is no FRC project currently mirroring IFRS 18\'s mandatory operating/investing/financing structure for FRS 102 reporters.','This means UK GAAP and IFRS income statements are likely to diverge further in presentation once IFRS 18 takes effect.'] },
   ]},
   irishgaap:{ label:'Irish GAAP (FRS 102)', rows:[
-    { topic:'Revenue Recognition', ifrs:'IFRS 15 — five-step model', local:'FRS 102 as adopted under Irish Companies Act 2014 — same IFRS 15-aligned model as UK' },
-    { topic:'Leases', ifrs:'IFRS 16 — on-balance-sheet for almost all leases', local:'FRS 102 (post-review) — same on-balance-sheet approach as UK FRS 102' },
-    { topic:'Financial Instruments — Impairment', ifrs:'IFRS 9 — three-stage ECL model', local:'FRS 102 — simpler incurred-loss-style impairment model' },
-    { topic:'Inventory — LIFO', ifrs:'IAS 2 — LIFO prohibited', local:'FRS 102 — LIFO not permitted' },
-    { topic:'Development Costs', ifrs:'IAS 38 — mandatory capitalisation once criteria met', local:'FRS 102 — accounting policy choice to capitalise or expense' },
-    { topic:'Impairment Reversal', ifrs:'IAS 36 — permitted (except goodwill)', local:'FRS 102 — broadly similar treatment' },
-    { topic:'Business Combinations / Goodwill', ifrs:'IFRS 3 — goodwill not amortised', local:'FRS 102 — goodwill amortised over useful life' },
-    { topic:'Income Statement Format', ifrs:'IFRS 18 (from 2027) — mandatory categories', local:'Irish Companies Act 2014 prescribed formats, broadly mirroring the UK position' },
+    { topic:'Revenue Recognition', ifrs:'IFRS 15 — five-step model', local:'FRS 102 as adopted under Irish Companies Act 2014 — same IFRS 15-aligned model as UK',
+      localDetail:['Ireland applies the same FRS 102 standard as the UK (the FRC sets FRS 102 jointly for both jurisdictions), so the post-review five-step revenue model applies identically.','The Irish Companies Act 2014 governs the legal company-reporting framework rather than the accounting standard itself.','In practice, an Irish FRS 102 preparer follows the exact same revenue guidance as a UK one.'] },
+    { topic:'Leases', ifrs:'IFRS 16 — on-balance-sheet for almost all leases', local:'FRS 102 (post-review) — same on-balance-sheet approach as UK FRS 102',
+      localDetail:['Identical to the UK position — most operating leases come on-balance-sheet under the FRS 102 periodic review amendments.','Irish entities should expect the same gearing and balance sheet impact as their UK counterparts.','Transition timing and reliefs mirror the UK effective date.'] },
+    { topic:'Financial Instruments — Impairment', ifrs:'IFRS 9 — three-stage ECL model', local:'FRS 102 — simpler incurred-loss-style impairment model',
+      localDetail:['Same simplified, less formulaic impairment approach as UK FRS 102 — no mandatory ECL staging.','Irish financial institutions reporting under IFRS (rather than FRS 102) would still need full IFRS 9 ECL modelling.','Most Irish SMEs and mid-market companies use FRS 102\'s simpler model.'] },
+    { topic:'Inventory — LIFO', ifrs:'IAS 2 — LIFO prohibited', local:'FRS 102 — LIFO not permitted',
+      localDetail:['Aligned with both IFRS and UK FRS 102 — LIFO is not an accepted method.','FIFO and weighted average remain the standard choices.','No jurisdiction-specific variation from the UK position.'] },
+    { topic:'Development Costs', ifrs:'IAS 38 — mandatory capitalisation once criteria met', local:'FRS 102 — accounting policy choice to capitalise or expense',
+      localDetail:['Same accounting policy choice available as UK FRS 102 preparers.','Common in Irish technology and pharmaceutical sectors, where R&D intensity makes the policy choice commercially significant.','Once elected, must be applied consistently.'] },
+    { topic:'Impairment Reversal', ifrs:'IAS 36 — permitted (except goodwill)', local:'FRS 102 — broadly similar treatment',
+      localDetail:['Mirrors the UK FRS 102 / IAS 36 position closely.','Reversal permitted (excluding goodwill) up to the un-impaired carrying amount.','No material Irish-specific divergence.'] },
+    { topic:'Business Combinations / Goodwill', ifrs:'IFRS 3 — goodwill not amortised', local:'FRS 102 — goodwill amortised over useful life',
+      localDetail:['Same goodwill amortisation requirement as the UK — typically 5-10 years, up to 20 in limited cases.','A key consideration for Ireland\'s significant base of multinational subsidiaries that may report both FRS 102 (Irish entity) and IFRS (group) figures.','Creates a recurring reconciling item between Irish statutory accounts and group IFRS consolidation.'] },
+    { topic:'Income Statement Format', ifrs:'IFRS 18 (from 2027) — mandatory categories', local:'Irish Companies Act 2014 prescribed formats, broadly mirroring the UK position',
+      localDetail:['Irish Companies Act 2014 prescribes profit and loss formats similar in spirit to the UK Companies Act 2006.','No IFRS 18-style mandatory categorisation exists for FRS 102 reporters in Ireland.','Multinational groups headquartered or listed elsewhere may still need IFRS 18 compliant group reporting even while the Irish subsidiary stays on FRS 102.'] },
   ]},
   luxgaap:{ label:'Luxembourg GAAP', rows:[
-    { topic:'Revenue Recognition', ifrs:'IFRS 15 — control-transfer, five-step model', local:'Lux GAAP — more rules-based, historical-cost-driven recognition under the EU Accounting Directive' },
-    { topic:'Leases', ifrs:'IFRS 16 — almost all leases on-balance-sheet', local:'Lux GAAP — operating leases generally remain off-balance-sheet (a major divergence)' },
-    { topic:'Financial Instruments — Impairment', ifrs:'IFRS 9 — forward-looking ECL model', local:'Lux GAAP — specific, prudence-driven provisions rather than a forward-looking ECL model' },
-    { topic:'Inventory — LIFO', ifrs:'IAS 2 — LIFO prohibited', local:'Lux GAAP — LIFO is permitted, reflecting Continental European GAAP tradition' },
-    { topic:'Development Costs', ifrs:'IAS 38 — mandatory capitalisation once criteria met', local:'Lux GAAP — capitalisation is optional (Article 65), with a conservative bias toward expensing' },
-    { topic:'Impairment Reversal', ifrs:'IAS 36 — permitted (except goodwill)', local:'Lux GAAP — reversal permitted only in limited, prudence-constrained circumstances' },
-    { topic:'Business Combinations / Goodwill', ifrs:'IFRS 3 — goodwill not amortised, tested for impairment', local:'Lux GAAP — goodwill is amortised, typically over a maximum of 5 years (extendable with justification)' },
-    { topic:'Income Statement Format', ifrs:'IFRS 18 (from 2027) — mandatory categories & MPM disclosure', local:'Prescribed vertical/horizontal formats under the EU Accounting Directive — no MPM concept' },
+    { topic:'Revenue Recognition', ifrs:'IFRS 15 — control-transfer, five-step model', local:'Lux GAAP — more rules-based, historical-cost-driven recognition under the EU Accounting Directive',
+      localDetail:['Lux GAAP recognition is generally tied to legal transfer of risks and rewards rather than IFRS 15\'s control-based, performance-obligation framework.','There is no formal five-step model — recognition criteria are simpler and more form-driven.','Multi-element arrangements (e.g. bundled services) get far less prescriptive guidance than under IFRS 15.'] },
+    { topic:'Leases', ifrs:'IFRS 16 — almost all leases on-balance-sheet', local:'Lux GAAP — operating leases generally remain off-balance-sheet (a major divergence)',
+      localDetail:['This is arguably the single biggest Lux GAAP vs IFRS difference: operating leases typically stay off-balance-sheet entirely, with payments simply expensed.','Lux GAAP has no direct equivalent to IFRS 16\'s right-of-use asset and lease liability model.','Holding and finance companies common in Luxembourg structuring should expect materially different leverage ratios depending on the framework used.'] },
+    { topic:'Financial Instruments — Impairment', ifrs:'IFRS 9 — forward-looking ECL model', local:'Lux GAAP — specific, prudence-driven provisions rather than a forward-looking ECL model',
+      localDetail:['Lux GAAP follows a prudence-led, incurred-loss philosophy rather than IFRS 9\'s forward-looking ECL approach.','Specific provisions are typically only recognised once there is concrete evidence of impairment, not based on probability-weighted forecasts.','This historically conservative approach reflects Luxembourg\'s Continental European (Plan Comptable / EU Directive) accounting heritage.'] },
+    { topic:'Inventory — LIFO', ifrs:'IAS 2 — LIFO prohibited', local:'Lux GAAP — LIFO is permitted, reflecting Continental European GAAP tradition',
+      localDetail:['Unlike IFRS, Lux GAAP permits LIFO as a recognised cost formula.','In practice, FIFO and weighted average remain more common, but the legal option to use LIFO is a genuine point of difference from IFRS.','Entities switching to IFRS reporting (e.g. ahead of a listing) must reassess their inventory costing policy entirely.'] },
+    { topic:'Development Costs', ifrs:'IAS 38 — mandatory capitalisation once criteria met', local:'Lux GAAP — capitalisation is optional (Article 65), with a conservative bias toward expensing',
+      localDetail:['Under Article 65 of the Luxembourg accounting law, capitalisation of development costs is an option, not a requirement as under IFRS.','The prevailing prudence concept in Lux GAAP means many entities default to expensing rather than capitalising, even where criteria might be met.','This is a notable simplification versus IAS 38\'s strict six-criteria test.'] },
+    { topic:'Impairment Reversal', ifrs:'IAS 36 — permitted (except goodwill)', local:'Lux GAAP — reversal permitted only in limited, prudence-constrained circumstances',
+      localDetail:['Lux GAAP\'s prudence principle makes impairment reversals far rarer in practice than under IFRS.','Where permitted, reversal is typically only recognised once a sustained recovery in value is clearly evidenced.','This conservative bias is consistent with Lux GAAP\'s historical-cost orientation generally.'] },
+    { topic:'Business Combinations / Goodwill', ifrs:'IFRS 3 — goodwill not amortised, tested for impairment', local:'Lux GAAP — goodwill is amortised, typically over a maximum of 5 years (extendable with justification)',
+      localDetail:['Goodwill amortisation (rather than annual impairment-only testing) is the Lux GAAP default — generally over 5 years, though this can be extended with documented justification (sometimes up to the asset\'s useful economic life).','This produces materially different reported profit trends versus an IFRS reporter with the same acquisition.','Luxembourg\'s prevalence as a holding-company jurisdiction makes this a frequently encountered reconciling item for multinational groups.'] },
+    { topic:'Income Statement Format', ifrs:'IFRS 18 (from 2027) — mandatory categories & MPM disclosure', local:'Prescribed vertical/horizontal formats under the EU Accounting Directive — no MPM concept',
+      localDetail:['Lux GAAP income statements follow prescribed formats (vertical or horizontal) set out in the EU Accounting Directive, with no IFRS 18-style category logic.','There is no regulatory concept directly equivalent to Management Performance Measures or their reconciliation requirements.','Groups consolidating Luxembourg entities into an IFRS 18-compliant group statement will need a separate mapping exercise.'] },
   ]},
   ausgaap:{ label:'Australian GAAP (AASB)', rows:[
-    { topic:'Revenue Recognition', ifrs:'IFRS 15 — five-step model', local:'AASB 15 — word-for-word equivalent of IFRS 15 (Australia has fully adopted IFRS via AASB)' },
-    { topic:'Leases', ifrs:'IFRS 16 — on-balance-sheet for almost all leases', local:'AASB 16 — direct equivalent of IFRS 16, same on-balance-sheet treatment' },
-    { topic:'Financial Instruments — Impairment', ifrs:'IFRS 9 — three-stage ECL model', local:'AASB 9 — direct equivalent of IFRS 9, including the ECL model' },
-    { topic:'Inventory — LIFO', ifrs:'IAS 2 — LIFO prohibited', local:'AASB 102 — direct equivalent of IAS 2, LIFO prohibited' },
-    { topic:'Development Costs', ifrs:'IAS 38 — capitalised once criteria met', local:'AASB 138 — direct equivalent of IAS 38' },
-    { topic:'Impairment Reversal', ifrs:'IAS 36 — permitted (except goodwill)', local:'AASB 136 — direct equivalent of IAS 36' },
-    { topic:'Business Combinations', ifrs:'IFRS 3 — goodwill not amortised, tested for impairment', local:'AASB 3 — direct equivalent; additional AASB 1054 disclosures apply' },
-    { topic:'Income Statement Format', ifrs:'IFRS 18 (from 2027) — mandatory categories & MPM disclosure', local:'AASB is expected to issue a near-identical local equivalent on the same timeline' },
+    { topic:'Revenue Recognition', ifrs:'IFRS 15 — five-step model', local:'AASB 15 — word-for-word equivalent of IFRS 15 (Australia has fully adopted IFRS via AASB)',
+      localDetail:['AASB 15 is issued by the Australian Accounting Standards Board as a direct, near word-for-word adoption of IFRS 15.','Australia formally adopted IFRS as the basis for AASB standards from 2005, so for-profit entity differences are minimal.','Any divergence tends to be limited to additional disclosure requirements for not-for-profit or public sector entities under companion AASB standards.'] },
+    { topic:'Leases', ifrs:'IFRS 16 — on-balance-sheet for almost all leases', local:'AASB 16 — direct equivalent of IFRS 16, same on-balance-sheet treatment',
+      localDetail:['AASB 16 mirrors IFRS 16\'s single lessee model and on-balance-sheet treatment exactly.','The same short-term and low-value asset exemptions apply.','Differences are effectively limited to local effective-date transition reliefs, if any, rather than substantive recognition differences.'] },
+    { topic:'Financial Instruments — Impairment', ifrs:'IFRS 9 — three-stage ECL model', local:'AASB 9 — direct equivalent of IFRS 9, including the ECL model',
+      localDetail:['AASB 9 adopts the full three-stage ECL model identically to IFRS 9.','Australian banks and ADIs (Authorised Deposit-taking Institutions) also layer on APRA prudential expectations around ECL modelling rigor, similar to PRA expectations in the UK.','For-profit entity accounting is materially identical to IFRS.'] },
+    { topic:'Inventory — LIFO', ifrs:'IAS 2 — LIFO prohibited', local:'AASB 102 — direct equivalent of IAS 2, LIFO prohibited',
+      localDetail:['AASB 102 prohibits LIFO exactly as IAS 2 does.','FIFO and weighted average are the accepted cost formulas.','No divergence from the IFRS position.'] },
+    { topic:'Development Costs', ifrs:'IAS 38 — capitalised once criteria met', local:'AASB 138 — direct equivalent of IAS 38',
+      localDetail:['AASB 138 applies the same six-criteria capitalisation test as IAS 38, with research costs always expensed.','Common in Australia\'s mining and resources sector, where exploration and evaluation expenditure is instead governed by the separate AASB 6.','No substantive recognition difference from IFRS for standard development costs.'] },
+    { topic:'Impairment Reversal', ifrs:'IAS 36 — permitted (except goodwill)', local:'AASB 136 — direct equivalent of IAS 36',
+      localDetail:['AASB 136 mirrors IAS 36\'s impairment and reversal rules exactly, including the prohibition on reversing goodwill impairment.','Australian-specific guidance exists for not-for-profit and public-sector cash-generating unit determination, but for-profit corporate accounting is unchanged from IFRS.','Recoverable amount testing (higher of fair value less costs to sell and value in use) is identical.'] },
+    { topic:'Business Combinations', ifrs:'IFRS 3 — goodwill not amortised, tested for impairment', local:'AASB 3 — direct equivalent; additional AASB 1054 disclosures apply',
+      localDetail:['AASB 3 is a direct adoption of IFRS 3, including the prohibition on goodwill amortisation.','AASB 1054 layers on additional Australian-specific disclosure requirements (e.g. certain audit and assurance-related disclosures) not found in IFRS 3 itself.','Substantive recognition and measurement is unchanged from IFRS.'] },
+    { topic:'Income Statement Format', ifrs:'IFRS 18 (from 2027) — mandatory categories & MPM disclosure', local:'AASB is expected to issue a near-identical local equivalent on the same timeline',
+      localDetail:['Given Australia\'s consistent practice of adopting IFRS standards word-for-word, the AASB is expected to issue an AASB 18 equivalent closely tracking the IFRS 18 effective date.','Until then, Australian preparers should plan on the same 2027 timeline and category structure as IFRS reporters globally.','This is one of the cleanest examples of why AASB is often described as "IFRS plus a few extra disclosures" rather than a genuinely separate GAAP.'] },
   ]},
 };
 
@@ -3072,19 +3392,24 @@ renderGaapTable();
 function openGaapSlide(jurisdiction, idx){
   const data=gaapData[jurisdiction];
   const row=data.rows[idx];
+  const ifrsBullets=(ifrsDetails[row.topic]||[]).map(b=>`<li>${b}</li>`).join('');
+  const localBullets=(row.localDetail||[]).map(b=>`<li>${b}</li>`).join('');
   document.getElementById('gaapSlideContent').innerHTML=`
-    <h1 style="margin-bottom:1.5rem">${row.topic}</h1>
+    <h1 style="margin-bottom:.5rem">${row.topic}</h1>
+    <p class="mr-note" style="margin-bottom:1.5rem">IFRS vs ${data.label}</p>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
       <div style="background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.25);border-radius:12px;padding:1.5rem">
         <div style="color:var(--gold);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem">IFRS</div>
-        <p style="color:var(--cream);line-height:1.7">${row.ifrs}</p>
+        <p style="color:var(--cream);line-height:1.7;font-weight:600;margin-bottom:.75rem">${row.ifrs}</p>
+        <ul style="color:var(--steel-light);line-height:1.7;font-size:.88rem;padding-left:1.1rem;margin:0">${ifrsBullets}</ul>
       </div>
       <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem">
         <div style="color:var(--gold-light);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem">${data.label}</div>
-        <p style="color:var(--cream);line-height:1.7">${row.local}</p>
+        <p style="color:var(--cream);line-height:1.7;font-weight:600;margin-bottom:.75rem">${row.local}</p>
+        <ul style="color:var(--steel-light);line-height:1.7;font-size:.88rem;padding-left:1.1rem;margin:0">${localBullets}</ul>
       </div>
     </div>
-    <p class="mr-note" style="margin-top:1.5rem">Ask the GAAP Research Assistant below for more depth on this specific topic and jurisdiction.</p>
+    <p class="mr-note" style="margin-top:1.5rem">Ask the GAAP Research Assistant below for even more depth on this specific topic and jurisdiction.</p>
   `;
   openPub('gaapSlideModal');
 }

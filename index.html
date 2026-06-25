@@ -1934,6 +1934,7 @@ animation:pulseRing 2.4s ease-out infinite;
 <footer>
   <div class="footer-logo">Usman · ACCA</div>
   <div class="footer-note">Audit, IFRS & Technical Accounting & Financial Reporting Advisory Advisory · London, UK</div>
+  <div class="footer-note" style="margin-top:.4rem;font-size:.65rem;opacity:.6">Background music: "Wallpaper" by Kevin MacLeod (incompetech.com) — Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener" style="color:inherit">Creative Commons BY 4.0</a></div>
 </footer>
 
 <div class="audio-toggle" id="audioToggle" title="Toggle ambient sound">
@@ -2332,116 +2333,27 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
   card.addEventListener('mouseleave', ()=>{ card.style.transform=''; });
 });
 
-/* ── Ambient background melody (synthesized, no external file) ── */
+/* ── Ambient background music (real track, not synthesized — avoids repetitive looping) ── */
 (function(){
-  let ctx=null, master=null, reverb=null, playing=false, droneNodes=[], noteTimer=null;
+  let playing=false;
   const toggle=document.getElementById('audioToggle');
   const iconOn=document.getElementById('audioIconOn');
   const iconOff=document.getElementById('audioIconOff');
 
-  const scale=[261.63,293.66,329.63,392.00,440.00,493.88,523.25]; // soft major scale
+  const player=new Audio('audio/ambient-wallpaper.mp3');
+  player.loop=true;
+  player.volume=0; // fade in once playing, never starts silent-then-jumpy
+  player.preload='auto';
 
-  function makeReverb(ctx){
-    const convolver=ctx.createConvolver();
-    const len=ctx.sampleRate*2.5;
-    const buf=ctx.createBuffer(2, len, ctx.sampleRate);
-    for(let ch=0; ch<2; ch++){
-      const data=buf.getChannelData(ch);
-      for(let i=0;i<len;i++){ data[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.2); }
+  function fadeTo(target, ms){
+    const start=player.volume;
+    const startTime=performance.now();
+    function step(){
+      const t=Math.min(1,(performance.now()-startTime)/ms);
+      player.volume=start+(target-start)*t;
+      if(t<1) requestAnimationFrame(step);
     }
-    convolver.buffer=buf;
-    return convolver;
-  }
-
-  function startAmbient(){
-    ctx=new (window.AudioContext||window.webkitAudioContext)();
-    master=ctx.createGain();
-    master.gain.value=0;
-    master.connect(ctx.destination);
-    master.gain.linearRampToValueAtTime(0.22, ctx.currentTime+2); // clearly audible, not background-only
-
-    reverb=makeReverb(ctx);
-    const wet=ctx.createGain(); wet.gain.value=0.3;
-    reverb.connect(wet); wet.connect(master);
-
-    // ping-pong delay — bounces echoes left/right for a lively, spacious feel
-    const delayL=ctx.createDelay(1); delayL.delayTime.value=0.28;
-    const delayR=ctx.createDelay(1); delayR.delayTime.value=0.28;
-    const panL=ctx.createStereoPanner(); panL.pan.value=-0.8;
-    const panR=ctx.createStereoPanner(); panR.pan.value=0.8;
-    const fb=ctx.createGain(); fb.gain.value=0.32;
-    delayL.connect(panL); panL.connect(delayR); delayR.connect(panR); panR.connect(fb); fb.connect(delayL);
-    const pingpongOut=ctx.createGain(); pingpongOut.gain.value=0.5;
-    panL.connect(pingpongOut); panR.connect(pingpongOut); pingpongOut.connect(master);
-
-    // soft low pad underneath — gentle sustained bass note
-    const padOsc=ctx.createOscillator();
-    padOsc.type='sine';
-    padOsc.frequency.value=scale[0]/2;
-    const padFilt=ctx.createBiquadFilter();
-    padFilt.type='lowpass';
-    padFilt.frequency.value=500;
-    const padGain=ctx.createGain();
-    padGain.gain.value=0;
-    padGain.gain.linearRampToValueAtTime(0.16, ctx.currentTime+3);
-    padOsc.connect(padFilt); padFilt.connect(padGain); padGain.connect(master);
-    padOsc.start();
-    droneNodes.push(padOsc);
-
-    // melodic phrase — alternates "piano" plucks and "flute" sustains for variety
-    const phrase=[0,2,4,2,5,4,2,0,4,6,4,2];
-    let step=0;
-
-    function pianoNote(f, now){
-      // two detuned oscillators (fundamental + octave) with a fast pluck-like decay
-      const o1=ctx.createOscillator(); o1.type='triangle'; o1.frequency.value=f;
-      const o2=ctx.createOscillator(); o2.type='sine'; o2.frequency.value=f*2;
-      const g1=ctx.createGain(); g1.gain.value=0;
-      const g2=ctx.createGain(); g2.gain.value=0;
-      o1.connect(g1); o2.connect(g2);
-      g1.connect(master); g2.connect(master);
-      g1.connect(reverb); g1.connect(delayL);
-      g1.gain.linearRampToValueAtTime(0.42, now+0.012);
-      g1.gain.exponentialRampToValueAtTime(0.001, now+0.9);
-      g2.gain.linearRampToValueAtTime(0.14, now+0.012);
-      g2.gain.exponentialRampToValueAtTime(0.001, now+0.5);
-      o1.start(now); o1.stop(now+0.95);
-      o2.start(now); o2.stop(now+0.55);
-    }
-
-    function fluteNote(f, now){
-      // a sine with gentle vibrato and a softer, slower swell — airy, breathy feel
-      const osc=ctx.createOscillator(); osc.type='sine'; osc.frequency.value=f;
-      const vibrato=ctx.createOscillator(); vibrato.type='sine'; vibrato.frequency.value=5;
-      const vibratoGain=ctx.createGain(); vibratoGain.gain.value=4;
-      vibrato.connect(vibratoGain); vibratoGain.connect(osc.frequency);
-      const g=ctx.createGain(); g.gain.value=0;
-      osc.connect(g); g.connect(master); g.connect(reverb); g.connect(delayR);
-      g.gain.linearRampToValueAtTime(0.28, now+0.25);
-      g.gain.linearRampToValueAtTime(0, now+1.4);
-      vibrato.start(now); osc.start(now);
-      vibrato.stop(now+1.4); osc.stop(now+1.4);
-    }
-
-    function playNote(){
-      if(!playing) return;
-      const idx=phrase[step % phrase.length];
-      const octaveUp = step % 8 === 3 || step % 8 === 7; // occasional higher accent note
-      const f=scale[idx % scale.length] * (octaveUp ? 2 : 1);
-      const now=ctx.currentTime;
-      if(step % 2 === 0){ pianoNote(f, now); } else { fluteNote(f, now); }
-      step++;
-      noteTimer=setTimeout(playNote, 420); // lively, danceable tempo (~140bpm feel)
-    }
-    playNote();
-  }
-
-  function stopAmbient(){
-    if(!master||!ctx) return;
-    clearTimeout(noteTimer);
-    const now=ctx.currentTime;
-    master.gain.linearRampToValueAtTime(0, now+1.2);
-    setTimeout(()=>{ droneNodes.forEach(n=>{try{n.stop();}catch(e){}}); if(ctx) ctx.close(); ctx=null; droneNodes=[]; }, 1300);
+    step();
   }
 
   function setPlaying(state){
@@ -2449,7 +2361,13 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
     toggle.classList.toggle('playing', playing);
     iconOn.style.display = playing ? 'block' : 'none';
     iconOff.style.display = playing ? 'none' : 'block';
-    if(playing) startAmbient(); else stopAmbient();
+    if(playing){
+      player.play().catch(()=>{});
+      fadeTo(0.42, 1800); // clearly audible, full real-music presence
+    } else {
+      fadeTo(0, 800);
+      setTimeout(()=>{ if(!playing) player.pause(); }, 850);
+    }
   }
 
   toggle.addEventListener('click', (e)=>{
@@ -2457,7 +2375,7 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
     setPlaying(!playing);
   });
 
-  // Browsers block true autoplay-with-sound; start softly on the visitor's first
+  // Browsers block true autoplay-with-sound; start on the visitor's first
   // interaction with the page instead, so it feels automatic without violating policy.
   function autoStartOnce(){
     if(!playing) setPlaying(true);

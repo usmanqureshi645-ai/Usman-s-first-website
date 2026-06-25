@@ -1140,6 +1140,23 @@ animation:pulseRing 2.4s ease-out infinite;
   animation:micPulse 1.3s ease-in-out infinite;
 }
 .mr-mic.active{ background:rgba(200,169,110,.22); border-color:var(--gold); color:var(--gold-light); }
+.voice-gender-select{
+  background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12);
+  color:var(--steel-light); height:42px; border-radius:10px; padding:0 .5rem;
+  font-size:.72rem; font-family:inherit; flex-shrink:0; cursor:pointer;
+}
+.voice-gender-select:focus{ outline:none; border-color:var(--gold); }
+@media (max-width:600px){ .voice-gender-select{ display:none; } }
+
+/* Markdown rendered inside chat bubbles */
+.mr-bubble h4{ font-size:.95rem; color:var(--gold-light); margin:.3rem 0 .4rem; font-weight:700; }
+.mr-bubble h5{ font-size:.88rem; color:var(--gold-light); margin:.3rem 0 .35rem; font-weight:700; }
+.mr-bubble p{ margin:0 0 .5rem; }
+.mr-bubble p:last-child{ margin-bottom:0; }
+.mr-bubble ul, .mr-bubble ol{ margin:0 0 .5rem 1.1rem; padding:0; }
+.mr-bubble li{ margin-bottom:.25rem; }
+.mr-bubble strong{ color:var(--gold-light); font-weight:700; }
+.mr-bubble br{ display:none; }
 @keyframes micPulse{0%,100%{box-shadow:0 0 0 0 rgba(200,169,110,.5)}50%{box-shadow:0 0 0 8px rgba(200,169,110,0)}}
 </style>
 
@@ -1612,6 +1629,10 @@ animation:pulseRing 2.4s ease-out infinite;
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
         <span class="mr-mic-label">Hear</span>
       </button>
+      <select class="voice-gender-select" title="Voice accent">
+        <option value="female">Female voice</option>
+        <option value="male">Male voice</option>
+      </select>
       <input type="text" id="mrInput" placeholder="Ask the panel a technical accounting question…" />
       <button id="mrSend" onclick="mrSendMessage()">Send</button>
     </div>
@@ -1778,6 +1799,18 @@ animation:pulseRing 2.4s ease-out infinite;
     <button class="mr-chip" onclick="gaapAsk('Can a US company use LIFO under IFRS?')">LIFO under IFRS?</button>
   </div>
   <div class="mr-inputbar">
+    <button id="gaapMic" class="mr-mic" title="Speak your question">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
+      <span class="mr-mic-label">Speak</span>
+    </button>
+    <button id="gaapVoiceToggle" class="mr-mic" title="Hear the assistant's replies aloud" onclick="gaapToggleVoice()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
+      <span class="mr-mic-label">Hear</span>
+    </button>
+    <select class="voice-gender-select" title="Voice accent">
+      <option value="female">Female voice</option>
+      <option value="male">Male voice</option>
+    </select>
     <input type="text" id="gaapInput" placeholder="Ask in plain language — e.g. 'How does goodwill differ under IFRS vs US GAAP?'" />
     <button id="gaapSend" onclick="gaapSendMessage()">Ask</button>
   </div>
@@ -1876,6 +1909,18 @@ animation:pulseRing 2.4s ease-out infinite;
 <div class="mr-chat" id="qzChatWrap" style="height:560px;max-width:900px;margin:2rem auto 0;display:none">
   <div class="mr-messages" id="qzMessages"></div>
   <div class="mr-inputbar">
+    <button id="qzMic" class="mr-mic" title="Speak your answer">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
+      <span class="mr-mic-label">Speak</span>
+    </button>
+    <button id="qzVoiceToggle" class="mr-mic" title="Hear the coach's questions aloud" onclick="qzToggleVoice()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
+      <span class="mr-mic-label">Hear</span>
+    </button>
+    <select class="voice-gender-select" title="Voice accent">
+      <option value="female">Female voice</option>
+      <option value="male">Male voice</option>
+    </select>
     <input type="text" id="qzInput" placeholder="Type your answer…" />
     <button id="qzSend" onclick="qzSendMessage()">Send</button>
   </div>
@@ -2151,6 +2196,38 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
 </script>
 
 <script>
+  // Shared: escape raw text, then render a safe subset of markdown as real HTML
+  function escapeHtml(str){
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+  function renderMarkdown(raw){
+    const lines=escapeHtml(raw).split('\n');
+    let html=''; let inList=false; let listType=null;
+    function closeList(){ if(inList){ html+= listType==='ol' ? '</ol>' : '</ul>'; inList=false; listType=null; } }
+    for(let line of lines){
+      const trimmed=line.trim();
+      if(/^###\s+/.test(trimmed)){ closeList(); html+=`<h5>${trimmed.replace(/^###\s+/,'')}</h5>`; continue; }
+      if(/^##\s+/.test(trimmed)){ closeList(); html+=`<h4>${trimmed.replace(/^##\s+/,'')}</h4>`; continue; }
+      if(/^#\s+/.test(trimmed)){ closeList(); html+=`<h4>${trimmed.replace(/^#\s+/,'')}</h4>`; continue; }
+      if(/^[-*]\s+/.test(trimmed)){
+        if(!inList || listType!=='ul'){ closeList(); html+='<ul>'; inList=true; listType='ul'; }
+        html+=`<li>${trimmed.replace(/^[-*]\s+/,'')}</li>`; continue;
+      }
+      if(/^\d+\.\s+/.test(trimmed)){
+        if(!inList || listType!=='ol'){ closeList(); html+='<ol>'; inList=true; listType='ol'; }
+        html+=`<li>${trimmed.replace(/^\d+\.\s+/,'')}</li>`; continue;
+      }
+      closeList();
+      if(trimmed==='---'){ html+='<hr style="border:none;border-top:1px solid rgba(255,255,255,.1);margin:.6rem 0">'; continue; }
+      if(trimmed==='') { html+='<br>'; continue; }
+      html+=`<p>${trimmed}</p>`;
+    }
+    closeList();
+    return html
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g, '<em>$1</em>');
+  }
+
   // Boutique fade-in on load
   window.addEventListener('load', () => requestAnimationFrame(() => document.body.classList.add('loaded')));
 
@@ -2390,6 +2467,45 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
   window.addEventListener('scroll', autoStartOnce, { once:true });
 })();
 
+/* ── Shared text-to-speech engine (used by Meeting Room, GAAP Compare, Knowledge Test) ── */
+const VoiceEngine=(function(){
+  let femaleVoice=null, maleVoice=null, gender='female';
+  function pickVoices(){
+    const voices=speechSynthesis.getVoices();
+    const englishVoices=voices.filter(v=>/^en/i.test(v.lang));
+    const pool=englishVoices.length?englishVoices:voices;
+    femaleVoice = pool.find(v=>/female|zira|samantha|susan|victoria|karen|moira|tessa|fiona|google uk english female|joanna|salli/i.test(v.name))
+      || pool.find(v=>/en-GB/i.test(v.lang) && !/male/i.test(v.name))
+      || pool[0] || null;
+    maleVoice = pool.find(v=>/male|david|daniel|fred|george|google uk english male|matthew|brian|arthur/i.test(v.name) && !/female/i.test(v.name))
+      || pool.find(v=>v!==femaleVoice)
+      || pool[0] || null;
+  }
+  if('speechSynthesis' in window){
+    pickVoices();
+    speechSynthesis.onvoiceschanged=pickVoices;
+  }
+  function setGender(g){ gender=g; }
+  function speak(text, pitch){
+    if(!('speechSynthesis' in window)) return;
+    const clean=text.replace(/[*_#>`]/g,'').replace(/\n+/g,'. ');
+    const utter=new SpeechSynthesisUtterance(clean);
+    const voice = gender==='male' ? maleVoice : femaleVoice;
+    if(voice) utter.voice=voice;
+    utter.pitch=pitch||1;
+    utter.rate=0.97;
+    utter.volume=0.9;
+    speechSynthesis.speak(utter);
+  }
+  function cancel(){ if('speechSynthesis' in window) speechSynthesis.cancel(); }
+  return { setGender, speak, cancel };
+})();
+
+// Wire up every gender <select> on the page (Meeting Room, GAAP Compare, Knowledge Test all share the same engine)
+document.querySelectorAll('.voice-gender-select').forEach(sel=>{
+  sel.addEventListener('change', ()=>VoiceEngine.setGender(sel.value));
+});
+
 /* ── Meeting Room chat ── */
 const mrHistory=[];
 let mrIntroduced=false;
@@ -2401,35 +2517,16 @@ const mrRoles={
   'Elena Rossi':'ESG & Sustainability Reporting'
 };
 let mrVoiceEnabled=false; // opt-in only — avoids clashing with ambient music & unwanted auto-speech
-let mrBestVoice=null;
-if('speechSynthesis' in window){
-  const pickVoice=()=>{
-    const voices=speechSynthesis.getVoices();
-    // Prefer a natural-sounding British/English voice for clear, plain-English pronunciation
-    mrBestVoice = voices.find(v=>/en-GB/i.test(v.lang) && /Google|Natural|Online/i.test(v.name))
-      || voices.find(v=>/en-GB/i.test(v.lang))
-      || voices.find(v=>/^en/i.test(v.lang))
-      || voices[0] || null;
-  };
-  pickVoice();
-  speechSynthesis.onvoiceschanged = pickVoice;
-}
+const mrPitches={'Sarah Chen':1.04,'David Whitfield':0.92,'Amara Singh':1.08,'Marcus Lee':0.88,'Elena Rossi':1.12};
 function mrSpeak(name, text){
-  if(!mrVoiceEnabled || !('speechSynthesis' in window)) return;
-  const clean=text.replace(/[*_#]/g,'');
-  const utter=new SpeechSynthesisUtterance(clean);
-  if(mrBestVoice) utter.voice=mrBestVoice;
-  const pitches={'Sarah Chen':1.04,'David Whitfield':0.92,'Amara Singh':1.08,'Marcus Lee':0.88,'Elena Rossi':1.12};
-  utter.pitch=pitches[name]||1;
-  utter.rate=0.97; // slightly slower than default reads less robotic, more conversational
-  utter.volume=0.85;
-  speechSynthesis.speak(utter);
+  if(!mrVoiceEnabled) return;
+  VoiceEngine.speak(text, mrPitches[name]||1);
 }
 function mrToggleVoice(){
   mrVoiceEnabled=!mrVoiceEnabled;
   const btn=document.getElementById('mrVoiceToggle');
   if(btn) btn.classList.toggle('active', mrVoiceEnabled);
-  if(!mrVoiceEnabled && 'speechSynthesis' in window) speechSynthesis.cancel();
+  if(!mrVoiceEnabled) VoiceEngine.cancel();
 }
 function mrAppendMessage(role, name, text){
   const wrap=document.getElementById('mrMessages');
@@ -2437,8 +2534,8 @@ function mrAppendMessage(role, name, text){
   div.className='mr-msg '+(role==='user'?'user':'agent');
   const role_label = mrRoles[name] ? `<div class="mr-msg-role">${mrRoles[name]}</div>` : '';
   div.innerHTML = role==='user'
-    ? `<div class="mr-bubble">${text}</div>`
-    : `<div class="mr-msg-name">${name}</div>${role_label}<div class="mr-bubble">${text}</div>`;
+    ? `<div class="mr-bubble">${escapeHtml(text)}</div>`
+    : `<div class="mr-msg-name">${name}</div>${role_label}<div class="mr-bubble">${renderMarkdown(text)}</div>`;
   wrap.appendChild(div);
   wrap.scrollTop=wrap.scrollHeight;
   if(role!=='user') mrSpeak(name, text);
@@ -2504,9 +2601,10 @@ function mrAsk(question){
   mrSendMessage();
 }
 
-/* Voice input via Web Speech API */
-(function(){
-  const micBtn=document.getElementById('mrMic');
+/* Voice input via Web Speech API — reusable across Meeting Room, GAAP Compare, Knowledge Test */
+function wireMic(micBtnId, inputId, sendFn){
+  const micBtn=document.getElementById(micBtnId);
+  if(!micBtn) return;
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if(!SR){ micBtn.style.display='none'; return; }
   const recognition=new SR();
@@ -2523,10 +2621,11 @@ function mrAsk(question){
   recognition.onerror=()=>{ listening=false; micBtn.classList.remove('listening'); };
   recognition.onresult=(e)=>{
     const transcript=e.results[0][0].transcript;
-    document.getElementById('mrInput').value=transcript;
-    mrSendMessage();
+    document.getElementById(inputId).value=transcript;
+    sendFn();
   };
-})();
+}
+wireMic('mrMic','mrInput', mrSendMessage);
 const mrSectionObserver=new IntersectionObserver((entries)=>{
   entries.forEach(entry=>{
     if(entry.isIntersecting && !mrIntroduced){
@@ -2541,15 +2640,24 @@ mrSectionObserver.observe(document.getElementById('meetingroom'));
 
 /* ── IFRS vs GAAP comparison bot ── */
 const gaapHistory=[];
+let gaapVoiceEnabled=false;
+function gaapSpeak(text){ if(gaapVoiceEnabled) VoiceEngine.speak(text); }
+function gaapToggleVoice(){
+  gaapVoiceEnabled=!gaapVoiceEnabled;
+  const btn=document.getElementById('gaapVoiceToggle');
+  if(btn) btn.classList.toggle('active', gaapVoiceEnabled);
+  if(!gaapVoiceEnabled) VoiceEngine.cancel();
+}
 function gaapAppendMessage(role, text){
   const wrap=document.getElementById('gaapMessages');
   const div=document.createElement('div');
   div.className='mr-msg '+(role==='user'?'user':'agent');
   div.innerHTML = role==='user'
-    ? `<div class="mr-bubble">${text}</div>`
-    : `<div class="mr-msg-name">GAAP Research Assistant</div><div class="mr-bubble">${text}</div>`;
+    ? `<div class="mr-bubble">${escapeHtml(text)}</div>`
+    : `<div class="mr-msg-name">GAAP Research Assistant</div><div class="mr-bubble">${renderMarkdown(text)}</div>`;
   wrap.appendChild(div);
   wrap.scrollTop=wrap.scrollHeight;
+  if(role!=='user') gaapSpeak(text);
 }
 function gaapShowTyping(){
   const wrap=document.getElementById('gaapMessages');
@@ -2599,18 +2707,28 @@ function gaapAsk(question){
 document.getElementById('gaapInput').addEventListener('keydown', e=>{
   if(e.key==='Enter') gaapSendMessage();
 });
+wireMic('gaapMic','gaapInput', gaapSendMessage);
 
 /* ── Test Your Knowledge (interview prep coach) ── */
 const qzHistory=[];
+let qzVoiceEnabled=false;
+function qzSpeak(text){ if(qzVoiceEnabled) VoiceEngine.speak(text); }
+function qzToggleVoice(){
+  qzVoiceEnabled=!qzVoiceEnabled;
+  const btn=document.getElementById('qzVoiceToggle');
+  if(btn) btn.classList.toggle('active', qzVoiceEnabled);
+  if(!qzVoiceEnabled) VoiceEngine.cancel();
+}
 function qzAppendMessage(role, text){
   const wrap=document.getElementById('qzMessages');
   const div=document.createElement('div');
   div.className='mr-msg '+(role==='user'?'user':'agent');
   div.innerHTML = role==='user'
-    ? `<div class="mr-bubble">${text}</div>`
-    : `<div class="mr-msg-name">Interview Coach</div><div class="mr-bubble">${text}</div>`;
+    ? `<div class="mr-bubble">${escapeHtml(text)}</div>`
+    : `<div class="mr-msg-name">Interview Coach</div><div class="mr-bubble">${renderMarkdown(text)}</div>`;
   wrap.appendChild(div);
   wrap.scrollTop=wrap.scrollHeight;
+  if(role!=='user') qzSpeak(text);
 }
 function qzShowTyping(){
   const wrap=document.getElementById('qzMessages');
@@ -2665,6 +2783,7 @@ function qzSendMessage(){
 document.getElementById('qzInput').addEventListener('keydown', e=>{
   if(e.key==='Enter') qzSendMessage();
 });
+wireMic('qzMic','qzInput', qzSendMessage);
 
 /* ── Job hub: AI CV & cover letter tailoring ── */
 async function jobTailor(){

@@ -102,6 +102,25 @@
   .tool-link-card .ti { font-size: 1.5rem; margin-bottom: .5rem; display: block; }
   .tool-link-card .tt { color: var(--cream); font-weight: 700; font-size: .95rem; margin-bottom: .3rem; display: block; }
   .tool-link-card .td { color: var(--steel-light); font-size: .8rem; line-height: 1.5; }
+
+  .audio-toggle{
+    position:fixed;bottom:28px;right:28px;z-index:9998;
+    width:56px;height:56px;border-radius:50%;
+    background:rgba(20,32,52,.7);backdrop-filter:blur(14px);
+    border:1px solid rgba(200,169,110,.3);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;transition:all .4s cubic-bezier(.22,1,.36,1);
+    box-shadow:0 8px 30px rgba(0,0,0,.3);
+  }
+  .audio-toggle:hover{border-color:var(--gold);transform:scale(1.08)}
+  .audio-toggle svg{width:20px;height:20px;stroke:var(--gold)}
+  .audio-toggle.playing{box-shadow:0 0 0 0 rgba(200,169,110,.5)}
+  .audio-toggle.playing::after{
+    content:'';position:absolute;inset:0;border-radius:50%;
+    border:1px solid rgba(200,169,110,.5);
+    animation:pulseRing 2.4s ease-out infinite;
+  }
+  @keyframes pulseRing{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.6);opacity:0}}
 </style>
 </head>
 <body>
@@ -109,6 +128,18 @@
     <div class="nav-logo"><a href="index.html">USMAN QURESHI, ACCA, ACA</a></div>
     <a class="back-link" href="index.html">← Back to site</a>
   </nav>
+
+  <div class="audio-toggle" title="Background music" id="audioToggle">
+    <svg id="audioIconOn" viewBox="0 0 24 24" fill="none" stroke-width="1.6" style="display:none">
+      <path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M16 8a5 5 0 010 8" stroke-linecap="round"/>
+      <path d="M19 5a9 9 0 010 14" stroke-linecap="round"/>
+    </svg>
+    <svg id="audioIconOff" viewBox="0 0 24 24" fill="none" stroke-width="1.6">
+      <path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M16 9l5 6M21 9l-5 6" stroke-linecap="round"/>
+    </svg>
+  </div>
 
   <main>
     <h1>My Workspace</h1>
@@ -262,6 +293,85 @@
       }
     }
     init();
+
+    /* ── Ambient background music — same playlist/behaviour as the main site ── */
+    (function(){
+      let playing=false;
+      const toggle=document.getElementById('audioToggle');
+      const iconOn=document.getElementById('audioIconOn');
+      const iconOff=document.getElementById('audioIconOff');
+
+      const playlist=['audio/soft-piano.mp3','audio/flute-melody.mp3','audio/soft-background.mp3'];
+      let order=[...playlist].sort(()=>Math.random()-0.5);
+      let trackIdx=0;
+
+      const player=new Audio(order[trackIdx]);
+      player.loop=false;
+      player.volume=0;
+      player.preload='auto';
+      player.addEventListener('ended', ()=>{
+        trackIdx=(trackIdx+1)%order.length;
+        if(trackIdx===0) order=[...playlist].sort(()=>Math.random()-0.5);
+        player.src=order[trackIdx];
+        if(playing) player.play().catch(()=>{});
+      });
+      player.addEventListener('error', ()=>{
+        if(!playing) return;
+        trackIdx=(trackIdx+1)%order.length;
+        player.src=order[trackIdx];
+        player.play().catch(()=>{});
+      });
+
+      function fadeTo(target, ms){
+        const start=player.volume;
+        const startTime=performance.now();
+        function step(){
+          const t=Math.min(1,(performance.now()-startTime)/ms);
+          player.volume=start+(target-start)*t;
+          if(t<1) requestAnimationFrame(step);
+        }
+        step();
+      }
+
+      function setPlaying(state){
+        playing=state;
+        toggle.classList.toggle('playing', playing);
+        iconOn.style.display = playing ? 'block' : 'none';
+        iconOff.style.display = playing ? 'none' : 'block';
+        if(playing){
+          player.play().catch(()=>{});
+          fadeTo(0.42, 1800);
+        } else {
+          fadeTo(0, 1500);
+          setTimeout(()=>{ if(!playing) player.pause(); }, 1550);
+        }
+      }
+
+      toggle.addEventListener('click', (e)=>{
+        e.stopPropagation();
+        setPlaying(!playing);
+      });
+
+      function autoStartOnce(){
+        if(!playing) setPlaying(true);
+        window.removeEventListener('click', autoStartOnce);
+        window.removeEventListener('touchstart', autoStartOnce);
+        window.removeEventListener('keydown', autoStartOnce);
+        window.removeEventListener('scroll', autoStartOnce);
+      }
+      window.addEventListener('click', autoStartOnce, { once:true });
+      window.addEventListener('touchstart', autoStartOnce, { once:true });
+      window.addEventListener('keydown', autoStartOnce, { once:true });
+      window.addEventListener('scroll', autoStartOnce, { once:true });
+
+      function resumeIfStuck(){
+        if(playing && player.paused){ player.play().catch(()=>{}); }
+      }
+      document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) resumeIfStuck(); });
+      window.addEventListener('focus', resumeIfStuck);
+      window.addEventListener('click', resumeIfStuck);
+      window.addEventListener('scroll', resumeIfStuck);
+    })();
   </script>
 </body>
 </html>

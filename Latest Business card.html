@@ -3421,7 +3421,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       lastTick=now;
       try{ tick(); }catch(e){}
     }
-    document.querySelectorAll('a, button, .knowledge-card, .sector-card, .service-card, .trust-card, .client-card, .std-pill, .mr-chip, .wb-option-btn').forEach(el=>{
+    document.querySelectorAll('a, button, .knowledge-card, .sector-card, .service-card, .trust-card, .client-card, .stat-card, .std-pill, .mr-chip, .wb-option-btn').forEach(el=>{
       el.addEventListener('mouseenter', throttledTick);
     });
   })();
@@ -3595,8 +3595,8 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
       player.play().catch(()=>{});
       if(duckReasons.size===0) fadeTo(0.42, 1800); // clearly audible, full real-music presence
     } else {
-      fadeTo(0, 800);
-      setTimeout(()=>{ if(!playing) player.pause(); }, 850);
+      fadeTo(0, 1500);
+      setTimeout(()=>{ if(!playing) player.pause(); }, 1550);
     }
   }
 
@@ -3632,7 +3632,9 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
   window.addEventListener('scroll', resumeIfStuck);
 
   // Ducking — temporarily silences the music (without losing "playing" state)
-  // whenever the visitor is using a voice feature or inside an interactive tool section.
+  // whenever the visitor is using a voice feature (TTS playback or mic listening).
+  // Deliberately NOT tied to scroll position/section visibility — that previously
+  // caused music to flicker on/off just from scrolling past certain sections.
   const duckReasons=new Set();
   function recalcDuck(){
     if(duckReasons.size>0){ fadeTo(0, 250); }
@@ -3643,18 +3645,6 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
     unduck(reason){ duckReasons.delete(reason); recalcDuck(); }
   };
 
-  // Mute music entirely while the visitor is inside an interactive tool section
-  ['meetingroom','gaapcompare','knowledgetest'].forEach(id=>{
-    const el=document.getElementById(id);
-    if(!el) return;
-    const obs=new IntersectionObserver(entries=>{
-      entries.forEach(entry=>{
-        if(entry.isIntersecting) window.MusicDuck.duck('section-'+id);
-        else window.MusicDuck.unduck('section-'+id);
-      });
-    }, { threshold:0.35 });
-    obs.observe(el);
-  });
 })();
 
 /* ── Shared text-to-speech engine (used by Meeting Room, GAAP Compare, Knowledge Test) ── */

@@ -1515,12 +1515,18 @@ animation:pulseRing 2.4s ease-out infinite;
         <button class="mr-chip" onclick="mrAsk('What tax risks come with a cross-border group restructuring?')">Cross-border tax risk</button>
       </span>
       <button class="mr-chip" id="mrEndBtn" onclick="mrEndMeeting()" style="border-color:var(--steel);color:var(--steel-light)">End meeting &amp; email me a summary</button>
+      <button class="mr-chip" id="mrDownloadBtn" onclick="mrDownloadTranscript()" style="border-color:var(--steel);color:var(--steel-light)">⬇️ Download transcript</button>
     </div>
     <div class="mr-inputbar" id="mrInputBar" style="display:none">
       <button id="mrMic" class="mr-mic" title="Speak your question">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
         <span class="mr-mic-label">Speak</span>
       </button>
+      <button id="mrAttach" class="mr-mic" title="Upload a document for the panel to review (PDF, image, or text file)" onclick="document.getElementById('mrFileInput').click()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="mr-mic-label">Attach</span>
+      </button>
+      <input type="file" id="mrFileInput" accept=".pdf,.png,.jpg,.jpeg,.gif,.webp,.txt,.csv" style="display:none" />
       <button id="mrVoiceToggle" class="mr-mic" title="Hear the panel's replies aloud" onclick="mrToggleVoice()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
         <span class="mr-mic-label">Hear</span>
@@ -3720,6 +3726,7 @@ function mrRenderPanelReply(text){
   }
 }
 let mrRealUserMessages=0;
+const MR_EMAIL_RE=/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
 function mrSendMessage(){
   const input=document.getElementById('mrInput');
   const text=input.value.trim();
@@ -3729,11 +3736,17 @@ function mrSendMessage(){
   input.value='';
   mrRealUserMessages++;
   // The generic topic-suggestion chips stop being relevant the moment a real
-  // discussion is underway — hide them (and their wrapper) after the first message
+  // discussion is underway — hide just the topic suggestions, keep the
+  // End meeting / Download transcript chips visible (mrChips wrapper stays shown)
   const topicChips=document.getElementById('mrTopicChips');
   if(topicChips) topicChips.style.display='none';
-  const chipsWrap=document.getElementById('mrChips');
-  if(chipsWrap) chipsWrap.style.display='none';
+  // If the user directly gave an email and asked for it to be sent/emailed,
+  // act on it immediately instead of claiming we can't help
+  const emailMatch=text.match(MR_EMAIL_RE);
+  if(emailMatch && /send|email|summary|consultation/i.test(text)){
+    mrSendSummaryTo(emailMatch[0], {skipUserBubble:true});
+    return;
+  }
   mrCallApi(text);
 }
 document.getElementById('mrInput').addEventListener('keydown', e=>{
@@ -3780,8 +3793,66 @@ function mrStartMeeting(){
   document.getElementById('mrStartBtn').disabled=true;
   document.getElementById('mrChips').style.display='flex';
   document.getElementById('mrInputBar').style.display='flex';
-  mrHistory.push({role:'user', content:`[The user has just entered the Meeting Room. The following specialists are present: ${mrSelectedAgents.join(', ')}. Greet the user warmly as the panel (briefly, 1-2 sentences total from one spokesperson), explain in one sentence what the Meeting Room is for, then ask for the user's name. Do not discuss any technical topic yet — just greet and ask their name.]`});
+  const siteUser=window.getSiteUser?.();
+  const kickoff=siteUser
+    ? `[The user has just entered the Meeting Room. The following specialists are present: ${mrSelectedAgents.join(', ')}. The user is already signed in as "${siteUser.name}" — greet them warmly by name as the panel (briefly, 1-2 sentences total from one spokesperson), explain in one sentence what the Meeting Room is for, then ask what they'd like to discuss today. Do NOT ask for their name — you already know it, never ask again.]`
+    : `[The user has just entered the Meeting Room. The following specialists are present: ${mrSelectedAgents.join(', ')}. Greet the user warmly as the panel (briefly, 1-2 sentences total from one spokesperson), explain in one sentence what the Meeting Room is for, then ask for the user's name. Do not discuss any technical topic yet — just greet and ask their name.]`;
+  mrHistory.push({role:'user', content:kickoff});
   mrCallApi();
+}
+
+const MR_FILE_MAX_BYTES=15*1024*1024;
+document.getElementById('mrFileInput').addEventListener('change', e=>{
+  const file=e.target.files[0];
+  e.target.value='';
+  if(!file) return;
+  if(file.size>MR_FILE_MAX_BYTES){ alert('That file is too large (max 15MB).'); return; }
+  mrHandleFileUpload(file);
+});
+async function mrHandleFileUpload(file){
+  let block;
+  try{
+    if(file.type==='application/pdf' || file.type.startsWith('image/')){
+      const base64=await new Promise((resolve,reject)=>{
+        const r=new FileReader();
+        r.onload=()=>resolve(r.result.split(',')[1]);
+        r.onerror=reject;
+        r.readAsDataURL(file);
+      });
+      block = file.type==='application/pdf'
+        ? {type:'document', source:{type:'base64', media_type:'application/pdf', data:base64}}
+        : {type:'image', source:{type:'base64', media_type:file.type, data:base64}};
+    } else {
+      const text=await file.text();
+      block={type:'text', text:`[Uploaded file: ${file.name}]\n\n${text.slice(0,20000)}`};
+    }
+  }catch(e){
+    mrAppendMessage('agent','Meeting Room', `Sorry — I couldn't read "${file.name}". Please try a different file.`);
+    return;
+  }
+  mrAppendMessage('user','You', `📎 Uploaded: ${file.name} — please review this.`);
+  mrHistory.push({role:'user', content:[block, {type:'text', text:`I've uploaded a document called "${file.name}" for the panel to review. Please read its actual contents and give your analysis.`}]});
+  mrCallApi();
+}
+
+function mrDownloadTranscript(){
+  if(mrHistory.length===0){ alert('Nothing to download yet — start chatting first.'); return; }
+  const lines=mrHistory
+    .filter(m=>!(typeof m.content==='string' && m.content.startsWith('[')))
+    .map(m=>{
+      const role=m.role==='user' ? 'You' : 'Panel';
+      const content = typeof m.content==='string'
+        ? m.content
+        : Array.isArray(m.content) ? m.content.filter(b=>b.type==='text').map(b=>b.text).join('\n') : '';
+      return content ? `${role}: ${content}` : null;
+    })
+    .filter(Boolean);
+  const blob=new Blob([lines.join('\n\n')], {type:'text/plain'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download='meeting-room-transcript.txt';
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
 }
 
 // Allow adding/removing specialists mid-conversation, not just before it starts
@@ -3805,9 +3876,13 @@ document.querySelectorAll('.mr-agent-check').forEach(checkbox=>{
 function mrEndMeeting(){
   const email=prompt("What email address should I send the discussion summary to?");
   if(!email || !email.includes('@')){ if(email!==null) alert('Please enter a valid email address.'); return; }
-  mrAppendMessage('user','You', `Please end the meeting and email a summary to ${email}.`);
-  document.getElementById('mrEndBtn').disabled=true;
-  document.getElementById('mrEndBtn').textContent='Sending summary…';
+  mrSendSummaryTo(email);
+}
+function mrSendSummaryTo(email, {skipUserBubble=false}={}){
+  if(!skipUserBubble) mrAppendMessage('user','You', `Please end the meeting and email a summary to ${email}.`);
+  const btn=document.getElementById('mrEndBtn');
+  btn.disabled=true;
+  btn.textContent='Sending summary…';
   fetch('/api/send-summary',{
     method:'POST',
     headers:{'content-type':'application/json'},
@@ -3815,14 +3890,14 @@ function mrEndMeeting(){
   }).then(r=>r.json()).then(data=>{
     if(data.error){ mrAppendMessage('agent','Meeting Room', `Sorry — I couldn't send that summary right now (${data.error}). Please try again shortly.`); }
     else{
-      mrAppendMessage('agent','Meeting Room', `Thank you — a summary of our discussion has been sent to **${email}**. It was a pleasure working through this with you.`);
+      mrAppendMessage('agent','Meeting Room', `Thank you — a summary of our discussion has been sent to **${email}**. It was a pleasure working through this with you. You can also use the "⬇️ Download transcript" button any time to keep a copy.`);
       window.showSignupNudge?.(document.getElementById('mrMessages'));
     }
   }).catch(()=>{
     mrAppendMessage('agent','Meeting Room', "Sorry — I couldn't send that summary right now. Please try again shortly.");
   }).finally(()=>{
-    document.getElementById('mrEndBtn').disabled=false;
-    document.getElementById('mrEndBtn').textContent='End meeting & email me a summary';
+    btn.disabled=false;
+    btn.textContent='End meeting & email me a summary';
   });
 }
 

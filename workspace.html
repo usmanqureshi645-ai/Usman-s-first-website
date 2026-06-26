@@ -20,11 +20,31 @@
   }
   html { background: var(--navy); }
   body {
+    position: relative;
     font-family: 'Manrope', 'Century Gothic', sans-serif;
-    background: var(--navy);
+    background: linear-gradient(180deg,#050b15,#0a1628);
     color: var(--cream);
     min-height: 100vh;
+    overflow-x: hidden;
   }
+  body::before{
+    content:'';
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(circle at 15% 20%, rgba(200,169,110,.10), transparent 30%),
+      radial-gradient(circle at 80% 30%, rgba(200,169,110,.08), transparent 25%),
+      radial-gradient(circle at 60% 80%, rgba(200,169,110,.06), transparent 30%);
+    pointer-events:none;
+    z-index:-1;
+  }
+  .office-parallax{
+    position:fixed; inset:0; width:100vw; height:100vh;
+    pointer-events:none; z-index:0;
+  }
+  .office-parallax g{ transition:transform .3s cubic-bezier(.22,1,.36,1); }
+  @media (max-width:980px){ .office-parallax{ opacity:0.55; } }
+  nav, main { position: relative; z-index: 1; }
   nav {
     position: sticky; top: 0; z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
@@ -124,6 +144,51 @@
 </style>
 </head>
 <body>
+<svg class="office-parallax" id="officeParallax" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <g id="opLayerWindow" opacity="0.1">
+    <rect x="1080" y="40" width="440" height="600" rx="4" fill="none" stroke="#C8A96E" stroke-width="2"/>
+    <line x1="1300" y1="40" x2="1300" y2="640" stroke="#C8A96E" stroke-width="1.5"/>
+    <line x1="1080" y1="340" x2="1520" y2="340" stroke="#C8A96E" stroke-width="1.5"/>
+    <circle cx="1300" cy="190" r="140" fill="#C8A96E" opacity="0.55"/>
+  </g>
+  <g id="opLayerShelf" opacity="0.1">
+    <rect x="60" y="60" width="380" height="14" fill="#E0C99A"/>
+    <rect x="60" y="160" width="380" height="14" fill="#E0C99A"/>
+    <rect x="60" y="260" width="380" height="14" fill="#E0C99A"/>
+    <rect x="80" y="78" width="28" height="78" fill="none" stroke="#E0C99A" stroke-width="2"/>
+    <rect x="118" y="78" width="20" height="78" fill="none" stroke="#E0C99A" stroke-width="2"/>
+    <rect x="148" y="68" width="36" height="88" fill="none" stroke="#E0C99A" stroke-width="2"/>
+    <rect x="100" y="178" width="30" height="78" fill="none" stroke="#E0C99A" stroke-width="2"/>
+    <rect x="140" y="178" width="22" height="78" fill="none" stroke="#E0C99A" stroke-width="2"/>
+    <circle cx="320" cy="115" r="35" fill="none" stroke="#C8A96E" stroke-width="2"/>
+  </g>
+  <g id="opLayerDesk" opacity="0.13">
+    <rect x="220" y="700" width="780" height="16" rx="2" fill="#C8A96E"/>
+    <rect x="260" y="716" width="18" height="190" fill="#C8A96E"/>
+    <rect x="940" y="716" width="18" height="190" fill="#C8A96E"/>
+    <rect x="480" y="630" width="170" height="74" rx="3" fill="none" stroke="#C8A96E" stroke-width="2.5"/>
+    <rect x="505" y="595" width="120" height="40" rx="2" fill="none" stroke="#C8A96E" stroke-width="2"/>
+    <rect x="700" y="660" width="90" height="44" rx="2" fill="none" stroke="#C8A96E" stroke-width="2"/>
+  </g>
+  <g id="opLayerChair" opacity="0.12">
+    <path d="M340 940 Q340 740 470 740 Q600 740 600 940" fill="none" stroke="#E0C99A" stroke-width="3.5"/>
+    <rect x="355" y="850" width="230" height="26" rx="12" fill="none" stroke="#E0C99A" stroke-width="3"/>
+    <line x1="380" y1="876" x2="368" y2="965" stroke="#E0C99A" stroke-width="3.5"/>
+    <line x1="560" y1="876" x2="572" y2="965" stroke="#E0C99A" stroke-width="3.5"/>
+  </g>
+  <g id="opLayerLamp" opacity="0.13">
+    <line x1="1150" y1="740" x2="1150" y2="580" stroke="#C8A96E" stroke-width="3.5"/>
+    <path d="M1095 580 L1205 580 L1180 525 L1120 525 Z" fill="none" stroke="#C8A96E" stroke-width="3"/>
+    <circle cx="1150" cy="740" r="36" fill="none" stroke="#C8A96E" stroke-width="3"/>
+  </g>
+  <g id="opLayerPlant" opacity="0.1">
+    <path d="M1420 900 L1460 900 L1450 800 L1430 800 Z" fill="none" stroke="#E0C99A" stroke-width="2.5"/>
+    <path d="M1440 800 Q1400 740 1410 690" fill="none" stroke="#E0C99A" stroke-width="2"/>
+    <path d="M1440 800 Q1480 730 1470 680" fill="none" stroke="#E0C99A" stroke-width="2"/>
+    <path d="M1440 800 Q1440 700 1440 650" fill="none" stroke="#E0C99A" stroke-width="2"/>
+  </g>
+</svg>
+
   <nav>
     <div class="nav-logo"><a href="index.html">USMAN QURESHI, ACCA, ACA</a></div>
     <a class="back-link" href="index.html">← Back to site</a>
@@ -430,7 +495,26 @@
     }
     init();
 
-    /* ── Ambient background music — same playlist/behaviour as the main site ── */
+    /* ── Boutique office parallax background — same as the main site ── */
+    (function(){
+      const layers=[
+        { el:document.getElementById('opLayerWindow'), depth:10 },
+        { el:document.getElementById('opLayerShelf'), depth:6 },
+        { el:document.getElementById('opLayerDesk'), depth:8 },
+        { el:document.getElementById('opLayerChair'), depth:18 },
+        { el:document.getElementById('opLayerLamp'), depth:14 },
+        { el:document.getElementById('opLayerPlant'), depth:12 },
+      ];
+      window.addEventListener('mousemove', e=>{
+        const x=e.clientX/window.innerWidth-0.5;
+        const y=e.clientY/window.innerHeight-0.5;
+        layers.forEach(l=>{
+          if(l.el) l.el.style.transform=`translate(${(-x*l.depth).toFixed(1)}px, ${(-y*l.depth).toFixed(1)}px)`;
+        });
+      });
+    })();
+
+    /* ── Ambient background music — same playlist/behaviour/persistence as the main site ── */
     (function(){
       let playing=false;
       const toggle=document.getElementById('audioToggle');
@@ -438,17 +522,47 @@
       const iconOff=document.getElementById('audioIconOff');
 
       const playlist=['audio/soft-piano.mp3','audio/flute-melody.mp3','audio/soft-background.mp3'];
-      let order=[...playlist].sort(()=>Math.random()-0.5);
-      let trackIdx=0;
+
+      // Resume the same track + position across page navigations (index <-> workspace)
+      // instead of restarting the playlist from track 1 every time.
+      let order=null;
+      try{
+        const savedOrder=JSON.parse(localStorage.getItem('bgMusicOrder')||'null');
+        if(Array.isArray(savedOrder) && savedOrder.length===playlist.length && savedOrder.every(t=>playlist.includes(t))) order=savedOrder;
+      }catch(e){}
+      if(!order) order=[...playlist].sort(()=>Math.random()-0.5);
+
+      let trackIdx=parseInt(localStorage.getItem('bgMusicTrackIdx')||'0',10);
+      if(!(trackIdx>=0 && trackIdx<order.length)) trackIdx=0;
+      const savedTime=parseFloat(localStorage.getItem('bgMusicTime')||'0')||0;
 
       const player=new Audio(order[trackIdx]);
       player.loop=false;
       player.volume=0;
       player.preload='auto';
+      if(savedTime>0){
+        player.addEventListener('loadedmetadata', ()=>{
+          try{ if(savedTime<player.duration-1) player.currentTime=savedTime; }catch(e){}
+        }, { once:true });
+      }
+
+      function persistOrder(){ try{ localStorage.setItem('bgMusicOrder', JSON.stringify(order)); }catch(e){} }
+      function persistPosition(){ try{ localStorage.setItem('bgMusicTrackIdx', String(trackIdx)); localStorage.setItem('bgMusicTime', String(player.currentTime||0)); }catch(e){} }
+      persistOrder();
+
+      let lastPersist=0;
+      player.addEventListener('timeupdate', ()=>{
+        const now=performance.now();
+        if(now-lastPersist>2000){ lastPersist=now; persistPosition(); }
+      });
+      window.addEventListener('pagehide', persistPosition);
+      document.addEventListener('visibilitychange', ()=>{ if(document.hidden) persistPosition(); });
+
       player.addEventListener('ended', ()=>{
         trackIdx=(trackIdx+1)%order.length;
-        if(trackIdx===0) order=[...playlist].sort(()=>Math.random()-0.5);
+        if(trackIdx===0){ order=[...playlist].sort(()=>Math.random()-0.5); persistOrder(); }
         player.src=order[trackIdx];
+        persistPosition();
         if(playing) player.play().catch(()=>{});
       });
       player.addEventListener('error', ()=>{
@@ -476,8 +590,7 @@
         iconOn.style.display = playing ? 'block' : 'none';
         iconOff.style.display = playing ? 'none' : 'block';
         if(playing){
-          player.play().catch(()=>{});
-          fadeTo(0.42, 1800);
+          player.play().then(()=>fadeTo(0.42, 1800)).catch(()=>{});
         } else {
           fadeTo(0, 1500);
           setTimeout(()=>{ if(!playing) player.pause(); }, 1550);
@@ -486,11 +599,19 @@
 
       toggle.addEventListener('click', (e)=>{
         e.stopPropagation();
+        // If we think music is on but the browser silently blocked/paused it, resume
+        // instead of reading this click as "turn off" — otherwise the toggle looked
+        // stuck and never came back on.
+        if(playing && player.paused){
+          player.play().then(()=>fadeTo(0.42, 800)).catch(()=>{});
+          return;
+        }
         setPlaying(!playing);
       });
 
       function autoStartOnce(){
         if(!playing) setPlaying(true);
+        else if(player.paused) player.play().then(()=>fadeTo(0.42, 800)).catch(()=>{});
         window.removeEventListener('click', autoStartOnce);
         window.removeEventListener('touchstart', autoStartOnce);
         window.removeEventListener('keydown', autoStartOnce);
@@ -513,13 +634,15 @@
         window.addEventListener('scroll', autoStartOnce, { once:true });
       }
 
+      // Watchdog — never stop on its own, only when the user explicitly turns it off.
       function resumeIfStuck(){
-        if(playing && player.paused){ player.play().catch(()=>{}); }
+        if(playing && player.paused){ player.play().then(()=>fadeTo(0.42, 800)).catch(()=>{}); }
       }
       document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) resumeIfStuck(); });
       window.addEventListener('focus', resumeIfStuck);
       window.addEventListener('click', resumeIfStuck);
       window.addEventListener('scroll', resumeIfStuck);
+      setInterval(resumeIfStuck, 4000);
     })();
   </script>
 </body>

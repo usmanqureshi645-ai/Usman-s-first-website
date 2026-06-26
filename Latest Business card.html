@@ -3563,17 +3563,48 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
   const iconOff=document.getElementById('audioIconOff');
 
   const playlist=['audio/soft-piano.mp3','audio/flute-melody.mp3','audio/soft-background.mp3'];
-  let order=[...playlist].sort(()=>Math.random()-0.5);
-  let trackIdx=0;
+
+  // Resume the same track + position across page navigations (index <-> workspace)
+  // instead of restarting the playlist from track 1 every time — as close to one
+  // continuous stream as a static multi-page site can get.
+  let order=null;
+  try{
+    const savedOrder=JSON.parse(localStorage.getItem('bgMusicOrder')||'null');
+    if(Array.isArray(savedOrder) && savedOrder.length===playlist.length && savedOrder.every(t=>playlist.includes(t))) order=savedOrder;
+  }catch(e){}
+  if(!order) order=[...playlist].sort(()=>Math.random()-0.5);
+
+  let trackIdx=parseInt(localStorage.getItem('bgMusicTrackIdx')||'0',10);
+  if(!(trackIdx>=0 && trackIdx<order.length)) trackIdx=0;
+  const savedTime=parseFloat(localStorage.getItem('bgMusicTime')||'0')||0;
 
   const player=new Audio(order[trackIdx]);
   player.loop=false; // advance to the next track instead of repeating the same one
   player.volume=0; // fade in once playing, never starts silent-then-jumpy
   player.preload='auto';
+  if(savedTime>0){
+    player.addEventListener('loadedmetadata', ()=>{
+      try{ if(savedTime<player.duration-1) player.currentTime=savedTime; }catch(e){}
+    }, { once:true });
+  }
+
+  function persistOrder(){ try{ localStorage.setItem('bgMusicOrder', JSON.stringify(order)); }catch(e){} }
+  function persistPosition(){ try{ localStorage.setItem('bgMusicTrackIdx', String(trackIdx)); localStorage.setItem('bgMusicTime', String(player.currentTime||0)); }catch(e){} }
+  persistOrder();
+
+  let lastPersist=0;
+  player.addEventListener('timeupdate', ()=>{
+    const now=performance.now();
+    if(now-lastPersist>2000){ lastPersist=now; persistPosition(); }
+  });
+  window.addEventListener('pagehide', persistPosition);
+  document.addEventListener('visibilitychange', ()=>{ if(document.hidden) persistPosition(); });
+
   player.addEventListener('ended', ()=>{
     trackIdx=(trackIdx+1)%order.length;
-    if(trackIdx===0) order=[...playlist].sort(()=>Math.random()-0.5); // reshuffle each full cycle
+    if(trackIdx===0){ order=[...playlist].sort(()=>Math.random()-0.5); persistOrder(); } // reshuffle each full cycle
     player.src=order[trackIdx];
+    persistPosition();
     if(playing) player.play().catch(()=>{}); // if this rejects, the watchdog below will retry on next interaction
   });
   // Also handle the (rare) case where a track errors out instead of firing 'ended'
@@ -3602,8 +3633,7 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
     iconOn.style.display = playing ? 'block' : 'none';
     iconOff.style.display = playing ? 'none' : 'block';
     if(playing){
-      player.play().catch(()=>{});
-      if(duckReasons.size===0) fadeTo(0.42, 1800); // clearly audible, full real-music presence
+      player.play().then(()=>{ if(duckReasons.size===0) fadeTo(0.42, 1800); }).catch(()=>{}); // clearly audible, full real-music presence
     } else {
       fadeTo(0, 1500);
       setTimeout(()=>{ if(!playing) player.pause(); }, 1550);
@@ -3612,6 +3642,13 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
 
   toggle.addEventListener('click', (e)=>{
     e.stopPropagation();
+    // If we think music is on but the browser silently blocked/paused it (autoplay
+    // policy, tab throttling), resume instead of reading this click as "turn off" —
+    // otherwise the toggle looked stuck and never came back on.
+    if(playing && player.paused){
+      player.play().then(()=>{ if(duckReasons.size===0) fadeTo(0.42, 800); }).catch(()=>{});
+      return;
+    }
     setPlaying(!playing);
   });
 
@@ -3619,6 +3656,7 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
   // interaction with the page instead, so it feels automatic without violating policy.
   function autoStartOnce(){
     if(!playing) setPlaying(true);
+    else if(player.paused) player.play().then(()=>{ if(duckReasons.size===0) fadeTo(0.42, 800); }).catch(()=>{});
     window.removeEventListener('click', autoStartOnce);
     window.removeEventListener('touchstart', autoStartOnce);
     window.removeEventListener('keydown', autoStartOnce);
@@ -3645,19 +3683,21 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
   // Watchdog: browsers sometimes silently pause background-tab audio (autoplay
   // policy, tab throttling) without firing any event we listen to. If the user
   // still intends music to be playing but it's actually paused, resume on the
-  // next real interaction or whenever the tab regains focus/visibility.
+  // next real interaction or whenever the tab regains focus/visibility — never
+  // stop on its own, only when the user explicitly turns it off.
   function resumeIfStuck(){
-    if(playing && player.paused){ player.play().catch(()=>{}); }
+    if(playing && player.paused){ player.play().then(()=>{ if(duckReasons.size===0) fadeTo(0.42, 800); }).catch(()=>{}); }
   }
   document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) resumeIfStuck(); });
   window.addEventListener('focus', resumeIfStuck);
   window.addEventListener('click', resumeIfStuck);
   window.addEventListener('scroll', resumeIfStuck);
+  setInterval(resumeIfStuck, 4000);
 
   // Ducking — temporarily silences the music (without losing "playing" state)
-  // whenever the visitor is using a voice feature (TTS playback or mic listening).
-  // Deliberately NOT tied to scroll position/section visibility — that previously
-  // caused music to flicker on/off just from scrolling past certain sections.
+  // only while the visitor is actively using the Meeting Room or Knowledge Test's
+  // voice features (TTS playback or mic listening) — every other AI tool (GAAP
+  // Compare included) leaves the music alone even when its own voice button is used.
   const duckReasons=new Set();
   function recalcDuck(){
     if(duckReasons.size>0){ fadeTo(0, 250); }
@@ -3689,8 +3729,9 @@ const VoiceEngine=(function(){
     speechSynthesis.onvoiceschanged=pickVoices;
   }
   function setGender(g){ gender=g; }
-  function speak(text, pitch){
+  function speak(text, pitch, duck){
     if(!('speechSynthesis' in window)) return;
+    const shouldDuck = duck!==false; // only Meeting Room / Knowledge Test pass false-free (default true); GAAP Compare opts out
     const clean=text.replace(/[*_#>`]/g,'').replace(/\n+/g,'. ');
     const utter=new SpeechSynthesisUtterance(clean);
     const voice = gender==='male' ? maleVoice : femaleVoice;
@@ -3698,9 +3739,9 @@ const VoiceEngine=(function(){
     utter.pitch=pitch||1;
     utter.rate=0.97;
     utter.volume=0.9;
-    window.MusicDuck?.duck('tts');
-    utter.onend=()=>window.MusicDuck?.unduck('tts');
-    utter.onerror=()=>window.MusicDuck?.unduck('tts');
+    if(shouldDuck) window.MusicDuck?.duck('tts');
+    utter.onend=()=>{ if(shouldDuck) window.MusicDuck?.unduck('tts'); };
+    utter.onerror=()=>{ if(shouldDuck) window.MusicDuck?.unduck('tts'); };
     speechSynthesis.speak(utter);
   }
   function cancel(){ if('speechSynthesis' in window) speechSynthesis.cancel(); window.MusicDuck?.unduck('tts'); }
@@ -3823,10 +3864,13 @@ function mrAsk(question){
   mrSendMessage();
 }
 
-/* Voice input via Web Speech API — reusable across Meeting Room, GAAP Compare, Knowledge Test */
-function wireMic(micBtnId, inputId, sendFn){
+/* Voice input via Web Speech API — reusable across Meeting Room, GAAP Compare, Knowledge Test.
+   `duck` defaults to true (Meeting Room / Knowledge Test); GAAP Compare passes false so its
+   mic doesn't silence the background music like the other two tools do. */
+function wireMic(micBtnId, inputId, sendFn, duck){
   const micBtn=document.getElementById(micBtnId);
   if(!micBtn) return;
+  const shouldDuck = duck!==false;
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if(!SR){ micBtn.style.display='none'; return; }
   const recognition=new SR();
@@ -3838,9 +3882,9 @@ function wireMic(micBtnId, inputId, sendFn){
     if(listening){ recognition.stop(); return; }
     recognition.start();
   });
-  recognition.onstart=()=>{ listening=true; micBtn.classList.add('listening'); window.MusicDuck?.duck('mic-'+micBtnId); };
-  recognition.onend=()=>{ listening=false; micBtn.classList.remove('listening'); window.MusicDuck?.unduck('mic-'+micBtnId); };
-  recognition.onerror=()=>{ listening=false; micBtn.classList.remove('listening'); window.MusicDuck?.unduck('mic-'+micBtnId); };
+  recognition.onstart=()=>{ listening=true; micBtn.classList.add('listening'); if(shouldDuck) window.MusicDuck?.duck('mic-'+micBtnId); };
+  recognition.onend=()=>{ listening=false; micBtn.classList.remove('listening'); if(shouldDuck) window.MusicDuck?.unduck('mic-'+micBtnId); };
+  recognition.onerror=()=>{ listening=false; micBtn.classList.remove('listening'); if(shouldDuck) window.MusicDuck?.unduck('mic-'+micBtnId); };
   recognition.onresult=(e)=>{
     const transcript=e.results[0][0].transcript;
     document.getElementById(inputId).value=transcript;
@@ -4312,7 +4356,7 @@ function openGaapSlide(jurisdiction, idx){
 /* ── IFRS vs GAAP comparison bot ── */
 const gaapHistory=[];
 let gaapVoiceEnabled=false;
-function gaapSpeak(text){ if(gaapVoiceEnabled) VoiceEngine.speak(text); }
+function gaapSpeak(text){ if(gaapVoiceEnabled) VoiceEngine.speak(text, 1, false); }
 function gaapToggleVoice(){
   gaapVoiceEnabled=!gaapVoiceEnabled;
   const btn=document.getElementById('gaapVoiceToggle');
@@ -4398,7 +4442,7 @@ function gaapAsk(question){
 document.getElementById('gaapInput').addEventListener('keydown', e=>{
   if(e.key==='Enter') gaapSendMessage();
 });
-wireMic('gaapMic','gaapInput', gaapSendMessage);
+wireMic('gaapMic','gaapInput', gaapSendMessage, false);
 
 /* ── Test Your Knowledge (interview prep coach) ── */
 const qzHistory=[];

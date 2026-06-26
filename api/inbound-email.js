@@ -1,5 +1,41 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import { buildMeetingSystemPrompt } from '../lib/meetingPersonas.js';
+import { buildQuizSystemPrompt } from '../lib/quizCoach.js';
+
+const SIGNUP_NUDGE = 'Want the full experience — saved history, resuming any conversation anytime, and a personal workspace? Sign up free at https://usman-s-first-website.vercel.app (it stays free after signing up too).';
+
+const MODES = {
+  meetingroom: {
+    kvPrefix: 'mrconv',
+    fromHeader: 'Meeting Room <meetingroom@uqconsulting.org>',
+    replyAddr: id => `meetingroom+${id}@uqconsulting.org`,
+    subject: 'Re: Your Meeting Room Consultation Summary',
+    ownerSubject: email => `Meeting Room follow-up from ${email}`,
+    buildSystem: conversation => buildMeetingSystemPrompt(conversation.agents) + `
+
+IMPORTANT — this session is a continuation of an earlier completed Meeting Room conversation, resumed via the user replying to their summary email. The full prior discussion is in the message history below; the user has already introduced themselves and the panel has already greeted them. Do NOT re-greet, do NOT re-ask for their name, and do NOT treat this as a fresh session — just pick the discussion back up naturally and respond directly to their new message.
+
+IMPORTANT — this response will be sent as a plain email reply, not rendered in the chat UI, so the usual markdown formatting must NOT be used here. Specifically: do not use ** for bold, do not use # headings, do not use > blockquotes, and do not use markdown link syntax like [text](url). Write each panel member's contribution as their plain name followed by a colon (e.g. "Sarah Chen: ..."), in plain prose, exactly as it would read in a normal email someone typed by hand. If you reference a source, write the organisation/standard name in prose and put the full URL in plain parentheses, e.g. "(see ifrs.org/issued-standards/list-of-standards/ifrs-16-leases)".
+
+IMPORTANT — end your reply with this exact line on its own paragraph: "${SIGNUP_NUDGE}"`,
+    buildRecord: (conversation, history) => JSON.stringify({ email: conversation.email, agents: conversation.agents, history }),
+  },
+  quiz: {
+    kvPrefix: 'qzconv',
+    fromHeader: 'Interview Prep Coach <coach@uqconsulting.org>',
+    replyAddr: id => `quiz+${id}@uqconsulting.org`,
+    subject: 'Re: Your Interview Prep Feedback',
+    ownerSubject: email => `Interview Coach follow-up from ${email}`,
+    buildSystem: () => buildQuizSystemPrompt() + `
+
+IMPORTANT — this session is a continuation of an earlier interview-prep conversation, resumed via the user replying to their feedback email. The full prior discussion is in the message history below; do NOT re-introduce yourself or re-ask their role/experience — just pick the coaching back up naturally and respond directly to their new message.
+
+IMPORTANT — this response will be sent as a plain email reply, not rendered in the chat UI, so the usual markdown formatting must NOT be used here: do not use ** for bold, do not use # headings, do not use markdown link syntax. Write in plain prose exactly as it would read in a normal email someone typed by hand.
+
+IMPORTANT — end your reply with this exact line on its own paragraph: "${SIGNUP_NUDGE}"`,
+    buildRecord: (conversation, history) => JSON.stringify({ email: conversation.email, history }),
+  },
+};
 
 export const config = { api: { bodyParser: false } };
 
@@ -78,10 +114,17 @@ export default async function handler(req, res) {
 
   const data = payload.data || {};
   const toAddresses = Array.isArray(data.to) ? data.to : [data.to].filter(Boolean);
-  const match = toAddresses.map(String).find(addr => /meetingroom\+[0-9a-f-]+@uqconsulting\.org/i.test(addr));
-  const conversationId = match && match.match(/meetingroom\+([0-9a-f-]+)@uqconsulting\.org/i)?.[1];
 
-  if (!conversationId) {
+  let modeKey, conversationId;
+  for (const addr of toAddresses.map(String)) {
+    const meetingMatch = addr.match(/meetingroom\+([0-9a-f-]+)@uqconsulting\.org/i);
+    const quizMatch = addr.match(/quiz\+([0-9a-f-]+)@uqconsulting\.org/i);
+    if (meetingMatch) { modeKey = 'meetingroom'; conversationId = meetingMatch[1]; break; }
+    if (quizMatch) { modeKey = 'quiz'; conversationId = quizMatch[1]; break; }
+  }
+  const mode = modeKey && MODES[modeKey];
+
+  if (!mode) {
     // Not a Meeting Room continuation thread (e.g. a reply to the Interview Coach or
     // GAAP Compare sender address) — these have no conversation state to resume, so
     // just forward the raw reply to the owner instead of silently dropping it.
@@ -119,7 +162,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const getResp = await fetch(`${kvUrl}/get/mrconv:${conversationId}`, {
+    const getResp = await fetch(`${kvUrl}/get/${mode.kvPrefix}:${conversationId}`, {
       headers: { authorization: `Bearer ${kvToken}` },
     });
     const getData = await getResp.json();
@@ -155,11 +198,7 @@ export default async function handler(req, res) {
     }
 
     const history = [...conversation.history, { role: 'user', content: replyText }];
-    const system = buildMeetingSystemPrompt(conversation.agents) + `
-
-IMPORTANT — this session is a continuation of an earlier completed Meeting Room conversation, resumed via the user replying to their summary email. The full prior discussion is in the message history below; the user has already introduced themselves and the panel has already greeted them. Do NOT re-greet, do NOT re-ask for their name, and do NOT treat this as a fresh session — just pick the discussion back up naturally and respond directly to their new message.
-
-IMPORTANT — this response will be sent as a plain email reply, not rendered in the chat UI, so the usual markdown formatting must NOT be used here. Specifically: do not use ** for bold, do not use # headings, do not use > blockquotes, and do not use markdown link syntax like [text](url). Write each panel member's contribution as their plain name followed by a colon (e.g. "Sarah Chen: ..."), in plain prose, exactly as it would read in a normal email someone typed by hand. If you reference a source, write the organisation/standard name in prose and put the full URL in plain parentheses, e.g. "(see ifrs.org/issued-standards/list-of-standards/ifrs-16-leases)".`;
+    const system = mode.buildSystem(conversation);
 
     const upstream = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -185,8 +224,8 @@ IMPORTANT — this response will be sent as a plain email reply, not rendered in
     const replyContent = upstreamData?.content?.[0]?.text || '';
     history.push({ role: 'assistant', content: replyContent });
 
-    const updatedRecord = JSON.stringify({ email: conversation.email, agents: conversation.agents, history });
-    await fetch(`${kvUrl}/set/mrconv:${conversationId}/${encodeURIComponent(updatedRecord)}/EX/2592000`, {
+    const updatedRecord = mode.buildRecord(conversation, history);
+    await fetch(`${kvUrl}/set/${mode.kvPrefix}:${conversationId}/${encodeURIComponent(updatedRecord)}/EX/2592000`, {
       headers: { authorization: `Bearer ${kvToken}` },
     });
 
@@ -194,10 +233,10 @@ IMPORTANT — this response will be sent as a plain email reply, not rendered in
       method: 'POST',
       headers: { 'content-type': 'application/json', authorization: `Bearer ${resendKey}` },
       body: JSON.stringify({
-        from: 'Meeting Room <meetingroom@uqconsulting.org>',
+        from: mode.fromHeader,
         to: [conversation.email],
-        reply_to: `meetingroom+${conversationId}@uqconsulting.org`,
-        subject: 'Re: Your Meeting Room Consultation Summary',
+        reply_to: mode.replyAddr(conversationId),
+        subject: mode.subject,
         html: replyContent.replace(/\n/g, '<br>'),
         headers: data.message_id ? { 'In-Reply-To': data.message_id, References: data.message_id } : undefined,
       }),
@@ -211,12 +250,12 @@ IMPORTANT — this response will be sent as a plain email reply, not rendered in
       method: 'POST',
       headers: { 'content-type': 'application/json', authorization: `Bearer ${resendKey}` },
       body: JSON.stringify({
-        from: 'Meeting Room <meetingroom@uqconsulting.org>',
+        from: mode.fromHeader,
         to: ['usmanqureshi645@gmail.com'],
-        subject: `Meeting Room follow-up from ${conversation.email}`,
-        html: `<p><strong>${conversation.email}</strong> replied to their Meeting Room summary:</p>
+        subject: mode.ownerSubject(conversation.email),
+        html: `<p><strong>${conversation.email}</strong> replied to their ${modeKey === 'quiz' ? 'Interview Prep feedback' : 'Meeting Room summary'}:</p>
 <blockquote style="margin:0 0 16px;padding-left:12px;border-left:3px solid #ccc;color:#333">${replyText.replace(/\n/g, '<br>')}</blockquote>
-<p><strong>Panel's reply (already sent to them):</strong></p>
+<p><strong>Reply (already sent to them):</strong></p>
 <blockquote style="margin:0;padding-left:12px;border-left:3px solid #C8A96E;color:#333">${replyContent.replace(/\n/g, '<br>')}</blockquote>`,
       }),
     });

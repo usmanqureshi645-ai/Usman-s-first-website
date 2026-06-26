@@ -1,4 +1,6 @@
 import { randomUUID } from 'node:crypto';
+import { getUserFromRequest } from '../lib/auth.js';
+import { saveConsultation, scheduleFollowup } from '../lib/consultations.js';
 
 const CONVERSATION_TTL_SECONDS = 30 * 24 * 60 * 60; // 30 days
 
@@ -101,6 +103,36 @@ Tone: professional, warm, clearly human-written consultation style — not robot
     if (!emailResp.ok) {
       res.status(emailResp.status).json({ error: emailData?.message || 'Email send failed' });
       return;
+    }
+
+    // If the visitor is logged in, save this to their permanent workspace history
+    // and queue a 24h "did this help?" follow-up email
+    const loggedInUser = getUserFromRequest(req);
+    if (loggedInUser && kvUrl && kvToken) {
+      try {
+        const firstUserMsg = transcript.find(m => m.role === 'user')?.content || 'Meeting Room consultation';
+        const consultationId = await saveConsultation({
+          kvUrl, kvToken,
+          email: loggedInUser.email,
+          tool: 'meeting',
+          title: firstUserMsg.slice(0, 80),
+          transcript,
+          summaryHtml: htmlBody,
+          agents: Array.isArray(agents) ? agents : [],
+        });
+        if (replyTo) {
+          await scheduleFollowup({
+            kvUrl, kvToken,
+            email: loggedInUser.email,
+            name: loggedInUser.name,
+            tool: 'meeting',
+            consultationId,
+            replyTo,
+          });
+        }
+      } catch {
+        // non-fatal — the summary email already sent successfully
+      }
     }
 
     res.status(200).json({ ok: true });

@@ -7,7 +7,8 @@ A single-page personal/professional site for Usman (ACCA, ACA — Big 4 audit & 
 - Backend: `/api/*.js` serverless functions on Vercel, calling the Anthropic API (model `claude-sonnet-4-6`)
 - Hosting: Vercel project `usman-s-first-website`, auto-deploys on push to `main` on GitHub (`usmanqureshi645-ai/Usman-s-first-website`)
 - Email: Resend API
-- Persistence: Upstash Redis (REST API) — feedback log, and Meeting Room conversation state for email reply-to-continue (30-day TTL, key `mrconv:<uuid>`)
+- Persistence: Upstash Redis (REST API) — feedback log, Meeting Room/Knowledge Test conversation state for email reply-to-continue (30-day TTL, keys `mrconv:<uuid>` / `qzconv:<uuid>`), permanent user accounts (`user:<email>`), and permanent per-user consultation history (`consultations:<email>` list, capped at 200) — see Accounts & Workspace below
+- Accounts & Workspace: real email+password accounts (zero external auth dependencies — `lib/auth.js` hand-rolls password hashing via Node's `crypto.scrypt` and a small HMAC-signed session cookie, no bcrypt/jsonwebtoken). Soft-gated: every AI tool works fully anonymously; signing up (also free) is pitched after a tool produces a result via `window.showSignupNudge()`, never as a hard wall. Logged-in users get consultations auto-saved (Meeting Room, Knowledge Test) or manually saved via a "💾 Save to my workspace" button (GAAP Compare; CV tools/AskAI not yet wired). `workspace.html` is a separate static page listing saved consultations with a "Continue this conversation" action that round-trips through `index.html?resume=<id>&tool=<tool>`.
 - Email sending domain: `uqconsulting.org`, verified in Resend (SPF/DKIM/DMARC + inbound MX to `inbound-smtp.eu-west-1.amazonaws.com`) — replaced the old `onboarding@resend.dev` sandbox sender, which could only deliver to the account owner's own address, not visitor-typed emails
 - Owner's contact email: `usmanqureshi645@gmail.com` (used as the destination for signup/feedback notification emails)
 
@@ -16,6 +17,8 @@ A single-page personal/professional site for Usman (ACCA, ACA — Big 4 audit & 
 - `RESEND_API_KEY` — outbound email (signup welcome, feedback log, meeting/interview summaries)
 - `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` — feedback persistence + Meeting Room conversation state (`/api/feedback-list.js` reuses the token itself as a simple shared-secret query param for read access)
 - `RESEND_WEBHOOK_SECRET` — optional, not yet set; if added, `/api/inbound-email.js` will verify Resend's Svix webhook signature instead of trusting payloads by UUID-unguessability alone
+- `AUTH_SECRET` — **must be set in Vercel** for accounts to work at all (`lib/auth.js` throws if missing); any long random string, used to HMAC-sign session cookies. Not yet generated/set as of this writing — do this before relying on signup/login in production.
+- `CRON_SECRET` — optional; if set, `/api/cron-followups.js` requires `Authorization: Bearer <secret>` (Vercel doesn't inject this automatically — only useful if you add it as a custom header via Vercel's cron config or call it yourself)
 
 ## API endpoints (all in `/api/`)
 - `meeting.js` — Meeting Room panel chat. Personas selectable by the user (Sarah Chen/audit, David Whitfield/IFRS-FRS, Amara Singh/tax, Marcus Lee/forensic, Elena Rossi/ESG, James Carter/legal, Priya Nair/technical accounting). Greets → asks name → interactive discussion with cross-references, risk/mitigation exchanges, clarifying questions, redirects if off-track. Shared persona/system-prompt logic lives in `/lib/meetingPersonas.js` (also used by `inbound-email.js`).
@@ -29,7 +32,11 @@ A single-page personal/professional site for Usman (ACCA, ACA — Big 4 audit & 
 - `qz-summary.js` — emails a kind, specific, never-harsh interview-prep feedback report (Knowledge Test's "End session" button).
 - `feedback.js` — technical-agent assessment of submitted feedback (valid/not), persists every submission to Upstash Redis (`feedback_log` list, capped at 500) and emails a log entry to the owner regardless of validity.
 - `feedback-list.js` — GET endpoint to list stored feedback (`?key=<UPSTASH_REDIS_REST_TOKEN>&limit=N`).
-- `signup.js` — sends a welcome email + lead notification on site signup.
+- `signup.js` — creates a real account (`user:<email>` in Redis, scrypt-hashed password), sets the session cookie, sends a welcome email + lead notification.
+- `login.js` / `logout.js` / `me.js` — session cookie auth; `me.js` returns `{loggedIn, name, email}` and is what the frontend polls on load to decide what to show.
+- `save-consultation.js` — login-required; lets GAAP Compare (and, when wired, CV tools/AskAI) save a raw transcript to the user's permanent workspace history.
+- `workspace-list.js` / `workspace-get.js` — login-required; power `workspace.html`'s history list and the "Continue this conversation" resume flow.
+- `cron-followups.js` — hourly Vercel Cron job (see `vercel.json`); pulls due entries from the `followups_zset` sorted set and emails a 24h "did this help?" check-in, with reply-to-continue for Meeting Room/Knowledge Test only (GAAP/CV/Ask follow-ups are a plain check-in, no resume capability).
 
 ## Scheduled background agents (run independently of any chat session)
 - `site-health-monitor` (every 3h) — checks the live site/APIs, can fix small unambiguous bugs directly and commit/push; asks first for anything structural or risky. Reads this CLAUDE.md at the start of each run.
@@ -39,7 +46,7 @@ A single-page personal/professional site for Usman (ACCA, ACA — Big 4 audit & 
 Hero → USP tools showcase → **Meeting Room → Knowledge Test → Job Search → GAAP Compare → Hot Market Topics** (the 5 interactive AI tools, intentionally placed right after the hero) → Trust → Services → About → Sectors → Standards → Skills → Client Experience → Publications → Trainings → Contact → Footer.
 
 ## Floating widgets (bottom-right, stacked)
-Audio toggle (ambient music), Welcome/Site Guide bot, Feedback widget, Sign-up widget, AskAI/personal GPT. All five are mutually exclusive — opening any one closes the others via `window.closeOtherWidgets()` (also cancels any in-progress TTS).
+Audio toggle (ambient music), Welcome/Site Guide bot, Feedback widget, Sign-up/Login widget, AskAI/personal GPT. All five are mutually exclusive — opening any one closes the others via `window.closeOtherWidgets()` (also cancels any in-progress TTS). The Sign-up widget doubles as a login form (toggle link inside the panel switches modes) and, once logged in, its floating button becomes a shortcut to `workspace.html` instead of reopening the signup form.
 
 ## Known constraints / conventions
 - Don't scrape or reproduce third-party copyrighted content (e.g. Big 4 "at a glance" guides) — build original equivalents instead (e.g. the hand-built IFRS flowchart diagrams).

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Workspace — Usman Qureshi | Audit & Advisory</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0A1628;
+    --slate: #1E3A5F;
+    --slate-mid: #2A4A72;
+    --gold: #C8A96E;
+    --gold-light: #E0C99A;
+    --cream: #F0EDE6;
+    --steel: #8899AA;
+    --steel-light: #B8C8D8;
+    --white: #FFFFFF;
+  }
+  html { background: var(--navy); }
+  body {
+    font-family: 'Manrope', 'Century Gothic', sans-serif;
+    background: var(--navy);
+    color: var(--cream);
+    min-height: 100vh;
+  }
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 clamp(1rem, 3vw, 4rem); height: 64px;
+    background: rgba(10,22,40,0.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(200,169,110,0.15);
+  }
+  .nav-logo { font-size: clamp(0.85rem, 1.1vw, 1.1rem); color: var(--gold); letter-spacing: 0.03em; }
+  .nav-logo a { color: var(--gold); text-decoration: none; }
+  .back-link { color: var(--steel-light); text-decoration: none; font-size: .85rem; }
+  .back-link:hover { color: var(--gold-light); }
+
+  main { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+  h1 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: .35rem; }
+  .sub { color: var(--steel-light); font-size: .9rem; margin-bottom: 2rem; }
+
+  .state-card {
+    background: rgba(255,255,255,.03); border: 1px solid rgba(200,169,110,.15);
+    border-radius: 14px; padding: 2rem; text-align: center;
+  }
+  .state-card p { color: var(--steel-light); margin: .5rem 0 1.25rem; line-height: 1.6; }
+  .btn-gold {
+    background: var(--gold); color: var(--navy); border: none; border-radius: 10px;
+    padding: .7rem 1.4rem; font-weight: 700; cursor: pointer; font-size: .9rem;
+  }
+  .btn-gold:hover { background: var(--gold-light); }
+
+  .tool-filter { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .tool-filter button {
+    background: rgba(255,255,255,.05); border: 1px solid rgba(200,169,110,.2); color: var(--steel-light);
+    border-radius: 20px; padding: .4rem .9rem; font-size: .78rem; cursor: pointer;
+  }
+  .tool-filter button.active { background: var(--gold); color: var(--navy); border-color: var(--gold); font-weight: 700; }
+
+  .consult-card {
+    background: rgba(255,255,255,.03); border: 1px solid rgba(200,169,110,.15);
+    border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 1.1rem;
+  }
+  .consult-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+  .consult-tool { font-size: .68rem; text-transform: uppercase; letter-spacing: .05em; color: var(--gold); font-weight: 700; }
+  .consult-date { font-size: .72rem; color: var(--steel); }
+  .consult-title { font-size: 1.02rem; margin: .35rem 0 .7rem; color: var(--cream); }
+  .consult-summary {
+    font-size: .85rem; line-height: 1.6; color: var(--steel-light);
+    max-height: 0; overflow: hidden; transition: max-height .3s ease;
+  }
+  .consult-summary.open { max-height: 2000px; }
+  .consult-summary h2, .consult-summary h3 { color: var(--gold-light); font-size: .95rem; margin: .8rem 0 .3rem; }
+  .consult-actions { display: flex; gap: .6rem; margin-top: .75rem; flex-wrap: wrap; }
+  .consult-actions button {
+    background: none; border: 1px solid rgba(200,169,110,.3); color: var(--gold-light);
+    border-radius: 8px; padding: .4rem .85rem; font-size: .78rem; cursor: pointer;
+  }
+  .consult-actions button:hover { background: rgba(200,169,110,.1); }
+  .consult-actions .continue-btn { background: var(--gold); color: var(--navy); border-color: var(--gold); font-weight: 700; }
+  .empty-note { color: var(--steel); font-size: .85rem; text-align: center; padding: 2rem 0; }
+</style>
+</head>
+<body>
+  <nav>
+    <div class="nav-logo"><a href="index.html">USMAN QURESHI, ACCA, ACA</a></div>
+    <a class="back-link" href="index.html">← Back to site</a>
+  </nav>
+
+  <main>
+    <h1>My Workspace</h1>
+    <p class="sub" id="workspaceSub">Loading…</p>
+
+    <div id="loggedOutState" class="state-card" style="display:none">
+      <p>Sign up or log in to see your saved consultations, interview feedback, and resume any conversation right where you left off — it's completely free, and every tool stays free after signing up too.</p>
+      <button class="btn-gold" onclick="location.href='index.html#signup'">Sign up free / Log in</button>
+    </div>
+
+    <div id="loggedInState" style="display:none">
+      <div class="tool-filter" id="toolFilter"></div>
+      <div id="consultList"></div>
+    </div>
+  </main>
+
+  <script>
+    const TOOL_LABELS = {
+      meeting: 'Meeting Room',
+      quiz: 'Interview Prep',
+      gaap: 'GAAP Compare',
+      'cv-review': 'CV Review',
+      'cv-tailor': 'CV Tailor',
+      ask: "AskAI",
+    };
+
+    let allConsultations = [];
+    let activeFilter = 'all';
+
+    function escapeHtml(s) {
+      return String(s || '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    }
+
+    function renderFilter() {
+      const tools = ['all', ...new Set(allConsultations.map(c => c.tool))];
+      document.getElementById('toolFilter').innerHTML = tools.map(t =>
+        `<button data-tool="${t}" class="${t === activeFilter ? 'active' : ''}">${t === 'all' ? 'All' : (TOOL_LABELS[t] || t)}</button>`
+      ).join('');
+      document.querySelectorAll('.tool-filter button').forEach(btn => {
+        btn.addEventListener('click', () => { activeFilter = btn.dataset.tool; renderFilter(); renderList(); });
+      });
+    }
+
+    function renderList() {
+      const list = document.getElementById('consultList');
+      const filtered = activeFilter === 'all' ? allConsultations : allConsultations.filter(c => c.tool === activeFilter);
+      if (filtered.length === 0) {
+        list.innerHTML = '<div class="empty-note">No consultations here yet — go use a tool on the site and end the session to save one.</div>';
+        return;
+      }
+      list.innerHTML = filtered.map(c => `
+        <div class="consult-card">
+          <div class="consult-head">
+            <span class="consult-tool">${TOOL_LABELS[c.tool] || c.tool}</span>
+            <span class="consult-date">${new Date(c.createdAt).toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' })}</span>
+          </div>
+          <div class="consult-title">${escapeHtml(c.title)}</div>
+          <div class="consult-summary" id="summary-${c.id}">${c.summaryHtml || renderTranscript(c.transcript)}</div>
+          <div class="consult-actions">
+            <button onclick="toggleSummary('${c.id}')">View summary</button>
+            ${(c.tool === 'meeting' || c.tool === 'quiz' || c.tool === 'gaap') ? `<button class="continue-btn" onclick="continueConsultation('${c.id}','${c.tool}')">Continue this conversation</button>` : ''}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderTranscript(transcript) {
+      if (!Array.isArray(transcript) || transcript.length === 0) return '<p>No written summary saved for this one.</p>';
+      return transcript
+        .filter(m => (m.role === 'user' || m.role === 'assistant') && !String(m.content).startsWith('['))
+        .map(m => `<p><strong>${m.role === 'user' ? 'You' : 'Assistant'}:</strong> ${escapeHtml(m.content)}</p>`)
+        .join('');
+    }
+
+    function toggleSummary(id) {
+      document.getElementById(`summary-${id}`).classList.toggle('open');
+    }
+
+    function continueConsultation(id, tool) {
+      const sectionMap = { meeting: 'meetingroom', quiz: 'knowledgetest', gaap: 'gaapcompare' };
+      location.href = `index.html?resume=${id}&tool=${tool}#${sectionMap[tool] || tool}`;
+    }
+
+    async function init() {
+      try {
+        const meResp = await fetch('/api/me');
+        const me = await meResp.json();
+        if (!me.loggedIn) {
+          document.getElementById('workspaceSub').textContent = "You're not logged in.";
+          document.getElementById('loggedOutState').style.display = 'block';
+          return;
+        }
+        document.getElementById('workspaceSub').textContent = `Welcome back, ${me.name.split(' ')[0]} — every consultation you've saved lives here.`;
+
+        const listResp = await fetch('/api/workspace-list');
+        const data = await listResp.json();
+        allConsultations = Array.isArray(data.consultations) ? data.consultations : [];
+        document.getElementById('loggedInState').style.display = 'block';
+        renderFilter();
+        renderList();
+      } catch (err) {
+        document.getElementById('workspaceSub').textContent = 'Something went wrong loading your workspace — please refresh.';
+      }
+    }
+    init();
+  </script>
+</body>
+</html>

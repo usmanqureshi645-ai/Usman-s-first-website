@@ -1,3 +1,9 @@
+import { randomUUID } from 'node:crypto';
+import { getUserFromRequest } from '../lib/auth.js';
+import { saveConsultation, scheduleFollowup } from '../lib/consultations.js';
+
+const CONVERSATION_TTL_SECONDS = 30 * 24 * 60 * 60; // 30 days
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
@@ -6,6 +12,8 @@ export default async function handler(req, res) {
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   const resendKey = process.env.RESEND_API_KEY;
+  const kvUrl = process.env.UPSTASH_REDIS_REST_URL;
+  const kvToken = process.env.UPSTASH_REDIS_REST_TOKEN;
   if (!apiKey) {
     res.status(500).json({ error: 'AI service not configured' });
     return;
@@ -64,7 +72,23 @@ Never use harsh words like "weak", "bad", "failed", "poor". Use "developing", "a
       return;
     }
 
-    const htmlBody = summaryData?.content?.[0]?.text || '<p>No feedback available.</p>';
+    let htmlBody = summaryData?.content?.[0]?.text || '<p>No feedback available.</p>';
+
+    // Persist the conversation so a reply to this email can resume coaching (mirrors Meeting Room)
+    let replyTo;
+    if (kvUrl && kvToken) {
+      const conversationId = randomUUID();
+      const record = JSON.stringify({ email, history: transcript });
+      try {
+        await fetch(`${kvUrl}/set/qzconv:${conversationId}/${encodeURIComponent(record)}/EX/${CONVERSATION_TTL_SECONDS}`, {
+          headers: { authorization: `Bearer ${kvToken}` },
+        });
+        replyTo = `quiz+${conversationId}@uqconsulting.org`;
+        htmlBody += `<p style="margin-top:24px;padding-top:16px;border-top:1px solid #ddd;color:#555">Have another question, or want to keep practising? Just reply to this email.</p>`;
+      } catch {
+        // non-fatal — feedback email still sends without reply capability
+      }
+    }
 
     const emailResp = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -75,6 +99,7 @@ Never use harsh words like "weak", "bad", "failed", "poor". Use "developing", "a
       body: JSON.stringify({
         from: 'Interview Prep Coach <coach@uqconsulting.org>',
         to: [email],
+        ...(replyTo ? { reply_to: replyTo } : {}),
         subject: 'Your Interview Prep Feedback — Great Work!',
         html: htmlBody,
       }),
@@ -84,6 +109,33 @@ Never use harsh words like "weak", "bad", "failed", "poor". Use "developing", "a
     if (!emailResp.ok) {
       res.status(emailResp.status).json({ error: emailData?.message || 'Email send failed' });
       return;
+    }
+
+    const loggedInUser = getUserFromRequest(req);
+    if (loggedInUser && kvUrl && kvToken) {
+      try {
+        const firstUserMsg = transcript.find(m => m.role === 'user')?.content || 'Interview prep session';
+        const consultationId = await saveConsultation({
+          kvUrl, kvToken,
+          email: loggedInUser.email,
+          tool: 'quiz',
+          title: firstUserMsg.slice(0, 80),
+          transcript,
+          summaryHtml: htmlBody,
+        });
+        if (replyTo) {
+          await scheduleFollowup({
+            kvUrl, kvToken,
+            email: loggedInUser.email,
+            name: loggedInUser.name,
+            tool: 'quiz',
+            consultationId,
+            replyTo,
+          });
+        }
+      } catch {
+        // non-fatal — the feedback email already sent successfully
+      }
     }
 
     res.status(200).json({ ok: true });

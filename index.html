@@ -1349,6 +1349,7 @@ animation:pulseRing 2.4s ease-out infinite;
 <li><a href="#knowledgetest">Knowledge Test</a></li>
 <li><a href="#meetingroom" class="nav-meetingroom">Meeting Room <span class="live-dot"></span></a></li>
 <li><a href="#contact">Contact</a></li>
+<li id="navWorkspaceLink" style="display:none"><a href="workspace.html">My Workspace</a></li>
 </ul>
 
 <button class="nav-toggle" id="navToggle" aria-label="Menu">
@@ -1752,6 +1753,7 @@ animation:pulseRing 2.4s ease-out infinite;
     <button class="mr-chip" onclick="gaapAsk('In plain English, what is the biggest practical difference between IFRS and US GAAP for leases?')">Leases: biggest difference?</button>
     <button class="mr-chip" onclick="gaapAsk('Why does US GAAP use CECL instead of the IFRS 9 staged ECL model?')">CECL vs IFRS 9 ECL</button>
     <button class="mr-chip" onclick="gaapAsk('Can a US company use LIFO under IFRS?')">LIFO under IFRS?</button>
+    <button class="mr-chip" id="gaapSaveBtn" onclick="gaapSaveConsultation()" style="border-color:var(--steel);color:var(--steel-light)">💾 Save to my workspace</button>
   </div>
   <div class="mr-inputbar">
     <button id="gaapMic" class="mr-mic" title="Speak your question">
@@ -2485,10 +2487,12 @@ animation:pulseRing 2.4s ease-out infinite;
       <button class="welcome-bot-close" onclick="toggleSignup(false)">&times;</button>
     </div>
     <div class="welcome-bot-messages" id="signupMessages" style="gap:1rem">
-      <div class="wb-msg bot"><div class="wb-bubble">Want to create your own workspace? Sign up here for free and get a personalised workspace.</div></div>
+      <div class="wb-msg bot"><div class="wb-bubble" id="signupIntroBubble">Every AI tool here is free to use without signing up. Signing up is free too — it just unlocks your personal workspace: every consultation saved, resume any conversation anytime, and a friendly follow-up email after each session.</div></div>
       <input type="text" id="signupName" placeholder="Your name" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
       <input type="email" id="signupEmail" placeholder="Your email" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
+      <input type="password" id="signupPassword" placeholder="Choose a password (6+ characters)" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
       <button class="pub-btn" id="signupSubmitBtn" onclick="submitSignup()">Sign Up Free</button>
+      <button id="signupModeToggle" onclick="toggleSignupMode()" style="background:none;border:none;color:var(--steel-light);font-size:.75rem;text-decoration:underline;cursor:pointer;text-align:center">Already have an account? Log in</button>
     </div>
   </div>
   <button class="welcome-bot-toggle widget-tip" data-tooltip="Sign up free" id="signupToggle" style="background:linear-gradient(135deg,#5fd97a,#C8A96E)">✨</button>
@@ -3065,29 +3069,53 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     });
   })();
 
-  // Sign-up widget — stores the visitor locally so the site can personalise return visits
+  // Sign-up / login widget — real accounts via /api/signup and /api/login (session cookie)
   (function(){
     const panel=document.getElementById('signupPanel');
     const toggleBtn=document.getElementById('signupToggle');
     let suOpened=false;
+    let currentUser=null;
+    let loginMode=false;
 
-    function getUser(){
-      try{ return JSON.parse(localStorage.getItem('site_user')||'null'); }catch(e){ return null; }
-    }
-    window.getSiteUser=getUser;
+    window.getSiteUser=()=>currentUser;
 
     function reflectSignedInState(){
-      const u=getUser();
-      if(u){
-        toggleBtn.textContent='👋';
-        toggleBtn.title=`Signed up as ${u.name}`;
+      const navLink=document.getElementById('navWorkspaceLink');
+      if(currentUser){
+        toggleBtn.textContent='🗂️';
+        toggleBtn.title=`My Workspace (${currentUser.name})`;
+        if(navLink) navLink.style.display='block';
+      } else {
+        toggleBtn.textContent='✨';
+        toggleBtn.title='Sign up free';
+        if(navLink) navLink.style.display='none';
       }
     }
-    reflectSignedInState();
+
+    async function refreshUser(){
+      try{
+        const r=await fetch('/api/me');
+        const data=await r.json();
+        currentUser = data.loggedIn ? { name:data.name, email:data.email } : null;
+      }catch(e){ currentUser=null; }
+      reflectSignedInState();
+      window.updateAskBranding?.();
+    }
+    window.refreshSiteUser=refreshUser;
+    refreshUser();
+
+    window.toggleSignupMode=function(){
+      loginMode=!loginMode;
+      document.getElementById('signupName').style.display = loginMode ? 'none' : 'block';
+      document.getElementById('signupSubmitBtn').textContent = loginMode ? 'Log In' : 'Sign Up Free';
+      document.getElementById('signupModeToggle').textContent = loginMode ? "Need an account? Sign up free" : 'Already have an account? Log in';
+      document.getElementById('signupIntroBubble').textContent = loginMode
+        ? 'Log in to get back to your saved consultations and resume any conversation.'
+        : "Every AI tool here is free to use without signing up. Signing up is free too — it just unlocks your personal workspace: every consultation saved, resume any conversation anytime, and a friendly follow-up email after each session.";
+    };
 
     window.toggleSignup=function(force){
-      const u=getUser();
-      if(u && force!==false){ alert(`You're already signed up as ${u.name} (${u.email}). Thanks for coming back!`); return; }
+      if(currentUser && force!==false){ location.href='workspace.html'; return; }
       suOpened = typeof force==='boolean' ? force : !suOpened;
       if(suOpened) window.closeOtherWidgets?.('signup');
       panel.classList.toggle('open', suOpened);
@@ -3097,26 +3125,31 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     window.submitSignup=async function(){
       const name=document.getElementById('signupName').value.trim();
       const email=document.getElementById('signupEmail').value.trim();
-      if(!name || !email.includes('@')){ alert('Please enter your name and a valid email.'); return; }
+      const password=document.getElementById('signupPassword').value;
+      if(loginMode){
+        if(!email.includes('@') || !password){ alert('Please enter your email and password.'); return; }
+      } else if(!name || !email.includes('@') || password.length<6){
+        alert('Please enter your name, a valid email, and a password (6+ characters).'); return;
+      }
       const btn=document.getElementById('signupSubmitBtn');
-      btn.disabled=true; btn.textContent='Signing up…';
+      btn.disabled=true; btn.textContent=loginMode ? 'Logging in…' : 'Signing up…';
       try{
-        const r=await fetch('/api/signup',{
+        const r=await fetch(loginMode ? '/api/login' : '/api/signup',{
           method:'POST',
           headers:{'content-type':'application/json'},
-          body:JSON.stringify({name, email})
+          body:JSON.stringify(loginMode ? {email, password} : {name, email, password})
         });
         const data=await r.json();
         if(!r.ok){ alert('Sorry, something went wrong: '+(data.error||'unknown error')); return; }
-        localStorage.setItem('site_user', JSON.stringify({name, email}));
+        currentUser={ name:data.name, email:data.email };
         reflectSignedInState();
-        document.getElementById('signupMessages').innerHTML=`<div class="wb-msg bot"><div class="wb-bubble">You're in, ${name.split(' ')[0]}! Check your inbox for a welcome note. Look for your personal assistant — it's now called "${name.split(' ')[0]}'sGPT" — near the chat bubble.</div></div>`;
-        updateAskBranding();
+        document.getElementById('signupMessages').innerHTML=`<div class="wb-msg bot"><div class="wb-bubble">${loginMode ? `Welcome back, ${data.name.split(' ')[0]}!` : `You're in, ${data.name.split(' ')[0]}! Check your inbox for a welcome note.`} Your <a href="workspace.html" style="color:var(--gold-light)">My Workspace</a> is ready whenever you want it.</div></div>`;
+        window.updateAskBranding?.();
         window.bumpSignupCount?.();
       }catch(e){
         alert('Connection issue — please try again.');
       }finally{
-        btn.disabled=false; btn.textContent='Sign Up Free';
+        btn.disabled=false; btn.textContent=loginMode ? 'Log In' : 'Sign Up Free';
       }
     };
   })();
@@ -3185,6 +3218,18 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       if(e.key==='Enter') window.sendAsk();
     });
   })();
+
+  // Reusable inline nudge shown once per session right after a tool produces a result,
+  // inviting (not forcing) a free signup so the result gets saved to a personal workspace
+  window.showSignupNudge=function(containerEl){
+    if(window.getSiteUser?.()) return; // already signed up — nothing to nudge about
+    if(sessionStorage.getItem('signup_nudge_shown')) return;
+    sessionStorage.setItem('signup_nudge_shown','1');
+    const div=document.createElement('div');
+    div.style.cssText='margin-top:1rem;padding:.85rem 1.1rem;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.25);border-radius:10px;font-size:.85rem;color:var(--steel-light);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap';
+    div.innerHTML=`<span>Want to save this and pick up where you left off next time? Sign up free — every tool stays free after signing up too.</span><button class="pub-btn" style="white-space:nowrap" onclick="window.toggleSignup(true)">Sign up free</button>`;
+    containerEl.appendChild(div);
+  };
 
   // Singleton widget manager — closes any other open floating widget (and stops its
   // audio) whenever one is opened, so they never stack up and talk over each other
@@ -3767,7 +3812,10 @@ function mrEndMeeting(){
     body:JSON.stringify({email, transcript:mrHistory, kind:'meeting', agents:mrSelectedAgents})
   }).then(r=>r.json()).then(data=>{
     if(data.error){ mrAppendMessage('agent','Meeting Room', `Sorry — I couldn't send that summary right now (${data.error}). Please try again shortly.`); }
-    else{ mrAppendMessage('agent','Meeting Room', `Thank you — a summary of our discussion has been sent to **${email}**. It was a pleasure working through this with you.`); }
+    else{
+      mrAppendMessage('agent','Meeting Room', `Thank you — a summary of our discussion has been sent to **${email}**. It was a pleasure working through this with you.`);
+      window.showSignupNudge?.(document.getElementById('mrMessages'));
+    }
   }).catch(()=>{
     mrAppendMessage('agent','Meeting Room', "Sorry — I couldn't send that summary right now. Please try again shortly.");
   }).finally(()=>{
@@ -4115,6 +4163,25 @@ async function gaapCallApi(){
     document.getElementById('gaapSend').disabled=false;
   }
 }
+async function gaapSaveConsultation(){
+  if(gaapHistory.length===0){ alert('Ask a question first, then save the discussion.'); return; }
+  if(!window.getSiteUser?.()){ window.toggleSignup?.(true); return; }
+  const btn=document.getElementById('gaapSaveBtn');
+  btn.disabled=true; btn.textContent='Saving…';
+  try{
+    const firstUserMsg=gaapHistory.find(m=>m.role==='user')?.content || 'GAAP Compare discussion';
+    const r=await fetch('/api/save-consultation',{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({tool:'gaap', title:firstUserMsg.slice(0,80), transcript:gaapHistory})
+    });
+    if(r.ok){ btn.textContent='Saved ✓'; setTimeout(()=>{ btn.textContent='💾 Save to my workspace'; btn.disabled=false; },2000); }
+    else{ btn.textContent='💾 Save to my workspace'; btn.disabled=false; alert('Could not save just now — please try again.'); }
+  }catch(e){
+    btn.textContent='💾 Save to my workspace'; btn.disabled=false;
+    alert('Connection issue — please try again.');
+  }
+}
 function gaapSendMessage(){
   const input=document.getElementById('gaapInput');
   const text=input.value.trim();
@@ -4207,7 +4274,10 @@ function qzEndSession(){
     body:JSON.stringify({email, transcript:qzHistory})
   }).then(r=>r.json()).then(data=>{
     if(data.error){ qzAppendMessage('agent', `I couldn't send that just now (${data.error}) — please try again shortly.`); }
-    else{ qzAppendMessage('agent', `All done — your personalised feedback report is on its way to **${email}**! You did really well practising today. 🌟`); }
+    else{
+      qzAppendMessage('agent', `All done — your personalised feedback report is on its way to **${email}**! You did really well practising today. 🌟`);
+      window.showSignupNudge?.(document.getElementById('qzMessages'));
+    }
   }).catch(()=>{
     qzAppendMessage('agent', "I couldn't send that just now — please try again shortly.");
   }).finally(()=>{
@@ -4227,6 +4297,57 @@ document.getElementById('qzInput').addEventListener('keydown', e=>{
   if(e.key==='Enter') qzSendMessage();
 });
 wireMic('qzMic','qzInput', qzSendMessage);
+
+// Resume a saved consultation from the workspace ("Continue this conversation")
+(async function handleResume(){
+  const params=new URLSearchParams(location.search);
+  const resumeId=params.get('resume');
+  const tool=params.get('tool');
+  if(!resumeId || !tool) return;
+  try{
+    const r=await fetch(`/api/workspace-get?id=${encodeURIComponent(resumeId)}`);
+    const data=await r.json();
+    if(!r.ok || !data.consultation) return;
+    const record=data.consultation;
+    const transcript=Array.isArray(record.transcript) ? record.transcript : [];
+
+    if(tool==='meeting'){
+      if(Array.isArray(record.agents) && record.agents.length>0){
+        document.querySelectorAll('.mr-agent-check').forEach(cb=>{ cb.checked=record.agents.includes(cb.value); });
+      }
+      mrSelectedAgents=Array.from(document.querySelectorAll('.mr-agent-check:checked')).map(c=>c.value);
+      mrHistory.push(...transcript);
+      transcript.forEach(m=>{
+        if(typeof m.content==='string' && m.content.startsWith('[')) return;
+        if(m.role==='user') mrAppendMessage('user','You', m.content);
+        else mrRenderPanelReply(m.content);
+      });
+      mrMeetingStarted=true;
+      document.getElementById('mrStartBtn').textContent='Meeting in progress — tick/untick anyone above to add or remove them';
+      document.getElementById('mrStartBtn').disabled=true;
+      document.getElementById('mrChips').style.display='flex';
+      document.getElementById('mrInputBar').style.display='flex';
+      document.getElementById('mrTopicChips').style.display='none';
+    } else if(tool==='quiz'){
+      document.getElementById('qzLevels').style.display='none';
+      document.getElementById('qzChatWrap').style.display='flex';
+      document.getElementById('qzNote').style.display='block';
+      qzHistory.push(...transcript);
+      transcript.forEach(m=>{
+        if(typeof m.content==='string' && m.content.startsWith('[')) return;
+        qzAppendMessage(m.role==='user' ? 'user' : 'agent', m.content);
+      });
+    } else if(tool==='gaap'){
+      gaapHistory.push(...transcript);
+      transcript.forEach(m=>{
+        if(typeof m.content==='string' && m.content.startsWith('[')) return;
+        gaapAppendMessage(m.role==='user' ? 'user' : 'agent', m.content);
+      });
+    }
+  }catch(e){
+    // non-fatal — the tool just opens fresh instead of resuming
+  }
+})();
 
 /* ── Job hub: file upload, ATS review, tailoring, templates ── */
 let jobCvText='', jobCoverText='';

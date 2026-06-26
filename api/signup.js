@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: { 'content-type': 'application/json', authorization: `Bearer ${resendKey}` },
       body: JSON.stringify({
-        from: 'Usman | Audit & Advisory <onboarding@resend.dev>',
+        from: 'Usman | Audit & Advisory <welcome@uqconsulting.org>',
         to: [email],
         subject: `Welcome aboard, ${name.split(' ')[0]}!`,
         html: `
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: { 'content-type': 'application/json', authorization: `Bearer ${resendKey}` },
       body: JSON.stringify({
-        from: 'Website Signups <onboarding@resend.dev>',
+        from: 'Website Signups <signups@uqconsulting.org>',
         to: ['usmanqureshi645@gmail.com'],
         subject: `New website signup: ${name}`,
         html: `<p>New signup on the website:</p><p><strong>Name:</strong> ${name}<br><strong>Email:</strong> ${email}</p>`,

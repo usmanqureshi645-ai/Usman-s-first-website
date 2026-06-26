@@ -73,7 +73,7 @@ Never use harsh words like "weak", "bad", "failed", "poor". Use "developing", "a
         authorization: `Bearer ${resendKey}`,
       },
       body: JSON.stringify({
-        from: 'Interview Prep Coach <onboarding@resend.dev>',
+        from: 'Interview Prep Coach <coach@uqconsulting.org>',
         to: [email],
         subject: 'Your Interview Prep Feedback — Great Work!',
         html: htmlBody,

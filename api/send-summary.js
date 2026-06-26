@@ -67,7 +67,7 @@ Tone: professional, warm, clearly human-written consultation style — not robot
         authorization: `Bearer ${resendKey}`,
       },
       body: JSON.stringify({
-        from: 'Meeting Room <onboarding@resend.dev>',
+        from: 'Meeting Room <meetingroom@uqconsulting.org>',
         to: [email],
         subject: 'Your Meeting Room Consultation Summary',
         html: htmlBody,

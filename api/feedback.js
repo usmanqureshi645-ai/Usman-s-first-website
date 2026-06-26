@@ -87,7 +87,7 @@ Respond with ONLY valid JSON, no markdown, no commentary, in this exact shape:
           authorization: `Bearer ${resendKey}`,
         },
         body: JSON.stringify({
-          from: 'Website Feedback <onboarding@resend.dev>',
+          from: 'Website Feedback <feedback@uqconsulting.org>',
           to: ['usmanqureshi645@gmail.com'],
           subject: `[Feedback Log] ${tag}: ${assessment.summary || feedback.slice(0, 60)}`,
           html: `

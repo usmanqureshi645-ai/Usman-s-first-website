@@ -3377,18 +3377,32 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
 
 const reveals=document.querySelectorAll('.reveal');
 const revealObserver=new IntersectionObserver(entries=>{
-entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
-},{threshold:.15});
+entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');revealObserver.unobserve(e.target);}});
+},{threshold:.1,rootMargin:'0px 0px 150px 0px'});
 reveals.forEach(r=>revealObserver.observe(r));
 
 
 const flowItems=document.querySelectorAll('.flow-reveal');
 const flowObserver=new IntersectionObserver(entries=>{
 entries.forEach(entry=>{
-if(entry.isIntersecting){entry.target.classList.add('visible');}
+if(entry.isIntersecting){entry.target.classList.add('visible');flowObserver.unobserve(entry.target);}
 });
-},{threshold:.15});
+},{threshold:.1,rootMargin:'0px 0px 150px 0px'});
 flowItems.forEach(el=>flowObserver.observe(el));
+
+/* Fallback: mobile momentum-scroll can skip IntersectionObserver callbacks entirely,
+   leaving tall sections permanently opacity:0 ("blank gap" reports). Force a manual
+   visibility sweep on scroll/resize so nothing stays stuck invisible. */
+function forceRevealSweep(){
+  document.querySelectorAll('.reveal:not(.visible),.flow-reveal:not(.visible)').forEach(el=>{
+    const r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight && r.bottom>0) el.classList.add('visible');
+  });
+}
+window.addEventListener('scroll',forceRevealSweep,{passive:true});
+window.addEventListener('resize',forceRevealSweep);
+window.addEventListener('load',forceRevealSweep);
+setTimeout(forceRevealSweep,1500);
 
 /* ── Boutique card tilt ── */
 document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-card,.client-card').forEach(card=>{

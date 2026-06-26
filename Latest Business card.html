@@ -595,6 +595,7 @@
   /* ── CONTACT ── */
   #contact {
     background: linear-gradient(135deg, rgba(30,58,95,0.5) 0%, var(--navy) 60%);
+    padding-bottom: 3rem;
   }
 
   .contact-layout {
@@ -813,7 +814,7 @@
     .audio-toggle{ bottom:18px; right:18px; width:46px; height:46px; }
 
     /* GAAP comparison & trainings mobile */
-    .gaap-table{ font-size:0.75rem; }
+    .gaap-table{ font-size:0.75rem; min-width:640px; }
     .gaap-table th,.gaap-table td{ padding:.5rem .4rem; }
     .train-grid{ grid-template-columns:1fr; }
   }
@@ -903,6 +904,9 @@
   .widget-tip:hover::before{ opacity:1; }
   @media (max-width:980px){ .widget-tip::after, .widget-tip::before{ display:none; } }
 
+  .gaap-table td, .gaap-table th{ overflow-wrap:break-word; word-break:break-word; }
+  .gaap-table{ table-layout:auto; }
+
   /* Welcome chatbot widget */
   .welcome-bot{ position:fixed; bottom:90px; right:28px; z-index:9999; display:flex; flex-direction:column; align-items:flex-end; }
   .welcome-bot-toggle{
@@ -916,7 +920,7 @@
   .welcome-bot-toggle.pulse{ animation:welcomePulse 1.8s ease-in-out 3; }
   @keyframes welcomePulse{ 0%,100%{box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 0 0 rgba(200,169,110,.5)} 50%{box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 0 10px rgba(200,169,110,0)} }
   .welcome-bot-panel{
-    width:320px; max-height:420px; margin-bottom:1rem;
+    width:320px; max-height:min(420px, 60vh); margin-bottom:1rem;
     background:rgba(16,26,44,.96); backdrop-filter:blur(20px);
     border:1px solid rgba(200,169,110,.3); border-radius:16px;
     box-shadow:0 20px 60px rgba(0,0,0,.4);
@@ -943,7 +947,11 @@
     padding:.4rem .8rem; border-radius:16px; cursor:pointer; transition:all .25s ease;
   }
   .wb-option-btn:hover{ background:rgba(200,169,110,.18); border-color:var(--gold); }
-  @media (max-width:480px){ .welcome-bot{ right:14px; bottom:80px; } .welcome-bot-panel{ width:88vw; } }
+  @media (max-width:480px){
+    .welcome-bot{ right:10px !important; }
+    .welcome-bot-toggle{ width:46px; height:46px; font-size:1.15rem; }
+    .welcome-bot-panel{ width:85vw; max-height:55vh !important; }
+  }
 
   /* Cursor-reactive hover tag */
   .hover-tag{
@@ -1173,7 +1181,7 @@ body{background:linear-gradient(180deg,#050b15,#0a1628)}
 /* ── Ambient audio toggle ── */
 .audio-toggle{
 position:fixed;bottom:28px;right:28px;z-index:9998;
-width:52px;height:52px;border-radius:50%;
+width:56px;height:56px;border-radius:50%;
 background:rgba(20,32,52,.7);backdrop-filter:blur(14px);
 border:1px solid rgba(200,169,110,.3);
 display:flex;align-items:center;justify-content:center;
@@ -1205,7 +1213,8 @@ animation:pulseRing 2.4s ease-out infinite;
 .mr-msg{max-width:80%;animation:msgIn .4s cubic-bezier(.22,1,.36,1)}
 @keyframes msgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .mr-msg.user{align-self:flex-end}
-.mr-bubble{padding:.85rem 1.1rem;border-radius:14px;font-size:.86rem;line-height:1.7}
+.mr-bubble{padding:.85rem 1.1rem;border-radius:14px;font-size:.86rem;line-height:1.7;overflow-wrap:break-word;word-break:break-word;max-width:100%}
+.mr-bubble a{word-break:break-all}
 .mr-msg.agent .mr-bubble{background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.18);color:var(--cream)}
 .mr-msg.user .mr-bubble{background:var(--gold);color:var(--navy);font-weight:500}
 .mr-msg-name{font-size:.7rem;font-weight:700;color:var(--gold);margin-bottom:.15rem;letter-spacing:.04em;text-transform:uppercase}
@@ -1255,7 +1264,16 @@ animation:pulseRing 2.4s ease-out infinite;
 .mr-mic svg{width:16px;height:16px;flex-shrink:0}
 .mr-mic-label{font-size:.7rem;font-weight:600;color:inherit;white-space:nowrap;font-family:inherit}
 .mr-mic:hover{border-color:var(--gold);background:rgba(200,169,110,.08)}
-@media (max-width:520px){ .mr-mic-label{font-size:.62rem} .mr-mic{padding:0 .5rem} .mr-inputbar{flex-wrap:wrap} .mr-inputbar input{flex:1 1 100%;order:3} }
+@media (max-width:520px){
+  .mr-mic-label{ display:none; } /* icon-only on small screens so mic+hear+send fit in one row */
+  .mr-mic{ padding:0; width:40px; flex-shrink:0; }
+  .mr-inputbar{ flex-wrap:wrap; gap:.5rem; }
+  .mr-inputbar input{ flex:1 1 100%; order:3; }
+  .mr-chips{ flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:.6rem; }
+  .mr-chip{ flex-shrink:0; white-space:nowrap; }
+  .mr-panel{ max-height:240px; overflow-y:auto; }
+  .mr-chat{ height:62vh; min-height:380px; }
+}
 .mr-mic.listening{
   background:rgba(200,169,110,.25);border-color:var(--gold);
   animation:micPulse 1.3s ease-in-out infinite;
@@ -1457,10 +1475,12 @@ animation:pulseRing 2.4s ease-out infinite;
   <div class="mr-chat">
     <div class="mr-messages" id="mrMessages"></div>
     <div class="mr-chips" id="mrChips" style="display:none">
-      <button class="mr-chip" onclick="mrAsk('What are the key risks under IFRS 9 ECL modelling?')">IFRS 9 ECL risks</button>
-      <button class="mr-chip" onclick="mrAsk('How should we account for a business combination under IFRS 3?')">IFRS 3 business combos</button>
-      <button class="mr-chip" onclick="mrAsk('What is changing under IFRS 18 for our income statement?')">IFRS 18 impact</button>
-      <button class="mr-chip" onclick="mrAsk('What tax risks come with a cross-border group restructuring?')">Cross-border tax risk</button>
+      <span id="mrTopicChips" style="display:contents">
+        <button class="mr-chip" onclick="mrAsk('What are the key risks under IFRS 9 ECL modelling?')">IFRS 9 ECL risks</button>
+        <button class="mr-chip" onclick="mrAsk('How should we account for a business combination under IFRS 3?')">IFRS 3 business combos</button>
+        <button class="mr-chip" onclick="mrAsk('What is changing under IFRS 18 for our income statement?')">IFRS 18 impact</button>
+        <button class="mr-chip" onclick="mrAsk('What tax risks come with a cross-border group restructuring?')">Cross-border tax risk</button>
+      </span>
       <button class="mr-chip" id="mrEndBtn" onclick="mrEndMeeting()" style="border-color:var(--steel);color:var(--steel-light)">End meeting &amp; email me a summary</button>
     </div>
     <div class="mr-inputbar" id="mrInputBar" style="display:none">
@@ -1559,7 +1579,7 @@ animation:pulseRing 2.4s ease-out infinite;
   <a class="mr-chip" target="_blank" rel="noopener" href="https://uk.indeed.com/jobs?q=audit&l=United+Kingdom">Indeed — Audit, UK</a>
   <a class="mr-chip" target="_blank" rel="noopener" href="https://uk.indeed.com/jobs?q=tax+advisory&l=United+Kingdom">Indeed — Tax Advisory, UK</a>
   <a class="mr-chip" target="_blank" rel="noopener" href="https://www.totaljobs.com/jobs/audit">TotalJobs — Audit</a>
-  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.efinancialcareers.co.uk/jobs-Audit">eFinancialCareers — Audit</a>
+  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.efinancialcareers.co.uk/search?q=audit">eFinancialCareers — Audit</a>
 </div>
 <p class="mr-note" style="margin-bottom:2.5rem">These open the relevant search directly on each site — by design, this site does not scrape or auto-apply to jobs (LinkedIn/Indeed Terms of Service prohibit automated scraping and applications). Browse there, then bring a posting back here to tailor your application.</p>
 
@@ -2444,7 +2464,7 @@ animation:pulseRing 2.4s ease-out infinite;
 
 <!-- PERSONAL GPT WIDGET -->
 <div class="welcome-bot" style="bottom:282px">
-  <div class="welcome-bot-panel" id="askPanel" style="max-height:520px">
+  <div class="welcome-bot-panel" id="askPanel" style="max-height:min(480px, 60vh)">
     <div class="welcome-bot-header">
       <span id="askPanelTitle">💬 AskAI</span>
       <button class="welcome-bot-close" onclick="toggleAsk(false)">&times;</button>
@@ -2767,6 +2787,13 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       if(Math.random()<0.3 && signups < visits - 50) signups++;
       render();
     }, 25000);
+
+    // A real signup on this visit should visibly move the needle immediately
+    window.bumpSignupCount=function(){
+      signups++;
+      if(visits<=signups) visits=signups+1;
+      render();
+    };
   })();
 
   // Industry News — fetches the auto-refreshed JSON (kept current by a background research agent)
@@ -2905,6 +2932,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
 
     window.toggleWelcomeBot=function(force){
       opened = typeof force==='boolean' ? force : !opened;
+      if(opened) window.closeOtherWidgets?.('welcomeBot');
       panel.classList.toggle('open', opened);
       toggleBtn.classList.remove('pulse');
       if(opened) startConversation();
@@ -2964,6 +2992,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
 
     window.toggleFeedback=function(force){
       fbOpened = typeof force==='boolean' ? force : !fbOpened;
+      if(fbOpened) window.closeOtherWidgets?.('feedback');
       panel.classList.toggle('open', fbOpened);
       if(fbOpened && !greeted){
         greeted=true;
@@ -3026,8 +3055,9 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
 
     window.toggleSignup=function(force){
       const u=getUser();
-      if(u){ alert(`You're already signed up as ${u.name} (${u.email}). Thanks for coming back!`); return; }
+      if(u && force!==false){ alert(`You're already signed up as ${u.name} (${u.email}). Thanks for coming back!`); return; }
       suOpened = typeof force==='boolean' ? force : !suOpened;
+      if(suOpened) window.closeOtherWidgets?.('signup');
       panel.classList.toggle('open', suOpened);
     };
     toggleBtn.addEventListener('click', ()=>window.toggleSignup());
@@ -3050,6 +3080,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
         reflectSignedInState();
         document.getElementById('signupMessages').innerHTML=`<div class="wb-msg bot"><div class="wb-bubble">You're in, ${name.split(' ')[0]}! Check your inbox for a welcome note. Look for your personal assistant — it's now called "${name.split(' ')[0]}'sGPT" — near the chat bubble.</div></div>`;
         updateAskBranding();
+        window.bumpSignupCount?.();
       }catch(e){
         alert('Connection issue — please try again.');
       }finally{
@@ -3081,6 +3112,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
 
     window.toggleAsk=function(force){
       askOpened = typeof force==='boolean' ? force : !askOpened;
+      if(askOpened) window.closeOtherWidgets?.('ask');
       panel.classList.toggle('open', askOpened);
       if(askOpened && wrap.childElementCount===0){
         const u=window.getSiteUser?.();
@@ -3122,6 +3154,16 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     });
   })();
 
+  // Singleton widget manager — closes any other open floating widget (and stops its
+  // audio) whenever one is opened, so they never stack up and talk over each other
+  window.closeOtherWidgets=function(exceptName){
+    if(exceptName!=='welcomeBot') window.toggleWelcomeBot?.(false);
+    if(exceptName!=='feedback') window.toggleFeedback?.(false);
+    if(exceptName!=='signup') window.toggleSignup?.(false);
+    if(exceptName!=='ask') window.toggleAsk?.(false);
+    if(typeof VoiceEngine!=='undefined') VoiceEngine.cancel();
+  };
+
   // USP toast notifications — gently invite visitors to try the standout features
   (function(){
     const toasts=[
@@ -3134,7 +3176,10 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     toastEl.className='usp-toast';
     document.body.appendChild(toastEl);
     const seenKey='usp_toasts_shown';
+    const dismissedKey='usp_toasts_dismissed';
     let shown=parseInt(sessionStorage.getItem(seenKey)||'0',10);
+    let userDismissed=sessionStorage.getItem(dismissedKey)==='1';
+    let intervalId=null;
 
     function renderToast(t){
       toastEl.innerHTML=`
@@ -3148,10 +3193,16 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
         document.querySelector(t.target)?.scrollIntoView({behavior:'smooth'});
         hideToast();
       });
-      toastEl.querySelector('.usp-toast-dismiss').addEventListener('click', hideToast);
+      toastEl.querySelector('.usp-toast-dismiss').addEventListener('click', ()=>{
+        // explicit dismissal means "stop showing these" for the rest of this session, not just this one
+        userDismissed=true;
+        sessionStorage.setItem(dismissedKey, '1');
+        if(intervalId) clearInterval(intervalId);
+        hideToast();
+      });
     }
     function showToast(){
-      if(shown>=12) return; // generous cap — this is a USP we want visible, not naggy
+      if(userDismissed || shown>=4) return; // respect an explicit "not now", and keep the cap modest
       renderToast(toasts[i % toasts.length]);
       i++;
       requestAnimationFrame(()=>toastEl.classList.add('show'));
@@ -3161,8 +3212,10 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     }
     function hideToast(){ toastEl.classList.remove('show'); }
 
-    setTimeout(showToast, 6000); // first nudge 5-8s after arrival
-    setInterval(showToast, 30000); // then a reminder every 30s, capped at 12/session
+    if(!userDismissed){
+      setTimeout(showToast, 6000); // first nudge 5-8s after arrival
+      intervalId=setInterval(showToast, 60000); // then a gentle reminder every 60s, capped at 4/session, stops on dismissal
+    }
   })();
 
   // Cursor-reactive hover tags on key feature cards
@@ -3550,6 +3603,7 @@ function mrRenderPanelReply(text){
     if(name && msg) mrAppendMessage('agent', name.trim(), msg.trim());
   }
 }
+let mrRealUserMessages=0;
 function mrSendMessage(){
   const input=document.getElementById('mrInput');
   const text=input.value.trim();
@@ -3557,6 +3611,13 @@ function mrSendMessage(){
   mrAppendMessage('user','You', text);
   mrHistory.push({role:'user', content:text});
   input.value='';
+  mrRealUserMessages++;
+  // The generic topic-suggestion chips stop being relevant once a real, specific
+  // discussion is underway — hide them after the name exchange so they don't linger
+  if(mrRealUserMessages>=2){
+    const topicChips=document.getElementById('mrTopicChips');
+    if(topicChips) topicChips.style.display='none';
+  }
   mrCallApi(text);
 }
 document.getElementById('mrInput').addEventListener('keydown', e=>{
@@ -3914,13 +3975,13 @@ function openGaapSlide(jurisdiction, idx){
   document.getElementById('gaapSlideContent').innerHTML=`
     <h1 style="margin-bottom:.5rem">${row.topic}</h1>
     <p class="mr-note" style="margin-bottom:1.5rem">IFRS vs ${data.label}</p>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
-      <div style="background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.25);border-radius:12px;padding:1.5rem">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.5rem;overflow-wrap:break-word">
+      <div style="background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.25);border-radius:12px;padding:1.5rem;min-width:0;overflow-wrap:break-word;word-break:break-word">
         <div style="color:var(--gold);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem">IFRS</div>
         <p style="color:var(--cream);line-height:1.7;font-weight:600;margin-bottom:.75rem">${row.ifrs}</p>
         <ul style="color:var(--steel-light);line-height:1.7;font-size:.88rem;padding-left:1.1rem;margin:0">${ifrsBullets}</ul>
       </div>
-      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem">
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:1.5rem;min-width:0;overflow-wrap:break-word;word-break:break-word">
         <div style="color:var(--gold-light);font-weight:700;font-size:.78rem;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.75rem">${data.label}</div>
         <p style="color:var(--cream);line-height:1.7;font-weight:600;margin-bottom:.75rem">${row.local}</p>
         <ul style="color:var(--steel-light);line-height:1.7;font-size:.88rem;padding-left:1.1rem;margin:0">${localBullets}</ul>

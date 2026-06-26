@@ -38,7 +38,8 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 4rem;
+    flex-wrap: nowrap;
+    padding: 0 clamp(1rem, 3vw, 4rem);
     height: 64px;
     background: rgba(10,22,40,0.92);
     backdrop-filter: blur(12px);
@@ -47,25 +48,29 @@
 
   .nav-logo {
     font-family: 'Manrope', 'Century Gothic', sans-serif;
-    font-size: 1.25rem;
+    font-size: clamp(0.78rem, 1.1vw, 1.25rem);
     color: var(--gold);
     letter-spacing: 0.03em;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 
   .nav-links {
     display: flex;
-    gap: 2.5rem;
+    flex-wrap: nowrap;
+    gap: clamp(0.6rem, 1.4vw, 2.5rem);
     list-style: none;
   }
 
   .nav-links a {
     text-decoration: none;
     color: var(--steel-light);
-    font-size: 0.8rem;
+    font-size: clamp(0.62rem, 0.85vw, 0.8rem);
     font-weight: 500;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     transition: color 0.2s;
+    white-space: nowrap;
   }
 
   .nav-links a:hover { color: var(--gold); }
@@ -1060,10 +1065,11 @@ animation:floatGlow 12s ease-in-out infinite;
 
 
 .nav-logo{
-font-size:1.4rem;
+font-size:clamp(0.78rem, 1.1vw, 1.25rem);
 font-weight:800;
-letter-spacing:.15em;
+letter-spacing:.1em;
 text-transform:uppercase;
+white-space:nowrap;
 background:linear-gradient(135deg,#fff,#e0c99a,#c8a96e);
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
@@ -1119,7 +1125,8 @@ background:linear-gradient(90deg,transparent,rgba(200,169,110,.7),transparent);
 
 .nav-links a{
 font-weight:700;
-letter-spacing:.12em;
+letter-spacing:.08em;
+white-space:nowrap;
 }
 
 </style>

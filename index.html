@@ -965,8 +965,8 @@
   .welcome-bot-messages{ padding:1rem; overflow-y:auto; flex:1; display:flex; flex-direction:column; gap:.7rem; }
   .wb-msg{ max-width:90%; align-self:flex-start; }
   .wb-msg.user{ align-self:flex-end; }
-  .wb-bubble{ background:rgba(200,169,110,.1); border:1px solid rgba(200,169,110,.2); border-radius:12px; padding:.65rem .9rem; font-size:.82rem; line-height:1.6; color:var(--cream); }
-  .wb-msg.user .wb-bubble{ background:var(--gold); color:var(--navy); font-weight:600; }
+  .wb-bubble{ background:rgba(200,169,110,.1); border:1px solid rgba(200,169,110,.2); border-radius:18px; border-bottom-left-radius:5px; padding:.65rem .9rem; font-size:.82rem; line-height:1.6; color:var(--cream); }
+  .wb-msg.user .wb-bubble{ background:var(--gold); color:var(--navy); font-weight:600; border-radius:18px; border-bottom-right-radius:5px; }
   .wb-options{ display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.3rem; }
   .wb-option-btn{
     background:rgba(255,255,255,.06); border:1px solid rgba(200,169,110,.3);
@@ -1251,10 +1251,10 @@ animation:pulseRing 2.4s ease-out infinite;
 .mr-msg{max-width:80%;animation:msgIn .4s cubic-bezier(.22,1,.36,1)}
 @keyframes msgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .mr-msg.user{align-self:flex-end}
-.mr-bubble{padding:.85rem 1.1rem;border-radius:14px;font-size:.86rem;line-height:1.7;overflow-wrap:break-word;word-break:break-word;max-width:100%}
+.mr-bubble{padding:.85rem 1.1rem;border-radius:20px;font-size:.86rem;line-height:1.7;overflow-wrap:break-word;word-break:break-word;max-width:100%;position:relative}
 .mr-bubble a{word-break:break-all}
-.mr-msg.agent .mr-bubble{background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.18);color:var(--cream)}
-.mr-msg.user .mr-bubble{background:var(--gold);color:var(--navy);font-weight:500}
+.mr-msg.agent .mr-bubble{background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.18);color:var(--cream);border-bottom-left-radius:5px}
+.mr-msg.user .mr-bubble{background:var(--gold);color:var(--navy);font-weight:500;border-bottom-right-radius:5px}
 .mr-msg-name{font-size:.7rem;font-weight:700;color:var(--gold);margin-bottom:.15rem;letter-spacing:.04em;text-transform:uppercase}
 .mr-msg-role{font-size:.66rem;color:var(--steel-light);margin-bottom:.4rem;font-style:italic}
 .mr-typing{display:flex;gap:4px;padding:.6rem 1rem}

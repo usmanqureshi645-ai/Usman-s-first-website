@@ -4,3 +4,7 @@
 /*.pdf
 .claude/
 Previous feedbacks/
+*.csv
+*API Key*
+*api key*
+*.env

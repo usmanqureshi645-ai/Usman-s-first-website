@@ -81,6 +81,27 @@
   .consult-actions button:hover { background: rgba(200,169,110,.1); }
   .consult-actions .continue-btn { background: var(--gold); color: var(--navy); border-color: var(--gold); font-weight: 700; }
   .empty-note { color: var(--steel); font-size: .85rem; text-align: center; padding: 2rem 0; }
+
+  .ws-tabs { display: flex; gap: .5rem; margin-bottom: 2rem; border-bottom: 1px solid rgba(200,169,110,.15); }
+  .ws-tab {
+    background: none; border: none; color: var(--steel-light); font-size: .85rem; font-weight: 600;
+    padding: .7rem .3rem; cursor: pointer; position: relative; font-family: inherit;
+  }
+  .ws-tab + .ws-tab { margin-left: 1.25rem; }
+  .ws-tab.active { color: var(--gold-light); }
+  .ws-tab.active::after { content:''; position:absolute; left:0; right:0; bottom:-1px; height:2px; background: var(--gold); }
+  .ws-panel { display: none; }
+  .ws-panel.active { display: block; }
+
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
+  .tool-link-card {
+    background: rgba(255,255,255,.03); border: 1px solid rgba(200,169,110,.15); border-radius: 14px;
+    padding: 1.4rem; text-decoration: none; display: block; transition: border-color .15s, background .15s;
+  }
+  .tool-link-card:hover { border-color: rgba(200,169,110,.45); background: rgba(255,255,255,.05); }
+  .tool-link-card .ti { font-size: 1.5rem; margin-bottom: .5rem; display: block; }
+  .tool-link-card .tt { color: var(--cream); font-weight: 700; font-size: .95rem; margin-bottom: .3rem; display: block; }
+  .tool-link-card .td { color: var(--steel-light); font-size: .8rem; line-height: 1.5; }
 </style>
 </head>
 <body>
@@ -99,8 +120,34 @@
     </div>
 
     <div id="loggedInState" style="display:none">
-      <div class="tool-filter" id="toolFilter"></div>
-      <div id="consultList"></div>
+      <div class="ws-tabs">
+        <button class="ws-tab active" data-panel="history">History</button>
+        <button class="ws-tab" data-panel="tools">AI Tools</button>
+        <button class="ws-tab" data-panel="contact">Contact</button>
+      </div>
+
+      <div class="ws-panel active" id="panel-history">
+        <div class="tool-filter" id="toolFilter"></div>
+        <div id="consultList"></div>
+      </div>
+
+      <div class="ws-panel" id="panel-tools">
+        <div class="tools-grid">
+          <a class="tool-link-card" href="index.html#meetingroom"><span class="ti">🤝</span><span class="tt">Meeting Room</span><span class="td">Discuss a real scenario with a panel of finance/audit/tax specialists.</span></a>
+          <a class="tool-link-card" href="index.html#knowledgetest"><span class="ti">📝</span><span class="tt">Interview Prep</span><span class="td">Practice technical/behavioural interview questions with a kind, encouraging coach.</span></a>
+          <a class="tool-link-card" href="index.html#jobhub"><span class="ti">📄</span><span class="tt">CV &amp; Job Search Tools</span><span class="td">Tailor your CV/cover letter or get a brutally honest recruiter-style review.</span></a>
+          <a class="tool-link-card" href="index.html#gaapcompare"><span class="ti">⚖️</span><span class="tt">GAAP Compare</span><span class="td">Jurisdiction-aware research on accounting standard differences.</span></a>
+          <a class="tool-link-card" href="index.html#hottopics"><span class="ti">📰</span><span class="tt">Hot Market Topics</span><span class="td">Current IFRS/FRC/audit news and discussion points.</span></a>
+          <a class="tool-link-card" href="index.html?openAsk=1#hero"><span class="ti">🤖</span><span class="tt">AskAI</span><span class="td">Your personal assistant for quick questions, any time.</span></a>
+        </div>
+      </div>
+
+      <div class="ws-panel" id="panel-contact">
+        <div class="state-card">
+          <p>Want to talk to Usman directly rather than the AI tools? Head back to the contact section on the main site.</p>
+          <button class="btn-gold" onclick="location.href='index.html#contact'">Go to Contact</button>
+        </div>
+      </div>
     </div>
   </main>
 
@@ -154,13 +201,35 @@
       `).join('');
     }
 
+    function stripMarkdown(text) {
+      return String(text || '')
+        .replace(/^#{1,6}\s*/gm, '')
+        .replace(/\*\*(.+?)\*\*/g, '$1')
+        .replace(/\*(.+?)\*/g, '$1')
+        .replace(/`{1,3}([^`]*)`{1,3}/g, '$1')
+        .replace(/^>\s?/gm, '')
+        .replace(/^[-*+]\s+/gm, '• ')
+        .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+        .replace(/^-{3,}$/gm, '')
+        .trim();
+    }
+
     function renderTranscript(transcript) {
       if (!Array.isArray(transcript) || transcript.length === 0) return '<p>No written summary saved for this one.</p>';
       return transcript
-        .filter(m => (m.role === 'user' || m.role === 'assistant') && !String(m.content).startsWith('['))
-        .map(m => `<p><strong>${m.role === 'user' ? 'You' : 'Assistant'}:</strong> ${escapeHtml(m.content)}</p>`)
+        .filter(m => (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string' && !m.content.startsWith('['))
+        .map(m => `<p><strong>${m.role === 'user' ? 'You' : 'Assistant'}:</strong> ${escapeHtml(stripMarkdown(m.content))}</p>`)
         .join('');
     }
+
+    document.querySelectorAll('.ws-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.ws-tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.ws-panel').forEach(p => p.classList.remove('active'));
+        tab.classList.add('active');
+        document.getElementById(`panel-${tab.dataset.panel}`).classList.add('active');
+      });
+    });
 
     function toggleSummary(id) {
       document.getElementById(`summary-${id}`).classList.toggle('open');

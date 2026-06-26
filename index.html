@@ -1011,7 +1011,9 @@
 
 .reveal{opacity:0;transform:translateY(24px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
-.service-grid,.trust-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1.5rem}
+.service-grid,.trust-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:1.5rem}
+.service-grid .service-card{flex:1 1 250px;max-width:320px}
+.trust-grid .trust-card{flex:1 1 250px;max-width:320px}
 .service-card,.trust-card{
 background:rgba(255,255,255,.03);
 backdrop-filter:blur(12px);
@@ -1162,9 +1164,10 @@ body{background:linear-gradient(180deg,#050b15,#0a1628)}
 .hero{position:relative}
 .hero:after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(200,169,110,.12),transparent 30%);pointer-events:none}
 .client-showcase,.knowledge-grid,.train-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
-#toolsshowcase .knowledge-grid{grid-template-columns:repeat(3,1fr)}
-@media (max-width:900px){ #toolsshowcase .knowledge-grid{grid-template-columns:repeat(2,1fr)} }
-@media (max-width:600px){ #toolsshowcase .knowledge-grid{grid-template-columns:1fr} }
+#toolsshowcase .knowledge-grid{display:flex;flex-wrap:wrap;justify-content:center}
+#toolsshowcase .knowledge-grid .knowledge-card{flex:1 1 300px;max-width:380px}
+#hottopics .knowledge-grid{display:flex;flex-wrap:wrap;justify-content:center}
+#hottopics .knowledge-grid .knowledge-card{flex:1 1 280px;max-width:380px}
 .client-card,.knowledge-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:1.6rem;border-radius:18px;backdrop-filter:blur(18px);transition:.4s}
 .client-card:hover,.knowledge-card:hover,.sector-card:hover{transform:translateY(-10px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
 .pub-btn{margin-top:1rem;background:#C8A96E;color:#0A1628;border:none;padding:.8rem 1.2rem;border-radius:10px;font-weight:700;cursor:pointer}
@@ -1349,7 +1352,7 @@ animation:pulseRing 2.4s ease-out infinite;
 <li><a href="#trainings">Trainings</a></li>
 <li><a href="#gaapcompare">GAAP Compare</a></li>
 <li><a href="#hottopics">Hot Market Topics</a></li>
-<li><a href="#jobhub">Job Search</a></li>
+<li><a href="#jobhub">Rate Your Resume</a></li>
 <li><a href="#knowledgetest">Knowledge Test</a></li>
 <li><a href="#meetingroom" class="nav-meetingroom">Meeting Room <span class="live-dot"></span></a></li>
 <li><a href="#contact">Contact</a></li>
@@ -1468,8 +1471,12 @@ animation:pulseRing 2.4s ease-out infinite;
 <p>Interview &amp; exam prep with a friendly AI coach — get an emailed feedback report.</p>
 </div>
 <div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('jobhub').scrollIntoView({behavior:'smooth'})">
-<span class="sector-icon">💼</span><h3>Job Search &amp; ATS Review</h3>
+<span class="sector-icon">💼</span><h3>Score Your Resume</h3>
 <p>Upload your CV for an honest score, then an AI-tailored rewrite.</p>
+</div>
+<div class="knowledge-card" style="cursor:pointer" onclick="window.openPersonalizedJobSearch()">
+<span class="sector-icon">🎯</span><h3>Personalized Job Search For You</h3>
+<p>Sign up, upload your CV, and get AI-curated job search links and titles matched to your background.</p>
 </div>
 <div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('gaapcompare').scrollIntoView({behavior:'smooth'})">
 <span class="sector-icon">📊</span><h3>GAAP Compare</h3>
@@ -1610,26 +1617,14 @@ animation:pulseRing 2.4s ease-out infinite;
 
 <hr class="gold-rule">
 
-<!-- LOOKING FOR A JOB -->
+<!-- RATE YOUR RESUME -->
 <section id="jobhub">
 <div class="section-inner flow-reveal">
 <div class="section-header">
 <p class="section-eyebrow">Career Toolkit</p>
-<h2 class="section-title">Looking for a Job</h2>
-<p class="section-sub">A quick way to search live finance roles, then tailor your CV and cover letter to a specific posting with AI — in your own words, in minutes. No data is stored; everything happens in this session.</p>
+<h2 class="section-title">Rate Your Resume</h2>
+<p class="section-sub">Upload your CV — and, optionally, a job posting and cover letter — and an AI acting as a skeptical recruiter and ATS reviewer scores it honestly, then tailors a rewrite to a specific posting if you want one. No data is stored; everything happens in this session. Looking for a job to apply to? Sign up free for <a href="#" onclick="window.openPersonalizedJobSearch();return false" style="color:var(--gold)">Personalized Job Search</a> in your workspace.</p>
 </div>
-
-<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Quick Search — Audit, Advisory &amp; Tax Roles</h3>
-<div class="job-filters" style="display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2.5rem">
-  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.linkedin.com/jobs/search/?keywords=audit&location=United%20Kingdom">LinkedIn — Audit, UK</a>
-  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.linkedin.com/jobs/search/?keywords=tax%20advisory&location=United%20Kingdom">LinkedIn — Tax Advisory, UK</a>
-  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.linkedin.com/jobs/search/?keywords=financial%20reporting&location=United%20Kingdom">LinkedIn — Financial Reporting, UK</a>
-  <a class="mr-chip" target="_blank" rel="noopener" href="https://uk.indeed.com/jobs?q=audit&l=United+Kingdom">Indeed — Audit, UK</a>
-  <a class="mr-chip" target="_blank" rel="noopener" href="https://uk.indeed.com/jobs?q=tax+advisory&l=United+Kingdom">Indeed — Tax Advisory, UK</a>
-  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.totaljobs.com/jobs/audit">TotalJobs — Audit</a>
-  <a class="mr-chip" target="_blank" rel="noopener" href="https://www.efinancialcareers.co.uk/search?q=audit">eFinancialCareers — Audit</a>
-</div>
-<p class="mr-note" style="margin-bottom:2.5rem">These open the relevant search directly on each site — by design, this site does not scrape or auto-apply to jobs (LinkedIn/Indeed Terms of Service prohibit automated scraping and applications). Browse there, then bring a posting back here to tailor your application.</p>
 
 <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">AI CV &amp; ATS Review</h3>
 <p class="mr-note" style="margin-bottom:1.5rem">Upload your documents — no need to retype anything. We'll act as a skeptical recruiter and ATS reviewer, score your CV, and only change what you approve.</p>
@@ -2475,6 +2470,10 @@ animation:pulseRing 2.4s ease-out infinite;
             <span class="contact-icon">⏱</span>
             <span>One month notice period</span>
           </li>
+          <li>
+            <span class="contact-icon">🔗</span>
+            <a href="https://www.linkedin.com/in/usman-qureshi-6118b613b/" target="_blank" rel="noopener" class="contact-link">LinkedIn Profile</a>
+          </li>
         </ul>
       </div>
 
@@ -3295,6 +3294,13 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     containerEl.appendChild(div);
   };
 
+  // "Personalized Job Search For You" USP tile — takes the visitor straight to the
+  // dashboard tab if logged in, or prompts a free signup first (never a hard wall).
+  window.openPersonalizedJobSearch=function(){
+    if(window.getSiteUser?.()){ window.location.href='workspace.html?tab=jobsearch'; return; }
+    window.toggleSignup?.(true);
+  };
+
   // Singleton widget manager — closes any other open floating widget (and stops its
   // audio) whenever one is opened, so they never stack up and talk over each other
   window.closeOtherWidgets=function(exceptName){
@@ -3539,7 +3545,7 @@ window.addEventListener('load',forceRevealSweep);
 setTimeout(forceRevealSweep,1500);
 
 /* ── Boutique card tilt ── */
-document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-card,.client-card').forEach(card=>{
+document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-card,.client-card,.stat-card').forEach(card=>{
   card.addEventListener('mousemove', e=>{
     const r=card.getBoundingClientRect();
     const x=(e.clientX-r.left)/r.width-0.5;
@@ -3591,6 +3597,7 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
 
   function setPlaying(state){
     playing=state;
+    try{ localStorage.setItem('bgMusicOn', playing ? '1' : '0'); }catch(e){}
     toggle.classList.toggle('playing', playing);
     iconOn.style.display = playing ? 'block' : 'none';
     iconOff.style.display = playing ? 'none' : 'block';
@@ -3617,10 +3624,23 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
     window.removeEventListener('keydown', autoStartOnce);
     window.removeEventListener('scroll', autoStartOnce);
   }
-  window.addEventListener('click', autoStartOnce, { once:true });
-  window.addEventListener('touchstart', autoStartOnce, { once:true });
-  window.addEventListener('keydown', autoStartOnce, { once:true });
-  window.addEventListener('scroll', autoStartOnce, { once:true });
+  // Carry the on/off state across pages (index <-> workspace) instead of each
+  // page tracking it independently, which made the toggle look flipped when navigating.
+  let storedOn=null;
+  try{ storedOn=localStorage.getItem('bgMusicOn'); }catch(e){}
+  if(storedOn==='1'){
+    setPlaying(true);
+    // If autoplay-with-sound is blocked on this fresh navigation, fall back to starting on first interaction.
+    window.addEventListener('click', autoStartOnce, { once:true });
+    window.addEventListener('touchstart', autoStartOnce, { once:true });
+    window.addEventListener('keydown', autoStartOnce, { once:true });
+    window.addEventListener('scroll', autoStartOnce, { once:true });
+  } else if(storedOn===null){
+    window.addEventListener('click', autoStartOnce, { once:true });
+    window.addEventListener('touchstart', autoStartOnce, { once:true });
+    window.addEventListener('keydown', autoStartOnce, { once:true });
+    window.addEventListener('scroll', autoStartOnce, { once:true });
+  }
 
   // Watchdog: browsers sometimes silently pause background-tab audio (autoplay
   // policy, tab throttling) without firing any event we listen to. If the user

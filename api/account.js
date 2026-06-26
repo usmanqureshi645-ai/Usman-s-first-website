@@ -146,6 +146,67 @@ async function handleWorkspaceGet(req, res, { kvUrl, kvToken }) {
   res.status(200).json({ ok: true, consultation: record });
 }
 
+const EXPERIENCE_LABELS = {
+  graduate: 'Graduate / Entry-level',
+  associate: 'Associate / Senior Associate',
+  manager: 'Manager',
+  'assistant-manager': 'Assistant Manager',
+  senior: 'Senior Manager / Director',
+};
+
+function buildJobSearchLinks(roleTitles, location) {
+  const loc = encodeURIComponent(location || '');
+  const links = [];
+  roleTitles.slice(0, 3).forEach(title => {
+    const kw = encodeURIComponent(title);
+    links.push({ label: `LinkedIn — ${title}`, url: `https://www.linkedin.com/jobs/search/?keywords=${kw}${loc ? `&location=${loc}` : ''}` });
+    links.push({ label: `Indeed — ${title}`, url: `https://www.indeed.com/jobs?q=${kw}${loc ? `&l=${loc}` : ''}` });
+  });
+  if (roleTitles[0]) {
+    links.push({ label: `TotalJobs — ${roleTitles[0]}`, url: `https://www.totaljobs.com/jobs/${encodeURIComponent(roleTitles[0]).replace(/%20/g, '-')}` });
+    links.push({ label: `eFinancialCareers — ${roleTitles[0]}`, url: `https://www.efinancialcareers.co.uk/search?q=${encodeURIComponent(roleTitles[0])}` });
+  }
+  return links;
+}
+
+async function handlePersonalizedJobs(req, res, { kvUrl, kvToken, apiKey }) {
+  if (!apiKey) { res.status(500).json({ error: 'Server not configured' }); return; }
+  const user = getUserFromRequest(req);
+  if (!user) { res.status(401).json({ error: 'Sign up free to use personalized job search' }); return; }
+
+  const { cv, coverLetter, location, country, experienceLevel } = req.body || {};
+  if (!cv || !String(cv).trim()) { res.status(400).json({ error: 'Please upload your CV first' }); return; }
+
+  const expLabel = EXPERIENCE_LABELS[experienceLevel] || experienceLevel || 'any level';
+  const system = `You help a finance/audit/accounting professional find relevant job search terms based on their CV. Extract their likely role titles, seniority and key skills, then respond with ONLY valid JSON, no markdown fencing, in this exact shape:
+{
+  "roleTitles": ["<2-4 specific job titles this person should search for, ordered by best fit>"],
+  "summary": "<2-3 short sentences, written directly to the candidate, on what kind of roles fit their background and why, considering the experience level ${expLabel} and location preference ${location || 'not specified'}${country ? `, country ${country}` : ''}>"
+}`;
+  const userMessage = `CANDIDATE CV:\n${cv}\n\n${coverLetter ? `COVER LETTER:\n${coverLetter}\n\n` : ''}PREFERRED LOCATION: ${location || 'not specified'}\nPREFERRED COUNTRY: ${country || 'not specified'}\nTARGET EXPERIENCE LEVEL: ${expLabel}`;
+
+  try {
+    const upstream = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 800, system, messages: [{ role: 'user', content: userMessage }] }),
+    });
+    const data = await upstream.json();
+    if (!upstream.ok) { res.status(upstream.status).json({ error: data?.error?.message || 'Upstream error' }); return; }
+
+    const text = data?.content?.[0]?.text || '{}';
+    let parsed;
+    try { parsed = JSON.parse(text); } catch { parsed = { roleTitles: [], summary: text }; }
+
+    const roleTitles = Array.isArray(parsed.roleTitles) && parsed.roleTitles.length ? parsed.roleTitles : ['Audit Manager'];
+    const links = buildJobSearchLinks(roleTitles, location || country || '');
+
+    res.status(200).json({ ok: true, roleTitles, summary: parsed.summary || '', links });
+  } catch (err) {
+    res.status(500).json({ error: 'Request failed' });
+  }
+}
+
 async function handleCronFollowups(req, res, { kvUrl, kvToken, resendKey }) {
   const cronSecret = process.env.CRON_SECRET;
   if (cronSecret && req.headers['authorization'] !== `Bearer ${cronSecret}`) { res.status(401).json({ error: 'Unauthorized' }); return; }
@@ -199,6 +260,7 @@ export default async function handler(req, res) {
     resendKey: process.env.RESEND_API_KEY,
     kvUrl: process.env.UPSTASH_REDIS_REST_URL,
     kvToken: process.env.UPSTASH_REDIS_REST_TOKEN,
+    apiKey: process.env.ANTHROPIC_API_KEY,
   };
   const action = req.query?.action;
 
@@ -212,6 +274,7 @@ export default async function handler(req, res) {
       case 'workspace-list': return await handleWorkspaceList(req, res, ctx);
       case 'workspace-get': return await handleWorkspaceGet(req, res, ctx);
       case 'cron-followups': return await handleCronFollowups(req, res, ctx);
+      case 'personalized-jobs': return req.method === 'POST' ? await handlePersonalizedJobs(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       default: res.status(400).json({ error: 'Unknown or missing action' });
     }
   } catch (err) {

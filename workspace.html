@@ -153,6 +153,7 @@
     <div id="loggedInState" style="display:none">
       <div class="ws-tabs">
         <button class="ws-tab active" data-panel="history">History</button>
+        <button class="ws-tab" data-panel="jobsearch">Job Search</button>
         <button class="ws-tab" data-panel="tools">AI Tools</button>
         <button class="ws-tab" data-panel="contact">Contact</button>
       </div>
@@ -162,11 +163,58 @@
         <div id="consultList"></div>
       </div>
 
+      <div class="ws-panel" id="panel-jobsearch">
+        <div class="state-card" style="text-align:left">
+          <p style="margin-top:0">Upload your CV (and optionally a cover letter), set your filters, and get AI-curated job search titles and links matched to your background — across LinkedIn, Indeed, TotalJobs and eFinancialCareers. This doesn't auto-apply or scrape listings — it generates the right search for you to browse.</p>
+          <label style="font-size:.78rem;color:var(--steel-light);display:block;margin:1rem 0 .4rem">1. Upload your CV (.pdf, .docx, or .txt) — required</label>
+          <div class="job-upload-box" id="jsCvUploadBox" onclick="document.getElementById('jsCvFile').click()" style="background:rgba(255,255,255,.05);border:1px dashed rgba(200,169,110,.3);border-radius:10px;padding:1rem;cursor:pointer;text-align:center;font-size:.85rem;color:var(--steel-light)">
+            <input type="file" id="jsCvFile" accept=".pdf,.docx,.txt" style="display:none" onchange="jsHandleFile(this,'cv')">
+            <span id="jsCvUploadLabel">📄 Click to upload your CV</span>
+          </div>
+          <label style="font-size:.78rem;color:var(--steel-light);display:block;margin:1rem 0 .4rem">Optional: upload your cover letter too</label>
+          <div class="job-upload-box" id="jsCoverUploadBox" onclick="document.getElementById('jsCoverFile').click()" style="background:rgba(255,255,255,.05);border:1px dashed rgba(200,169,110,.3);border-radius:10px;padding:1rem;cursor:pointer;text-align:center;font-size:.85rem;color:var(--steel-light)">
+            <input type="file" id="jsCoverFile" accept=".pdf,.docx,.txt" style="display:none" onchange="jsHandleFile(this,'cover')">
+            <span id="jsCoverUploadLabel">✉️ Click to upload your cover letter (optional)</span>
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin-top:1.25rem">
+            <div>
+              <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">Location</label>
+              <input type="text" id="jsLocation" placeholder="e.g. London" style="width:100%;height:40px;border-radius:8px;border:1px solid rgba(200,169,110,.2);background:rgba(255,255,255,.03);color:var(--cream);padding:0 .6rem">
+            </div>
+            <div>
+              <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">Country</label>
+              <input type="text" id="jsCountry" placeholder="e.g. United Kingdom" style="width:100%;height:40px;border-radius:8px;border:1px solid rgba(200,169,110,.2);background:rgba(255,255,255,.03);color:var(--cream);padding:0 .6rem">
+            </div>
+            <div>
+              <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">Experience level</label>
+              <select id="jsExperience" style="width:100%;height:40px;border-radius:8px;border:1px solid rgba(200,169,110,.2);background:rgba(255,255,255,.03);color:var(--cream)">
+                <option value="graduate">Graduate / Entry-level</option>
+                <option value="associate">Associate / Senior Associate</option>
+                <option value="assistant-manager">Assistant Manager</option>
+                <option value="manager" selected>Manager</option>
+                <option value="senior">Senior Manager / Director</option>
+              </select>
+            </div>
+          </div>
+
+          <div style="text-align:center;margin-top:1.5rem">
+            <button class="btn-gold" id="jsSubmitBtn" onclick="jsFindJobs()">Find My Jobs</button>
+          </div>
+
+          <div id="jsResult" style="display:none;margin-top:1.5rem">
+            <p id="jsSummary" style="color:var(--steel-light);font-size:.9rem;line-height:1.6"></p>
+            <div id="jsLinks" style="display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem"></div>
+          </div>
+        </div>
+      </div>
+
       <div class="ws-panel" id="panel-tools">
         <div class="tools-grid">
           <a class="tool-link-card" href="index.html#meetingroom"><span class="ti">🤝</span><span class="tt">Meeting Room</span><span class="td">Discuss a real scenario with a panel of finance/audit/tax specialists.</span></a>
           <a class="tool-link-card" href="index.html#knowledgetest"><span class="ti">📝</span><span class="tt">Interview Prep</span><span class="td">Practice technical/behavioural interview questions with a kind, encouraging coach.</span></a>
-          <a class="tool-link-card" href="index.html#jobhub"><span class="ti">📄</span><span class="tt">CV &amp; Job Search Tools</span><span class="td">Tailor your CV/cover letter or get a brutally honest recruiter-style review.</span></a>
+          <a class="tool-link-card" href="index.html#jobhub"><span class="ti">📄</span><span class="tt">Rate Your Resume</span><span class="td">Tailor your CV/cover letter or get a brutally honest recruiter-style review.</span></a>
+          <a class="tool-link-card" href="#" onclick="activateTab('jobsearch');document.querySelector('.ws-tab[data-panel=jobsearch]').scrollIntoView({behavior:'smooth'});return false"><span class="ti">🎯</span><span class="tt">Personalized Job Search</span><span class="td">AI-curated job titles and search links matched to your CV.</span></a>
           <a class="tool-link-card" href="index.html#gaapcompare"><span class="ti">⚖️</span><span class="tt">GAAP Compare</span><span class="td">Jurisdiction-aware research on accounting standard differences.</span></a>
           <a class="tool-link-card" href="index.html#hottopics"><span class="ti">📰</span><span class="tt">Hot Market Topics</span><span class="td">Current IFRS/FRC/audit news and discussion points.</span></a>
           <a class="tool-link-card" href="index.html?openAsk=1#hero"><span class="ti">🤖</span><span class="tt">AskAI</span><span class="td">Your personal assistant for quick questions, any time.</span></a>
@@ -253,14 +301,101 @@
         .join('');
     }
 
+    function activateTab(panel) {
+      const tab = document.querySelector(`.ws-tab[data-panel="${panel}"]`);
+      if (!tab) return;
+      document.querySelectorAll('.ws-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.ws-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(`panel-${panel}`).classList.add('active');
+    }
+
     document.querySelectorAll('.ws-tab').forEach(tab => {
-      tab.addEventListener('click', () => {
-        document.querySelectorAll('.ws-tab').forEach(t => t.classList.remove('active'));
-        document.querySelectorAll('.ws-panel').forEach(p => p.classList.remove('active'));
-        tab.classList.add('active');
-        document.getElementById(`panel-${tab.dataset.panel}`).classList.add('active');
-      });
+      tab.addEventListener('click', () => activateTab(tab.dataset.panel));
     });
+
+    const requestedTab = new URLSearchParams(location.search).get('tab');
+
+    /* ── Personalized Job Search ── */
+    let jsCvText = '', jsCoverText = '';
+
+    function loadScriptOnce(src) {
+      return new Promise((resolve, reject) => {
+        if (document.querySelector(`script[src="${src}"]`)) { resolve(); return; }
+        const s = document.createElement('script');
+        s.src = src; s.onload = resolve; s.onerror = reject;
+        document.head.appendChild(s);
+      });
+    }
+
+    async function extractFileText(file) {
+      const ext = file.name.split('.').pop().toLowerCase();
+      if (ext === 'txt') return await file.text();
+      if (ext === 'pdf') {
+        await loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js');
+        window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        const buf = await file.arrayBuffer();
+        const pdf = await window.pdfjsLib.getDocument({ data: buf }).promise;
+        let text = '';
+        for (let i = 1; i <= pdf.numPages; i++) {
+          const page = await pdf.getPage(i);
+          const content = await page.getTextContent();
+          text += content.items.map(it => it.str).join(' ') + '\n';
+        }
+        return text;
+      }
+      if (ext === 'docx') {
+        await loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js');
+        const buf = await file.arrayBuffer();
+        const result = await window.mammoth.extractRawText({ arrayBuffer: buf });
+        return result.value;
+      }
+      throw new Error('Unsupported file type');
+    }
+
+    async function jsHandleFile(input, kind) {
+      const file = input.files[0];
+      if (!file) return;
+      const label = document.getElementById(kind === 'cv' ? 'jsCvUploadLabel' : 'jsCoverUploadLabel');
+      label.textContent = `Extracting text from ${file.name}…`;
+      try {
+        const text = await extractFileText(file);
+        if (kind === 'cv') jsCvText = text; else jsCoverText = text;
+        label.textContent = `✓ ${file.name} — ${text.trim().split(/\s+/).length} words extracted`;
+      } catch (e) {
+        label.textContent = `Couldn't read ${file.name} — try a .txt, .pdf or .docx file`;
+      }
+    }
+
+    async function jsFindJobs() {
+      if (!jsCvText.trim()) { alert('Please upload your CV first.'); return; }
+      const btn = document.getElementById('jsSubmitBtn');
+      btn.disabled = true; btn.textContent = 'Finding jobs…';
+      try {
+        const resp = await fetch('/api/account?action=personalized-jobs', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            cv: jsCvText,
+            coverLetter: jsCoverText || undefined,
+            location: document.getElementById('jsLocation').value.trim(),
+            country: document.getElementById('jsCountry').value.trim(),
+            experienceLevel: document.getElementById('jsExperience').value,
+          }),
+        });
+        const data = await resp.json();
+        if (!resp.ok) { alert(data.error || 'Something went wrong — please try again.'); return; }
+        document.getElementById('jsSummary').textContent = data.summary || '';
+        document.getElementById('jsLinks').innerHTML = (data.links || []).map(l =>
+          `<a href="${l.url}" target="_blank" rel="noopener" style="background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.25);color:var(--gold-light);border-radius:20px;padding:.45rem 1rem;font-size:.8rem;text-decoration:none">${escapeHtml(l.label)}</a>`
+        ).join('');
+        document.getElementById('jsResult').style.display = 'block';
+      } catch (e) {
+        alert('Something went wrong — please try again.');
+      } finally {
+        btn.disabled = false; btn.textContent = 'Find My Jobs';
+      }
+    }
 
     function toggleSummary(id) {
       document.getElementById(`summary-${id}`).classList.toggle('open');
@@ -288,6 +423,7 @@
         document.getElementById('loggedInState').style.display = 'block';
         renderFilter();
         renderList();
+        if (requestedTab) activateTab(requestedTab);
       } catch (err) {
         document.getElementById('workspaceSub').textContent = 'Something went wrong loading your workspace — please refresh.';
       }
@@ -335,6 +471,7 @@
 
       function setPlaying(state){
         playing=state;
+        try{ localStorage.setItem('bgMusicOn', playing ? '1' : '0'); }catch(e){}
         toggle.classList.toggle('playing', playing);
         iconOn.style.display = playing ? 'block' : 'none';
         iconOff.style.display = playing ? 'none' : 'block';
@@ -359,10 +496,22 @@
         window.removeEventListener('keydown', autoStartOnce);
         window.removeEventListener('scroll', autoStartOnce);
       }
-      window.addEventListener('click', autoStartOnce, { once:true });
-      window.addEventListener('touchstart', autoStartOnce, { once:true });
-      window.addEventListener('keydown', autoStartOnce, { once:true });
-      window.addEventListener('scroll', autoStartOnce, { once:true });
+      // Carry the on/off state across pages (index <-> workspace) instead of each
+      // page tracking it independently, which made the toggle look flipped when navigating.
+      let storedOn=null;
+      try{ storedOn=localStorage.getItem('bgMusicOn'); }catch(e){}
+      if(storedOn==='1'){
+        setPlaying(true);
+        window.addEventListener('click', autoStartOnce, { once:true });
+        window.addEventListener('touchstart', autoStartOnce, { once:true });
+        window.addEventListener('keydown', autoStartOnce, { once:true });
+        window.addEventListener('scroll', autoStartOnce, { once:true });
+      } else if(storedOn===null){
+        window.addEventListener('click', autoStartOnce, { once:true });
+        window.addEventListener('touchstart', autoStartOnce, { once:true });
+        window.addEventListener('keydown', autoStartOnce, { once:true });
+        window.addEventListener('scroll', autoStartOnce, { once:true });
+      }
 
       function resumeIfStuck(){
         if(playing && player.paused){ player.play().catch(()=>{}); }

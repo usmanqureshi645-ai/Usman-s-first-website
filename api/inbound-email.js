@@ -82,7 +82,39 @@ export default async function handler(req, res) {
   const conversationId = match && match.match(/meetingroom\+([0-9a-f-]+)@uqconsulting\.org/i)?.[1];
 
   if (!conversationId) {
-    res.status(200).json({ ok: true }); // not a Meeting Room reply — ignore
+    // Not a Meeting Room continuation thread (e.g. a reply to the Interview Coach or
+    // GAAP Compare sender address) — these have no conversation state to resume, so
+    // just forward the raw reply to the owner instead of silently dropping it.
+    try {
+      let bodyText = '';
+      if (data.email_id && resendKey) {
+        const emailResp = await fetch(`https://api.resend.com/emails/receiving/${data.email_id}`, {
+          headers: { authorization: `Bearer ${resendKey}` },
+        });
+        if (emailResp.ok) {
+          const emailData = await emailResp.json();
+          bodyText = emailData.text || (emailData.html ? emailData.html.replace(/<[^>]+>/g, ' ') : '') || '';
+        }
+      }
+      const replyText = extractNewReplyText(bodyText) || '(no readable body)';
+      const fromAddr = Array.isArray(data.from) ? data.from[0] : data.from;
+      if (resendKey) {
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: { 'content-type': 'application/json', authorization: `Bearer ${resendKey}` },
+          body: JSON.stringify({
+            from: 'Website Replies <noreply@uqconsulting.org>',
+            to: ['usmanqureshi645@gmail.com'],
+            subject: `Reply received: ${data.subject || '(no subject)'} (from ${fromAddr || 'unknown'})`,
+            html: `<p><strong>${fromAddr || 'Someone'}</strong> replied to <strong>${toAddresses.join(', ')}</strong>:</p>
+<blockquote style="margin:0;padding-left:12px;border-left:3px solid #ccc;color:#333">${replyText.replace(/\n/g, '<br>')}</blockquote>`,
+          }),
+        });
+      }
+    } catch (err) {
+      console.error('[inbound-email] fallback forward failed', err);
+    }
+    res.status(200).json({ ok: true });
     return;
   }
 

@@ -92,6 +92,7 @@ export default async function handler(req, res) {
     });
     const getData = await getResp.json();
     if (!getData?.result) {
+      console.error('[inbound-email] no conversation found for', conversationId);
       res.status(200).json({ ok: true }); // conversation expired or unknown — silently ignore
       return;
     }
@@ -99,6 +100,7 @@ export default async function handler(req, res) {
     const conversation = JSON.parse(getData.result);
     const replyText = extractNewReplyText(data.text || '');
     if (!replyText) {
+      console.error('[inbound-email] empty replyText after extraction, raw text was:', data.text);
       res.status(200).json({ ok: true });
       return;
     }
@@ -124,6 +126,7 @@ IMPORTANT — this session is a continuation of an earlier completed Meeting Roo
     });
     const upstreamData = await upstream.json();
     if (!upstream.ok) {
+      console.error('[inbound-email] Anthropic call failed', upstream.status, JSON.stringify(upstreamData));
       res.status(200).json({ ok: true });
       return;
     }
@@ -136,7 +139,7 @@ IMPORTANT — this session is a continuation of an earlier completed Meeting Roo
       headers: { authorization: `Bearer ${kvToken}` },
     });
 
-    await fetch('https://api.resend.com/emails', {
+    const replyToVisitor = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'content-type': 'application/json', authorization: `Bearer ${resendKey}` },
       body: JSON.stringify({
@@ -148,9 +151,12 @@ IMPORTANT — this session is a continuation of an earlier completed Meeting Roo
         headers: data.message_id ? { 'In-Reply-To': data.message_id, References: data.message_id } : undefined,
       }),
     });
+    if (!replyToVisitor.ok) {
+      console.error('[inbound-email] visitor reply send failed', replyToVisitor.status, await replyToVisitor.text());
+    }
 
     // Notify the site owner of every visitor follow-up reply (not just the auto-reply sent back to the visitor)
-    await fetch('https://api.resend.com/emails', {
+    const notifyOwner = await fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: { 'content-type': 'application/json', authorization: `Bearer ${resendKey}` },
       body: JSON.stringify({
@@ -163,9 +169,13 @@ IMPORTANT — this session is a continuation of an earlier completed Meeting Roo
 <blockquote style="margin:0;padding-left:12px;border-left:3px solid #C8A96E;color:#333">${replyContent.replace(/\n/g, '<br>')}</blockquote>`,
       }),
     });
+    if (!notifyOwner.ok) {
+      console.error('[inbound-email] owner notification send failed', notifyOwner.status, await notifyOwner.text());
+    }
 
     res.status(200).json({ ok: true });
   } catch (err) {
+    console.error('[inbound-email] unexpected error', err);
     res.status(200).json({ ok: true }); // webhook must ack 200 or Resend will retry indefinitely
   }
 }

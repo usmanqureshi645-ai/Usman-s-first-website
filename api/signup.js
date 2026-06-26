@@ -21,7 +21,7 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: { 'content-type': 'application/json', authorization: `Bearer ${resendKey}` },
       body: JSON.stringify({
-        from: 'Usman | Audit & Advisory <welcome@uqconsulting.org>',
+        from: 'Usman Qureshi | Audit & Advisory <welcome@uqconsulting.org>',
         to: [email],
         subject: `Welcome aboard, ${name.split(' ')[0]}!`,
         html: `

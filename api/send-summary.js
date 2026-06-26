@@ -32,7 +32,7 @@ export default async function handler(req, res) {
     .map(m => `${m.role === 'user' ? 'User' : 'Panel'}: ${m.content}`)
     .join('\n\n');
 
-  const system = `You write professional consultation summary emails on behalf of "Usman's Meeting Room" — a virtual panel of finance specialists on a personal website. Given a raw conversation transcript, produce a polished HTML email body (use simple inline-styled HTML: <h2>, <p>, <ul>, <li>, <a>, no external CSS) with this exact structure:
+  const system = `You write professional consultation summary emails on behalf of "Usman Qureshi's Meeting Room" — a virtual panel of finance specialists on a personal website. Given a raw conversation transcript, produce a polished HTML email body (use simple inline-styled HTML: <h2>, <p>, <ul>, <li>, <a>, no external CSS) with this exact structure:
 
 1. A warm opening paragraph thanking the user for using the Meeting Room.
 2. A heading "Discussion Summary" followed by a clear, well-organised excerpt/summary of what was actually discussed (the user's question(s), the key points raised by each specialist, any risks flagged).

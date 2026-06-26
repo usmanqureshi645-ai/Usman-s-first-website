@@ -104,7 +104,9 @@ export default async function handler(req, res) {
     }
 
     const history = [...conversation.history, { role: 'user', content: replyText }];
-    const system = buildMeetingSystemPrompt(conversation.agents);
+    const system = buildMeetingSystemPrompt(conversation.agents) + `
+
+IMPORTANT — this session is a continuation of an earlier completed Meeting Room conversation, resumed via the user replying to their summary email. The full prior discussion is in the message history below; the user has already introduced themselves and the panel has already greeted them. Do NOT re-greet, do NOT re-ask for their name, and do NOT treat this as a fresh session — just pick the discussion back up naturally and respond directly to their new message.`;
 
     const upstream = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',

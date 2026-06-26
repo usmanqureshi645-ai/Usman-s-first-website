@@ -173,7 +173,7 @@
 
     async function init() {
       try {
-        const meResp = await fetch('/api/me');
+        const meResp = await fetch('/api/account?action=me');
         const me = await meResp.json();
         if (!me.loggedIn) {
           document.getElementById('workspaceSub').textContent = "You're not logged in.";
@@ -182,7 +182,7 @@
         }
         document.getElementById('workspaceSub').textContent = `Welcome back, ${me.name.split(' ')[0]} — every consultation you've saved lives here.`;
 
-        const listResp = await fetch('/api/workspace-list');
+        const listResp = await fetch('/api/account?action=workspace-list');
         const data = await listResp.json();
         allConsultations = Array.isArray(data.consultations) ? data.consultations : [];
         document.getElementById('loggedInState').style.display = 'block';

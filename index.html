@@ -3069,7 +3069,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     });
   })();
 
-  // Sign-up / login widget — real accounts via /api/signup and /api/login (session cookie)
+  // Sign-up / login widget — real accounts via /api/account?action=signup|login (session cookie)
   (function(){
     const panel=document.getElementById('signupPanel');
     const toggleBtn=document.getElementById('signupToggle');
@@ -3094,7 +3094,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
 
     async function refreshUser(){
       try{
-        const r=await fetch('/api/me');
+        const r=await fetch('/api/account?action=me');
         const data=await r.json();
         currentUser = data.loggedIn ? { name:data.name, email:data.email } : null;
       }catch(e){ currentUser=null; }
@@ -3134,7 +3134,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       const btn=document.getElementById('signupSubmitBtn');
       btn.disabled=true; btn.textContent=loginMode ? 'Logging in…' : 'Signing up…';
       try{
-        const r=await fetch(loginMode ? '/api/login' : '/api/signup',{
+        const r=await fetch(loginMode ? '/api/account?action=login' : '/api/account?action=signup',{
           method:'POST',
           headers:{'content-type':'application/json'},
           body:JSON.stringify(loginMode ? {email, password} : {name, email, password})
@@ -4170,7 +4170,7 @@ async function gaapSaveConsultation(){
   btn.disabled=true; btn.textContent='Saving…';
   try{
     const firstUserMsg=gaapHistory.find(m=>m.role==='user')?.content || 'GAAP Compare discussion';
-    const r=await fetch('/api/save-consultation',{
+    const r=await fetch('/api/account?action=save-consultation',{
       method:'POST',
       headers:{'content-type':'application/json'},
       body:JSON.stringify({tool:'gaap', title:firstUserMsg.slice(0,80), transcript:gaapHistory})
@@ -4305,7 +4305,7 @@ wireMic('qzMic','qzInput', qzSendMessage);
   const tool=params.get('tool');
   if(!resumeId || !tool) return;
   try{
-    const r=await fetch(`/api/workspace-get?id=${encodeURIComponent(resumeId)}`);
+    const r=await fetch(`/api/account?action=workspace-get&id=${encodeURIComponent(resumeId)}`);
     const data=await r.json();
     if(!r.ok || !data.consultation) return;
     const record=data.consultation;

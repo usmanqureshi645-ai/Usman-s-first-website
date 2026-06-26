@@ -3695,7 +3695,7 @@ function mrEndMeeting(){
   fetch('/api/send-summary',{
     method:'POST',
     headers:{'content-type':'application/json'},
-    body:JSON.stringify({email, transcript:mrHistory, kind:'meeting'})
+    body:JSON.stringify({email, transcript:mrHistory, kind:'meeting', agents:mrSelectedAgents})
   }).then(r=>r.json()).then(data=>{
     if(data.error){ mrAppendMessage('agent','Meeting Room', `Sorry — I couldn't send that summary right now (${data.error}). Please try again shortly.`); }
     else{ mrAppendMessage('agent','Meeting Room', `Thank you — a summary of our discussion has been sent to **${email}**. It was a pleasure working through this with you.`); }

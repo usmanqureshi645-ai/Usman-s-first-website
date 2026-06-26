@@ -7,22 +7,25 @@ A single-page personal/professional site for Usman (ACCA, ACA — Big 4 audit & 
 - Backend: `/api/*.js` serverless functions on Vercel, calling the Anthropic API (model `claude-sonnet-4-6`)
 - Hosting: Vercel project `usman-s-first-website`, auto-deploys on push to `main` on GitHub (`usmanqureshi645-ai/Usman-s-first-website`)
 - Email: Resend API
-- Persistence: Upstash Redis (REST API) — used only for the feedback log so far
+- Persistence: Upstash Redis (REST API) — feedback log, and Meeting Room conversation state for email reply-to-continue (30-day TTL, key `mrconv:<uuid>`)
+- Email sending domain: `uqconsulting.org`, verified in Resend (SPF/DKIM/DMARC + inbound MX to `inbound-smtp.eu-west-1.amazonaws.com`) — replaced the old `onboarding@resend.dev` sandbox sender, which could only deliver to the account owner's own address, not visitor-typed emails
 - Owner's contact email: `usmanqureshi645@gmail.com` (used as the destination for signup/feedback notification emails)
 
 ## Env vars (set in Vercel, production)
 - `ANTHROPIC_API_KEY` — powers every `/api/*.js` AI endpoint
 - `RESEND_API_KEY` — outbound email (signup welcome, feedback log, meeting/interview summaries)
-- `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` — feedback persistence (`/api/feedback-list.js` reuses the token itself as a simple shared-secret query param for read access)
+- `UPSTASH_REDIS_REST_URL`, `UPSTASH_REDIS_REST_TOKEN` — feedback persistence + Meeting Room conversation state (`/api/feedback-list.js` reuses the token itself as a simple shared-secret query param for read access)
+- `RESEND_WEBHOOK_SECRET` — optional, not yet set; if added, `/api/inbound-email.js` will verify Resend's Svix webhook signature instead of trusting payloads by UUID-unguessability alone
 
 ## API endpoints (all in `/api/`)
-- `meeting.js` — Meeting Room panel chat. Personas selectable by the user (Sarah Chen/audit, David Whitfield/IFRS-FRS, Amara Singh/tax, Marcus Lee/forensic, Elena Rossi/ESG, James Carter/legal, Priya Nair/technical accounting). Greets → asks name → interactive discussion with cross-references, risk/mitigation exchanges, clarifying questions, redirects if off-track.
+- `meeting.js` — Meeting Room panel chat. Personas selectable by the user (Sarah Chen/audit, David Whitfield/IFRS-FRS, Amara Singh/tax, Marcus Lee/forensic, Elena Rossi/ESG, James Carter/legal, Priya Nair/technical accounting). Greets → asks name → interactive discussion with cross-references, risk/mitigation exchanges, clarifying questions, redirects if off-track. Shared persona/system-prompt logic lives in `/lib/meetingPersonas.js` (also used by `inbound-email.js`).
+- `inbound-email.js` — Resend inbound webhook receiver. Lets users reply to their Meeting Room summary email to resume the conversation: looks up the conversation by the `meetingroom+<uuid>@uqconsulting.org` address the reply was sent to, replays it through the same panel persona prompt, emails the panel's reply back, and re-persists the updated history (30-day TTL).
 - `gaap.js` — GAAP Compare research bot, jurisdiction-aware (US/UK/Ireland/Luxembourg/Australia).
 - `quiz.js` — Knowledge Test interview coach. Onboarding flow: greet as a friend → ask role/JD → ask experience → mention CV tool exists separately → mention email feedback → then ask questions. Tone must always stay kind/encouraging, never harsh.
 - `tailor.js` — CV/cover-letter tailoring (preserves original structure/format).
 - `cv-review.js` — brutally honest ATS/recruiter review (the "skeptical recruiter" prompt) — deliberately the opposite tone to quiz.js.
 - `ask.js` — general-purpose "AskAI"/"[Name]'sGPT" assistant, not finance-specific.
-- `send-summary.js` — emails a Meeting Room discussion summary (used by the "End meeting & email me a summary" button).
+- `send-summary.js` — emails a Meeting Room discussion summary (used by the "End meeting & email me a summary" button); persists the transcript to Upstash and sets a per-conversation `reply_to` so replies route to `inbound-email.js`.
 - `qz-summary.js` — emails a kind, specific, never-harsh interview-prep feedback report (Knowledge Test's "End session" button).
 - `feedback.js` — technical-agent assessment of submitted feedback (valid/not), persists every submission to Upstash Redis (`feedback_log` list, capped at 500) and emails a log entry to the owner regardless of validity.
 - `feedback-list.js` — GET endpoint to list stored feedback (`?key=<UPSTASH_REDIS_REST_TOKEN>&limit=N`).

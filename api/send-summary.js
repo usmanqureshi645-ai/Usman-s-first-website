@@ -1,3 +1,7 @@
+import { randomUUID } from 'node:crypto';
+
+const CONVERSATION_TTL_SECONDS = 30 * 24 * 60 * 60; // 30 days
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
@@ -6,6 +10,8 @@ export default async function handler(req, res) {
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
   const resendKey = process.env.RESEND_API_KEY;
+  const kvUrl = process.env.UPSTASH_REDIS_REST_URL;
+  const kvToken = process.env.UPSTASH_REDIS_REST_TOKEN;
   if (!apiKey) {
     res.status(500).json({ error: 'AI service not configured' });
     return;
@@ -15,7 +21,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { email, transcript, kind } = req.body || {};
+  const { email, transcript, kind, agents } = req.body || {};
   if (!email || !Array.isArray(transcript) || transcript.length === 0) {
     res.status(400).json({ error: 'Missing email or transcript' });
     return;
@@ -58,7 +64,23 @@ Tone: professional, warm, clearly human-written consultation style — not robot
       return;
     }
 
-    const htmlBody = summaryData?.content?.[0]?.text || '<p>No summary available.</p>';
+    let htmlBody = summaryData?.content?.[0]?.text || '<p>No summary available.</p>';
+
+    // Persist the conversation so a reply to this email can resume it (Meeting Room itself is stateless)
+    let replyTo;
+    if (kvUrl && kvToken && kind === 'meeting') {
+      const conversationId = randomUUID();
+      const record = JSON.stringify({ email, agents: Array.isArray(agents) ? agents : [], history: transcript });
+      try {
+        await fetch(`${kvUrl}/set/mrconv:${conversationId}/${encodeURIComponent(record)}/EX/${CONVERSATION_TTL_SECONDS}`, {
+          headers: { authorization: `Bearer ${kvToken}` },
+        });
+        replyTo = `meetingroom+${conversationId}@uqconsulting.org`;
+        htmlBody += `<p style="margin-top:24px;padding-top:16px;border-top:1px solid #ddd;color:#555">Have a follow-up question? Just reply to this email and the panel will pick the discussion back up.</p>`;
+      } catch {
+        // non-fatal — summary email still sends without reply capability
+      }
+    }
 
     const emailResp = await fetch('https://api.resend.com/emails', {
       method: 'POST',
@@ -69,6 +91,7 @@ Tone: professional, warm, clearly human-written consultation style — not robot
       body: JSON.stringify({
         from: 'Meeting Room <meetingroom@uqconsulting.org>',
         to: [email],
+        ...(replyTo ? { reply_to: replyTo } : {}),
         subject: 'Your Meeting Room Consultation Summary',
         html: htmlBody,
       }),

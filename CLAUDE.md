@@ -36,7 +36,7 @@ A single-page personal/professional site for Usman (ACCA, ACA — Big 4 audit & 
 - `login.js` / `logout.js` / `me.js` — session cookie auth; `me.js` returns `{loggedIn, name, email}` and is what the frontend polls on load to decide what to show.
 - `save-consultation.js` — login-required; lets GAAP Compare (and, when wired, CV tools/AskAI) save a raw transcript to the user's permanent workspace history.
 - `workspace-list.js` / `workspace-get.js` — login-required; power `workspace.html`'s history list and the "Continue this conversation" resume flow.
-- `cron-followups.js` — hourly Vercel Cron job (see `vercel.json`); pulls due entries from the `followups_zset` sorted set and emails a 24h "did this help?" check-in, with reply-to-continue for Meeting Room/Knowledge Test only (GAAP/CV/Ask follow-ups are a plain check-in, no resume capability).
+- `cron-followups.js` — daily Vercel Cron job (see `vercel.json`, 09:00 UTC — Vercel's Hobby plan rejects the entire deployment if a cron is more frequent than once/day, so don't drop this below daily); pulls due entries from the `followups_zset` sorted set and emails a 24h "did this help?" check-in, with reply-to-continue for Meeting Room/Knowledge Test only (GAAP/CV/Ask follow-ups are a plain check-in, no resume capability). Because it only runs once a day, actual delivery can lag up to ~24h past the nominal 24h mark.
 
 ## Scheduled background agents (run independently of any chat session)
 - `site-health-monitor` (every 3h) — checks the live site/APIs, can fix small unambiguous bugs directly and commit/push; asks first for anything structural or risky. Reads this CLAUDE.md at the start of each run.

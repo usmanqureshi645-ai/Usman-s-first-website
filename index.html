@@ -894,6 +894,10 @@
     .usp-toast-title{ font-size:.66rem; }
     .usp-toast-body{ font-size:.66rem; }
   }
+  @media (max-width:600px){
+    .wb-bubble{ padding:.5rem .7rem; font-size:.78rem; line-height:1.45; max-width:78%; }
+    .mr-bubble{ padding:.55rem .8rem; font-size:.78rem; line-height:1.45; max-width:82%; }
+  }
 
   .site-stats-badge{
     display:flex; gap:1.5rem; margin-top:1.75rem; flex-wrap:wrap;
@@ -2970,7 +2974,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     // Auto-open (not just pulse) ~10s after arrival, so the visitor knows a guide exists before getting lost
     let userDismissedOnce=false;
     setTimeout(()=>{
-      if(!opened && !userDismissedOnce){
+      if(!opened && !userDismissedOnce && !window.isUserBusy?.()){
         window.toggleWelcomeBot(true);
         // close automatically the first time the visitor interacts elsewhere on the page, unless they engage with the guide itself
         const autoCloseOnInteraction=(e)=>{
@@ -2992,7 +2996,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     });
     // If the visitor has been scrolling around for 2-3 minutes without using any tool, gently resurface the guide
     setInterval(()=>{
-      if(!opened && Date.now()-lastInteraction > 150000){
+      if(!opened && Date.now()-lastInteraction > 150000 && !window.isUserBusy?.()){
         lastInteraction=Date.now();
         window.toggleWelcomeBot(true);
         addMsg('bot', "Still exploring? 🧭 I'm right here if you'd like a hand finding the Meeting Room, Knowledge Test, GAAP Compare or Job Search tools.", [
@@ -3190,6 +3194,25 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     if(exceptName!=='signup') window.toggleSignup?.(false);
     if(exceptName!=='ask') window.toggleAsk?.(false);
     if(typeof VoiceEngine!=='undefined') VoiceEngine.cancel();
+    window.hideUspToast?.();
+  };
+
+  // Tracks whether the visitor is actively typing/chatting in any tool, so promotional
+  // popups (USP toasts, Site Guide auto-open) stay out of the way while they're busy
+  let userIsBusy=false;
+  document.addEventListener('focusin', e=>{
+    if(e.target.closest('.mr-inputbar, .mr-chat')) userIsBusy=true;
+  });
+  document.addEventListener('focusout', e=>{
+    if(e.target.closest('.mr-inputbar, .mr-chat')) setTimeout(()=>{ userIsBusy = !!document.activeElement?.closest('.mr-inputbar, .mr-chat'); }, 50);
+  });
+  window.isUserBusy=function(){
+    return userIsBusy
+      || document.getElementById('welcomeBotPanel')?.classList.contains('open')
+      || document.getElementById('feedbackPanel')?.classList.contains('open')
+      || document.getElementById('signupPanel')?.classList.contains('open')
+      || document.getElementById('askPanel')?.classList.contains('open')
+      || (typeof mrMeetingStarted!=='undefined' && mrMeetingStarted);
   };
 
   // USP toast notifications — gently invite visitors to try the standout features
@@ -3233,6 +3256,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     }
     function showToast(){
       if(userDismissed || shown>=5) return; // respect an explicit "not now", and keep the cap modest
+      if(window.isUserBusy?.()) return; // don't interrupt someone actively chatting in a tool
       renderToast(toasts[i % toasts.length]);
       i++;
       requestAnimationFrame(()=>toastEl.classList.add('show'));
@@ -3241,6 +3265,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       setTimeout(hideToast, 7000); // fade away if no response, so it doesn't linger and distract
     }
     function hideToast(){ toastEl.classList.remove('show'); }
+    window.hideUspToast=hideToast;
 
     if(!userDismissed){
       setTimeout(showToast, 6000); // first nudge 5-8s after arrival
@@ -3656,12 +3681,12 @@ function mrSendMessage(){
   mrHistory.push({role:'user', content:text});
   input.value='';
   mrRealUserMessages++;
-  // The generic topic-suggestion chips stop being relevant once a real, specific
-  // discussion is underway — hide them after the name exchange so they don't linger
-  if(mrRealUserMessages>=2){
-    const topicChips=document.getElementById('mrTopicChips');
-    if(topicChips) topicChips.style.display='none';
-  }
+  // The generic topic-suggestion chips stop being relevant the moment a real
+  // discussion is underway — hide them (and their wrapper) after the first message
+  const topicChips=document.getElementById('mrTopicChips');
+  if(topicChips) topicChips.style.display='none';
+  const chipsWrap=document.getElementById('mrChips');
+  if(chipsWrap) chipsWrap.style.display='none';
   mrCallApi(text);
 }
 document.getElementById('mrInput').addEventListener('keydown', e=>{

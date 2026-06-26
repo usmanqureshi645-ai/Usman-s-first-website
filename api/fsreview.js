@@ -70,7 +70,7 @@ Respond with ONLY valid JSON, no markdown fencing, in this exact shape:
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: 4000,
+        max_tokens: 6000,
         system,
         messages: [{ role: 'user', content: userMessage }],
       }),
@@ -82,12 +82,21 @@ Respond with ONLY valid JSON, no markdown fencing, in this exact shape:
       return;
     }
 
+    const rawText = data?.content?.[0]?.text || '{}';
     let review;
     try {
-      review = JSON.parse(data?.content?.[0]?.text || '{}');
+      review = JSON.parse(rawText);
     } catch {
-      res.status(500).json({ error: 'Could not parse the panel review — please try again' });
-      return;
+      // Model sometimes wraps JSON in markdown fences or adds stray text around it — recover the {...} block
+      const fenced = rawText.match(/```(?:json)?\s*([\s\S]*?)```/i);
+      const candidate = fenced ? fenced[1] : rawText.slice(rawText.indexOf('{'), rawText.lastIndexOf('}') + 1);
+      try {
+        review = JSON.parse(candidate);
+      } catch {
+        console.error('[fsreview] failed to parse model output:', rawText.slice(0, 2000));
+        res.status(500).json({ error: 'Could not parse the panel review — please try again' });
+        return;
+      }
     }
 
     const inlineComments = Array.isArray(review.inlineComments) ? review.inlineComments : [];

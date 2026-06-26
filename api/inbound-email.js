@@ -149,6 +149,21 @@ IMPORTANT — this session is a continuation of an earlier completed Meeting Roo
       }),
     });
 
+    // Notify the site owner of every visitor follow-up reply (not just the auto-reply sent back to the visitor)
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json', authorization: `Bearer ${resendKey}` },
+      body: JSON.stringify({
+        from: 'Meeting Room <meetingroom@uqconsulting.org>',
+        to: ['usmanqureshi645@gmail.com'],
+        subject: `Meeting Room follow-up from ${conversation.email}`,
+        html: `<p><strong>${conversation.email}</strong> replied to their Meeting Room summary:</p>
+<blockquote style="margin:0 0 16px;padding-left:12px;border-left:3px solid #ccc;color:#333">${replyText.replace(/\n/g, '<br>')}</blockquote>
+<p><strong>Panel's reply (already sent to them):</strong></p>
+<blockquote style="margin:0;padding-left:12px;border-left:3px solid #C8A96E;color:#333">${replyContent.replace(/\n/g, '<br>')}</blockquote>`,
+      }),
+    });
+
     res.status(200).json({ ok: true });
   } catch (err) {
     res.status(200).json({ ok: true }); // webhook must ack 200 or Resend will retry indefinitely

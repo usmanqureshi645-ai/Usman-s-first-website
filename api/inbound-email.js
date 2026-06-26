@@ -98,9 +98,26 @@ export default async function handler(req, res) {
     }
 
     const conversation = JSON.parse(getData.result);
-    const replyText = extractNewReplyText(data.text || '');
+
+    // The webhook payload only carries metadata — the actual body must be fetched separately
+    let bodyText = '';
+    if (data.email_id) {
+      const emailResp = await fetch(`https://api.resend.com/emails/receiving/${data.email_id}`, {
+        headers: { authorization: `Bearer ${resendKey}` },
+      });
+      if (emailResp.ok) {
+        const emailData = await emailResp.json();
+        bodyText = emailData.text || (emailData.html ? emailData.html.replace(/<[^>]+>/g, ' ') : '') || '';
+      } else {
+        console.error('[inbound-email] failed to fetch received email body', emailResp.status, await emailResp.text());
+      }
+    } else {
+      console.error('[inbound-email] webhook payload had no email_id', JSON.stringify(data));
+    }
+
+    const replyText = extractNewReplyText(bodyText);
     if (!replyText) {
-      console.error('[inbound-email] empty replyText after extraction, raw text was:', data.text);
+      console.error('[inbound-email] empty replyText after extraction, raw body was:', bodyText);
       res.status(200).json({ ok: true });
       return;
     }

@@ -1162,6 +1162,9 @@ body{background:linear-gradient(180deg,#050b15,#0a1628)}
 .hero{position:relative}
 .hero:after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,rgba(200,169,110,.12),transparent 30%);pointer-events:none}
 .client-showcase,.knowledge-grid,.train-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+#toolsshowcase .knowledge-grid{grid-template-columns:repeat(3,1fr)}
+@media (max-width:900px){ #toolsshowcase .knowledge-grid{grid-template-columns:repeat(2,1fr)} }
+@media (max-width:600px){ #toolsshowcase .knowledge-grid{grid-template-columns:1fr} }
 .client-card,.knowledge-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:1.6rem;border-radius:18px;backdrop-filter:blur(18px);transition:.4s}
 .client-card:hover,.knowledge-card:hover,.sector-card:hover{transform:translateY(-10px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
 .pub-btn{margin-top:1rem;background:#C8A96E;color:#0A1628;border:none;padding:.8rem 1.2rem;border-radius:10px;font-weight:700;cursor:pointer}
@@ -1283,7 +1286,7 @@ animation:pulseRing 2.4s ease-out infinite;
   background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.25);
   color:var(--gold-light);font-size:.72rem;font-weight:500;
   padding:.45rem .85rem;border-radius:20px;cursor:pointer;
-  transition:all .3s ease;font-family:inherit;
+  transition:all .3s ease;font-family:inherit;white-space:nowrap;
 }
 .mr-chip:hover{background:rgba(200,169,110,.18);border-color:var(--gold);transform:translateY(-2px)}
 .mr-mic{

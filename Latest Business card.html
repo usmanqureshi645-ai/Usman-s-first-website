@@ -3084,10 +3084,12 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       if(currentUser){
         toggleBtn.textContent='🗂️';
         toggleBtn.title=`My Workspace (${currentUser.name})`;
+        toggleBtn.setAttribute('data-tooltip',`My Workspace (${currentUser.name})`);
         if(navLink) navLink.style.display='block';
       } else {
         toggleBtn.textContent='✨';
         toggleBtn.title='Sign up free';
+        toggleBtn.setAttribute('data-tooltip','Sign up free');
         if(navLink) navLink.style.display='none';
       }
     }

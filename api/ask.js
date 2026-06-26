@@ -1,3 +1,5 @@
+import { logAndCheckUsage } from '../lib/ipUsage.js';
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
@@ -15,6 +17,8 @@ export default async function handler(req, res) {
     res.status(400).json({ error: 'Missing conversation history' });
     return;
   }
+
+  const usage = await logAndCheckUsage(req, { kvUrl: process.env.UPSTASH_REDIS_REST_URL, kvToken: process.env.UPSTASH_REDIS_REST_TOKEN }, 'ask');
 
   const system = `You are a helpful, general-purpose AI assistant embedded on a personal/professional website (a personal "ChatGPT-style" assistant for whoever is visiting${userName ? `, currently chatting with ${userName}` : ''}). Answer any question helpfully, clearly and concisely, on any topic — not limited to finance or accounting, though the site owner is a Big 4 audit/advisory professional so finance questions are especially welcome.
 
@@ -50,7 +54,7 @@ Style:
     }
 
     const text = data?.content?.[0]?.text || '';
-    res.status(200).json({ text });
+    res.status(200).json({ text, usage });
   } catch (err) {
     res.status(500).json({ error: 'Request failed' });
   }

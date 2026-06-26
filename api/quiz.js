@@ -1,4 +1,5 @@
 import { buildQuizSystemPrompt } from '../lib/quizCoach.js';
+import { logAndCheckUsage } from '../lib/ipUsage.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -17,6 +18,8 @@ export default async function handler(req, res) {
     res.status(400).json({ error: 'Missing conversation history' });
     return;
   }
+
+  const usage = await logAndCheckUsage(req, { kvUrl: process.env.UPSTASH_REDIS_REST_URL, kvToken: process.env.UPSTASH_REDIS_REST_TOKEN }, 'quiz');
 
   const system = buildQuizSystemPrompt();
 
@@ -46,7 +49,7 @@ export default async function handler(req, res) {
     }
 
     const text = data?.content?.[0]?.text || '';
-    res.status(200).json({ text });
+    res.status(200).json({ text, usage });
   } catch (err) {
     res.status(500).json({ error: 'Request failed' });
   }

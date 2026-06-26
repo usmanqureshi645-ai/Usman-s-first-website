@@ -1,3 +1,5 @@
+import { logAndCheckUsage } from '../lib/ipUsage.js';
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
@@ -15,6 +17,8 @@ export default async function handler(req, res) {
     res.status(400).json({ error: 'Missing CV or job description text' });
     return;
   }
+
+  const usage = await logAndCheckUsage(req, { kvUrl: process.env.UPSTASH_REDIS_REST_URL, kvToken: process.env.UPSTASH_REDIS_REST_TOKEN }, 'tailor');
 
   const system = `You are a career advisor specialising in finance, accounting, audit and tax roles, acting as an HR professional, hiring manager and ATS reviewer combined. Given a candidate's existing CV text (and optionally their existing cover letter) and a target job posting, produce two outputs:
 
@@ -57,7 +61,7 @@ Respond with EXACTLY this format, nothing else:
     const cvMatch = text.split('===CV===')[1]?.split('===COVER LETTER===')[0]?.trim() || '';
     const coverMatch = text.split('===COVER LETTER===')[1]?.trim() || '';
 
-    res.status(200).json({ cv: cvMatch, coverLetter: coverMatch });
+    res.status(200).json({ cv: cvMatch, coverLetter: coverMatch, usage });
   } catch (err) {
     res.status(500).json({ error: 'Request failed' });
   }

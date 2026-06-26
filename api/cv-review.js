@@ -1,3 +1,5 @@
+import { logAndCheckUsage } from '../lib/ipUsage.js';
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
@@ -15,6 +17,8 @@ export default async function handler(req, res) {
     res.status(400).json({ error: 'Missing CV or job description text' });
     return;
   }
+
+  const usage = await logAndCheckUsage(req, { kvUrl: process.env.UPSTASH_REDIS_REST_URL, kvToken: process.env.UPSTASH_REDIS_REST_TOKEN }, 'cv-review');
 
   const system = `Act as a skeptical recruiter and ATS reviewer. You are reviewing a candidate's CV against a specific job description. Be brutally honest. Tell them the top 5 reasons they may not be getting interviews. Identify weak achievements, missing metrics, missing keywords, vague statements, and anything a recruiter would miss during a 6-second scan.
 
@@ -59,7 +63,7 @@ Be specific and reference actual content from the CV provided — never generic 
       parsed = { score: null, review: text };
     }
 
-    res.status(200).json(parsed);
+    res.status(200).json({ ...parsed, usage });
   } catch (err) {
     res.status(500).json({ error: 'Request failed' });
   }

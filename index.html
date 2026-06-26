@@ -1472,6 +1472,10 @@ animation:pulseRing 2.4s ease-out infinite;
 <span class="sector-icon">📊</span><h3>GAAP Compare</h3>
 <p>IFRS vs US/UK/Irish/Luxembourg/Australian GAAP, with a live research bot.</p>
 </div>
+<div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('fsreview').scrollIntoView({behavior:'smooth'})">
+<span class="sector-icon">📝</span><h3>Financial Statement Review</h3>
+<p>Upload your financial statements — an AI panel reviews them for FRS/IFRS/US GAAP compliance and adds real Word comments.</p>
+</div>
 <div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('hottopics').scrollIntoView({behavior:'smooth'})">
 <span class="sector-icon">📰</span><h3>Hot Market Topics</h3>
 <p>Curated, regularly refreshed briefings on what's moving in audit &amp; IFRS.</p>
@@ -1781,6 +1785,53 @@ animation:pulseRing 2.4s ease-out infinite;
   </div>
 </div>
 <p class="mr-note" style="text-align:center;margin-top:1rem">Simulated AI research assistant grounded in IFRS, PCAOB and Big 4 comparison guidance — for education, not formal advice.</p>
+
+</div>
+</section>
+
+<hr class="gold-rule">
+
+<!-- FINANCIAL STATEMENT REVIEW -->
+<section id="fsreview">
+<div class="section-inner flow-reveal">
+<div class="section-header">
+<p class="section-eyebrow">AI Panel Review</p>
+<h2 class="section-title">Financial Statement Review</h2>
+<p class="section-sub">Upload your financial statements and an AI panel — audit, tax, IFRS/FRC technical, forensic, ESG, legal and technical accounting specialists — reviews them for compliance with your chosen framework. Discrepancies come back as real, clickable Word comments from Usman Qureshi, anchored to the exact text. Works fully anonymously — signing up (free) just lets you save the review to your workspace.</p>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;max-width:900px;margin-left:auto;margin-right:auto">
+  <div>
+    <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.5rem">1. Upload financial statements (.pdf, .docx, or .txt)</label>
+    <div class="job-upload-box" id="fsUploadBox" onclick="document.getElementById('fsFile').click()">
+      <input type="file" id="fsFile" accept=".pdf,.docx,.txt" style="display:none" onchange="fsHandleFile(this)">
+      <span id="fsUploadLabel">📄 Click to upload financial statements</span>
+    </div>
+  </div>
+  <div>
+    <label for="fsFramework" style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.5rem">2. Review against which framework?</label>
+    <select id="fsFramework" class="voice-gender-select" style="height:42px;width:100%">
+      <option value="Full IFRS">Full IFRS</option>
+      <option value="FRS 101">FRS 101</option>
+      <option value="FRS 102">FRS 102</option>
+      <option value="US GAAP">US GAAP</option>
+      <option value="AICPA">AICPA</option>
+    </select>
+    <label for="fsEmail" style="font-size:.78rem;color:var(--steel-light);display:block;margin:1rem 0 .5rem">3. Email the reviewed document to</label>
+    <input type="text" id="fsEmail" placeholder="you@example.com" style="width:100%;height:42px;border-radius:8px;border:1px solid var(--steel);background:rgba(255,255,255,.03);color:var(--cream);padding:0 .75rem" />
+  </div>
+</div>
+
+<div style="text-align:center;margin-bottom:1.5rem">
+  <button class="pub-btn" id="fsSubmitBtn" onclick="fsSubmitReview()">Review my financial statements</button>
+</div>
+
+<div id="fsResult" style="max-width:900px;margin:0 auto;display:none">
+  <div class="mr-chat" style="height:auto;padding:1.5rem">
+    <div id="fsResultBody" style="color:var(--steel-light);font-size:.9rem;line-height:1.7"></div>
+  </div>
+</div>
+<p class="mr-note" style="text-align:center;margin-top:1rem">Simulated AI panel review for education — not a formal audit opinion or assurance engagement.</p>
 
 </div>
 </section>
@@ -4539,6 +4590,70 @@ async function jobHandleFile(input, kind){
   }catch(e){
     label.textContent=`Couldn't read ${file.name} — try a .txt, .pdf or .docx file`;
     box.classList.remove('has-file');
+  }
+}
+
+let fsExtractedText='', fsFileName='', fsFileBase64='';
+
+function readFileAsDataUrl(file){
+  return new Promise((resolve,reject)=>{
+    const reader=new FileReader();
+    reader.onload=()=>resolve(reader.result);
+    reader.onerror=reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+async function fsHandleFile(input){
+  const file=input.files[0];
+  if(!file) return;
+  const box=document.getElementById('fsUploadBox');
+  const label=document.getElementById('fsUploadLabel');
+  label.textContent=`Extracting text from ${file.name}…`;
+  try{
+    const text=await extractFileText(file);
+    fsExtractedText=text;
+    fsFileName=file.name;
+    fsFileBase64='';
+    if(file.name.toLowerCase().endsWith('.docx')){
+      const dataUrl=await readFileAsDataUrl(file);
+      fsFileBase64=dataUrl.split(',')[1] || '';
+    }
+    box.classList.add('has-file');
+    label.textContent=`✓ ${file.name} — ${text.trim().split(/\s+/).length} words extracted`;
+  }catch(e){
+    label.textContent=`Couldn't read ${file.name} — try a .txt, .pdf or .docx file`;
+    box.classList.remove('has-file');
+  }
+}
+
+async function fsSubmitReview(){
+  if(!fsExtractedText){ alert('Please upload your financial statements first.'); return; }
+  const email=document.getElementById('fsEmail').value.trim() || window.getSiteUser?.()?.email;
+  if(!email || !email.includes('@')){ alert('Please enter an email address to send the reviewed document to.'); return; }
+  const framework=document.getElementById('fsFramework').value;
+  const btn=document.getElementById('fsSubmitBtn');
+  btn.disabled=true; btn.textContent='Reviewing…';
+  try{
+    const r=await fetch('/api/fsreview',{
+      method:'POST',
+      headers:{'content-type':'application/json'},
+      body:JSON.stringify({text:fsExtractedText, fileName:fsFileName, fileBase64:fsFileBase64, framework, email})
+    });
+    const data=await r.json();
+    if(!r.ok){ alert(data.error || 'Something went wrong — please try again.'); return; }
+
+    const resultDiv=document.getElementById('fsResult');
+    const resultBody=document.getElementById('fsResultBody');
+    const notesHtml=(data.additionalNotes||[]).map(n=>`<li><strong>${n.persona||'Panel'}:</strong> ${n.note}</li>`).join('');
+    resultBody.innerHTML=`<p>${data.summary}</p><p>📧 The annotated Word document has been emailed to <strong>${email}</strong> with comments from Usman Qureshi anchored to the flagged text.</p>${notesHtml ? `<h4 style="color:var(--gold);margin-top:1rem">Additional risks &amp; reservations</h4><ul>${notesHtml}</ul>` : ''}`;
+    resultDiv.style.display='block';
+    resultDiv.scrollIntoView({behavior:'smooth'});
+    window.showSignupNudge?.(resultDiv);
+  }catch(e){
+    alert('Connection issue — please try again.');
+  }finally{
+    btn.disabled=false; btn.textContent='Review my financial statements';
   }
 }
 

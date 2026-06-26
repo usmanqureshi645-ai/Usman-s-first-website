@@ -6,7 +6,7 @@ import { saveConsultation, scheduleFollowup } from '../lib/consultations.js';
 
 const TOOL_LABELS = { meeting: 'Meeting Room consultation', quiz: 'Interview Prep session' };
 const SIGNUP_LINE = "If you haven't already, signing up is free and unlocks your personal workspace — every consultation saved, and you can resume any conversation right where you left off. It stays free after signing up too.";
-const ALLOWED_SAVE_TOOLS = new Set(['gaap', 'cv-review', 'cv-tailor', 'ask']);
+const ALLOWED_SAVE_TOOLS = new Set(['gaap', 'cv-review', 'cv-tailor', 'ask', 'fsreview']);
 
 async function handleSignup(req, res, { resendKey, kvUrl, kvToken }) {
   if (!resendKey) { res.status(500).json({ error: 'Email service not configured yet' }); return; }

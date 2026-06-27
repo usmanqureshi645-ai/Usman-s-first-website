@@ -1318,8 +1318,11 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
    the page behind is fully locked, and inputs are 16px so iOS Safari never auto-zooms (and gets
    stuck zoomed-in, forcing the user to pinch-out and pan). */
 @media (max-width:768px){
-  .mr-chat.mr-maximized{ width:100vw!important; height:100dvh!important; height:100vh!important; }
+  /* 100vh first as the fallback, 100dvh last so it wins where supported — 100vh alone is taller
+     than the visible area on mobile (it counts the URL bar), which pushed the input bar off-screen. */
+  .mr-chat.mr-maximized{ width:100vw!important; height:100vh!important; height:100dvh!important; }
   body.mr-fullscreen{ position:fixed; inset:0; width:100%; height:100%; touch-action:none; }
+  .mr-chat.mr-maximized .mr-inputbar{ flex-shrink:0; padding-bottom:max(1rem, env(safe-area-inset-bottom)); }
   .mr-chat.mr-maximized .mr-inputbar input,
   .mr-chat.mr-maximized .mr-inputbar textarea{ font-size:16px; }
   .mr-chat.mr-maximized .mr-stage{ padding:.5rem; gap:.5rem; }

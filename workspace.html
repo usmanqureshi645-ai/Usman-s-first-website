@@ -88,11 +88,17 @@
   .consult-date { font-size: .72rem; color: var(--steel); }
   .consult-title { font-size: 1.02rem; margin: .35rem 0 .7rem; color: var(--cream); }
   .consult-summary {
-    font-size: .85rem; line-height: 1.6; color: var(--steel-light);
+    font-size: .85rem; line-height: 1.6; color: var(--cream);
     max-height: 0; overflow: hidden; transition: max-height .3s ease;
   }
   .consult-summary.open { max-height: 2000px; }
+  .consult-summary p { margin: 0; }
   .consult-summary h2, .consult-summary h3 { color: var(--gold-light); font-size: .95rem; margin: .8rem 0 .3rem; }
+  /* Saved transcript turns — clear gap + label colour so user vs specialist are easy to tell apart */
+  .consult-summary .turn { margin: 0 0 .85rem; }
+  .consult-summary .turn:last-child { margin-bottom: 0; }
+  .consult-summary .turn .who { color: var(--gold-light); font-weight: 700; }
+  .consult-summary .turn.you .who { color: var(--steel-light); }
   .consult-actions { display: flex; gap: .6rem; margin-top: .75rem; flex-wrap: wrap; }
   .consult-actions button {
     background: none; border: 1px solid rgba(200,169,110,.3); color: var(--gold-light);
@@ -503,7 +509,7 @@
             <span class="consult-date">${new Date(c.createdAt).toLocaleDateString(undefined, { year:'numeric', month:'short', day:'numeric' })}</span>
           </div>
           <div class="consult-title">${escapeHtml(c.title)}</div>
-          <div class="consult-summary" id="summary-${c.id}">${c.summaryHtml || renderTranscript(c.transcript)}</div>
+          <div class="consult-summary" id="summary-${c.id}">${c.summaryHtml || renderTranscript(c.transcript, c.tool)}</div>
           <div class="consult-actions">
             <button id="summaryBtn-${c.id}" onclick="toggleSummary('${c.id}')">View summary</button>
             ${(c.tool === 'meeting' || c.tool === 'quiz' || c.tool === 'gaap') ? `<button class="continue-btn" onclick="continueConsultation('${c.id}','${c.tool}')">Continue this conversation</button>` : ''}
@@ -525,11 +531,27 @@
         .trim();
     }
 
-    function renderTranscript(transcript) {
+    // Per-tool name for the AI side of a saved transcript, so it isn't a generic "Assistant"
+    const ASSISTANT_NAMES = {
+      gaap: 'GAAP Champion',
+      quiz: 'Interview Coach',
+      meeting: 'Specialist Panel',
+      'cv-review': 'CV Reviewer',
+      'cv-tailor': 'CV Tailor',
+      fsreview: 'FS Reviewer',
+      ask: 'AskAI',
+    };
+
+    function renderTranscript(transcript, tool) {
       if (!Array.isArray(transcript) || transcript.length === 0) return '<p>No written summary saved for this one.</p>';
+      const aiName = ASSISTANT_NAMES[tool] || 'Specialist';
       return transcript
         .filter(m => (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string' && !m.content.startsWith('['))
-        .map(m => `<p><strong>${m.role === 'user' ? 'You' : 'Assistant'}:</strong> ${escapeHtml(stripMarkdown(m.content))}</p>`)
+        .map(m => {
+          const isUser = m.role === 'user';
+          const who = isUser ? 'You' : aiName;
+          return `<div class="turn ${isUser ? 'you' : 'ai'}"><span class="who">${escapeHtml(who)}:</span> ${escapeHtml(stripMarkdown(m.content))}</div>`;
+        })
         .join('');
     }
 

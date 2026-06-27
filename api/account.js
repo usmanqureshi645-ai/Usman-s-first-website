@@ -338,10 +338,15 @@ async function handleMeetingPost(req, res, { kvUrl, kvToken }) {
     session.invitee.name = user.name;
   }
 
+  // Tag the poster's email on EVERY message (including the AI panel replies they
+  // relay), so each client can skip the messages it authored when polling and
+  // only render the other party's. Without this, a client would re-render the
+  // panel replies it posted itself. `authorName` keeps the human display name
+  // for user turns; assistant turns still render as the panel, not the poster.
   session.history.push({
     role: message.role === 'assistant' ? 'assistant' : 'user',
     content: message.content,
-    speakerEmail: message.role === 'assistant' ? null : user.email,
+    speakerEmail: user.email,
     speakerName: message.role === 'assistant' ? null : user.name,
   });
   await saveMeetingSession({ kvUrl, kvToken, session });

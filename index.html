@@ -3066,13 +3066,27 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     });
     const obs=new IntersectionObserver(entries=>{
       entries.forEach(entry=>{
+        // Cards taller than the viewport can never reach intersectionRatio 1,
+        // so they'd stay permanently blurred. Treat "enough of it is on screen"
+        // (or any meaningful reveal of a tall card) as fully revealed, lock it
+        // sharp, and stop observing so it never re-blurs.
+        const vh=window.innerHeight||document.documentElement.clientHeight;
+        const tall=entry.boundingClientRect.height > vh*0.85;
+        const revealed = entry.intersectionRatio>=0.55 || (tall && entry.isIntersecting && entry.intersectionRatio>0.12);
+        if(revealed){
+          entry.target.style.transform='scale(1)';
+          entry.target.style.opacity='1';
+          entry.target.style.filter='blur(0)';
+          obs.unobserve(entry.target);
+          return;
+        }
         const ratio=entry.intersectionRatio;
         const scale=0.88 + Math.min(ratio,1)*0.12;
         entry.target.style.transform=`scale(${scale.toFixed(3)})`;
         entry.target.style.opacity=Math.min(0.35+ratio*0.65,1).toFixed(2);
         entry.target.style.filter=`blur(${Math.max(0,2-ratio*2.5).toFixed(2)}px)`;
       });
-    }, { threshold:[0,0.15,0.3,0.45,0.6,0.75,0.9,1] });
+    }, { threshold:[0,0.12,0.15,0.3,0.45,0.55,0.6,0.75,0.9,1] });
     targets.forEach(el=>obs.observe(el));
   })();
 
@@ -3995,7 +4009,7 @@ const VoiceEngine=(function(){
     const voice = (explicitGender||gender)==='male' ? maleVoice : femaleVoice;
     if(voice) utter.voice=voice;
     utter.pitch=pitch||1;
-    utter.rate=1.5; // noticeably faster — the default 0.97 felt sluggish
+    utter.rate=1.25; // slightly faster than default, but not rushed
     utter.volume=0.9;
     if(shouldDuck) window.MusicDuck?.duck('tts');
     utter.onend=()=>{ if(shouldDuck) window.MusicDuck?.unduck('tts'); };
@@ -4328,7 +4342,7 @@ function mrRemoveCustomPersona(id){
   }
 }
 // ── Live two-person session (experimental) — see lib/meetingSession.js for the polling rationale ──
-let mrSessionId=null, mrSessionSeen=0, mrPollTimer=null, mrInviteeInfo=null, mrOtherParticipant=null;
+let mrSessionId=null, mrSessionSeen=0, mrPollTimer=null, mrInviteeInfo=null, mrOtherParticipant=null, mrInviteeAnnounced=false, mrIsHost=false;
 function mrToggleInviteForm(force){
   const form=document.getElementById('mrInviteForm');
   const show = typeof force==='boolean' ? force : form.style.display==='none';
@@ -4350,31 +4364,45 @@ async function mrSendInvite(){
   }
   const btn=document.getElementById('mrSendInviteBtn');
   btn.disabled=true; btn.textContent='Sending…';
+  // Keep the network call in its own try so a genuine connection failure is the
+  // ONLY thing that surfaces "Connection issue". Previously any exception in the
+  // post-success UI updates below (e.g. a missing element) fell into the same
+  // catch and showed a false "connection issue" even though the invite + email
+  // had actually gone through.
+  let data;
   try{
     const existingHistory=mrMeetingStarted ? mrHistory.filter(m=>!(typeof m.content==='string' && m.content.startsWith('['))) : [];
     const r=await fetch('/api/account?action=meeting-invite',{
       method:'POST', headers:{'content-type':'application/json'},
       body:JSON.stringify({ sessionId:mrSessionId, agents:mrAgentsPayload(), inviteeEmail:email, existingHistory })
     });
-    const data=await r.json();
+    data=await r.json();
     if(!r.ok){ warnEl.textContent=data.error||'Could not send the invite.'; warnEl.style.display='block'; return; }
-    mrSessionId=data.sessionId;
-    mrSessionSeen=data.totalCount||0;
-    mrStartPolling();
-    document.getElementById('mrInviteForm').querySelectorAll('input,button').forEach(el=>el.style.display='none');
-    const statusEl=document.getElementById('mrInviteStatus');
-    statusEl.style.display='block';
-    statusEl.textContent = data.alreadyMember
-      ? `Invite sent to ${email} — they already have an account, so they'll join shortly.`
-      : `Invite sent to ${email} — they'll get a link to sign up and join you.`;
-    if(mrMeetingStarted){
-      mrAppendMessage('agent','Meeting Room', `An invite has been sent to ${email} to join us live.`);
-    }
   }catch(e){
     warnEl.textContent='Connection issue — please try again.'; warnEl.style.display='block';
+    return;
   }finally{
     btn.disabled=false; btn.textContent='Send invite';
   }
+  // From here the invite has been accepted server-side; never show a connection error.
+  try{
+    mrSessionId=data.sessionId;
+    mrSessionSeen=data.totalCount||0;
+    mrInviteeAnnounced=false;
+    mrIsHost=true;
+    mrStartPolling();
+    document.getElementById('mrInviteForm').querySelectorAll('input,button').forEach(el=>el.style.display='none');
+    const statusEl=document.getElementById('mrInviteStatus');
+    if(statusEl){
+      statusEl.style.display='block';
+      statusEl.textContent = data.alreadyMember
+        ? `Invite sent to ${email} — they already have an account, so they'll join shortly.`
+        : `Invite sent to ${email} — they'll get a link to sign up and join you.`;
+    }
+    if(mrMeetingStarted){
+      mrAppendMessage('agent','Meeting Room', `An invite has been sent to ${email} to join us live.`);
+    }
+  }catch(e){ /* UI-only glitch after a successful invite — don't alarm the user */ }
 }
 function mrStartPolling(){
   if(mrPollTimer) return;
@@ -4391,7 +4419,12 @@ async function mrPostToSession(message){
       body:JSON.stringify({ id:mrSessionId, message })
     });
     const data=await r.json();
-    if(r.ok){ mrSessionSeen=data.totalCount; if(data.invitee) mrInviteeInfo=data.invitee; }
+    // Deliberately DON'T advance mrSessionSeen here. Jumping it to the server's
+    // full length would skip over any messages the other party posted but we
+    // haven't polled yet, so we'd never render them. The poll loop owns
+    // mrSessionSeen; it skips our own messages by speakerEmail, so posting
+    // without advancing the pointer is safe and never double-renders.
+    if(r.ok && data.invitee) mrInviteeInfo=data.invitee;
   }catch(e){ /* the next poll will eventually resync */ }
 }
 async function mrPollSession(){
@@ -4404,10 +4437,17 @@ async function mrPollSession(){
     mrInviteeInfo=data.invitee;
     if(data.invitee && data.invitee.joined){
       mrOtherParticipant = mrOtherParticipant || { email:data.invitee.email, name:data.invitee.name };
+      // Let the host actually see that their guest has arrived (announce once).
+      // Host-only: to the guest, data.invitee is themselves, so this would be confusing.
+      if(mrIsHost && !mrInviteeAnnounced){
+        mrInviteeAnnounced=true;
+        mrAppendMessage('agent','Meeting Room', `**${data.invitee.name||'Your guest'}** has joined the meeting. You'll both see each other's messages live from here.`);
+      }
     }
+    const myEmail = siteUser && siteUser.email ? siteUser.email.toLowerCase() : null;
     if(Array.isArray(data.history) && data.history.length){
       for(const m of data.history){
-        if(m.speakerEmail && siteUser && m.speakerEmail===siteUser.email) continue; // already rendered locally when we sent it
+        if(m.speakerEmail && myEmail && m.speakerEmail.toLowerCase()===myEmail) continue; // already rendered locally when we sent it
         mrHistory.push({role:m.role, content:m.content});
         if(m.role==='assistant'){ await mrRenderPanelReply(m.content); }
         else { mrAppendMessage('user', m.speakerName||'Guest', m.content); }
@@ -5254,6 +5294,7 @@ window.mrTryJoinSession=async function(joinId){
     if(!r.ok){ alert(data.error||'That meeting invite could not be found — it may have expired.'); return; }
 
     mrSessionId=joinId;
+    mrIsHost=false;
     mrOtherParticipant={ email:data.hostEmail, name:data.hostName };
     mrMeetingStarted=true;
     document.getElementById('mrStartBtn').textContent='Meeting in progress — tick/untick anyone above to add or remove them';

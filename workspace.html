@@ -177,6 +177,30 @@
   .back-to-main-btn{
     background:linear-gradient(135deg,var(--gold-light),var(--gold)) !important;
   }
+  .widget-tip{ position:relative; }
+  .widget-tip::after{
+    content:attr(data-tooltip);
+    position:absolute; right:calc(100% + 12px); top:50%; transform:translateY(-50%) translateX(6px);
+    background:rgba(16,26,44,.97); color:var(--gold-light);
+    border:1px solid rgba(200,169,110,.35);
+    padding:.45rem .8rem; border-radius:8px;
+    font-size:.72rem; font-weight:600; letter-spacing:.02em;
+    white-space:nowrap; pointer-events:none;
+    opacity:0; transition:opacity .25s ease, transform .25s cubic-bezier(.22,1,.36,1);
+  }
+  .widget-tip::before{
+    content:''; position:absolute; right:calc(100% + 4px); top:50%; transform:translateY(-50%);
+    border:6px solid transparent; border-left-color:rgba(200,169,110,.35);
+    opacity:0; transition:opacity .25s ease;
+  }
+  .widget-tip:hover::after{ opacity:1; transform:translateY(-50%) translateX(0); }
+  .widget-tip:hover::before{ opacity:1; }
+  @media (max-width:980px){ .widget-tip::after, .widget-tip::before{ display:none; } }
+  .mr-typing{display:flex;gap:4px;padding:.6rem 1rem}
+  .mr-typing span{width:6px;height:6px;border-radius:50%;background:var(--gold);opacity:.4;animation:typingDot 1.2s infinite}
+  .mr-typing span:nth-child(2){animation-delay:.2s}
+  .mr-typing span:nth-child(3){animation-delay:.4s}
+  @keyframes typingDot{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
   @media (max-width:480px){
     .welcome-bot{ right:10px !important; }
     .welcome-bot-toggle{ width:46px; height:46px; font-size:1.15rem; }
@@ -267,6 +291,22 @@
       </div>
     </div>
     <button class="welcome-bot-toggle" title="Report a bug" style="background:linear-gradient(135deg,#e0c99a,#8899aa)" onclick="toggleFeedback()">🐞</button>
+  </div>
+
+  <!-- PERSONAL AI ASSISTANT (ported from index.html) -->
+  <div class="welcome-bot" style="bottom:218px;right:28px">
+    <div class="welcome-bot-panel" id="askPanel">
+      <div class="welcome-bot-header">
+        <span id="askPanelTitle">💬 AskAI</span>
+        <button class="welcome-bot-close" onclick="toggleAsk(false)">&times;</button>
+      </div>
+      <div class="welcome-bot-messages" id="askMessages"></div>
+      <div style="padding:.75rem;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:.5rem">
+        <input type="text" id="askInput" placeholder="Ask me anything…" style="flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.5rem .75rem;color:var(--cream);font-family:inherit;font-size:.78rem">
+        <button class="wb-option-btn" onclick="sendAsk()">Send</button>
+      </div>
+    </div>
+    <button class="welcome-bot-toggle widget-tip" data-tooltip="Your AI assistant" id="askToggle" style="background:linear-gradient(135deg,#8899aa,#0A1628);color:#fff">🤖</button>
   </div>
 
   <main>
@@ -544,6 +584,8 @@
           return;
         }
         document.getElementById('workspaceSub').textContent = `Welcome back, ${me.name.split(' ')[0]} — every consultation you've saved lives here.`;
+        window.workspaceUser = me;
+        window.updateAskBranding?.();
 
         const listResp = await fetch('/api/account?action=workspace-list');
         const data = await listResp.json();
@@ -724,6 +766,7 @@
 
       window.toggleFeedback=function(force){
         fbOpened = typeof force==='boolean' ? force : !fbOpened;
+        if(fbOpened) window.toggleAsk?.(false);
         panel.classList.toggle('open', fbOpened);
         if(fbOpened && !greeted){
           greeted=true;
@@ -760,6 +803,99 @@
       };
       document.getElementById('feedbackInput').addEventListener('keydown', e=>{
         if(e.key==='Enter') window.submitFeedback();
+      });
+    })();
+
+    function renderMarkdown(raw){
+      const lines=escapeHtml(raw).split('\n');
+      let html=''; let inList=false; let listType=null;
+      function closeList(){ if(inList){ html+= listType==='ol' ? '</ol>' : '</ul>'; inList=false; listType=null; } }
+      for(let line of lines){
+        const trimmed=line.trim();
+        if(/^###\s+/.test(trimmed)){ closeList(); html+=`<h5>${trimmed.replace(/^###\s+/,'')}</h5>`; continue; }
+        if(/^##\s+/.test(trimmed)){ closeList(); html+=`<h4>${trimmed.replace(/^##\s+/,'')}</h4>`; continue; }
+        if(/^#\s+/.test(trimmed)){ closeList(); html+=`<h4>${trimmed.replace(/^#\s+/,'')}</h4>`; continue; }
+        if(/^[-*]\s+/.test(trimmed)){
+          if(!inList || listType!=='ul'){ closeList(); html+='<ul>'; inList=true; listType='ul'; }
+          html+=`<li>${trimmed.replace(/^[-*]\s+/,'')}</li>`; continue;
+        }
+        if(/^\d+\.\s+/.test(trimmed)){
+          if(!inList || listType!=='ol'){ closeList(); html+='<ol>'; inList=true; listType='ol'; }
+          html+=`<li>${trimmed.replace(/^\d+\.\s+/,'')}</li>`; continue;
+        }
+        closeList();
+        if(trimmed==='---'){ html+='<hr style="border:none;border-top:1px solid rgba(255,255,255,.1);margin:.6rem 0">'; continue; }
+        if(trimmed==='') { html+='<br>'; continue; }
+        html+=`<p>${trimmed}</p>`;
+      }
+      closeList();
+      return html
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        .replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g, '<em>$1</em>');
+    }
+
+    // Personal AI assistant — ported from index.html so it's available from the workspace too
+    (function(){
+      const panel=document.getElementById('askPanel');
+      const toggleBtn=document.getElementById('askToggle');
+      const wrap=document.getElementById('askMessages');
+      let askOpened=false, askHistory=[];
+
+      window.updateAskBranding=function(){
+        const u=window.workspaceUser;
+        document.getElementById('askPanelTitle').textContent = u ? `🤖 ${u.name.split(' ')[0]}'sGPT` : '💬 AskAI';
+      };
+      updateAskBranding();
+
+      function addAskMsg(role, html){
+        const div=document.createElement('div');
+        div.className='wb-msg '+(role==='user'?'user':'bot');
+        div.innerHTML=`<div class="wb-bubble">${html}</div>`;
+        wrap.appendChild(div);
+        wrap.scrollTop=wrap.scrollHeight;
+      }
+
+      window.toggleAsk=function(force){
+        askOpened = typeof force==='boolean' ? force : !askOpened;
+        if(askOpened) window.toggleFeedback?.(false);
+        panel.classList.toggle('open', askOpened);
+        if(askOpened && wrap.childElementCount===0){
+          const u=window.workspaceUser;
+          addAskMsg('bot', u ? `Hey ${u.name.split(' ')[0]}! Ask me anything — I'm a general-purpose assistant, separate from the site's specialised tools.` : "Hi! Ask me anything — general questions, not just finance.");
+        }
+      };
+      toggleBtn.addEventListener('click', ()=>window.toggleAsk());
+
+      window.sendAsk=async function(){
+        const input=document.getElementById('askInput');
+        const text=input.value.trim();
+        if(!text) return;
+        addAskMsg('user', escapeHtml(text));
+        askHistory.push({role:'user', content:text});
+        input.value='';
+        const typing=document.createElement('div');
+        typing.className='wb-msg bot'; typing.id='askTyping';
+        typing.innerHTML=`<div class="wb-bubble"><span class="mr-typing"><span></span><span></span><span></span></span></div>`;
+        wrap.appendChild(typing); wrap.scrollTop=wrap.scrollHeight;
+        try{
+          const u=window.workspaceUser;
+          const r=await fetch('/api/ask',{
+            method:'POST',
+            headers:{'content-type':'application/json'},
+            body:JSON.stringify({history:askHistory, userName:u?.name})
+          });
+          const data=await r.json();
+          document.getElementById('askTyping')?.remove();
+          if(!r.ok){ addAskMsg('bot', "Sorry, I'm temporarily unavailable — please try again shortly."); return; }
+          askHistory.push({role:'assistant', content:data.text});
+          addAskMsg('bot', renderMarkdown(data.text));
+        }catch(e){
+          document.getElementById('askTyping')?.remove();
+          addAskMsg('bot', 'Connection issue — please try again.');
+        }
+      };
+      document.getElementById('askInput').addEventListener('keydown', e=>{
+        if(e.key==='Enter') window.sendAsk();
       });
     })();
   </script>

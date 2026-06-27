@@ -3941,7 +3941,7 @@ async function mrCallApi(userText){
       return;
     }
     mrHistory.push({role:'assistant', content:data.text});
-    mrRenderPanelReply(data.text);
+    await mrRenderPanelReply(data.text);
   }catch(e){
     mrHideTyping();
     mrAppendMessage('agent','Meeting Room','Connection issue — please try again.');
@@ -3949,13 +3949,26 @@ async function mrCallApi(userText){
     document.getElementById('mrSend').disabled=false;
   }
 }
-function mrRenderPanelReply(text){
+function mrWait(ms){ return new Promise(r=>setTimeout(r, ms)); }
+// Renders each panel member's contribution one at a time, with a realistic
+// typing pause beforehand, instead of dumping every speaker's bubble at once —
+// the latter reads as obviously AI-generated rather than a real back-and-forth.
+async function mrRenderPanelReply(text){
   // Splits "**Name (Role):** message" segments into separate bubbles
   const parts=text.split(/\*\*([^*]+)\*\*:?\s*/).filter(Boolean);
   if(parts.length<=1){ mrAppendMessage('agent','Panel', text.trim()); return; }
   for(let i=0;i<parts.length;i+=2){
     const name=parts[i]; const msg=parts[i+1];
-    if(name && msg) mrAppendMessage('agent', name.trim(), msg.trim());
+    if(!name || !msg) continue;
+    if(i>0){
+      // brief pause before the next speaker "picks up", as if they were listening
+      await mrWait(500 + Math.random()*400);
+      mrShowTyping();
+      const typingDelay=Math.min(2600, Math.max(900, msg.trim().length*22));
+      await mrWait(typingDelay);
+      mrHideTyping();
+    }
+    mrAppendMessage('agent', name.trim(), msg.trim());
   }
 }
 let mrRealUserMessages=0;

@@ -19,6 +19,7 @@
     --white: #FFFFFF;
   }
   html { background: var(--navy); }
+  select option { background: var(--navy); color: var(--cream); }
   body {
     position: relative;
     font-family: 'Manrope', 'Century Gothic', sans-serif;
@@ -348,12 +349,13 @@
 
           <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin-top:1.25rem">
             <div>
-              <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">Location</label>
-              <input type="text" id="jsLocation" placeholder="e.g. London" style="width:100%;height:40px;border-radius:8px;border:1px solid rgba(200,169,110,.2);background:rgba(255,255,255,.03);color:var(--cream);padding:0 .6rem">
+              <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">Country</label>
+              <select id="jsCountry" onchange="jsPopulateCities()" style="width:100%;height:40px;border-radius:8px;border:1px solid rgba(200,169,110,.2);background:rgba(255,255,255,.03);color:var(--cream)"></select>
             </div>
             <div>
-              <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">Country</label>
-              <input type="text" id="jsCountry" placeholder="e.g. United Kingdom" style="width:100%;height:40px;border-radius:8px;border:1px solid rgba(200,169,110,.2);background:rgba(255,255,255,.03);color:var(--cream);padding:0 .6rem">
+              <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">City / Location</label>
+              <select id="jsCitySelect" onchange="jsHandleCityChange()" style="width:100%;height:40px;border-radius:8px;border:1px solid rgba(200,169,110,.2);background:rgba(255,255,255,.03);color:var(--cream)"></select>
+              <input type="text" id="jsCityOther" placeholder="Type your city" style="display:none;width:100%;height:40px;border-radius:8px;border:1px solid rgba(200,169,110,.2);background:rgba(255,255,255,.03);color:var(--cream);padding:0 .6rem;margin-top:.5rem">
             </div>
             <div>
               <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">Experience level</label>
@@ -523,6 +525,48 @@
       throw new Error('Unsupported file type');
     }
 
+    const JS_COUNTRY_CITIES = {
+      'United Kingdom': ['London', 'Manchester', 'Birmingham', 'Edinburgh', 'Leeds', 'Bristol', 'Glasgow'],
+      'United States': ['New York', 'San Francisco', 'Chicago', 'Boston', 'Los Angeles', 'Dallas', 'Atlanta'],
+      'Ireland': ['Dublin', 'Cork', 'Galway'],
+      'Luxembourg': ['Luxembourg City'],
+      'Australia': ['Sydney', 'Melbourne', 'Brisbane', 'Perth'],
+      'United Arab Emirates': ['Dubai', 'Abu Dhabi'],
+      'Canada': ['Toronto', 'Vancouver', 'Montreal', 'Calgary'],
+      'Singapore': ['Singapore'],
+      'Germany': ['Frankfurt', 'Berlin', 'Munich'],
+      'Netherlands': ['Amsterdam', 'Rotterdam'],
+      'Switzerland': ['Zurich', 'Geneva'],
+      'India': ['Mumbai', 'Bangalore', 'Delhi', 'Pune', 'Hyderabad'],
+      'Pakistan': ['Karachi', 'Lahore', 'Islamabad'],
+      'Hong Kong': ['Hong Kong'],
+      'France': ['Paris'],
+    };
+
+    function jsPopulateCountries() {
+      const sel = document.getElementById('jsCountry');
+      sel.innerHTML = Object.keys(JS_COUNTRY_CITIES).map(c => `<option value="${c}">${c}</option>`).join('')
+        + '<option value="Other">Other (type below)</option>';
+      jsPopulateCities();
+    }
+
+    function jsPopulateCities() {
+      const country = document.getElementById('jsCountry').value;
+      const sel = document.getElementById('jsCitySelect');
+      const cities = JS_COUNTRY_CITIES[country] || [];
+      sel.innerHTML = cities.map(c => `<option value="${c}">${c}</option>`).join('')
+        + '<option value="Other">Other (type below)</option>';
+      sel.style.display = '';
+      jsHandleCityChange();
+    }
+
+    function jsHandleCityChange() {
+      const isOther = document.getElementById('jsCitySelect').value === 'Other';
+      document.getElementById('jsCityOther').style.display = isOther ? '' : 'none';
+    }
+
+    jsPopulateCountries();
+
     async function jsHandleFile(input, kind) {
       const file = input.files[0];
       if (!file) return;
@@ -548,8 +592,10 @@
           body: JSON.stringify({
             cv: jsCvText,
             coverLetter: jsCoverText || undefined,
-            location: document.getElementById('jsLocation').value.trim(),
-            country: document.getElementById('jsCountry').value.trim(),
+            location: (document.getElementById('jsCitySelect').value === 'Other'
+              ? document.getElementById('jsCityOther').value.trim()
+              : document.getElementById('jsCitySelect').value),
+            country: document.getElementById('jsCountry').value === 'Other' ? '' : document.getElementById('jsCountry').value,
             experienceLevel: document.getElementById('jsExperience').value,
           }),
         });

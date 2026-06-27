@@ -4077,8 +4077,11 @@ function mrWait(ms){ return new Promise(r=>setTimeout(r, ms)); }
 // typing pause beforehand, instead of dumping every speaker's bubble at once —
 // the latter reads as obviously AI-generated rather than a real back-and-forth.
 async function mrRenderPanelReply(text, instant){
-  // Splits "**Name (Role):** message" segments into separate bubbles
-  const parts=text.split(/\*\*([^*]+)\*\*:?\s*/).filter(Boolean);
+  // Splits "**Name**: message" speaker segments into separate bubbles. The colon
+  // AFTER the closing ** is required, so inline bold inside a message (e.g. the
+  // "**Quick note:**" voice disclaimer, colon inside the bold) is NOT mistaken for
+  // a new speaker and stays as bold text within the bubble.
+  const parts=text.split(/\*\*([^*]+)\*\*:\s*/).filter(Boolean);
   if(parts.length<=1){ mrAppendMessage('agent','Panel', text.trim()); return; }
   for(let i=0;i<parts.length;i+=2){
     const name=parts[i]; const msg=parts[i+1];

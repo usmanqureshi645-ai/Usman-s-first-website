@@ -1721,10 +1721,6 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
       <span class="mr-mic-label">Hear</span>
     </button>
-    <select class="voice-gender-select" title="Voice accent">
-      <option value="female">Female voice</option>
-      <option value="male">Male voice</option>
-    </select>
     <input type="text" id="qzInput" placeholder="Type your answer…" />
     <button id="qzSend" onclick="qzSendMessage()">Send</button>
   </div>
@@ -1875,11 +1871,11 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 </ul>
 </div>
 
-<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Ask the GAAP Research Assistant</h3>
+<h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Ask the GAAP Champion</h3>
 <div class="mr-chat" id="gaapChatWrap" style="height:520px;max-width:900px;margin:0 auto">
   <div style="display:flex;align-items:center;gap:.6rem;padding:.85rem 1rem;border-bottom:1px solid rgba(255,255,255,.08)">
     <div class="mr-avatar photo av-ga" style="width:34px;height:34px;border-radius:8px">GA</div>
-    <span style="font-size:.85rem;font-weight:700;color:var(--gold)">GAAP Research Assistant</span>
+    <span style="font-size:.85rem;font-weight:700;color:var(--gold)">GAAP Champion</span>
     <button class="mr-maximize-btn" type="button" onclick="mrToggleMaximize('gaapChatWrap')" title="Maximize" style="margin-left:auto">⛶</button>
   </div>
   <div class="mr-messages" id="gaapMessages"></div>
@@ -1898,10 +1894,6 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
       <span class="mr-mic-label">Hear</span>
     </button>
-    <select class="voice-gender-select" title="Voice accent">
-      <option value="female">Female voice</option>
-      <option value="male">Male voice</option>
-    </select>
     <input type="text" id="gaapInput" placeholder="Ask in plain language — e.g. 'How does goodwill differ under IFRS vs US GAAP?'" />
     <button id="gaapSend" onclick="gaapSendMessage()">Ask</button>
   </div>
@@ -3977,7 +3969,7 @@ const VoiceEngine=(function(){
     const voice = (explicitGender||gender)==='male' ? maleVoice : femaleVoice;
     if(voice) utter.voice=voice;
     utter.pitch=pitch||1;
-    utter.rate=0.97;
+    utter.rate=1.5; // noticeably faster — the default 0.97 felt sluggish
     utter.volume=0.9;
     if(shouldDuck) window.MusicDuck?.duck('tts');
     utter.onend=()=>{ if(shouldDuck) window.MusicDuck?.unduck('tts'); };
@@ -3988,10 +3980,10 @@ const VoiceEngine=(function(){
   return { setGender, speak, cancel };
 })();
 
-// Wire up every gender <select> on the page (Meeting Room, GAAP Compare, Knowledge Test all share the same engine)
-document.querySelectorAll('.voice-gender-select').forEach(sel=>{
-  sel.addEventListener('change', ()=>VoiceEngine.setGender(sel.value));
-});
+// Voice gender is now fixed per tool (GAAP Champion = male, Interview Coach = female,
+// Meeting Room = per-persona), so there's no global voice-gender selector to wire up.
+// The `.voice-gender-select` class is still used purely for dropdown styling elsewhere
+// (GAAP jurisdiction, FS framework) — those must NOT touch the voice engine.
 
 /* ── Meeting Room chat ── */
 const mrHistory=[];
@@ -4477,7 +4469,7 @@ function mrAssessDocQuality(text){
 const MR_AVATAR_CLASS={
   'Sarah Bennett':'av-sc','David Whitfield':'av-dw','Amelia Hartley':'av-as','Marcus Lee':'av-ml',
   'Elena Rossi':'av-er','James Carter':'av-jc','Charlotte Sinclair':'av-pn',
-  'Interview Coach':'av-ic','GAAP Research Assistant':'av-ga'
+  'Interview Coach':'av-ic','GAAP Champion':'av-ga'
 };
 function mrAvatarClassFor(name){
   if(MR_AVATAR_CLASS[name]) return MR_AVATAR_CLASS[name];
@@ -4490,7 +4482,7 @@ function mrAvatarClassFor(name){
 function mrStageParticipants(el){
   if(el.id==='mrChatWrap') return (typeof mrPresentNames==='function' ? mrPresentNames() : []);
   if(el.id==='qzChatWrap') return ['Interview Coach'];
-  if(el.id==='gaapChatWrap') return ['GAAP Research Assistant'];
+  if(el.id==='gaapChatWrap') return ['GAAP Champion'];
   return [];
 }
 
@@ -5005,7 +4997,7 @@ function openGaapSlide(jurisdiction, idx){
         <ul style="color:var(--steel-light);line-height:1.7;font-size:.88rem;padding-left:1.1rem;margin:0">${localBullets}</ul>
       </div>
     </div>
-    <p class="mr-note" style="margin-top:1.5rem">Ask the GAAP Research Assistant below for even more depth on this specific topic and jurisdiction.</p>
+    <p class="mr-note" style="margin-top:1.5rem">Ask the GAAP Champion below for even more depth on this specific topic and jurisdiction.</p>
   `;
   openPub('gaapSlideModal');
 }
@@ -5013,7 +5005,15 @@ function openGaapSlide(jurisdiction, idx){
 /* ── IFRS vs GAAP comparison bot ── */
 const gaapHistory=[];
 let gaapVoiceEnabled=false;
-function gaapSpeak(text){ if(gaapVoiceEnabled) VoiceEngine.speak(text, 1, false); }
+// GAAP Champion is always a male voice — no selector, fixed character.
+function gaapSpeak(text){ if(gaapVoiceEnabled) VoiceEngine.speak(text, 0.92, false, 'male'); }
+// Fade the music out gently the first time the user engages with GAAP (speak or type).
+let gaapStarted=false;
+function gaapDuckOnce(){
+  if(gaapStarted) return;
+  gaapStarted=true;
+  window.MusicDuck?.duck('gaap', 2500); // slow, graceful fade-out
+}
 function gaapToggleVoice(){
   gaapVoiceEnabled=!gaapVoiceEnabled;
   const btn=document.getElementById('gaapVoiceToggle');
@@ -5026,7 +5026,7 @@ function gaapAppendMessage(role, text){
   div.className='mr-msg '+(role==='user'?'user':'agent');
   div.innerHTML = role==='user'
     ? `<div class="mr-bubble">${escapeHtml(text)}</div>`
-    : `<div class="mr-msg-name">GAAP Research Assistant</div><div class="mr-bubble">${renderMarkdown(text)}</div>`;
+    : `<div class="mr-msg-name">GAAP Champion</div><div class="mr-bubble">${renderMarkdown(text)}</div>`;
   wrap.appendChild(div);
   wrap.scrollTop=wrap.scrollHeight;
   if(role!=='user') gaapSpeak(text);
@@ -5088,6 +5088,7 @@ function gaapSendMessage(){
   const input=document.getElementById('gaapInput');
   const text=input.value.trim();
   if(!text) return;
+  gaapDuckOnce(); // typing a question counts as engaging with GAAP — fade the music
   gaapAppendMessage('user', text);
   gaapHistory.push({role:'user', content:text});
   input.value='';
@@ -5101,11 +5102,14 @@ document.getElementById('gaapInput').addEventListener('keydown', e=>{
   if(e.key==='Enter') gaapSendMessage();
 });
 wireMic('gaapMic','gaapInput', gaapSendMessage, false);
+// Clicking "Speak" in GAAP should fade the music too, the moment it's pressed.
+document.getElementById('gaapMic')?.addEventListener('click', gaapDuckOnce);
 
 /* ── Test Your Knowledge (interview prep coach) ── */
 const qzHistory=[];
 let qzVoiceEnabled=false;
-function qzSpeak(text){ if(qzVoiceEnabled) VoiceEngine.speak(text); }
+// Interview Coach is always a female voice — no selector, fixed character.
+function qzSpeak(text){ if(qzVoiceEnabled) VoiceEngine.speak(text, 1, true, 'female'); }
 function qzToggleVoice(){
   qzVoiceEnabled=!qzVoiceEnabled;
   const btn=document.getElementById('qzVoiceToggle');

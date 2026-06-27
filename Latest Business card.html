@@ -1394,7 +1394,7 @@ animation:pulseRing 2.4s ease-out infinite;
 <li><a href="#gaapcompare">GAAP Compare</a></li>
 <li><a href="#hottopics">Hot Market Topics</a></li>
 <li><a href="#jobhub">Rate Your Resume</a></li>
-<li><a href="#knowledgetest">Knowledge Test</a></li>
+<li><a href="#knowledgetest">Interview Preparation</a></li>
 <li><a href="#meetingroom" class="nav-meetingroom">Meeting Room <span class="live-dot"></span></a></li>
 <li><a href="#contact">Contact</a></li>
 <li id="navWorkspaceLink" style="display:none"><a href="workspace.html">My Workspace</a></li>
@@ -1513,7 +1513,7 @@ animation:pulseRing 2.4s ease-out infinite;
 <p>Talk live with an AI panel of audit, tax, legal and technical specialists.</p>
 </div>
 <div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('knowledgetest').scrollIntoView({behavior:'smooth'})">
-<span class="sector-icon">🎯</span><h3>Knowledge Test</h3>
+<span class="sector-icon">🎯</span><h3>Interview Preparation</h3>
 <p>Interview &amp; exam prep with a friendly AI coach — get an emailed feedback report.</p>
 </div>
 <div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('jobhub').scrollIntoView({behavior:'smooth'})">
@@ -1637,8 +1637,8 @@ animation:pulseRing 2.4s ease-out infinite;
 <div class="section-inner flow-reveal">
 <div class="section-header">
 <p class="section-eyebrow">Interview &amp; Exam Prep</p>
-<h2 class="section-title">Test Your Knowledge</h2>
-<p class="section-sub">Not a test — a friend who helps you prepare. Pick a level, and get asked real accounting, audit, tax and interpersonal/leadership questions one at a time, with feedback and the "why this matters for interviews" context after every answer.</p>
+<h2 class="section-title">Interview Preparation</h2>
+<p class="section-sub">Not a test — a friend who helps you prepare for the real interview ahead of you. Share the job description (and a link, if you have one) so the questions are specific to that company and role, not generic. Pick a level, and get asked real, role-specific accounting, audit, tax and interpersonal/leadership questions one at a time, with feedback and the "why this matters for interviews" context after every answer.</p>
 </div>
 
 <div id="qzLevels" class="train-grid">
@@ -3098,8 +3098,8 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       addMsg('bot', `🟢 <strong>The Meeting Room</strong> — talk live (type or speak) with an AI panel of an Audit Partner, Tax Partner, IFRS Regulator and more.`, [
         { label:'Open Meeting Room', action:()=>{ document.getElementById('meetingroom').scrollIntoView({behavior:'smooth'}); toggleWelcomeBot(false); } }
       ]);
-      addMsg('bot', `🎯 <strong>Test Your Knowledge</strong> — a friendly AI coach that quizzes you for interviews/exams and explains why each question matters.`, [
-        { label:'Open Knowledge Test', action:()=>{ document.getElementById('knowledgetest').scrollIntoView({behavior:'smooth'}); toggleWelcomeBot(false); } }
+      addMsg('bot', `🎯 <strong>Interview Preparation</strong> — a friendly AI coach that runs a mock interview tailored to the actual job you're applying for and explains why each question matters.`, [
+        { label:'Open Interview Preparation', action:()=>{ document.getElementById('knowledgetest').scrollIntoView({behavior:'smooth'}); toggleWelcomeBot(false); } }
       ]);
       addMsg('bot', `💼 <strong>Job Search</strong> — quick links to live audit/tax roles, plus AI CV &amp; cover-letter tailoring to a specific posting.`, [
         { label:'Open Job Search', action:()=>{ document.getElementById('jobhub').scrollIntoView({behavior:'smooth'}); toggleWelcomeBot(false); } }
@@ -3147,7 +3147,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       if(!opened && Date.now()-lastInteraction > 150000 && !window.isUserBusy?.()){
         lastInteraction=Date.now();
         window.toggleWelcomeBot(true);
-        addMsg('bot', "Still exploring? 🧭 I'm right here if you'd like a hand finding the Meeting Room, Knowledge Test, GAAP Compare or Job Search tools.", [
+        addMsg('bot', "Still exploring? 🧭 I'm right here if you'd like a hand finding the Meeting Room, Interview Preparation, GAAP Compare or Job Search tools.", [
           { label:'Show me around', action:()=>{ addMsg('user','Show me around'); explainSite(); } },
           { label:"I'm fine, thanks", action:()=>{ addMsg('user',"I'm fine, thanks"); window.toggleWelcomeBot(false); } },
         ]);
@@ -3455,7 +3455,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
   (function(){
     const toasts=[
       { title:'🟢 Meeting Room', body:"Talk live with an AI Audit Partner, Tax Partner, IFRS Regulator and more.", cta:'Open it', target:'#meetingroom' },
-      { title:'🎯 Knowledge Test', body:"Get interview/exam questions one at a time, with feedback after every answer.", cta:'Start', target:'#knowledgetest' },
+      { title:'🎯 Interview Preparation', body:"A mock interview tailored to the real job you're applying for, one question at a time.", cta:'Start', target:'#knowledgetest' },
       { title:'💼 Job hunting?', body:"Get an AI-tailored CV and cover letter in minutes.", cta:'Try it', target:'#jobhub' },
       { title:'✨ Sign up free', body:"Want to create your own workspace? Sign up free and get a personalised workspace.", cta:'Sign up', action:'signup' },
     ];
@@ -4354,7 +4354,7 @@ function mrDownloadTranscript(){
 }
 
 function qzDownloadTranscript(){
-  downloadTranscriptPDF(qzHistory, 'Interview Prep — Knowledge Test Transcript', 'knowledge-test-transcript.pdf');
+  downloadTranscriptPDF(qzHistory, 'Interview Preparation Transcript', 'interview-preparation-transcript.pdf');
 }
 
 // Allow adding/removing specialists mid-conversation, not just before it starts

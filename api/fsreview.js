@@ -3,6 +3,7 @@ import { buildAnnotatedDocx } from '../lib/docxComments.js';
 import { logAndCheckUsage } from '../lib/ipUsage.js';
 import { getUserFromRequest } from '../lib/auth.js';
 import { saveConsultation } from '../lib/consultations.js';
+import { sendEmail } from '../lib/email.js';
 
 const FRAMEWORKS = new Set(['FRS 101', 'FRS 102', 'Full IFRS', 'US GAAP', 'AICPA']);
 
@@ -151,17 +152,13 @@ If isFinancialStatement is false, leave inlineComments and additionalNotes as em
       <p style="margin-top:24px;padding-top:16px;border-top:1px solid #ddd;color:#555">This is an AI-simulated panel review for educational purposes, not formal assurance or audit opinion.</p>
     `;
 
-    const emailResp = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', authorization: `Bearer ${resendKey}` },
-      body: JSON.stringify({
+    const emailResp = await sendEmail(resendKey, {
         from: 'Financial Statement Review <fsreview@uqconsulting.org>',
         to: [email],
         subject: `Your Financial Statement Review (${selectedFramework})`,
         html,
         attachments: [{ filename: outFileName, content: annotatedBuffer.toString('base64') }],
-      }),
-    });
+    }, { kvUrl, kvToken });
 
     if (!emailResp.ok) {
       const emailData = await emailResp.json().catch(() => ({}));

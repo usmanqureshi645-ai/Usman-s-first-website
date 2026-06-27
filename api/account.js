@@ -5,6 +5,8 @@ import { hashPassword, verifyPassword, setSessionCookie, clearSessionCookie, get
 import { saveConsultation, scheduleFollowup } from '../lib/consultations.js';
 import { createMeetingSession, getMeetingSession, saveMeetingSession } from '../lib/meetingSession.js';
 import { getProfile, saveProfile } from '../lib/profile.js';
+import { sendEmail } from '../lib/email.js';
+import { recordVisit, recordPresence, recordSignup, getDashboardData } from '../lib/metrics.js';
 
 const TOOL_LABELS = { meeting: 'Meeting Room consultation', quiz: 'Interview Prep session' };
 const SIGNUP_LINE = "If you haven't already, signing up is free and unlocks your personal workspace — every consultation saved, and you can resume any conversation right where you left off. It stays free after signing up too.";
@@ -33,10 +35,10 @@ async function handleSignup(req, res, { resendKey, kvUrl, kvToken }) {
 
   setSessionCookie(res, { email: normalizedEmail, name });
 
-  await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json', authorization: `Bearer ${resendKey}` },
-    body: JSON.stringify({
+  // Persist to the signup database + counter that powers the admin dashboard.
+  await recordSignup({ kvUrl, kvToken }, { name, email: normalizedEmail });
+
+  await sendEmail(resendKey, {
       from: 'Usman Qureshi | Audit & Advisory <welcome@uqconsulting.org>',
       to: [normalizedEmail],
       subject: `Welcome aboard, ${name.split(' ')[0]}!`,
@@ -53,19 +55,14 @@ async function handleSignup(req, res, { resendKey, kvUrl, kvToken }) {
         </ul>
         <p>See you back soon.</p>
       `,
-    }),
-  });
+  }, { kvUrl, kvToken });
 
-  await fetch('https://api.resend.com/emails', {
-    method: 'POST',
-    headers: { 'content-type': 'application/json', authorization: `Bearer ${resendKey}` },
-    body: JSON.stringify({
+  await sendEmail(resendKey, {
       from: 'Website Signups <signups@uqconsulting.org>',
       to: ['usmanqureshi645@gmail.com'],
       subject: `New website signup: ${name}`,
       html: `<p>New signup on the website:</p><p><strong>Name:</strong> ${name}<br><strong>Email:</strong> ${normalizedEmail}</p>`,
-    }),
-  });
+  }, { kvUrl, kvToken });
 
   res.status(200).json({ ok: true, name, email: normalizedEmail });
 }
@@ -276,18 +273,14 @@ async function handleMeetingInvite(req, res, { kvUrl, kvToken, resendKey }) {
   const joinUrl = `${proto}://${req.headers.host}/index.html?meetingjoin=${session.id}`;
 
   if (resendKey) {
-    await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', authorization: `Bearer ${resendKey}` },
-      body: JSON.stringify({
+    await sendEmail(resendKey, {
         from: 'Meeting Room <meetingroom@uqconsulting.org>',
         to: [normalizedInvitee],
         subject: `${user.name} has invited you to a live Meeting Room session`,
         html: alreadyMember
           ? `<p>Hi,</p><p><strong>${user.name}</strong> is in a live Meeting Room session right now on Usman Qureshi's website, talking with an AI panel of finance specialists, and would like you to join.</p><p><a href="${joinUrl}">Click here to join now</a> — you're already a member, so you'll drop straight in.</p>`
           : `<p>Hi,</p><p><strong>${user.name}</strong> is in a live Meeting Room session right now on Usman Qureshi's website and would like you to join — a live conversation with an AI panel of finance specialists.</p><p>You'll just need a free account first (takes a minute) — <a href="${joinUrl}">click here to sign up and join the session</a>.</p>`,
-      }),
-    });
+    }, { kvUrl, kvToken });
   }
 
   res.status(200).json({ ok: true, sessionId: session.id, alreadyMember, totalCount: session.history.length });
@@ -394,17 +387,13 @@ async function handleCronFollowups(req, res, { kvUrl, kvToken, resendKey }) {
       <p>Talk soon,<br>Usman</p>
     `;
 
-    const emailResp = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', authorization: `Bearer ${resendKey}` },
-      body: JSON.stringify({
+    const emailResp = await sendEmail(resendKey, {
         from: item.replyTo ? `${item.tool === 'quiz' ? 'Interview Prep Coach' : 'Meeting Room'} <${item.tool === 'quiz' ? 'coach' : 'meetingroom'}@uqconsulting.org>` : 'Usman Qureshi | Audit & Advisory <noreply@uqconsulting.org>',
         to: [item.email],
         ...(item.replyTo ? { reply_to: item.replyTo } : {}),
         subject: `Following up on your ${toolLabel}`,
         html,
-      }),
-    });
+    }, { kvUrl, kvToken });
     if (!emailResp.ok) console.error('[account:cron-followups] send failed for', item.email, await emailResp.text());
 
     await fetch(`${kvUrl}/zrem/followups_zset/${encodeURIComponent(member)}`, { headers: { authorization: `Bearer ${kvToken}` } });
@@ -412,6 +401,24 @@ async function handleCronFollowups(req, res, { kvUrl, kvToken, resendKey }) {
   }
 
   res.status(200).json({ ok: true, processed });
+}
+
+// Public, no-auth visitor ping — fired on page load + a periodic heartbeat from index.html.
+// Powers the live-traffic and visitor counts on the admin dashboard.
+async function handleTrack(req, res, { kvUrl, kvToken }) {
+  if (!kvUrl || !kvToken) { res.status(200).json({ ok: true }); return; }
+  const vid = String((req.body && req.body.vid) || req.query?.vid || '').slice(0, 64).replace(/[^a-zA-Z0-9_-]/g, '');
+  if (vid) { await Promise.all([recordVisit({ kvUrl, kvToken }, vid), recordPresence({ kvUrl, kvToken }, vid)]); }
+  res.status(200).json({ ok: true });
+}
+
+// Owner-only analytics read. Same shared-secret pattern as feedback.js (?key=<UPSTASH token>).
+async function handleDashboard(req, res, { kvUrl, kvToken }) {
+  if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Storage not configured yet' }); return; }
+  const provided = req.query?.key || req.headers['x-dashboard-key'];
+  if (provided !== kvToken) { res.status(401).json({ error: 'Unauthorized' }); return; }
+  const data = await getDashboardData({ kvUrl, kvToken });
+  res.status(200).json({ ok: true, ...data });
 }
 
 export default async function handler(req, res) {
@@ -441,6 +448,8 @@ export default async function handler(req, res) {
       case 'meeting-join': return req.method === 'POST' ? await handleMeetingJoin(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       case 'meeting-post': return req.method === 'POST' ? await handleMeetingPost(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       case 'meeting-end': return req.method === 'POST' ? await handleMeetingEnd(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
+      case 'track': return await handleTrack(req, res, ctx);
+      case 'dashboard': return req.method === 'GET' ? await handleDashboard(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       default: res.status(400).json({ error: 'Unknown or missing action' });
     }
   } catch (err) {

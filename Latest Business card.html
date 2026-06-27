@@ -3324,6 +3324,22 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     }
     window.refreshSiteUser=refreshUser;
     window.getSiteProfile=()=>window._siteProfile;
+
+    // --- Visitor & live-traffic tracking (feeds the owner-only admin dashboard) ---
+    (function(){
+      let vid;
+      try{
+        vid=localStorage.getItem('uq_vid');
+        if(!vid){ vid=Date.now().toString(36)+Math.random().toString(36).slice(2,10); localStorage.setItem('uq_vid',vid); }
+      }catch(e){ vid=Date.now().toString(36)+Math.random().toString(36).slice(2,10); }
+      function ping(){
+        try{ fetch('/api/account?action=track',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({vid}),keepalive:true}).catch(()=>{}); }catch(e){}
+      }
+      ping();
+      // Heartbeat only while the tab is visible — this is what keeps "live now" accurate.
+      setInterval(function(){ if(document.visibilityState==='visible') ping(); },45000);
+      document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='visible') ping(); });
+    })();
     // Persist a patch to the shared profile (logged-in only) and keep the local cache in sync.
     window.saveSiteProfile=async function(patch){
       if(!currentUser) return;

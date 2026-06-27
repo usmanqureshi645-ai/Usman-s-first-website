@@ -1,4 +1,5 @@
 import { getUserFromRequest } from '../lib/auth.js';
+import { sendEmail } from '../lib/email.js';
 
 async function findEntryIndex(kvUrl, kvToken, id) {
   const r = await fetch(`${kvUrl}/lrange/feedback_log/0/-1`, {
@@ -80,13 +81,7 @@ async function handleResolve(req, res, { kvUrl, kvToken, resendKey }) {
 
     let emailSent = false;
     if (resendKey && entry.email) {
-      const emailResp = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          authorization: `Bearer ${resendKey}`,
-        },
-        body: JSON.stringify({
+      const emailResp = await sendEmail(resendKey, {
           from: 'Usman Qureshi <feedback@uqconsulting.org>',
           to: [entry.email],
           subject: `Thank you for your feedback — here's what we did about it`,
@@ -99,8 +94,7 @@ async function handleResolve(req, res, { kvUrl, kvToken, resendKey }) {
             <p>I really appreciate you flagging it — feedback like yours directly makes the site better. If you notice anything else, the feedback widget (bottom-right) is always open.</p>
             <p>Best,<br>Usman Qureshi</p>
           `,
-        }),
-      });
+      }, { kvUrl, kvToken });
       emailSent = emailResp.ok;
     }
     res.status(200).json({ ok: true, emailSent });
@@ -242,13 +236,7 @@ Respond with ONLY valid JSON, no markdown, no commentary, in this exact shape:
     let emailSent = false;
     if (resendKey) {
       const tag = assessment.valid ? `Validated (${assessment.severity})` : 'Not actionable';
-      const emailResp = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'content-type': 'application/json',
-          authorization: `Bearer ${resendKey}`,
-        },
-        body: JSON.stringify({
+      const emailResp = await sendEmail(resendKey, {
           from: 'Website Feedback <feedback@uqconsulting.org>',
           to: ['usmanqureshi645@gmail.com'],
           subject: `[Feedback Log] ${tag}: ${assessment.summary || feedback.slice(0, 60)}`,
@@ -265,8 +253,7 @@ Respond with ONLY valid JSON, no markdown, no commentary, in this exact shape:
             <p><strong>Entry id (for resolve):</strong> ${entry.id}</p>
             ${assessment.valid ? `<p>To act on this, open your Claude Code session for this website and ask it to apply the suggested fix. Once fixed, call <code>POST /api/feedback?action=resolve&key=&lt;UPSTASH_REDIS_REST_TOKEN&gt;</code> with <code>{"id":"${entry.id}","resolutionSummary":"..."}</code> to send the reporter a thank-you email confirming what was done — only if they have an email on file.</p>` : `<p><em>The technical agent judged this not specific/actionable enough to act on automatically — review and decide if it still needs attention.</em></p>`}
           `,
-        }),
-      });
+      }, { kvUrl, kvToken });
       emailSent = emailResp.ok;
     }
 

@@ -1,6 +1,7 @@
 import { createHmac, timingSafeEqual } from 'node:crypto';
 import { buildMeetingSystemPrompt } from '../lib/meetingPersonas.js';
 import { buildQuizSystemPrompt } from '../lib/quizCoach.js';
+import { sendEmail } from '../lib/email.js';
 
 const SIGNUP_NUDGE = 'Want the full experience — saved history, resuming any conversation anytime, and a personal workspace? Sign up free at https://usman-s-first-website.vercel.app (it stays free after signing up too).';
 
@@ -142,17 +143,13 @@ export default async function handler(req, res) {
       const replyText = extractNewReplyText(bodyText) || '(no readable body)';
       const fromAddr = Array.isArray(data.from) ? data.from[0] : data.from;
       if (resendKey) {
-        await fetch('https://api.resend.com/emails', {
-          method: 'POST',
-          headers: { 'content-type': 'application/json', authorization: `Bearer ${resendKey}` },
-          body: JSON.stringify({
+        await sendEmail(resendKey, {
             from: 'Website Replies <noreply@uqconsulting.org>',
             to: ['usmanqureshi645@gmail.com'],
             subject: `Reply received: ${data.subject || '(no subject)'} (from ${fromAddr || 'unknown'})`,
             html: `<p><strong>${fromAddr || 'Someone'}</strong> replied to <strong>${toAddresses.join(', ')}</strong>:</p>
 <blockquote style="margin:0;padding-left:12px;border-left:3px solid #ccc;color:#333">${replyText.replace(/\n/g, '<br>')}</blockquote>`,
-          }),
-        });
+        }, { kvUrl, kvToken });
       }
     } catch (err) {
       console.error('[inbound-email] fallback forward failed', err);
@@ -229,27 +226,20 @@ export default async function handler(req, res) {
       headers: { authorization: `Bearer ${kvToken}` },
     });
 
-    const replyToVisitor = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', authorization: `Bearer ${resendKey}` },
-      body: JSON.stringify({
+    const replyToVisitor = await sendEmail(resendKey, {
         from: mode.fromHeader,
         to: [conversation.email],
         reply_to: mode.replyAddr(conversationId),
         subject: mode.subject,
         html: replyContent.replace(/\n/g, '<br>'),
         headers: data.message_id ? { 'In-Reply-To': data.message_id, References: data.message_id } : undefined,
-      }),
-    });
+    }, { kvUrl, kvToken });
     if (!replyToVisitor.ok) {
       console.error('[inbound-email] visitor reply send failed', replyToVisitor.status, await replyToVisitor.text());
     }
 
     // Notify the site owner of every visitor follow-up reply (not just the auto-reply sent back to the visitor)
-    const notifyOwner = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', authorization: `Bearer ${resendKey}` },
-      body: JSON.stringify({
+    const notifyOwner = await sendEmail(resendKey, {
         from: mode.fromHeader,
         to: ['usmanqureshi645@gmail.com'],
         subject: mode.ownerSubject(conversation.email),
@@ -257,8 +247,7 @@ export default async function handler(req, res) {
 <blockquote style="margin:0 0 16px;padding-left:12px;border-left:3px solid #ccc;color:#333">${replyText.replace(/\n/g, '<br>')}</blockquote>
 <p><strong>Reply (already sent to them):</strong></p>
 <blockquote style="margin:0;padding-left:12px;border-left:3px solid #C8A96E;color:#333">${replyContent.replace(/\n/g, '<br>')}</blockquote>`,
-      }),
-    });
+    }, { kvUrl, kvToken });
     if (!notifyOwner.ok) {
       console.error('[inbound-email] owner notification send failed', notifyOwner.status, await notifyOwner.text());
     }

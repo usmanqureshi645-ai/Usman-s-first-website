@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { getUserFromRequest } from '../lib/auth.js';
 import { saveConsultation, scheduleFollowup } from '../lib/consultations.js';
+import { sendEmail } from '../lib/email.js';
 
 const CONVERSATION_TTL_SECONDS = 30 * 24 * 60 * 60; // 30 days
 
@@ -90,20 +91,13 @@ Never use harsh words like "weak", "bad", "failed", "poor". Use "developing", "a
       }
     }
 
-    const emailResp = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        authorization: `Bearer ${resendKey}`,
-      },
-      body: JSON.stringify({
+    const emailResp = await sendEmail(resendKey, {
         from: 'Interview Prep Coach <coach@uqconsulting.org>',
         to: [email],
         ...(replyTo ? { reply_to: replyTo } : {}),
         subject: 'Your Interview Prep Feedback — Great Work!',
         html: htmlBody,
-      }),
-    });
+    }, { kvUrl, kvToken });
 
     const emailData = await emailResp.json();
     if (!emailResp.ok) {

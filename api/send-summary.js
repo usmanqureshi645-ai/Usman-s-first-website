@@ -1,6 +1,7 @@
 import { randomUUID } from 'node:crypto';
 import { getUserFromRequest } from '../lib/auth.js';
 import { saveConsultation, scheduleFollowup } from '../lib/consultations.js';
+import { sendEmail } from '../lib/email.js';
 
 const CONVERSATION_TTL_SECONDS = 30 * 24 * 60 * 60; // 30 days
 
@@ -99,20 +100,13 @@ Output format — this is critical: respond with ONLY the raw HTML body itself, 
       ? `<p style="margin-top:24px;padding-top:16px;border-top:1px solid #ddd;color:#555">You attended this consultation together with <strong>${otherName}</strong> and the panel.</p>`
       : '';
 
-    const sendOne = async (toEmail, otherName) => fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        authorization: `Bearer ${resendKey}`,
-      },
-      body: JSON.stringify({
+    const sendOne = async (toEmail, otherName) => sendEmail(resendKey, {
         from: 'Meeting Room <meetingroom@uqconsulting.org>',
         to: [toEmail],
         ...(replyTo ? { reply_to: replyTo } : {}),
         subject: 'Your Meeting Room Consultation Summary',
         html: htmlBody + jointNoteFor(otherName),
-      }),
-    });
+    }, { kvUrl, kvToken });
 
     const emailResp = await sendOne(email, coParticipant?.name || 'your colleague');
     const emailData = await emailResp.json();

@@ -441,7 +441,7 @@
           <div class="consult-title">${escapeHtml(c.title)}</div>
           <div class="consult-summary" id="summary-${c.id}">${c.summaryHtml || renderTranscript(c.transcript)}</div>
           <div class="consult-actions">
-            <button onclick="toggleSummary('${c.id}')">View summary</button>
+            <button id="summaryBtn-${c.id}" onclick="toggleSummary('${c.id}')">View summary</button>
             ${(c.tool === 'meeting' || c.tool === 'quiz' || c.tool === 'gaap') ? `<button class="continue-btn" onclick="continueConsultation('${c.id}','${c.tool}')">Continue this conversation</button>` : ''}
           </div>
         </div>
@@ -566,7 +566,8 @@
     }
 
     function toggleSummary(id) {
-      document.getElementById(`summary-${id}`).classList.toggle('open');
+      const isOpen = document.getElementById(`summary-${id}`).classList.toggle('open');
+      document.getElementById(`summaryBtn-${id}`).textContent = isOpen ? 'Hide summary' : 'View summary';
     }
 
     function continueConsultation(id, tool) {

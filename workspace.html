@@ -272,6 +272,8 @@
     </svg>
   </div>
 
+  <button id="backToTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" style="position:fixed;left:28px;bottom:28px;z-index:9998;display:none;align-items:center;gap:.4rem;background:rgba(10,22,40,.85);border:1px solid rgba(200,169,110,.35);color:var(--gold);font-family:inherit;font-size:.78rem;padding:.6rem 1rem;border-radius:30px;backdrop-filter:blur(12px);cursor:pointer;transition:.3s">↑ Back to Top</button>
+
   <!-- BACK TO MAIN WEBSITE (replaces the "My Workspace" widget here, since we're already on it) -->
   <div class="welcome-bot" style="bottom:90px;right:28px">
     <button class="welcome-bot-toggle back-to-main-btn" title="Back to main website" onclick="location.href='index.html'">🏠</button>
@@ -899,6 +901,14 @@
         if(e.key==='Enter') window.sendAsk();
       });
     })();
+
+    function toggleBackToTop(){
+      const btn=document.getElementById('backToTopBtn');
+      if(!btn) return;
+      btn.style.display = window.scrollY>400 ? 'flex' : 'none';
+    }
+    window.addEventListener('scroll',toggleBackToTop,{passive:true});
+    toggleBackToTop();
   </script>
 </body>
 </html>

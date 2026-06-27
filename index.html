@@ -4075,6 +4075,7 @@ function mrWait(ms){ return new Promise(r=>setTimeout(r, ms)); }
 async function mrRenderPanelReply(text, instant){
   // When meeting starts (first panel response), fade music out for the entire conversation
   if(!mrMeetingStarted){
+    console.log('Meeting started, ducking music');
     mrMeetingStarted=true;
     window.MusicDuck?.duck('meeting-room');
   }
@@ -4139,44 +4140,42 @@ function wireMic(micBtnId, inputId, sendFn, duck){
   if(!micBtn) return;
   const shouldDuck = duck!==false;
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  if(!SR){ micBtn.style.display='none'; return; }
+  if(!SR){ micBtn.style.display='none'; console.log('Speech Recognition not supported'); return; }
+
   const recognition=new SR();
   recognition.lang='en-GB';
   recognition.continuous=false;
   recognition.interimResults=true;
-  recognition.maxAlternatives=3;
+  recognition.maxAlternatives=5;
   let listening=false;
-  let permissionDenied=false;
 
-  micBtn.addEventListener('click', async ()=>{
+  micBtn.addEventListener('click', ()=>{
     if(listening){
+      console.log('Stopping recognition');
       recognition.stop();
       return;
     }
-    // Request microphone permission if needed (Chrome/Edge)
-    if(!permissionDenied && navigator.permissions?.query){
-      try{
-        const perm=await navigator.permissions.query({name:'microphone'});
-        if(perm.state==='denied'){
-          permissionDenied=true;
-          document.getElementById(inputId).placeholder='Microphone access denied — check browser settings';
-          return;
-        }
-      }catch(e){}
+    console.log('Starting speech recognition');
+    try{
+      recognition.start();
+    }catch(e){
+      console.error('Failed to start recognition:', e);
+      document.getElementById(inputId).placeholder='Microphone error — try refreshing the page';
     }
-    recognition.start();
   });
 
   recognition.onstart=()=>{
+    console.log('Recognition started');
     listening=true;
     micBtn.classList.add('listening');
     micBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg><span class="mr-mic-label">Stop</span>';
     const input=document.getElementById(inputId);
-    input.placeholder='Listening…';
+    input.placeholder='Listening… speak now';
     if(shouldDuck) window.MusicDuck?.duck('mic-'+micBtnId);
   };
 
   recognition.onend=()=>{
+    console.log('Recognition ended, listening =', listening);
     listening=false;
     micBtn.classList.remove('listening');
     micBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg><span class="mr-mic-label">Speak</span>';
@@ -4186,24 +4185,28 @@ function wireMic(micBtnId, inputId, sendFn, duck){
   };
 
   recognition.onerror=(e)=>{
+    console.error('Recognition error:', e.error);
     listening=false;
     micBtn.classList.remove('listening');
     micBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg><span class="mr-mic-label">Speak</span>';
     if(shouldDuck) window.MusicDuck?.unduck('mic-'+micBtnId);
     const input=document.getElementById(inputId);
-    if(e.error==='no-speech') input.placeholder='No speech detected — speak louder or try again';
-    else if(e.error==='network') input.placeholder='Network error — check your connection';
-    else if(e.error==='not-allowed') { input.placeholder='Microphone access denied'; permissionDenied=true; }
-    else input.placeholder='Mic error — please try again';
+    if(e.error==='no-speech') input.placeholder='No speech — speak again (louder if needed)';
+    else if(e.error==='network') input.placeholder='Network error — check connection';
+    else if(e.error==='not-allowed') input.placeholder='Mic permission denied — check browser settings';
+    else if(e.error==='audio-capture') input.placeholder='No microphone found';
+    else input.placeholder='Mic error: '+e.error+' — try again';
   };
 
   recognition.onresult=(e)=>{
+    console.log('Result received, isFinal:', e.isFinal, 'results:', e.results.length);
     const results=e.results;
     let bestTranscript='';
     let bestConfidence=0;
     for(let i=0;i<results.length;i++){
       const transcript=results[i][0].transcript;
       const confidence=results[i][0].confidence||0;
+      console.log('Result', i, ':', transcript, '(confidence:', confidence+')');
       if(confidence>bestConfidence){
         bestConfidence=confidence;
         bestTranscript=transcript;
@@ -4211,12 +4214,13 @@ function wireMic(micBtnId, inputId, sendFn, duck){
     }
     const input=document.getElementById(inputId);
     if(e.isFinal){
+      console.log('Final result:', bestTranscript);
       input.value=bestTranscript.trim();
       input.placeholder='';
-      sendFn();
+      if(bestTranscript.trim()) sendFn();
     } else {
       input.value=bestTranscript.trim();
-      if(!bestTranscript) input.placeholder='Listening…';
+      if(!bestTranscript) input.placeholder='Listening… speak now';
     }
   };
 }
@@ -4682,6 +4686,7 @@ document.querySelectorAll('.mr-agent-check').forEach(checkbox=>{
 
 function mrEndMeeting(){
   // Resume background music when meeting ends
+  console.log('Meeting ended, resuming music');
   window.MusicDuck?.unduck('meeting-room');
   mrMeetingStarted=false;
   const siteUser=window.getSiteUser?.();

@@ -3934,13 +3934,18 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
   // voice features (TTS playback or mic listening) — every other AI tool (GAAP
   // Compare included) leaves the music alone even when its own voice button is used.
   const duckReasons=new Set();
+  // Track the slowest requested fade so a gentle reason (meeting start) isn't
+  // overridden by a snappy one (mic). Default 250ms for the quick mic/TTS ducks.
+  let duckFadeMs=250;
   function recalcDuck(){
-    if(duckReasons.size>0){ fadeTo(0, 250); }
-    else if(playing){ fadeTo(0.42, 500); }
+    if(duckReasons.size>0){ fadeTo(0, duckFadeMs); }
+    else if(playing){ fadeTo(0.42, 1800); } // gentle fade back in
   }
   window.MusicDuck={
-    duck(reason){ duckReasons.add(reason); recalcDuck(); },
-    unduck(reason){ duckReasons.delete(reason); recalcDuck(); }
+    // fadeMs lets callers ask for a slow, graceful fade (meeting/interview start)
+    // instead of the default near-instant mic/TTS duck.
+    duck(reason, fadeMs){ duckFadeMs = fadeMs || 250; duckReasons.add(reason); recalcDuck(); },
+    unduck(reason){ duckReasons.delete(reason); duckFadeMs=250; recalcDuck(); }
   };
 
 })();
@@ -4397,7 +4402,7 @@ function mrStartMeeting(){
   // The meeting begins the moment this button is pressed — fade the music out now,
   // not on the first typed message (mrMeetingStarted is already true by then).
   console.log('Meeting started, ducking music');
-  window.MusicDuck?.duck('meeting-room');
+  window.MusicDuck?.duck('meeting-room', 2500); // slow, graceful fade-out
   mrMeetingStarted=true;
   document.getElementById('mrStartBtn').textContent='Meeting in progress — tick/untick anyone above to add or remove them';
   document.getElementById('mrStartBtn').disabled=true;
@@ -5153,7 +5158,7 @@ async function qzCallApi(){
 }
 function qzStart(level){
   console.log('Interview prep started, ducking music');
-  window.MusicDuck?.duck('interview-prep');
+  window.MusicDuck?.duck('interview-prep', 2500); // slow, graceful fade-out
   document.getElementById('qzLevels').style.display='none';
   document.getElementById('qzChatWrap').style.display='flex';
   document.getElementById('qzNote').style.display='block';

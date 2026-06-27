@@ -1243,7 +1243,15 @@ animation:pulseRing 2.4s ease-out infinite;
 .mr-panel{background:rgba(255,255,255,.04);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.5rem}
 .mr-agent{display:flex;align-items:center;gap:.85rem;padding:.7rem;border-radius:10px;margin-bottom:.4rem;transition:background .3s}
 .mr-agent:hover{background:rgba(200,169,110,.07)}
-.mr-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold-light),var(--gold));display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--navy);flex-shrink:0;font-size:.85rem}
+.mr-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--gold-light),var(--gold));display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--navy);flex-shrink:0;font-size:.85rem;background-size:cover;background-position:center top;overflow:hidden}
+.mr-avatar.photo{color:transparent;font-size:0;border-radius:0}
+.mr-avatar.av-sc{background-image:url("images/team/sarah-chen.png")}
+.mr-avatar.av-dw{background-image:url("images/team/david-whitfield.png")}
+.mr-avatar.av-as{background-image:url("images/team/amara-singh.png")}
+.mr-avatar.av-ml{background-image:url("images/team/marcus-lee.png")}
+.mr-avatar.av-er{background-image:url("images/team/elena-rossi.png")}
+.mr-avatar.av-jc{background-image:url("images/team/james-carter.png")}
+.mr-avatar.av-pn{background-image:url("images/team/priya-nair.png")}
 .mr-agent-name{font-size:.82rem;font-weight:600;color:var(--white)}
 .mr-agent-role{font-size:.7rem;color:var(--steel-light)}
 .mr-chat{background:rgba(255,255,255,.04);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);border-radius:16px;display:flex;flex-direction:column;height:560px;overflow:hidden}
@@ -1509,13 +1517,13 @@ animation:pulseRing 2.4s ease-out infinite;
 <div class="mr-layout">
   <div class="mr-panel">
     <p class="mr-pick-title">Choose who joins the room (you can add/remove anyone at any time):</p>
-    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Sarah Chen" checked><div class="mr-avatar">SC</div><div><div class="mr-agent-name">Sarah Chen</div><div class="mr-agent-role">Big 4 Audit Partner</div></div></label>
-    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="David Whitfield" checked><div class="mr-avatar">DW</div><div><div class="mr-agent-name">David Whitfield</div><div class="mr-agent-role">IFRS/FRS Technical Regulator</div></div></label>
-    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Amara Singh" checked><div class="mr-avatar">AS</div><div><div class="mr-agent-name">Amara Singh</div><div class="mr-agent-role">Big 4 Tax Partner</div></div></label>
-    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Marcus Lee"><div class="mr-avatar">ML</div><div><div class="mr-agent-name">Marcus Lee</div><div class="mr-agent-role">Forensic &amp; Valuations Specialist</div></div></label>
-    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Elena Rossi"><div class="mr-avatar">ER</div><div><div class="mr-agent-name">Elena Rossi</div><div class="mr-agent-role">ESG &amp; Sustainability Reporting</div></div></label>
-    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="James Carter"><div class="mr-avatar">JC</div><div><div class="mr-agent-name">James Carter</div><div class="mr-agent-role">Legal &amp; Regulatory Advisor</div></div></label>
-    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Priya Nair"><div class="mr-avatar">PN</div><div><div class="mr-agent-name">Priya Nair</div><div class="mr-agent-role">Technical Accounting Consultant</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Sarah Bennett" checked><div class="mr-avatar photo av-sc">SC</div><div><div class="mr-agent-name">Sarah Bennett</div><div class="mr-agent-role">Big 4 Audit Partner</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="David Whitfield" checked><div class="mr-avatar photo av-dw">DW</div><div><div class="mr-agent-name">David Whitfield</div><div class="mr-agent-role">IFRS/FRS Technical Regulator</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Amelia Hartley" checked><div class="mr-avatar photo av-as">AS</div><div><div class="mr-agent-name">Amelia Hartley</div><div class="mr-agent-role">Big 4 Tax Partner</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Marcus Lee"><div class="mr-avatar photo av-ml">ML</div><div><div class="mr-agent-name">Marcus Lee</div><div class="mr-agent-role">Forensic &amp; Valuations Specialist</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Elena Rossi"><div class="mr-avatar photo av-er">ER</div><div><div class="mr-agent-name">Elena Rossi</div><div class="mr-agent-role">ESG &amp; Sustainability Reporting</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="James Carter"><div class="mr-avatar photo av-jc">JC</div><div><div class="mr-agent-name">James Carter</div><div class="mr-agent-role">Legal &amp; Regulatory Advisor</div></div></label>
+    <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Charlotte Sinclair"><div class="mr-avatar photo av-pn">PN</div><div><div class="mr-agent-name">Charlotte Sinclair</div><div class="mr-agent-role">Technical Accounting Consultant</div></div></label>
     <button class="pub-btn" id="mrStartBtn" onclick="mrStartMeeting()" style="width:100%;margin-top:1rem">Start the Meeting</button>
     <p class="mr-note">Simulated AI panel for technical discussion &amp; education — not formal advice.</p>
   </div>
@@ -3756,16 +3764,16 @@ document.querySelectorAll('.voice-gender-select').forEach(sel=>{
 /* ── Meeting Room chat ── */
 const mrHistory=[];
 const mrRoles={
-  'Sarah Chen':'Big 4 Audit Partner',
+  'Sarah Bennett':'Big 4 Audit Partner',
   'David Whitfield':'IFRS/FRS Technical Regulator',
-  'Amara Singh':'Big 4 Tax Partner',
+  'Amelia Hartley':'Big 4 Tax Partner',
   'Marcus Lee':'Forensic & Valuations Specialist',
   'Elena Rossi':'ESG & Sustainability Reporting',
   'James Carter':'Legal & Regulatory Advisor',
-  'Priya Nair':'Technical Accounting Consultant'
+  'Charlotte Sinclair':'Technical Accounting Consultant'
 };
 let mrVoiceEnabled=false; // opt-in only — avoids clashing with ambient music & unwanted auto-speech
-const mrPitches={'Sarah Chen':1.04,'David Whitfield':0.92,'Amara Singh':1.08,'Marcus Lee':0.88,'Elena Rossi':1.12,'James Carter':0.85,'Priya Nair':1.1};
+const mrPitches={'Sarah Bennett':1.04,'David Whitfield':0.92,'Amelia Hartley':1.08,'Marcus Lee':0.88,'Elena Rossi':1.12,'James Carter':0.85,'Charlotte Sinclair':1.1};
 function mrSpeak(name, text){
   if(!mrVoiceEnabled) return;
   VoiceEngine.speak(text, mrPitches[name]||1);

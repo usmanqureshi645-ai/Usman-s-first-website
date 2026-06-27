@@ -1610,10 +1610,6 @@ animation:pulseRing 2.4s ease-out infinite;
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
         <span class="mr-mic-label">Hear</span>
       </button>
-      <select class="voice-gender-select" title="Voice accent">
-        <option value="female">Female voice</option>
-        <option value="male">Male voice</option>
-      </select>
       <input type="text" id="mrInput" placeholder="Ask the panel a technical accounting question…" />
       <button id="mrSend" onclick="mrSendMessage()">Send</button>
     </div>
@@ -3855,12 +3851,12 @@ const VoiceEngine=(function(){
     speechSynthesis.onvoiceschanged=pickVoices;
   }
   function setGender(g){ gender=g; }
-  function speak(text, pitch, duck){
+  function speak(text, pitch, duck, explicitGender){
     if(!('speechSynthesis' in window)) return;
     const shouldDuck = duck!==false; // only Meeting Room / Knowledge Test pass false-free (default true); GAAP Compare opts out
     const clean=text.replace(/[*_#>`]/g,'').replace(/\n+/g,'. ');
     const utter=new SpeechSynthesisUtterance(clean);
-    const voice = gender==='male' ? maleVoice : femaleVoice;
+    const voice = (explicitGender||gender)==='male' ? maleVoice : femaleVoice;
     if(voice) utter.voice=voice;
     utter.pitch=pitch||1;
     utter.rate=0.97;
@@ -3892,9 +3888,14 @@ const mrRoles={
 };
 let mrVoiceEnabled=false; // opt-in only — avoids clashing with ambient music & unwanted auto-speech
 const mrPitches={'Sarah Bennett':1.04,'David Whitfield':0.92,'Amelia Hartley':1.08,'Marcus Lee':0.88,'Elena Rossi':1.12,'James Carter':0.85,'Charlotte Sinclair':1.1};
+// Each panel member speaks in their own actual gender's voice — no manual selector needed,
+// since a real mixed panel shouldn't all share one voice toggle.
+const mrGenders={'Sarah Bennett':'female','David Whitfield':'male','Amelia Hartley':'female','Marcus Lee':'male','Elena Rossi':'female','James Carter':'male','Charlotte Sinclair':'female'};
 function mrSpeak(name, text){
   if(!mrVoiceEnabled) return;
-  VoiceEngine.speak(text, mrPitches[name]||1);
+  const customMatch=mrCustomPersonas.find(p=>p.name===name);
+  const speakerGender=customMatch?.gender || mrGenders[name] || 'female';
+  VoiceEngine.speak(text, mrPitches[name]||1, true, speakerGender);
 }
 function mrToggleVoice(){
   mrVoiceEnabled=!mrVoiceEnabled;

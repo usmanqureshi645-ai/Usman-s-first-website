@@ -52,7 +52,7 @@
 
   .nav-logo {
     font-family: 'Manrope', 'Century Gothic', sans-serif;
-    font-size: clamp(0.78rem, 1.1vw, 1.25rem);
+    font-size: clamp(0.72rem, 0.95vw, 1.05rem);
     color: var(--gold);
     letter-spacing: 0.03em;
     white-space: nowrap;
@@ -62,16 +62,17 @@
   .nav-links {
     display: flex;
     flex-wrap: nowrap;
-    gap: clamp(0.6rem, 1.4vw, 2.5rem);
+    gap: clamp(0.55rem, 1.1vw, 1.6rem);
     list-style: none;
+    margin-left: 1.5rem;
   }
 
   .nav-links a {
     text-decoration: none;
     color: var(--steel-light);
-    font-size: clamp(0.62rem, 0.85vw, 0.8rem);
+    font-size: clamp(0.6rem, 0.8vw, 0.76rem);
     font-weight: 500;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
     transition: color 0.2s;
     white-space: nowrap;
@@ -756,9 +757,9 @@
 
   /* ── RESPONSIVE ── */
   @media (max-width: 1380px) {
-    nav { padding: 0 1.75rem; }
-    .nav-links { gap: 1.1rem; }
-    .nav-links a { font-size: 0.68rem; }
+    nav { padding: 0 1.5rem; }
+    .nav-links { gap: 0.95rem; margin-left: 1rem; }
+    .nav-links a { font-size: 0.66rem; letter-spacing: 0.04em; }
   }
 
   @media (max-width: 1300px) {
@@ -1114,9 +1115,9 @@ animation:floatGlow 12s ease-in-out infinite;
 
 
 .nav-logo{
-font-size:clamp(0.78rem, 1.1vw, 1.25rem);
+font-size:clamp(0.72rem, 0.95vw, 1.05rem);
 font-weight:800;
-letter-spacing:.1em;
+letter-spacing:.06em;
 text-transform:uppercase;
 white-space:nowrap;
 background:linear-gradient(135deg,#fff,#e0c99a,#c8a96e);

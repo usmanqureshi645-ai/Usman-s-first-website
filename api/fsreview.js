@@ -43,7 +43,9 @@ export default async function handler(req, res) {
 
 OVERRIDE FOR THIS TASK — ignore the conversational "Meeting Room" response format above. You are jointly reviewing a client's financial statements for compliance with **${selectedFramework}**, in the style of a Big 4 audit partner review (the kind that happens before statements go out the door). The panel of specialists above is jointly responsible for this review, each focusing on their own area (audit/disclosure, tax, IFRS/FRS technical interpretation, forensic/valuation, ESG, legal, technical accounting).
 
-Review the full text for:
+FIRST, check whether the document below is actually a set of financial statements (balance sheet / income statement / cash flow statement / notes to accounts, etc.) suitable for this kind of review. If it is clearly NOT financial statements (e.g. it's a CV/resume, a cover letter, a contract, random text, etc.), do not perform the compliance review at all — just identify what the document actually is.
+
+If it IS financial statements, review the full text for:
 1. Compliance discrepancies against ${selectedFramework} — missing or incorrect disclosures, misapplied recognition/measurement, presentation errors.
 2. Cross-reference discrepancies — e.g. a note referenced in the primary statements that doesn't exist, or numbers that don't tie between statements and notes.
 3. Spelling mistakes and wording issues — treat this like a professional proofread, not just a technical review.
@@ -53,10 +55,13 @@ For every issue that can be pinned to a specific piece of text, you MUST be able
 
 Respond with ONLY valid JSON, no markdown fencing, in this exact shape:
 {
+  "isFinancialStatement": true or false,
+  "detectedDocumentType": "<what this document actually is, e.g. 'a CV/resume' — only meaningful when isFinancialStatement is false, otherwise empty string>",
   "inlineComments": [{ "quote": "<exact verbatim substring from the document>", "comment": "<the issue and what should change>", "persona": "<panel member name>", "standard": "<standard/clause reference, e.g. IAS 1.82>" }],
   "additionalNotes": [{ "persona": "<panel member name>", "note": "<broader risk or reservation, not anchored to specific text>" }],
   "summary": "<2-4 sentence overview of the review, written as if from the panel>"
-}`;
+}
+If isFinancialStatement is false, leave inlineComments and additionalNotes as empty arrays and summary as an empty string.`;
 
   const userMessage = `FRAMEWORK TO REVIEW AGAINST: ${selectedFramework}\n\nFINANCIAL STATEMENTS TEXT:\n${text}`;
 
@@ -97,6 +102,15 @@ Respond with ONLY valid JSON, no markdown fencing, in this exact shape:
         res.status(500).json({ error: 'Could not parse the panel review — please try again' });
         return;
       }
+    }
+
+    if (review.isFinancialStatement === false) {
+      res.status(200).json({
+        isFinancialStatement: false,
+        detectedDocumentType: review.detectedDocumentType || 'a different kind of document',
+        usage,
+      });
+      return;
     }
 
     const inlineComments = Array.isArray(review.inlineComments) ? review.inlineComments : [];
@@ -170,7 +184,7 @@ Respond with ONLY valid JSON, no markdown fencing, in this exact shape:
       }
     }
 
-    res.status(200).json({ summary, additionalNotes: allNotes, emailed: true, usage });
+    res.status(200).json({ isFinancialStatement: true, summary, additionalNotes: allNotes, emailed: true, usage });
   } catch (err) {
     res.status(500).json({ error: 'Request failed' });
   }

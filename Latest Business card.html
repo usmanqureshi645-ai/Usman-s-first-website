@@ -1498,6 +1498,10 @@ animation:pulseRing 2.4s ease-out infinite;
 <span class="sector-icon">📰</span><h3>Hot Market Topics</h3>
 <p>Curated, regularly refreshed briefings on what's moving in audit &amp; IFRS.</p>
 </div>
+<div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
+<span class="sector-icon">🤖</span><h3>AI &amp; Web Development</h3>
+<p>This entire site — every AI tool on it — was built by Usman himself: prompt engineering, AI agents, and full web development &amp; design.</p>
+</div>
 </div>
 </div>
 </section>
@@ -1977,6 +1981,7 @@ animation:pulseRing 2.4s ease-out infinite;
 <div class="service-card"><h3>Internal Controls</h3><p>Risk assessment, governance and control frameworks.</p></div>
 <div class="service-card"><h3>CFO Advisory</h3><p>Finance transformation and reporting optimisation.</p></div>
 <div class="service-card"><h3>CV Reviews, Career Coaching & Interview Preparation</h3><p>Audit readiness, technical papers and issue resolution.</p></div>
+<div class="service-card"><h3>Website Development, Design & AI Agents</h3><p>This very site — and every AI tool on it — built end-to-end by Usman: web development, website design, prompt engineering and custom AI agents.</p></div>
 </div>
 </div>
 </section>
@@ -3124,7 +3129,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
         if(data.error){
           addFbMsg('bot', "Thanks for the report — I couldn't fully process it automatically, but it's noted.");
         } else if(data.valid){
-          addFbMsg('bot', `That looks like a genuine issue — thank you. ${data.emailSent ? "I've flagged it to the site owner for review." : "It's been logged for review."}`);
+          addFbMsg('bot', `That looks like a genuine issue — thank you. ${data.emailSent ? "I've flagged it to Usman for review." : "It's been logged for review."}`);
         } else {
           addFbMsg('bot', "Thanks for the note! That one doesn't look like a specific bug I can action, but I appreciate you taking the time.");
         }
@@ -4698,7 +4703,12 @@ async function fsSubmitReview(){
   if(!email || !email.includes('@')){ alert('Please enter an email address to send the reviewed document to.'); return; }
   const framework=document.getElementById('fsFramework').value;
   const btn=document.getElementById('fsSubmitBtn');
+  const resultDiv=document.getElementById('fsResult');
+  const resultBody=document.getElementById('fsResultBody');
   btn.disabled=true; btn.textContent='Reviewing…';
+  resultBody.innerHTML=`<p>📨 Document received — the panel is reviewing it now against ${framework}. This can take a minute or two; we'll email the full report to <strong>${email}</strong> the moment it's ready${window.getSiteUser?.() ? ' and save it to your workspace' : ''}.</p>`;
+  resultDiv.style.display='block';
+  resultDiv.scrollIntoView({behavior:'smooth'});
   try{
     const r=await fetch('/api/fsreview',{
       method:'POST',
@@ -4706,17 +4716,17 @@ async function fsSubmitReview(){
       body:JSON.stringify({text:fsExtractedText, fileName:fsFileName, fileBase64:fsFileBase64, framework, email})
     });
     const data=await r.json();
-    if(!r.ok){ alert(data.error || 'Something went wrong — please try again.'); return; }
+    if(!r.ok){ resultBody.innerHTML=`<p>${data.error || 'Something went wrong — please try again.'}</p>`; return; }
 
-    const resultDiv=document.getElementById('fsResult');
-    const resultBody=document.getElementById('fsResultBody');
-    const notesHtml=(data.additionalNotes||[]).map(n=>`<li><strong>${n.persona||'Panel'}:</strong> ${n.note}</li>`).join('');
-    resultBody.innerHTML=`<p>${data.summary}</p><p>📧 The annotated Word document has been emailed to <strong>${email}</strong> with comments from Usman Qureshi anchored to the flagged text.</p>${notesHtml ? `<h4 style="color:var(--gold);margin-top:1rem">Additional risks &amp; reservations</h4><ul>${notesHtml}</ul>` : ''}`;
-    resultDiv.style.display='block';
-    resultDiv.scrollIntoView({behavior:'smooth'});
+    if(data.isFinancialStatement===false){
+      resultBody.innerHTML=`<p>⚠️ This doesn't look like a set of financial statements — it looks like <strong>${data.detectedDocumentType}</strong>. We haven't reviewed it or sent anything by email. Please upload your financial statements (balance sheet, income statement, cash flow statement and notes) and we'll review those instead.</p>`;
+      return;
+    }
+
+    resultBody.innerHTML=`<p>✅ Review complete — the full report with comments from Usman Qureshi has been emailed to <strong>${email}</strong>.${window.getSiteUser?.() ? ' It\'s also been saved to your workspace.' : ''}</p>`;
     window.showSignupNudge?.(resultDiv);
   }catch(e){
-    alert('Connection issue — please try again.');
+    resultBody.innerHTML=`<p>Connection issue — please try again.</p>`;
   }finally{
     btn.disabled=false; btn.textContent='Review my financial statements';
   }

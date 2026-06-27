@@ -1271,6 +1271,7 @@ animation:pulseRing 2.4s ease-out infinite;
 #meetingroom{background:linear-gradient(160deg,rgba(30,58,95,.25),var(--navy) 70%)}
 .mr-layout{display:grid;grid-template-columns:280px 1fr;gap:2rem;margin-top:2rem}
 @media (max-width:900px){.mr-layout{grid-template-columns:1fr}}
+@media (max-width:768px){.job-tailor-grid{grid-template-columns:1fr !important}}
 .mr-panel{background:rgba(255,255,255,.04);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.5rem}
 .mr-agent{display:flex;align-items:center;gap:.85rem;padding:.7rem;border-radius:10px;margin-bottom:.4rem;transition:background .3s}
 .mr-agent:hover{background:rgba(200,169,110,.07)}
@@ -1914,7 +1915,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 <p class="section-sub">Upload your financial statements and an AI panel — audit, tax, IFRS/FRC technical, forensic, ESG, legal and technical accounting specialists — reviews them for compliance with your chosen framework. Discrepancies come back as real, clickable Word comments from Usman Qureshi, anchored to the exact text. Works fully anonymously — signing up (free) just lets you save the review to your workspace.</p>
 </div>
 
-<div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;max-width:900px;margin-left:auto;margin-right:auto">
+<div class="job-tailor-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;max-width:900px;margin-left:auto;margin-right:auto">
   <div>
     <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.5rem">1. Upload financial statements (.pdf, .docx, or .txt)</label>
     <div class="job-upload-box" id="fsUploadBox" onclick="document.getElementById('fsFile').click()">

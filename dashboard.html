@@ -306,9 +306,12 @@
     setInterval(()=>{ pingHealth(); }, 30000);
   }
 
+  // Strip whitespace and any surrounding quotes the user may have copied with the token.
+  function cleanKey(s){ return String(s||'').trim().replace(/^["'\s]+|["'\s]+$/g,''); }
+
   // --- boot ---
   $('keyBtn').addEventListener('click', ()=>{
-    const v = $('keyInput').value.trim();
+    const v = cleanKey($('keyInput').value);
     if(!v){ $('keyErr').textContent='Please enter your key.'; return; }
     dashKey = v; localStorage.setItem(KEY_STORE, v); $('keyErr').textContent='';
     start();
@@ -317,8 +320,8 @@
   $('refreshBtn').addEventListener('click', ()=>{ load(); pingHealth(); });
   $('logoutBtn').addEventListener('click', ()=>{ localStorage.removeItem(KEY_STORE); dashKey=null; showGate('Key forgotten.'); });
 
-  dashKey = localStorage.getItem(KEY_STORE);
-  if(dashKey){ start(); } else { showGate(); }
+  dashKey = cleanKey(localStorage.getItem(KEY_STORE));
+  if(dashKey){ localStorage.setItem(KEY_STORE, dashKey); start(); } else { showGate(); }
 </script>
 </body>
 </html>

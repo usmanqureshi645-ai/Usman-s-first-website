@@ -4021,12 +4021,12 @@ wireMic('mrMic','mrInput', mrSendMessage);
 
 let mrSelectedAgents=[];
 let mrMeetingStarted=false;
-let mrCustomPersonas=[]; // {id, name, role, gender}
+let mrCustomPersonas=[]; // {id, name, role, gender, active}
 function mrAgentsPayload(){
-  return [...mrSelectedAgents, ...mrCustomPersonas.map(p=>({name:p.name, role:p.role}))];
+  return [...mrSelectedAgents, ...mrCustomPersonas.filter(p=>p.active).map(p=>({name:p.name, role:p.role}))];
 }
 function mrPresentNames(){
-  return [...mrSelectedAgents, ...mrCustomPersonas.map(p=>p.name)];
+  return [...mrSelectedAgents, ...mrCustomPersonas.filter(p=>p.active).map(p=>p.name)];
 }
 function mrToggleCustomForm(force){
   const form=document.getElementById('mrCustomForm');
@@ -4039,10 +4039,25 @@ function mrRenderCustomPersonas(){
   const wrap=document.getElementById('mrCustomList');
   wrap.innerHTML = mrCustomPersonas.map(p=>`
     <label class="mr-agent mr-agent-pick" style="position:relative">
+      <input type="checkbox" class="mr-custom-check" data-id="${p.id}" ${p.active?'checked':''} onchange="mrToggleCustomPersona('${p.id}')">
       <div class="mr-avatar photo ${p.gender==='male'?'av-gen-m':'av-gen-f'}"></div>
       <div><div class="mr-agent-name">${escapeHtml(p.name)}</div><div class="mr-agent-role">${escapeHtml(p.role)}</div></div>
-      <button type="button" onclick="mrRemoveCustomPersona('${p.id}')" title="Remove" style="margin-left:auto;background:none;border:none;color:var(--steel-light);cursor:pointer;font-size:1.1rem">×</button>
+      <button type="button" onclick="mrRemoveCustomPersona('${p.id}')" title="Remove from list entirely" style="margin-left:auto;background:none;border:none;color:var(--steel-light);cursor:pointer;font-size:1.1rem">×</button>
     </label>`).join('');
+}
+function mrToggleCustomPersona(id){
+  const p=mrCustomPersonas.find(x=>x.id===id);
+  if(!p) return;
+  if(p.active && mrPresentNames().length===1){
+    document.querySelector(`.mr-custom-check[data-id="${id}"]`).checked=true;
+    alert('At least one specialist needs to stay in the room.');
+    return;
+  }
+  p.active=!p.active;
+  if(mrMeetingStarted){
+    mrHistory.push({role:'user', content:`[${p.name} has just ${p.active ? 'joined' : 'left'} the meeting room. Current specialists present: ${mrPresentNames().join(', ')}. Briefly acknowledge this change in one short sentence from any present member, then continue the discussion naturally — do not restart the conversation or re-greet the user.]`});
+    mrCallApi();
+  }
 }
 let mrCustomOverrideConfirmed=false;
 function mrAddCustomPersona(){
@@ -4060,7 +4075,7 @@ function mrAddCustomPersona(){
   }
   mrCustomOverrideConfirmed=false;
   const id='custom-'+Date.now()+'-'+Math.random().toString(36).slice(2,7);
-  mrCustomPersonas.push({id, name, role, gender});
+  mrCustomPersonas.push({id, name, role, gender, active:true});
   mrRoles[name]=role;
   mrRenderCustomPersonas();
   mrToggleCustomForm(false);

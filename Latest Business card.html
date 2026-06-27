@@ -1286,7 +1286,24 @@ animation:pulseRing 2.4s ease-out infinite;
 .mr-avatar.av-gen-m{background-image:url("images/team/generic-male.png")}
 .mr-agent-name{font-size:.82rem;font-weight:600;color:var(--white)}
 .mr-agent-role{font-size:.7rem;color:var(--steel-light)}
-.mr-chat{background:rgba(255,255,255,.04);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);border-radius:16px;display:flex;flex-direction:column;height:560px;overflow:hidden}
+.mr-chat{background:rgba(255,255,255,.04);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);border-radius:16px;display:flex;flex-direction:column;height:560px;overflow:hidden;position:relative}
+.mr-chat-topbar{position:absolute;top:.5rem;right:.5rem;z-index:5}
+.mr-maximize-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:var(--steel-light);border-radius:6px;width:30px;height:30px;cursor:pointer;font-size:.9rem;line-height:1;flex-shrink:0}
+.mr-maximize-btn:hover{border-color:var(--gold);color:var(--gold-light)}
+.mr-chat.mr-maximized{position:fixed!important;inset:0!important;z-index:9999;width:100vw!important;height:100vh!important;max-width:none!important;margin:0!important;border-radius:0;background:var(--navy)}
+.mr-stage{display:none;gap:.85rem;padding:.85rem 1rem;flex-wrap:wrap;justify-content:center;border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0}
+.mr-chat.mr-maximized .mr-stage.has-tiles{display:flex}
+.mr-stage-tile{display:flex;flex-direction:column;align-items:center;gap:.35rem;padding:.5rem;border-radius:10px;border:2px solid transparent;transition:all .2s}
+.mr-stage-tile.speaking{border-color:var(--gold);box-shadow:0 0 16px rgba(200,169,110,.4)}
+.mr-stage-tile .mr-avatar{width:46px;height:46px}
+.mr-stage-name{font-size:.68rem;color:var(--steel-light)}
+.mr-share-panel{display:none;position:absolute;top:0;right:0;bottom:0;width:340px;border-left:1px solid rgba(255,255,255,.1);padding:1rem;overflow-y:auto;font-size:.78rem;color:var(--steel-light);background:rgba(8,16,28,.95);z-index:4}
+.mr-chat.mr-maximized .mr-share-panel.active{display:block}
+.mr-chat.mr-maximized .mr-share-panel.active ~ .mr-messages, .mr-chat.mr-maximized.has-share .mr-messages{margin-right:340px}
+.mr-share-warning{background:rgba(200,80,80,.14);border:1px solid rgba(200,80,80,.35);color:#f3cccc;border-radius:8px;padding:.6rem;margin-bottom:.7rem;font-size:.74rem;line-height:1.4}
+.mr-share-title{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.mr-share-text{white-space:pre-wrap;line-height:1.5}
+@media (max-width:768px){ .mr-share-panel{width:100%} .mr-chat.mr-maximized.has-share .mr-messages{margin-right:0;display:none} }
 .mr-messages{flex:1;overflow-y:auto;padding:1.75rem;display:flex;flex-direction:column;gap:1.1rem}
 .mr-msg{max-width:80%;animation:msgIn .4s cubic-bezier(.22,1,.36,1)}
 @keyframes msgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -1596,7 +1613,8 @@ animation:pulseRing 2.4s ease-out infinite;
     <p class="mr-note">Simulated AI panel for technical discussion &amp; education — not formal advice.</p>
   </div>
 
-  <div class="mr-chat">
+  <div class="mr-chat" id="mrChatWrap">
+    <div class="mr-chat-topbar"><button class="mr-maximize-btn" type="button" onclick="mrToggleMaximize('mrChatWrap')" title="Maximize">⛶</button></div>
     <div class="mr-messages" id="mrMessages"></div>
     <div class="mr-chips" id="mrChips" style="display:none">
       <span id="mrTopicChips" style="display:contents">
@@ -1663,6 +1681,7 @@ animation:pulseRing 2.4s ease-out infinite;
   <div style="display:flex;align-items:center;gap:.6rem;padding:.85rem 1rem;border-bottom:1px solid rgba(255,255,255,.08)">
     <div class="mr-avatar photo av-ic" style="width:34px;height:34px;border-radius:8px">IC</div>
     <span style="font-size:.85rem;font-weight:700;color:var(--gold)">Interview Coach</span>
+    <button class="mr-maximize-btn" type="button" onclick="mrToggleMaximize('qzChatWrap')" title="Maximize" style="margin-left:auto">⛶</button>
   </div>
   <div class="mr-messages" id="qzMessages"></div>
   <div class="mr-chips">
@@ -1837,6 +1856,7 @@ animation:pulseRing 2.4s ease-out infinite;
   <div style="display:flex;align-items:center;gap:.6rem;padding:.85rem 1rem;border-bottom:1px solid rgba(255,255,255,.08)">
     <div class="mr-avatar photo av-ga" style="width:34px;height:34px;border-radius:8px">GA</div>
     <span style="font-size:.85rem;font-weight:700;color:var(--gold)">GAAP Research Assistant</span>
+    <button class="mr-maximize-btn" type="button" onclick="mrToggleMaximize('gaapChatWrap')" title="Maximize" style="margin-left:auto">⛶</button>
   </div>
   <div class="mr-messages" id="gaapMessages"></div>
   <div class="mr-chips" id="gaapChips">
@@ -3930,6 +3950,7 @@ function mrAppendMessage(role, name, text){
   wrap.appendChild(div);
   wrap.scrollTop=wrap.scrollHeight;
   if(role!=='user') mrSpeak(name, text);
+  if(typeof mrLiveStageRefresh==='function') mrLiveStageRefresh();
 }
 function mrShowTyping(){
   const wrap=document.getElementById('mrMessages');
@@ -4277,8 +4298,121 @@ async function mrHandleFileUpload(file){
   }
   mrAppendMessage('user','You', `📎 Uploaded: ${file.name} — please review this.`);
   mrHistory.push({role:'user', content:[block, {type:'text', text:`I've uploaded a document called "${file.name}" for the panel to review. Please read its actual contents and give your analysis.`}]});
+  if(file.type.startsWith('image/')){
+    mrLastSharedDoc = { name:file.name, text:'', quality:'unsupported' };
+  } else {
+    try{
+      const sharedText = await extractFileText(file);
+      mrLastSharedDoc = { name:file.name, text:sharedText, quality: mrAssessDocQuality(sharedText) };
+    }catch(e){
+      mrLastSharedDoc = { name:file.name, text:'', quality:'unsupported' };
+    }
+  }
+  mrRefreshSharePanel();
   mrCallApi();
 }
+
+/* ── Maximize/minimize for chat-style USP tools, with a Teams-style speaker stage and a "shared screen" doc panel ── */
+let mrLastSharedDoc = null; // {name, text, quality:'ok'|'poor'|'unsupported'}
+
+function mrAssessDocQuality(text){
+  if(!text || !text.trim()) return 'unsupported';
+  const words = text.trim().split(/\s+/);
+  if(words.length < 25) return 'poor';
+  const printable = text.replace(/[^\x20-\x7E\n]/g,'').length;
+  if(printable / text.length < 0.85) return 'poor';
+  return 'ok';
+}
+
+function mrStageParticipants(el){
+  if(el.id==='mrChatWrap') return (typeof mrPresentNames==='function' ? mrPresentNames() : []);
+  if(el.id==='qzChatWrap') return ['Interview Coach'];
+  if(el.id==='gaapChatWrap') return ['GAAP Research Assistant'];
+  return [];
+}
+
+function mrEnsureStage(el){
+  if(el.querySelector('.mr-stage')) return;
+  const stage=document.createElement('div');
+  stage.className='mr-stage';
+  el.insertBefore(stage, el.querySelector('.mr-messages'));
+}
+
+function mrRefreshStage(el){
+  const stage=el.querySelector('.mr-stage');
+  if(!stage) return;
+  const names=mrStageParticipants(el);
+  if(!names.length){ stage.classList.remove('has-tiles'); stage.innerHTML=''; return; }
+  const agentNames=el.querySelectorAll('.mr-msg.agent .mr-msg-name');
+  const speaking = agentNames.length ? agentNames[agentNames.length-1].textContent.trim() : '';
+  stage.innerHTML = names.map(n=>{
+    const initials=n.split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase();
+    return `<div class="mr-stage-tile ${n===speaking?'speaking':''}"><div class="mr-avatar">${initials}</div><div class="mr-stage-name">${escapeHtml(n)}</div></div>`;
+  }).join('');
+  stage.classList.add('has-tiles');
+}
+
+function mrLiveStageRefresh(){
+  document.querySelectorAll('.mr-chat.mr-maximized').forEach(mrRefreshStage);
+}
+
+function mrEnsureSharePanel(el){
+  if(el.querySelector('.mr-share-panel')) return;
+  const panel=document.createElement('div');
+  panel.className='mr-share-panel';
+  panel.innerHTML='<div class="mr-share-title">📄 Shared document</div><div class="mr-share-body"></div>';
+  el.appendChild(panel);
+}
+
+function mrRefreshSharePanel(){
+  document.querySelectorAll('.mr-chat.mr-maximized').forEach(el=>{
+    const panel=el.querySelector('.mr-share-panel');
+    if(!panel) return;
+    const body=panel.querySelector('.mr-share-body');
+    const doc = el.id==='mrChatWrap' ? mrLastSharedDoc : null;
+    if(!doc){
+      panel.classList.remove('active');
+      el.classList.remove('has-share');
+      return;
+    }
+    panel.classList.add('active');
+    el.classList.add('has-share');
+    let warning='';
+    if(doc.quality==='unsupported'){
+      warning = doc.text===''
+        ? `<div class="mr-share-warning">I can't show a text preview of this file type on screen, but the panel can still see and discuss "${escapeHtml(doc.name)}" directly.</div>`
+        : '';
+    } else if(doc.quality==='poor'){
+      warning = `<div class="mr-share-warning">⚠️ "${escapeHtml(doc.name)}" looks low-quality or scanned, so I could only pull a small or messy amount of text from it — the on-screen preview may not be fully accurate. For a cleaner presentation, try sharing a Word/Excel file or a properly converted (non-scanned) PDF instead.</div>`;
+    }
+    const textHtml = doc.text ? `<div class="mr-share-text">${escapeHtml(doc.text.slice(0,4000))}${doc.text.length>4000?'…':''}</div>` : '';
+    body.innerHTML = warning + textHtml;
+  });
+}
+
+function mrToggleMaximize(id){
+  const el=document.getElementById(id);
+  if(!el) return;
+  const maximized=el.classList.toggle('mr-maximized');
+  document.body.style.overflow = maximized ? 'hidden' : '';
+  const btn=el.querySelector('.mr-maximize-btn');
+  if(btn){ btn.textContent = maximized ? '⤡' : '⛶'; btn.title = maximized ? 'Minimize' : 'Maximize'; }
+  if(maximized){
+    mrEnsureStage(el);
+    mrEnsureSharePanel(el);
+    mrRefreshStage(el);
+    mrRefreshSharePanel();
+  } else {
+    const stage=el.querySelector('.mr-stage'); if(stage) stage.remove();
+    const panel=el.querySelector('.mr-share-panel'); if(panel) panel.remove();
+    el.classList.remove('has-share');
+  }
+}
+document.addEventListener('keydown', e=>{
+  if(e.key==='Escape'){
+    document.querySelectorAll('.mr-chat.mr-maximized').forEach(el=>mrToggleMaximize(el.id));
+  }
+});
 
 // Strips markdown syntax so transcripts read like normal human language, not raw markdown (##, **, etc.)
 function stripMarkdown(text){
@@ -4718,6 +4852,7 @@ function gaapAppendMessage(role, text){
   wrap.appendChild(div);
   wrap.scrollTop=wrap.scrollHeight;
   if(role!=='user') gaapSpeak(text);
+  if(typeof mrLiveStageRefresh==='function') mrLiveStageRefresh();
 }
 function gaapShowTyping(){
   const wrap=document.getElementById('gaapMessages');
@@ -4809,6 +4944,7 @@ function qzAppendMessage(role, text){
   wrap.appendChild(div);
   wrap.scrollTop=wrap.scrollHeight;
   if(role!=='user') qzSpeak(text);
+  if(typeof mrLiveStageRefresh==='function') mrLiveStageRefresh();
 }
 function qzShowTyping(){
   const wrap=document.getElementById('qzMessages');

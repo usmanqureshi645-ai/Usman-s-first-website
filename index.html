@@ -949,7 +949,7 @@
   .welcome-bot-panel{
     width:320px; max-height:min(420px, 60vh); margin-bottom:1rem;
     background:rgba(16,26,44,.96); backdrop-filter:blur(20px);
-    border:1px solid rgba(200,169,110,.3); border-radius:16px;
+    border:1px solid rgba(200,169,110,.3); border-radius:26px; border-bottom-right-radius:6px;
     box-shadow:0 20px 60px rgba(0,0,0,.4);
     display:none; flex-direction:column; overflow:hidden;
     transform:translateY(20px) scale(.96); opacity:0;
@@ -958,7 +958,7 @@
   .welcome-bot-panel.open{ display:flex; transform:translateY(0) scale(1); opacity:1; }
   .welcome-bot-header{
     display:flex; justify-content:space-between; align-items:center;
-    padding:.85rem 1.1rem; border-bottom:1px solid rgba(255,255,255,.08);
+    padding:1rem 1.3rem; border-bottom:1px solid rgba(255,255,255,.08);
     font-size:.85rem; font-weight:700; color:var(--gold);
   }
   .welcome-bot-close{ background:none; border:none; color:var(--steel); font-size:1.2rem; cursor:pointer; line-height:1; }
@@ -1529,7 +1529,7 @@ animation:pulseRing 2.4s ease-out infinite;
         <button class="mr-chip" onclick="mrAsk('What is changing under IFRS 18 for our income statement?')">IFRS 18 impact</button>
         <button class="mr-chip" onclick="mrAsk('What tax risks come with a cross-border group restructuring?')">Cross-border tax risk</button>
       </span>
-      <button class="mr-chip" id="mrEndBtn" onclick="mrEndMeeting()" style="border-color:var(--steel);color:var(--steel-light)">End meeting &amp; email me a summary</button>
+      <button class="mr-chip" id="mrEndBtn" onclick="mrEndMeeting()" style="border-color:var(--steel);color:var(--steel-light)">End meeting &amp; email me the consultation</button>
       <button class="mr-chip" id="mrDownloadBtn" onclick="mrDownloadTranscript()" style="border-color:var(--steel);color:var(--steel-light)">⬇️ Download transcript</button>
     </div>
     <div class="mr-inputbar" id="mrInputBar" style="display:none">
@@ -4064,7 +4064,7 @@ function mrSendSummaryTo(email, {skipUserBubble=false}={}){
     mrAppendMessage('agent','Meeting Room', "Sorry — I couldn't send that summary right now. Please try again shortly.");
   }).finally(()=>{
     btn.disabled=false;
-    btn.textContent='End meeting & email me a summary';
+    btn.textContent='End meeting & email me the consultation';
   });
 }
 

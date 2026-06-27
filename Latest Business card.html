@@ -3389,6 +3389,18 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       || (typeof mrMeetingStarted!=='undefined' && mrMeetingStarted);
   };
 
+  // Close any open floating-widget popup (Site Guide, Feedback, Sign-up, AskAI) as soon
+  // as the visitor scrolls the page, rather than requiring them to close it manually —
+  // but never while they're actively typing/chatting inside one
+  window.addEventListener('scroll', () => {
+    if (userIsBusy) return;
+    const anyOpen = document.getElementById('welcomeBotPanel')?.classList.contains('open')
+      || document.getElementById('feedbackPanel')?.classList.contains('open')
+      || document.getElementById('signupPanel')?.classList.contains('open')
+      || document.getElementById('askPanel')?.classList.contains('open');
+    if (anyOpen) window.closeOtherWidgets?.();
+  }, { passive: true });
+
   // USP toast notifications — gently invite visitors to try the standout features
   (function(){
     const toasts=[

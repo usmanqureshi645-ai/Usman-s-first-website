@@ -132,6 +132,12 @@
       <div class="card stat"><div class="num" id="s-invoc">–</div><div class="lbl">API calls this month</div></div>
     </div>
 
+    <!-- 7-day visitor trend -->
+    <div class="card section">
+      <h2>Last 7 Days <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">— visits (bars) & unique visitors (line)</span></h2>
+      <div id="trendChart"></div>
+    </div>
+
     <div class="grid cols-2 section">
       <!-- Feature usage -->
       <div class="card">
@@ -257,6 +263,29 @@
     $('signupBody').innerHTML = su.length
       ? su.map(s=>`<tr><td>${esc(s.name)}</td><td>${esc(s.email)}</td><td class="muted">${s.createdAt?new Date(s.createdAt).toLocaleDateString():'–'}</td></tr>`).join('')
       : '<tr><td colspan="3" class="muted">No signups yet</td></tr>';
+
+    renderTrend(d.trend||[]);
+  }
+
+  // 7-day chart: visits as bars, unique visitors as an overlaid line. Pure inline SVG.
+  function renderTrend(trend){
+    const el = $('trendChart');
+    if(!trend.length){ el.innerHTML='<div class="muted" style="font-size:.84rem">No data yet</div>'; return; }
+    const W=700, H=200, padL=34, padR=12, padT=14, padB=28;
+    const iw=W-padL-padR, ih=H-padT-padB;
+    const max=Math.max(1, ...trend.map(t=>Math.max(t.visits,t.unique)));
+    const n=trend.length, slot=iw/n, bw=Math.min(46, slot*0.55);
+    const x=i=>padL + slot*i + slot/2;
+    const y=v=>padT + ih - (v/max)*ih;
+    const dow=ds=>new Date(ds+'T00:00:00').toLocaleDateString(undefined,{weekday:'short'});
+    // gridlines (0, 50%, 100%)
+    let grid='';
+    [0,0.5,1].forEach(f=>{ const gy=padT+ih-f*ih; grid+=`<line x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke="rgba(200,169,110,.15)"/><text x="${padL-6}" y="${gy+3}" text-anchor="end" font-size="9" fill="var(--steel)">${Math.round(max*f)}</text>`; });
+    const bars=trend.map((t,i)=>`<rect x="${x(i)-bw/2}" y="${y(t.visits)}" width="${bw}" height="${padT+ih-y(t.visits)}" rx="3" fill="var(--gold)" opacity=".85"><title>${t.date}: ${t.visits} visits</title></rect>`).join('');
+    const pts=trend.map((t,i)=>`${x(i)},${y(t.unique)}`).join(' ');
+    const line=`<polyline points="${pts}" fill="none" stroke="var(--green)" stroke-width="2"/>` + trend.map((t,i)=>`<circle cx="${x(i)}" cy="${y(t.unique)}" r="3" fill="var(--green)"><title>${t.date}: ${t.unique} unique</title></circle>`).join('');
+    const labels=trend.map((t,i)=>`<text x="${x(i)}" y="${H-9}" text-anchor="middle" font-size="10" fill="var(--steel-light)">${dow(t.date)}</text>`).join('');
+    el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block">${grid}${bars}${line}${labels}</svg>`;
   }
 
   function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }

@@ -4137,20 +4137,56 @@ function wireMic(micBtnId, inputId, sendFn, duck){
   if(!SR){ micBtn.style.display='none'; return; }
   const recognition=new SR();
   recognition.lang='en-GB';
-  recognition.interimResults=false;
-  recognition.maxAlternatives=1;
+  recognition.continuous=false;
+  recognition.interimResults=true;
+  recognition.maxAlternatives=3;
   let listening=false;
   micBtn.addEventListener('click', ()=>{
     if(listening){ recognition.stop(); return; }
     recognition.start();
   });
-  recognition.onstart=()=>{ listening=true; micBtn.classList.add('listening'); if(shouldDuck) window.MusicDuck?.duck('mic-'+micBtnId); };
-  recognition.onend=()=>{ listening=false; micBtn.classList.remove('listening'); if(shouldDuck) window.MusicDuck?.unduck('mic-'+micBtnId); };
-  recognition.onerror=()=>{ listening=false; micBtn.classList.remove('listening'); if(shouldDuck) window.MusicDuck?.unduck('mic-'+micBtnId); };
+  recognition.onstart=()=>{
+    listening=true;
+    micBtn.classList.add('listening');
+    if(shouldDuck) window.MusicDuck?.duck('mic-'+micBtnId);
+  };
+  recognition.onend=()=>{
+    listening=false;
+    micBtn.classList.remove('listening');
+    if(shouldDuck) window.MusicDuck?.unduck('mic-'+micBtnId);
+  };
+  recognition.onerror=(e)=>{
+    listening=false;
+    micBtn.classList.remove('listening');
+    if(shouldDuck) window.MusicDuck?.unduck('mic-'+micBtnId);
+    // Provide user feedback on error
+    const input = document.getElementById(inputId);
+    if(e.error==='no-speech') input.placeholder='No speech detected — try again';
+    else if(e.error==='network') input.placeholder='Network error — check your connection';
+  };
   recognition.onresult=(e)=>{
-    const transcript=e.results[0][0].transcript;
-    document.getElementById(inputId).value=transcript;
-    sendFn();
+    const results=e.results;
+    let bestTranscript='';
+    let bestConfidence=0;
+    // Find the best match across all results (interim + final)
+    for(let i=0;i<results.length;i++){
+      const transcript=results[i][0].transcript;
+      const confidence=results[i][0].confidence||0;
+      if(confidence>bestConfidence){
+        bestConfidence=confidence;
+        bestTranscript=transcript;
+      }
+    }
+    const input=document.getElementById(inputId);
+    if(e.isFinal){
+      // Final result — send it
+      input.value=bestTranscript.trim();
+      input.placeholder='';
+      sendFn();
+    } else {
+      // Interim result — show what we're hearing (visual feedback)
+      input.value=bestTranscript.trim();
+    }
   };
 }
 wireMic('mrMic','mrInput', mrSendMessage);

@@ -980,6 +980,8 @@
   }
   /* absolute + visibility means it fades both ways (no display:none flash) yet reserves no layout space when closed */
   .welcome-bot-panel.open{ transform:translateY(0) scale(1); opacity:1; visibility:visible; pointer-events:auto; }
+  /* lift the active launcher above its sibling launchers so an open panel (esp. its Send button on narrow phones) isn't overlapped by the other floating buttons */
+  .welcome-bot:has(.welcome-bot-panel.open){ z-index:10001; }
   .welcome-bot-header{
     display:flex; justify-content:space-between; align-items:center;
     padding:1rem 1.3rem; border-bottom:1px solid rgba(255,255,255,.08);

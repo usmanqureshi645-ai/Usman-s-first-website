@@ -3964,7 +3964,14 @@ const VoiceEngine=(function(){
   function speak(text, pitch, duck, explicitGender){
     if(!('speechSynthesis' in window)) return;
     const shouldDuck = duck!==false; // only Meeting Room / Knowledge Test pass false-free (default true); GAAP Compare opts out
-    const clean=text.replace(/[*_#>`]/g,'').replace(/\n+/g,'. ');
+    // Strip markdown, then strip emojis/pictographs (and common symbols) so the voice
+    // doesn't read out "waving hand", "smiling face", etc. — those are purely visual.
+    const clean=text
+      .replace(/[*_#>`]/g,'')
+      .replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2190}-\u{21FF}\u{2B00}-\u{2BFF}\u{FE00}-\u{FE0F}\u{1F1E6}-\u{1F1FF}\u{200D}\u{2300}-\u{23FF}]/gu,'')
+      .replace(/\n+/g,'. ')
+      .replace(/\s{2,}/g,' ')
+      .trim();
     const utter=new SpeechSynthesisUtterance(clean);
     const voice = (explicitGender||gender)==='male' ? maleVoice : femaleVoice;
     if(voice) utter.voice=voice;

@@ -4073,12 +4073,6 @@ function mrWait(ms){ return new Promise(r=>setTimeout(r, ms)); }
 // typing pause beforehand, instead of dumping every speaker's bubble at once —
 // the latter reads as obviously AI-generated rather than a real back-and-forth.
 async function mrRenderPanelReply(text, instant){
-  // When meeting starts (first panel response), fade music out for the entire conversation
-  if(!mrMeetingStarted){
-    console.log('Meeting started, ducking music');
-    mrMeetingStarted=true;
-    window.MusicDuck?.duck('meeting-room');
-  }
   // Splits "**Name (Role):** message" segments into separate bubbles
   const parts=text.split(/\*\*([^*]+)\*\*:?\s*/).filter(Boolean);
   if(parts.length<=1){ mrAppendMessage('agent','Panel', text.trim()); return; }
@@ -4102,6 +4096,13 @@ async function mrSendMessage(){
   const input=document.getElementById('mrInput');
   const text=input.value.trim();
   if(!text) return;
+  // Meeting starts the moment the user sends their first message — duck the music
+  // right away instead of waiting for the panel's reply to come back.
+  if(!mrMeetingStarted){
+    console.log('Meeting started, ducking music');
+    mrMeetingStarted=true;
+    window.MusicDuck?.duck('meeting-room');
+  }
   mrAppendMessage('user','You', text);
   mrHistory.push({role:'user', content:text});
   input.value='';
@@ -4199,28 +4200,24 @@ function wireMic(micBtnId, inputId, sendFn, duck){
   };
 
   recognition.onresult=(e)=>{
-    console.log('Result received, isFinal:', e.isFinal, 'results:', e.results.length);
-    const results=e.results;
-    let bestTranscript='';
-    let bestConfidence=0;
-    for(let i=0;i<results.length;i++){
-      const transcript=results[i][0].transcript;
-      const confidence=results[i][0].confidence||0;
-      console.log('Result', i, ':', transcript, '(confidence:', confidence+')');
-      if(confidence>bestConfidence){
-        bestConfidence=confidence;
-        bestTranscript=transcript;
-      }
+    // Build the full transcript by concatenating every result slot (final + interim),
+    // taking each slot's top alternative — Edge desktop always reports confidence:0 for
+    // every alternative, so picking "highest confidence" never advances past the empty
+    // default and nothing ever gets sent even though the mic captured speech correctly.
+    let transcript='';
+    let isFinal=false;
+    for(let i=0;i<e.results.length;i++){
+      transcript+=e.results[i][0].transcript;
+      if(e.results[i].isFinal) isFinal=true;
     }
+    console.log('Speech result:', transcript, '| isFinal:', isFinal);
     const input=document.getElementById(inputId);
-    if(e.isFinal){
-      console.log('Final result:', bestTranscript);
-      input.value=bestTranscript.trim();
+    input.value=transcript.trim();
+    if(isFinal){
       input.placeholder='';
-      if(bestTranscript.trim()) sendFn();
-    } else {
-      input.value=bestTranscript.trim();
-      if(!bestTranscript) input.placeholder='Listening… speak now';
+      if(transcript.trim()) sendFn();
+    } else if(!transcript){
+      input.placeholder='Listening… speak now';
     }
   };
 }
@@ -5158,6 +5155,8 @@ async function qzCallApi(){
   }
 }
 function qzStart(level){
+  console.log('Interview prep started, ducking music');
+  window.MusicDuck?.duck('interview-prep');
   document.getElementById('qzLevels').style.display='none';
   document.getElementById('qzChatWrap').style.display='flex';
   document.getElementById('qzNote').style.display='block';
@@ -5167,6 +5166,8 @@ function qzStart(level){
   qzCallApi();
 }
 function qzEndSession(){
+  console.log('Interview prep ended, resuming music');
+  window.MusicDuck?.unduck('interview-prep');
   const email=prompt("What email address should I send your feedback report to?");
   if(!email || !email.includes('@')){ if(email!==null) alert('Please enter a valid email address.'); return; }
   qzAppendMessage('user', `I'd like to wrap up — please email my feedback to ${email}.`);

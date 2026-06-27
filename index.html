@@ -3468,11 +3468,14 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
   // Tracks whether the visitor is actively typing/chatting in any tool, so promotional
   // popups (USP toasts, Site Guide auto-open) stay out of the way while they're busy
   let userIsBusy=false;
+  // Selector covering both the big in-page tool chats AND the floating widget panels,
+  // so focusing/typing anywhere inside a widget counts as "busy" and never auto-closes.
+  const BUSY_SEL='.mr-inputbar, .mr-chat, #welcomeBotPanel, #feedbackPanel, #signupPanel, #askPanel';
   document.addEventListener('focusin', e=>{
-    if(e.target.closest('.mr-inputbar, .mr-chat')) userIsBusy=true;
+    if(e.target.closest(BUSY_SEL)) userIsBusy=true;
   });
   document.addEventListener('focusout', e=>{
-    if(e.target.closest('.mr-inputbar, .mr-chat')) setTimeout(()=>{ userIsBusy = !!document.activeElement?.closest('.mr-inputbar, .mr-chat'); }, 50);
+    if(e.target.closest(BUSY_SEL)) setTimeout(()=>{ userIsBusy = !!document.activeElement?.closest(BUSY_SEL); }, 50);
   });
   window.isUserBusy=function(){
     return userIsBusy
@@ -3486,8 +3489,18 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
   // Close any open floating-widget popup (Site Guide, Feedback, Sign-up, AskAI) as soon
   // as the visitor scrolls the page, rather than requiring them to close it manually —
   // but never while they're actively typing/chatting inside one
+  let lastDismissScrollY = window.scrollY;
   window.addEventListener('scroll', () => {
-    if (userIsBusy) return;
+    // Never close while the visitor is interacting inside a widget, or while a widget
+    // input still holds focus (on mobile the soft keyboard fires spurious scroll events).
+    if (userIsBusy || document.activeElement?.closest(BUSY_SEL)) {
+      lastDismissScrollY = window.scrollY;
+      return;
+    }
+    // Only treat a deliberate page scroll (beyond a small threshold) as "I'm browsing,
+    // close the popup" — this ignores the tiny viewport shifts a mobile keyboard causes.
+    if (Math.abs(window.scrollY - lastDismissScrollY) < 60) return;
+    lastDismissScrollY = window.scrollY;
     const anyOpen = document.getElementById('welcomeBotPanel')?.classList.contains('open')
       || document.getElementById('feedbackPanel')?.classList.contains('open')
       || document.getElementById('signupPanel')?.classList.contains('open')

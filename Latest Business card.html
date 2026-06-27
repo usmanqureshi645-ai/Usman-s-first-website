@@ -969,15 +969,17 @@
   .welcome-bot-toggle.pulse{ animation:welcomePulse 1.8s ease-in-out 3; }
   @keyframes welcomePulse{ 0%,100%{box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 0 0 rgba(200,169,110,.5)} 50%{box-shadow:0 10px 30px rgba(0,0,0,.35),0 0 0 10px rgba(200,169,110,0)} }
   .welcome-bot-panel{
-    width:320px; max-height:min(420px, 60vh); margin-bottom:1rem;
+    position:absolute; bottom:calc(100% + .6rem); right:0;
+    width:320px; max-height:min(420px, 60vh);
     background:rgba(16,26,44,.96); backdrop-filter:blur(20px);
     border:1px solid rgba(200,169,110,.3); border-radius:26px; border-bottom-right-radius:6px;
     box-shadow:0 20px 60px rgba(0,0,0,.4);
-    display:none; flex-direction:column; overflow:hidden;
-    transform:translateY(20px) scale(.96); opacity:0;
-    transition:all .4s cubic-bezier(.22,1,.36,1);
+    display:flex; flex-direction:column; overflow:hidden;
+    transform:translateY(16px) scale(.96); opacity:0; visibility:hidden; pointer-events:none;
+    transition:opacity .38s cubic-bezier(.22,1,.36,1), transform .38s cubic-bezier(.22,1,.36,1), visibility .38s;
   }
-  .welcome-bot-panel.open{ display:flex; transform:translateX(-46px) translateY(0) scale(1); opacity:1; }
+  /* absolute + visibility means it fades both ways (no display:none flash) yet reserves no layout space when closed */
+  .welcome-bot-panel.open{ transform:translateY(0) scale(1); opacity:1; visibility:visible; pointer-events:auto; }
   .welcome-bot-header{
     display:flex; justify-content:space-between; align-items:center;
     padding:1rem 1.3rem; border-bottom:1px solid rgba(255,255,255,.08);
@@ -1000,7 +1002,7 @@
     .welcome-bot{ right:10px !important; }
     .welcome-bot-toggle{ width:46px; height:46px; font-size:1.15rem; }
     .welcome-bot-panel{ width:85vw; max-height:55vh !important; }
-    .welcome-bot-panel.open{ transform:translateX(-12px) translateY(0) scale(1) !important; }
+    .welcome-bot-panel.open{ transform:translateY(0) scale(1) !important; }
     .audio-toggle{ bottom:18px !important; right:10px !important; width:46px !important; height:46px !important; }
   }
 
@@ -1312,6 +1314,17 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 .mr-share-title{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
 .mr-share-text{white-space:pre-wrap;line-height:1.5}
 @media (max-width:768px){ .mr-share-panel{width:100%} .mr-chat.mr-maximized.has-share .mr-messages{margin-right:0;display:none} }
+/* Mobile maximized = native chat-app feel (Teams/WhatsApp): the tool fills the screen exactly,
+   the page behind is fully locked, and inputs are 16px so iOS Safari never auto-zooms (and gets
+   stuck zoomed-in, forcing the user to pinch-out and pan). */
+@media (max-width:768px){
+  .mr-chat.mr-maximized{ width:100vw!important; height:100dvh!important; height:100vh!important; }
+  body.mr-fullscreen{ position:fixed; inset:0; width:100%; height:100%; touch-action:none; }
+  .mr-chat.mr-maximized .mr-inputbar input,
+  .mr-chat.mr-maximized .mr-inputbar textarea{ font-size:16px; }
+  .mr-chat.mr-maximized .mr-stage{ padding:.5rem; gap:.5rem; }
+  .mr-chat.mr-maximized .mr-messages{ padding:1rem 1rem 1.25rem; }
+}
 .mr-messages{flex:1;overflow-y:auto;padding:1.75rem;display:flex;flex-direction:column;gap:1.1rem}
 .mr-msg{max-width:80%;animation:msgIn .4s cubic-bezier(.22,1,.36,1)}
 @keyframes msgIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
@@ -1371,7 +1384,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
   .mr-mic-label{ display:none; } /* icon-only on small screens so mic+hear+send fit in one row */
   .mr-mic{ padding:0; width:40px; flex-shrink:0; }
   .mr-inputbar{ flex-wrap:wrap; gap:.5rem; }
-  .mr-inputbar input{ flex:1 1 100%; order:3; }
+  .mr-inputbar input{ flex:1 1 100%; order:3; font-size:16px; } /* 16px stops iOS Safari auto-zoom on focus */
   .mr-chips{ flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:.6rem; }
   .mr-chip{ flex-shrink:0; white-space:nowrap; }
   .mr-panel{ max-height:240px; overflow-y:auto; }
@@ -3172,7 +3185,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     });
     // If the visitor has been scrolling around for 2-3 minutes without using any tool, gently resurface the guide
     setInterval(()=>{
-      if(!opened && Date.now()-lastInteraction > 150000 && !window.isUserBusy?.()){
+      if(!opened && !userDismissedOnce && Date.now()-lastInteraction > 150000 && !window.isUserBusy?.()){
         lastInteraction=Date.now();
         window.toggleWelcomeBot(true);
         addMsg('bot', "Still exploring? 🧭 I'm right here if you'd like a hand finding the Meeting Room, Interview Preparation, GAAP Compare or Job Search tools.", [
@@ -3535,6 +3548,13 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       setTimeout(showToast, 6000); // first nudge 5-8s after arrival
       intervalId=setInterval(showToast, 60000); // then a gentle reminder every 60s, capped at 4/session, stops on dismissal
     }
+    // Once the visitor starts scrolling, treat it as "I'm browsing, leave me be": hide the toast and
+    // stop the recurring nudge for the rest of the session so it never keeps popping back up.
+    window.addEventListener('scroll', ()=>{
+      if(intervalId){ clearInterval(intervalId); intervalId=null; }
+      userDismissed=true; sessionStorage.setItem(dismissedKey, '1');
+      hideToast();
+    }, { passive:true, once:true });
   })();
 
   // Cursor-reactive hover tags on key feature cards
@@ -3849,9 +3869,18 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
   // next real interaction or whenever the tab regains focus/visibility — never
   // stop on its own, only when the user explicitly turns it off.
   function resumeIfStuck(){
+    if(document.hidden) return; // never fight the OS/lock-screen pause while the page is backgrounded
     if(playing && player.paused){ player.play().then(()=>{ if(duckReasons.size===0) fadeTo(0.42, 800); }).catch(()=>{}); }
   }
-  document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) resumeIfStuck(); });
+  // When the visitor puts the phone away, locks it, or switches apps, fade the music out and pause it
+  // rather than letting it play on in the background (and rather than the watchdog re-forcing it on).
+  document.addEventListener('visibilitychange', ()=>{
+    if(document.hidden){
+      if(playing){ player.pause(); } // requestAnimationFrame fades don't run while hidden, so pause outright
+    } else {
+      resumeIfStuck();
+    }
+  });
   window.addEventListener('focus', resumeIfStuck);
   window.addEventListener('click', resumeIfStuck);
   window.addEventListener('scroll', resumeIfStuck);

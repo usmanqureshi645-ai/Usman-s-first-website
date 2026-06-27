@@ -23,6 +23,10 @@
   html { scroll-behavior: smooth; background: #0A1628; overflow-x: hidden; }
   body { overflow-x: hidden; }
 
+  a { color: var(--gold); }
+  a:visited { color: var(--gold); }
+  a:hover { color: var(--gold-light); }
+
   body {
     font-family: 'Manrope', 'Century Gothic', sans-serif;
     background: var(--navy);
@@ -1735,7 +1739,7 @@ animation:pulseRing 2.4s ease-out infinite;
 <div class="section-header">
 <p class="section-eyebrow">Comparative Technical Library</p>
 <h2 class="section-title">IFRS Comparison with Local GAAPs</h2>
-<p class="section-sub">This tool compares IFRS against your chosen local GAAP, topic by topic, and includes a live AI research assistant that answers comparison questions in plain language — grounded in IFRS, PCAOB and Big 4 guidance.</p>
+<p class="section-sub">This tool compares IFRS against your chosen local GAAP, topic by topic, and includes a <a href="#gaapChatWrap" onclick="document.getElementById('gaapChatWrap').scrollIntoView({behavior:'smooth',block:'center'});document.getElementById('gaapInput').focus();return false;" style="color: var(--gold); text-decoration: underline; cursor: pointer;">live AI research assistant</a> that answers comparison questions in plain language — grounded in IFRS, PCAOB and Big 4 guidance.</p>
 </div>
 
 <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;margin-bottom:1.5rem">

@@ -4,6 +4,7 @@
 import { hashPassword, verifyPassword, setSessionCookie, clearSessionCookie, getUserFromRequest, normalizeEmail } from '../lib/auth.js';
 import { saveConsultation, scheduleFollowup } from '../lib/consultations.js';
 import { createMeetingSession, getMeetingSession, saveMeetingSession } from '../lib/meetingSession.js';
+import { getProfile, saveProfile } from '../lib/profile.js';
 
 const TOOL_LABELS = { meeting: 'Meeting Room consultation', quiz: 'Interview Prep session' };
 const SIGNUP_LINE = "If you haven't already, signing up is free and unlocks your personal workspace — every consultation saved, and you can resume any conversation right where you left off. It stays free after signing up too.";
@@ -145,6 +146,35 @@ async function handleWorkspaceGet(req, res, { kvUrl, kvToken }) {
   if (!record) { res.status(404).json({ error: 'Consultation not found' }); return; }
 
   res.status(200).json({ ok: true, consultation: record });
+}
+
+// Shared CV / cover-letter / contact profile, reused across every tool for logged-in users.
+async function handleProfileGet(req, res, { kvUrl, kvToken }) {
+  if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Profile service not configured yet' }); return; }
+  const user = getUserFromRequest(req);
+  if (!user) { res.status(401).json({ error: 'Not logged in' }); return; }
+  const profile = await getProfile({ kvUrl, kvToken, email: user.email });
+  res.status(200).json({ ok: true, name: user.name, email: user.email, profile: profile || {} });
+}
+
+async function handleProfileSave(req, res, { kvUrl, kvToken }) {
+  if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Profile service not configured yet' }); return; }
+  const user = getUserFromRequest(req);
+  if (!user) { res.status(401).json({ error: 'Sign up free to save this to your workspace' }); return; }
+
+  const { cv, cvFilename, coverLetter, coverFilename, location, country, experienceLevel } = req.body || {};
+  const patch = {};
+  if (typeof cv === 'string') patch.cv = cv.slice(0, 60000);
+  if (typeof cvFilename === 'string') patch.cvFilename = cvFilename.slice(0, 200);
+  if (typeof coverLetter === 'string') patch.coverLetter = coverLetter.slice(0, 60000);
+  if (typeof coverFilename === 'string') patch.coverFilename = coverFilename.slice(0, 200);
+  if (typeof location === 'string') patch.location = location.slice(0, 120);
+  if (typeof country === 'string') patch.country = country.slice(0, 120);
+  if (typeof experienceLevel === 'string') patch.experienceLevel = experienceLevel.slice(0, 60);
+  if (Object.keys(patch).length === 0) { res.status(400).json({ error: 'Nothing to save' }); return; }
+
+  const profile = await saveProfile({ kvUrl, kvToken, email: user.email, patch });
+  res.status(200).json({ ok: true, profile });
 }
 
 const EXPERIENCE_LABELS = {
@@ -404,6 +434,8 @@ export default async function handler(req, res) {
       case 'workspace-get': return await handleWorkspaceGet(req, res, ctx);
       case 'cron-followups': return await handleCronFollowups(req, res, ctx);
       case 'personalized-jobs': return req.method === 'POST' ? await handlePersonalizedJobs(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
+      case 'profile-get': return await handleProfileGet(req, res, ctx);
+      case 'profile-save': return req.method === 'POST' ? await handleProfileSave(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       case 'meeting-invite': return req.method === 'POST' ? await handleMeetingInvite(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       case 'meeting-session': return req.method === 'GET' ? await handleMeetingSessionGet(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       case 'meeting-join': return req.method === 'POST' ? await handleMeetingJoin(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });

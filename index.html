@@ -1742,7 +1742,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 <div class="section-header">
 <p class="section-eyebrow">Career Toolkit</p>
 <h2 class="section-title">Rate Your Resume</h2>
-<p class="section-sub">Upload your CV — and, optionally, a job posting and cover letter — and an AI acting as a skeptical recruiter and ATS reviewer scores it honestly, then tailors a rewrite to a specific posting if you want one. No data is stored; everything happens in this session. Looking for a job to apply to? Sign up free for <a href="#" onclick="window.openPersonalizedJobSearch();return false" style="color:var(--gold)">Personalized Job Search</a> in your workspace.</p>
+<p class="section-sub">Upload your CV — and, optionally, a job posting and cover letter — and an AI acting as a skeptical recruiter and ATS reviewer scores it honestly, then tailors a rewrite to a specific posting if you want one. If you're signed in, your CV and cover letter are saved privately to your workspace so you never have to re-upload them; if you're not, nothing is stored beyond this session. Looking for a job to apply to? Sign up free for <a href="#" onclick="window.openPersonalizedJobSearch();return false" style="color:var(--gold)">Personalized Job Search</a> in your workspace.</p>
 </div>
 
 <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">AI CV &amp; ATS Review</h3>
@@ -3315,8 +3315,31 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       }catch(e){ currentUser=null; }
       reflectSignedInState();
       window.updateAskBranding?.();
+      // Load the shared CV/cover/contact profile so every tool can reuse what the user
+      // already gave another tool, instead of re-asking. Logged-in users only.
+      window._siteProfile = null;
+      if(currentUser){
+        try{
+          const pr=await fetch('/api/account?action=profile-get');
+          const pdata=await pr.json();
+          if(pdata.ok) window._siteProfile=pdata.profile||{};
+        }catch(e){}
+      }
+      window.applySavedProfileToTools?.();
     }
     window.refreshSiteUser=refreshUser;
+    window.getSiteProfile=()=>window._siteProfile;
+    // Persist a patch to the shared profile (logged-in only) and keep the local cache in sync.
+    window.saveSiteProfile=async function(patch){
+      if(!currentUser) return;
+      try{
+        const r=await fetch('/api/account?action=profile-save',{
+          method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify(patch)
+        });
+        const data=await r.json();
+        if(data.ok) window._siteProfile=data.profile;
+      }catch(e){}
+    };
     refreshUser();
 
     window.toggleSignupMode=function(){
@@ -3361,6 +3384,12 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
         document.getElementById('signupMessages').innerHTML=`<div class="wb-msg bot"><div class="wb-bubble">${loginMode ? `Welcome back, ${data.name.split(' ')[0]}!` : `You're in, ${data.name.split(' ')[0]}! Check your inbox for a welcome note.`} Your <a href="workspace.html" style="color:var(--gold-light)">My Workspace</a> is ready whenever you want it.</div></div>`;
         window.updateAskBranding?.();
         window.bumpSignupCount?.();
+        // Pull in this user's saved CV/cover/contact profile right away so the tools on
+        // this page immediately stop asking for things they already have.
+        (async()=>{
+          try{ const pr=await fetch('/api/account?action=profile-get'); const pd=await pr.json(); if(pd.ok) window._siteProfile=pd.profile||{}; }catch(e){}
+          window.applySavedProfileToTools?.();
+        })();
         if(window.pendingMeetingJoinId){ const joinId=window.pendingMeetingJoinId; window.pendingMeetingJoinId=null; window.toggleSignup?.(false); window.mrTryJoinSession?.(joinId); }
       }catch(e){
         alert('Connection issue — please try again.');
@@ -5258,11 +5287,42 @@ async function jobHandleFile(input, kind){
     if(kind==='cv') jobCvText=text; else jobCoverText=text;
     box.classList.add('has-file');
     label.textContent=`✓ ${file.name} — ${text.trim().split(/\s+/).length} words extracted`;
+    // Remember it for next time, so logged-in users never have to re-upload across tools.
+    if(window.getSiteUser?.()){
+      const patch = kind==='cv' ? { cv:text, cvFilename:file.name } : { coverLetter:text, coverFilename:file.name };
+      window.saveSiteProfile?.(patch);
+      label.textContent += ' · saved to your workspace';
+    }
   }catch(e){
     label.textContent=`Couldn't read ${file.name} — try a .txt, .pdf or .docx file`;
     box.classList.remove('has-file');
   }
 }
+
+// Pre-fill any tool from the saved profile so logged-in users aren't asked twice.
+// Called after login/profile load. Safe to call repeatedly.
+window.applySavedProfileToTools=function(){
+  const p=window.getSiteProfile?.();
+  const user=window.getSiteUser?.();
+  // FS-review email: suggest the account email instead of asking for it again.
+  const fsEmail=document.getElementById('fsEmail');
+  if(fsEmail && user && !fsEmail.value.trim()) fsEmail.value=user.email;
+  if(!p) return;
+  if(p.cv && !jobCvText){
+    jobCvText=p.cv;
+    const cvBox=document.getElementById('jobCvUploadBox');
+    const cvLabel=document.getElementById('jobCvUploadLabel');
+    if(cvLabel){ cvLabel.innerHTML=`✓ Using your saved CV${p.cvFilename?` (${p.cvFilename})`:''} — click to replace`; }
+    cvBox?.classList.add('has-file');
+  }
+  if(p.coverLetter && !jobCoverText){
+    jobCoverText=p.coverLetter;
+    const cBox=document.getElementById('jobCoverUploadBox');
+    const cLabel=document.getElementById('jobCoverUploadLabel');
+    if(cLabel){ cLabel.innerHTML=`✓ Using your saved cover letter${p.coverFilename?` (${p.coverFilename})`:''} — click to replace`; }
+    cBox?.classList.add('has-file');
+  }
+};
 
 let fsExtractedText='', fsFileName='', fsFileBase64='';
 

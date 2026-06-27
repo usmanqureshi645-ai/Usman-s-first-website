@@ -323,6 +323,7 @@
     <div id="loggedInState" style="display:none">
       <div class="ws-tabs">
         <button class="ws-tab active" data-panel="history">History</button>
+        <button class="ws-tab" data-panel="cv">My CV &amp; Cover Letter</button>
         <button class="ws-tab" data-panel="jobsearch">Job Search</button>
         <button class="ws-tab" data-panel="tools">AI Tools</button>
         <button class="ws-tab" data-panel="contact">Contact</button>
@@ -331,6 +332,63 @@
       <div class="ws-panel active" id="panel-history">
         <div class="tool-filter" id="toolFilter"></div>
         <div id="consultList"></div>
+      </div>
+
+      <div class="ws-panel" id="panel-cv">
+        <div class="state-card" style="text-align:left">
+          <p style="margin-top:0">Your CV and cover letter live here. Upload them once and every tool on the site — CV scoring, tailoring and job search — reuses them automatically, so you're never asked to upload again. Stored privately to your account only.</p>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.25rem">
+            <div>
+              <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">Your CV</label>
+              <div class="job-upload-box" onclick="document.getElementById('cvCvFile').click()" style="background:rgba(255,255,255,.05);border:1px dashed rgba(200,169,110,.3);border-radius:10px;padding:1rem;cursor:pointer;text-align:center;font-size:.85rem;color:var(--steel-light)">
+                <input type="file" id="cvCvFile" accept=".pdf,.docx,.txt" style="display:none" onchange="cvHandleFile(this,'cv')">
+                <span id="cvCvLabel">📄 Click to upload your CV</span>
+              </div>
+              <button id="cvViewCvBtn" onclick="cvToggleView('cv')" style="display:none;margin-top:.5rem;background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold-light);border-radius:8px;padding:.35rem .8rem;font-size:.75rem;cursor:pointer">View saved CV</button>
+            </div>
+            <div>
+              <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">Your cover letter</label>
+              <div class="job-upload-box" onclick="document.getElementById('cvCoverFile').click()" style="background:rgba(255,255,255,.05);border:1px dashed rgba(200,169,110,.3);border-radius:10px;padding:1rem;cursor:pointer;text-align:center;font-size:.85rem;color:var(--steel-light)">
+                <input type="file" id="cvCoverFile" accept=".pdf,.docx,.txt" style="display:none" onchange="cvHandleFile(this,'cover')">
+                <span id="cvCoverLabel">✉️ Click to upload your cover letter</span>
+              </div>
+              <button id="cvViewCoverBtn" onclick="cvToggleView('cover')" style="display:none;margin-top:.5rem;background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold-light);border-radius:8px;padding:.35rem .8rem;font-size:.75rem;cursor:pointer">View saved cover letter</button>
+            </div>
+          </div>
+
+          <pre id="cvViewBox" style="display:none;white-space:pre-wrap;font-family:inherit;font-size:.8rem;color:var(--steel-light);background:rgba(0,0,0,.2);border:1px solid rgba(200,169,110,.15);border-radius:10px;padding:1rem;margin-top:1rem;max-height:340px;overflow-y:auto"></pre>
+
+          <hr style="border:none;border-top:1px solid rgba(200,169,110,.15);margin:1.75rem 0">
+
+          <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem">Tailor &amp; score for your next job</h3>
+          <p style="color:var(--steel-light);font-size:.85rem;line-height:1.6;margin-bottom:.75rem">Paste the job description below, then get an honest recruiter-style score, or a tailored rewrite of your CV and cover letter for that role.</p>
+          <textarea id="cvJobDesc" placeholder="Paste the job posting (title, company, description) here…" style="width:100%;min-height:160px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:1rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
+          <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem">
+            <button class="btn-gold" id="cvScoreBtn" onclick="cvScore()">Score my CV</button>
+            <button class="btn-gold" id="cvTailorBtn" onclick="cvTailor()" style="background:transparent;border:1px solid var(--gold);color:var(--gold-light)">Tailor CV &amp; cover letter</button>
+          </div>
+
+          <div id="cvScoreResult" style="display:none;margin-top:1.5rem">
+            <h3 style="display:flex;align-items:center;gap:.6rem;font-size:1rem">ATS &amp; Recruiter Score: <span id="cvScoreNum" style="color:var(--gold);font-size:1.3rem">—</span>/100</h3>
+            <div id="cvScoreBody" style="color:var(--steel-light);line-height:1.7;font-size:.85rem;margin-top:.5rem"></div>
+          </div>
+
+          <div id="cvTailorResult" style="display:none;margin-top:1.5rem">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+              <div>
+                <h3 style="font-size:.95rem;margin-bottom:.5rem">Tailored CV</h3>
+                <pre id="cvTailoredCv" style="white-space:pre-wrap;font-family:inherit;font-size:.8rem;color:var(--steel-light);background:rgba(0,0,0,.2);border:1px solid rgba(200,169,110,.15);border-radius:10px;padding:1rem;max-height:360px;overflow-y:auto"></pre>
+                <button onclick="cvDownload('cvTailoredCv','tailored-cv.txt')" style="margin-top:.5rem;background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold-light);border-radius:8px;padding:.4rem .85rem;font-size:.78rem;cursor:pointer">Download CV (.txt)</button>
+              </div>
+              <div>
+                <h3 style="font-size:.95rem;margin-bottom:.5rem">Tailored cover letter</h3>
+                <pre id="cvTailoredCover" style="white-space:pre-wrap;font-family:inherit;font-size:.8rem;color:var(--steel-light);background:rgba(0,0,0,.2);border:1px solid rgba(200,169,110,.15);border-radius:10px;padding:1rem;max-height:360px;overflow-y:auto"></pre>
+                <button onclick="cvDownload('cvTailoredCover','tailored-cover-letter.txt')" style="margin-top:.5rem;background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold-light);border-radius:8px;padding:.4rem .85rem;font-size:.78rem;cursor:pointer">Download letter (.txt)</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="ws-panel" id="panel-jobsearch">
@@ -575,7 +633,9 @@
       try {
         const text = await extractFileText(file);
         if (kind === 'cv') jsCvText = text; else jsCoverText = text;
-        label.textContent = `✓ ${file.name} — ${text.trim().split(/\s+/).length} words extracted`;
+        label.textContent = `✓ ${file.name} — ${text.trim().split(/\s+/).length} words extracted · saved`;
+        // Keep the shared profile in sync so the CV tab and main-site tools see it too.
+        if (window.saveProfilePatch) await window.saveProfilePatch(kind === 'cv' ? { cv: text, cvFilename: file.name } : { coverLetter: text, coverFilename: file.name });
       } catch (e) {
         label.textContent = `Couldn't read ${file.name} — try a .txt, .pdf or .docx file`;
       }
@@ -585,6 +645,9 @@
       if (!jsCvText.trim()) { alert('Please upload your CV first.'); return; }
       const btn = document.getElementById('jsSubmitBtn');
       btn.disabled = true; btn.textContent = 'Finding jobs…';
+      // Remember the chosen filters so they're pre-selected next time.
+      const chosenCountry = document.getElementById('jsCountry').value === 'Other' ? '' : document.getElementById('jsCountry').value;
+      window.saveProfilePatch?.({ country: chosenCountry, experienceLevel: document.getElementById('jsExperience').value });
       try {
         const resp = await fetch('/api/account?action=personalized-jobs', {
           method: 'POST',
@@ -623,6 +686,133 @@
       location.href = `index.html?resume=${id}&tool=${tool}#${sectionMap[tool] || tool}`;
     }
 
+    /* ── My CV & Cover Letter tab ── */
+    // Mirrors the shared profile; kept in sync with the server on every change.
+    let cvText = '', coverText = '';
+
+    function wordCount(t) { return String(t || '').trim().split(/\s+/).filter(Boolean).length; }
+
+    async function saveProfilePatch(patch) {
+      try {
+        const r = await fetch('/api/account?action=profile-save', {
+          method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(patch),
+        });
+        const data = await r.json();
+        if (data.ok) window.wsProfile = data.profile;
+      } catch (e) {}
+    }
+    window.saveProfilePatch = saveProfilePatch;
+
+    // Take whatever is saved server-side and reflect it into the CV tab and the Job Search tab,
+    // so neither one asks for a CV the user has already provided.
+    function applyProfileToWorkspace() {
+      const p = window.wsProfile || {};
+      if (p.cv) {
+        cvText = p.cv;
+        document.getElementById('cvCvLabel').innerHTML = `✓ ${p.cvFilename || 'CV saved'} — ${wordCount(p.cv)} words · click to replace`;
+        document.getElementById('cvViewCvBtn').style.display = 'inline-block';
+        // Reuse it in the Job Search tab too.
+        jsCvText = p.cv;
+        const jsLbl = document.getElementById('jsCvUploadLabel');
+        if (jsLbl) jsLbl.textContent = `✓ Using your saved CV${p.cvFilename ? ` (${p.cvFilename})` : ''} — click to replace`;
+      }
+      if (p.coverLetter) {
+        coverText = p.coverLetter;
+        document.getElementById('cvCoverLabel').innerHTML = `✓ ${p.coverFilename || 'Cover letter saved'} — ${wordCount(p.coverLetter)} words · click to replace`;
+        document.getElementById('cvViewCoverBtn').style.display = 'inline-block';
+        jsCoverText = p.coverLetter;
+        const jsCLbl = document.getElementById('jsCoverUploadLabel');
+        if (jsCLbl) jsCLbl.textContent = `✓ Using your saved cover letter${p.coverFilename ? ` (${p.coverFilename})` : ''} — click to replace`;
+      }
+      // Pre-select saved job-search filters.
+      if (p.country) { const sel = document.getElementById('jsCountry'); if (sel && [...sel.options].some(o => o.value === p.country)) { sel.value = p.country; jsPopulateCities(); } }
+      if (p.experienceLevel) { const sel = document.getElementById('jsExperience'); if (sel) sel.value = p.experienceLevel; }
+    }
+    window.applyProfileToWorkspace = applyProfileToWorkspace;
+
+    async function cvHandleFile(input, kind) {
+      const file = input.files[0];
+      if (!file) return;
+      const label = document.getElementById(kind === 'cv' ? 'cvCvLabel' : 'cvCoverLabel');
+      label.textContent = `Extracting text from ${file.name}…`;
+      try {
+        const text = await extractFileText(file);
+        if (kind === 'cv') { cvText = text; jsCvText = text; }
+        else { coverText = text; jsCoverText = text; }
+        label.innerHTML = `✓ ${file.name} — ${wordCount(text)} words · saved`;
+        document.getElementById(kind === 'cv' ? 'cvViewCvBtn' : 'cvViewCoverBtn').style.display = 'inline-block';
+        await saveProfilePatch(kind === 'cv' ? { cv: text, cvFilename: file.name } : { coverLetter: text, coverFilename: file.name });
+      } catch (e) {
+        label.textContent = `Couldn't read ${file.name} — try a .txt, .pdf or .docx file`;
+      }
+    }
+    window.cvHandleFile = cvHandleFile;
+
+    let cvViewing = null;
+    function cvToggleView(kind) {
+      const box = document.getElementById('cvViewBox');
+      if (cvViewing === kind) { box.style.display = 'none'; cvViewing = null; return; }
+      box.textContent = kind === 'cv' ? cvText : coverText;
+      box.style.display = 'block';
+      cvViewing = kind;
+    }
+    window.cvToggleView = cvToggleView;
+
+    async function cvScore() {
+      if (!cvText.trim()) { alert('Upload your CV first.'); return; }
+      const jd = document.getElementById('cvJobDesc').value.trim();
+      if (!jd) { alert('Paste the job description first.'); return; }
+      const btn = document.getElementById('cvScoreBtn');
+      btn.disabled = true; btn.textContent = 'Scoring…';
+      try {
+        const r = await fetch('/api/cv-review', {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ cv: cvText, jobDescription: jd }),
+        });
+        const data = await r.json();
+        if (!r.ok) { alert(data.error || 'Something went wrong — please try again.'); return; }
+        document.getElementById('cvScoreNum').textContent = data.score ?? '—';
+        document.getElementById('cvScoreBody').innerHTML = renderMarkdown(data.review || '');
+        document.getElementById('cvScoreResult').style.display = 'block';
+        document.getElementById('cvScoreResult').scrollIntoView({ behavior: 'smooth' });
+      } catch (e) { alert('Connection issue — please try again.'); }
+      finally { btn.disabled = false; btn.textContent = 'Score my CV'; }
+    }
+    window.cvScore = cvScore;
+
+    async function cvTailor() {
+      if (!cvText.trim()) { alert('Upload your CV first.'); return; }
+      const jd = document.getElementById('cvJobDesc').value.trim();
+      if (!jd) { alert('Paste the job description first.'); return; }
+      const btn = document.getElementById('cvTailorBtn');
+      btn.disabled = true; btn.textContent = 'Tailoring…';
+      try {
+        const r = await fetch('/api/tailor', {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ cv: cvText, jobDescription: jd, coverLetter: coverText || undefined }),
+        });
+        const data = await r.json();
+        if (!r.ok) { alert(data.error || 'Something went wrong — please try again.'); return; }
+        document.getElementById('cvTailoredCv').textContent = data.cv || '';
+        document.getElementById('cvTailoredCover').textContent = data.coverLetter || '';
+        document.getElementById('cvTailorResult').style.display = 'block';
+        document.getElementById('cvTailorResult').scrollIntoView({ behavior: 'smooth' });
+      } catch (e) { alert('Connection issue — please try again.'); }
+      finally { btn.disabled = false; btn.textContent = 'Tailor CV & cover letter'; }
+    }
+    window.cvTailor = cvTailor;
+
+    function cvDownload(elId, filename) {
+      const text = document.getElementById(elId).textContent;
+      const blob = new Blob([text], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = filename;
+      document.body.appendChild(a); a.click(); a.remove();
+      URL.revokeObjectURL(url);
+    }
+    window.cvDownload = cvDownload;
+
     async function init() {
       try {
         const meResp = await fetch('/api/account?action=me');
@@ -647,6 +837,15 @@
         document.getElementById('loggedInState').style.display = 'block';
         renderFilter();
         renderList();
+
+        // Load the shared CV/cover/contact profile and pre-fill every tab from it, so the
+        // CV uploaded anywhere on the site is already here and never asked for again.
+        try {
+          const pResp = await fetch('/api/account?action=profile-get');
+          const pData = await pResp.json();
+          if (pData.ok) { window.wsProfile = pData.profile || {}; applyProfileToWorkspace(); }
+        } catch (e) {}
+
         if (requestedTab) activateTab(requestedTab);
       } catch (err) {
         document.getElementById('workspaceSub').textContent = 'Something went wrong loading your workspace — please refresh.';

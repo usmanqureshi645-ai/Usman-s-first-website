@@ -1290,7 +1290,14 @@ animation:pulseRing 2.4s ease-out infinite;
 .mr-chat-topbar{position:absolute;top:.5rem;right:.5rem;z-index:5}
 .mr-maximize-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:var(--steel-light);border-radius:6px;width:30px;height:30px;cursor:pointer;font-size:.9rem;line-height:1;flex-shrink:0}
 .mr-maximize-btn:hover{border-color:var(--gold);color:var(--gold-light)}
-.mr-chat.mr-maximized{position:fixed!important;inset:0!important;z-index:9999;width:100vw!important;height:100vh!important;max-width:none!important;margin:0!important;border-radius:0;background:var(--navy)}
+.mr-chat.mr-maximized{position:fixed!important;inset:0!important;z-index:100000;width:auto!important;height:auto!important;max-width:none!important;max-height:none!important;margin:0!important;border-radius:0;border:none;background:var(--navy);box-sizing:border-box}
+/* When any tool is maximized, fade the rest of the site away for a clean full-simulation view */
+body.mr-fullscreen{overflow:hidden}
+body.mr-fullscreen nav,
+body.mr-fullscreen .welcome-bot,
+body.mr-fullscreen .audio-toggle,
+body.mr-fullscreen .usp-toast,
+body.mr-fullscreen #backToTopBtn{display:none!important}
 .mr-stage{display:none;gap:.85rem;padding:.85rem 1rem;flex-wrap:wrap;justify-content:center;border-bottom:1px solid rgba(255,255,255,.08);flex-shrink:0}
 .mr-chat.mr-maximized .mr-stage.has-tiles{display:flex}
 .mr-stage-tile{display:flex;flex-direction:column;align-items:center;gap:.35rem;padding:.5rem;border-radius:10px;border:2px solid transparent;transition:all .2s}
@@ -4324,6 +4331,19 @@ function mrAssessDocQuality(text){
   return 'ok';
 }
 
+const MR_AVATAR_CLASS={
+  'Sarah Bennett':'av-sc','David Whitfield':'av-dw','Amelia Hartley':'av-as','Marcus Lee':'av-ml',
+  'Elena Rossi':'av-er','James Carter':'av-jc','Charlotte Sinclair':'av-pn',
+  'Interview Coach':'av-ic','GAAP Research Assistant':'av-ga'
+};
+function mrAvatarClassFor(name){
+  if(MR_AVATAR_CLASS[name]) return MR_AVATAR_CLASS[name];
+  // Custom specialist: fall back to a generic photo by stored gender if we have it
+  const custom=(typeof mrCustomPersonas!=='undefined') ? mrCustomPersonas.find(p=>p.name===name) : null;
+  if(custom) return custom.gender==='male' ? 'av-gen-m' : 'av-gen-f';
+  return '';
+}
+
 function mrStageParticipants(el){
   if(el.id==='mrChatWrap') return (typeof mrPresentNames==='function' ? mrPresentNames() : []);
   if(el.id==='qzChatWrap') return ['Interview Coach'];
@@ -4347,7 +4367,9 @@ function mrRefreshStage(el){
   const speaking = agentNames.length ? agentNames[agentNames.length-1].textContent.trim() : '';
   stage.innerHTML = names.map(n=>{
     const initials=n.split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase();
-    return `<div class="mr-stage-tile ${n===speaking?'speaking':''}"><div class="mr-avatar">${initials}</div><div class="mr-stage-name">${escapeHtml(n)}</div></div>`;
+    const avClass=mrAvatarClassFor(n);
+    const avatar = avClass ? `<div class="mr-avatar photo ${avClass}">${initials}</div>` : `<div class="mr-avatar">${initials}</div>`;
+    return `<div class="mr-stage-tile ${n===speaking?'speaking':''}">${avatar}<div class="mr-stage-name">${escapeHtml(n)}</div></div>`;
   }).join('');
   stage.classList.add('has-tiles');
 }
@@ -4390,14 +4412,21 @@ function mrRefreshSharePanel(){
   });
 }
 
+const mrMaximPlaceholders={};
 function mrToggleMaximize(id){
   const el=document.getElementById(id);
   if(!el) return;
   const maximized=el.classList.toggle('mr-maximized');
-  document.body.style.overflow = maximized ? 'hidden' : '';
+  document.body.classList.toggle('mr-fullscreen', maximized);
   const btn=el.querySelector('.mr-maximize-btn');
   if(btn){ btn.textContent = maximized ? '⤡' : '⛶'; btn.title = maximized ? 'Minimize' : 'Maximize'; }
   if(maximized){
+    // Reparent to <body> so an ancestor's transform/filter (section reveal animation) doesn't
+    // break position:fixed and clamp the panel inside the section instead of the viewport.
+    const ph=document.createComment('mr-maxim-'+id);
+    el.parentNode.insertBefore(ph, el);
+    mrMaximPlaceholders[id]=ph;
+    document.body.appendChild(el);
     mrEnsureStage(el);
     mrEnsureSharePanel(el);
     mrRefreshStage(el);
@@ -4406,6 +4435,8 @@ function mrToggleMaximize(id){
     const stage=el.querySelector('.mr-stage'); if(stage) stage.remove();
     const panel=el.querySelector('.mr-share-panel'); if(panel) panel.remove();
     el.classList.remove('has-share');
+    const ph=mrMaximPlaceholders[id];
+    if(ph && ph.parentNode){ ph.parentNode.insertBefore(el, ph); ph.remove(); delete mrMaximPlaceholders[id]; }
   }
 }
 document.addEventListener('keydown', e=>{

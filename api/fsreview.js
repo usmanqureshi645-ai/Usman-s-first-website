@@ -53,6 +53,8 @@ If it IS financial statements, review the full text for:
 
 For every issue that can be pinned to a specific piece of text, you MUST be able to quote a short, EXACT, VERBATIM substring (5-15 words) from the document text below so it can be located and commented on directly — do not paraphrase the quote. If an issue is a broader risk/reservation that isn't anchored to one specific sentence (e.g. "going concern disclosures should be expanded given the facts described"), put it in additionalNotes instead.
 
+Reference accuracy (critical): for the "standard" field, only cite a paragraph/clause number you are highly confident in and that genuinely belongs to ${selectedFramework} — wrong-numbered or mismatched standard references are a common AI failure mode and undermine the whole review. If unsure of the exact paragraph, cite only the standard name/number you're sure of (e.g. "IAS 1" rather than a possibly-wrong "IAS 1.82"), or leave "standard" as an empty string rather than fabricating one.
+
 Respond with ONLY valid JSON, no markdown fencing, in this exact shape:
 {
   "isFinancialStatement": true or false,

@@ -264,7 +264,7 @@
   async function load(){
     try{
       const r = await fetch('/api/account?action=dashboard&key='+encodeURIComponent(dashKey));
-      if(r.status===401){ localStorage.removeItem(KEY_STORE); dashKey=null; showGate('That key was rejected. Try again.'); return; }
+      if(r.status===401){ const n=(dashKey||'').length; localStorage.removeItem(KEY_STORE); dashKey=null; showGate('That key was rejected (you entered '+n+' characters). It must exactly match UPSTASH_REDIS_REST_TOKEN in Vercel.'); return; }
       const d = await r.json();
       if(!d.ok){ showGate(d.error||'Could not load dashboard.'); return; }
       showDash();

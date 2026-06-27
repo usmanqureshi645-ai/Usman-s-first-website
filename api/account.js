@@ -415,8 +415,10 @@ async function handleTrack(req, res, { kvUrl, kvToken }) {
 // Owner-only analytics read. Same shared-secret pattern as feedback.js (?key=<UPSTASH token>).
 async function handleDashboard(req, res, { kvUrl, kvToken }) {
   if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Storage not configured yet' }); return; }
-  const provided = req.query?.key || req.headers['x-dashboard-key'];
-  if (provided !== kvToken) { res.status(401).json({ error: 'Unauthorized' }); return; }
+  // Trim both sides: a trailing space/newline pasted into the Vercel env var is the most
+  // common cause of a false "rejected", and tokens never have meaningful edge whitespace.
+  const provided = String(req.query?.key || req.headers['x-dashboard-key'] || '').trim();
+  if (provided !== String(kvToken).trim()) { res.status(401).json({ error: 'Unauthorized' }); return; }
   const data = await getDashboardData({ kvUrl, kvToken });
   res.status(200).json({ ok: true, ...data });
 }

@@ -4073,6 +4073,11 @@ function mrWait(ms){ return new Promise(r=>setTimeout(r, ms)); }
 // typing pause beforehand, instead of dumping every speaker's bubble at once —
 // the latter reads as obviously AI-generated rather than a real back-and-forth.
 async function mrRenderPanelReply(text, instant){
+  // When meeting starts (first panel response), fade music out for the entire conversation
+  if(!mrMeetingStarted){
+    mrMeetingStarted=true;
+    window.MusicDuck?.duck('meeting-room');
+  }
   // Splits "**Name (Role):** message" segments into separate bubbles
   const parts=text.split(/\*\*([^*]+)\*\*:?\s*/).filter(Boolean);
   if(parts.length<=1){ mrAppendMessage('agent','Panel', text.trim()); return; }
@@ -4141,34 +4146,61 @@ function wireMic(micBtnId, inputId, sendFn, duck){
   recognition.interimResults=true;
   recognition.maxAlternatives=3;
   let listening=false;
-  micBtn.addEventListener('click', ()=>{
-    if(listening){ recognition.stop(); return; }
+  let permissionDenied=false;
+
+  micBtn.addEventListener('click', async ()=>{
+    if(listening){
+      recognition.stop();
+      return;
+    }
+    // Request microphone permission if needed (Chrome/Edge)
+    if(!permissionDenied && navigator.permissions?.query){
+      try{
+        const perm=await navigator.permissions.query({name:'microphone'});
+        if(perm.state==='denied'){
+          permissionDenied=true;
+          document.getElementById(inputId).placeholder='Microphone access denied — check browser settings';
+          return;
+        }
+      }catch(e){}
+    }
     recognition.start();
   });
+
   recognition.onstart=()=>{
     listening=true;
     micBtn.classList.add('listening');
+    micBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg><span class="mr-mic-label">Stop</span>';
+    const input=document.getElementById(inputId);
+    input.placeholder='Listening…';
     if(shouldDuck) window.MusicDuck?.duck('mic-'+micBtnId);
   };
+
   recognition.onend=()=>{
     listening=false;
     micBtn.classList.remove('listening');
+    micBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg><span class="mr-mic-label">Speak</span>';
+    const input=document.getElementById(inputId);
+    if(!input.value) input.placeholder='Ask a question…';
     if(shouldDuck) window.MusicDuck?.unduck('mic-'+micBtnId);
   };
+
   recognition.onerror=(e)=>{
     listening=false;
     micBtn.classList.remove('listening');
+    micBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg><span class="mr-mic-label">Speak</span>';
     if(shouldDuck) window.MusicDuck?.unduck('mic-'+micBtnId);
-    // Provide user feedback on error
-    const input = document.getElementById(inputId);
-    if(e.error==='no-speech') input.placeholder='No speech detected — try again';
+    const input=document.getElementById(inputId);
+    if(e.error==='no-speech') input.placeholder='No speech detected — speak louder or try again';
     else if(e.error==='network') input.placeholder='Network error — check your connection';
+    else if(e.error==='not-allowed') { input.placeholder='Microphone access denied'; permissionDenied=true; }
+    else input.placeholder='Mic error — please try again';
   };
+
   recognition.onresult=(e)=>{
     const results=e.results;
     let bestTranscript='';
     let bestConfidence=0;
-    // Find the best match across all results (interim + final)
     for(let i=0;i<results.length;i++){
       const transcript=results[i][0].transcript;
       const confidence=results[i][0].confidence||0;
@@ -4179,13 +4211,12 @@ function wireMic(micBtnId, inputId, sendFn, duck){
     }
     const input=document.getElementById(inputId);
     if(e.isFinal){
-      // Final result — send it
       input.value=bestTranscript.trim();
       input.placeholder='';
       sendFn();
     } else {
-      // Interim result — show what we're hearing (visual feedback)
       input.value=bestTranscript.trim();
+      if(!bestTranscript) input.placeholder='Listening…';
     }
   };
 }
@@ -4650,6 +4681,9 @@ document.querySelectorAll('.mr-agent-check').forEach(checkbox=>{
 });
 
 function mrEndMeeting(){
+  // Resume background music when meeting ends
+  window.MusicDuck?.unduck('meeting-room');
+  mrMeetingStarted=false;
   const siteUser=window.getSiteUser?.();
   if(siteUser){ mrSendSummaryTo(siteUser.email, {skipUserBubble:false, loggedIn:true}); return; }
   const email=prompt("What email address should I send the discussion summary to?");

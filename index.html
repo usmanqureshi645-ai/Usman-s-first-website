@@ -4096,13 +4096,6 @@ async function mrSendMessage(){
   const input=document.getElementById('mrInput');
   const text=input.value.trim();
   if(!text) return;
-  // Meeting starts the moment the user sends their first message — duck the music
-  // right away instead of waiting for the panel's reply to come back.
-  if(!mrMeetingStarted){
-    console.log('Meeting started, ducking music');
-    mrMeetingStarted=true;
-    window.MusicDuck?.duck('meeting-room');
-  }
   mrAppendMessage('user','You', text);
   mrHistory.push({role:'user', content:text});
   input.value='';
@@ -4401,6 +4394,10 @@ async function mrPollSession(){
 function mrStartMeeting(){
   mrSelectedAgents=Array.from(document.querySelectorAll('.mr-agent-check:checked')).map(c=>c.value);
   if(mrPresentNames().length===0){ alert('Please pick at least one specialist to join the room.'); return; }
+  // The meeting begins the moment this button is pressed — fade the music out now,
+  // not on the first typed message (mrMeetingStarted is already true by then).
+  console.log('Meeting started, ducking music');
+  window.MusicDuck?.duck('meeting-room');
   mrMeetingStarted=true;
   document.getElementById('mrStartBtn').textContent='Meeting in progress — tick/untick anyone above to add or remove them';
   document.getElementById('mrStartBtn').disabled=true;

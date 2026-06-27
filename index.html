@@ -3917,14 +3917,12 @@ document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-car
     if(document.hidden) return; // never fight the OS/lock-screen pause while the page is backgrounded
     if(playing && player.paused){ player.play().then(()=>{ if(duckReasons.size===0) fadeTo(0.42, 800); }).catch(()=>{}); }
   }
-  // When the visitor puts the phone away, locks it, or switches apps, fade the music out and pause it
-  // rather than letting it play on in the background (and rather than the watchdog re-forcing it on).
+  // On mobile (phone lock, app backgrounded), the browser's native autoplay policies
+  // will pause audio anyway. On desktop, let music continue even when switching tabs.
+  // Only pause when truly leaving the page (pagehide), not on tab switch (visibilitychange).
+  window.addEventListener('pagehide', ()=>{ if(playing) persistPosition(); });
   document.addEventListener('visibilitychange', ()=>{
-    if(document.hidden){
-      if(playing){ player.pause(); } // requestAnimationFrame fades don't run while hidden, so pause outright
-    } else {
-      resumeIfStuck();
-    }
+    if(!document.hidden) resumeIfStuck(); // if we just regained focus, resume if stuck
   });
   window.addEventListener('focus', resumeIfStuck);
   window.addEventListener('click', resumeIfStuck);

@@ -45,7 +45,9 @@ export default async function handler(req, res) {
 4. A heading "Other Resources You Might Find Useful" with 2-3 additional relevant links based on the topic discussed.
 5. A heading "Conclusion" with a brief, professional closing summary and an invitation to return to the Meeting Room any time.
 
-Tone: professional, warm, clearly human-written consultation style — not robotic. Do not mention that this was AI-generated.`;
+Tone: professional, warm, clearly human-written consultation style — not robotic. Do not mention that this was AI-generated.
+
+Output format — this is critical: respond with ONLY the raw HTML body itself, starting directly with the opening paragraph's <p> tag. No markdown code fences (no \`\`\`html or \`\`\`), no preamble, no commentary about the transcript or its quality, no notes to the reader before or after the HTML. Even if the transcript is short, incomplete, or seems to cut off mid-conversation, just write the best honest summary you can directly in the HTML — never comment on the transcript's quality or completeness outside of the HTML itself.`;
 
   try {
     const summaryResp = await fetch('https://api.anthropic.com/v1/messages', {
@@ -70,6 +72,12 @@ Tone: professional, warm, clearly human-written consultation style — not robot
     }
 
     let htmlBody = summaryData?.content?.[0]?.text || '<p>No summary available.</p>';
+    // Defensive cleanup — the model occasionally adds a markdown code fence or commentary
+    // before/after the HTML despite the prompt forbidding it; strip those if present.
+    htmlBody = htmlBody.replace(/^```html\s*|```\s*$/gi, '');
+    const firstTagIndex = htmlBody.search(/<(p|h[1-6]|ul|div)[\s>]/i);
+    if (firstTagIndex > 0) htmlBody = htmlBody.slice(firstTagIndex);
+    htmlBody = htmlBody.trim();
 
     // Persist the conversation so a reply to this email can resume it (Meeting Room itself is stateless)
     let replyTo;

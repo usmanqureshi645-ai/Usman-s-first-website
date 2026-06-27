@@ -3517,6 +3517,12 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       navToggle.classList.remove('open');
       navLinksEl.classList.remove('open');
     }));
+    window.addEventListener('scroll', () => {
+      if (navLinksEl.classList.contains('open')) {
+        navToggle.classList.remove('open');
+        navLinksEl.classList.remove('open');
+      }
+    }, { passive: true });
   }
 
   // Animate trail items on scroll

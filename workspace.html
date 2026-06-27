@@ -141,6 +141,48 @@
     animation:pulseRing 2.4s ease-out infinite;
   }
   @keyframes pulseRing{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.6);opacity:0}}
+
+  /* Floating widgets ported from the main site, scoped to workspace */
+  .welcome-bot{ position:fixed; z-index:9999; display:flex; flex-direction:column; align-items:flex-end; }
+  .welcome-bot-toggle{
+    width:56px; height:56px; border-radius:50%;
+    border:none; color:var(--navy); font-size:1.4rem; cursor:pointer;
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+    transition:transform .3s cubic-bezier(.22,1,.36,1);
+  }
+  .welcome-bot-toggle:hover{ transform:scale(1.08); }
+  .welcome-bot-panel{
+    width:320px; max-height:min(420px, 60vh); margin-bottom:1rem;
+    background:rgba(16,26,44,.96); backdrop-filter:blur(20px);
+    border:1px solid rgba(200,169,110,.3); border-radius:26px; border-bottom-right-radius:6px;
+    box-shadow:0 20px 60px rgba(0,0,0,.4);
+    display:none; flex-direction:column; overflow:hidden;
+    transform:translateY(20px) scale(.96); opacity:0;
+    transition:all .4s cubic-bezier(.22,1,.36,1);
+  }
+  .welcome-bot-panel.open{ display:flex; transform:translateX(-46px) translateY(0) scale(1); opacity:1; }
+  .welcome-bot-header{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:1rem 1.3rem; border-bottom:1px solid rgba(255,255,255,.08);
+    font-size:.85rem; font-weight:700; color:var(--gold);
+  }
+  .welcome-bot-close{ background:none; border:none; color:var(--steel); font-size:1.2rem; cursor:pointer; line-height:1; }
+  .welcome-bot-messages{ flex:1; overflow-y:auto; padding:1rem 1.3rem; display:flex; flex-direction:column; gap:.6rem; }
+  .wb-msg{ max-width:90%; align-self:flex-start; display:flex; }
+  .wb-msg.user{ align-self:flex-end; }
+  .wb-bubble{ background:rgba(200,169,110,.1); border:1px solid rgba(200,169,110,.2); border-radius:18px; border-bottom-left-radius:5px; padding:.65rem .9rem; font-size:.82rem; line-height:1.6; color:var(--cream); }
+  .wb-msg.user .wb-bubble{ background:var(--gold); color:var(--navy); font-weight:600; border-radius:18px; border-bottom-right-radius:5px; }
+  .wb-option-btn{ background:rgba(200,169,110,.12); border:1px solid rgba(200,169,110,.35); color:var(--gold); border-radius:8px; padding:.5rem .9rem; font-size:.78rem; cursor:pointer; transition:.3s; }
+  .wb-option-btn:hover{ background:rgba(200,169,110,.18); border-color:var(--gold); }
+  .back-to-main-btn{
+    background:linear-gradient(135deg,var(--gold-light),var(--gold)) !important;
+  }
+  @media (max-width:480px){
+    .welcome-bot{ right:10px !important; }
+    .welcome-bot-toggle{ width:46px; height:46px; font-size:1.15rem; }
+    .welcome-bot-panel{ width:85vw; max-height:55vh !important; }
+    .welcome-bot-panel.open{ transform:translateX(-12px) translateY(0) scale(1) !important; }
+  }
 </style>
 </head>
 <body>
@@ -204,6 +246,27 @@
       <path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M16 9l5 6M21 9l-5 6" stroke-linecap="round"/>
     </svg>
+  </div>
+
+  <!-- BACK TO MAIN WEBSITE (replaces the "My Workspace" widget here, since we're already on it) -->
+  <div class="welcome-bot" style="bottom:90px;right:28px">
+    <button class="welcome-bot-toggle back-to-main-btn" title="Back to main website" onclick="location.href='index.html'">🏠</button>
+  </div>
+
+  <!-- FEEDBACK WIDGET -->
+  <div class="welcome-bot" style="bottom:154px;right:28px">
+    <div class="welcome-bot-panel" id="feedbackPanel">
+      <div class="welcome-bot-header">
+        <span>🐞 Feedback</span>
+        <button class="welcome-bot-close" onclick="toggleFeedback(false)">&times;</button>
+      </div>
+      <div class="welcome-bot-messages" id="feedbackMessages"></div>
+      <div style="padding:.75rem;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:.5rem">
+        <input type="text" id="feedbackInput" placeholder="Describe what you noticed…" style="flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.5rem .75rem;color:var(--cream);font-family:inherit;font-size:.78rem">
+        <button class="wb-option-btn" onclick="submitFeedback()">Send</button>
+      </div>
+    </div>
+    <button class="welcome-bot-toggle" title="Report a bug" style="background:linear-gradient(135deg,#e0c99a,#8899aa)" onclick="toggleFeedback()">🐞</button>
   </div>
 
   <main>
@@ -643,6 +706,61 @@
       window.addEventListener('click', resumeIfStuck);
       window.addEventListener('scroll', resumeIfStuck);
       setInterval(resumeIfStuck, 4000);
+    })();
+
+    // Feedback widget — ported from index.html so bugs can be reported from the workspace too
+    (function(){
+      const panel=document.getElementById('feedbackPanel');
+      const wrap=document.getElementById('feedbackMessages');
+      let fbOpened=false, greeted=false;
+
+      function addFbMsg(role, html){
+        const div=document.createElement('div');
+        div.className='wb-msg '+(role==='user'?'user':'bot');
+        div.innerHTML=`<div class="wb-bubble">${html}</div>`;
+        wrap.appendChild(div);
+        wrap.scrollTop=wrap.scrollHeight;
+      }
+
+      window.toggleFeedback=function(force){
+        fbOpened = typeof force==='boolean' ? force : !fbOpened;
+        panel.classList.toggle('open', fbOpened);
+        if(fbOpened && !greeted){
+          greeted=true;
+          addFbMsg('bot', "Hi — this is a newly built website, so there might be a few unfixed bugs here and there. If you've noticed anything broken, confusing, or off, let me know below and I'll look into it.");
+        }
+      };
+
+      window.submitFeedback=async function(){
+        const input=document.getElementById('feedbackInput');
+        const text=input.value.trim();
+        if(!text) return;
+        addFbMsg('user', escapeHtml(text));
+        input.value='';
+        addFbMsg('bot', 'Thanks — checking that now…');
+        try{
+          const r=await fetch('/api/feedback',{
+            method:'POST',
+            headers:{'content-type':'application/json'},
+            body:JSON.stringify({ feedback:text, pageContext: location.pathname+location.hash })
+          });
+          const data=await r.json();
+          wrap.lastChild.remove();
+          if(data.error){
+            addFbMsg('bot', "Thanks for the report — I couldn't fully process it automatically, but it's noted.");
+          } else if(data.valid){
+            addFbMsg('bot', `That looks like a genuine issue — thank you. ${data.emailSent ? "I've flagged it to Usman for review." : "It's been logged for review."}`);
+          } else {
+            addFbMsg('bot', "Thanks for the note! That one doesn't look like a specific bug I can action, but I appreciate you taking the time.");
+          }
+        }catch(e){
+          wrap.lastChild.remove();
+          addFbMsg('bot', "Thanks — I couldn't reach the review system just now, but I've noted your message.");
+        }
+      };
+      document.getElementById('feedbackInput').addEventListener('keydown', e=>{
+        if(e.key==='Enter') window.submitFeedback();
+      });
     })();
   </script>
 </body>

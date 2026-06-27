@@ -152,7 +152,7 @@
     font-weight: 400;
     color: var(--gold);
     margin-bottom: 1.75rem;
-    font-style: italic;
+    font-style: normal;
   }
 
   .hero-bio {
@@ -955,7 +955,7 @@
     transform:translateY(20px) scale(.96); opacity:0;
     transition:all .4s cubic-bezier(.22,1,.36,1);
   }
-  .welcome-bot-panel.open{ display:flex; transform:translateY(0) scale(1); opacity:1; }
+  .welcome-bot-panel.open{ display:flex; transform:translateX(-46px) translateY(0) scale(1); opacity:1; }
   .welcome-bot-header{
     display:flex; justify-content:space-between; align-items:center;
     padding:1rem 1.3rem; border-bottom:1px solid rgba(255,255,255,.08);
@@ -978,6 +978,7 @@
     .welcome-bot{ right:10px !important; }
     .welcome-bot-toggle{ width:46px; height:46px; font-size:1.15rem; }
     .welcome-bot-panel{ width:85vw; max-height:55vh !important; }
+    .welcome-bot-panel.open{ transform:translateX(-12px) translateY(0) scale(1) !important; }
     .audio-toggle{ bottom:18px !important; right:10px !important; width:46px !important; height:46px !important; }
   }
 
@@ -1168,7 +1169,8 @@ body{background:linear-gradient(180deg,#050b15,#0a1628)}
 #toolsshowcase .knowledge-grid .knowledge-card{flex:1 1 300px;max-width:380px}
 #hottopics .knowledge-grid{display:flex;flex-wrap:wrap;justify-content:center}
 #hottopics .knowledge-grid .knowledge-card{flex:1 1 280px;max-width:380px}
-.client-card,.knowledge-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:1.6rem;border-radius:18px;backdrop-filter:blur(18px);transition:.4s}
+.client-card,.knowledge-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:1.6rem;border-radius:18px;backdrop-filter:blur(18px);transition:.4s;font-family:inherit}
+.knowledge-card h3,.knowledge-card p{font-family:inherit}
 .client-card:hover,.knowledge-card:hover,.sector-card:hover{transform:translateY(-10px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
 .pub-btn{margin-top:1rem;background:#C8A96E;color:#0A1628;border:none;padding:.8rem 1.2rem;border-radius:10px;font-weight:700;cursor:pointer}
 .pub-modal{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;z-index:99999;padding:30px;overflow:auto}
@@ -1252,6 +1254,8 @@ animation:pulseRing 2.4s ease-out infinite;
 .mr-avatar.av-er{background-image:url("images/team/elena-rossi.png")}
 .mr-avatar.av-jc{background-image:url("images/team/james-carter.png")}
 .mr-avatar.av-pn{background-image:url("images/team/priya-nair.png")}
+.mr-avatar.av-ic{background-image:url("images/team/interview-coach.png")}
+.mr-avatar.av-ga{background-image:url("images/team/gaap-assistant.png")}
 .mr-agent-name{font-size:.82rem;font-weight:600;color:var(--white)}
 .mr-agent-role{font-size:.7rem;color:var(--steel-light)}
 .mr-chat{background:rgba(255,255,255,.04);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);border-radius:16px;display:flex;flex-direction:column;height:560px;overflow:hidden}
@@ -1600,6 +1604,10 @@ animation:pulseRing 2.4s ease-out infinite;
 </div>
 
 <div class="mr-chat" id="qzChatWrap" style="height:560px;max-width:900px;margin:2rem auto 0;display:none">
+  <div style="display:flex;align-items:center;gap:.6rem;padding:.85rem 1rem;border-bottom:1px solid rgba(255,255,255,.08)">
+    <div class="mr-avatar photo av-ic" style="width:34px;height:34px;border-radius:8px">IC</div>
+    <span style="font-size:.85rem;font-weight:700;color:var(--gold)">Interview Coach</span>
+  </div>
   <div class="mr-messages" id="qzMessages"></div>
   <div class="mr-chips">
     <button class="mr-chip" id="qzEndBtn" onclick="qzEndSession()" style="border-color:var(--steel);color:var(--steel-light)">End session &amp; email my feedback</button>
@@ -1770,6 +1778,10 @@ animation:pulseRing 2.4s ease-out infinite;
 
 <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Ask the GAAP Research Assistant</h3>
 <div class="mr-chat" id="gaapChatWrap" style="height:520px;max-width:900px;margin:0 auto">
+  <div style="display:flex;align-items:center;gap:.6rem;padding:.85rem 1rem;border-bottom:1px solid rgba(255,255,255,.08)">
+    <div class="mr-avatar photo av-ga" style="width:34px;height:34px;border-radius:8px">GA</div>
+    <span style="font-size:.85rem;font-weight:700;color:var(--gold)">GAAP Research Assistant</span>
+  </div>
   <div class="mr-messages" id="gaapMessages"></div>
   <div class="mr-chips" id="gaapChips">
     <button class="mr-chip" onclick="gaapAsk('In plain English, what is the biggest practical difference between IFRS and US GAAP for leases?')">Leases: biggest difference?</button>
@@ -2512,6 +2524,8 @@ animation:pulseRing 2.4s ease-out infinite;
   <div class="footer-note">Audit, IFRS & Technical Accounting & Financial Reporting Advisory Advisory · London, UK</div>
   <div class="footer-note" style="margin-top:.4rem;font-size:.65rem;opacity:.6">Background music: royalty-free piano &amp; flute tracks</div>
 </footer>
+
+<button id="backToTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" style="position:fixed;left:28px;bottom:28px;z-index:9998;display:none;align-items:center;gap:.4rem;background:rgba(10,22,40,.85);border:1px solid rgba(200,169,110,.35);color:var(--gold);font-family:inherit;font-size:.78rem;padding:.6rem 1rem;border-radius:30px;backdrop-filter:blur(12px);cursor:pointer;transition:.3s">↑ Back to Top</button>
 
 <div class="audio-toggle widget-tip" data-tooltip="Background music" id="audioToggle">
   <svg id="audioIconOn" viewBox="0 0 24 24" fill="none" stroke-width="1.6" style="display:none">
@@ -3556,6 +3570,14 @@ window.addEventListener('scroll',forceRevealSweep,{passive:true});
 window.addEventListener('resize',forceRevealSweep);
 window.addEventListener('load',forceRevealSweep);
 setTimeout(forceRevealSweep,1500);
+
+function toggleBackToTop(){
+  const btn=document.getElementById('backToTopBtn');
+  if(!btn) return;
+  btn.style.display = window.scrollY>400 ? 'flex' : 'none';
+}
+window.addEventListener('scroll',toggleBackToTop,{passive:true});
+toggleBackToTop();
 
 /* ── Boutique card tilt ── */
 document.querySelectorAll('.knowledge-card,.sector-card,.service-card,.trust-card,.client-card,.stat-card').forEach(card=>{

@@ -4095,9 +4095,16 @@ async function mrCallApi(userText){
       mrAppendMessage('agent','Meeting Room','Sorry — the panel is temporarily unavailable. Please try again shortly.');
       return;
     }
-    mrHistory.push({role:'assistant', content:data.text});
-    await mrRenderPanelReply(data.text);
-    if(mrSessionId) await mrPostToSession({role:'assistant', content:data.text});
+    // Guard against an empty reply poisoning the history: an empty-content turn
+    // makes every subsequent /api/meeting call 400, so never store one.
+    const replyText=(data.text||'').trim();
+    if(!replyText){
+      mrAppendMessage('agent','Meeting Room','Sorry — the panel is temporarily unavailable. Please try again shortly.');
+      return;
+    }
+    mrHistory.push({role:'assistant', content:replyText});
+    await mrRenderPanelReply(replyText);
+    if(mrSessionId) await mrPostToSession({role:'assistant', content:replyText});
   }catch(e){
     mrHideTyping();
     mrAppendMessage('agent','Meeting Room','Connection issue — please try again.');

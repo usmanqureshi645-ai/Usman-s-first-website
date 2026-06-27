@@ -23,7 +23,20 @@ export default async function handler(req, res) {
 
   const system = buildMeetingSystemPrompt(agents);
 
-  const messages = history.map(m => ({ role: m.role, content: m.content }));
+  // Anthropic 400s on empty/whitespace-only content blocks. A single empty turn
+  // (e.g. a previous reply that came back blank and got pushed into the client's
+  // history) would then make EVERY subsequent call in that session fail — which
+  // reads to the user as the panel being "temporarily unavailable" again and
+  // again until they reload. Drop empty turns and any leading assistant turns so
+  // the first message is always a user turn.
+  let messages = history
+    .filter(m => (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string' && m.content.trim().length > 0)
+    .map(m => ({ role: m.role, content: m.content }));
+  while (messages.length && messages[0].role === 'assistant') messages.shift();
+  if (messages.length === 0) {
+    res.status(400).json({ error: 'Missing conversation history' });
+    return;
+  }
 
   try {
     const upstream = await fetch('https://api.anthropic.com/v1/messages', {

@@ -4069,12 +4069,17 @@ function mrToggleCustomForm(force){
   document.getElementById('mrCustomWarning').style.display='none';
   if(show){ document.getElementById('mrCustomName').value=''; document.getElementById('mrCustomRole').value=''; mrCustomOverrideConfirmed=false; }
 }
+function mrInitials(name){
+  return name.trim().split(/\s+/).map(w=>w[0]).join('').slice(0,2).toUpperCase();
+}
 function mrRenderCustomPersonas(){
   const wrap=document.getElementById('mrCustomList');
+  // No stock photo here — a real name picked by the user shouldn't get a random,
+  // possibly mismatched face. Plain initials, same as the rest of the site's default avatar style.
   wrap.innerHTML = mrCustomPersonas.map(p=>`
     <label class="mr-agent mr-agent-pick" style="position:relative">
       <input type="checkbox" class="mr-custom-check" data-id="${p.id}" ${p.active?'checked':''} onchange="mrToggleCustomPersona('${p.id}')">
-      <div class="mr-avatar photo ${p.gender==='male'?'av-gen-m':'av-gen-f'}"></div>
+      <div class="mr-avatar">${escapeHtml(mrInitials(p.name))}</div>
       <div><div class="mr-agent-name">${escapeHtml(p.name)}</div><div class="mr-agent-role">${escapeHtml(p.role)}</div></div>
       <button type="button" onclick="mrRemoveCustomPersona('${p.id}')" title="Remove from list entirely" style="margin-left:auto;background:none;border:none;color:var(--steel-light);cursor:pointer;font-size:1.1rem">×</button>
     </label>`).join('');

@@ -23,11 +23,14 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { email, transcript, kind, agents } = req.body || {};
+  const { email, transcript, kind, agents, coParticipant } = req.body || {};
   if (!email || !Array.isArray(transcript) || transcript.length === 0) {
     res.status(400).json({ error: 'Missing email or transcript' });
     return;
   }
+  // coParticipant = { email, name } — set when this was a live, two-person Meeting Room
+  // session (see lib/meetingSession.js); both people get the summary + a workspace save.
+  const hasCoParticipant = coParticipant && coParticipant.email && coParticipant.email !== email;
 
   const conversationText = transcript
     .filter(m => m.role === 'user' || m.role === 'assistant')
@@ -84,7 +87,11 @@ Tone: professional, warm, clearly human-written consultation style — not robot
       }
     }
 
-    const emailResp = await fetch('https://api.resend.com/emails', {
+    const jointNoteFor = otherName => hasCoParticipant
+      ? `<p style="margin-top:24px;padding-top:16px;border-top:1px solid #ddd;color:#555">You attended this consultation together with <strong>${otherName}</strong> and the panel.</p>`
+      : '';
+
+    const sendOne = async (toEmail, otherName) => fetch('https://api.resend.com/emails', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -92,17 +99,21 @@ Tone: professional, warm, clearly human-written consultation style — not robot
       },
       body: JSON.stringify({
         from: 'Meeting Room <meetingroom@uqconsulting.org>',
-        to: [email],
+        to: [toEmail],
         ...(replyTo ? { reply_to: replyTo } : {}),
         subject: 'Your Meeting Room Consultation Summary',
-        html: htmlBody,
+        html: htmlBody + jointNoteFor(otherName),
       }),
     });
 
+    const emailResp = await sendOne(email, coParticipant?.name || 'your colleague');
     const emailData = await emailResp.json();
     if (!emailResp.ok) {
       res.status(emailResp.status).json({ error: emailData?.message || 'Email send failed' });
       return;
+    }
+    if (hasCoParticipant) {
+      await sendOne(coParticipant.email, 'your colleague').catch(() => {});
     }
 
     // If the visitor is logged in, save this to their permanent workspace history
@@ -117,7 +128,7 @@ Tone: professional, warm, clearly human-written consultation style — not robot
           tool: 'meeting',
           title: firstUserMsg.slice(0, 80),
           transcript,
-          summaryHtml: htmlBody,
+          summaryHtml: htmlBody + (hasCoParticipant ? jointNoteFor(coParticipant.name || 'your colleague') : ''),
           agents: Array.isArray(agents) ? agents : [],
         });
         if (replyTo) {
@@ -132,6 +143,25 @@ Tone: professional, warm, clearly human-written consultation style — not robot
         }
       } catch {
         // non-fatal — the summary email already sent successfully
+      }
+    }
+
+    // Co-participant gets their own workspace save too, even though this request's
+    // session cookie belongs to the host, not them
+    if (hasCoParticipant && kvUrl && kvToken) {
+      try {
+        const firstUserMsg = transcript.find(m => m.role === 'user')?.content || 'Meeting Room consultation';
+        await saveConsultation({
+          kvUrl, kvToken,
+          email: coParticipant.email,
+          tool: 'meeting',
+          title: firstUserMsg.slice(0, 80),
+          transcript,
+          summaryHtml: htmlBody + jointNoteFor(loggedInUser?.name || 'your colleague'),
+          agents: Array.isArray(agents) ? agents : [],
+        });
+      } catch {
+        // non-fatal
       }
     }
 

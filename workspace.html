@@ -346,6 +346,7 @@
                 <span id="cvCvLabel">📄 Click to upload your CV</span>
               </div>
               <button id="cvViewCvBtn" onclick="cvToggleView('cv')" style="display:none;margin-top:.5rem;background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold-light);border-radius:8px;padding:.35rem .8rem;font-size:.75rem;cursor:pointer">View saved CV</button>
+              <button id="cvClearCvBtn" onclick="cvClear('cv')" style="display:none;margin-top:.5rem;margin-left:.4rem;background:none;border:1px solid rgba(180,90,90,.4);color:#d8a0a0;border-radius:8px;padding:.35rem .8rem;font-size:.75rem;cursor:pointer">Remove</button>
             </div>
             <div>
               <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">Your cover letter</label>
@@ -354,6 +355,7 @@
                 <span id="cvCoverLabel">✉️ Click to upload your cover letter</span>
               </div>
               <button id="cvViewCoverBtn" onclick="cvToggleView('cover')" style="display:none;margin-top:.5rem;background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold-light);border-radius:8px;padding:.35rem .8rem;font-size:.75rem;cursor:pointer">View saved cover letter</button>
+              <button id="cvClearCoverBtn" onclick="cvClear('cover')" style="display:none;margin-top:.5rem;margin-left:.4rem;background:none;border:1px solid rgba(180,90,90,.4);color:#d8a0a0;border-radius:8px;padding:.35rem .8rem;font-size:.75rem;cursor:pointer">Remove</button>
             </div>
           </div>
 
@@ -711,6 +713,7 @@
         cvText = p.cv;
         document.getElementById('cvCvLabel').innerHTML = `✓ ${p.cvFilename || 'CV saved'} — ${wordCount(p.cv)} words · click to replace`;
         document.getElementById('cvViewCvBtn').style.display = 'inline-block';
+        document.getElementById('cvClearCvBtn').style.display = 'inline-block';
         // Reuse it in the Job Search tab too.
         jsCvText = p.cv;
         const jsLbl = document.getElementById('jsCvUploadLabel');
@@ -720,6 +723,7 @@
         coverText = p.coverLetter;
         document.getElementById('cvCoverLabel').innerHTML = `✓ ${p.coverFilename || 'Cover letter saved'} — ${wordCount(p.coverLetter)} words · click to replace`;
         document.getElementById('cvViewCoverBtn').style.display = 'inline-block';
+        document.getElementById('cvClearCoverBtn').style.display = 'inline-block';
         jsCoverText = p.coverLetter;
         const jsCLbl = document.getElementById('jsCoverUploadLabel');
         if (jsCLbl) jsCLbl.textContent = `✓ Using your saved cover letter${p.coverFilename ? ` (${p.coverFilename})` : ''} — click to replace`;
@@ -741,12 +745,28 @@
         else { coverText = text; jsCoverText = text; }
         label.innerHTML = `✓ ${file.name} — ${wordCount(text)} words · saved`;
         document.getElementById(kind === 'cv' ? 'cvViewCvBtn' : 'cvViewCoverBtn').style.display = 'inline-block';
+        document.getElementById(kind === 'cv' ? 'cvClearCvBtn' : 'cvClearCoverBtn').style.display = 'inline-block';
         await saveProfilePatch(kind === 'cv' ? { cv: text, cvFilename: file.name } : { coverLetter: text, coverFilename: file.name });
       } catch (e) {
         label.textContent = `Couldn't read ${file.name} — try a .txt, .pdf or .docx file`;
       }
     }
     window.cvHandleFile = cvHandleFile;
+
+    async function cvClear(kind) {
+      const what = kind === 'cv' ? 'CV' : 'cover letter';
+      if (!confirm(`Remove your saved ${what}? This deletes it from your workspace and the other tools will stop using it.`)) return;
+      if (kind === 'cv') { cvText = ''; jsCvText = ''; } else { coverText = ''; jsCoverText = ''; }
+      // Empty string clears the field server-side (saveProfile merge-patches whatever is sent).
+      await saveProfilePatch(kind === 'cv' ? { cv: '', cvFilename: '' } : { coverLetter: '', coverFilename: '' });
+      document.getElementById(kind === 'cv' ? 'cvCvLabel' : 'cvCoverLabel').textContent = kind === 'cv' ? '📄 Click to upload your CV' : '✉️ Click to upload your cover letter';
+      document.getElementById(kind === 'cv' ? 'cvViewCvBtn' : 'cvViewCoverBtn').style.display = 'none';
+      document.getElementById(kind === 'cv' ? 'cvClearCvBtn' : 'cvClearCoverBtn').style.display = 'none';
+      const jsLbl = document.getElementById(kind === 'cv' ? 'jsCvUploadLabel' : 'jsCoverUploadLabel');
+      if (jsLbl) jsLbl.textContent = kind === 'cv' ? '📄 Click to upload your CV' : '✉️ Click to upload your cover letter (optional)';
+      if (cvViewing === kind) { document.getElementById('cvViewBox').style.display = 'none'; cvViewing = null; }
+    }
+    window.cvClear = cvClear;
 
     let cvViewing = null;
     function cvToggleView(kind) {

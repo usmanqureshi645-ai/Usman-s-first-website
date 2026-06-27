@@ -586,7 +586,12 @@
           document.getElementById('loggedOutState').style.display = 'block';
           return;
         }
-        document.getElementById('workspaceSub').textContent = `Welcome back, ${me.name.split(' ')[0]} — every consultation you've saved lives here. More features are on the way.`;
+        const workspaceSubEl = document.getElementById('workspaceSub');
+        workspaceSubEl.textContent = `Welcome back, ${me.name.split(' ')[0]} — every consultation you've saved lives here. `;
+        const moreFeaturesSpan = document.createElement('span');
+        moreFeaturesSpan.style.color = '#d4af37';
+        moreFeaturesSpan.textContent = 'More features are on the way.';
+        workspaceSubEl.appendChild(moreFeaturesSpan);
         window.workspaceUser = me;
         window.updateAskBranding?.();
 

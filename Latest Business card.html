@@ -1282,6 +1282,8 @@ animation:pulseRing 2.4s ease-out infinite;
 .mr-avatar.av-pn{background-image:url("images/team/priya-nair.png")}
 .mr-avatar.av-ic{background-image:url("images/team/interview-coach.png")}
 .mr-avatar.av-ga{background-image:url("images/team/gaap-assistant.png")}
+.mr-avatar.av-gen-f{background-image:url("images/team/generic-female.png")}
+.mr-avatar.av-gen-m{background-image:url("images/team/generic-male.png")}
 .mr-agent-name{font-size:.82rem;font-weight:600;color:var(--white)}
 .mr-agent-role{font-size:.7rem;color:var(--steel-light)}
 .mr-chat{background:rgba(255,255,255,.04);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);border-radius:16px;display:flex;flex-direction:column;height:560px;overflow:hidden}
@@ -1563,6 +1565,21 @@ animation:pulseRing 2.4s ease-out infinite;
     <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Elena Rossi"><div class="mr-avatar photo av-er">ER</div><div><div class="mr-agent-name">Elena Rossi</div><div class="mr-agent-role">ESG &amp; Sustainability Reporting</div></div></label>
     <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="James Carter"><div class="mr-avatar photo av-jc">JC</div><div><div class="mr-agent-name">James Carter</div><div class="mr-agent-role">Legal &amp; Regulatory Advisor</div></div></label>
     <label class="mr-agent mr-agent-pick"><input type="checkbox" class="mr-agent-check" value="Charlotte Sinclair"><div class="mr-avatar photo av-pn">PN</div><div><div class="mr-agent-name">Charlotte Sinclair</div><div class="mr-agent-role">Technical Accounting Consultant</div></div></label>
+    <div id="mrCustomList"></div>
+    <button class="mr-chip" id="mrAddCustomBtn" onclick="mrToggleCustomForm()" type="button" style="width:100%;margin-top:.6rem;border-color:var(--gold);color:var(--gold-light)">+ Add your own specialist</button>
+    <div id="mrCustomForm" style="display:none;margin-top:.6rem;padding:.8rem;border:1px solid var(--steel);border-radius:8px">
+      <input type="text" id="mrCustomName" placeholder="Name (e.g. Priya Nair)" style="width:100%;margin-bottom:.4rem">
+      <input type="text" id="mrCustomRole" placeholder="Their role / expertise (e.g. Treasury &amp; FX risk specialist)" style="width:100%;margin-bottom:.4rem">
+      <div style="display:flex;gap:1rem;margin-bottom:.6rem">
+        <label style="font-size:.85rem"><input type="radio" name="mrCustomGender" value="female" checked> Female</label>
+        <label style="font-size:.85rem"><input type="radio" name="mrCustomGender" value="male"> Male</label>
+      </div>
+      <div id="mrCustomWarning" style="display:none;font-size:.85rem;color:var(--gold-light);margin-bottom:.5rem"></div>
+      <div style="display:flex;gap:.5rem">
+        <button class="pub-btn" type="button" onclick="mrAddCustomPersona()" style="flex:1">Add to room</button>
+        <button class="mr-chip" type="button" onclick="mrToggleCustomForm(false)">Cancel</button>
+      </div>
+    </div>
     <button class="pub-btn" id="mrStartBtn" onclick="mrStartMeeting()" style="width:100%;margin-top:1rem">Start the Meeting</button>
     <p class="mr-note">Simulated AI panel for technical discussion &amp; education — not formal advice.</p>
   </div>
@@ -3175,6 +3192,15 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
           addFbMsg('bot', "Thanks for the report — I couldn't fully process it automatically, but it's noted.");
         } else if(data.valid){
           addFbMsg('bot', `That looks like a genuine issue — thank you. ${data.emailSent ? "I've flagged it to Usman for review." : "It's been logged for review."}`);
+          if(data.loggedIn){
+            addFbMsg('bot', "Since you're signed in, I'll email you once it's sorted — no need to leave your address again.");
+          } else if(data.id){
+            addFbMsg('bot', `Want me to email you once it's fixed, with a quick note on what we did? Drop your email below, or just skip — totally optional.
+              <div style="display:flex;gap:.4rem;margin-top:.5rem">
+                <input type="email" id="fbFollowupEmail" placeholder="you@example.com" style="flex:1;min-width:0">
+                <button class="mr-chip" onclick="submitFeedbackEmail('${data.id}')" type="button" style="padding:.4rem .7rem">Notify me</button>
+              </div>`);
+          }
         } else {
           addFbMsg('bot', "Thanks for the note! That one doesn't look like a specific bug I can action, but I appreciate you taking the time.");
         }
@@ -3186,6 +3212,22 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     document.getElementById('feedbackInput').addEventListener('keydown', e=>{
       if(e.key==='Enter') window.submitFeedback();
     });
+
+    window.submitFeedbackEmail=async function(id){
+      const input=document.getElementById('fbFollowupEmail');
+      const email=input?.value.trim();
+      if(!email || !email.includes('@')){ alert('Please enter a valid email address.'); return; }
+      try{
+        await fetch('/api/feedback?action=attach-email',{
+          method:'POST',
+          headers:{'content-type':'application/json'},
+          body:JSON.stringify({id, email})
+        });
+        addFbMsg('bot', "Got it — I'll let you know as soon as it's sorted.");
+      }catch(e){
+        addFbMsg('bot', "Couldn't save that just now, but your report is already logged either way.");
+      }
+    };
   })();
 
   // Sign-up / login widget — real accounts via /api/account?action=signup|login (session cookie)
@@ -3890,7 +3932,7 @@ async function mrCallApi(userText){
     const r=await fetch('/api/meeting',{
       method:'POST',
       headers:{'content-type':'application/json'},
-      body:JSON.stringify({history:mrHistory, agents:mrSelectedAgents})
+      body:JSON.stringify({history:mrHistory, agents:mrAgentsPayload()})
     });
     const data=await r.json();
     mrHideTyping();
@@ -3979,18 +4021,82 @@ wireMic('mrMic','mrInput', mrSendMessage);
 
 let mrSelectedAgents=[];
 let mrMeetingStarted=false;
+let mrCustomPersonas=[]; // {id, name, role, gender}
+function mrAgentsPayload(){
+  return [...mrSelectedAgents, ...mrCustomPersonas.map(p=>({name:p.name, role:p.role}))];
+}
+function mrPresentNames(){
+  return [...mrSelectedAgents, ...mrCustomPersonas.map(p=>p.name)];
+}
+function mrToggleCustomForm(force){
+  const form=document.getElementById('mrCustomForm');
+  const show = typeof force==='boolean' ? force : form.style.display==='none';
+  form.style.display = show ? 'block' : 'none';
+  document.getElementById('mrCustomWarning').style.display='none';
+  if(show){ document.getElementById('mrCustomName').value=''; document.getElementById('mrCustomRole').value=''; mrCustomOverrideConfirmed=false; }
+}
+function mrRenderCustomPersonas(){
+  const wrap=document.getElementById('mrCustomList');
+  wrap.innerHTML = mrCustomPersonas.map(p=>`
+    <label class="mr-agent mr-agent-pick" style="position:relative">
+      <div class="mr-avatar photo ${p.gender==='male'?'av-gen-m':'av-gen-f'}"></div>
+      <div><div class="mr-agent-name">${escapeHtml(p.name)}</div><div class="mr-agent-role">${escapeHtml(p.role)}</div></div>
+      <button type="button" onclick="mrRemoveCustomPersona('${p.id}')" title="Remove" style="margin-left:auto;background:none;border:none;color:var(--steel-light);cursor:pointer;font-size:1.1rem">×</button>
+    </label>`).join('');
+}
+let mrCustomOverrideConfirmed=false;
+function mrAddCustomPersona(){
+  const name=document.getElementById('mrCustomName').value.trim();
+  const role=document.getElementById('mrCustomRole').value.trim();
+  const gender=document.querySelector('input[name="mrCustomGender"]:checked').value;
+  const warnEl=document.getElementById('mrCustomWarning');
+  if(!name || !role){ warnEl.textContent='Please fill in both a name and a role.'; warnEl.style.display='block'; return; }
+  const builtInMatch=!mrCustomOverrideConfirmed && Object.keys(mrRoles).find(n=>n.toLowerCase()===name.toLowerCase() && !mrCustomPersonas.some(p=>p.name===n));
+  if(builtInMatch){
+    warnEl.innerHTML=`We already have <strong>${escapeHtml(builtInMatch)}</strong> (${escapeHtml(mrRoles[builtInMatch])}) in the room — just tick their box on the left instead. If you'd specifically like your own version of this role, click "Add to room" again to confirm.`;
+    warnEl.style.display='block';
+    mrCustomOverrideConfirmed=true;
+    return;
+  }
+  mrCustomOverrideConfirmed=false;
+  const id='custom-'+Date.now()+'-'+Math.random().toString(36).slice(2,7);
+  mrCustomPersonas.push({id, name, role, gender});
+  mrRoles[name]=role;
+  mrRenderCustomPersonas();
+  mrToggleCustomForm(false);
+  if(mrMeetingStarted){
+    mrHistory.push({role:'user', content:`[${name} (${role}) has just joined the meeting room as a custom specialist the user added. Current specialists present: ${mrPresentNames().join(', ')}. Briefly acknowledge this change in one short sentence from any present member, welcoming ${name} into the discussion, then continue naturally — do not restart the conversation or re-greet the user.]`});
+    mrCallApi();
+  }
+}
+function mrRemoveCustomPersona(id){
+  const p=mrCustomPersonas.find(x=>x.id===id);
+  if(!p) return;
+  mrCustomPersonas=mrCustomPersonas.filter(x=>x.id!==id);
+  mrRenderCustomPersonas();
+  if(mrMeetingStarted){
+    if(mrPresentNames().length===0){
+      mrCustomPersonas.push(p); mrRenderCustomPersonas();
+      alert('At least one specialist needs to stay in the room.');
+      return;
+    }
+    mrHistory.push({role:'user', content:`[${p.name} has just left the meeting room. Current specialists present: ${mrPresentNames().join(', ')}. Briefly acknowledge this change in one short sentence from any present member, then continue the discussion naturally — do not restart the conversation or re-greet the user.]`});
+    mrCallApi();
+  }
+}
 function mrStartMeeting(){
   mrSelectedAgents=Array.from(document.querySelectorAll('.mr-agent-check:checked')).map(c=>c.value);
-  if(mrSelectedAgents.length===0){ alert('Please pick at least one specialist to join the room.'); return; }
+  if(mrPresentNames().length===0){ alert('Please pick at least one specialist to join the room.'); return; }
   mrMeetingStarted=true;
   document.getElementById('mrStartBtn').textContent='Meeting in progress — tick/untick anyone above to add or remove them';
   document.getElementById('mrStartBtn').disabled=true;
   document.getElementById('mrChips').style.display='flex';
   document.getElementById('mrInputBar').style.display='flex';
   const siteUser=window.getSiteUser?.();
+  const presentNames=mrPresentNames();
   const kickoff=siteUser
-    ? `[The user has just entered the Meeting Room. The following specialists are present: ${mrSelectedAgents.join(', ')}. The user is already signed in as "${siteUser.name}" — greet them warmly by name as the panel (briefly, 1-2 sentences total from one spokesperson), explain in one sentence what the Meeting Room is for, then ask what they'd like to discuss today. Do NOT ask for their name — you already know it, never ask again.]`
-    : `[The user has just entered the Meeting Room. The following specialists are present: ${mrSelectedAgents.join(', ')}. Greet the user warmly as the panel (briefly, 1-2 sentences total from one spokesperson), explain in one sentence what the Meeting Room is for, then ask for the user's name. Do not discuss any technical topic yet — just greet and ask their name.]`;
+    ? `[The user has just entered the Meeting Room. The following specialists are present: ${presentNames.join(', ')}. The user is already signed in as "${siteUser.name}" — greet them warmly by name as the panel (briefly, 1-2 sentences total from one spokesperson), explain in one sentence what the Meeting Room is for, then ask what they'd like to discuss today. Do NOT ask for their name — you already know it, never ask again.]`
+    : `[The user has just entered the Meeting Room. The following specialists are present: ${presentNames.join(', ')}. Greet the user warmly as the panel (briefly, 1-2 sentences total from one spokesperson), explain in one sentence what the Meeting Room is for, then ask for the user's name. Do not discuss any technical topic yet — just greet and ask their name.]`;
   mrHistory.push({role:'user', content:kickoff});
   mrCallApi();
 }
@@ -4112,36 +4218,40 @@ document.querySelectorAll('.mr-agent-check').forEach(checkbox=>{
     if(!mrMeetingStarted) return;
     const name=checkbox.value;
     const nowSelected=Array.from(document.querySelectorAll('.mr-agent-check:checked')).map(c=>c.value);
-    if(nowSelected.length===0){
+    if(nowSelected.length===0 && mrCustomPersonas.length===0){
       checkbox.checked=true; // never allow an empty room mid-conversation
       alert('At least one specialist needs to stay in the room.');
       return;
     }
     const joined=checkbox.checked;
     mrSelectedAgents=nowSelected;
-    mrHistory.push({role:'user', content:`[${name} has just ${joined ? 'joined' : 'left'} the meeting room. Current specialists present: ${mrSelectedAgents.join(', ')}. Briefly acknowledge this change in one short sentence from any present member, then continue the discussion naturally — do not restart the conversation or re-greet the user.]`});
+    mrHistory.push({role:'user', content:`[${name} has just ${joined ? 'joined' : 'left'} the meeting room. Current specialists present: ${mrPresentNames().join(', ')}. Briefly acknowledge this change in one short sentence from any present member, then continue the discussion naturally — do not restart the conversation or re-greet the user.]`});
     mrCallApi();
   });
 });
 
 function mrEndMeeting(){
+  const siteUser=window.getSiteUser?.();
+  if(siteUser){ mrSendSummaryTo(siteUser.email, {skipUserBubble:false, loggedIn:true}); return; }
   const email=prompt("What email address should I send the discussion summary to?");
   if(!email || !email.includes('@')){ if(email!==null) alert('Please enter a valid email address.'); return; }
   mrSendSummaryTo(email);
 }
-function mrSendSummaryTo(email, {skipUserBubble=false}={}){
-  if(!skipUserBubble) mrAppendMessage('user','You', `Please end the meeting and email a summary to ${email}.`);
+function mrSendSummaryTo(email, {skipUserBubble=false, loggedIn=false}={}){
+  if(!skipUserBubble) mrAppendMessage('user','You', loggedIn ? 'Please end the meeting and email me the consultation.' : `Please end the meeting and email a summary to ${email}.`);
   const btn=document.getElementById('mrEndBtn');
   btn.disabled=true;
   btn.textContent='Sending summary…';
   fetch('/api/send-summary',{
     method:'POST',
     headers:{'content-type':'application/json'},
-    body:JSON.stringify({email, transcript:mrHistory, kind:'meeting', agents:mrSelectedAgents})
+    body:JSON.stringify({email, transcript:mrHistory, kind:'meeting', agents:mrAgentsPayload()})
   }).then(r=>r.json()).then(data=>{
     if(data.error){ mrAppendMessage('agent','Meeting Room', `Sorry — I couldn't send that summary right now (${data.error}). Please try again shortly.`); }
     else{
-      mrAppendMessage('agent','Meeting Room', `Thank you — a summary of our discussion has been sent to **${email}**. It was a pleasure working through this with you. You can also use the "⬇️ Download transcript" button any time to keep a copy.`);
+      mrAppendMessage('agent','Meeting Room', loggedIn
+        ? `Thank you — I'm sending the consultation to your email now, and it'll also be saved in your **My Workspace** dashboard for quick reference any time. It was a pleasure working through this with you.`
+        : `Thank you — a summary of our discussion has been sent to **${email}**. It was a pleasure working through this with you. You can also use the "⬇️ Download transcript" button any time to keep a copy.`);
       window.showSignupNudge?.(document.getElementById('mrMessages'));
     }
   }).catch(()=>{
@@ -4642,7 +4752,11 @@ wireMic('qzMic','qzInput', qzSendMessage);
 
     if(tool==='meeting'){
       if(Array.isArray(record.agents) && record.agents.length>0){
-        document.querySelectorAll('.mr-agent-check').forEach(cb=>{ cb.checked=record.agents.includes(cb.value); });
+        const builtInNames=record.agents.filter(a=>typeof a==='string');
+        document.querySelectorAll('.mr-agent-check').forEach(cb=>{ cb.checked=builtInNames.includes(cb.value); });
+        mrCustomPersonas=record.agents.filter(a=>a && typeof a==='object' && a.name && a.role).map(a=>({id:'custom-'+Date.now()+'-'+Math.random().toString(36).slice(2,7), name:a.name, role:a.role, gender:'female'}));
+        mrCustomPersonas.forEach(p=>{ mrRoles[p.name]=p.role; });
+        mrRenderCustomPersonas();
       }
       mrSelectedAgents=Array.from(document.querySelectorAll('.mr-agent-check:checked')).map(c=>c.value);
       mrHistory.push(...transcript);

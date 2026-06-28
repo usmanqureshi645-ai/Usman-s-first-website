@@ -369,31 +369,41 @@
 
           <hr style="border:none;border-top:1px solid rgba(200,169,110,.15);margin:1.75rem 0">
 
-          <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem">Tailor &amp; score for your next job</h3>
-          <p style="color:var(--steel-light);font-size:.85rem;line-height:1.6;margin-bottom:.75rem">Paste the job description below, then get an honest recruiter-style score, or a tailored rewrite of your CV and cover letter for that role.</p>
+          <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem">Score your CV for your next job</h3>
+          <p style="color:var(--steel-light);font-size:.85rem;line-height:1.6;margin-bottom:.75rem">Paste the job description below and get an honest score from three angles, HR, the applicant tracking system and the hiring manager, with each weakness paired to a fix you can make yourself.</p>
           <textarea id="cvJobDesc" placeholder="Paste the job posting (title, company, description) here…" style="width:100%;min-height:160px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:1rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
           <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem">
-            <button class="btn-gold" id="cvScoreBtn" onclick="cvScore()">Score my CV</button>
-            <button class="btn-gold" id="cvTailorBtn" onclick="cvTailor()" style="background:transparent;border:1px solid var(--gold);color:var(--gold-light)">Tailor CV &amp; cover letter</button>
+            <button class="btn-gold" id="cvScoreBtn" onclick="cvScore()">Score my CV &amp; cover letter</button>
           </div>
 
           <div id="cvScoreResult" style="display:none;margin-top:1.5rem">
-            <h3 style="display:flex;align-items:center;gap:.6rem;font-size:1rem">ATS &amp; Recruiter Score: <span id="cvScoreNum" style="color:var(--gold);font-size:1.3rem">—</span>/100</h3>
-            <div id="cvScoreBody" style="color:var(--steel-light);line-height:1.7;font-size:.85rem;margin-top:.5rem"></div>
+            <div id="cvScoreCard"></div>
+            <div id="cvCoverScoreCard" style="margin-top:1.5rem"></div>
           </div>
 
-          <div id="cvTailorResult" style="display:none;margin-top:1.5rem">
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
-              <div>
-                <h3 style="font-size:.95rem;margin-bottom:.5rem">Tailored CV</h3>
-                <pre id="cvTailoredCv" style="white-space:pre-wrap;font-family:inherit;font-size:.8rem;color:var(--steel-light);background:rgba(0,0,0,.2);border:1px solid rgba(200,169,110,.15);border-radius:10px;padding:1rem;max-height:360px;overflow-y:auto"></pre>
-                <button onclick="cvDownload('cvTailoredCv','tailored-cv.txt')" style="margin-top:.5rem;background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold-light);border-radius:8px;padding:.4rem .85rem;font-size:.78rem;cursor:pointer">Download CV (.txt)</button>
-              </div>
-              <div>
-                <h3 style="font-size:.95rem;margin-bottom:.5rem">Tailored cover letter</h3>
-                <pre id="cvTailoredCover" style="white-space:pre-wrap;font-family:inherit;font-size:.8rem;color:var(--steel-light);background:rgba(0,0,0,.2);border:1px solid rgba(200,169,110,.15);border-radius:10px;padding:1rem;max-height:360px;overflow-y:auto"></pre>
-                <button onclick="cvDownload('cvTailoredCover','tailored-cover-letter.txt')" style="margin-top:.5rem;background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold-light);border-radius:8px;padding:.4rem .85rem;font-size:.78rem;cursor:pointer">Download letter (.txt)</button>
-              </div>
+          <hr style="border:none;border-top:1px solid rgba(200,169,110,.15);margin:1.75rem 0">
+
+          <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem">Write me a cover letter</h3>
+          <p style="color:var(--steel-light);font-size:.85rem;line-height:1.6;margin-bottom:.75rem">Using your saved CV and the job description above, we'll draft a cover letter written specifically for this role. Add the company's website below and we'll read it so the motivation reflects something real about the firm. The letter stays here on the page in plain, human business English.</p>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:.75rem">
+            <input id="cvCompanyName" type="text" placeholder="Company name (optional)" style="background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.7rem;color:var(--cream);font-family:inherit;font-size:.85rem">
+            <input id="cvCompanyUrl" type="text" placeholder="Company website URL (optional)" style="background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.7rem;color:var(--cream);font-family:inherit;font-size:.85rem">
+          </div>
+          <button class="btn-gold" id="cvWriteBtn" onclick="cvWriteCover()" style="background:transparent;border:1px solid var(--gold);color:var(--gold-light)">Write my cover letter</button>
+          <div id="cvWriteResult" style="display:none;margin-top:1.25rem">
+            <pre id="cvWrittenCover" style="white-space:pre-wrap;font-family:inherit;font-size:.85rem;color:var(--cream);line-height:1.7;background:rgba(0,0,0,.2);border:1px solid rgba(200,169,110,.15);border-radius:10px;padding:1.25rem"></pre>
+            <p style="color:var(--steel-light);font-size:.78rem;margin-top:.5rem">Read it through and make it your own before you send it. Select the text to copy it into your own document.</p>
+          </div>
+
+          <hr style="border:none;border-top:1px solid rgba(200,169,110,.15);margin:1.75rem 0">
+
+          <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem">Talk through your edits</h3>
+          <p style="color:var(--steel-light);font-size:.85rem;line-height:1.6;margin-bottom:.75rem">Made changes after the scoring? Tell the AI what you changed, or paste your new version, and it will give you an honest read on whether it's better and what to fix next. It coaches you; it won't rewrite the document for you.</p>
+          <div id="cvReviewChat" style="border:1px solid rgba(200,169,110,.18);border-radius:12px;padding:1rem;background:rgba(0,0,0,.15)">
+            <div id="cvChatLog" style="max-height:420px;overflow-y:auto;display:flex;flex-direction:column;gap:.75rem;margin-bottom:.75rem"></div>
+            <div style="display:flex;gap:.5rem">
+              <textarea id="cvChatInput" placeholder="Tell me what you changed, or paste your updated text…" style="flex:1;min-height:60px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.7rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
+              <button class="btn-gold" id="cvChatSendBtn" onclick="cvChatSend()" style="align-self:flex-end">Send</button>
             </div>
           </div>
         </div>
@@ -800,60 +810,124 @@
     }
     window.cvToggleView = cvToggleView;
 
+    function cvScoreColor(n) {
+      n = Number(n) || 0;
+      if (n >= 75) return '#7cc47c';
+      if (n >= 50) return 'var(--gold)';
+      return '#d88a8a';
+    }
+    function cvRenderScorecard(block, title) {
+      if (!block) return '';
+      const chip = (label, val) => `<div style="flex:1;min-width:110px;text-align:center;background:rgba(255,255,255,.04);border:1px solid rgba(200,169,110,.18);border-radius:12px;padding:.8rem .4rem">
+          <div style="font-size:.66rem;letter-spacing:.07em;text-transform:uppercase;color:var(--steel-light);margin-bottom:.3rem">${label}</div>
+          <div style="font-size:1.4rem;font-weight:700;color:${cvScoreColor(val)}">${val == null ? '—' : escapeHtml(String(val))}<span style="font-size:.75rem;color:var(--steel-light)">/100</span></div>
+        </div>`;
+      const items = Array.isArray(block.items) ? block.items : [];
+      const rows = items.map(it => `<tr>
+          <td style="padding:.75rem .85rem;border-bottom:1px solid rgba(255,255,255,.06);color:#e7c4c4;font-size:.82rem;line-height:1.55;vertical-align:top;width:50%">${escapeHtml(it.criticism || '')}</td>
+          <td style="padding:.75rem .85rem;border-bottom:1px solid rgba(255,255,255,.06);color:#bfe0c4;font-size:.82rem;line-height:1.55;vertical-align:top;width:50%">${escapeHtml(it.suggestion || '')}</td>
+        </tr>`).join('');
+      return `<h3 style="font-size:1rem;margin-bottom:.75rem">${escapeHtml(title)}</h3>
+        <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-bottom:1.25rem">
+          ${chip('HR Screener', block.hr)}${chip('ATS', block.ats)}${chip('Hiring Manager', block.hiringManager)}
+        </div>
+        <div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;min-width:520px">
+          <thead><tr>
+            <th style="text-align:left;padding:.55rem .85rem;font-size:.68rem;letter-spacing:.07em;text-transform:uppercase;color:#d88a8a;border-bottom:1px solid rgba(200,169,110,.2)">What's holding it back</th>
+            <th style="text-align:left;padding:.55rem .85rem;font-size:.68rem;letter-spacing:.07em;text-transform:uppercase;color:#7cc47c;border-bottom:1px solid rgba(200,169,110,.2)">What to do about it</th>
+          </tr></thead>
+          <tbody>${rows || '<tr><td colspan="2" style="padding:1rem;color:var(--steel-light)">No specific issues flagged.</td></tr>'}</tbody>
+        </table></div>`;
+    }
+
     async function cvScore() {
       if (!cvText.trim()) { alert('Upload your CV first.'); return; }
       const jd = document.getElementById('cvJobDesc').value.trim();
       if (!jd) { alert('Paste the job description first.'); return; }
       const btn = document.getElementById('cvScoreBtn');
+      const orig = btn.textContent;
       btn.disabled = true; btn.textContent = 'Scoring…';
       try {
         const r = await fetch('/api/cv-review', {
           method: 'POST', headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ cv: cvText, jobDescription: jd }),
+          body: JSON.stringify({ mode: 'score', cv: cvText, coverLetter: coverText || undefined, jobDescription: jd }),
         });
         const data = await r.json();
         if (!r.ok) { alert(data.error || 'Something went wrong — please try again.'); return; }
-        document.getElementById('cvScoreNum').textContent = data.score ?? '—';
-        document.getElementById('cvScoreBody').innerHTML = renderMarkdown(data.review || '');
+        document.getElementById('cvScoreCard').innerHTML = cvRenderScorecard(data.cv, 'Your CV');
+        document.getElementById('cvCoverScoreCard').innerHTML = data.coverLetter ? cvRenderScorecard(data.coverLetter, 'Your cover letter') : '';
         document.getElementById('cvScoreResult').style.display = 'block';
         document.getElementById('cvScoreResult').scrollIntoView({ behavior: 'smooth' });
       } catch (e) { alert('Connection issue — please try again.'); }
-      finally { btn.disabled = false; btn.textContent = 'Score my CV'; }
+      finally { btn.disabled = false; btn.textContent = orig; }
     }
     window.cvScore = cvScore;
 
-    async function cvTailor() {
+    async function cvWriteCover() {
       if (!cvText.trim()) { alert('Upload your CV first.'); return; }
       const jd = document.getElementById('cvJobDesc').value.trim();
-      if (!jd) { alert('Paste the job description first.'); return; }
-      const btn = document.getElementById('cvTailorBtn');
-      btn.disabled = true; btn.textContent = 'Tailoring…';
+      if (!jd) { alert('Paste the job description above first.'); return; }
+      const btn = document.getElementById('cvWriteBtn');
+      btn.disabled = true; btn.textContent = 'Writing…';
       try {
         const r = await fetch('/api/tailor', {
           method: 'POST', headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ cv: cvText, jobDescription: jd, coverLetter: coverText || undefined }),
+          body: JSON.stringify({
+            cv: cvText, jobDescription: jd,
+            companyName: document.getElementById('cvCompanyName').value.trim() || undefined,
+            companyUrl: document.getElementById('cvCompanyUrl').value.trim() || undefined,
+            existingCoverLetter: coverText || undefined,
+          }),
         });
         const data = await r.json();
         if (!r.ok) { alert(data.error || 'Something went wrong — please try again.'); return; }
-        document.getElementById('cvTailoredCv').textContent = data.cv || '';
-        document.getElementById('cvTailoredCover').textContent = data.coverLetter || '';
-        document.getElementById('cvTailorResult').style.display = 'block';
-        document.getElementById('cvTailorResult').scrollIntoView({ behavior: 'smooth' });
+        document.getElementById('cvWrittenCover').textContent = data.coverLetter || '';
+        document.getElementById('cvWriteResult').style.display = 'block';
+        document.getElementById('cvWriteResult').scrollIntoView({ behavior: 'smooth' });
       } catch (e) { alert('Connection issue — please try again.'); }
-      finally { btn.disabled = false; btn.textContent = 'Tailor CV & cover letter'; }
+      finally { btn.disabled = false; btn.textContent = 'Write my cover letter'; }
     }
-    window.cvTailor = cvTailor;
+    window.cvWriteCover = cvWriteCover;
 
-    function cvDownload(elId, filename) {
-      const text = document.getElementById(elId).textContent;
-      const blob = new Blob([text], { type: 'text/plain' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = filename;
-      document.body.appendChild(a); a.click(); a.remove();
-      URL.revokeObjectURL(url);
+    /* ── Iterative review chat ── */
+    const cvChatMessages = [];
+    function cvAppendChat(role, text) {
+      const log = document.getElementById('cvChatLog');
+      const wrap = document.createElement('div');
+      const isUser = role === 'user';
+      wrap.style.cssText = `align-self:${isUser ? 'flex-end' : 'flex-start'};max-width:85%;background:${isUser ? 'rgba(200,169,110,.15)' : 'rgba(255,255,255,.05)'};border:1px solid rgba(200,169,110,.15);border-radius:12px;padding:.65rem .9rem;font-size:.85rem;line-height:1.6;color:var(--cream);white-space:pre-wrap`;
+      wrap.textContent = text;
+      log.appendChild(wrap);
+      log.scrollTop = log.scrollHeight;
+      return wrap;
     }
-    window.cvDownload = cvDownload;
+    async function cvChatSend() {
+      const input = document.getElementById('cvChatInput');
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      cvAppendChat('user', text);
+      cvChatMessages.push({ role: 'user', content: text });
+      const btn = document.getElementById('cvChatSendBtn');
+      btn.disabled = true; btn.textContent = '…';
+      const thinking = cvAppendChat('assistant', 'Reading your changes…');
+      try {
+        const r = await fetch('/api/cv-review', {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            mode: 'chat', messages: cvChatMessages,
+            cv: cvText || undefined, coverLetter: coverText || undefined,
+            jobDescription: document.getElementById('cvJobDesc').value.trim() || undefined,
+          }),
+        });
+        const data = await r.json();
+        if (!r.ok) { thinking.textContent = data.error || 'Something went wrong — please try again.'; return; }
+        thinking.textContent = data.reply || '';
+        cvChatMessages.push({ role: 'assistant', content: data.reply || '' });
+      } catch (e) { thinking.textContent = 'Connection issue — please try again.'; }
+      finally { btn.disabled = false; btn.textContent = 'Send'; }
+    }
+    window.cvChatSend = cvChatSend;
 
     async function init() {
       try {
@@ -889,6 +963,18 @@
         } catch (e) {}
 
         if (requestedTab) activateTab(requestedTab);
+        // Deep link from the CV scoring tool: open the review chat ready to go.
+        if (new URLSearchParams(location.search).get('review') === '1') {
+          activateTab('cv');
+          const chat = document.getElementById('cvReviewChat');
+          if (chat) {
+            chat.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (!cvChatMessages.length) {
+              cvAppendChat('assistant', "Good to see you back. Tell me what you changed since the scoring, or paste your updated section, and I'll give you an honest read on whether it's stronger and what to look at next.");
+            }
+            document.getElementById('cvChatInput')?.focus();
+          }
+        }
       } catch (err) {
         document.getElementById('workspaceSub').textContent = 'Something went wrong loading your workspace — please refresh.';
       }

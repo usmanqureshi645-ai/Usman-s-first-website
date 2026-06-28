@@ -1,5 +1,32 @@
 import { logAndCheckUsage } from '../lib/ipUsage.js';
 
+// Fetch a company web page and reduce it to plain text we can feed the model.
+// Best-effort only: a failure or timeout just means we fall back to model knowledge.
+async function fetchCompanyText(url) {
+  try {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 8000);
+    const resp = await fetch(url, {
+      signal: controller.signal,
+      headers: { 'user-agent': 'Mozilla/5.0 (compatible; UQConsultingBot/1.0)' },
+    });
+    clearTimeout(timer);
+    if (!resp.ok) return '';
+    const html = await resp.text();
+    const text = html
+      .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+      .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+      .replace(/<[^>]+>/g, ' ')
+      .replace(/&nbsp;/g, ' ')
+      .replace(/&amp;/g, '&')
+      .replace(/\s+/g, ' ')
+      .trim();
+    return text.slice(0, 6000);
+  } catch {
+    return '';
+  }
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
@@ -12,7 +39,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { cv, jobDescription, coverLetter } = req.body || {};
+  const { cv, jobDescription, companyName, companyUrl, existingCoverLetter } = req.body || {};
   if (!cv || !jobDescription) {
     res.status(400).json({ error: 'Missing CV or job description text' });
     return;
@@ -20,19 +47,26 @@ export default async function handler(req, res) {
 
   const usage = await logAndCheckUsage(req, { kvUrl: process.env.UPSTASH_REDIS_REST_URL, kvToken: process.env.UPSTASH_REDIS_REST_TOKEN }, 'tailor');
 
-  const system = `You are a career advisor specialising in finance, accounting, audit and tax roles, acting as an HR professional, hiring manager and ATS reviewer combined. Given a candidate's existing CV text (and optionally their existing cover letter) and a target job posting, produce two outputs:
+  let companyText = '';
+  if (companyUrl && /^https?:\/\//i.test(companyUrl)) {
+    companyText = await fetchCompanyText(companyUrl);
+  }
 
-1. An updated CV — preserve the candidate's existing structure, section order and overall format as closely as possible (same section headings, same general layout) — do not reinvent the document. Within that structure, reorganise and rephrase the candidate's own genuine experience to foreground what's most relevant to this specific role, using language and keywords from the job posting where truthfully applicable. Fix vague statements, add structure to weak bullet points, and strengthen language — but never invent experience, employers, qualifications, metrics or skills the candidate didn't provide. If a metric is missing, flag it with "[ADD METRIC: e.g. % or £ impact]" rather than inventing a number. Keep it as a clean, plain-text document (no markdown formatting, just clear section headers and bullet points using "-").
+  const system = `You are writing one cover letter for a candidate applying to a specific role. Write it as a real, experienced professional would, not as an AI. It must be genuinely specific to this company and this role, and the motivation for wanting to work there must feel real and grounded in something true about the firm.
 
-2. A cover letter — if the candidate provided an existing cover letter, preserve its structure and tone while improving and tailoring the content; otherwise write a new one. Concise (under 350 words), professional, specific to the company and role mentioned in the posting, referencing 2-3 genuinely relevant achievements from the CV. Plain text, no markdown.
+Hard rules on language:
+- Write in plain, natural British business English.
+- Do NOT use em dashes or en dashes (— or –). Use commas, full stops or brackets.
+- Do NOT use generic AI filler such as "I am excited to", "passionate about", "in today's fast-paced world", "leverage", "delve into", "tapestry", "robust", "seamless", "navigate the landscape", "I am writing to express my interest". Open in a way a thoughtful human actually would.
+- Vary sentence length. Mix short, direct sentences with longer ones so it does not read like a template.
+- Reference 2 to 3 genuinely relevant achievements drawn ONLY from the candidate's CV. Never invent employers, qualifications, metrics or skills they did not provide.
+- Keep it under 350 words. No markdown, no bullet points, just clean paragraphs with a greeting and a sign off.
 
-Respond with EXACTLY this format, nothing else:
-===CV===
-<updated CV text>
-===COVER LETTER===
-<updated cover letter text>`;
+${companyText ? `Here is text scraped from the company's own website. Use it to ground the motivation in something specific and true about them (their values, work, sectors, recent activity). Do not quote it verbatim or stuff it in; weave one or two genuine points in naturally:\n\n${companyText}` : 'No company website was provided, so draw on what you reliably know about the named company and the job description. If you are not sure about a specific fact, keep the motivation grounded in the role and sector rather than inventing claims about the firm.'}
 
-  const userMessage = `CANDIDATE CV:\n${cv}\n\n---\n\n${coverLetter ? `EXISTING COVER LETTER:\n${coverLetter}\n\n---\n\n` : ''}JOB POSTING:\n${jobDescription}`;
+Respond with ONLY the cover letter text, nothing else.`;
+
+  const userMessage = `CANDIDATE CV:\n${cv}\n\n---\n\n${companyName ? `COMPANY: ${companyName}\n\n---\n\n` : ''}${existingCoverLetter ? `THEIR EXISTING COVER LETTER (improve on it, keep what works):\n${existingCoverLetter}\n\n---\n\n` : ''}JOB POSTING:\n${jobDescription}`;
 
   try {
     const upstream = await fetch('https://api.anthropic.com/v1/messages', {
@@ -44,7 +78,7 @@ Respond with EXACTLY this format, nothing else:
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: 2000,
+        max_tokens: 1500,
         system,
         messages: [{ role: 'user', content: userMessage }],
       }),
@@ -57,11 +91,8 @@ Respond with EXACTLY this format, nothing else:
       return;
     }
 
-    const text = data?.content?.[0]?.text || '';
-    const cvMatch = text.split('===CV===')[1]?.split('===COVER LETTER===')[0]?.trim() || '';
-    const coverMatch = text.split('===COVER LETTER===')[1]?.trim() || '';
-
-    res.status(200).json({ cv: cvMatch, coverLetter: coverMatch, usage });
+    const coverLetter = (data?.content?.[0]?.text || '').trim();
+    res.status(200).json({ coverLetter, usage });
   } catch (err) {
     res.status(500).json({ error: 'Request failed' });
   }

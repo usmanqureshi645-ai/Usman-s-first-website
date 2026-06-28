@@ -112,20 +112,20 @@ Give between 5 and 8 items for the CV. The HR score reflects screening appeal an
     const { ok, status, data } = await callClaude(apiKey, { system, messages: [{ role: 'user', content: userMessage }], max_tokens: 2500 });
     if (!ok) { res.status(status).json({ error: data?.error?.message || 'Upstream error' }); return; }
 
-    let text = data?.content?.[0]?.text || '{}';
+    let rawText = data?.content?.[0]?.text || '{}';
     // The model sometimes wraps the JSON in ```json ... ``` fences; strip them,
     // and as a fallback grab the outermost { ... } block.
-    text = text.replace(/^\s*```(?:json)?\s*/i, '').replace(/\s*```\s*$/i, '').trim();
+    rawText = rawText.replace(/^\s*```(?:json)?\s*/i, '').replace(/\s*```\s*$/i, '').trim();
     let parsed;
-    try { parsed = JSON.parse(text); }
+    try { parsed = JSON.parse(rawText); }
     catch {
-      const m = text.match(/\{[\s\S]*\}/);
-      try { parsed = JSON.parse(m ? m[0] : text); }
-      catch { parsed = { cv: null, coverLetter: null, raw: text }; }
+      const m = rawText.match(/\{[\s\S]*\}/);
+      try { parsed = JSON.parse(m ? m[0] : rawText); }
+      catch { parsed = { cv: null, coverLetter: null, raw: rawText }; }
     }
 
     res.status(200).json({ ...parsed, usage });
   } catch (err) {
-    res.status(500).json({ error: 'Request failed', detail: String(err && err.message || err), where: mode });
+    res.status(500).json({ error: 'Request failed' });
   }
 }

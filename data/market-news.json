@@ -1,41 +1,41 @@
 {
-  "updatedAt": "2026-06-25T20:08:49Z",
+  "updatedAt": "2026-06-28T15:24:55Z",
   "items": [
     {
-      "title": "IASB Issues IFRS 20 for Rate-Regulated Entities",
-      "summary": "The IASB has issued IFRS 20, a new standard requiring companies subject to rate regulation - think utilities like electricity, water and gas providers - to recognise regulatory assets and liabilities on their balance sheets. It's designed to give investors a clearer picture of how rate regulation shapes future cash flows, and takes effect for annual periods beginning on or after 1 January 2029.",
-      "source": "IFRS Foundation",
-      "url": "https://www.ifrs.org/news-and-events/news/2026/05/iasb-issues-ifrs-20/"
+      "title": "IASB Faces Leadership Transition as Barckow's Term Ends",
+      "summary": "Andreas Barckow's five-year term as IASB Chair concludes on 30 June 2026, and the IFRS Foundation has yet to announce a permanent successor. Vice-Chair Linda Mezon-Hutter will serve as Acting Chair while the search continues, an unusual gap for the board that sets global accounting standards.",
+      "source": "Accounting Today",
+      "url": "https://www.accountingtoday.com/news/iasb-will-have-new-chair-by-october"
     },
     {
-      "title": "FRC Revises UK Auditing Standards on Reporting",
-      "summary": "The FRC has revised three UK auditing standards (ISA (UK) 700, 701 and 720) following public consultation, aiming to make auditors' reports shorter, clearer and more useful to investors. The changes, which also clarify auditor responsibilities under the revised UK Corporate Governance Code, take effect from 15 December 2026.",
-      "source": "FRC",
-      "url": "https://www.frc.org.uk/news-and-events/news/2026/06/frc-refreshes-auditing-standards-to-reduce-reporting-burden-and-improve-transparency/"
+      "title": "FRC Clarifies Auditor Duties Under Provision 29",
+      "summary": "With the UK Corporate Governance Code's Provision 29 now applying to financial years beginning on or after 1 January 2026, the FRC has set out what auditors are and are not required to do when a company's annual report includes a board declaration on material controls. The guidance accompanies the FRC's revised ISA (UK) 700, 701 and 720 reporting standards, effective from 15 December 2026.",
+      "source": "GRC Report",
+      "url": "https://www.grcreport.com/post/uk-auditors-face-new-controls-disclosure-requirements-under-revised-frc-standards"
     },
     {
       "title": "FRC Modernises Audit Enforcement Procedure",
-      "summary": "The FRC has overhauled its Audit Enforcement Procedure as part of a broader shift to a more integrated regulatory model, linking supervision, investigation and enforcement so problems are spotted earlier and resolved faster. The reform is intended to give the audit market quicker outcomes and earlier lessons learned from enforcement cases.",
+      "summary": "The FRC has overhauled its Audit Enforcement Procedure, moving to a more integrated regulatory model that links supervision, investigation and enforcement so problems are spotted earlier and resolved faster. The reform is meant to give the UK audit market quicker outcomes and clearer lessons learned from enforcement cases.",
       "source": "FRC",
       "url": "https://www.frc.org.uk/news-and-events/news/2026/06/frc-modernises-enforcement-to-deliver-faster-outcomes-and-earlier-learnings-for-the-uk-audit-market/"
     },
     {
       "title": "PCAOB Proposes Easing Quality Control Standard",
       "summary": "The PCAOB has proposed amendments to its QC 1000 quality control standard that would remove the external quality control function and design-only compliance requirements, responding to pushback from audit firms over implementation burden. The proposal is open for public comment until 9 July 2026.",
-      "source": "PCAOB / Journal of Accountancy",
+      "source": "Journal of Accountancy",
       "url": "https://www.journalofaccountancy.com/news/2026/jun/pcaob-seeks-comment-on-proposed-quality-control-amendments/"
     },
     {
-      "title": "PCAOB Forms Inspections Modernization Council",
-      "summary": "The PCAOB is setting up an Inspections Modernization Council and invited outside experts to apply, signalling an effort to rethink how it inspects audit firms. The application window closed mid-June 2026, with the council expected to feed into future changes to the inspections programme.",
-      "source": "PCAOB",
-      "url": "https://pcaobus.org/news-events/news-releases/news-release-detail/pcaob-announces-inspections-modernization-council--seeks-participation-from-outside-experts"
+      "title": "Big Four Scale Up AI Agents Across Audit and Tax",
+      "summary": "Deloitte, PwC, KPMG and EY are moving AI from pilot projects to scaled deployment, with EY rolling out AI agents across its tax practice and KPMG continuing a multi-year, multi-billion-dollar AI investment programme. The shift is also reshaping hiring, with AI-related roles now outpacing traditional audit postings across the firms.",
+      "source": "Bloomberg Tax",
+      "url": "https://news.bloombergtax.com/financial-accounting/big-four-firms-embrace-ai-to-revamp-corporate-service-offerings"
     },
     {
-      "title": "Big Four Race to Build AI Assurance Services",
-      "summary": "PwC, EY, Deloitte and KPMG are racing to build out AI assurance services that audit the safety, fairness and effectiveness of clients' own AI systems, alongside KPMG's $2bn AI investment programme and EY's rollout of AI agents across its tax practice. The push reflects how the Big Four are repositioning audit and advisory work around AI risk, not just adopting AI internally.",
-      "source": "Consultancy.uk",
-      "url": "https://www.consultancy.uk/news/40424/big-four-weighing-up-new-ai-audit-offerings"
+      "title": "Demand for Sustainability Assurance Keeps Climbing",
+      "summary": "A growing share of large global companies are now seeking third-party assurance on their sustainability reporting, with audit firms picking up more of that work as ISSB-aligned standards roll out across more than 35 jurisdictions. New assurance and ethics standards from the IAASB and IESBA are helping firms respond to the rising demand.",
+      "source": "Accounting Today",
+      "url": "https://www.accountingtoday.com/news/more-companies-seek-assurance-on-sustainability-reporting"
     }
   ]
 }

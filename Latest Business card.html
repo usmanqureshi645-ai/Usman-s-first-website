@@ -5593,12 +5593,15 @@ async function jobReviewCv(){
     document.getElementById('jobReviewResults').style.display='block';
     document.getElementById('jobReviewResults').scrollIntoView({behavior:'smooth'});
     window.showSignupNudge?.(document.getElementById('jobReviewResults'));
-    // For logged-in users, save this scoring to their workspace track record.
+    // For logged-in users, save this scoring (with the JD + a text version of the feedback)
+    // so the workspace "Talk through your edits" chat can continue from it.
     if(window.getSiteUser?.()){
       const summaryHtml=jobCvHtml+(jobCoverHtml?'<div style="margin-top:1.25rem">'+jobCoverHtml+'</div>':'');
+      const toText=(block,label)=>{ if(!block) return ''; let s=`${label} scores — HR ${block.hr}, ATS ${block.ats}, Hiring Manager ${block.hiringManager}.\n`; (block.items||[]).forEach(it=>{ s+=`- Weakness: ${it.criticism} | Suggested fix: ${it.suggestion}\n`; }); return s; };
+      const priorScoring=[toText(data.cv,'CV'), data.coverLetter?toText(data.coverLetter,'Cover letter'):''].filter(Boolean).join('\n');
       fetch('/api/account?action=save-consultation',{
         method:'POST',headers:{'content-type':'application/json'},
-        body:JSON.stringify({tool:'cv-review',title:'CV & Cover Letter Scoring',summaryHtml})
+        body:JSON.stringify({tool:'cv-review',title:'CV & Cover Letter Scoring',summaryHtml,transcript:{jobDescription:jd,priorScoring}})
       }).catch(()=>{});
     }
   }catch(e){

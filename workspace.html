@@ -57,7 +57,7 @@
   .back-link { color: var(--steel-light); text-decoration: none; font-size: .85rem; }
   .back-link:hover { color: var(--gold-light); }
 
-  main { max-width: 900px; margin: 0 auto; padding: 2.5rem 1.25rem 5rem; }
+  main { max-width: 1280px; margin: 0 auto; padding: 2.5rem clamp(1.25rem, 4vw, 3rem) 5rem; }
   h1 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: .35rem; }
   .sub { color: var(--steel-light); font-size: .9rem; margin-bottom: 2rem; }
 
@@ -379,6 +379,12 @@
 
           <pre id="cvViewBox" style="display:none;white-space:pre-wrap;font-family:inherit;font-size:.8rem;color:var(--steel-light);background:rgba(0,0,0,.2);border:1px solid rgba(200,169,110,.15);border-radius:10px;padding:1rem;margin-top:1rem;max-height:340px;overflow-y:auto"></pre>
 
+          <div id="cvTrackRecordWrap" style="display:none;margin-top:1.5rem;background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.18);border-radius:12px;padding:1rem 1.25rem">
+            <h4 style="color:var(--gold);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.25rem">Your scoring history</h4>
+            <p style="color:var(--steel-light);font-size:.78rem;margin-bottom:.5rem">Every scoring you run is kept here. Click any one to reopen its full criticism and suggestions for reference.</p>
+            <div id="cvTrackRecord"></div>
+          </div>
+
           <hr style="border:none;border-top:1px solid rgba(200,169,110,.15);margin:1.75rem 0">
 
           <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem">Score your CV for your next job</h3>
@@ -393,15 +399,11 @@
             <div id="cvCoverScoreCard" style="margin-top:1.5rem"></div>
           </div>
 
-          <div id="cvTrackRecordWrap" style="display:none;margin-top:1.5rem">
-            <h4 style="color:var(--gold);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem">Your past scorings</h4>
-            <div id="cvTrackRecord"></div>
-          </div>
-
           <hr style="border:none;border-top:1px solid rgba(200,169,110,.15);margin:1.75rem 0">
 
           <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem">Write me a cover letter</h3>
-          <p style="color:var(--steel-light);font-size:.85rem;line-height:1.6;margin-bottom:.75rem">Using your saved CV and the job description above, we'll draft a cover letter written specifically for this role. Add the company's website below and we'll read it so the motivation reflects something real about the firm. The letter stays here on the page in plain, human business English.</p>
+          <p style="color:var(--steel-light);font-size:.85rem;line-height:1.6;margin-bottom:.75rem">Paste the job description below and we'll draft a cover letter from your saved CV, written specifically for this role. Add the company's website too and we'll read it so the motivation reflects something real about the firm. The letter stays here on the page in plain, human business English.</p>
+          <textarea id="cvCoverJobDesc" placeholder="Paste the job posting (title, company, description) for this cover letter…" style="width:100%;min-height:140px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:1rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical;margin-bottom:.75rem"></textarea>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:.75rem">
             <input id="cvCompanyName" type="text" placeholder="Company name (optional)" style="background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.7rem;color:var(--cream);font-family:inherit;font-size:.85rem">
             <input id="cvCompanyUrl" type="text" placeholder="Company website URL (optional)" style="background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.7rem;color:var(--cream);font-family:inherit;font-size:.85rem">
@@ -415,7 +417,7 @@
           <hr style="border:none;border-top:1px solid rgba(200,169,110,.15);margin:1.75rem 0">
 
           <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem">Talk through your edits with Eleanor</h3>
-          <p style="color:var(--steel-light);font-size:.85rem;line-height:1.6;margin-bottom:.75rem">Made changes after the scoring? Eleanor Hughes, a recruitment specialist, will talk them through with you. Disagree with any of our suggestions, explain your situation, and she'll adapt the advice to what actually works for you. You can type, speak, listen to her replies, or attach an updated document. She coaches you; she won't rewrite the document for you.</p>
+          <p style="color:var(--steel-light);font-size:.85rem;line-height:1.6;margin-bottom:.75rem">Eleanor Hughes, a recruitment specialist, picks up from your scoring and helps you improve, point by point. Attach your CV or cover letter and she'll read it and give you honest criticism and suggestions. Disagree with anything we flagged, explain your situation, and she'll adapt the advice to what actually works for you. You can type, speak or listen to her replies. She coaches you; she won't rewrite the document for you.</p>
           <div id="cvReviewChat" style="border:1px solid rgba(200,169,110,.18);border-radius:12px;padding:1rem;background:rgba(0,0,0,.15)">
             <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.85rem;padding-bottom:.85rem;border-bottom:1px solid rgba(200,169,110,.12)">
               <img src="images/team/cv-reviewer.png" alt="Eleanor Hughes" style="width:42px;height:42px;border-radius:50%;object-fit:cover">
@@ -923,21 +925,35 @@
         document.getElementById('cvCoverScoreCard').innerHTML = coverHtml;
         document.getElementById('cvScoreResult').style.display = 'block';
         document.getElementById('cvScoreResult').scrollIntoView({ behavior: 'smooth' });
-        // Keep a track record of this scoring in the user's workspace.
-        cvSaveScoring(cvHtml + (coverHtml ? '<div style="margin-top:1.25rem">' + coverHtml + '</div>' : ''));
+        // Keep a track record of this scoring, and carry it into the Eleanor chat for continuity.
+        const priorScoring = cvScoringToText(data);
+        cvLatestPriorScoring = priorScoring;
+        cvSaveScoring(cvHtml + (coverHtml ? '<div style="margin-top:1.25rem">' + coverHtml + '</div>' : ''), { jobDescription: jd, priorScoring });
       } catch (e) { alert('Connection issue — please try again.'); }
       finally { btn.disabled = false; btn.textContent = orig; }
     }
     window.cvScore = cvScore;
 
+    // Flatten a scoring result into plain text so Eleanor can continue the conversation from it.
+    function cvScoringToText(data) {
+      const part = (block, label) => {
+        if (!block) return '';
+        let s = `${label} scores — HR ${block.hr}, ATS ${block.ats}, Hiring Manager ${block.hiringManager}.\n`;
+        (block.items || []).forEach(it => { s += `- Weakness: ${it.criticism} | Suggested fix: ${it.suggestion}\n`; });
+        return s;
+      };
+      return [part(data.cv, 'CV'), data.coverLetter ? part(data.coverLetter, 'Cover letter') : ''].filter(Boolean).join('\n');
+    }
+    let cvLatestPriorScoring = '';
+
     /* ── Scoring track record ── */
     // Each scoring is saved as a consultation (tool 'cv-review'); we list them here
     // as one-line dated links that expand the saved scorecard for reference.
-    async function cvSaveScoring(summaryHtml) {
+    async function cvSaveScoring(summaryHtml, meta) {
       try {
         const r = await fetch('/api/account?action=save-consultation', {
           method: 'POST', headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({ tool: 'cv-review', title: 'CV & Cover Letter Scoring', summaryHtml }),
+          body: JSON.stringify({ tool: 'cv-review', title: 'CV & Cover Letter Scoring', summaryHtml, transcript: meta || null }),
         });
         if (r.ok) cvLoadTrackRecord();
       } catch (e) { /* track record is best-effort; never block the scoring */ }
@@ -950,6 +966,14 @@
         const data = await r.json();
         cvTrackRecords = (data.consultations || []).filter(c => c.tool === 'cv-review' && c.summaryHtml);
         cvRenderTrackRecord();
+        // Carry the most recent scoring into the chat so Eleanor continues from it, and
+        // pre-fill the job description from it if the user hasn't typed one.
+        const latest = cvTrackRecords[0];
+        if (latest && latest.transcript) {
+          if (latest.transcript.priorScoring && !cvLatestPriorScoring) cvLatestPriorScoring = latest.transcript.priorScoring;
+          const jdBox = document.getElementById('cvJobDesc');
+          if (jdBox && !jdBox.value.trim() && latest.transcript.jobDescription) jdBox.value = latest.transcript.jobDescription;
+        }
       } catch (e) {}
     }
     function cvRenderTrackRecord() {
@@ -974,8 +998,8 @@
 
     async function cvWriteCover() {
       if (!cvText.trim()) { alert('Upload your CV first.'); return; }
-      const jd = document.getElementById('cvJobDesc').value.trim();
-      if (!jd) { alert('Paste the job description above first.'); return; }
+      const jd = document.getElementById('cvCoverJobDesc').value.trim() || document.getElementById('cvJobDesc').value.trim();
+      if (!jd) { alert('Paste the job description for this cover letter first.'); return; }
       const btn = document.getElementById('cvWriteBtn');
       btn.disabled = true; btn.textContent = 'Writing…';
       try {
@@ -1109,33 +1133,50 @@
 
     /* ── Iterative review chat with Eleanor Hughes ── */
     const cvChatMessages = [];
+    // Eleanor replies in clean business English with only **bold** for emphasis. Render that
+    // safely: escape HTML, turn **x** into <strong>, drop any stray markdown symbols.
+    function cvFormatReply(text) {
+      let s = escapeHtml(String(text || ''));
+      s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+      s = s.replace(/^\s{0,3}#{1,6}\s*/gm, '');     // stray headings
+      s = s.replace(/^\s*[-*•]\s+/gm, '');           // stray bullet characters
+      return s.replace(/\n/g, '<br>');
+    }
     function cvAppendChat(role, text) {
       const log = document.getElementById('cvChatLog');
       const wrap = document.createElement('div');
       const isUser = role === 'user';
-      wrap.style.cssText = `align-self:${isUser ? 'flex-end' : 'flex-start'};max-width:85%;background:${isUser ? 'rgba(200,169,110,.15)' : 'rgba(255,255,255,.05)'};border:1px solid rgba(200,169,110,.15);border-radius:12px;padding:.65rem .9rem;font-size:.85rem;line-height:1.6;color:var(--cream);white-space:pre-wrap`;
-      wrap.textContent = text;
+      wrap.style.cssText = `align-self:${isUser ? 'flex-end' : 'flex-start'};max-width:85%;background:${isUser ? 'rgba(200,169,110,.15)' : 'rgba(255,255,255,.05)'};border:1px solid rgba(200,169,110,.15);border-radius:12px;padding:.65rem .9rem;font-size:.85rem;line-height:1.6;color:var(--cream)`;
+      if (isUser) { wrap.style.whiteSpace = 'pre-wrap'; wrap.textContent = text; }
+      else { wrap.innerHTML = cvFormatReply(text); }
       log.appendChild(wrap);
       log.scrollTop = log.scrollHeight;
       return wrap;
     }
+    function cvSetAssistant(el, text) { el.innerHTML = cvFormatReply(text); document.getElementById('cvChatLog').scrollTop = 1e9; }
+
+    // Upload in the chat: read the document in the background (no text dumped into the box),
+    // check it really is a CV or cover letter, then ask Eleanor to review it. A document that
+    // is not a CV/cover letter still goes to her, flagged, so she can decline politely and
+    // ask how the user wants to use the information on their CV.
     async function cvChatHandleFile(input) {
       const file = input.files[0];
       if (!file) return;
-      const box = document.getElementById('cvChatInput');
-      const original = box.placeholder;
-      box.placeholder = `Reading ${file.name}…`;
-      try {
-        const text = await extractFileText(file);
-        const prefix = box.value.trim() ? box.value.trim() + '\n\n' : '';
-        box.value = `${prefix}Here is my updated document (${file.name}):\n\n${text}`;
-        box.placeholder = original;
-      } catch (e) {
-        box.placeholder = `Couldn't read ${file.name} — try a .txt, .pdf or .docx`;
-      }
       input.value = '';
+      const placeholder = cvAppendChat('user', `📎 ${file.name}`);
+      const thinking = cvAppendChat('assistant', `Reading ${file.name}…`);
+      let text;
+      try { text = await extractFileText(file); }
+      catch (e) { cvSetAssistant(thinking, `I could not read ${file.name}. Please try a .txt, .pdf or .docx file.`); return; }
+      const check = await cvValidateDoc(text, 'cv');
+      const sent = check.isValid
+        ? `[The user uploaded "${file.name}", which is their CV or cover letter. Please review it and give them honest criticism, suggestions and improvement points. Here is the full text:]\n\n${text}`
+        : `[The user uploaded "${file.name}". Our classifier says it is NOT a CV or cover letter${check.detectedType ? ` — it looks like ${check.detectedType}` : ''}. Do not help with this document's subject. Politely tell them it is not a CV or cover letter, then ask how they would like to use the information in it on their CV. Here is the text for context:]\n\n${text}`;
+      cvChatMessages.push({ role: 'user', content: sent });
+      await cvSendToEleanor(thinking);
     }
     window.cvChatHandleFile = cvChatHandleFile;
+
     async function cvChatSend() {
       const input = document.getElementById('cvChatInput');
       const text = input.value.trim();
@@ -1143,9 +1184,15 @@
       input.value = '';
       cvAppendChat('user', text);
       cvChatMessages.push({ role: 'user', content: text });
+      const thinking = cvAppendChat('assistant', 'Thinking…');
+      await cvSendToEleanor(thinking);
+    }
+    window.cvChatSend = cvChatSend;
+
+    // Shared call used by both typing and uploading. `thinking` is the placeholder bubble to fill.
+    async function cvSendToEleanor(thinking) {
       const btn = document.getElementById('cvChatSendBtn');
       btn.disabled = true; btn.textContent = '…';
-      const thinking = cvAppendChat('assistant', 'Reading your changes…');
       try {
         const r = await fetch('/api/cv-review', {
           method: 'POST', headers: { 'content-type': 'application/json' },
@@ -1153,14 +1200,15 @@
             mode: 'chat', messages: cvChatMessages,
             cv: cvText || undefined, coverLetter: coverText || undefined,
             jobDescription: document.getElementById('cvJobDesc').value.trim() || undefined,
+            priorScoring: cvLatestPriorScoring || undefined,
           }),
         });
         const data = await r.json();
-        if (!r.ok) { thinking.textContent = data.error || 'Something went wrong — please try again.'; return; }
-        thinking.textContent = data.reply || '';
+        if (!r.ok) { cvSetAssistant(thinking, data.error || 'Something went wrong — please try again.'); return; }
+        cvSetAssistant(thinking, data.reply || '');
         cvChatMessages.push({ role: 'assistant', content: data.reply || '' });
         cvSpeak(data.reply || '');
-      } catch (e) { thinking.textContent = 'Connection issue — please try again.'; }
+      } catch (e) { cvSetAssistant(thinking, 'Connection issue — please try again.'); }
       finally { btn.disabled = false; btn.textContent = 'Send'; }
     }
     window.cvChatSend = cvChatSend;
@@ -1212,7 +1260,10 @@
           if (chat) {
             chat.scrollIntoView({ behavior: 'smooth', block: 'center' });
             if (!cvChatMessages.length) {
-              cvAppendChat('assistant', "Hi, I'm Eleanor. Good to see you back. Tell me what you changed since the scoring, or paste your updated section, and I'll give you an honest read on whether it's stronger. And if you don't agree with something we flagged, say so, I'd rather hear your side and work out what actually fits your situation.");
+              const seen = cvLatestPriorScoring
+                ? "Hi, I'm Eleanor. I've got your scoring and the feedback from it in front of me, so let's pick up right where that left off. Tell me which point you'd like to tackle first, or what you've changed, and I'll give you an honest read. If you don't agree with something we flagged, say so, I'd rather hear your side and find what actually fits your situation."
+                : "Hi, I'm Eleanor. Good to see you. Upload or paste your CV (or cover letter) and I'll talk you through where it's strong and what to improve. If you don't agree with something I flag, say so, I'd rather hear your side and work out what actually fits your situation.";
+              cvAppendChat('assistant', seen);
             }
             document.getElementById('cvChatInput')?.focus();
           }

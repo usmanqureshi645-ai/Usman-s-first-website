@@ -57,13 +57,13 @@
   .back-link { color: var(--steel-light); text-decoration: none; font-size: .85rem; }
   .back-link:hover { color: var(--gold-light); }
 
-  main { max-width: 1280px; margin: 0 auto; padding: 2.5rem clamp(1.25rem, 4vw, 3rem) 5rem; }
-  h1 { font-size: clamp(1.5rem, 3vw, 2rem); margin-bottom: .35rem; }
-  .sub { color: var(--steel-light); font-size: .9rem; margin-bottom: 2rem; }
+  main { max-width: min(1760px, 96vw); margin: 0 auto; padding: 2rem clamp(1rem, 3vw, 2.5rem) 4rem; }
+  h1 { font-size: clamp(1.35rem, 2.6vw, 1.85rem); margin-bottom: .3rem; }
+  .sub { color: var(--steel-light); font-size: .88rem; margin-bottom: 1.5rem; }
 
   .state-card {
     background: rgba(255,255,255,.03); border: 1px solid rgba(200,169,110,.15);
-    border-radius: 14px; padding: 2rem; text-align: center;
+    border-radius: 14px; padding: 1.5rem; text-align: center;
   }
   .state-card p { color: var(--steel-light); margin: .5rem 0 1.25rem; line-height: 1.6; }
   .btn-gold {
@@ -81,7 +81,7 @@
 
   .consult-card {
     background: rgba(255,255,255,.03); border: 1px solid rgba(200,169,110,.15);
-    border-radius: 14px; padding: 1.25rem 1.5rem; margin-bottom: 1.1rem;
+    border-radius: 14px; padding: 1rem 1.25rem; margin-bottom: .85rem;
   }
   .consult-head { display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
   .consult-tool { font-size: .68rem; text-transform: uppercase; letter-spacing: .05em; color: var(--gold); font-weight: 700; }
@@ -225,6 +225,10 @@
   #cvReviewChat.cv-chat-max{ position:fixed!important; inset:0!important; z-index:10000!important; margin:0!important; border:none!important; border-radius:0!important; background:#0a1424!important; padding:1.1rem 1.1rem 1.25rem!important; display:flex; flex-direction:column; max-width:none!important; height:100dvh; }
   #cvReviewChat.cv-chat-max #cvChatLog{ max-height:none!important; flex:1 1 auto; }
   body.cv-focus-mode{ overflow:hidden; }
+  .cv-step-num{ background:var(--gold); color:var(--navy); border-radius:50%; width:20px; height:20px; flex-shrink:0; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:.68rem; }
+  /* Two-column CV tab: a narrower reference rail (upload + history) beside the main workspace. */
+  .cv-grid{ display:grid; grid-template-columns:380px 1fr; gap:1.75rem; margin-top:1rem; align-items:start; }
+  @media (max-width:980px){ .cv-grid{ grid-template-columns:1fr; } }
 </style>
 </head>
 <body>
@@ -341,7 +345,7 @@
     <div id="loggedInState" style="display:none">
       <div class="ws-tabs">
         <button class="ws-tab active" data-panel="history">History</button>
-        <button class="ws-tab" data-panel="cv">My CV &amp; Cover Letter</button>
+        <button class="ws-tab" data-panel="cv">My CV &amp; Cover Letter Scoring</button>
         <button class="ws-tab" data-panel="jobsearch">Job Search</button>
         <button class="ws-tab" data-panel="tools">AI Tools</button>
         <button class="ws-tab" data-panel="contact">Contact</button>
@@ -354,102 +358,121 @@
 
       <div class="ws-panel" id="panel-cv">
         <div class="state-card" style="text-align:left">
+          <h2 style="font-size:1.05rem;margin-bottom:.4rem;color:var(--cream)">My CV &amp; Cover Letter Scoring</h2>
           <p style="margin-top:0">Your CV and cover letter live here. Upload them once and every tool on the site — CV scoring, tailoring and job search — reuses them automatically, so you're never asked to upload again. Stored privately to your account only.</p>
 
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.25rem">
-            <div>
-              <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">Your CV</label>
-              <div class="job-upload-box" onclick="document.getElementById('cvCvFile').click()" style="background:rgba(255,255,255,.05);border:1px dashed rgba(200,169,110,.3);border-radius:10px;padding:1rem;cursor:pointer;text-align:center;font-size:.85rem;color:var(--steel-light)">
-                <input type="file" id="cvCvFile" accept=".pdf,.docx,.txt" style="display:none" onchange="cvHandleFile(this,'cv')">
-                <span id="cvCvLabel">📄 Click to upload your CV</span>
-              </div>
-              <button id="cvViewCvBtn" onclick="cvToggleView('cv')" style="display:none;margin-top:.5rem;background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold-light);border-radius:8px;padding:.35rem .8rem;font-size:.75rem;cursor:pointer">View saved CV</button>
-              <button id="cvClearCvBtn" onclick="cvClear('cv')" style="display:none;margin-top:.5rem;margin-left:.4rem;background:none;border:1px solid rgba(180,90,90,.4);color:#d8a0a0;border-radius:8px;padding:.35rem .8rem;font-size:.75rem;cursor:pointer">Remove</button>
+          <div id="cvWorkflowExplainer" style="margin:.75rem 0 1.25rem;padding:.85rem 1.1rem;background:rgba(200,169,110,.05);border:1px solid rgba(200,169,110,.15);border-radius:12px">
+            <div style="display:flex;align-items:center;gap:.45rem;flex-wrap:wrap;font-size:.78rem;color:var(--steel-light)">
+              <span class="cv-step-num">1</span><span>Upload your CV &amp; cover letter</span>
+              <span style="color:var(--gold)">→</span>
+              <span class="cv-step-num">2</span><span>Get scored from three angles</span>
+              <span style="color:var(--gold)">→</span>
+              <span class="cv-step-num">3</span><span>Challenge or discuss it with Eleanor</span>
+              <span style="color:var(--gold)">→</span>
+              <span class="cv-step-num">4</span><span>Re-upload your improved version and score again</span>
             </div>
-            <div>
-              <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">Your cover letter</label>
-              <div class="job-upload-box" onclick="document.getElementById('cvCoverFile').click()" style="background:rgba(255,255,255,.05);border:1px dashed rgba(200,169,110,.3);border-radius:10px;padding:1rem;cursor:pointer;text-align:center;font-size:.85rem;color:var(--steel-light)">
-                <input type="file" id="cvCoverFile" accept=".pdf,.docx,.txt" style="display:none" onchange="cvHandleFile(this,'cover')">
-                <span id="cvCoverLabel">✉️ Click to upload your cover letter</span>
-              </div>
-              <button id="cvViewCoverBtn" onclick="cvToggleView('cover')" style="display:none;margin-top:.5rem;background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold-light);border-radius:8px;padding:.35rem .8rem;font-size:.75rem;cursor:pointer">View saved cover letter</button>
-              <button id="cvClearCoverBtn" onclick="cvClear('cover')" style="display:none;margin-top:.5rem;margin-left:.4rem;background:none;border:1px solid rgba(180,90,90,.4);color:#d8a0a0;border-radius:8px;padding:.35rem .8rem;font-size:.75rem;cursor:pointer">Remove</button>
-            </div>
+            <p style="margin:.5rem 0 0;font-size:.74rem;color:var(--steel-light)">This is a back-and-forth process, repeat it as many times as you like. Every scoring is saved below, and whenever you challenge an evaluation, Eleanor knows exactly which one you mean.</p>
           </div>
 
-          <pre id="cvViewBox" style="display:none;white-space:pre-wrap;font-family:inherit;font-size:.8rem;color:var(--steel-light);background:rgba(0,0,0,.2);border:1px solid rgba(200,169,110,.15);border-radius:10px;padding:1rem;margin-top:1rem;max-height:340px;overflow-y:auto"></pre>
-
-          <div id="cvTrackRecordWrap" style="display:none;margin-top:1.5rem;background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.18);border-radius:12px;padding:1rem 1.25rem">
-            <h4 style="color:var(--gold);font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.25rem">Your scoring history</h4>
-            <p style="color:var(--steel-light);font-size:.78rem;margin-bottom:.5rem">Every scoring you run is kept here. Click any one to reopen its full criticism and suggestions for reference.</p>
-            <div id="cvTrackRecord"></div>
-          </div>
-
-          <hr style="border:none;border-top:1px solid rgba(200,169,110,.15);margin:1.75rem 0">
-
-          <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem">Score your CV for your next job</h3>
-          <p style="color:var(--steel-light);font-size:.85rem;line-height:1.6;margin-bottom:.75rem">Paste the job description below and get an honest score from three angles, HR, the applicant tracking system and the hiring manager, with each weakness paired to a fix you can make yourself.</p>
-          <textarea id="cvJobDesc" placeholder="Paste the job posting (title, company, description) here…" style="width:100%;min-height:160px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:1rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
-          <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:1rem">
-            <button class="btn-gold" id="cvScoreBtn" onclick="cvScore()">Score my CV &amp; cover letter</button>
-          </div>
-
-          <div id="cvScoreResult" style="display:none;margin-top:1.5rem">
-            <div id="cvScoreCard"></div>
-            <div id="cvCoverScoreCard" style="margin-top:1.5rem"></div>
-          </div>
-
-          <hr style="border:none;border-top:1px solid rgba(200,169,110,.15);margin:1.75rem 0">
-
-          <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem">Write me a cover letter</h3>
-          <p style="color:var(--steel-light);font-size:.85rem;line-height:1.6;margin-bottom:.75rem">Paste the job description below and we'll draft a cover letter from your saved CV, written specifically for this role. Add the company's website too and we'll read it so the motivation reflects something real about the firm. The letter stays here on the page in plain, human business English.</p>
-          <textarea id="cvCoverJobDesc" placeholder="Paste the job posting (title, company, description) for this cover letter…" style="width:100%;min-height:140px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:1rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical;margin-bottom:.75rem"></textarea>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:.75rem">
-            <input id="cvCompanyName" type="text" placeholder="Company name (optional)" style="background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.7rem;color:var(--cream);font-family:inherit;font-size:.85rem">
-            <input id="cvCompanyUrl" type="text" placeholder="Company website URL (optional)" style="background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.7rem;color:var(--cream);font-family:inherit;font-size:.85rem">
-          </div>
-          <button class="btn-gold" id="cvWriteBtn" onclick="cvWriteCover()" style="background:transparent;border:1px solid var(--gold);color:var(--gold-light)">Write my cover letter</button>
-          <div id="cvWriteResult" style="display:none;margin-top:1.25rem">
-            <pre id="cvWrittenCover" style="white-space:pre-wrap;font-family:inherit;font-size:.85rem;color:var(--cream);line-height:1.7;background:rgba(0,0,0,.2);border:1px solid rgba(200,169,110,.15);border-radius:10px;padding:1.25rem"></pre>
-            <p style="color:var(--steel-light);font-size:.78rem;margin-top:.5rem">Read it through and make it your own before you send it. Select the text to copy it into your own document.</p>
-          </div>
-
-          <hr style="border:none;border-top:1px solid rgba(200,169,110,.15);margin:1.75rem 0">
-
-          <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem">Talk through your edits with Eleanor</h3>
-          <p style="color:var(--steel-light);font-size:.85rem;line-height:1.6;margin-bottom:.75rem">Eleanor Hughes, a recruitment specialist, picks up from your scoring and helps you improve, point by point. Attach your CV or cover letter and she'll read it and give you honest criticism and suggestions. Disagree with anything we flagged, explain your situation, and she'll adapt the advice to what actually works for you. You can type, speak or listen to her replies. She coaches you; she won't rewrite the document for you.</p>
-          <div id="cvReviewChat" style="border:1px solid rgba(200,169,110,.18);border-radius:12px;padding:1rem;background:rgba(0,0,0,.15)">
-            <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.85rem;padding-bottom:.85rem;border-bottom:1px solid rgba(200,169,110,.12)">
-              <img src="images/team/cv-reviewer.png" alt="Eleanor Hughes" style="width:42px;height:42px;border-radius:50%;object-fit:cover">
+          <div class="cv-grid">
+            <div class="cv-col-left">
               <div>
-                <div style="font-weight:600;color:var(--cream);font-size:.9rem">Eleanor Hughes</div>
-                <div style="font-size:.72rem;color:var(--steel-light)">Recruitment &amp; Career Specialist</div>
+                <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.35rem">Your CV</label>
+                <div class="job-upload-box" onclick="document.getElementById('cvCvFile').click()" style="background:rgba(255,255,255,.05);border:1px dashed rgba(200,169,110,.3);border-radius:10px;padding:.85rem;cursor:pointer;text-align:center;font-size:.83rem;color:var(--steel-light)">
+                  <input type="file" id="cvCvFile" accept=".pdf,.docx,.txt" style="display:none" onchange="cvHandleFile(this,'cv')">
+                  <span id="cvCvLabel">📄 Click to upload your CV</span>
+                </div>
+                <button id="cvViewCvBtn" onclick="cvToggleView('cv')" style="display:none;margin-top:.4rem;background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold-light);border-radius:8px;padding:.32rem .75rem;font-size:.73rem;cursor:pointer">View saved CV</button>
+                <button id="cvClearCvBtn" onclick="cvClear('cv')" style="display:none;margin-top:.4rem;margin-left:.4rem;background:none;border:1px solid rgba(180,90,90,.4);color:#d8a0a0;border-radius:8px;padding:.32rem .75rem;font-size:.73rem;cursor:pointer">Remove</button>
               </div>
-              <button id="cvChatMaxBtn" class="mr-mic" onclick="cvToggleMaximize()" title="Focus mode — full screen" style="margin-left:auto">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3M3 16v3a2 2 0 002 2h3m8 0h3a2 2 0 002-2v-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                <span class="mr-mic-label">Full screen</span>
-              </button>
+              <div style="margin-top:.85rem">
+                <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.35rem">Your cover letter</label>
+                <div class="job-upload-box" onclick="document.getElementById('cvCoverFile').click()" style="background:rgba(255,255,255,.05);border:1px dashed rgba(200,169,110,.3);border-radius:10px;padding:.85rem;cursor:pointer;text-align:center;font-size:.83rem;color:var(--steel-light)">
+                  <input type="file" id="cvCoverFile" accept=".pdf,.docx,.txt" style="display:none" onchange="cvHandleFile(this,'cover')">
+                  <span id="cvCoverLabel">✉️ Click to upload your cover letter</span>
+                </div>
+                <button id="cvViewCoverBtn" onclick="cvToggleView('cover')" style="display:none;margin-top:.4rem;background:none;border:1px solid rgba(200,169,110,.3);color:var(--gold-light);border-radius:8px;padding:.32rem .75rem;font-size:.73rem;cursor:pointer">View saved cover letter</button>
+                <button id="cvClearCoverBtn" onclick="cvClear('cover')" style="display:none;margin-top:.4rem;margin-left:.4rem;background:none;border:1px solid rgba(180,90,90,.4);color:#d8a0a0;border-radius:8px;padding:.32rem .75rem;font-size:.73rem;cursor:pointer">Remove</button>
+              </div>
+
+              <pre id="cvViewBox" style="display:none;white-space:pre-wrap;font-family:inherit;font-size:.78rem;color:var(--steel-light);background:rgba(0,0,0,.2);border:1px solid rgba(200,169,110,.15);border-radius:10px;padding:.85rem;margin-top:.85rem;max-height:280px;overflow-y:auto"></pre>
+
+              <div id="cvTrackRecordWrap" style="display:none;margin-top:1.1rem;background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.18);border-radius:12px;padding:.85rem 1rem">
+                <h4 style="color:var(--gold);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.2rem">Your scoring history</h4>
+                <p style="color:var(--steel-light);font-size:.74rem;margin-bottom:.4rem">Every evaluation is kept here. Open one to see the full criticism and suggestions, or challenge it with Eleanor.</p>
+                <div id="cvTrackRecord"></div>
+              </div>
             </div>
-            <div id="cvChatLog" style="max-height:420px;overflow-y:auto;display:flex;flex-direction:column;gap:.75rem;margin-bottom:.75rem"></div>
-            <p id="cvVoiceNote" style="display:none;font-size:.72rem;color:var(--steel-light);margin:0 0 .55rem;font-style:italic">The spoken voice can sound a little robotic for now. We're soon bringing real human accents.</p>
-            <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.55rem">
-              <button id="cvMic" class="mr-mic" title="Speak to Eleanor">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
-                <span class="mr-mic-label">Speak</span>
-              </button>
-              <button id="cvChatAttach" class="mr-mic" title="Attach your updated CV or cover letter (PDF, Word or text)" onclick="document.getElementById('cvChatFile').click()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 12.5l-8.5 8.5a5 5 0 01-7-7l9-9a3.5 3.5 0 015 5l-9 9a2 2 0 01-3-3l8.5-8.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                <span class="mr-mic-label">Attach</span>
-              </button>
-              <input type="file" id="cvChatFile" accept=".pdf,.docx,.txt" style="display:none" onchange="cvChatHandleFile(this)">
-              <button id="cvVoiceToggle" class="mr-mic" title="Hear Eleanor's replies aloud" onclick="cvToggleVoice()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a9 9 0 010 14" stroke-linecap="round"/></svg>
-                <span class="mr-mic-label">Hear</span>
-              </button>
-            </div>
-            <div style="display:flex;gap:.5rem">
-              <textarea id="cvChatInput" placeholder="Tell Eleanor what you changed, or paste your updated text…" style="flex:1;min-height:60px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.7rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
-              <button class="btn-gold" id="cvChatSendBtn" onclick="cvChatSend()" style="align-self:flex-end">Send</button>
+
+            <div class="cv-col-right">
+              <h3 style="color:var(--gold);font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;margin-bottom:.4rem">Score your CV for your next job</h3>
+              <p style="color:var(--steel-light);font-size:.82rem;line-height:1.55;margin-bottom:.6rem">Paste the job description below and get an honest score from three angles, HR, the applicant tracking system and the hiring manager, with each weakness paired to a fix you can make yourself.</p>
+              <textarea id="cvJobDesc" placeholder="Paste the job posting (title, company, description) here…" style="width:100%;min-height:110px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.85rem;color:var(--cream);font-family:inherit;font-size:.83rem;resize:vertical"></textarea>
+              <div style="display:flex;gap:.75rem;flex-wrap:wrap;margin-top:.75rem">
+                <button class="btn-gold" id="cvScoreBtn" onclick="cvScore()">Score my CV &amp; cover letter</button>
+              </div>
+
+              <div id="cvScoreResult" style="display:none;margin-top:1.1rem">
+                <div id="cvScoreCard"></div>
+                <div id="cvCoverScoreCard" style="margin-top:1.1rem"></div>
+                <div style="text-align:center;margin-top:1rem">
+                  <button class="btn-gold" style="background:transparent;border:1px solid var(--gold);color:var(--gold-light)" onclick="cvChallengeLatest()">Challenge this evaluation with Eleanor</button>
+                </div>
+              </div>
+
+              <hr style="border:none;border-top:1px solid rgba(200,169,110,.15);margin:1.1rem 0">
+
+              <h3 style="color:var(--gold);font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;margin-bottom:.4rem">Write me a cover letter</h3>
+              <p style="color:var(--steel-light);font-size:.82rem;line-height:1.55;margin-bottom:.6rem">Paste the job description below and we'll draft a cover letter from your saved CV, written specifically for this role. Add the company's website too and we'll read it so the motivation reflects something real about the firm. The letter stays here on the page in plain, human business English.</p>
+              <textarea id="cvCoverJobDesc" placeholder="Paste the job posting (title, company, description) for this cover letter…" style="width:100%;min-height:100px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.85rem;color:var(--cream);font-family:inherit;font-size:.83rem;resize:vertical;margin-bottom:.6rem"></textarea>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem;margin-bottom:.6rem">
+                <input id="cvCompanyName" type="text" placeholder="Company name (optional)" style="background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.65rem;color:var(--cream);font-family:inherit;font-size:.83rem">
+                <input id="cvCompanyUrl" type="text" placeholder="Company website URL (optional)" style="background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.65rem;color:var(--cream);font-family:inherit;font-size:.83rem">
+              </div>
+              <button class="btn-gold" id="cvWriteBtn" onclick="cvWriteCover()" style="background:transparent;border:1px solid var(--gold);color:var(--gold-light)">Write my cover letter</button>
+              <div id="cvWriteResult" style="display:none;margin-top:1rem">
+                <pre id="cvWrittenCover" style="white-space:pre-wrap;font-family:inherit;font-size:.83rem;color:var(--cream);line-height:1.6;background:rgba(0,0,0,.2);border:1px solid rgba(200,169,110,.15);border-radius:10px;padding:1.1rem"></pre>
+                <p style="color:var(--steel-light);font-size:.76rem;margin-top:.4rem">Read it through and make it your own before you send it. Select the text to copy it into your own document.</p>
+              </div>
+
+              <hr style="border:none;border-top:1px solid rgba(200,169,110,.15);margin:1.1rem 0">
+
+              <h3 style="color:var(--gold);font-size:.82rem;letter-spacing:.07em;text-transform:uppercase;margin-bottom:.4rem">Talk through it with Eleanor</h3>
+              <p style="color:var(--steel-light);font-size:.82rem;line-height:1.55;margin-bottom:.6rem">Eleanor Hughes, a recruitment specialist, picks up from your scoring and helps you improve, point by point. Attach your CV or cover letter and she'll read it and give you honest criticism and suggestions. Disagree with anything we flagged, explain your situation, and she'll adapt the advice to what actually works for you. You can type, speak or listen to her replies. She coaches you; she won't rewrite the document for you.</p>
+              <div id="cvReviewChat" style="border:1px solid rgba(200,169,110,.18);border-radius:12px;padding:.9rem;background:rgba(0,0,0,.15)">
+                <div style="display:flex;align-items:center;gap:.55rem;margin-bottom:.7rem;padding-bottom:.7rem;border-bottom:1px solid rgba(200,169,110,.12)">
+                  <img src="images/team/cv-reviewer.png" alt="Eleanor Hughes" style="width:38px;height:38px;border-radius:50%;object-fit:cover">
+                  <div>
+                    <div style="font-weight:600;color:var(--cream);font-size:.86rem">Eleanor Hughes</div>
+                    <div style="font-size:.7rem;color:var(--steel-light)">Recruitment &amp; Career Specialist</div>
+                  </div>
+                  <button id="cvChatMaxBtn" class="mr-mic" onclick="cvToggleMaximize()" title="Focus mode — full screen" style="margin-left:auto">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3M3 16v3a2 2 0 002 2h3m8 0h3a2 2 0 002-2v-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span class="mr-mic-label">Full screen</span>
+                  </button>
+                </div>
+                <div id="cvChatLog" style="max-height:380px;overflow-y:auto;display:flex;flex-direction:column;gap:.7rem;margin-bottom:.7rem"></div>
+                <p id="cvVoiceNote" style="display:none;font-size:.7rem;color:var(--steel-light);margin:0 0 .5rem;font-style:italic">The spoken voice can sound a little robotic for now. We're soon bringing real human accents.</p>
+                <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem">
+                  <button id="cvMic" class="mr-mic" title="Speak to Eleanor">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
+                    <span class="mr-mic-label">Speak</span>
+                  </button>
+                  <button id="cvChatAttach" class="mr-mic" title="Attach your updated CV or cover letter (PDF, Word or text)" onclick="document.getElementById('cvChatFile').click()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 12.5l-8.5 8.5a5 5 0 01-7-7l9-9a3.5 3.5 0 015 5l-9 9a2 2 0 01-3-3l8.5-8.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    <span class="mr-mic-label">Attach</span>
+                  </button>
+                  <input type="file" id="cvChatFile" accept=".pdf,.docx,.txt" style="display:none" onchange="cvChatHandleFile(this)">
+                  <button id="cvVoiceToggle" class="mr-mic" title="Hear Eleanor's replies aloud" onclick="cvToggleVoice()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a9 9 0 010 14" stroke-linecap="round"/></svg>
+                    <span class="mr-mic-label">Hear</span>
+                  </button>
+                </div>
+                <div style="display:flex;gap:.5rem">
+                  <textarea id="cvChatInput" placeholder="Tell Eleanor what you changed, or paste your updated text…" style="flex:1;min-height:56px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.65rem;color:var(--cream);font-family:inherit;font-size:.83rem;resize:vertical"></textarea>
+                  <button class="btn-gold" id="cvChatSendBtn" onclick="cvChatSend()" style="align-self:flex-end">Send</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -506,7 +529,7 @@
         <div class="tools-grid">
           <a class="tool-link-card" href="index.html#meetingroom"><span class="ti">🤝</span><span class="tt">Meeting Room</span><span class="td">Discuss a real scenario with a panel of finance/audit/tax specialists.</span></a>
           <a class="tool-link-card" href="index.html#knowledgetest"><span class="ti">📝</span><span class="tt">Interview Prep</span><span class="td">Practice technical/behavioural interview questions with a kind, encouraging coach.</span></a>
-          <a class="tool-link-card" href="index.html#jobhub"><span class="ti">📄</span><span class="tt">Rate Your Resume</span><span class="td">Tailor your CV/cover letter or get a brutally honest recruiter-style review.</span></a>
+          <a class="tool-link-card" href="index.html#jobhub"><span class="ti">📄</span><span class="tt">Score My Resume</span><span class="td">An honest score on your CV and cover letter from HR, ATS and a hiring manager.</span></a>
           <a class="tool-link-card" href="#" onclick="activateTab('jobsearch');document.querySelector('.ws-tab[data-panel=jobsearch]').scrollIntoView({behavior:'smooth'});return false"><span class="ti">🎯</span><span class="tt">Personalized Job Search</span><span class="td">AI-curated job titles and search links matched to your CV.</span></a>
           <a class="tool-link-card" href="index.html#gaapcompare"><span class="ti">⚖️</span><span class="tt">GAAP Compare</span><span class="td">Jurisdiction-aware research on accounting standard differences.</span></a>
           <a class="tool-link-card" href="index.html#hottopics"><span class="ti">📰</span><span class="tt">Hot Market Topics</span><span class="td">Current IFRS/FRC/audit news and discussion points.</span></a>
@@ -981,12 +1004,18 @@
       const list = document.getElementById('cvTrackRecord');
       if (!cvTrackRecords.length) { wrap.style.display = 'none'; return; }
       wrap.style.display = 'block';
+      const total = cvTrackRecords.length;
       list.innerHTML = cvTrackRecords.map((c, i) => {
         const d = new Date(c.createdAt);
         const when = d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) + ', ' + d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+        const evalNum = total - i; // index 0 is the most recent (lpush), so number from oldest=1 upward
+        const canChallenge = c.transcript && c.transcript.priorScoring;
         return `<div style="border-bottom:1px solid rgba(200,169,110,.1)">
-            <a href="#" onclick="cvToggleScoring(${i});return false" style="display:block;padding:.5rem 0;color:var(--gold-light);font-size:.84rem;text-decoration:none">CV &amp; Cover Letter Scoring — ${when}</a>
-            <div id="cvScoringView-${i}" style="display:none;padding:.5rem 0 1rem">${c.summaryHtml}</div>
+            <a href="#" onclick="cvToggleScoring(${i});return false" style="display:block;padding:.45rem 0;color:var(--gold-light);font-size:.82rem;text-decoration:none">Evaluation #${evalNum} — ${when}</a>
+            <div id="cvScoringView-${i}" style="display:none;padding:.4rem 0 .9rem">
+              ${c.summaryHtml}
+              ${canChallenge ? `<div style="text-align:center;margin-top:.75rem"><button class="btn-gold" style="background:transparent;border:1px solid var(--gold);color:var(--gold-light);font-size:.76rem;padding:.4rem .85rem" onclick="cvChallengeRecord(${i})">Challenge evaluation #${evalNum} with Eleanor</button></div>` : ''}
+            </div>
           </div>`;
       }).join('');
     }
@@ -995,6 +1024,34 @@
       if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
     }
     window.cvToggleScoring = cvToggleScoring;
+
+    // Bridge an evaluation (latest, or a past one from the track record) into the Eleanor
+    // chat, so there is never a disconnect between an evaluation and the discussion about it.
+    function cvGoToEleanor(priorScoringText, jdText, label) {
+      if (priorScoringText) cvLatestPriorScoring = priorScoringText;
+      if (jdText) {
+        const jdBox = document.getElementById('cvJobDesc');
+        if (jdBox) jdBox.value = jdText;
+      }
+      const chat = document.getElementById('cvReviewChat');
+      if (chat) chat.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      cvAppendChat('assistant', `Let's talk through ${label}. Tell me which point you would like to challenge or discuss first, and I will work through it with you, taking your perspective into account.`);
+      document.getElementById('cvChatInput')?.focus();
+    }
+    window.cvGoToEleanor = cvGoToEleanor;
+    function cvChallengeLatest() {
+      cvGoToEleanor(cvLatestPriorScoring, document.getElementById('cvJobDesc').value.trim(), 'your latest evaluation');
+    }
+    window.cvChallengeLatest = cvChallengeLatest;
+    function cvChallengeRecord(i) {
+      const rec = cvTrackRecords[i];
+      if (!rec) return;
+      const t = rec.transcript || {};
+      const total = cvTrackRecords.length;
+      const evalNum = total - i;
+      cvGoToEleanor(t.priorScoring, t.jobDescription, `evaluation #${evalNum}, from ${new Date(rec.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' })}`);
+    }
+    window.cvChallengeRecord = cvChallengeRecord;
 
     async function cvWriteCover() {
       if (!cvText.trim()) { alert('Upload your CV first.'); return; }

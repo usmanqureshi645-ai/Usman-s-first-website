@@ -336,6 +336,7 @@
   <main>
     <h1>My Workspace</h1>
     <p class="sub" id="workspaceSub">Loading…</p>
+    <button id="wsLogoutBtn" onclick="wsLogout()" style="display:none;background:none;border:none;color:var(--steel-light);font-size:.8rem;text-decoration:underline;cursor:pointer;padding:0;margin:-0.5rem 0 1rem">Log out</button>
 
     <div id="loggedOutState" class="state-card" style="display:none">
       <p>Sign up or log in to see your saved consultations, interview feedback, and resume any conversation right where you left off — it's completely free, and every tool stays free after signing up too.</p>
@@ -1283,6 +1284,7 @@
           document.getElementById('loggedOutState').style.display = 'block';
           return;
         }
+        document.getElementById('wsLogoutBtn').style.display = 'block';
         const workspaceSubEl = document.getElementById('workspaceSub');
         workspaceSubEl.textContent = `Welcome back, ${me.name.split(' ')[0]} — every consultation you've saved lives here. `;
         const moreFeaturesSpan = document.createElement('span');
@@ -1330,6 +1332,11 @@
       }
     }
     init();
+
+    window.wsLogout = async function() {
+      try { await fetch('/api/account?action=logout', { method: 'POST' }); } catch (e) {}
+      location.href = 'index.html';
+    };
 
     /* ── Boutique office parallax background — same as the main site ── */
     (function(){

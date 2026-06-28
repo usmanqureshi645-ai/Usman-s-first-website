@@ -2630,12 +2630,22 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
       <button class="welcome-bot-close" onclick="toggleSignup(false)">&times;</button>
     </div>
     <div class="welcome-bot-messages" id="signupMessages" style="gap:1rem">
+      <div id="signupLoggedInBlock" style="display:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.7rem .8rem;font-size:.82rem;color:var(--cream)">
+        Logged in as <strong id="signupLoggedInName"></strong>
+        <button class="pub-btn" onclick="location.href='workspace.html'" style="display:block;margin-top:.6rem;width:100%">Go to My Workspace</button>
+        <button onclick="logoutSiteUser()" style="display:block;margin-top:.5rem;background:none;border:none;color:var(--steel-light);font-size:.75rem;text-decoration:underline;cursor:pointer;padding:0">Log out</button>
+      </div>
       <div class="wb-msg bot"><div class="wb-bubble" id="signupIntroBubble">Every AI tool here is free to use without signing up. Signing up is free too — it just unlocks your personal workspace: every consultation saved, resume any conversation anytime, and a friendly follow-up email after each session.</div></div>
       <input type="text" id="signupName" placeholder="Your name" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
       <input type="email" id="signupEmail" placeholder="Your email" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
       <input type="password" id="signupPassword" placeholder="Choose a password (6+ characters)" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
+      <button id="signupForgotLink" onclick="toggleForgotMode(true)" style="display:none;background:none;border:none;color:var(--steel-light);font-size:.75rem;text-decoration:underline;cursor:pointer;text-align:right">Forgot password?</button>
+      <input type="email" id="forgotEmail" placeholder="Your email" style="display:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
+      <input type="text" id="forgotCode" placeholder="5-digit code from your email" style="display:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
+      <input type="password" id="forgotNewPassword" placeholder="New password (6+ characters)" style="display:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
       <button class="pub-btn" id="signupSubmitBtn" onclick="submitSignup()">Sign Up Free</button>
       <button id="signupModeToggle" onclick="toggleSignupMode()" style="background:none;border:none;color:var(--steel-light);font-size:.75rem;text-decoration:underline;cursor:pointer;text-align:center">Already have an account? Log in</button>
+      <button id="forgotBackLink" onclick="toggleForgotMode(false)" style="display:none;background:none;border:none;color:var(--steel-light);font-size:.75rem;text-decoration:underline;cursor:pointer;text-align:center">Back to log in</button>
     </div>
   </div>
   <button class="welcome-bot-toggle widget-tip" data-tooltip="Sign up free" id="signupToggle" style="background:linear-gradient(135deg,#5fd97a,#C8A96E)">✨</button>
@@ -3263,18 +3273,37 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
 
     function reflectSignedInState(){
       const navLink=document.getElementById('navWorkspaceLink');
+      const loggedInBlock=document.getElementById('signupLoggedInBlock');
+      const formFields=['signupIntroBubble','signupName','signupEmail','signupPassword','signupSubmitBtn','signupModeToggle','signupForgotLink'];
       if(currentUser){
         toggleBtn.textContent='🗂️';
         toggleBtn.title=`My Workspace (${currentUser.name})`;
         toggleBtn.setAttribute('data-tooltip',`My Workspace (${currentUser.name})`);
         if(navLink) navLink.style.display='block';
+        if(loggedInBlock){
+          loggedInBlock.style.display='block';
+          document.getElementById('signupLoggedInName').textContent=currentUser.name;
+        }
+        formFields.forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display='none'; });
       } else {
         toggleBtn.textContent='✨';
         toggleBtn.title='Sign up free';
         toggleBtn.setAttribute('data-tooltip','Sign up free');
         if(navLink) navLink.style.display='none';
+        if(loggedInBlock) loggedInBlock.style.display='none';
+        formFields.forEach(id=>{ const el=document.getElementById(id); if(el && id!=='signupForgotLink') el.style.display='block'; });
+        if(document.getElementById('signupForgotLink')) document.getElementById('signupForgotLink').style.display = loginMode ? 'block' : 'none';
       }
     }
+
+    window.logoutSiteUser=async function(){
+      try{ await fetch('/api/account?action=logout',{method:'POST'}); }catch(e){}
+      currentUser=null;
+      window._siteProfile=null;
+      reflectSignedInState();
+      window.updateAskBranding?.();
+      document.getElementById('signupMessages').insertAdjacentHTML('beforeend','<div class="wb-msg bot"><div class="wb-bubble">You\'ve been logged out.</div></div>');
+    };
 
     async function refreshUser(){
       try{
@@ -3332,13 +3361,98 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       document.getElementById('signupName').style.display = loginMode ? 'none' : 'block';
       document.getElementById('signupSubmitBtn').textContent = loginMode ? 'Log In' : 'Sign Up Free';
       document.getElementById('signupModeToggle').textContent = loginMode ? "Need an account? Sign up free" : 'Already have an account? Log in';
+      document.getElementById('signupForgotLink').style.display = loginMode ? 'block' : 'none';
       document.getElementById('signupIntroBubble').textContent = loginMode
         ? 'Log in to get back to your saved consultations and resume any conversation.'
         : "Every AI tool here is free to use without signing up. Signing up is free too — it just unlocks your personal workspace: every consultation saved, resume any conversation anytime, and a friendly follow-up email after each session.";
     };
 
+    let forgotMode=false;
+    let forgotStep=1; // 1 = enter email, 2 = enter code + new password
+
+    window.toggleForgotMode=function(on){
+      forgotMode=on;
+      forgotStep=1;
+      const loginFields=['signupEmail','signupPassword','signupSubmitBtn','signupModeToggle','signupForgotLink'];
+      const forgotFields=['forgotEmail','forgotCode','forgotNewPassword','forgotBackLink'];
+      if(on){
+        loginFields.forEach(id=>{ document.getElementById(id).style.display='none'; });
+        document.getElementById('signupName').style.display='none';
+        document.getElementById('forgotEmail').style.display='block';
+        document.getElementById('forgotCode').style.display='none';
+        document.getElementById('forgotNewPassword').style.display='none';
+        document.getElementById('forgotBackLink').style.display='block';
+        document.getElementById('signupSubmitBtn').style.display='block';
+        document.getElementById('signupSubmitBtn').textContent='Send reset code';
+        document.getElementById('signupIntroBubble').textContent='Enter your email and we\'ll send you a 5-digit code to reset your password.';
+      } else {
+        forgotFields.forEach(id=>{ document.getElementById(id).style.display='none'; });
+        document.getElementById('signupName').style.display = loginMode ? 'none' : 'block';
+        document.getElementById('signupEmail').style.display='block';
+        document.getElementById('signupPassword').style.display='block';
+        document.getElementById('signupSubmitBtn').style.display='block';
+        document.getElementById('signupSubmitBtn').textContent = loginMode ? 'Log In' : 'Sign Up Free';
+        document.getElementById('signupModeToggle').style.display='block';
+        document.getElementById('signupForgotLink').style.display = loginMode ? 'block' : 'none';
+        document.getElementById('signupIntroBubble').textContent = loginMode
+          ? 'Log in to get back to your saved consultations and resume any conversation.'
+          : "Every AI tool here is free to use without signing up. Signing up is free too — it just unlocks your personal workspace: every consultation saved, resume any conversation anytime, and a friendly follow-up email after each session.";
+      }
+    };
+
+    window.submitForgotPassword=async function(){
+      const btn=document.getElementById('signupSubmitBtn');
+      if(forgotStep===1){
+        const email=document.getElementById('forgotEmail').value.trim();
+        if(!email.includes('@')){ alert('Please enter a valid email.'); return; }
+        btn.disabled=true; btn.textContent='Sending…';
+        try{
+          const r=await fetch('/api/account?action=forgot-password',{
+            method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({email})
+          });
+          const data=await r.json();
+          if(!r.ok){ alert('Sorry, something went wrong: '+(data.error||'unknown error')); return; }
+          forgotStep=2;
+          document.getElementById('forgotEmail').style.display='none';
+          document.getElementById('forgotCode').style.display='block';
+          document.getElementById('forgotNewPassword').style.display='block';
+          btn.textContent='Reset password';
+          document.getElementById('signupIntroBubble').textContent='If an account exists for that email, a 5-digit code is on its way — enter it below along with your new password.';
+        }catch(e){
+          alert('Connection issue — please try again.');
+        }finally{
+          btn.disabled=false;
+        }
+      } else {
+        const email=document.getElementById('forgotEmail').value.trim();
+        const code=document.getElementById('forgotCode').value.trim();
+        const newPassword=document.getElementById('forgotNewPassword').value;
+        if(!code || newPassword.length<6){ alert('Please enter the code and a new password (6+ characters).'); return; }
+        btn.disabled=true; btn.textContent='Resetting…';
+        try{
+          const r=await fetch('/api/account?action=reset-password',{
+            method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({email, code, newPassword})
+          });
+          const data=await r.json();
+          if(!r.ok){ alert('Sorry, something went wrong: '+(data.error||'unknown error')); return; }
+          currentUser={ name:data.name, email:data.email };
+          window.toggleForgotMode(false);
+          reflectSignedInState();
+          document.getElementById('signupMessages').innerHTML=`<div class="wb-msg bot"><div class="wb-bubble">Password reset — you're logged back in, ${data.name.split(' ')[0]}.</div></div>`;
+          window.updateAskBranding?.();
+          (async()=>{
+            try{ const pr=await fetch('/api/account?action=profile-get'); const pd=await pr.json(); if(pd.ok) window._siteProfile=pd.profile||{}; }catch(e){}
+            window.applySavedProfileToTools?.();
+          })();
+        }catch(e){
+          alert('Connection issue — please try again.');
+        }finally{
+          btn.disabled=false; btn.textContent='Reset password';
+        }
+      }
+    };
+
     window.toggleSignup=function(force){
-      if(currentUser && force!==false){ location.href='workspace.html'; return; }
       suOpened = typeof force==='boolean' ? force : !suOpened;
       if(suOpened) window.closeOtherWidgets?.('signup');
       panel.classList.toggle('open', suOpened);
@@ -3346,6 +3460,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     toggleBtn.addEventListener('click', ()=>window.toggleSignup());
 
     window.submitSignup=async function(){
+      if(forgotMode){ return window.submitForgotPassword(); }
       const name=document.getElementById('signupName').value.trim();
       const email=document.getElementById('signupEmail').value.trim();
       const password=document.getElementById('signupPassword').value;

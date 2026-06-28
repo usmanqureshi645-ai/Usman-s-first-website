@@ -7,6 +7,7 @@ import { createMeetingSession, getMeetingSession, saveMeetingSession } from '../
 import { getProfile, saveProfile } from '../lib/profile.js';
 import { sendEmail } from '../lib/email.js';
 import { recordVisit, recordPresence, recordSignup, getDashboardData } from '../lib/metrics.js';
+import { logAndCheckUsage } from '../lib/ipUsage.js';
 
 const TOOL_LABELS = { meeting: 'Meeting Room consultation', quiz: 'Interview Prep session' };
 const SIGNUP_LINE = "If you haven't already, signing up is free and unlocks your personal workspace — every consultation saved, and you can resume any conversation right where you left off. It stays free after signing up too.";
@@ -96,6 +97,81 @@ async function handleLogout(req, res) {
 async function handleMe(req, res) {
   const user = getUserFromRequest(req);
   res.status(200).json(user ? { loggedIn: true, name: user.name, email: user.email } : { loggedIn: false });
+}
+
+const RESET_CODE_TTL_SECONDS = 60 * 10; // 10 minutes
+
+async function handleForgotPassword(req, res, { resendKey, kvUrl, kvToken }) {
+  if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Accounts service not configured yet' }); return; }
+
+  const usage = await logAndCheckUsage(req, { kvUrl, kvToken }, 'forgot-password');
+  if (usage.limited) { res.status(429).json({ error: 'Too many requests — please wait a minute and try again' }); return; }
+
+  const { email } = req.body || {};
+  const normalizedEmail = normalizeEmail(email);
+  if (!normalizedEmail || !normalizedEmail.includes('@')) {
+    res.status(400).json({ error: 'Please provide a valid email' });
+    return;
+  }
+
+  // Always respond ok — don't leak whether an account exists for this email.
+  const getResp = await fetch(`${kvUrl}/get/user:${normalizedEmail}`, { headers: { authorization: `Bearer ${kvToken}` } });
+  const getData = await getResp.json();
+  if (!getData?.result) { res.status(200).json({ ok: true }); return; }
+
+  const user = JSON.parse(getData.result);
+  const code = String(Math.floor(10000 + Math.random() * 90000));
+
+  const key = `resetcode:${normalizedEmail}`;
+  await fetch(`${kvUrl}/set/${key}/${code}`, { headers: { authorization: `Bearer ${kvToken}` } });
+  await fetch(`${kvUrl}/expire/${key}/${RESET_CODE_TTL_SECONDS}`, { headers: { authorization: `Bearer ${kvToken}` } });
+
+  if (resendKey) {
+    await sendEmail(resendKey, {
+      from: 'Usman Qureshi | Audit & Advisory <welcome@uqconsulting.org>',
+      to: [normalizedEmail],
+      subject: 'Your password reset code',
+      html: `
+        <h2>Reset your password</h2>
+        <p>Hi ${user.name.split(' ')[0]}, here's your password reset code:</p>
+        <p style="font-size:28px;font-weight:bold;letter-spacing:4px">${code}</p>
+        <p>This code expires in 10 minutes. If you didn't request this, you can safely ignore this email.</p>
+      `,
+    }, { kvUrl, kvToken });
+  }
+
+  res.status(200).json({ ok: true });
+}
+
+async function handleResetPassword(req, res, { kvUrl, kvToken }) {
+  if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Accounts service not configured yet' }); return; }
+
+  const { email, code, newPassword } = req.body || {};
+  const normalizedEmail = normalizeEmail(email);
+  if (!normalizedEmail || !code || !newPassword || newPassword.length < 6) {
+    res.status(400).json({ error: 'Please provide your email, the code, and a new password (6+ characters)' });
+    return;
+  }
+
+  const codeKey = `resetcode:${normalizedEmail}`;
+  const codeResp = await fetch(`${kvUrl}/get/${codeKey}`, { headers: { authorization: `Bearer ${kvToken}` } });
+  const codeData = await codeResp.json();
+  if (!codeData?.result || codeData.result !== String(code)) {
+    res.status(400).json({ error: 'Invalid or expired code' });
+    return;
+  }
+
+  const getResp = await fetch(`${kvUrl}/get/user:${normalizedEmail}`, { headers: { authorization: `Bearer ${kvToken}` } });
+  const getData = await getResp.json();
+  if (!getData?.result) { res.status(400).json({ error: 'Invalid or expired code' }); return; }
+
+  const user = JSON.parse(getData.result);
+  user.passwordHash = hashPassword(newPassword);
+  await fetch(`${kvUrl}/set/user:${normalizedEmail}/${encodeURIComponent(JSON.stringify(user))}`, { headers: { authorization: `Bearer ${kvToken}` } });
+  await fetch(`${kvUrl}/del/${codeKey}`, { headers: { authorization: `Bearer ${kvToken}` } });
+
+  setSessionCookie(res, { email: user.email, name: user.name });
+  res.status(200).json({ ok: true, name: user.name, email: user.email });
 }
 
 async function handleSaveConsultation(req, res, { kvUrl, kvToken }) {
@@ -441,6 +517,8 @@ export default async function handler(req, res) {
       case 'login': return req.method === 'POST' ? await handleLogin(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       case 'logout': return req.method === 'POST' ? await handleLogout(req, res) : res.status(405).json({ error: 'Method not allowed' });
       case 'me': return await handleMe(req, res);
+      case 'forgot-password': return req.method === 'POST' ? await handleForgotPassword(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
+      case 'reset-password': return req.method === 'POST' ? await handleResetPassword(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       case 'save-consultation': return req.method === 'POST' ? await handleSaveConsultation(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       case 'workspace-list': return await handleWorkspaceList(req, res, ctx);
       case 'workspace-get': return await handleWorkspaceGet(req, res, ctx);

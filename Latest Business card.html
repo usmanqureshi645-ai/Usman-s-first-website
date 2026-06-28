@@ -1292,7 +1292,7 @@ animation:pulseRing 2.4s ease-out infinite;
 .mr-avatar.av-gen-m{background-image:url("images/team/generic-male.png")}
 .mr-agent-name{font-size:.82rem;font-weight:600;color:var(--white)}
 .mr-agent-role{font-size:.7rem;color:var(--steel-light)}
-.mr-chat{background:rgba(255,255,255,.04);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);border-radius:16px;display:flex;flex-direction:column;height:560px;overflow:hidden;position:relative}
+.mr-chat{background:rgba(255,255,255,.04);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);border-radius:16px;display:flex;flex-direction:column;height:100%;min-height:560px;overflow:hidden;position:relative}
 .mr-chat-topbar{position:absolute;top:.5rem;right:.5rem;z-index:5}
 .mr-maximize-btn{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);color:var(--steel-light);border-radius:6px;width:30px;height:30px;cursor:pointer;font-size:.9rem;line-height:1;flex-shrink:0}
 .mr-maximize-btn:hover{border-color:var(--gold);color:var(--gold-light)}
@@ -1749,7 +1749,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 
 <div class="job-tailor-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem">
   <div>
-    <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.5rem">1. Upload your CV (.pdf, .docx, or .txt) — required</label>
+    <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.5rem">1. Upload your CV (.docx preferred, .pdf or .txt also fine) — required</label>
     <div class="job-upload-box" id="jobCvUploadBox" onclick="document.getElementById('jobCvFile').click()">
       <input type="file" id="jobCvFile" accept=".pdf,.docx,.txt" style="display:none" onchange="jobHandleFile(this,'cv')">
       <span id="jobCvUploadLabel">📄 Click to upload your CV</span>
@@ -1787,14 +1787,23 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
     <div class="knowledge-card">
       <h3>Updated CV</h3>
       <pre id="jobCvOutput" style="white-space:pre-wrap;font-family:inherit;font-size:.82rem;color:var(--steel-light);max-height:420px;overflow-y:auto"></pre>
-      <button class="pub-btn" style="margin-top:1rem" onclick="jobDownload('jobCvOutput','updated-cv.txt')">Download CV (.txt)</button>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem">
+        <button class="pub-btn" onclick="jobDownloadDocx('jobCvOutput','Updated-CV.docx',this)">Download CV (Word)</button>
+        <button class="pub-btn" style="background:transparent;border:1px solid var(--steel);color:var(--steel-light)" onclick="jobCopyText('jobCvOutput',this)">Copy text</button>
+      </div>
     </div>
     <div class="knowledge-card">
       <h3>Cover Letter</h3>
       <pre id="jobCoverOutput" style="white-space:pre-wrap;font-family:inherit;font-size:.82rem;color:var(--steel-light);max-height:420px;overflow-y:auto"></pre>
-      <button class="pub-btn" style="margin-top:1rem" onclick="jobDownload('jobCoverOutput','cover-letter.txt')">Download Letter (.txt)</button>
+      <div style="display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1rem">
+        <button class="pub-btn" onclick="jobDownloadDocx('jobCoverOutput','Cover-Letter.docx',this)">Download Letter (Word)</button>
+        <button class="pub-btn" style="background:transparent;border:1px solid var(--steel);color:var(--steel-light)" onclick="jobCopyText('jobCoverOutput',this)">Copy text</button>
+      </div>
     </div>
   </div>
+  <p class="mr-note" style="text-align:center;margin-top:1rem;max-width:760px;margin-left:auto;margin-right:auto">
+    <strong>About formatting:</strong> the Word download is a clean, professionally laid-out version of your updated content. If you'd rather keep your <em>own</em> original layout exactly, use <strong>Copy text</strong> and paste the wording into your existing file — or pick one of the polished templates below. For the closest match when uploading, a <strong>.docx</strong> CV works better than a PDF.
+  </p>
   <p class="mr-note" style="text-align:center;margin-top:1.5rem">Review carefully before sending — this is an AI-generated draft, not a substitute for your own judgement. Apply directly on the employer's site or LinkedIn/Indeed — this tool does not submit applications on your behalf.</p>
 
   <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin:2.5rem 0 1rem;text-align:center">Want a Polished Template Instead?</h3>
@@ -5598,14 +5607,125 @@ async function jobApplyChanges(){
   }
 }
 
-function jobDownload(elId, filename){
-  const text=document.getElementById(elId).textContent;
-  const blob=new Blob([text], {type:'text/plain'});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement('a');
-  a.href=url; a.download=filename;
-  document.body.appendChild(a); a.click(); a.remove();
-  URL.revokeObjectURL(url);
+// ---- Word (.docx) export -------------------------------------------------
+// We build a clean, real Word document from the tailored text client-side (no
+// server round-trip, no extra serverless function). Exact reproduction of an
+// arbitrary uploaded layout isn't feasible in the browser, so we render a tidy,
+// consistent professional layout — and we also offer "copy the text" so the
+// user can paste the updated wording straight into their own original file.
+function jobXmlEscape(s){
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+// Split a line on **bold** spans into Word runs, honouring an optional base size/bold.
+function jobDocxRuns(text, { bold=false, sz }={}){
+  const parts=String(text).split(/(\*\*[^*]+\*\*)/g).filter(s=>s!=='');
+  return parts.map(seg=>{
+    let isBold=bold, t=seg;
+    const m=seg.match(/^\*\*([^*]+)\*\*$/);
+    if(m){ isBold=true; t=m[1]; }
+    const rpr=`<w:rPr>${isBold?'<w:b/>':''}${sz?`<w:sz w:val="${sz}"/><w:szCs w:val="${sz}"/>`:''}</w:rPr>`;
+    return `<w:r>${rpr}<w:t xml:space="preserve">${jobXmlEscape(t)}</w:t></w:r>`;
+  }).join('');
+}
+// Turn the plain/markdown-ish tailored text into Word paragraphs.
+function jobTextToDocxBody(text){
+  const lines=String(text||'').replace(/\r/g,'').split('\n');
+  let firstContentSeen=false;
+  const paras=[];
+  for(const raw of lines){
+    const line=raw.trim();
+    if(!line){ paras.push('<w:p/>'); continue; }
+    // The very first non-empty line is treated as the name/title.
+    if(!firstContentSeen){
+      firstContentSeen=true;
+      paras.push(`<w:p><w:pPr><w:spacing w:after="120"/></w:pPr>${jobDocxRuns(line,{bold:true,sz:36})}</w:p>`);
+      continue;
+    }
+    const md=line.match(/^(#{1,3})\s+(.*)$/);
+    const isAllCaps=/^[A-Z0-9][A-Z0-9 &/().,'-]{2,48}$/.test(line) && /[A-Z]/.test(line);
+    const isWholeBold=/^\*\*[^*]+\*\*$/.test(line);
+    if(md || isAllCaps || isWholeBold){
+      const heading=md ? md[2] : line.replace(/^\*\*|\*\*$/g,'');
+      paras.push(`<w:p><w:pPr><w:spacing w:before="240" w:after="60"/><w:keepNext/></w:pPr>${jobDocxRuns(heading,{bold:true,sz:26})}</w:p>`);
+      continue;
+    }
+    if(/^[-•*]\s+/.test(line)){
+      const item=line.replace(/^[-•*]\s+/,'');
+      paras.push(`<w:p><w:pPr><w:ind w:left="360" w:hanging="360"/><w:spacing w:after="40"/></w:pPr><w:r><w:t xml:space="preserve">• </w:t></w:r>${jobDocxRuns(item)}</w:p>`);
+      continue;
+    }
+    paras.push(`<w:p><w:pPr><w:spacing w:after="60"/></w:pPr>${jobDocxRuns(line)}</w:p>`);
+  }
+  return paras.join('');
+}
+async function jobBuildDocxBlob(text){
+  await loadScriptOnce('https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js');
+  const zip=new window.JSZip();
+  zip.file('[Content_Types].xml',
+    `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>`+
+    `<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">`+
+    `<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>`+
+    `<Default Extension="xml" ContentType="application/xml"/>`+
+    `<Override PartName="/word/document.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>`+
+    `<Override PartName="/word/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>`+
+    `</Types>`);
+  zip.folder('_rels').file('.rels',
+    `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>`+
+    `<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">`+
+    `<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="word/document.xml"/>`+
+    `</Relationships>`);
+  const wordRels=zip.folder('word').folder('_rels');
+  wordRels.file('document.xml.rels',
+    `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>`+
+    `<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">`+
+    `<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>`+
+    `</Relationships>`);
+  zip.file('word/styles.xml',
+    `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>`+
+    `<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main">`+
+    `<w:docDefaults><w:rPrDefault><w:rPr><w:rFonts w:ascii="Calibri" w:hAnsi="Calibri" w:cs="Calibri"/><w:sz w:val="22"/><w:szCs w:val="22"/></w:rPr></w:rPrDefault></w:docDefaults>`+
+    `</w:styles>`);
+  zip.file('word/document.xml',
+    `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>`+
+    `<w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"><w:body>`+
+    jobTextToDocxBody(text)+
+    `<w:sectPr><w:pgSz w:w="11906" w:h="16838"/><w:pgMar w:top="1134" w:right="1134" w:bottom="1134" w:left="1134" w:header="720" w:footer="720" w:gutter="0"/></w:sectPr>`+
+    `</w:body></w:document>`);
+  return await zip.generateAsync({ type:'blob', mimeType:'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+}
+async function jobDownloadDocx(elId, filename, btn){
+  const text=document.getElementById(elId).textContent || '';
+  if(!text.trim()){ alert('Nothing to download yet.'); return; }
+  const original = btn && btn.textContent;
+  if(btn){ btn.disabled=true; btn.textContent='Building Word file…'; }
+  try{
+    const blob=await jobBuildDocxBlob(text);
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url; a.download=filename.endsWith('.docx')?filename:filename+'.docx';
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+  }catch(e){
+    // Fall back to plain text so the user is never left empty-handed.
+    const blob=new Blob([text], {type:'text/plain'});
+    const url=URL.createObjectURL(blob);
+    const a=document.createElement('a');
+    a.href=url; a.download=filename.replace(/\.docx$/,'')+'.txt';
+    document.body.appendChild(a); a.click(); a.remove();
+    URL.revokeObjectURL(url);
+    alert('We could not build a Word file just now, so we downloaded the text instead — you can paste it straight into your own CV.');
+  }finally{
+    if(btn){ btn.disabled=false; btn.textContent=original; }
+  }
+}
+async function jobCopyText(elId, btn){
+  const text=document.getElementById(elId).textContent || '';
+  try{
+    await navigator.clipboard.writeText(text);
+    if(btn){ const o=btn.textContent; btn.textContent='Copied ✓'; setTimeout(()=>{btn.textContent=o;},1800); }
+  }catch(e){
+    alert('Could not copy automatically — select the text above and copy manually.');
+  }
 }
 
 function jobRenderTemplate(style){

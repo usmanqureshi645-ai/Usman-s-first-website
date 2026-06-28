@@ -126,6 +126,6 @@ Give between 5 and 8 items for the CV. The HR score reflects screening appeal an
 
     res.status(200).json({ ...parsed, usage });
   } catch (err) {
-    res.status(500).json({ error: 'Request failed' });
+    res.status(500).json({ error: 'Request failed', detail: String(err && err.message || err), where: mode });
   }
 }

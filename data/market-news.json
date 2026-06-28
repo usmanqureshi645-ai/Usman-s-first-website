@@ -1,41 +1,41 @@
 {
-  "updatedAt": "2026-06-25T21:00:00Z",
+  "updatedAt": "2026-06-25T20:08:49Z",
   "items": [
     {
-      "title": "FRC Refreshes Auditing Standards to Reduce Reporting Burden",
-      "summary": "The FRC has revised three UK auditing standards (ISA (UK) 700, 701, 720) to make auditor's reports shorter, clearer and more useful to investors. The revised standards take effect from 15 December 2026.",
+      "title": "IASB Issues IFRS 20 for Rate-Regulated Entities",
+      "summary": "The IASB has issued IFRS 20, a new standard requiring companies subject to rate regulation - think utilities like electricity, water and gas providers - to recognise regulatory assets and liabilities on their balance sheets. It's designed to give investors a clearer picture of how rate regulation shapes future cash flows, and takes effect for annual periods beginning on or after 1 January 2029.",
+      "source": "IFRS Foundation",
+      "url": "https://www.ifrs.org/news-and-events/news/2026/05/iasb-issues-ifrs-20/"
+    },
+    {
+      "title": "FRC Revises UK Auditing Standards on Reporting",
+      "summary": "The FRC has revised three UK auditing standards (ISA (UK) 700, 701 and 720) following public consultation, aiming to make auditors' reports shorter, clearer and more useful to investors. The changes, which also clarify auditor responsibilities under the revised UK Corporate Governance Code, take effect from 15 December 2026.",
       "source": "FRC",
       "url": "https://www.frc.org.uk/news-and-events/news/2026/06/frc-refreshes-auditing-standards-to-reduce-reporting-burden-and-improve-transparency/"
     },
     {
-      "title": "FRC Publishes First UK Guidance on AI Use in Auditing",
-      "summary": "The FRC has published what it describes as the world's first guidance on AI use in auditing, warning firms they remain accountable for AI-driven errors — as EY rolls out its AI-powered Canvas platform and KPMG pilots orchestration agents on Clara.",
-      "source": "FRC / Industry",
-      "url": "https://www.resultsense.com/news/2026-04-06-frc-ai-auditing-guidance-big-four/"
-    },
-    {
-      "title": "FRC Evolves Audit Supervisory Model",
-      "summary": "A more proportionate, integrated supervisory framework began rolling out from April 2026 for the largest firms, placing Systems of Quality Management (SoQM) at the heart of supervision, supported by thematic reviews and corroboratory inspections.",
+      "title": "FRC Modernises Audit Enforcement Procedure",
+      "summary": "The FRC has overhauled its Audit Enforcement Procedure as part of a broader shift to a more integrated regulatory model, linking supervision, investigation and enforcement so problems are spotted earlier and resolved faster. The reform is intended to give the audit market quicker outcomes and earlier lessons learned from enforcement cases.",
       "source": "FRC",
-      "url": "https://www.frc.org.uk/news-and-events/news/2026/03/frc-introduces-evolved-approach-to-audit-supervision/"
+      "url": "https://www.frc.org.uk/news-and-events/news/2026/06/frc-modernises-enforcement-to-deliver-faster-outcomes-and-earlier-learnings-for-the-uk-audit-market/"
     },
     {
-      "title": "UK Government Drops Audit Reform Bill",
-      "summary": "In January 2026 the UK government announced it would not proceed with a standalone Audit Reform Bill, citing reduced administrative burden priorities and recent improvements in audit regulation as reasons major legislative reform is now less pressing.",
-      "source": "House of Commons / ICAEW",
-      "url": "https://www.icaew.com/insights/viewpoints-on-the-news/2026/jan-2026/2026-will-we-see-audit-reform"
+      "title": "PCAOB Proposes Easing Quality Control Standard",
+      "summary": "The PCAOB has proposed amendments to its QC 1000 quality control standard that would remove the external quality control function and design-only compliance requirements, responding to pushback from audit firms over implementation burden. The proposal is open for public comment until 9 July 2026.",
+      "source": "PCAOB / Journal of Accountancy",
+      "url": "https://www.journalofaccountancy.com/news/2026/jun/pcaob-seeks-comment-on-proposed-quality-control-amendments/"
     },
     {
-      "title": "IFRS 18 Comparatives Now Required for 2026",
-      "summary": "Although IFRS 18 isn't mandatorily effective until January 2027, entities must apply it retrospectively — meaning 2026 comparative figures need to be prepared on an IFRS 18 basis now, alongside new IFRS 7/IFRS 9 amendments on settlement-date derecognition and ESG-linked cash flows.",
-      "source": "IFRS Foundation / KPMG",
-      "url": "https://kpmg.com/us/en/articles/2026/q2-2026-new-ifrs-accounting-standards-amendments-are-you-ready.html"
+      "title": "PCAOB Forms Inspections Modernization Council",
+      "summary": "The PCAOB is setting up an Inspections Modernization Council and invited outside experts to apply, signalling an effort to rethink how it inspects audit firms. The application window closed mid-June 2026, with the council expected to feed into future changes to the inspections programme.",
+      "source": "PCAOB",
+      "url": "https://pcaobus.org/news-events/news-releases/news-release-detail/pcaob-announces-inspections-modernization-council--seeks-participation-from-outside-experts"
     },
     {
-      "title": "IASB Chair Transition Raises Direction Questions",
-      "summary": "The non-renewal of Andreas Barckow's term as IASB chair (concluding June 2026) has fuelled debate about the IFRS Foundation's strategic direction and resourcing as it juggles accounting and sustainability standard-setting simultaneously.",
-      "source": "Thomson Reuters",
-      "url": "https://tax.thomsonreuters.com/news/outlook-2026-is-the-ifrs-foundation-biting-off-more-than-it-can-chew/"
+      "title": "Big Four Race to Build AI Assurance Services",
+      "summary": "PwC, EY, Deloitte and KPMG are racing to build out AI assurance services that audit the safety, fairness and effectiveness of clients' own AI systems, alongside KPMG's $2bn AI investment programme and EY's rollout of AI agents across its tax practice. The push reflects how the Big Four are repositioning audit and advisory work around AI risk, not just adopting AI internally.",
+      "source": "Consultancy.uk",
+      "url": "https://www.consultancy.uk/news/40424/big-four-weighing-up-new-ai-audit-offerings"
     }
   ]
 }

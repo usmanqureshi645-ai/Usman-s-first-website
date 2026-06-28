@@ -5403,6 +5403,15 @@ async function jobHandleFile(input, kind){
   label.textContent=`Extracting text from ${file.name}…`;
   try{
     const text=await extractFileText(file);
+    label.textContent=`Checking ${file.name}…`;
+    const ok=await jobValidateDoc(text, kind);
+    if(!ok.isValid){
+      box.classList.remove('has-file');
+      if(kind==='cv') jobCvText=''; else jobCoverText='';
+      label.textContent=`✕ That doesn't look like ${kind==='cv'?'a CV':'a cover letter'}${ok.detectedType?` — it looks like ${ok.detectedType}`:''}. Please upload your ${kind==='cv'?'CV':'cover letter'}.`;
+      input.value='';
+      return;
+    }
     if(kind==='cv') jobCvText=text; else jobCoverText=text;
     box.classList.add('has-file');
     label.textContent=`✓ ${file.name} — ${text.trim().split(/\s+/).length} words extracted`;
@@ -5416,6 +5425,19 @@ async function jobHandleFile(input, kind){
     label.textContent=`Couldn't read ${file.name} — try a .txt, .pdf or .docx file`;
     box.classList.remove('has-file');
   }
+}
+
+// Guard against the wrong document being uploaded (e.g. financial statements as a CV).
+// On any error we fail open (treat as valid) so a transient API issue never blocks a real CV.
+async function jobValidateDoc(text, kind){
+  try{
+    const r=await fetch('/api/cv-review',{
+      method:'POST',headers:{'content-type':'application/json'},
+      body:JSON.stringify({mode:'validate', text, kind:kind==='cover'?'cover':'cv'})
+    });
+    if(!r.ok) return { isValid:true };
+    return await r.json();
+  }catch(e){ return { isValid:true }; }
 }
 
 // Pre-fill any tool from the saved profile so logged-in users aren't asked twice.

@@ -213,7 +213,7 @@
     .welcome-bot-panel{ width:85vw; max-height:55vh !important; }
     .welcome-bot-panel.open{ transform:translateX(-12px) translateY(0) scale(1) !important; }
   }
-  /* Speak / Attach / Hear buttons for the Priya review chat — same look as the site's mr-mic. */
+  /* Speak / Attach / Hear buttons for the Eleanor review chat — same look as the site's mr-mic. */
   .mr-mic{ display:inline-flex; align-items:center; gap:.4rem; padding:.45rem .8rem; background:rgba(255,255,255,.05); border:1px solid rgba(200,169,110,.25); border-radius:9px; color:var(--steel-light); cursor:pointer; font-family:inherit; transition:.2s; }
   .mr-mic svg{ width:16px; height:16px; flex-shrink:0; }
   .mr-mic-label{ font-size:.72rem; font-weight:600; color:inherit; white-space:nowrap; font-family:inherit; }
@@ -221,6 +221,10 @@
   .mr-mic.active{ background:rgba(200,169,110,.22); border-color:var(--gold); color:var(--gold-light); }
   .mr-mic.listening{ background:rgba(200,80,80,.18); border-color:#d88a8a; color:#e7b4b4; }
   @media (max-width:480px){ .mr-mic-label{ display:none; } .mr-mic{ padding:0; width:40px; height:40px; justify-content:center; } }
+  /* Focus mode: the review chat fills the screen and everything else is hidden behind it. */
+  #cvReviewChat.cv-chat-max{ position:fixed!important; inset:0!important; z-index:10000!important; margin:0!important; border:none!important; border-radius:0!important; background:#0a1424!important; padding:1.1rem 1.1rem 1.25rem!important; display:flex; flex-direction:column; max-width:none!important; height:100dvh; }
+  #cvReviewChat.cv-chat-max #cvChatLog{ max-height:none!important; flex:1 1 auto; }
+  body.cv-focus-mode{ overflow:hidden; }
 </style>
 </head>
 <body>
@@ -410,19 +414,24 @@
 
           <hr style="border:none;border-top:1px solid rgba(200,169,110,.15);margin:1.75rem 0">
 
-          <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem">Talk through your edits with Priya</h3>
-          <p style="color:var(--steel-light);font-size:.85rem;line-height:1.6;margin-bottom:.75rem">Made changes after the scoring? Priya Nair, a recruitment specialist, will talk them through with you. Disagree with any of our suggestions, explain your situation, and she'll adapt the advice to what actually works for you. You can type, speak, listen to her replies, or attach an updated document. She coaches you; she won't rewrite the document for you.</p>
+          <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem">Talk through your edits with Eleanor</h3>
+          <p style="color:var(--steel-light);font-size:.85rem;line-height:1.6;margin-bottom:.75rem">Made changes after the scoring? Eleanor Hughes, a recruitment specialist, will talk them through with you. Disagree with any of our suggestions, explain your situation, and she'll adapt the advice to what actually works for you. You can type, speak, listen to her replies, or attach an updated document. She coaches you; she won't rewrite the document for you.</p>
           <div id="cvReviewChat" style="border:1px solid rgba(200,169,110,.18);border-radius:12px;padding:1rem;background:rgba(0,0,0,.15)">
             <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.85rem;padding-bottom:.85rem;border-bottom:1px solid rgba(200,169,110,.12)">
-              <img src="images/team/priya-nair.png" alt="Priya Nair" style="width:42px;height:42px;border-radius:50%;object-fit:cover">
+              <img src="images/team/cv-reviewer.png" alt="Eleanor Hughes" style="width:42px;height:42px;border-radius:50%;object-fit:cover">
               <div>
-                <div style="font-weight:600;color:var(--cream);font-size:.9rem">Priya Nair</div>
+                <div style="font-weight:600;color:var(--cream);font-size:.9rem">Eleanor Hughes</div>
                 <div style="font-size:.72rem;color:var(--steel-light)">Recruitment &amp; Career Specialist</div>
               </div>
+              <button id="cvChatMaxBtn" class="mr-mic" onclick="cvToggleMaximize()" title="Focus mode — full screen" style="margin-left:auto">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3M3 16v3a2 2 0 002 2h3m8 0h3a2 2 0 002-2v-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="mr-mic-label">Full screen</span>
+              </button>
             </div>
             <div id="cvChatLog" style="max-height:420px;overflow-y:auto;display:flex;flex-direction:column;gap:.75rem;margin-bottom:.75rem"></div>
+            <p id="cvVoiceNote" style="display:none;font-size:.72rem;color:var(--steel-light);margin:0 0 .55rem;font-style:italic">The spoken voice can sound a little robotic for now. We're soon bringing real human accents.</p>
             <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.55rem">
-              <button id="cvMic" class="mr-mic" title="Speak to Priya">
+              <button id="cvMic" class="mr-mic" title="Speak to Eleanor">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
                 <span class="mr-mic-label">Speak</span>
               </button>
@@ -431,13 +440,13 @@
                 <span class="mr-mic-label">Attach</span>
               </button>
               <input type="file" id="cvChatFile" accept=".pdf,.docx,.txt" style="display:none" onchange="cvChatHandleFile(this)">
-              <button id="cvVoiceToggle" class="mr-mic" title="Hear Priya's replies aloud" onclick="cvToggleVoice()">
+              <button id="cvVoiceToggle" class="mr-mic" title="Hear Eleanor's replies aloud" onclick="cvToggleVoice()">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a9 9 0 010 14" stroke-linecap="round"/></svg>
                 <span class="mr-mic-label">Hear</span>
               </button>
             </div>
             <div style="display:flex;gap:.5rem">
-              <textarea id="cvChatInput" placeholder="Tell Priya what you changed, or paste your updated text…" style="flex:1;min-height:60px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.7rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
+              <textarea id="cvChatInput" placeholder="Tell Eleanor what you changed, or paste your updated text…" style="flex:1;min-height:60px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.7rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
               <button class="btn-gold" id="cvChatSendBtn" onclick="cvChatSend()" style="align-self:flex-end">Send</button>
             </div>
           </div>
@@ -808,6 +817,13 @@
       label.textContent = `Extracting text from ${file.name}…`;
       try {
         const text = await extractFileText(file);
+        label.textContent = `Checking ${file.name}…`;
+        const check = await cvValidateDoc(text, kind);
+        if (!check.isValid) {
+          label.textContent = `✕ That doesn't look like ${kind === 'cv' ? 'a CV' : 'a cover letter'}${check.detectedType ? ` — it looks like ${check.detectedType}` : ''}. Please upload your ${kind === 'cv' ? 'CV' : 'cover letter'}.`;
+          input.value = '';
+          return;
+        }
         if (kind === 'cv') { cvText = text; jsCvText = text; }
         else { coverText = text; jsCoverText = text; }
         label.innerHTML = `✓ ${file.name} — ${wordCount(text)} words · saved`;
@@ -819,6 +835,18 @@
       }
     }
     window.cvHandleFile = cvHandleFile;
+
+    // Reject the wrong kind of document before we save or score it. Fail open on errors.
+    async function cvValidateDoc(text, kind) {
+      try {
+        const r = await fetch('/api/cv-review', {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ mode: 'validate', text, kind: kind === 'cover' ? 'cover' : 'cv' }),
+        });
+        if (!r.ok) return { isValid: true };
+        return await r.json();
+      } catch (e) { return { isValid: true }; }
+    }
 
     async function cvClear(kind) {
       const what = kind === 'cv' ? 'CV' : 'cover letter';
@@ -1036,12 +1064,50 @@
       cvVoiceEnabled = !cvVoiceEnabled;
       const btn = document.getElementById('cvVoiceToggle');
       btn.classList.toggle('active', cvVoiceEnabled);
+      const note = document.getElementById('cvVoiceNote');
+      if (note) note.style.display = cvVoiceEnabled ? 'block' : 'none';
       if (!cvVoiceEnabled) VoiceEngine.cancel();
     }
     window.cvToggleVoice = cvToggleVoice;
     function cvSpeak(text) { if (cvVoiceEnabled) VoiceEngine.speak(text, 1, 'female'); }
 
-    /* ── Iterative review chat with Priya Nair ── */
+    // Focus mode: reparent the chat to <body> so no ancestor's overflow/stacking can clip it,
+    // fill the screen, hide everything else, and pause the background music while focused.
+    let cvChatPlaceholder = null;
+    function cvToggleMaximize() {
+      const chat = document.getElementById('cvReviewChat');
+      const btn = document.getElementById('cvChatMaxBtn');
+      const label = btn.querySelector('.mr-mic-label');
+      if (!chat.classList.contains('cv-chat-max')) {
+        cvChatPlaceholder = document.createComment('cv-chat-anchor');
+        chat.parentNode.insertBefore(cvChatPlaceholder, chat);
+        document.body.appendChild(chat);
+        chat.classList.add('cv-chat-max');
+        document.body.classList.add('cv-focus-mode');
+        if (label) label.textContent = 'Exit full screen';
+        btn.title = 'Exit focus mode';
+        window.wsMusicSuppress?.();
+        document.getElementById('cvChatInput')?.focus();
+      } else {
+        chat.classList.remove('cv-chat-max');
+        document.body.classList.remove('cv-focus-mode');
+        if (cvChatPlaceholder && cvChatPlaceholder.parentNode) {
+          cvChatPlaceholder.parentNode.replaceChild(chat, cvChatPlaceholder);
+          cvChatPlaceholder = null;
+        }
+        if (label) label.textContent = 'Full screen';
+        btn.title = 'Focus mode — full screen';
+        window.wsMusicRelease?.();
+        chat.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
+    }
+    window.cvToggleMaximize = cvToggleMaximize;
+    // Esc leaves focus mode.
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && document.getElementById('cvReviewChat')?.classList.contains('cv-chat-max')) cvToggleMaximize();
+    });
+
+    /* ── Iterative review chat with Eleanor Hughes ── */
     const cvChatMessages = [];
     function cvAppendChat(role, text) {
       const log = document.getElementById('cvChatLog');
@@ -1146,7 +1212,7 @@
           if (chat) {
             chat.scrollIntoView({ behavior: 'smooth', block: 'center' });
             if (!cvChatMessages.length) {
-              cvAppendChat('assistant', "Hi, I'm Priya. Good to see you back. Tell me what you changed since the scoring, or paste your updated section, and I'll give you an honest read on whether it's stronger. And if you don't agree with something we flagged, say so, I'd rather hear your side and work out what actually fits your situation.");
+              cvAppendChat('assistant', "Hi, I'm Eleanor. Good to see you back. Tell me what you changed since the scoring, or paste your updated section, and I'll give you an honest read on whether it's stronger. And if you don't agree with something we flagged, say so, I'd rather hear your side and work out what actually fits your situation.");
             }
             document.getElementById('cvChatInput')?.focus();
           }
@@ -1296,8 +1362,22 @@
         window.addEventListener('scroll', autoStartOnce, { once:true });
       }
 
+      // Focus mode (full-screen chat) can suppress the music without flipping the user's
+      // on/off choice — `playing` stays as-is so it resumes when they leave focus mode.
+      let suppressed=false;
+      window.wsMusicSuppress=function(){
+        suppressed=true;
+        if(playing){ fadeTo(0, 500); setTimeout(()=>{ if(suppressed) player.pause(); }, 550); }
+      };
+      window.wsMusicRelease=function(){
+        if(!suppressed) return;
+        suppressed=false;
+        if(playing){ player.play().then(()=>fadeTo(0.42, 800)).catch(()=>{}); }
+      };
+
       // Watchdog — never stop on its own, only when the user explicitly turns it off.
       function resumeIfStuck(){
+        if(suppressed) return;
         if(playing && player.paused){ player.play().then(()=>fadeTo(0.42, 800)).catch(()=>{}); }
       }
       document.addEventListener('visibilitychange', ()=>{ if(!document.hidden) resumeIfStuck(); });

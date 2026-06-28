@@ -5564,11 +5564,21 @@ async function jobReviewCv(){
     });
     const data=await r.json();
     if(!r.ok){ alert('Sorry, something went wrong: '+(data.error||'unknown error')); return; }
-    document.getElementById('jobCvScorecard').innerHTML=jobRenderScorecard(data.cv,'Your CV');
-    document.getElementById('jobCoverScorecard').innerHTML=data.coverLetter?jobRenderScorecard(data.coverLetter,'Your Cover Letter'):'';
+    const jobCvHtml=jobRenderScorecard(data.cv,'Your CV');
+    const jobCoverHtml=data.coverLetter?jobRenderScorecard(data.coverLetter,'Your Cover Letter'):'';
+    document.getElementById('jobCvScorecard').innerHTML=jobCvHtml;
+    document.getElementById('jobCoverScorecard').innerHTML=jobCoverHtml;
     document.getElementById('jobReviewResults').style.display='block';
     document.getElementById('jobReviewResults').scrollIntoView({behavior:'smooth'});
     window.showSignupNudge?.(document.getElementById('jobReviewResults'));
+    // For logged-in users, save this scoring to their workspace track record.
+    if(window.getSiteUser?.()){
+      const summaryHtml=jobCvHtml+(jobCoverHtml?'<div style="margin-top:1.25rem">'+jobCoverHtml+'</div>':'');
+      fetch('/api/account?action=save-consultation',{
+        method:'POST',headers:{'content-type':'application/json'},
+        body:JSON.stringify({tool:'cv-review',title:'CV & Cover Letter Scoring',summaryHtml})
+      }).catch(()=>{});
+    }
   }catch(e){
     alert('Connection issue, please try again.');
   }finally{

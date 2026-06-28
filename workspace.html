@@ -213,6 +213,14 @@
     .welcome-bot-panel{ width:85vw; max-height:55vh !important; }
     .welcome-bot-panel.open{ transform:translateX(-12px) translateY(0) scale(1) !important; }
   }
+  /* Speak / Attach / Hear buttons for the Priya review chat — same look as the site's mr-mic. */
+  .mr-mic{ display:inline-flex; align-items:center; gap:.4rem; padding:.45rem .8rem; background:rgba(255,255,255,.05); border:1px solid rgba(200,169,110,.25); border-radius:9px; color:var(--steel-light); cursor:pointer; font-family:inherit; transition:.2s; }
+  .mr-mic svg{ width:16px; height:16px; flex-shrink:0; }
+  .mr-mic-label{ font-size:.72rem; font-weight:600; color:inherit; white-space:nowrap; font-family:inherit; }
+  .mr-mic:hover{ border-color:var(--gold); background:rgba(200,169,110,.08); }
+  .mr-mic.active{ background:rgba(200,169,110,.22); border-color:var(--gold); color:var(--gold-light); }
+  .mr-mic.listening{ background:rgba(200,80,80,.18); border-color:#d88a8a; color:#e7b4b4; }
+  @media (max-width:480px){ .mr-mic-label{ display:none; } .mr-mic{ padding:0; width:40px; height:40px; justify-content:center; } }
 </style>
 </head>
 <body>
@@ -381,6 +389,11 @@
             <div id="cvCoverScoreCard" style="margin-top:1.5rem"></div>
           </div>
 
+          <div id="cvTrackRecordWrap" style="display:none;margin-top:1.5rem">
+            <h4 style="color:var(--gold);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.5rem">Your past scorings</h4>
+            <div id="cvTrackRecord"></div>
+          </div>
+
           <hr style="border:none;border-top:1px solid rgba(200,169,110,.15);margin:1.75rem 0">
 
           <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem">Write me a cover letter</h3>
@@ -397,12 +410,34 @@
 
           <hr style="border:none;border-top:1px solid rgba(200,169,110,.15);margin:1.75rem 0">
 
-          <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem">Talk through your edits</h3>
-          <p style="color:var(--steel-light);font-size:.85rem;line-height:1.6;margin-bottom:.75rem">Made changes after the scoring? Tell the AI what you changed, or paste your new version, and it will give you an honest read on whether it's better and what to fix next. It coaches you; it won't rewrite the document for you.</p>
+          <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.08em;text-transform:uppercase;margin-bottom:.5rem">Talk through your edits with Priya</h3>
+          <p style="color:var(--steel-light);font-size:.85rem;line-height:1.6;margin-bottom:.75rem">Made changes after the scoring? Priya Nair, a recruitment specialist, will talk them through with you. Disagree with any of our suggestions, explain your situation, and she'll adapt the advice to what actually works for you. You can type, speak, listen to her replies, or attach an updated document. She coaches you; she won't rewrite the document for you.</p>
           <div id="cvReviewChat" style="border:1px solid rgba(200,169,110,.18);border-radius:12px;padding:1rem;background:rgba(0,0,0,.15)">
+            <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.85rem;padding-bottom:.85rem;border-bottom:1px solid rgba(200,169,110,.12)">
+              <img src="images/team/priya-nair.png" alt="Priya Nair" style="width:42px;height:42px;border-radius:50%;object-fit:cover">
+              <div>
+                <div style="font-weight:600;color:var(--cream);font-size:.9rem">Priya Nair</div>
+                <div style="font-size:.72rem;color:var(--steel-light)">Recruitment &amp; Career Specialist</div>
+              </div>
+            </div>
             <div id="cvChatLog" style="max-height:420px;overflow-y:auto;display:flex;flex-direction:column;gap:.75rem;margin-bottom:.75rem"></div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.55rem">
+              <button id="cvMic" class="mr-mic" title="Speak to Priya">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
+                <span class="mr-mic-label">Speak</span>
+              </button>
+              <button id="cvChatAttach" class="mr-mic" title="Attach your updated CV or cover letter (PDF, Word or text)" onclick="document.getElementById('cvChatFile').click()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 12.5l-8.5 8.5a5 5 0 01-7-7l9-9a3.5 3.5 0 015 5l-9 9a2 2 0 01-3-3l8.5-8.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span class="mr-mic-label">Attach</span>
+              </button>
+              <input type="file" id="cvChatFile" accept=".pdf,.docx,.txt" style="display:none" onchange="cvChatHandleFile(this)">
+              <button id="cvVoiceToggle" class="mr-mic" title="Hear Priya's replies aloud" onclick="cvToggleVoice()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a9 9 0 010 14" stroke-linecap="round"/></svg>
+                <span class="mr-mic-label">Hear</span>
+              </button>
+            </div>
             <div style="display:flex;gap:.5rem">
-              <textarea id="cvChatInput" placeholder="Tell me what you changed, or paste your updated text…" style="flex:1;min-height:60px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.7rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
+              <textarea id="cvChatInput" placeholder="Tell Priya what you changed, or paste your updated text…" style="flex:1;min-height:60px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.7rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
               <button class="btn-gold" id="cvChatSendBtn" onclick="cvChatSend()" style="align-self:flex-end">Send</button>
             </div>
           </div>
@@ -854,14 +889,60 @@
         });
         const data = await r.json();
         if (!r.ok) { alert(data.error || 'Something went wrong — please try again.'); return; }
-        document.getElementById('cvScoreCard').innerHTML = cvRenderScorecard(data.cv, 'Your CV');
-        document.getElementById('cvCoverScoreCard').innerHTML = data.coverLetter ? cvRenderScorecard(data.coverLetter, 'Your cover letter') : '';
+        const cvHtml = cvRenderScorecard(data.cv, 'Your CV');
+        const coverHtml = data.coverLetter ? cvRenderScorecard(data.coverLetter, 'Your cover letter') : '';
+        document.getElementById('cvScoreCard').innerHTML = cvHtml;
+        document.getElementById('cvCoverScoreCard').innerHTML = coverHtml;
         document.getElementById('cvScoreResult').style.display = 'block';
         document.getElementById('cvScoreResult').scrollIntoView({ behavior: 'smooth' });
+        // Keep a track record of this scoring in the user's workspace.
+        cvSaveScoring(cvHtml + (coverHtml ? '<div style="margin-top:1.25rem">' + coverHtml + '</div>' : ''));
       } catch (e) { alert('Connection issue — please try again.'); }
       finally { btn.disabled = false; btn.textContent = orig; }
     }
     window.cvScore = cvScore;
+
+    /* ── Scoring track record ── */
+    // Each scoring is saved as a consultation (tool 'cv-review'); we list them here
+    // as one-line dated links that expand the saved scorecard for reference.
+    async function cvSaveScoring(summaryHtml) {
+      try {
+        const r = await fetch('/api/account?action=save-consultation', {
+          method: 'POST', headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({ tool: 'cv-review', title: 'CV & Cover Letter Scoring', summaryHtml }),
+        });
+        if (r.ok) cvLoadTrackRecord();
+      } catch (e) { /* track record is best-effort; never block the scoring */ }
+    }
+    let cvTrackRecords = [];
+    async function cvLoadTrackRecord() {
+      try {
+        const r = await fetch('/api/account?action=workspace-list');
+        if (!r.ok) return;
+        const data = await r.json();
+        cvTrackRecords = (data.consultations || []).filter(c => c.tool === 'cv-review' && c.summaryHtml);
+        cvRenderTrackRecord();
+      } catch (e) {}
+    }
+    function cvRenderTrackRecord() {
+      const wrap = document.getElementById('cvTrackRecordWrap');
+      const list = document.getElementById('cvTrackRecord');
+      if (!cvTrackRecords.length) { wrap.style.display = 'none'; return; }
+      wrap.style.display = 'block';
+      list.innerHTML = cvTrackRecords.map((c, i) => {
+        const d = new Date(c.createdAt);
+        const when = d.toLocaleDateString(undefined, { year: 'numeric', month: 'short', day: 'numeric' }) + ', ' + d.toLocaleTimeString(undefined, { hour: '2-digit', minute: '2-digit' });
+        return `<div style="border-bottom:1px solid rgba(200,169,110,.1)">
+            <a href="#" onclick="cvToggleScoring(${i});return false" style="display:block;padding:.5rem 0;color:var(--gold-light);font-size:.84rem;text-decoration:none">CV &amp; Cover Letter Scoring — ${when}</a>
+            <div id="cvScoringView-${i}" style="display:none;padding:.5rem 0 1rem">${c.summaryHtml}</div>
+          </div>`;
+      }).join('');
+    }
+    function cvToggleScoring(i) {
+      const el = document.getElementById('cvScoringView-' + i);
+      if (el) el.style.display = el.style.display === 'none' ? 'block' : 'none';
+    }
+    window.cvToggleScoring = cvToggleScoring;
 
     async function cvWriteCover() {
       if (!cvText.trim()) { alert('Upload your CV first.'); return; }
@@ -889,7 +970,78 @@
     }
     window.cvWriteCover = cvWriteCover;
 
-    /* ── Iterative review chat ── */
+    /* ── Voice engine (browser TTS) — same behaviour as the main site's tools ── */
+    const VoiceEngine = (function () {
+      let femaleVoice = null, maleVoice = null, gender = 'female';
+      function pickVoices() {
+        const voices = speechSynthesis.getVoices();
+        const englishVoices = voices.filter(v => /^en/i.test(v.lang));
+        const pool = englishVoices.length ? englishVoices : voices;
+        femaleVoice = pool.find(v => /female|zira|samantha|susan|victoria|karen|moira|tessa|fiona|google uk english female|joanna|salli/i.test(v.name))
+          || pool.find(v => /en-GB/i.test(v.lang) && !/male/i.test(v.name)) || pool[0] || null;
+        maleVoice = pool.find(v => /male|david|daniel|fred|george|google uk english male|matthew|brian|arthur/i.test(v.name) && !/female/i.test(v.name))
+          || pool.find(v => v !== femaleVoice) || pool[0] || null;
+      }
+      if ('speechSynthesis' in window) { pickVoices(); speechSynthesis.onvoiceschanged = pickVoices; }
+      function speak(text, pitch, explicitGender) {
+        if (!('speechSynthesis' in window)) return;
+        const clean = String(text || '')
+          .replace(/[*_#>`]/g, '')
+          .replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2190}-\u{21FF}\u{2B00}-\u{2BFF}\u{FE00}-\u{FE0F}\u{1F1E6}-\u{1F1FF}\u{200D}\u{2300}-\u{23FF}]/gu, '')
+          .replace(/\n+/g, '. ').replace(/\s{2,}/g, ' ').trim();
+        const utter = new SpeechSynthesisUtterance(clean);
+        const voice = (explicitGender || gender) === 'male' ? maleVoice : femaleVoice;
+        if (voice) utter.voice = voice;
+        utter.pitch = pitch || 1; utter.rate = 1.25; utter.volume = 0.9;
+        speechSynthesis.speak(utter);
+      }
+      function cancel() { if ('speechSynthesis' in window) speechSynthesis.cancel(); }
+      return { speak, cancel };
+    })();
+
+    /* ── Speech-to-text mic wiring — mirrors the main site's wireMic() ── */
+    function wireMic(micBtnId, inputId, sendFn) {
+      const micBtn = document.getElementById(micBtnId);
+      if (!micBtn) return;
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SR) { micBtn.style.display = 'none'; return; }
+      const recognition = new SR();
+      recognition.lang = 'en-GB'; recognition.continuous = false; recognition.interimResults = true; recognition.maxAlternatives = 5;
+      let listening = false;
+      const speakIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>';
+      micBtn.addEventListener('click', () => {
+        if (listening) { recognition.stop(); return; }
+        try { recognition.start(); } catch (e) { document.getElementById(inputId).placeholder = 'Microphone error — try refreshing the page'; }
+      });
+      recognition.onstart = () => { listening = true; micBtn.classList.add('listening'); micBtn.innerHTML = speakIcon + '<span class="mr-mic-label">Stop</span>'; document.getElementById(inputId).placeholder = 'Listening… speak now'; };
+      recognition.onend = () => { listening = false; micBtn.classList.remove('listening'); micBtn.innerHTML = speakIcon + '<span class="mr-mic-label">Speak</span>'; };
+      recognition.onerror = (e) => {
+        listening = false; micBtn.classList.remove('listening'); micBtn.innerHTML = speakIcon + '<span class="mr-mic-label">Speak</span>';
+        const input = document.getElementById(inputId);
+        if (e.error === 'no-speech') input.placeholder = 'No speech — speak again (louder if needed)';
+        else if (e.error === 'not-allowed') input.placeholder = 'Mic permission denied — check browser settings';
+        else if (e.error === 'audio-capture') input.placeholder = 'No microphone found';
+      };
+      recognition.onresult = (e) => {
+        let transcript = '', isFinal = false;
+        for (let i = 0; i < e.results.length; i++) { transcript += e.results[i][0].transcript; if (e.results[i].isFinal) isFinal = true; }
+        const input = document.getElementById(inputId);
+        input.value = transcript.trim();
+        if (isFinal && transcript.trim()) { input.placeholder = ''; sendFn(); }
+      };
+    }
+
+    let cvVoiceEnabled = false;
+    function cvToggleVoice() {
+      cvVoiceEnabled = !cvVoiceEnabled;
+      const btn = document.getElementById('cvVoiceToggle');
+      btn.classList.toggle('active', cvVoiceEnabled);
+      if (!cvVoiceEnabled) VoiceEngine.cancel();
+    }
+    window.cvToggleVoice = cvToggleVoice;
+    function cvSpeak(text) { if (cvVoiceEnabled) VoiceEngine.speak(text, 1, 'female'); }
+
+    /* ── Iterative review chat with Priya Nair ── */
     const cvChatMessages = [];
     function cvAppendChat(role, text) {
       const log = document.getElementById('cvChatLog');
@@ -901,6 +1053,23 @@
       log.scrollTop = log.scrollHeight;
       return wrap;
     }
+    async function cvChatHandleFile(input) {
+      const file = input.files[0];
+      if (!file) return;
+      const box = document.getElementById('cvChatInput');
+      const original = box.placeholder;
+      box.placeholder = `Reading ${file.name}…`;
+      try {
+        const text = await extractFileText(file);
+        const prefix = box.value.trim() ? box.value.trim() + '\n\n' : '';
+        box.value = `${prefix}Here is my updated document (${file.name}):\n\n${text}`;
+        box.placeholder = original;
+      } catch (e) {
+        box.placeholder = `Couldn't read ${file.name} — try a .txt, .pdf or .docx`;
+      }
+      input.value = '';
+    }
+    window.cvChatHandleFile = cvChatHandleFile;
     async function cvChatSend() {
       const input = document.getElementById('cvChatInput');
       const text = input.value.trim();
@@ -924,10 +1093,15 @@
         if (!r.ok) { thinking.textContent = data.error || 'Something went wrong — please try again.'; return; }
         thinking.textContent = data.reply || '';
         cvChatMessages.push({ role: 'assistant', content: data.reply || '' });
+        cvSpeak(data.reply || '');
       } catch (e) { thinking.textContent = 'Connection issue — please try again.'; }
       finally { btn.disabled = false; btn.textContent = 'Send'; }
     }
     window.cvChatSend = cvChatSend;
+    wireMic('cvMic', 'cvChatInput', cvChatSend);
+    document.getElementById('cvChatInput')?.addEventListener('keydown', e => {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); cvChatSend(); }
+    });
 
     async function init() {
       try {
@@ -953,6 +1127,8 @@
         document.getElementById('loggedInState').style.display = 'block';
         renderFilter();
         renderList();
+        cvTrackRecords = allConsultations.filter(c => c.tool === 'cv-review' && c.summaryHtml);
+        cvRenderTrackRecord();
 
         // Load the shared CV/cover/contact profile and pre-fill every tab from it, so the
         // CV uploaded anywhere on the site is already here and never asked for again.
@@ -970,7 +1146,7 @@
           if (chat) {
             chat.scrollIntoView({ behavior: 'smooth', block: 'center' });
             if (!cvChatMessages.length) {
-              cvAppendChat('assistant', "Good to see you back. Tell me what you changed since the scoring, or paste your updated section, and I'll give you an honest read on whether it's stronger and what to look at next.");
+              cvAppendChat('assistant', "Hi, I'm Priya. Good to see you back. Tell me what you changed since the scoring, or paste your updated section, and I'll give you an honest read on whether it's stronger. And if you don't agree with something we flagged, say so, I'd rather hear your side and work out what actually fits your situation.");
             }
             document.getElementById('cvChatInput')?.focus();
           }

@@ -1,4 +1,4 @@
-import { getUserFromRequest } from '../lib/auth.js';
+import { getUserFromRequest, verifyAdminKey } from '../lib/auth.js';
 import { sendEmail } from '../lib/email.js';
 
 async function findEntryIndex(kvUrl, kvToken, id) {
@@ -55,9 +55,9 @@ async function handleResolve(req, res, { kvUrl, kvToken, resendKey }) {
     res.status(500).json({ error: 'Storage not configured yet' });
     return;
   }
-  // Same shared-secret pattern as ?action=list — this is an owner-only action
+  // Same DASHBOARD_KEY pattern as ?action=list — this is an owner-only action
   const provided = req.query?.key || req.headers['x-feedback-key'];
-  if (provided !== kvToken) {
+  if (!verifyAdminKey(provided)) {
     res.status(401).json({ error: 'Unauthorized' });
     return;
   }
@@ -109,9 +109,9 @@ async function handleList(req, res, { kvUrl, kvToken }) {
     return;
   }
 
-  // Simple shared-secret check so this isn't publicly listable — reuses the KV token itself
+  // Gated by DASHBOARD_KEY so this isn't publicly listable (separate from the Redis token itself)
   const provided = req.query?.key || req.headers['x-feedback-key'];
-  if (provided !== kvToken) {
+  if (!verifyAdminKey(provided)) {
     res.status(401).json({ error: 'Unauthorized' });
     return;
   }

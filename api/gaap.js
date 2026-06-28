@@ -19,6 +19,7 @@ export default async function handler(req, res) {
   }
 
   const usage = await logAndCheckUsage(req, { kvUrl: process.env.UPSTASH_REDIS_REST_URL, kvToken: process.env.UPSTASH_REDIS_REST_TOKEN }, 'gaap');
+  if (usage.limited) { res.status(429).json({ error: 'Too many requests — please wait a moment and try again.' }); return; }
 
   const localGaap = jurisdiction || 'US GAAP';
 

@@ -19,6 +19,7 @@ export default async function handler(req, res) {
   }
 
   const usage = await logAndCheckUsage(req, { kvUrl: process.env.UPSTASH_REDIS_REST_URL, kvToken: process.env.UPSTASH_REDIS_REST_TOKEN }, 'ask');
+  if (usage.limited) { res.status(429).json({ error: 'Too many requests — please wait a moment and try again.' }); return; }
 
   const system = `You are a helpful, general-purpose AI assistant embedded on a personal/professional website (a personal "ChatGPT-style" assistant for whoever is visiting${userName ? `, currently chatting with ${userName}` : ''}). Answer any question helpfully, clearly and concisely, on any topic — not limited to finance or accounting, though the site owner is a Big 4 audit/advisory professional so finance questions are especially welcome.
 

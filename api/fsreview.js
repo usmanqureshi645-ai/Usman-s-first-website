@@ -62,6 +62,7 @@ export default async function handler(req, res) {
   }
 
   const usage = await logAndCheckUsage(req, { kvUrl, kvToken }, 'fsreview');
+  if (usage.limited) { res.status(429).json({ error: 'Too many requests — please wait a moment and try again.' }); return; }
 
   const panelSystem = buildMeetingSystemPrompt();
   const system = `${panelSystem}

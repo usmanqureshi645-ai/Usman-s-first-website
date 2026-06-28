@@ -32,6 +32,7 @@ export default async function handler(req, res) {
   const { mode = 'score', cv, coverLetter, jobDescription, messages, text, kind } = req.body || {};
 
   const usage = await logAndCheckUsage(req, { kvUrl: process.env.UPSTASH_REDIS_REST_URL, kvToken: process.env.UPSTASH_REDIS_REST_TOKEN }, 'cv-review');
+  if (usage.limited) { res.status(429).json({ error: 'Too many requests — please wait a moment and try again.' }); return; }
 
   try {
     if (mode === 'validate') {

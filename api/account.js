@@ -1,7 +1,7 @@
 // Consolidated accounts + workspace endpoint — Vercel's Hobby plan caps a deployment at
 // 12 Serverless Functions, so every account/workspace action is routed through this one
 // file via ?action=, instead of one file per action.
-import { hashPassword, verifyPassword, setSessionCookie, clearSessionCookie, getUserFromRequest, normalizeEmail } from '../lib/auth.js';
+import { hashPassword, verifyPassword, setSessionCookie, clearSessionCookie, getUserFromRequest, normalizeEmail, verifyAdminKey } from '../lib/auth.js';
 import { saveConsultation, scheduleFollowup } from '../lib/consultations.js';
 import { createMeetingSession, getMeetingSession, saveMeetingSession } from '../lib/meetingSession.js';
 import { getProfile, saveProfile } from '../lib/profile.js';
@@ -417,13 +417,11 @@ async function handleTrack(req, res, { kvUrl, kvToken }) {
   res.status(200).json({ ok: true });
 }
 
-// Owner-only analytics read. Same shared-secret pattern as feedback.js (?key=<UPSTASH token>).
+// Owner-only analytics read. Gated by DASHBOARD_KEY (separate from the Redis token — see lib/auth.js).
 async function handleDashboard(req, res, { kvUrl, kvToken }) {
   if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Storage not configured yet' }); return; }
-  // Trim both sides: a trailing space/newline pasted into the Vercel env var is the most
-  // common cause of a false "rejected", and tokens never have meaningful edge whitespace.
-  const provided = String(req.query?.key || req.headers['x-dashboard-key'] || '').trim();
-  if (provided !== String(kvToken).trim()) { res.status(401).json({ error: 'Unauthorized' }); return; }
+  const provided = req.query?.key || req.headers['x-dashboard-key'];
+  if (!verifyAdminKey(provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
   const data = await getDashboardData({ kvUrl, kvToken });
   res.status(200).json({ ok: true, ...data });
 }

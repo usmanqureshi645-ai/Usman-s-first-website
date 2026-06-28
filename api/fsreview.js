@@ -6,6 +6,16 @@ import { saveConsultation } from '../lib/consultations.js';
 import { sendEmail } from '../lib/email.js';
 
 const FRAMEWORKS = new Set(['FRS 101', 'FRS 102', 'Full IFRS', 'US GAAP', 'AICPA']);
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+const MAX_TEXT_LENGTH = 30000; // ~8k tokens
+const API_TIMEOUT_MS = 8000; // 8 seconds
+
+function withTimeout(promise, ms) {
+  return Promise.race([
+    promise,
+    new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), ms))
+  ]);
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -37,6 +47,20 @@ export default async function handler(req, res) {
     return;
   }
 
+  if (fileBase64 && fileBase64.length > MAX_FILE_SIZE) {
+    res.status(413).json({
+      error: 'File too large — please upload a document under 10MB',
+      code: 'SIZE_EXCEEDED',
+    });
+    return;
+  }
+
+  let processedText = text;
+  if (text.length > MAX_TEXT_LENGTH) {
+    processedText = text.slice(0, MAX_TEXT_LENGTH);
+    res.setHeader('X-Text-Truncated', 'true');
+  }
+
   const usage = await logAndCheckUsage(req, { kvUrl, kvToken }, 'fsreview');
 
   const panelSystem = buildMeetingSystemPrompt();
@@ -66,27 +90,45 @@ Respond with ONLY valid JSON, no markdown fencing, in this exact shape:
 }
 If isFinancialStatement is false, leave inlineComments and additionalNotes as empty arrays and summary as an empty string.`;
 
-  const userMessage = `FRAMEWORK TO REVIEW AGAINST: ${selectedFramework}\n\nFINANCIAL STATEMENTS TEXT:\n${text}`;
+  const userMessage = `FRAMEWORK TO REVIEW AGAINST: ${selectedFramework}\n\nFINANCIAL STATEMENTS TEXT:\n${processedText}`;
 
   try {
-    const upstream = await fetch('https://api.anthropic.com/v1/messages', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-6',
-        max_tokens: 6000,
-        system,
-        messages: [{ role: 'user', content: userMessage }],
-      }),
-    });
+    let upstream;
+    try {
+      upstream = await withTimeout(
+        fetch('https://api.anthropic.com/v1/messages', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            'x-api-key': apiKey,
+            'anthropic-version': '2023-06-01',
+          },
+          body: JSON.stringify({
+            model: 'claude-sonnet-4-6',
+            max_tokens: 6000,
+            system,
+            messages: [{ role: 'user', content: userMessage }],
+          }),
+        }),
+        API_TIMEOUT_MS
+      );
+    } catch (err) {
+      if (err.message === 'timeout') {
+        res.status(504).json({
+          error: 'API request timed out — please try again in a moment',
+          code: 'TIMEOUT',
+        });
+        return;
+      }
+      throw err;
+    }
 
     const data = await upstream.json();
     if (!upstream.ok) {
-      res.status(upstream.status).json({ error: data?.error?.message || 'Upstream error' });
+      res.status(upstream.status).json({
+        error: data?.error?.message || 'Upstream error',
+        code: 'UPSTREAM_ERROR',
+      });
       return;
     }
 
@@ -102,7 +144,10 @@ If isFinancialStatement is false, leave inlineComments and additionalNotes as em
         review = JSON.parse(candidate);
       } catch {
         console.error('[fsreview] failed to parse model output:', rawText.slice(0, 2000));
-        res.status(500).json({ error: 'Could not parse the panel review — please try again' });
+        res.status(500).json({
+          error: 'Could not parse the panel review — please try again',
+          code: 'PARSE_ERROR',
+        });
         return;
       }
     }
@@ -149,7 +194,6 @@ If isFinancialStatement is false, leave inlineComments and additionalNotes as em
       <p>${summary}</p>
       <p>The full review is attached as a Word document (<strong>${outFileName}</strong>) with inline comments from Usman Qureshi anchored to the specific text in question${isDocx ? '' : " — since the original wasn't a Word file, we've rebuilt it as a commentable Word document so the comments can be anchored directly"}.</p>
       ${notesHtml}
-      <p style="margin-top:24px;padding-top:16px;border-top:1px solid #ddd;color:#555">This is an AI-simulated panel review for educational purposes, not formal assurance or audit opinion.</p>
     `;
 
     const emailResp = await sendEmail(resendKey, {
@@ -185,6 +229,10 @@ If isFinancialStatement is false, leave inlineComments and additionalNotes as em
 
     res.status(200).json({ isFinancialStatement: true, summary, additionalNotes: allNotes, emailed: true, usage });
   } catch (err) {
-    res.status(500).json({ error: 'Request failed' });
+    console.error('[fsreview] unhandled error:', err.message);
+    res.status(500).json({
+      error: 'Request failed — please try again',
+      code: 'INTERNAL_ERROR',
+    });
   }
 }

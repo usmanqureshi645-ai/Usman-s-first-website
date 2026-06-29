@@ -9,6 +9,7 @@ import { sendEmail } from '../lib/email.js';
 import { recordVisit, recordPresence, recordSignup, getDashboardData } from '../lib/metrics.js';
 import { logAndCheckUsage } from '../lib/ipUsage.js';
 import { buildWorkbook } from '../lib/exportData.js';
+import { appendUserToSheet } from '../lib/googleSheets.js';
 
 const TOOL_LABELS = { meeting: 'Meeting Room consultation', quiz: 'Interview Prep session' };
 const SIGNUP_LINE = "If you haven't already, signing up is free and unlocks your personal workspace — every consultation saved, and you can resume any conversation right where you left off. It stays free after signing up too.";
@@ -107,6 +108,17 @@ async function handleSignup(req, res, { resendKey, kvUrl, kvToken }) {
       subject: `New website signup: ${name}`,
       html: `<p>New signup on the website:</p><p><strong>Name:</strong> ${name}<br><strong>Email:</strong> ${normalizedEmail}</p>`,
   }, { kvUrl, kvToken });
+
+  // Auto-sync to Google Sheets (non-blocking)
+  appendUserToSheet({
+    email: normalizedEmail,
+    name,
+    company: cleanCompany,
+    department: cleanDepartment === 'Other' ? cleanDepartmentOther : cleanDepartment,
+    designation: cleanDesignation === 'Other' ? cleanDesignationOther : cleanDesignation,
+    country: cleanCountry,
+    city: cleanCity,
+  }).catch(err => console.error('[Signup] Google Sheets sync error:', err));
 
   res.status(200).json({ ok: true, name, email: normalizedEmail });
 }

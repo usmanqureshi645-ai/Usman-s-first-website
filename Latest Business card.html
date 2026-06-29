@@ -919,7 +919,7 @@
 
   /* Feature-rating popup — asks "which feature are you enjoying most" after 20 minutes */
   .rating-popup{
-    position:fixed; right:20px; bottom:350px; width:280px; max-width:88vw; z-index:9998;
+    position:fixed; right:20px; bottom:350px; width:300px; max-width:88vw; z-index:9998;
     background:rgba(16,26,44,.97); backdrop-filter:blur(20px); border:1px solid rgba(200,169,110,.35);
     border-radius:14px; padding:1rem 1.1rem; box-shadow:0 12px 32px rgba(0,0,0,.5);
     transform:translateY(12px) scale(.96); opacity:0; pointer-events:none;
@@ -927,16 +927,20 @@
   }
   .rating-popup.show{ transform:translateY(0) scale(1); opacity:1; pointer-events:auto; }
   .rating-popup-title{ font-size:.8rem; font-weight:700; color:var(--gold); margin-bottom:.55rem; }
-  .rating-popup select.searchable-dd-input{ margin-bottom:.6rem; cursor:pointer; }
+  .rating-list{ display:flex; flex-direction:column; gap:.5rem; max-height:260px; overflow-y:auto; margin-bottom:.6rem; padding-right:.2rem; }
+  .rating-row{ display:flex; flex-direction:column; gap:.3rem; }
+  .rating-row-label{ font-size:.7rem; color:var(--cream); font-weight:600; }
+  .rating-row-stars{ display:flex; gap:.3rem; }
+  .rating-row-done{ font-size:.68rem; color:var(--gold); padding:.3rem 0; }
   .rating-popup-stars{ display:flex; gap:.35rem; margin-bottom:.6rem; }
-  .rating-popup-star{ flex:1; text-align:center; padding:.4rem 0; border:1px solid rgba(255,255,255,.15); border-radius:6px; cursor:pointer; font-size:.78rem; color:var(--steel-light); }
+  .rating-popup-star{ flex:1; text-align:center; padding:.35rem 0; border:1px solid rgba(255,255,255,.15); border-radius:6px; cursor:pointer; font-size:.74rem; color:var(--steel-light); }
   .rating-popup-star:hover{ border-color:var(--gold); color:var(--cream); }
   .rating-popup-star.selected{ background:var(--gold); color:var(--navy); border-color:var(--gold); font-weight:700; }
   .rating-popup-note{ font-size:.66rem; color:var(--steel-light); margin-bottom:.55rem; }
   .rating-popup-footer{ display:flex; justify-content:space-between; align-items:center; }
   .rating-popup-bug{ color:var(--steel-light); text-decoration:underline; cursor:pointer; font-size:.68rem; }
   .rating-popup-dismiss{ background:none; border:none; color:var(--steel); font-size:.7rem; cursor:pointer; }
-  @media (max-width:600px){ .rating-popup{ right:8px; bottom:340px; width:230px; } }
+  @media (max-width:600px){ .rating-popup{ right:8px; bottom:340px; width:230px; } .rating-list{ max-height:220px; } }
   @media (max-width:600px){
     .wb-bubble{ padding:.5rem .7rem; font-size:.78rem; line-height:1.45; max-width:78%; }
     .mr-bubble{ padding:.55rem .8rem; font-size:.78rem; line-height:1.45; max-width:82%; }
@@ -3877,31 +3881,36 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       return (Date.now()-last) >= REELIGIBLE_MS;
     }
 
-    function submitRating(rating, feature){
+    function submitRating(rating, feature, rowEl){
       const siteUser=window.getSiteUser?.();
       fetch('/api/feedback?action=rate',{
         method:'POST', headers:{'content-type':'application/json'},
         body:JSON.stringify({ rating, feature, email: siteUser?.email })
       }).catch(()=>{});
-      el.innerHTML=`<div class="rating-popup-title">Thanks for the feedback!</div>`;
-      setTimeout(hide, 1800);
+      rowEl.innerHTML=`<span class="rating-row-label">${feature}</span><div class="rating-row-done">✓ Rated ${rating}/5 — thanks!</div>`;
     }
 
     function render(){
       el.innerHTML=`
-        <div class="rating-popup-title">Which feature are you enjoying most?</div>
-        <select id="ratingFeatureSelect" class="searchable-dd-input">${FEATURES.map(f=>`<option value="${f}">${f}</option>`).join('')}</select>
-        <div class="rating-popup-stars">${[1,2,3,4,5].map(n=>`<div class="rating-popup-star" data-n="${n}">${n}</div>`).join('')}</div>
+        <div class="rating-popup-title">Rate the features you've used</div>
+        <div class="rating-list">${FEATURES.map(f=>`
+          <div class="rating-row" data-feature="${f}">
+            <span class="rating-row-label">${f}</span>
+            <div class="rating-row-stars">${[1,2,3,4,5].map(n=>`<div class="rating-popup-star" data-n="${n}">${n}</div>`).join('')}</div>
+          </div>`).join('')}</div>
         <div class="rating-popup-note">Feedback taken seriously — this helps decide what to build next.</div>
         <div class="rating-popup-footer">
           <span class="rating-popup-bug">Report a bug</span>
-          <button class="rating-popup-dismiss" type="button">Not now</button>
+          <button class="rating-popup-dismiss" type="button">Close</button>
         </div>`;
-      el.querySelectorAll('.rating-popup-star').forEach(s=>{
-        s.addEventListener('click', ()=>{
-          el.querySelectorAll('.rating-popup-star').forEach(x=>x.classList.remove('selected'));
-          s.classList.add('selected');
-          submitRating(parseInt(s.dataset.n,10), document.getElementById('ratingFeatureSelect').value);
+      el.querySelectorAll('.rating-row').forEach(row=>{
+        const feature=row.dataset.feature;
+        row.querySelectorAll('.rating-popup-star').forEach(s=>{
+          s.addEventListener('click', ()=>{
+            row.querySelectorAll('.rating-popup-star').forEach(x=>x.classList.remove('selected'));
+            s.classList.add('selected');
+            submitRating(parseInt(s.dataset.n,10), feature, row);
+          });
         });
       });
       el.querySelector('.rating-popup-bug').addEventListener('click', ()=>{
@@ -4062,6 +4071,23 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
   }, { rootMargin: '-40% 0px -55% 0px' });
 
   sections.forEach(s => navObserver.observe(s));
+
+  // Auto-resume music if a visitor scrolls away from a tool section without clicking
+  // its explicit "End meeting"/"End session" button — MusicDuck.unduck() is a no-op
+  // if that reason was never ducked, so it's always safe to call here.
+  const TOOL_SECTION_DUCK_REASON = { meetingroom:'meeting-room', gaapcompare:'gaap', knowledgetest:'interview-prep' };
+  const toolDuckObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) {
+        const reason = TOOL_SECTION_DUCK_REASON[entry.target.id];
+        if (reason) window.MusicDuck?.unduck(reason);
+      }
+    });
+  }, { rootMargin: '-15% 0px -15% 0px' });
+  Object.keys(TOOL_SECTION_DUCK_REASON).forEach(id => {
+    const s = document.getElementById(id);
+    if (s) toolDuckObserver.observe(s);
+  });
 
 const reveals=document.querySelectorAll('.reveal');
 const revealObserver=new IntersectionObserver(entries=>{

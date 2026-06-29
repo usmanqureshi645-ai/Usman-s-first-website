@@ -916,6 +916,27 @@
     .usp-toast-title{ font-size:.66rem; }
     .usp-toast-body{ font-size:.66rem; }
   }
+
+  /* Feature-rating popup — asks "which feature are you enjoying most" after 20 minutes */
+  .rating-popup{
+    position:fixed; right:20px; bottom:350px; width:280px; max-width:88vw; z-index:9998;
+    background:rgba(16,26,44,.97); backdrop-filter:blur(20px); border:1px solid rgba(200,169,110,.35);
+    border-radius:14px; padding:1rem 1.1rem; box-shadow:0 12px 32px rgba(0,0,0,.5);
+    transform:translateY(12px) scale(.96); opacity:0; pointer-events:none;
+    transition:transform .35s cubic-bezier(.22,1,.36,1), opacity .35s ease;
+  }
+  .rating-popup.show{ transform:translateY(0) scale(1); opacity:1; pointer-events:auto; }
+  .rating-popup-title{ font-size:.8rem; font-weight:700; color:var(--gold); margin-bottom:.55rem; }
+  .rating-popup select.searchable-dd-input{ margin-bottom:.6rem; cursor:pointer; }
+  .rating-popup-stars{ display:flex; gap:.35rem; margin-bottom:.6rem; }
+  .rating-popup-star{ flex:1; text-align:center; padding:.4rem 0; border:1px solid rgba(255,255,255,.15); border-radius:6px; cursor:pointer; font-size:.78rem; color:var(--steel-light); }
+  .rating-popup-star:hover{ border-color:var(--gold); color:var(--cream); }
+  .rating-popup-star.selected{ background:var(--gold); color:var(--navy); border-color:var(--gold); font-weight:700; }
+  .rating-popup-note{ font-size:.66rem; color:var(--steel-light); margin-bottom:.55rem; }
+  .rating-popup-footer{ display:flex; justify-content:space-between; align-items:center; }
+  .rating-popup-bug{ color:var(--steel-light); text-decoration:underline; cursor:pointer; font-size:.68rem; }
+  .rating-popup-dismiss{ background:none; border:none; color:var(--steel); font-size:.7rem; cursor:pointer; }
+  @media (max-width:600px){ .rating-popup{ right:8px; bottom:340px; width:230px; } }
   @media (max-width:600px){
     .wb-bubble{ padding:.5rem .7rem; font-size:.78rem; line-height:1.45; max-width:78%; }
     .mr-bubble{ padding:.55rem .8rem; font-size:.78rem; line-height:1.45; max-width:82%; }
@@ -1410,6 +1431,23 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 .voice-gender-select option, select option{ background:var(--navy); color:var(--cream); }
 @media (max-width:600px){ .voice-gender-select{ display:none; } }
 
+/* Searchable dropdown (signup form: Department, Designation, Country) */
+.searchable-dd{ position:relative; }
+.searchable-dd-input{
+  width:100%; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
+  border-radius:8px; padding:.6rem .8rem; color:var(--cream); font-family:inherit; font-size:.82rem;
+}
+.searchable-dd-input:focus{ outline:none; border-color:var(--gold); }
+.searchable-dd-list{
+  display:none; position:absolute; top:100%; left:0; right:0; z-index:50; max-height:180px;
+  overflow-y:auto; background:var(--navy); border:1px solid rgba(200,169,110,.3); border-radius:8px;
+  margin-top:4px; box-shadow:0 8px 24px rgba(0,0,0,.4);
+}
+.searchable-dd-list.open{ display:block; }
+.searchable-dd-option{ padding:.55rem .8rem; font-size:.8rem; color:var(--cream); cursor:pointer; }
+.searchable-dd-option:hover{ background:rgba(200,169,110,.18); }
+.searchable-dd-option.no-match{ color:var(--steel-light); cursor:default; }
+
 /* Markdown rendered inside chat bubbles */
 .mr-bubble h4{ font-size:.95rem; color:var(--gold-light); margin:.3rem 0 .4rem; font-weight:700; }
 .mr-bubble h5{ font-size:.88rem; color:var(--gold-light); margin:.3rem 0 .35rem; font-weight:700; }
@@ -1848,6 +1886,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
     <button class="mr-chip" onclick="gaapAsk('Why does US GAAP use CECL instead of the IFRS 9 staged ECL model?')">CECL vs IFRS 9 ECL</button>
     <button class="mr-chip" onclick="gaapAsk('Can a US company use LIFO under IFRS?')">LIFO under IFRS?</button>
     <button class="mr-chip" id="gaapSaveBtn" onclick="gaapSaveConsultation()" style="border-color:var(--steel);color:var(--steel-light)">💾 Save to my workspace</button>
+    <button class="mr-chip" id="gaapEndBtn" onclick="gaapEndSession()" style="border-color:var(--steel);color:var(--steel-light)">End session &amp; email me a summary</button>
   </div>
   <div class="mr-inputbar">
     <button id="gaapMic" class="mr-mic" title="Speak your question">
@@ -2639,6 +2678,25 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
       <input type="text" id="signupName" placeholder="Your name" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
       <input type="email" id="signupEmail" placeholder="Your email" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
       <input type="password" id="signupPassword" placeholder="Choose a password (6+ characters)" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
+      <input type="text" id="signupCompany" placeholder="Company" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
+      <div class="searchable-dd" id="ddDepartment">
+        <input type="text" class="searchable-dd-input" id="ddDepartmentInput" placeholder="Department" autocomplete="off">
+        <div class="searchable-dd-list" id="ddDepartmentList"></div>
+        <input type="hidden" id="ddDepartmentValue">
+      </div>
+      <input type="text" id="signupDepartmentOther" placeholder="Please specify your department" style="display:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
+      <div class="searchable-dd" id="ddDesignation">
+        <input type="text" class="searchable-dd-input" id="ddDesignationInput" placeholder="Designation" autocomplete="off">
+        <div class="searchable-dd-list" id="ddDesignationList"></div>
+        <input type="hidden" id="ddDesignationValue">
+      </div>
+      <input type="text" id="signupDesignationOther" placeholder="Please specify your designation" style="display:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
+      <div class="searchable-dd" id="ddCountry">
+        <input type="text" class="searchable-dd-input" id="ddCountryInput" placeholder="Country" autocomplete="off">
+        <div class="searchable-dd-list" id="ddCountryList"></div>
+        <input type="hidden" id="ddCountryValue">
+      </div>
+      <input type="text" id="signupCity" placeholder="City" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
       <button id="signupForgotLink" onclick="toggleForgotMode(true)" style="display:none;background:none;border:none;color:var(--steel-light);font-size:.75rem;text-decoration:underline;cursor:pointer;text-align:right">Forgot password?</button>
       <input type="email" id="forgotEmail" placeholder="Your email" style="display:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
       <input type="text" id="forgotCode" placeholder="5-digit code from your email" style="display:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
@@ -3261,6 +3319,46 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     };
   })();
 
+  // Generic vanilla-JS searchable dropdown (Department/Designation/Country on the signup
+  // form): typing filters the option list (case-insensitive substring match), clicking an
+  // option selects it, Enter selects the first visible match.
+  function createSearchableDropdown(inputEl, listEl, hiddenEl, options, onSelect){
+    function render(filter){
+      const f=filter.trim().toLowerCase();
+      const matches = f ? options.filter(o=>o.toLowerCase().includes(f)) : options;
+      listEl.innerHTML = matches.length
+        ? matches.slice(0,50).map(o=>`<div class="searchable-dd-option" data-value="${o.replace(/"/g,'&quot;')}">${o}</div>`).join('')
+        : `<div class="searchable-dd-option no-match">No match</div>`;
+      listEl.querySelectorAll('.searchable-dd-option[data-value]').forEach(el=>{
+        el.addEventListener('mousedown', e=>{
+          e.preventDefault();
+          const val=el.dataset.value;
+          inputEl.value=val;
+          if(hiddenEl) hiddenEl.value=val;
+          listEl.classList.remove('open');
+          onSelect?.(val);
+        });
+      });
+    }
+    inputEl.addEventListener('focus', ()=>{ render(inputEl.value); listEl.classList.add('open'); });
+    inputEl.addEventListener('input', ()=>{ render(inputEl.value); listEl.classList.add('open'); if(hiddenEl) hiddenEl.value=''; });
+    inputEl.addEventListener('blur', ()=>{ setTimeout(()=>listEl.classList.remove('open'), 100); });
+    inputEl.addEventListener('keydown', e=>{
+      if(e.key==='Enter'){
+        const first=listEl.querySelector('.searchable-dd-option[data-value]');
+        if(first){ first.dispatchEvent(new MouseEvent('mousedown')); e.preventDefault(); }
+      }
+    });
+  }
+  const COUNTRY_LIST=["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic","Chad","Chile","China","Colombia","Comoros","Congo","Costa Rica","Croatia","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Korea","North Macedonia","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"];
+  const DEPARTMENT_OPTIONS=['Internal Audit','External Audit','Tax','Advisory','AI','Accounting & Finance','Risk & Compliance','Treasury','Other'];
+  const DESIGNATION_OPTIONS=['Associate','Senior Associate','Assistant Manager','Manager','Senior Manager','Director','Partner','CEO','CFO','VP / Executive Director','Other'];
+  // Signup-only field/group ids — shown in signup mode, hidden in login mode and forgot-password mode.
+  const SIGNUP_ONLY_FIELDS=['signupCompany','ddDepartment','ddDesignation','ddCountry','signupCity'];
+  // The two "Other" free-text boxes default hidden and are only ever shown by their own
+  // dropdown's onSelect — never blanket-shown when switching modes, only blanket-hidden.
+  const SIGNUP_OTHER_FIELDS=['signupDepartmentOther','signupDesignationOther'];
+
   // Sign-up / login widget — real accounts via /api/account?action=signup|login (session cookie)
   (function(){
     const panel=document.getElementById('signupPanel');
@@ -3271,10 +3369,25 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
 
     window.getSiteUser=()=>currentUser;
 
+    createSearchableDropdown(
+      document.getElementById('ddDepartmentInput'), document.getElementById('ddDepartmentList'), document.getElementById('ddDepartmentValue'),
+      DEPARTMENT_OPTIONS,
+      val=>{ document.getElementById('signupDepartmentOther').style.display = val==='Other' ? 'block' : 'none'; }
+    );
+    createSearchableDropdown(
+      document.getElementById('ddDesignationInput'), document.getElementById('ddDesignationList'), document.getElementById('ddDesignationValue'),
+      DESIGNATION_OPTIONS,
+      val=>{ document.getElementById('signupDesignationOther').style.display = val==='Other' ? 'block' : 'none'; }
+    );
+    createSearchableDropdown(
+      document.getElementById('ddCountryInput'), document.getElementById('ddCountryList'), document.getElementById('ddCountryValue'),
+      COUNTRY_LIST, null
+    );
+
     function reflectSignedInState(){
       const navLink=document.getElementById('navWorkspaceLink');
       const loggedInBlock=document.getElementById('signupLoggedInBlock');
-      const formFields=['signupIntroBubble','signupName','signupEmail','signupPassword','signupSubmitBtn','signupModeToggle','signupForgotLink'];
+      const formFields=['signupIntroBubble','signupName','signupEmail','signupPassword','signupSubmitBtn','signupModeToggle','signupForgotLink',...SIGNUP_ONLY_FIELDS,...SIGNUP_OTHER_FIELDS];
       if(currentUser){
         toggleBtn.textContent='🗂️';
         toggleBtn.title=`My Workspace (${currentUser.name})`;
@@ -3291,8 +3404,10 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
         toggleBtn.setAttribute('data-tooltip','Sign up free');
         if(navLink) navLink.style.display='none';
         if(loggedInBlock) loggedInBlock.style.display='none';
-        formFields.forEach(id=>{ const el=document.getElementById(id); if(el && id!=='signupForgotLink') el.style.display='block'; });
+        formFields.forEach(id=>{ const el=document.getElementById(id); if(el && id!=='signupForgotLink' && !SIGNUP_ONLY_FIELDS.includes(id) && !SIGNUP_OTHER_FIELDS.includes(id)) el.style.display='block'; });
         if(document.getElementById('signupForgotLink')) document.getElementById('signupForgotLink').style.display = loginMode ? 'block' : 'none';
+        SIGNUP_ONLY_FIELDS.forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display = loginMode ? 'none' : 'block'; });
+        SIGNUP_OTHER_FIELDS.forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display='none'; }); // always hidden here; only the dropdown's onSelect ever shows it
       }
     }
 
@@ -3359,6 +3474,8 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     window.toggleSignupMode=function(){
       loginMode=!loginMode;
       document.getElementById('signupName').style.display = loginMode ? 'none' : 'block';
+      SIGNUP_ONLY_FIELDS.forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display = loginMode ? 'none' : 'block'; });
+      SIGNUP_OTHER_FIELDS.forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display='none'; }); // login mode never needs these; signup mode only via dropdown onSelect
       document.getElementById('signupSubmitBtn').textContent = loginMode ? 'Log In' : 'Sign Up Free';
       document.getElementById('signupModeToggle').textContent = loginMode ? "Need an account? Sign up free" : 'Already have an account? Log in';
       document.getElementById('signupForgotLink').style.display = loginMode ? 'block' : 'none';
@@ -3378,6 +3495,8 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       if(on){
         loginFields.forEach(id=>{ document.getElementById(id).style.display='none'; });
         document.getElementById('signupName').style.display='none';
+        SIGNUP_ONLY_FIELDS.forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display='none'; });
+        SIGNUP_OTHER_FIELDS.forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display='none'; });
         document.getElementById('forgotEmail').style.display='block';
         document.getElementById('forgotCode').style.display='none';
         document.getElementById('forgotNewPassword').style.display='none';
@@ -3388,6 +3507,8 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       } else {
         forgotFields.forEach(id=>{ document.getElementById(id).style.display='none'; });
         document.getElementById('signupName').style.display = loginMode ? 'none' : 'block';
+        SIGNUP_ONLY_FIELDS.forEach(id=>{ const el=document.getElementById(id); if(el) el.style.display = loginMode ? 'none' : 'block'; });
+        // SIGNUP_OTHER_FIELDS stay hidden here too — only the dropdown's own onSelect ever reveals them
         document.getElementById('signupEmail').style.display='block';
         document.getElementById('signupPassword').style.display='block';
         document.getElementById('signupSubmitBtn').style.display='block';
@@ -3459,15 +3580,43 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     };
     toggleBtn.addEventListener('click', ()=>window.toggleSignup());
 
+    window.showDuplicateSignupUx=function(typedEmail){
+      document.getElementById('signupMessages').insertAdjacentHTML('beforeend', `
+        <div class="wb-msg bot"><div class="wb-bubble">This account has already been used.
+          <a href="#" id="dupSignupRecoverLink" style="color:var(--gold-light);text-decoration:underline">Forgot password? Recover here</a>
+        </div></div>`);
+      const wrap=document.getElementById('signupMessages');
+      wrap.scrollTop=wrap.scrollHeight;
+      document.getElementById('dupSignupRecoverLink').addEventListener('click', e=>{
+        e.preventDefault();
+        const forgotEmailEl=document.getElementById('forgotEmail');
+        if(forgotEmailEl) forgotEmailEl.value=typedEmail;
+        window.toggleForgotMode(true);
+      });
+    };
+
     window.submitSignup=async function(){
       if(forgotMode){ return window.submitForgotPassword(); }
       const name=document.getElementById('signupName').value.trim();
       const email=document.getElementById('signupEmail').value.trim();
       const password=document.getElementById('signupPassword').value;
+      const company=document.getElementById('signupCompany').value.trim();
+      const department=document.getElementById('ddDepartmentValue').value;
+      const departmentOther=document.getElementById('signupDepartmentOther').value.trim();
+      const designation=document.getElementById('ddDesignationValue').value;
+      const designationOther=document.getElementById('signupDesignationOther').value.trim();
+      const country=document.getElementById('ddCountryValue').value;
+      const city=document.getElementById('signupCity').value.trim();
+
       if(loginMode){
         if(!email.includes('@') || !password){ alert('Please enter your email and password.'); return; }
-      } else if(!name || !email.includes('@') || password.length<6){
-        alert('Please enter your name, a valid email, and a password (6+ characters).'); return;
+      } else {
+        if(!name || !email.includes('@') || password.length<6){ alert('Please enter your name, a valid email, and a password (6+ characters).'); return; }
+        if(!company){ alert('Please enter your company.'); return; }
+        if(!department || (department==='Other' && !departmentOther)){ alert('Please select your department (or specify it if you chose Other).'); return; }
+        if(!designation || (designation==='Other' && !designationOther)){ alert('Please select your designation (or specify it if you chose Other).'); return; }
+        if(!country){ alert('Please select your country.'); return; }
+        if(!city){ alert('Please enter your city.'); return; }
       }
       const btn=document.getElementById('signupSubmitBtn');
       btn.disabled=true; btn.textContent=loginMode ? 'Logging in…' : 'Signing up…';
@@ -3475,10 +3624,13 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
         const r=await fetch(loginMode ? '/api/account?action=login' : '/api/account?action=signup',{
           method:'POST',
           headers:{'content-type':'application/json'},
-          body:JSON.stringify(loginMode ? {email, password} : {name, email, password})
+          body:JSON.stringify(loginMode ? {email, password} : {name, email, password, company, department, departmentOther, designation, designationOther, country, city})
         });
         const data=await r.json();
-        if(!r.ok){ alert('Sorry, something went wrong: '+(data.error||'unknown error')); return; }
+        if(!r.ok){
+          if(data.duplicate){ window.showDuplicateSignupUx(email); return; }
+          alert('Sorry, something went wrong: '+(data.error||'unknown error')); return;
+        }
         currentUser={ name:data.name, email:data.email };
         reflectSignedInState();
         document.getElementById('signupMessages').innerHTML=`<div class="wb-msg bot"><div class="wb-bubble">${loginMode ? `Welcome back, ${data.name.split(' ')[0]}!` : `You're in, ${data.name.split(' ')[0]}! Check your inbox for a welcome note.`} Your <a href="workspace.html" style="color:var(--gold-light)">My Workspace</a> is ready whenever you want it.</div></div>`;
@@ -3592,6 +3744,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     if(exceptName!=='ask') window.toggleAsk?.(false);
     if(typeof VoiceEngine!=='undefined') VoiceEngine.cancel();
     window.hideUspToast?.();
+    window.hideRatingPopup?.();
   };
 
   // Tracks whether the visitor is actively typing/chatting in any tool, so promotional
@@ -3700,6 +3853,80 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       userDismissed=true; sessionStorage.setItem(dismissedKey, '1');
       hideToast();
     }, { passive:true, once:true });
+  })();
+
+  // Feature-rating popup — "Which feature are you enjoying most?" (Part 4 of the
+  // requirements doc). 20-minute initial delay, then re-checks periodically and is
+  // re-eligible every 60 minutes (tracked via localStorage so the cooldown survives
+  // reloads/tab changes within the hour, unlike the USP toast's session-only cap above).
+  (function(){
+    const FEATURES=['Meeting Room','Knowledge Test','GAAP Compare','CV Scoring','CV Reasoning (Eleanor)','Financial Statement Review'];
+    const LAST_SHOWN_KEY='rating_popup_last_shown'; // localStorage timestamp (ms)
+    const DISMISSED_KEY='rating_popup_dismissed'; // sessionStorage — "Not now" blocks for the rest of this tab's session
+    const INITIAL_DELAY_MS=20*60*1000; // 20 minutes on site
+    const REELIGIBLE_MS=60*60*1000;    // max once per hour
+
+    const el=document.createElement('div');
+    el.className='rating-popup';
+    document.body.appendChild(el);
+
+    function canShowNow(){
+      if(sessionStorage.getItem(DISMISSED_KEY)==='1') return false;
+      const last=parseInt(localStorage.getItem(LAST_SHOWN_KEY)||'0',10);
+      return (Date.now()-last) >= REELIGIBLE_MS;
+    }
+
+    function submitRating(rating, feature){
+      const siteUser=window.getSiteUser?.();
+      fetch('/api/feedback?action=rate',{
+        method:'POST', headers:{'content-type':'application/json'},
+        body:JSON.stringify({ rating, feature, email: siteUser?.email })
+      }).catch(()=>{});
+      el.innerHTML=`<div class="rating-popup-title">Thanks for the feedback!</div>`;
+      setTimeout(hide, 1800);
+    }
+
+    function render(){
+      el.innerHTML=`
+        <div class="rating-popup-title">Which feature are you enjoying most?</div>
+        <select id="ratingFeatureSelect" class="searchable-dd-input">${FEATURES.map(f=>`<option value="${f}">${f}</option>`).join('')}</select>
+        <div class="rating-popup-stars">${[1,2,3,4,5].map(n=>`<div class="rating-popup-star" data-n="${n}">${n}</div>`).join('')}</div>
+        <div class="rating-popup-note">Feedback taken seriously — this helps decide what to build next.</div>
+        <div class="rating-popup-footer">
+          <span class="rating-popup-bug">Report a bug</span>
+          <button class="rating-popup-dismiss" type="button">Not now</button>
+        </div>`;
+      el.querySelectorAll('.rating-popup-star').forEach(s=>{
+        s.addEventListener('click', ()=>{
+          el.querySelectorAll('.rating-popup-star').forEach(x=>x.classList.remove('selected'));
+          s.classList.add('selected');
+          submitRating(parseInt(s.dataset.n,10), document.getElementById('ratingFeatureSelect').value);
+        });
+      });
+      el.querySelector('.rating-popup-bug').addEventListener('click', ()=>{
+        hide();
+        window.toggleFeedback?.(true);
+      });
+      el.querySelector('.rating-popup-dismiss').addEventListener('click', ()=>{
+        sessionStorage.setItem(DISMISSED_KEY,'1');
+        hide();
+      });
+    }
+
+    function show(){
+      if(!canShowNow()) return;
+      if(window.isUserBusy?.()) return; // don't interrupt someone actively chatting in a tool
+      render();
+      localStorage.setItem(LAST_SHOWN_KEY, String(Date.now()));
+      requestAnimationFrame(()=>el.classList.add('show'));
+    }
+    function hide(){ el.classList.remove('show'); }
+    window.hideRatingPopup=hide;
+
+    setTimeout(function tick(){
+      show();
+      setTimeout(tick, 5*60*1000); // re-check every 5 min after the initial 20-min mark
+    }, INITIAL_DELAY_MS);
   })();
 
   // Cursor-reactive hover tags on key feature cards
@@ -4102,6 +4329,7 @@ const VoiceEngine=(function(){
 
 /* ── Meeting Room chat ── */
 const mrHistory=[];
+let mrResumedSession=false; // set true by handleResume() — passed to send-summary.js so a resumed session is logged as its own feature-usage category
 const mrRoles={
   'Sarah Bennett':'Big 4 Audit Partner',
   'David Whitfield':'IFRS/FRS Technical Regulator',
@@ -4850,7 +5078,7 @@ function mrSendSummaryTo(email, {skipUserBubble=false, loggedIn=false}={}){
   fetch('/api/send-summary',{
     method:'POST',
     headers:{'content-type':'application/json'},
-    body:JSON.stringify({email, transcript:mrHistory, kind:'meeting', agents:mrAgentsPayload(), coParticipant})
+    body:JSON.stringify({email, transcript:mrHistory, kind:'meeting', agents:mrAgentsPayload(), coParticipant, resumed: !!mrResumedSession})
   }).then(r=>r.json()).then(data=>{
     if(data.error){ mrAppendMessage('agent','Meeting Room', `Sorry — I couldn't send that summary right now (${data.error}). Please try again shortly.`); }
     else{
@@ -5155,6 +5383,7 @@ function openGaapSlide(jurisdiction, idx){
 
 /* ── IFRS vs GAAP comparison bot ── */
 const gaapHistory=[];
+let gaapResumedSession=false; // set true by handleResume()
 let gaapVoiceEnabled=false;
 // GAAP Champion is always a male voice — no selector, fixed character.
 function gaapSpeak(text){ if(gaapVoiceEnabled) VoiceEngine.speak(text, 0.92, false, 'male'); }
@@ -5235,6 +5464,33 @@ async function gaapSaveConsultation(){
     alert('Connection issue — please try again.');
   }
 }
+function gaapEndSession(){
+  console.log('GAAP session ended, resuming music');
+  window.MusicDuck?.unduck('gaap');
+  if(gaapHistory.length===0){ alert('Ask a question first, then end the session.'); return; }
+  const siteUser=window.getSiteUser?.();
+  const email = siteUser ? siteUser.email : prompt("What email address should I send the GAAP Compare summary to?");
+  if(!email || !email.includes('@')){ if(email!==null) alert('Please enter a valid email address.'); return; }
+  gaapAppendMessage('user', siteUser ? 'Please end the session and email me a summary.' : `Please end the session and email a summary to ${email}.`);
+  const btn=document.getElementById('gaapEndBtn');
+  btn.disabled=true; btn.textContent='Sending summary…';
+  fetch('/api/send-summary',{
+    method:'POST',
+    headers:{'content-type':'application/json'},
+    body:JSON.stringify({email, transcript:gaapHistory, kind:'gaap', resumed: !!gaapResumedSession})
+  }).then(r=>r.json()).then(data=>{
+    if(data.error){ gaapAppendMessage('agent', `Sorry — I couldn't send that summary right now (${data.error}). Please try again shortly.`); }
+    else{
+      gaapAppendMessage('agent', `Thank you — a summary of our GAAP Compare session has been sent to **${email}**.${siteUser ? ' It will also show up in your workspace history if you save this session.' : ''}`);
+      window.showSignupNudge?.(document.getElementById('gaapMessages'));
+    }
+  }).catch(()=>{
+    gaapAppendMessage('agent', "Sorry — I couldn't send that summary right now. Please try again shortly.");
+  }).finally(()=>{
+    btn.disabled=false;
+    btn.textContent='End session & email me a summary';
+  });
+}
 function gaapSendMessage(){
   const input=document.getElementById('gaapInput');
   const text=input.value.trim();
@@ -5258,6 +5514,7 @@ document.getElementById('gaapMic')?.addEventListener('click', gaapDuckOnce);
 
 /* ── Test Your Knowledge (interview prep coach) ── */
 const qzHistory=[];
+let qzResumedSession=false; // set true by handleResume()
 let qzVoiceEnabled=false;
 // Interview Coach is always a female voice — no selector, fixed character.
 function qzSpeak(text){ if(qzVoiceEnabled) VoiceEngine.speak(text, 1, true, 'female'); }
@@ -5333,7 +5590,7 @@ function qzEndSession(){
   fetch('/api/qz-summary',{
     method:'POST',
     headers:{'content-type':'application/json'},
-    body:JSON.stringify({email, transcript:qzHistory})
+    body:JSON.stringify({email, transcript:qzHistory, resumed: !!qzResumedSession})
   }).then(r=>r.json()).then(data=>{
     if(data.error){ qzAppendMessage('agent', `I couldn't send that just now (${data.error}) — please try again shortly.`); }
     else{
@@ -5428,6 +5685,7 @@ window.mrTryJoinSession=async function(joinId){
     const transcript=Array.isArray(record.transcript) ? record.transcript : [];
 
     if(tool==='meeting'){
+      mrResumedSession=true;
       if(Array.isArray(record.agents) && record.agents.length>0){
         const builtInNames=record.agents.filter(a=>typeof a==='string');
         document.querySelectorAll('.mr-agent-check').forEach(cb=>{ cb.checked=builtInNames.includes(cb.value); });
@@ -5449,6 +5707,7 @@ window.mrTryJoinSession=async function(joinId){
       document.getElementById('mrInputBar').style.display='flex';
       document.getElementById('mrTopicChips').style.display='none';
     } else if(tool==='quiz'){
+      qzResumedSession=true;
       document.getElementById('qzLevels').style.display='none';
       document.getElementById('qzChatWrap').style.display='flex';
       document.getElementById('qzNote').style.display='block';
@@ -5458,6 +5717,7 @@ window.mrTryJoinSession=async function(joinId){
         qzAppendMessage(m.role==='user' ? 'user' : 'agent', m.content);
       });
     } else if(tool==='gaap'){
+      gaapResumedSession=true;
       gaapHistory.push(...transcript);
       transcript.forEach(m=>{
         if(typeof m.content==='string' && m.content.startsWith('[')) return;

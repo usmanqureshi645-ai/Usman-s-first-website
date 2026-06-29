@@ -2,6 +2,7 @@ import { randomUUID } from 'node:crypto';
 import { getUserFromRequest } from '../lib/auth.js';
 import { saveConsultation, scheduleFollowup } from '../lib/consultations.js';
 import { sendEmail } from '../lib/email.js';
+import { isMeaningfulSession, logFeatureUse } from '../lib/featureLog.js';
 
 const CONVERSATION_TTL_SECONDS = 30 * 24 * 60 * 60; // 30 days
 
@@ -24,7 +25,7 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { email, transcript } = req.body || {};
+  const { email, transcript, resumed } = req.body || {};
   if (!email || !Array.isArray(transcript) || transcript.length === 0) {
     res.status(400).json({ error: 'Missing email or transcript' });
     return;
@@ -106,6 +107,19 @@ Never use harsh words like "weak", "bad", "failed", "poor". Use "developing", "a
     }
 
     const loggedInUser = getUserFromRequest(req);
+
+    // Genuine-completion logging for the weekly Excel export (Part 2 of the requirements doc).
+    if (kvUrl && kvToken && isMeaningfulSession(transcript, { tool: 'quiz' })) {
+      await logFeatureUse({ kvUrl, kvToken }, {
+        tool: 'quiz',
+        email: loggedInUser?.email || email,
+        detail: { resumed: !!resumed },
+      });
+      if (resumed) {
+        await logFeatureUse({ kvUrl, kvToken }, { tool: 'resume-session', email: loggedInUser?.email || email, detail: { originalTool: 'quiz' } });
+      }
+    }
+
     if (loggedInUser && kvUrl && kvToken) {
       try {
         const firstUserMsg = transcript.find(m => m.role === 'user')?.content || 'Interview prep session';

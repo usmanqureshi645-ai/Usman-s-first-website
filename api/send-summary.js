@@ -2,8 +2,18 @@ import { randomUUID } from 'node:crypto';
 import { getUserFromRequest } from '../lib/auth.js';
 import { saveConsultation, scheduleFollowup } from '../lib/consultations.js';
 import { sendEmail } from '../lib/email.js';
+import { isMeaningfulSession, logFeatureUse } from '../lib/featureLog.js';
 
 const CONVERSATION_TTL_SECONDS = 30 * 24 * 60 * 60; // 30 days
+
+// Email framing varies by kind — this endpoint now serves both Meeting Room's "End
+// meeting" button and GAAP Compare's "End session" button (kept on one function to
+// respect the Vercel Hobby 12-function cap). The summary prompt's overall structure
+// (Discussion Summary / References / Conclusion) works fine for both unchanged.
+const KIND_CONFIG = {
+  meeting: { label: "Usman Qureshi's Meeting Room", speakerLabel: 'Panel', fromName: 'Meeting Room', fromAddr: 'meetingroom@uqconsulting.org', subject: 'Your Meeting Room Consultation Summary' },
+  gaap: { label: "Usman Qureshi's GAAP Compare", speakerLabel: 'GAAP Champion', fromName: 'GAAP Compare', fromAddr: 'gaap@uqconsulting.org', subject: 'Your GAAP Compare Session Summary' },
+};
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -24,23 +34,24 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { email, transcript, kind, agents, coParticipant } = req.body || {};
+  const { email, transcript, kind, agents, coParticipant, resumed } = req.body || {};
   if (!email || !Array.isArray(transcript) || transcript.length === 0) {
     res.status(400).json({ error: 'Missing email or transcript' });
     return;
   }
+  const cfg = KIND_CONFIG[kind] || KIND_CONFIG.meeting;
   // coParticipant = { email, name } — set when this was a live, two-person Meeting Room
   // session (see lib/meetingSession.js); both people get the summary + a workspace save.
   const hasCoParticipant = coParticipant && coParticipant.email && coParticipant.email !== email;
 
   const conversationText = transcript
     .filter(m => m.role === 'user' || m.role === 'assistant')
-    .map(m => `${m.role === 'user' ? 'User' : 'Panel'}: ${m.content}`)
+    .map(m => `${m.role === 'user' ? 'User' : cfg.speakerLabel}: ${m.content}`)
     .join('\n\n');
 
-  const system = `You write professional consultation summary emails on behalf of "Usman Qureshi's Meeting Room" — a virtual panel of finance specialists on a personal website. Given a raw conversation transcript, produce a polished HTML email body (use simple inline-styled HTML: <h2>, <p>, <ul>, <li>, <a>, no external CSS) with this exact structure:
+  const system = `You write professional consultation summary emails on behalf of "${cfg.label}" — a virtual panel of finance specialists on a personal website. Given a raw conversation transcript, produce a polished HTML email body (use simple inline-styled HTML: <h2>, <p>, <ul>, <li>, <a>, no external CSS) with this exact structure:
 
-1. A warm opening paragraph thanking the user for using the Meeting Room.
+1. A warm opening paragraph thanking the user for using ${cfg.label}.
 2. A heading "Discussion Summary" followed by a clear, well-organised excerpt/summary of what was actually discussed (the user's question(s), the key points raised by each specialist, any risks flagged).
 3. A heading "References & Further Reading" with a bullet list of any real source links mentioned during the discussion (IFRS Foundation, Big 4, FRC, PCAOB etc.) — only include real, plausible URLs that were actually referenced; if none were given, link to https://www.ifrs.org/ and https://pcaobus.org/ as general resources.
 4. A heading "Other Resources You Might Find Useful" with 2-3 additional relevant links based on the topic discussed.
@@ -101,10 +112,10 @@ Output format — this is critical: respond with ONLY the raw HTML body itself, 
       : '';
 
     const sendOne = async (toEmail, otherName) => sendEmail(resendKey, {
-        from: 'Meeting Room <meetingroom@uqconsulting.org>',
+        from: `${cfg.fromName} <${cfg.fromAddr}>`,
         to: [toEmail],
         ...(replyTo ? { reply_to: replyTo } : {}),
-        subject: 'Your Meeting Room Consultation Summary',
+        subject: cfg.subject,
         html: htmlBody + jointNoteFor(otherName),
     }, { kvUrl, kvToken });
 
@@ -118,10 +129,27 @@ Output format — this is critical: respond with ONLY the raw HTML body itself, 
       await sendOne(coParticipant.email, 'your colleague').catch(() => {});
     }
 
-    // If the visitor is logged in, save this to their permanent workspace history
-    // and queue a 24h "did this help?" follow-up email
     const loggedInUser = getUserFromRequest(req);
-    if (loggedInUser && kvUrl && kvToken) {
+
+    // Genuine-completion logging for the weekly Excel export (Part 2 of the requirements
+    // doc) — "End session" was clicked AND the conversation had enough real back-and-forth
+    // to count as actual use, not a quick test. Both kind values route through here.
+    if (kvUrl && kvToken && isMeaningfulSession(transcript, { tool: kind })) {
+      await logFeatureUse({ kvUrl, kvToken }, {
+        tool: kind === 'gaap' ? 'gaap' : 'meeting',
+        email: loggedInUser?.email || email,
+        detail: { resumed: !!resumed },
+      });
+      if (resumed) {
+        await logFeatureUse({ kvUrl, kvToken }, { tool: 'resume-session', email: loggedInUser?.email || email, detail: { originalTool: kind } });
+      }
+    }
+
+    // If the visitor is logged in, save this to their permanent workspace history
+    // and queue a 24h "did this help?" follow-up email. GAAP already has its own
+    // separate gaapSaveConsultation() save path, so scope this to Meeting Room only —
+    // otherwise a GAAP "End session" call here would mis-tag the save tool:'meeting'.
+    if (kind === 'meeting' && loggedInUser && kvUrl && kvToken) {
       try {
         const firstUserMsg = transcript.find(m => m.role === 'user')?.content || 'Meeting Room consultation';
         const consultationId = await saveConsultation({
@@ -150,7 +178,7 @@ Output format — this is critical: respond with ONLY the raw HTML body itself, 
 
     // Co-participant gets their own workspace save too, even though this request's
     // session cookie belongs to the host, not them
-    if (hasCoParticipant && kvUrl && kvToken) {
+    if (kind === 'meeting' && hasCoParticipant && kvUrl && kvToken) {
       try {
         const firstUserMsg = transcript.find(m => m.role === 'user')?.content || 'Meeting Room consultation';
         await saveConsultation({

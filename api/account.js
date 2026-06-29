@@ -8,36 +8,79 @@ import { getProfile, saveProfile } from '../lib/profile.js';
 import { sendEmail } from '../lib/email.js';
 import { recordVisit, recordPresence, recordSignup, getDashboardData } from '../lib/metrics.js';
 import { logAndCheckUsage } from '../lib/ipUsage.js';
+import { buildWorkbook } from '../lib/exportData.js';
 
 const TOOL_LABELS = { meeting: 'Meeting Room consultation', quiz: 'Interview Prep session' };
 const SIGNUP_LINE = "If you haven't already, signing up is free and unlocks your personal workspace — every consultation saved, and you can resume any conversation right where you left off. It stays free after signing up too.";
 const ALLOWED_SAVE_TOOLS = new Set(['gaap', 'cv-review', 'cv-tailor', 'ask', 'fsreview']);
 
+// Department/Designation dropdown options on the signup form — kept in sync with the
+// <select>-equivalent searchable dropdowns in index.html. "Other" triggers a separate,
+// dedicated free-text field for each (departmentOther / designationOther) — never shared.
+const DEPARTMENTS = new Set(['Internal Audit', 'External Audit', 'Tax', 'Advisory', 'AI', 'Accounting & Finance', 'Risk & Compliance', 'Treasury', 'Other']);
+const DESIGNATIONS = new Set(['Associate', 'Senior Associate', 'Assistant Manager', 'Manager', 'Senior Manager', 'Director', 'Partner', 'CEO', 'CFO', 'VP / Executive Director', 'Other']);
+
 async function handleSignup(req, res, { resendKey, kvUrl, kvToken }) {
   if (!resendKey) { res.status(500).json({ error: 'Email service not configured yet' }); return; }
   if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Accounts service not configured yet' }); return; }
 
-  const { name, email, password } = req.body || {};
+  const { name, email, password, company, department, departmentOther, designation, designationOther, country, city } = req.body || {};
   const normalizedEmail = normalizeEmail(email);
   if (!name || !normalizedEmail || !normalizedEmail.includes('@') || !password || password.length < 6) {
     res.status(400).json({ error: 'Please provide your name, a valid email, and a password (6+ characters)' });
     return;
   }
 
+  // Check duplicate email first (cheap lookup) — don't make a returning user fill out
+  // every new field below before learning they already have an account.
   const existingResp = await fetch(`${kvUrl}/get/user:${normalizedEmail}`, { headers: { authorization: `Bearer ${kvToken}` } });
   const existingData = await existingResp.json();
   if (existingData?.result) {
-    res.status(409).json({ error: 'An account with that email already exists — log in instead?' });
+    res.status(409).json({ error: 'This account has already been used', duplicate: true });
     return;
   }
 
-  const user = { name, email: normalizedEmail, passwordHash: hashPassword(password), createdAt: new Date().toISOString() };
+  const cleanCompany = String(company || '').trim().slice(0, 120);
+  const cleanCountry = String(country || '').trim().slice(0, 80);
+  const cleanCity = String(city || '').trim().slice(0, 80);
+  if (!cleanCompany || !cleanCountry || !cleanCity) {
+    res.status(400).json({ error: 'Please provide your company, country, and city' });
+    return;
+  }
+
+  const cleanDepartment = DEPARTMENTS.has(department) ? department : '';
+  const cleanDepartmentOther = department === 'Other' ? String(departmentOther || '').trim().slice(0, 120) : '';
+  if (!cleanDepartment || (cleanDepartment === 'Other' && !cleanDepartmentOther)) {
+    res.status(400).json({ error: 'Please select your department (or specify it if you chose Other)' });
+    return;
+  }
+
+  const cleanDesignation = DESIGNATIONS.has(designation) ? designation : '';
+  const cleanDesignationOther = designation === 'Other' ? String(designationOther || '').trim().slice(0, 120) : '';
+  if (!cleanDesignation || (cleanDesignation === 'Other' && !cleanDesignationOther)) {
+    res.status(400).json({ error: 'Please select your designation (or specify it if you chose Other)' });
+    return;
+  }
+
+  const user = {
+    name, email: normalizedEmail, passwordHash: hashPassword(password),
+    company: cleanCompany, department: cleanDepartment, departmentOther: cleanDepartmentOther,
+    designation: cleanDesignation, designationOther: cleanDesignationOther,
+    country: cleanCountry, city: cleanCity,
+    createdAt: new Date().toISOString(),
+  };
   await fetch(`${kvUrl}/set/user:${normalizedEmail}/${encodeURIComponent(JSON.stringify(user))}`, { headers: { authorization: `Bearer ${kvToken}` } });
 
   setSessionCookie(res, { email: normalizedEmail, name });
 
-  // Persist to the signup database + counter that powers the admin dashboard.
-  await recordSignup({ kvUrl, kvToken }, { name, email: normalizedEmail });
+  // Persist to the signup database + counter that powers the admin dashboard and the
+  // weekly Excel export (lib/exportData.js reads this same signups_log list).
+  await recordSignup({ kvUrl, kvToken }, {
+    name, email: normalizedEmail, company: cleanCompany,
+    department: cleanDepartment, departmentOther: cleanDepartmentOther,
+    designation: cleanDesignation, designationOther: cleanDesignationOther,
+    country: cleanCountry, city: cleanCity,
+  });
 
   await sendEmail(resendKey, {
       from: 'Usman Qureshi | Audit & Advisory <welcome@uqconsulting.org>',
@@ -484,6 +527,51 @@ async function handleCronFollowups(req, res, { kvUrl, kvToken, resendKey }) {
   res.status(200).json({ ok: true, processed });
 }
 
+// Weekly full-snapshot Excel export (3 sheets: Signups, Feature Usage, Feature Ratings —
+// see lib/exportData.js), emailed to the owner. Same Bearer CRON_SECRET pattern as cron-followups.
+async function handleCronExportData(req, res, { kvUrl, kvToken, resendKey }) {
+  const cronSecret = process.env.CRON_SECRET;
+  if (cronSecret && req.headers['authorization'] !== `Bearer ${cronSecret}`) { res.status(401).json({ error: 'Unauthorized' }); return; }
+  if (!kvUrl || !kvToken || !resendKey) { res.status(200).json({ ok: true, sent: false, reason: 'not configured' }); return; }
+
+  try {
+    const buffer = await buildWorkbook({ kvUrl, kvToken });
+    const dateLabel = new Date().toISOString().slice(0, 10);
+    const emailResp = await sendEmail(resendKey, {
+        from: 'Website Data Export <data@uqconsulting.org>',
+        to: ['usmanqureshi645@gmail.com'],
+        subject: `Weekly website data export — ${dateLabel}`,
+        html: `<p>Attached is the latest full snapshot of signups, feature usage, and feature ratings (3 sheets), as of ${new Date().toISOString()}.</p><p>This is a complete export each time, not incremental — safe to keep just the most recent file.</p>`,
+        attachments: [{ filename: `website-export-${dateLabel}.xlsx`, content: buffer.toString('base64') }],
+    }, { kvUrl, kvToken });
+
+    if (!emailResp.ok) { console.error('[account:cron-export-data] send failed', await emailResp.text()); res.status(200).json({ ok: true, sent: false }); return; }
+    res.status(200).json({ ok: true, sent: true });
+  } catch (err) {
+    console.error('[account:cron-export-data] failed', err);
+    res.status(500).json({ error: 'Export failed' });
+  }
+}
+
+// On-demand version of the same export — gated by the admin DASHBOARD_KEY (same pattern
+// as ?action=dashboard) so the owner can pull current data without waiting for Monday.
+async function handleExportData(req, res, { kvUrl, kvToken }) {
+  if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Storage not configured yet' }); return; }
+  const provided = req.query?.key || req.headers['x-dashboard-key'];
+  if (!verifyAdminKey(provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
+
+  try {
+    const buffer = await buildWorkbook({ kvUrl, kvToken });
+    const dateLabel = new Date().toISOString().slice(0, 10);
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition', `attachment; filename="website-export-${dateLabel}.xlsx"`);
+    res.status(200).send(buffer);
+  } catch (err) {
+    console.error('[account:export-data] failed', err);
+    res.status(500).json({ error: 'Export failed' });
+  }
+}
+
 // Public, no-auth visitor ping — fired on page load + a periodic heartbeat from index.html.
 // Powers the live-traffic and visitor counts on the admin dashboard.
 async function handleTrack(req, res, { kvUrl, kvToken }) {
@@ -533,6 +621,8 @@ export default async function handler(req, res) {
       case 'meeting-end': return req.method === 'POST' ? await handleMeetingEnd(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       case 'track': return await handleTrack(req, res, ctx);
       case 'dashboard': return req.method === 'GET' ? await handleDashboard(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
+      case 'cron-export-data': return await handleCronExportData(req, res, ctx);
+      case 'export-data': return req.method === 'GET' ? await handleExportData(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       default: res.status(400).json({ error: 'Unknown or missing action' });
     }
   } catch (err) {

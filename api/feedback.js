@@ -1,5 +1,6 @@
 import { getUserFromRequest, verifyAdminKey } from '../lib/auth.js';
 import { sendEmail } from '../lib/email.js';
+import { logFeatureRating } from '../lib/featureLog.js';
 
 async function findEntryIndex(kvUrl, kvToken, id) {
   const r = await fetch(`${kvUrl}/lrange/feedback_log/0/-1`, {
@@ -103,6 +104,38 @@ async function handleResolve(req, res, { kvUrl, kvToken, resendKey }) {
   }
 }
 
+// Feature-rating popup submission (Part 4 of the requirements doc) — public, optionally
+// attributed to a logged-in user, same anonymous-friendly pattern as the rest of this file.
+async function handleRate(req, res, { kvUrl, kvToken }) {
+  if (req.method !== 'POST') {
+    res.status(405).json({ error: 'Method not allowed' });
+    return;
+  }
+  if (!kvUrl || !kvToken) {
+    res.status(500).json({ error: 'Storage not configured yet' });
+    return;
+  }
+  const { rating, feature, email } = req.body || {};
+  const cleanRating = Number(rating);
+  if (!Number.isInteger(cleanRating) || cleanRating < 1 || cleanRating > 5) {
+    res.status(400).json({ error: 'Rating must be an integer from 1 to 5' });
+    return;
+  }
+  if (!feature || typeof feature !== 'string') {
+    res.status(400).json({ error: 'Missing feature name' });
+    return;
+  }
+  const loggedInUser = getUserFromRequest(req);
+  const resolvedEmail = loggedInUser?.email || (typeof email === 'string' && email.includes('@') ? email.trim() : null);
+
+  try {
+    await logFeatureRating({ kvUrl, kvToken }, { email: resolvedEmail, rating: cleanRating, feature: feature.slice(0, 60) });
+    res.status(200).json({ ok: true });
+  } catch (err) {
+    res.status(500).json({ error: 'Request failed' });
+  }
+}
+
 async function handleList(req, res, { kvUrl, kvToken }) {
   if (!kvUrl || !kvToken) {
     res.status(500).json({ error: 'Storage not configured yet' });
@@ -150,6 +183,10 @@ export default async function handler(req, res) {
 
   if (req.query?.action === 'resolve') {
     return handleResolve(req, res, { kvUrl, kvToken, resendKey });
+  }
+
+  if (req.query?.action === 'rate') {
+    return handleRate(req, res, { kvUrl, kvToken });
   }
 
   if (req.method !== 'POST') {

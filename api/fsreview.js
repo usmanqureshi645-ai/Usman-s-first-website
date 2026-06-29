@@ -4,6 +4,7 @@ import { logAndCheckUsage } from '../lib/ipUsage.js';
 import { getUserFromRequest } from '../lib/auth.js';
 import { saveConsultation } from '../lib/consultations.js';
 import { sendEmail } from '../lib/email.js';
+import { logFeatureUse } from '../lib/featureLog.js';
 
 const FRAMEWORKS = new Set(['FRS 101', 'FRS 102', 'Full IFRS', 'US GAAP', 'AICPA']);
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
@@ -226,6 +227,14 @@ If isFinancialStatement is false, leave inlineComments and additionalNotes as em
       } catch {
         // non-fatal — the deliverable was already emailed regardless
       }
+    }
+
+    // "Review button clicked on a real document" (Part 2 of the requirements doc) — reaching
+    // this point means the model judged it WAS genuine financial statements (the
+    // isFinancialStatement===false branch already returned earlier otherwise) and the
+    // email sent successfully. That's a complete, real review by construction.
+    if (kvUrl && kvToken) {
+      await logFeatureUse({ kvUrl, kvToken }, { tool: 'fsreview', email: user?.email || null, detail: { framework: selectedFramework } });
     }
 
     res.status(200).json({ isFinancialStatement: true, summary, additionalNotes: allNotes, emailed: true, usage });

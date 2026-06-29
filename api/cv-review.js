@@ -1,4 +1,6 @@
 import { logAndCheckUsage } from '../lib/ipUsage.js';
+import { getUserFromRequest } from '../lib/auth.js';
+import { logFeatureUse } from '../lib/featureLog.js';
 
 // Shared language rules so neither the scoring nor the chat sounds like generic AI.
 const HUMAN_LANGUAGE_RULES = `Write in plain, natural British business English. Do not use em dashes or en dashes (— or –); use commas, full stops or brackets instead. Avoid generic AI filler such as "I am excited to", "passionate about", "in today's fast-paced world", "leverage", "delve", "tapestry", "robust", "seamless", "navigate the landscape". Vary your sentence length so it reads like a real person wrote it. Be concrete and specific, never vague.`;
@@ -30,8 +32,10 @@ export default async function handler(req, res) {
   }
 
   const { mode = 'score', cv, coverLetter, jobDescription, messages, text, kind } = req.body || {};
+  const kvUrl = process.env.UPSTASH_REDIS_REST_URL;
+  const kvToken = process.env.UPSTASH_REDIS_REST_TOKEN;
 
-  const usage = await logAndCheckUsage(req, { kvUrl: process.env.UPSTASH_REDIS_REST_URL, kvToken: process.env.UPSTASH_REDIS_REST_TOKEN }, 'cv-review');
+  const usage = await logAndCheckUsage(req, { kvUrl, kvToken }, 'cv-review');
   if (usage.limited) { res.status(429).json({ error: 'Too many requests — please wait a moment and try again.' }); return; }
 
   try {
@@ -89,6 +93,16 @@ ${context ? `For reference, here is the material they are working on:\n\n${conte
       const { ok, status, data } = await callClaude(apiKey, { system, messages: cleanMessages, max_tokens: 1200 });
       if (!ok) { res.status(status).json({ error: data?.error?.message || 'Upstream error' }); return; }
       const reply = data?.content?.[0]?.text || '';
+
+      // Genuine-use signal for CV Reasoning (Part 2 of the requirements doc): the frontend
+      // always resends the full, never-truncated history, so this fires exactly once per
+      // session — on the call where the user's 2nd message crosses the threshold.
+      const userMessageCount = cleanMessages.filter(m => m.role === 'user').length;
+      if (kvUrl && kvToken && userMessageCount === 2) {
+        const loggedInUser = getUserFromRequest(req);
+        await logFeatureUse({ kvUrl, kvToken }, { tool: 'cv-review-chat', email: loggedInUser?.email || null, detail: { messageCount: userMessageCount } });
+      }
+
       res.status(200).json({ reply, usage });
       return;
     }
@@ -133,6 +147,14 @@ Give between 5 and 8 items for the CV. The HR score reflects screening appeal an
       const m = rawText.match(/\{[\s\S]*\}/);
       try { parsed = JSON.parse(m ? m[0] : rawText); }
       catch { parsed = { cv: null, coverLetter: null, raw: rawText }; }
+    }
+
+    // Score mode has no testing-vs-trial ambiguity: reaching this point means a real CV
+    // and job description were supplied (already enforced by the 400-check above), so
+    // every successful score is a genuine complete use by construction.
+    if (kvUrl && kvToken) {
+      const loggedInUser = getUserFromRequest(req);
+      await logFeatureUse({ kvUrl, kvToken }, { tool: 'cv-review-score', email: loggedInUser?.email || null, detail: {} });
     }
 
     res.status(200).json({ ...parsed, usage });

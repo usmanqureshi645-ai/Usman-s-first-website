@@ -110,6 +110,7 @@ async function handleSignup(req, res, { resendKey, kvUrl, kvToken }) {
   }, { kvUrl, kvToken });
 
   // Auto-sync to Google Sheets (non-blocking)
+  const signupIp = String(req.headers?.['x-forwarded-for'] || '').split(',')[0].trim() || req.socket?.remoteAddress || '';
   appendUserToSheet({
     email: normalizedEmail,
     name,
@@ -118,6 +119,7 @@ async function handleSignup(req, res, { resendKey, kvUrl, kvToken }) {
     designation: cleanDesignation === 'Other' ? cleanDesignationOther : cleanDesignation,
     country: cleanCountry,
     city: cleanCity,
+    ip: signupIp,
   }).catch(err => console.error('[Signup] Google Sheets sync error:', err));
 
   res.status(200).json({ ok: true, name, email: normalizedEmail });

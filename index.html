@@ -5794,10 +5794,6 @@ async function jobValidateDoc(text, kind){
 // Called after login/profile load. Safe to call repeatedly.
 window.applySavedProfileToTools=function(){
   const p=window.getSiteProfile?.();
-  const user=window.getSiteUser?.();
-  // FS-review email: suggest the account email instead of asking for it again.
-  const fsEmail=document.getElementById('fsEmail');
-  if(fsEmail && user && !fsEmail.value.trim()) fsEmail.value=user.email;
   if(!p) return;
   if(p.cv && !jobCvText){
     jobCvText=p.cv;

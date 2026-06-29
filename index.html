@@ -4340,7 +4340,7 @@ function mrSpeak(name, text){
 function mrPlayAudio(audioUrl){
   if(!audioUrl || typeof audioUrl !== 'string') return;
   try {
-    if(window.MusicDuck) window.MusicDuck.duck('tts');
+    if(window.MusicDuck) window.MusicDuck.duck('tts', 1500);
     const audio = new Audio(audioUrl);
     audio.onended = () => { if(window.MusicDuck) window.MusicDuck.unduck('tts'); };
     audio.onerror = () => { if(window.MusicDuck) window.MusicDuck.unduck('tts'); };

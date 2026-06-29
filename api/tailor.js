@@ -1,4 +1,5 @@
 import { logAndCheckUsage } from '../lib/ipUsage.js';
+import { getUserFromRequest } from '../lib/auth.js';
 
 // Fetch a company web page and reduce it to plain text we can feed the model.
 // Best-effort only: a failure or timeout just means we fall back to model knowledge.
@@ -38,6 +39,9 @@ export default async function handler(req, res) {
     res.status(500).json({ error: 'Server not configured' });
     return;
   }
+
+  const user = getUserFromRequest(req);
+  if (!user) { res.status(401).json({ error: 'Sign up free to write a tailored cover letter' }); return; }
 
   const { cv, jobDescription, companyName, companyUrl, existingCoverLetter } = req.body || {};
   if (!cv || !jobDescription) {

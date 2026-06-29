@@ -1778,7 +1778,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 <div class="section-header">
 <p class="section-eyebrow">Career Toolkit</p>
 <h2 class="section-title">Score My Resume</h2>
-<p class="section-sub">Upload your CV, paste the job posting and, if you like, add your cover letter. We score it honestly from three angles, HR, the applicant tracking system and the hiring manager, and lay out every criticism next to a specific fix you can make yourself. If you're signed in, your CV and cover letter are saved privately to your workspace so you never have to re-upload them; if you're not, nothing is stored beyond this session. Looking for a job to apply to? Sign up free for <a href="#" onclick="window.openPersonalizedJobSearch();return false" style="color:var(--gold)">Personalized Job Search</a> in your workspace.</p>
+<p class="section-sub">Upload your CV, paste the job posting and, if you like, add your cover letter. We score it honestly from three angles, HR, the applicant tracking system and the hiring manager, and lay out every criticism next to a specific fix you can make yourself. Sign up free to use this tool — it only takes a minute, and unlocks every AI tool on the site. Once you're in, your CV and cover letter are saved privately to your workspace so you never have to re-upload them. Looking for a job to apply to? Sign up free for <a href="#" onclick="window.openPersonalizedJobSearch();return false" style="color:var(--gold)">Personalized Job Search</a> in your workspace.</p>
 </div>
 
 <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">CV &amp; Cover Letter Scoring</h3>
@@ -1913,7 +1913,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 <div class="section-header">
 <p class="section-eyebrow">AI Panel Review</p>
 <h2 class="section-title">Financial Statement Review</h2>
-<p class="section-sub">Upload your financial statements and an AI panel — audit, tax, IFRS/FRC technical, forensic, ESG, legal and technical accounting specialists — reviews them for compliance with your chosen framework. Discrepancies come back as real, clickable Word comments from Usman Qureshi, anchored to the exact text. Works fully anonymously — signing up (free) just lets you save the review to your workspace.</p>
+<p class="section-sub">Upload your financial statements and an AI panel — audit, tax, IFRS/FRC technical, forensic, ESG, legal and technical accounting specialists — reviews them for compliance with your chosen framework. Discrepancies come back as real, clickable Word comments from Usman Qureshi, anchored to the exact text. Sign up free to use this tool — it only takes a minute, and unlocks every AI tool on the site, including this one.</p>
 </div>
 
 <div class="job-tailor-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;max-width:900px;margin-left:auto;margin-right:auto">
@@ -1933,8 +1933,6 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
       <option value="US GAAP">US GAAP</option>
       <option value="AICPA">AICPA</option>
     </select>
-    <label for="fsEmail" style="font-size:.78rem;color:var(--steel-light);display:block;margin:1rem 0 .5rem">3. Email the reviewed document to</label>
-    <input type="text" id="fsEmail" placeholder="you@example.com" style="width:100%;height:42px;border-radius:8px;border:1px solid var(--steel);background:rgba(255,255,255,.03);color:var(--cream);padding:0 .75rem" />
   </div>
 </div>
 
@@ -2674,7 +2672,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
         <button class="pub-btn" onclick="location.href='workspace.html'" style="display:block;margin-top:.6rem;width:100%">Go to My Workspace</button>
         <button onclick="logoutSiteUser()" style="display:block;margin-top:.5rem;background:none;border:none;color:var(--steel-light);font-size:.75rem;text-decoration:underline;cursor:pointer;padding:0">Log out</button>
       </div>
-      <div class="wb-msg bot"><div class="wb-bubble" id="signupIntroBubble">Every AI tool here is free to use without signing up. Signing up is free too — it just unlocks your personal workspace: every consultation saved, resume any conversation anytime, and a friendly follow-up email after each session.</div></div>
+      <div class="wb-msg bot"><div class="wb-bubble" id="signupIntroBubble">Sign up free to unlock every AI tool on this site — Meeting Room, Interview Prep, GAAP Compare, CV Scoring, Financial Statement Review and AskAI. It takes a minute, and it's completely free.</div></div>
       <input type="text" id="signupName" placeholder="Your name" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
       <input type="email" id="signupEmail" placeholder="Your email" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
       <input type="password" id="signupPassword" placeholder="Choose a password (6+ characters)" style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.6rem .8rem;color:var(--cream);font-family:inherit;font-size:.82rem">
@@ -3481,7 +3479,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       document.getElementById('signupForgotLink').style.display = loginMode ? 'block' : 'none';
       document.getElementById('signupIntroBubble').textContent = loginMode
         ? 'Log in to get back to your saved consultations and resume any conversation.'
-        : "Every AI tool here is free to use without signing up. Signing up is free too — it just unlocks your personal workspace: every consultation saved, resume any conversation anytime, and a friendly follow-up email after each session.";
+        : "Sign up free to unlock every AI tool on this site — Meeting Room, Interview Prep, GAAP Compare, CV Scoring, Financial Statement Review and AskAI. It takes a minute, and it's completely free.";
     };
 
     let forgotMode=false;
@@ -3517,7 +3515,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
         document.getElementById('signupForgotLink').style.display = loginMode ? 'block' : 'none';
         document.getElementById('signupIntroBubble').textContent = loginMode
           ? 'Log in to get back to your saved consultations and resume any conversation.'
-          : "Every AI tool here is free to use without signing up. Signing up is free too — it just unlocks your personal workspace: every consultation saved, resume any conversation anytime, and a friendly follow-up email after each session.";
+          : "Sign up free to unlock every AI tool on this site — Meeting Room, Interview Prep, GAAP Compare, CV Scoring, Financial Statement Review and AskAI. It takes a minute, and it's completely free.";
       }
     };
 
@@ -3678,12 +3676,13 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       panel.classList.toggle('open', askOpened);
       if(askOpened && wrap.childElementCount===0){
         const u=window.getSiteUser?.();
-        addAskMsg('bot', u ? `Hey ${u.name.split(' ')[0]}! Ask me anything — I'm a general-purpose assistant, separate from the site's specialised tools.` : "Hi! Ask me anything — general questions, not just finance. Sign up above to make this your own personalised assistant.");
+        addAskMsg('bot', u ? `Hey ${u.name.split(' ')[0]}! Ask me anything — I'm a general-purpose assistant, separate from the site's specialised tools.` : "Hi! Sign up free to start chatting with me — once you do, I'm your own personalised assistant, separate from the site's other tools.");
       }
     };
     toggleBtn.addEventListener('click', ()=>window.toggleAsk());
 
     window.sendAsk=async function(){
+      if(!window.getSiteUser?.()){ window.toggleSignup?.(true); return; }
       const input=document.getElementById('askInput');
       const text=input.value.trim();
       if(!text) return;
@@ -3695,11 +3694,10 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       typing.innerHTML=`<div class="wb-bubble"><span class="mr-typing"><span></span><span></span><span></span></span></div>`;
       wrap.appendChild(typing); wrap.scrollTop=wrap.scrollHeight;
       try{
-        const u=window.getSiteUser?.();
         const r=await fetch('/api/ask',{
           method:'POST',
           headers:{'content-type':'application/json'},
-          body:JSON.stringify({history:askHistory, userName:u?.name})
+          body:JSON.stringify({history:askHistory})
         });
         const data=await r.json();
         document.getElementById('askTyping')?.remove();
@@ -3716,20 +3714,9 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     });
   })();
 
-  // Reusable inline nudge shown once per session right after a tool produces a result,
-  // inviting (not forcing) a free signup so the result gets saved to a personal workspace
-  window.showSignupNudge=function(containerEl){
-    if(window.getSiteUser?.()) return; // already signed up — nothing to nudge about
-    if(sessionStorage.getItem('signup_nudge_shown')) return;
-    sessionStorage.setItem('signup_nudge_shown','1');
-    const div=document.createElement('div');
-    div.style.cssText='margin-top:1rem;padding:.85rem 1.1rem;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.25);border-radius:10px;font-size:.85rem;color:var(--steel-light);display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap';
-    div.innerHTML=`<span>Want to save this and pick up where you left off next time? Sign up free — every tool stays free after signing up too.</span><button class="pub-btn" style="white-space:nowrap" onclick="window.toggleSignup(true)">Sign up free</button>`;
-    containerEl.appendChild(div);
-  };
-
   // "Personalized Job Search For You" USP tile — takes the visitor straight to the
-  // dashboard tab if logged in, or prompts a free signup first (never a hard wall).
+  // dashboard tab if logged in, or opens the signup panel otherwise (every tool now
+  // requires signup before use).
   window.openPersonalizedJobSearch=function(){
     if(window.getSiteUser?.()){ window.location.href='workspace.html?tab=jobsearch'; return; }
     window.toggleSignup?.(true);
@@ -4768,6 +4755,7 @@ async function mrPollSession(){
   }catch(e){ /* ignore — retried on next interval */ }
 }
 function mrStartMeeting(){
+  if(!window.getSiteUser?.()){ window.toggleSignup?.(true); return; }
   mrSelectedAgents=Array.from(document.querySelectorAll('.mr-agent-check:checked')).map(c=>c.value);
   if(mrPresentNames().length===0){ alert('Please pick at least one specialist to join the room.'); return; }
   // The meeting begins the moment this button is pressed — fade the music out now,
@@ -4779,11 +4767,9 @@ function mrStartMeeting(){
   document.getElementById('mrStartBtn').disabled=true;
   document.getElementById('mrChips').style.display='flex';
   document.getElementById('mrInputBar').style.display='flex';
-  const siteUser=window.getSiteUser?.();
+  const siteUser=window.getSiteUser();
   const presentNames=mrPresentNames();
-  const kickoff=siteUser
-    ? `[The user has just entered the Meeting Room. The following specialists are present: ${presentNames.join(', ')}. The user is already signed in as "${siteUser.name}" — greet them warmly by name as the panel (briefly, 1-2 sentences total from one spokesperson), explain in one sentence what the Meeting Room is for, then ask what they'd like to discuss today. Do NOT ask for their name — you already know it, never ask again.]`
-    : `[The user has just entered the Meeting Room. The following specialists are present: ${presentNames.join(', ')}. Greet the user warmly as the panel (briefly, 1-2 sentences total from one spokesperson), explain in one sentence what the Meeting Room is for, then ask for the user's name. Do not discuss any technical topic yet — just greet and ask their name.]`;
+  const kickoff=`[The user has just entered the Meeting Room. The following specialists are present: ${presentNames.join(', ')}. The user is already signed in as "${siteUser.name}" — greet them warmly by name as the panel (briefly, 1-2 sentences total from one spokesperson), explain in one sentence what the Meeting Room is for, then ask what they'd like to discuss today. Do NOT ask for their name — you already know it, never ask again.]`;
   mrHistory.push({role:'user', content:kickoff});
   mrCallApi();
 }
@@ -5059,11 +5045,7 @@ function mrEndMeeting(){
   console.log('Meeting ended, resuming music');
   window.MusicDuck?.unduck('meeting-room');
   mrMeetingStarted=false;
-  const siteUser=window.getSiteUser?.();
-  if(siteUser){ mrSendSummaryTo(siteUser.email, {skipUserBubble:false, loggedIn:true}); return; }
-  const email=prompt("What email address should I send the discussion summary to?");
-  if(!email || !email.includes('@')){ if(email!==null) alert('Please enter a valid email address.'); return; }
-  mrSendSummaryTo(email);
+  mrSendSummaryTo(window.getSiteUser().email, {skipUserBubble:false, loggedIn:true});
 }
 function mrSendSummaryTo(email, {skipUserBubble=false, loggedIn=false}={}){
   if(!skipUserBubble) mrAppendMessage('user','You', loggedIn ? 'Please end the meeting and email me the consultation.' : `Please end the meeting and email a summary to ${email}.`);
@@ -5083,10 +5065,7 @@ function mrSendSummaryTo(email, {skipUserBubble=false, loggedIn=false}={}){
     if(data.error){ mrAppendMessage('agent','Meeting Room', `Sorry — I couldn't send that summary right now (${data.error}). Please try again shortly.`); }
     else{
       const jointNote = coParticipant ? ` A copy has also gone to **${coParticipant.name||coParticipant.email}**, and it's saved in both your workspaces.` : '';
-      mrAppendMessage('agent','Meeting Room', loggedIn
-        ? `Thank you — I'm sending the consultation to your email now, and it'll also be saved in your **My Workspace** dashboard for quick reference any time.${jointNote} It was a pleasure working through this with you.`
-        : `Thank you — a summary of our discussion has been sent to **${email}**.${jointNote} It was a pleasure working through this with you. You can also use the "⬇️ Download transcript" button any time to keep a copy.`);
-      window.showSignupNudge?.(document.getElementById('mrMessages'));
+      mrAppendMessage('agent','Meeting Room', `Thank you — I'm sending the consultation to your email now, and it'll also be saved in your **My Workspace** dashboard for quick reference any time.${jointNote} It was a pleasure working through this with you.`);
     }
   }).catch(()=>{
     mrAppendMessage('agent','Meeting Room', "Sorry — I couldn't send that summary right now. Please try again shortly.");
@@ -5468,10 +5447,9 @@ function gaapEndSession(){
   console.log('GAAP session ended, resuming music');
   window.MusicDuck?.unduck('gaap');
   if(gaapHistory.length===0){ alert('Ask a question first, then end the session.'); return; }
-  const siteUser=window.getSiteUser?.();
-  const email = siteUser ? siteUser.email : prompt("What email address should I send the GAAP Compare summary to?");
-  if(!email || !email.includes('@')){ if(email!==null) alert('Please enter a valid email address.'); return; }
-  gaapAppendMessage('user', siteUser ? 'Please end the session and email me a summary.' : `Please end the session and email a summary to ${email}.`);
+  const siteUser=window.getSiteUser();
+  const email=siteUser.email;
+  gaapAppendMessage('user', 'Please end the session and email me a summary.');
   const btn=document.getElementById('gaapEndBtn');
   btn.disabled=true; btn.textContent='Sending summary…';
   fetch('/api/send-summary',{
@@ -5481,8 +5459,7 @@ function gaapEndSession(){
   }).then(r=>r.json()).then(data=>{
     if(data.error){ gaapAppendMessage('agent', `Sorry — I couldn't send that summary right now (${data.error}). Please try again shortly.`); }
     else{
-      gaapAppendMessage('agent', `Thank you — a summary of our GAAP Compare session has been sent to **${email}**.${siteUser ? ' It will also show up in your workspace history if you save this session.' : ''}`);
-      window.showSignupNudge?.(document.getElementById('gaapMessages'));
+      gaapAppendMessage('agent', `Thank you — a summary of our GAAP Compare session has been sent to **${email}**. It will also show up in your workspace history if you save this session.`);
     }
   }).catch(()=>{
     gaapAppendMessage('agent', "Sorry — I couldn't send that summary right now. Please try again shortly.");
@@ -5492,6 +5469,7 @@ function gaapEndSession(){
   });
 }
 function gaapSendMessage(){
+  if(!window.getSiteUser?.()){ window.toggleSignup?.(true); return; }
   const input=document.getElementById('gaapInput');
   const text=input.value.trim();
   if(!text) return;
@@ -5569,6 +5547,7 @@ async function qzCallApi(){
   }
 }
 function qzStart(level){
+  if(!window.getSiteUser?.()){ window.toggleSignup?.(true); return; }
   console.log('Interview prep started, ducking music');
   window.MusicDuck?.duck('interview-prep', 2500); // slow, graceful fade-out
   document.getElementById('qzLevels').style.display='none';
@@ -5582,8 +5561,7 @@ function qzStart(level){
 function qzEndSession(){
   console.log('Interview prep ended, resuming music');
   window.MusicDuck?.unduck('interview-prep');
-  const email=prompt("What email address should I send your feedback report to?");
-  if(!email || !email.includes('@')){ if(email!==null) alert('Please enter a valid email address.'); return; }
+  const email=window.getSiteUser().email;
   qzAppendMessage('user', `I'd like to wrap up — please email my feedback to ${email}.`);
   const btn=document.getElementById('qzEndBtn');
   btn.disabled=true; btn.textContent='Preparing your feedback…';
@@ -5595,7 +5573,6 @@ function qzEndSession(){
     if(data.error){ qzAppendMessage('agent', `I couldn't send that just now (${data.error}) — please try again shortly.`); }
     else{
       qzAppendMessage('agent', `All done — your personalised feedback report is on its way to **${email}**! You did really well practising today. 🌟`);
-      window.showSignupNudge?.(document.getElementById('qzMessages'));
     }
   }).catch(()=>{
     qzAppendMessage('agent', "I couldn't send that just now — please try again shortly.");
@@ -5873,22 +5850,22 @@ async function fsHandleFile(input){
 }
 
 async function fsSubmitReview(){
+  if(!window.getSiteUser?.()){ window.toggleSignup?.(true); return; }
   if(!fsExtractedText){ alert('Please upload your financial statements first.'); return; }
-  const email=document.getElementById('fsEmail').value.trim() || window.getSiteUser?.()?.email;
-  if(!email || !email.includes('@')){ alert('Please enter an email address to send the reviewed document to.'); return; }
+  const email=window.getSiteUser().email;
   const framework=document.getElementById('fsFramework').value;
   const btn=document.getElementById('fsSubmitBtn');
   const resultDiv=document.getElementById('fsResult');
   const resultBody=document.getElementById('fsResultBody');
   btn.disabled=true; btn.textContent='Reviewing…';
-  resultBody.innerHTML=`<p>📨 Document received — the panel is reviewing it now against ${framework}. This can take a minute or two; we'll email the full report to <strong>${email}</strong> the moment it's ready${window.getSiteUser?.() ? ' and save it to your workspace' : ''}.</p>`;
+  resultBody.innerHTML=`<p>📨 Document received — the panel is reviewing it now against ${framework}. This can take a minute or two; we'll email the full report to <strong>${email}</strong> the moment it's ready and save it to your workspace.</p>`;
   resultDiv.style.display='block';
   resultDiv.scrollIntoView({behavior:'smooth'});
   try{
     const r=await fetch('/api/fsreview',{
       method:'POST',
       headers:{'content-type':'application/json'},
-      body:JSON.stringify({text:fsExtractedText, fileName:fsFileName, fileBase64:fsFileBase64, framework, email})
+      body:JSON.stringify({text:fsExtractedText, fileName:fsFileName, fileBase64:fsFileBase64, framework})
     });
     const data=await r.json();
     if(!r.ok){ resultBody.innerHTML=`<p>${data.error || 'Something went wrong — please try again.'}</p>`; return; }
@@ -5898,8 +5875,7 @@ async function fsSubmitReview(){
       return;
     }
 
-    resultBody.innerHTML=`<p>✅ Review complete — the full report with comments from Usman Qureshi has been emailed to <strong>${email}</strong>.${window.getSiteUser?.() ? ' It\'s also been saved to your workspace.' : ''}</p>`;
-    window.showSignupNudge?.(resultDiv);
+    resultBody.innerHTML=`<p>✅ Review complete — the full report with comments from Usman Qureshi has been emailed to <strong>${email}</strong>. It's also been saved to your workspace.</p>`;
   }catch(e){
     resultBody.innerHTML=`<p>Connection issue — please try again.</p>`;
   }finally{
@@ -5946,6 +5922,7 @@ function jobRenderScorecard(block, title){
 }
 
 async function jobReviewCv(){
+  if(!window.getSiteUser?.()){ window.toggleSignup?.(true); return; }
   const jd=document.getElementById('jobDescInput').value.trim();
   if(!jobCvText){ alert('Please upload your CV first.'); return; }
   if(!jd){ alert('Please paste the job description first.'); return; }
@@ -5965,18 +5942,15 @@ async function jobReviewCv(){
     document.getElementById('jobCoverScorecard').innerHTML=jobCoverHtml;
     document.getElementById('jobReviewResults').style.display='block';
     document.getElementById('jobReviewResults').scrollIntoView({behavior:'smooth'});
-    window.showSignupNudge?.(document.getElementById('jobReviewResults'));
-    // For logged-in users, save this scoring (with the JD + a text version of the feedback)
-    // so the workspace "Talk through your edits" chat can continue from it.
-    if(window.getSiteUser?.()){
-      const summaryHtml=jobCvHtml+(jobCoverHtml?'<div style="margin-top:1.25rem">'+jobCoverHtml+'</div>':'');
-      const toText=(block,label)=>{ if(!block) return ''; let s=`${label} scores — HR ${block.hr}, ATS ${block.ats}, Hiring Manager ${block.hiringManager}.\n`; (block.items||[]).forEach(it=>{ s+=`- Weakness: ${it.criticism} | Suggested fix: ${it.suggestion}\n`; }); return s; };
-      const priorScoring=[toText(data.cv,'CV'), data.coverLetter?toText(data.coverLetter,'Cover letter'):''].filter(Boolean).join('\n');
-      fetch('/api/account?action=save-consultation',{
-        method:'POST',headers:{'content-type':'application/json'},
-        body:JSON.stringify({tool:'cv-review',title:'CV & Cover Letter Scoring',summaryHtml,transcript:{jobDescription:jd,priorScoring}})
-      }).catch(()=>{});
-    }
+    // Save this scoring (with the JD + a text version of the feedback) so the workspace
+    // "Talk through your edits" chat can continue from it.
+    const summaryHtml=jobCvHtml+(jobCoverHtml?'<div style="margin-top:1.25rem">'+jobCoverHtml+'</div>':'');
+    const toText=(block,label)=>{ if(!block) return ''; let s=`${label} scores — HR ${block.hr}, ATS ${block.ats}, Hiring Manager ${block.hiringManager}.\n`; (block.items||[]).forEach(it=>{ s+=`- Weakness: ${it.criticism} | Suggested fix: ${it.suggestion}\n`; }); return s; };
+    const priorScoring=[toText(data.cv,'CV'), data.coverLetter?toText(data.coverLetter,'Cover letter'):''].filter(Boolean).join('\n');
+    fetch('/api/account?action=save-consultation',{
+      method:'POST',headers:{'content-type':'application/json'},
+      body:JSON.stringify({tool:'cv-review',title:'CV & Cover Letter Scoring',summaryHtml,transcript:{jobDescription:jd,priorScoring}})
+    }).catch(()=>{});
   }catch(e){
     alert('Connection issue, please try again.');
   }finally{
@@ -5986,13 +5960,7 @@ async function jobReviewCv(){
 
 // "I've made my edits, review them again" -> the iterative review chat lives in the workspace.
 function jobReviewAgain(){
-  if(window.getSiteUser?.()){
-    location.href='workspace.html?tab=cv&review=1';
-  }else{
-    window.showSignupNudge?.(document.getElementById('jobReviewResults'));
-    alert('The follow-up review chat lives in your private workspace. Signing up is free and takes a moment, then you can keep refining your CV and cover letter with the AI.');
-    location.href='index.html#signup';
-  }
+  location.href='workspace.html?tab=cv&review=1';
 }
 </script>
 

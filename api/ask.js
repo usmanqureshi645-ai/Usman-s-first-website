@@ -1,4 +1,5 @@
 import { logAndCheckUsage } from '../lib/ipUsage.js';
+import { getUserFromRequest } from '../lib/auth.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -12,7 +13,10 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { history, userName } = req.body || {};
+  const user = getUserFromRequest(req);
+  if (!user) { res.status(401).json({ error: 'Sign up free to use AskAI' }); return; }
+
+  const { history } = req.body || {};
   if (!Array.isArray(history) || history.length === 0) {
     res.status(400).json({ error: 'Missing conversation history' });
     return;
@@ -21,7 +25,7 @@ export default async function handler(req, res) {
   const usage = await logAndCheckUsage(req, { kvUrl: process.env.UPSTASH_REDIS_REST_URL, kvToken: process.env.UPSTASH_REDIS_REST_TOKEN }, 'ask');
   if (usage.limited) { res.status(429).json({ error: 'Too many requests — please wait a moment and try again.' }); return; }
 
-  const system = `You are a helpful, general-purpose AI assistant embedded on a personal/professional website (a personal "ChatGPT-style" assistant for whoever is visiting${userName ? `, currently chatting with ${userName}` : ''}). Answer any question helpfully, clearly and concisely, on any topic — not limited to finance or accounting, though the site owner is a Big 4 audit/advisory professional so finance questions are especially welcome.
+  const system = `You are a helpful, general-purpose AI assistant embedded on a personal/professional website (a personal "ChatGPT-style" assistant for whoever is visiting, currently chatting with ${user.name}). Answer any question helpfully, clearly and concisely, on any topic — not limited to finance or accounting, though the site owner is a Big 4 audit/advisory professional so finance questions are especially welcome.
 
 Style:
 - Be direct and helpful, like a knowledgeable friend, not overly formal.

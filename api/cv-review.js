@@ -35,6 +35,15 @@ export default async function handler(req, res) {
   const kvUrl = process.env.UPSTASH_REDIS_REST_URL;
   const kvToken = process.env.UPSTASH_REDIS_REST_TOKEN;
 
+  // mode:'validate' is a free, cheap pre-check called during file upload (before the
+  // user has clicked "Score My CV") and stays ungated, consistent with letting
+  // preparatory actions through; only the actual scoring/coaching modes require signup.
+  const user = getUserFromRequest(req);
+  if (mode !== 'validate' && !user) {
+    res.status(401).json({ error: mode === 'chat' ? 'Sign up free to talk this through with Eleanor' : 'Sign up free to score your CV' });
+    return;
+  }
+
   const usage = await logAndCheckUsage(req, { kvUrl, kvToken }, 'cv-review');
   if (usage.limited) { res.status(429).json({ error: 'Too many requests — please wait a moment and try again.' }); return; }
 
@@ -99,8 +108,7 @@ ${context ? `For reference, here is the material they are working on:\n\n${conte
       // session — on the call where the user's 2nd message crosses the threshold.
       const userMessageCount = cleanMessages.filter(m => m.role === 'user').length;
       if (kvUrl && kvToken && userMessageCount === 2) {
-        const loggedInUser = getUserFromRequest(req);
-        await logFeatureUse({ kvUrl, kvToken }, { tool: 'cv-review-chat', email: loggedInUser?.email || null, detail: { messageCount: userMessageCount } });
+        await logFeatureUse({ kvUrl, kvToken }, { tool: 'cv-review-chat', email: user.email, detail: { messageCount: userMessageCount } });
       }
 
       res.status(200).json({ reply, usage });
@@ -153,8 +161,7 @@ Give between 5 and 8 items for the CV. The HR score reflects screening appeal an
     // and job description were supplied (already enforced by the 400-check above), so
     // every successful score is a genuine complete use by construction.
     if (kvUrl && kvToken) {
-      const loggedInUser = getUserFromRequest(req);
-      await logFeatureUse({ kvUrl, kvToken }, { tool: 'cv-review-score', email: loggedInUser?.email || null, detail: {} });
+      await logFeatureUse({ kvUrl, kvToken }, { tool: 'cv-review-score', email: user.email, detail: {} });
     }
 
     res.status(200).json({ ...parsed, usage });

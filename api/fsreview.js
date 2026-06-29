@@ -37,14 +37,13 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { text, fileName, fileBase64, framework, email } = req.body || {};
+  const user = getUserFromRequest(req);
+  if (!user) { res.status(401).json({ error: 'Sign up free to use Financial Statement Review' }); return; }
+
+  const { text, fileName, fileBase64, framework } = req.body || {};
   const selectedFramework = FRAMEWORKS.has(framework) ? framework : 'Full IFRS';
   if (!text || typeof text !== 'string' || text.trim().length < 50) {
     res.status(400).json({ error: 'Please upload financial statements with enough text to review' });
-    return;
-  }
-  if (!email || !String(email).includes('@')) {
-    res.status(400).json({ error: 'Please provide an email address to send the reviewed document to' });
     return;
   }
 
@@ -200,7 +199,7 @@ If isFinancialStatement is false, leave inlineComments and additionalNotes as em
 
     const emailResp = await sendEmail(resendKey, {
         from: 'Financial Statement Review <fsreview@uqconsulting.org>',
-        to: [email],
+        to: [user.email],
         subject: `Your Financial Statement Review (${selectedFramework})`,
         html,
         attachments: [{ filename: outFileName, content: annotatedBuffer.toString('base64') }],
@@ -212,8 +211,7 @@ If isFinancialStatement is false, leave inlineComments and additionalNotes as em
       return;
     }
 
-    const user = getUserFromRequest(req);
-    if (user && kvUrl && kvToken) {
+    if (kvUrl && kvToken) {
       try {
         await saveConsultation({
           kvUrl,
@@ -234,7 +232,7 @@ If isFinancialStatement is false, leave inlineComments and additionalNotes as em
     // isFinancialStatement===false branch already returned earlier otherwise) and the
     // email sent successfully. That's a complete, real review by construction.
     if (kvUrl && kvToken) {
-      await logFeatureUse({ kvUrl, kvToken }, { tool: 'fsreview', email: user?.email || null, detail: { framework: selectedFramework } });
+      await logFeatureUse({ kvUrl, kvToken }, { tool: 'fsreview', email: user.email, detail: { framework: selectedFramework } });
     }
 
     res.status(200).json({ isFinancialStatement: true, summary, additionalNotes: allNotes, emailed: true, usage });

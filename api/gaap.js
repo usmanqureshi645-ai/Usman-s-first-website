@@ -1,4 +1,5 @@
 import { logAndCheckUsage } from '../lib/ipUsage.js';
+import { getUserFromRequest } from '../lib/auth.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -11,6 +12,9 @@ export default async function handler(req, res) {
     res.status(500).json({ error: 'Server not configured' });
     return;
   }
+
+  const user = getUserFromRequest(req);
+  if (!user) { res.status(401).json({ error: 'Sign up free to ask the GAAP Champion a question' }); return; }
 
   const { history, jurisdiction } = req.body || {};
   if (!Array.isArray(history) || history.length === 0) {

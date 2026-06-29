@@ -55,7 +55,7 @@ export default async function handler(req, res) {
     }
 
     const text = data?.content?.[0]?.text || '';
-    const audioUrl = await synthesize(text, 'default', { kv: { url: process.env.UPSTASH_REDIS_REST_URL, token: process.env.UPSTASH_REDIS_REST_TOKEN } });
+    const audioUrl = await synthesize(text, 'Quiz Coach', { kv: { url: process.env.UPSTASH_REDIS_REST_URL, token: process.env.UPSTASH_REDIS_REST_TOKEN } });
     res.status(200).json({ text, audioUrl: audioUrl || null, usage });
   } catch (err) {
     res.status(500).json({ error: 'Request failed' });

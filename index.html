@@ -4337,6 +4337,18 @@ function mrSpeak(name, text){
   const speakerGender=customMatch?.gender || mrGenders[name] || 'female';
   VoiceEngine.speak(text, mrPitches[name]||1, true, speakerGender);
 }
+function mrPlayAudio(audioUrl){
+  if(!audioUrl || typeof audioUrl !== 'string') return;
+  try {
+    if(window.MusicDuck) window.MusicDuck.duck('tts');
+    const audio = new Audio(audioUrl);
+    audio.onended = () => { if(window.MusicDuck) window.MusicDuck.unduck('tts'); };
+    audio.onerror = () => { if(window.MusicDuck) window.MusicDuck.unduck('tts'); };
+    audio.play().catch(() => { if(window.MusicDuck) window.MusicDuck.unduck('tts'); });
+  } catch {
+    if(window.MusicDuck) window.MusicDuck.unduck('tts');
+  }
+}
 function mrToggleVoice(){
   mrVoiceEnabled=!mrVoiceEnabled;
   const btn=document.getElementById('mrVoiceToggle');
@@ -4393,7 +4405,7 @@ async function mrCallApi(userText){
       return;
     }
     mrHistory.push({role:'assistant', content:replyText});
-    await mrRenderPanelReply(replyText);
+    await mrRenderPanelReply(replyText, false, data.audioUrl);
     if(mrSessionId) await mrPostToSession({role:'assistant', content:replyText});
   }catch(e){
     mrHideTyping();
@@ -4406,13 +4418,14 @@ function mrWait(ms){ return new Promise(r=>setTimeout(r, ms)); }
 // Renders each panel member's contribution one at a time, with a realistic
 // typing pause beforehand, instead of dumping every speaker's bubble at once —
 // the latter reads as obviously AI-generated rather than a real back-and-forth.
-async function mrRenderPanelReply(text, instant){
+async function mrRenderPanelReply(text, instant, audioUrl){
   // Splits "**Name**: message" speaker segments into separate bubbles. The colon
   // AFTER the closing ** is required, so inline bold inside a message (e.g. the
   // "**Quick note:**" voice disclaimer, colon inside the bold) is NOT mistaken for
   // a new speaker and stays as bold text within the bubble.
   const parts=text.split(/\*\*([^*]+)\*\*:\s*/).filter(Boolean);
-  if(parts.length<=1){ mrAppendMessage('agent','Panel', text.trim()); return; }
+  const hasAudio = audioUrl && mrVoiceEnabled;
+  if(parts.length<=1){ mrAppendMessage('agent','Panel', text.trim()); if(hasAudio) mrPlayAudio(audioUrl); return; }
   for(let i=0;i<parts.length;i+=2){
     const name=parts[i]; const msg=parts[i+1];
     if(!name || !msg) continue;
@@ -4426,6 +4439,7 @@ async function mrRenderPanelReply(text, instant){
     }
     mrAppendMessage('agent', name.trim(), msg.trim());
   }
+  if(hasAudio) mrPlayAudio(audioUrl);
 }
 let mrRealUserMessages=0;
 const MR_EMAIL_RE=/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;

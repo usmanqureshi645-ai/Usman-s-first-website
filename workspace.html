@@ -1152,6 +1152,18 @@
     }
     window.cvToggleVoice = cvToggleVoice;
     function cvSpeak(text) { if (cvVoiceEnabled) VoiceEngine.speak(text, 1, 'female'); }
+    function cvPlayAudio(audioUrl) {
+      if (!audioUrl || typeof audioUrl !== 'string' || !cvVoiceEnabled) return;
+      try {
+        if (window.MusicDuck) window.MusicDuck.duck('tts');
+        const audio = new Audio(audioUrl);
+        audio.onended = () => { if (window.MusicDuck) window.MusicDuck.unduck('tts'); };
+        audio.onerror = () => { if (window.MusicDuck) window.MusicDuck.unduck('tts'); };
+        audio.play().catch(() => { if (window.MusicDuck) window.MusicDuck.unduck('tts'); });
+      } catch {
+        if (window.MusicDuck) window.MusicDuck.unduck('tts');
+      }
+    }
 
     // Focus mode: reparent the chat to <body> so no ancestor's overflow/stacking can clip it,
     // fill the screen, hide everything else, and pause the background music while focused.
@@ -1265,7 +1277,8 @@
         if (!r.ok) { cvSetAssistant(thinking, data.error || 'Something went wrong — please try again.'); return; }
         cvSetAssistant(thinking, data.reply || '');
         cvChatMessages.push({ role: 'assistant', content: data.reply || '' });
-        cvSpeak(data.reply || '');
+        if (data.audioUrl) cvPlayAudio(data.audioUrl);
+        else cvSpeak(data.reply || '');
       } catch (e) { cvSetAssistant(thinking, 'Connection issue — please try again.'); }
       finally { btn.disabled = false; btn.textContent = 'Send'; }
     }

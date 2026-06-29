@@ -4355,7 +4355,7 @@ function mrToggleVoice(){
   if(btn) btn.classList.toggle('active', mrVoiceEnabled);
   if(!mrVoiceEnabled) VoiceEngine.cancel();
 }
-function mrAppendMessage(role, name, text){
+function mrAppendMessage(role, name, text, skipBrowserTts){
   const wrap=document.getElementById('mrMessages');
   const div=document.createElement('div');
   div.className='mr-msg '+(role==='user'?'user':'agent');
@@ -4368,7 +4368,9 @@ function mrAppendMessage(role, name, text){
     : `<div class="mr-msg-name">${name}</div>${role_label}<div class="mr-bubble">${renderMarkdown(text)}</div>`;
   wrap.appendChild(div);
   wrap.scrollTop=wrap.scrollHeight;
-  if(role!=='user') mrSpeak(name, text);
+  // skipBrowserTts is true when real Polly audio is already queued for this reply —
+  // calling the old browser speechSynthesis voice too would talk over/before it.
+  if(role!=='user' && !skipBrowserTts) mrSpeak(name, text);
   if(typeof mrLiveStageRefresh==='function') mrLiveStageRefresh();
 }
 function mrShowTyping(){
@@ -4424,8 +4426,11 @@ async function mrRenderPanelReply(text, instant, audioUrl){
   // "**Quick note:**" voice disclaimer, colon inside the bold) is NOT mistaken for
   // a new speaker and stays as bold text within the bubble.
   const parts=text.split(/\*\*([^*]+)\*\*:\s*/).filter(Boolean);
-  const hasAudio = audioUrl && mrVoiceEnabled;
-  if(parts.length<=1){ mrAppendMessage('agent','Panel', text.trim()); if(hasAudio) mrPlayAudio(audioUrl); return; }
+  const hasAudio = !!(audioUrl && mrVoiceEnabled);
+  // Start the real Polly audio immediately (not after the typing-delay sequence below) and
+  // skip the old per-bubble browser voice entirely when it's playing, so they never overlap.
+  if(hasAudio) mrPlayAudio(audioUrl);
+  if(parts.length<=1){ mrAppendMessage('agent','Panel', text.trim(), hasAudio); return; }
   for(let i=0;i<parts.length;i+=2){
     const name=parts[i]; const msg=parts[i+1];
     if(!name || !msg) continue;
@@ -4437,9 +4442,8 @@ async function mrRenderPanelReply(text, instant, audioUrl){
       await mrWait(typingDelay);
       mrHideTyping();
     }
-    mrAppendMessage('agent', name.trim(), msg.trim());
+    mrAppendMessage('agent', name.trim(), msg.trim(), hasAudio);
   }
-  if(hasAudio) mrPlayAudio(audioUrl);
 }
 let mrRealUserMessages=0;
 const MR_EMAIL_RE=/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;

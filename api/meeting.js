@@ -68,20 +68,8 @@ export default async function handler(req, res) {
     }
 
     const text = data?.content?.[0]?.text || '';
-
-    // DEBUG: Check if AWS credentials are available in Vercel
-    const hasAwsCreds = !!process.env.AWS_ACCESS_KEY_ID && !!process.env.AWS_SECRET_ACCESS_KEY;
-    console.log('[MEETING] AWS credentials available:', hasAwsCreds);
-    console.log('[MEETING] AWS_REGION:', process.env.AWS_REGION);
-
     const audioUrl = await synthesize(text, agents?.[0] || 'default', { kv: { url: process.env.UPSTASH_REDIS_REST_URL, token: process.env.UPSTASH_REDIS_REST_TOKEN } });
-
-    res.status(200).json({
-      text,
-      audioUrl: audioUrl || null,
-      usage,
-      debug: { hasAwsCreds, region: process.env.AWS_REGION, audioUrlLength: audioUrl?.length || 0 }
-    });
+    res.status(200).json({ text, audioUrl: audioUrl || null, usage });
   } catch (err) {
     res.status(500).json({ error: 'Request failed' });
   }

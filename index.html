@@ -5397,7 +5397,7 @@ function gaapToggleVoice(){
   if(btn) btn.classList.toggle('active', gaapVoiceEnabled);
   if(!gaapVoiceEnabled) VoiceEngine.cancel();
 }
-function gaapAppendMessage(role, text){
+function gaapAppendMessage(role, text, audioUrl){
   const wrap=document.getElementById('gaapMessages');
   const div=document.createElement('div');
   div.className='mr-msg '+(role==='user'?'user':'agent');
@@ -5406,7 +5406,10 @@ function gaapAppendMessage(role, text){
     : `<div class="mr-msg-name">GAAP Champion</div><div class="mr-bubble">${renderMarkdown(text)}</div>`;
   wrap.appendChild(div);
   wrap.scrollTop=wrap.scrollHeight;
-  if(role!=='user') gaapSpeak(text);
+  if(role!=='user'){
+    if(audioUrl && gaapVoiceEnabled) mrPlayAudio(audioUrl);
+    else gaapSpeak(text);
+  }
   if(typeof mrLiveStageRefresh==='function') mrLiveStageRefresh();
 }
 function gaapShowTyping(){
@@ -5434,7 +5437,7 @@ async function gaapCallApi(){
     gaapHideTyping();
     if(!r.ok){ gaapAppendMessage('agent','Sorry — the assistant is temporarily unavailable. Please try again shortly.'); return; }
     gaapHistory.push({role:'assistant', content:data.text});
-    gaapAppendMessage('agent', data.text);
+    gaapAppendMessage('agent', data.text, data.audioUrl);
   }catch(e){
     gaapHideTyping();
     gaapAppendMessage('agent','Connection issue — please try again.');
@@ -5520,7 +5523,7 @@ function qzToggleVoice(){
   if(btn) btn.classList.toggle('active', qzVoiceEnabled);
   if(!qzVoiceEnabled) VoiceEngine.cancel();
 }
-function qzAppendMessage(role, text){
+function qzAppendMessage(role, text, audioUrl){
   const wrap=document.getElementById('qzMessages');
   const div=document.createElement('div');
   div.className='mr-msg '+(role==='user'?'user':'agent');
@@ -5529,7 +5532,10 @@ function qzAppendMessage(role, text){
     : `<div class="mr-msg-name">Interview Coach</div><div class="mr-bubble">${renderMarkdown(text)}</div>`;
   wrap.appendChild(div);
   wrap.scrollTop=wrap.scrollHeight;
-  if(role!=='user') qzSpeak(text);
+  if(role!=='user'){
+    if(audioUrl && qzVoiceEnabled) mrPlayAudio(audioUrl);
+    else qzSpeak(text);
+  }
   if(typeof mrLiveStageRefresh==='function') mrLiveStageRefresh();
 }
 function qzShowTyping(){
@@ -5556,7 +5562,7 @@ async function qzCallApi(){
     qzHideTyping();
     if(!r.ok){ qzAppendMessage('agent','Sorry — the coach is temporarily unavailable. Please try again shortly.'); return; }
     qzHistory.push({role:'assistant', content:data.text});
-    qzAppendMessage('agent', data.text);
+    qzAppendMessage('agent', data.text, data.audioUrl);
   }catch(e){
     qzHideTyping();
     qzAppendMessage('agent','Connection issue — please try again.');

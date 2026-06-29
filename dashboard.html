@@ -12,6 +12,7 @@
     --navy: #0A1628; --slate: #1E3A5F; --gold: #C8A96E; --gold-light: #E0C99A;
     --cream: #F0EDE6; --steel: #8899AA; --steel-light: #B8C8D8; --white: #FFFFFF;
     --green: #4FB477; --amber: #E0A93A; --red: #D9534F;
+    --blue: #5B8DEF; --purple: #A87CD8; --teal: #46B5A8;
   }
   html { background: var(--navy); }
   body {
@@ -19,7 +20,7 @@
     background: linear-gradient(180deg,#050b15,#0a1628);
     color: var(--cream); min-height: 100vh; overflow-x: hidden;
   }
-  nav {
+  nav.topbar {
     position: sticky; top: 0; z-index: 100; display: flex; align-items: center;
     justify-content: space-between; padding: 0 clamp(1rem,3vw,3rem); height: 64px;
     background: rgba(5,11,21,.7); backdrop-filter: blur(8px);
@@ -32,7 +33,7 @@
   main { max-width: 1080px; margin: 0 auto; padding: 2rem 1.25rem 5rem; }
   h1 { font-size: clamp(1.4rem,3vw,1.9rem); margin-bottom: .3rem; }
   .sub { color: var(--steel-light); font-size: .88rem; margin-bottom: .35rem; }
-  .stamp { color: var(--steel); font-size: .72rem; margin-bottom: 1.75rem; }
+  .stamp { color: var(--steel); font-size: .72rem; margin-bottom: 1.25rem; }
 
   .gate { max-width: 460px; margin: 4rem auto; background: rgba(255,255,255,.03);
     border: 1px solid rgba(200,169,110,.18); border-radius: 14px; padding: 2rem; text-align: center; }
@@ -46,8 +47,13 @@
 
   .grid { display: grid; gap: 1rem; }
   .cols-4 { grid-template-columns: repeat(4,1fr); }
+  .cols-3 { grid-template-columns: repeat(3,1fr); }
   .cols-2 { grid-template-columns: repeat(2,1fr); }
-  @media (max-width: 760px){ .cols-4 { grid-template-columns: repeat(2,1fr); } .cols-2 { grid-template-columns: 1fr; } }
+  @media (max-width: 760px){
+    .cols-4 { grid-template-columns: repeat(2,1fr); }
+    .cols-3 { grid-template-columns: 1fr; }
+    .cols-2 { grid-template-columns: 1fr; }
+  }
 
   .card { background: rgba(255,255,255,.03); border: 1px solid rgba(200,169,110,.15);
     border-radius: 14px; padding: 1.25rem 1.4rem; }
@@ -61,6 +67,11 @@
     margin-right: .4rem; box-shadow: 0 0 0 0 rgba(79,180,119,.6); animation: pulse 1.8s infinite; }
   @keyframes pulse { 0%{box-shadow:0 0 0 0 rgba(79,180,119,.55);} 70%{box-shadow:0 0 0 10px rgba(79,180,119,0);} 100%{box-shadow:0 0 0 0 rgba(79,180,119,0);} }
 
+  .pct-chip { font-size: .72rem; font-weight: 700; margin-top: .3rem; }
+  .pct-chip.up { color: var(--green); }
+  .pct-chip.down { color: var(--red); }
+  .pct-chip.flat { color: var(--steel); }
+
   .section { margin-top: 1.75rem; }
   table { width: 100%; border-collapse: collapse; font-size: .84rem; }
   th, td { text-align: left; padding: .55rem .5rem; border-bottom: 1px solid rgba(200,169,110,.1); }
@@ -70,7 +81,7 @@
   .muted { color: var(--steel); }
 
   .bar { height: 9px; border-radius: 6px; background: rgba(255,255,255,.08); overflow: hidden; margin: .4rem 0 .2rem; }
-  .bar > span { display: block; height: 100%; border-radius: 6px; background: var(--gold); transition: width .4s; }
+  .bar > span { display: block; height: 100%; border-radius: 6px; background: var(--gold); transition: width .5s ease; }
   .limit-row { margin-bottom: 1.1rem; }
   .limit-row .top { display: flex; justify-content: space-between; font-size: .82rem; }
   .limit-row .top b { color: var(--white); font-weight: 700; }
@@ -85,13 +96,62 @@
   .lat { color: var(--steel); font-size: .74rem; }
   .note { font-size: .74rem; color: var(--steel); margin-top: .75rem; line-height: 1.5; }
   .refresh-row { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; flex-wrap: wrap; }
-  .refresh-row button { background: rgba(255,255,255,.05); border: 1px solid rgba(200,169,110,.2);
-    color: var(--steel-light); border-radius: 20px; padding: .35rem .9rem; font-size: .76rem; cursor: pointer; }
-  .refresh-row button:hover { color: var(--gold-light); }
+  .refresh-row button, .tab-refresh { background: rgba(255,255,255,.05); border: 1px solid rgba(200,169,110,.2);
+    color: var(--steel-light); border-radius: 20px; padding: .35rem .9rem; font-size: .76rem; cursor: pointer; font-family: inherit; }
+  .refresh-row button:hover, .tab-refresh:hover { color: var(--gold-light); }
+
+  /* ===== TABS ===== */
+  nav.tabs { display: flex; gap: .35rem; margin-bottom: 1.5rem; flex-wrap: wrap;
+    border-bottom: 1px solid rgba(200,169,110,.15); align-items: center; }
+  .tab-btn { background: transparent; border: none; border-bottom: 2px solid transparent;
+    color: var(--steel-light); padding: .6rem .95rem; font-size: .9rem; cursor: pointer; font-family: inherit; }
+  .tab-btn:hover { color: var(--gold-light); }
+  .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); font-weight: 700; }
+  #logoutBtn { margin-left: auto; background: rgba(255,255,255,.05); border: 1px solid rgba(200,169,110,.2);
+    color: var(--steel-light); border-radius: 20px; padding: .35rem .9rem; font-size: .74rem; cursor: pointer; font-family: inherit; }
+  #logoutBtn:hover { color: var(--gold-light); }
+  .tab-panel { animation: fade .3s ease; }
+  @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+
+  /* ===== GAUGE / DONUT ===== */
+  .gauge-card { text-align: center; }
+  .gauge-card .gv { font-size: 1.6rem; font-weight: 800; color: var(--white); line-height: 1; }
+  .gauge-wrap svg { display: block; width: 100%; max-width: 220px; margin: 0 auto; }
+  .donut-legend-row { display: flex; align-items: center; gap: .5rem; font-size: .78rem; margin-bottom: .35rem; }
+  .swatch { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+  /* ===== BANNERS / LOADING ===== */
+  .banner { border-radius: 10px; padding: .7rem .9rem; font-size: .82rem; margin-bottom: 1rem; line-height: 1.5; }
+  .banner.warn { background: rgba(217,83,79,.12); border: 1px solid rgba(217,83,79,.3); color: var(--red); }
+  .banner.info { background: rgba(136,153,170,.1); border: 1px solid rgba(136,153,170,.25); color: var(--steel-light); }
+  .loading { color: var(--steel); font-size: .85rem; padding: 1rem .2rem; }
+  .stat-mini { font-size: .74rem; color: var(--steel-light); }
+  .stat-mini b { color: var(--white); font-weight: 700; }
+  .trend-dir { font-weight: 700; }
+  .trend-dir.up { color: var(--green); } .trend-dir.down { color: var(--red); } .trend-dir.flat { color: var(--steel); }
+
+  /* ===== DATABASE TAB ===== */
+  .db-controls { display: flex; gap: .6rem; flex-wrap: wrap; margin-bottom: 1rem; align-items: center; }
+  .db-controls input, .db-controls select {
+    background: rgba(0,0,0,.25); border: 1px solid rgba(200,169,110,.25); color: var(--cream);
+    border-radius: 8px; padding: .45rem .7rem; font-size: .82rem; font-family: inherit; }
+  .db-controls input { flex: 1; min-width: 180px; }
+  th.sortable { cursor: pointer; user-select: none; }
+  th.sortable:hover { color: var(--gold-light); }
+  th.sortable .arrow { font-size: .6rem; opacity: .7; }
+  .pager { display: flex; gap: .6rem; align-items: center; margin-top: .9rem; font-size: .78rem; color: var(--steel-light); }
+  .pager button { background: rgba(255,255,255,.05); border: 1px solid rgba(200,169,110,.2);
+    color: var(--steel-light); border-radius: 8px; padding: .3rem .8rem; font-size: .76rem; cursor: pointer; font-family: inherit; }
+  .pager button:disabled { opacity: .35; cursor: default; }
+  .inline-edit { display: flex; gap: .5rem; align-items: center; flex-wrap: wrap; margin-top: .6rem; justify-content: center; }
+  .inline-edit input { width: 90px; background: rgba(0,0,0,.25); border: 1px solid rgba(200,169,110,.3);
+    color: var(--cream); border-radius: 8px; padding: .35rem .5rem; font-size: .82rem; font-family: inherit; }
+  .inline-edit button { background: var(--gold); color: var(--navy); border: none; border-radius: 8px;
+    padding: .35rem .8rem; font-weight: 700; font-size: .76rem; cursor: pointer; font-family: inherit; }
 </style>
 </head>
 <body>
-<nav>
+<nav class="topbar">
   <div class="nav-logo"><a href="index.html">Usman Qureshi</a> · Admin</div>
   <a class="back-link" href="index.html">← Back to site</a>
 </nav>
@@ -109,84 +169,267 @@
   <!-- Dashboard -->
   <div id="dash" style="display:none">
     <h1>Site Dashboard</h1>
-    <div class="sub">Live traffic, signups, feature usage, health and free-tier limits for uqconsulting.org</div>
+    <div class="sub">Live traffic, costs, usage, signups, health and free-tier limits for uqconsulting.org</div>
     <div class="stamp" id="stamp"></div>
 
-    <div class="refresh-row">
-      <button id="refreshBtn">↻ Refresh now</button>
-      <span class="muted" style="font-size:.76rem">Auto-refreshes every 15s</span>
-      <button id="logoutBtn" style="margin-left:auto">Forget key</button>
-    </div>
+    <nav class="tabs">
+      <button class="tab-btn active" data-tab="overview">Overview</button>
+      <button class="tab-btn" data-tab="costs">Costs</button>
+      <button class="tab-btn" data-tab="usage">Usage</button>
+      <button class="tab-btn" data-tab="database">Database</button>
+      <button id="logoutBtn">Forget key</button>
+    </nav>
 
-    <!-- Top stats -->
-    <div class="grid cols-4">
-      <div class="card stat live"><div class="num"><span class="dot"></span><span id="s-live">–</span></div><div class="lbl">Live now</div></div>
-      <div class="card stat"><div class="num" id="s-visit-today">–</div><div class="lbl">Visits today</div></div>
-      <div class="card stat"><div class="num" id="s-uniq-today">–</div><div class="lbl">Unique today</div></div>
-      <div class="card stat"><div class="num" id="s-signups">–</div><div class="lbl">Total signups</div></div>
-    </div>
-    <div class="grid cols-4" style="margin-top:1rem">
-      <div class="card stat"><div class="num" id="s-visit-total">–</div><div class="lbl">Visits all-time</div></div>
-      <div class="card stat"><div class="num" id="s-uniq-total">–</div><div class="lbl">Unique all-time</div></div>
-      <div class="card stat"><div class="num" id="s-uses-total">–</div><div class="lbl">AI tool uses (total)</div></div>
-      <div class="card stat"><div class="num" id="s-invoc">–</div><div class="lbl">API calls this month</div></div>
-    </div>
-
-    <!-- 7-day visitor trend -->
-    <div class="card section">
-      <h2>Last 7 Days <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">— visits (bars) & unique visitors (line)</span></h2>
-      <div id="trendChart"></div>
-    </div>
-
-    <div class="grid cols-2 section">
-      <!-- Feature usage -->
-      <div class="card">
-        <h2>AI Feature Usage</h2>
-        <table>
-          <thead><tr><th>Feature</th><th class="n">Total</th><th class="n">Unique</th><th class="n">Repeat</th></tr></thead>
-          <tbody id="toolBody"></tbody>
-        </table>
+    <!-- ============================ OVERVIEW TAB ============================ -->
+    <div id="tab-overview" class="tab-panel">
+      <div class="refresh-row">
+        <button id="refreshBtn">↻ Refresh now</button>
+        <span class="muted" style="font-size:.76rem">Auto-refreshes every 15s</span>
       </div>
 
-      <!-- Free-tier limits -->
-      <div class="card">
-        <h2>Free-tier Limits</h2>
-        <div class="limit-row">
-          <div class="top"><span>Resend emails — today</span><span><b id="em-today">–</b> / <span id="em-today-lim">100</span></span></div>
-          <div class="bar"><span id="em-today-bar"></span></div>
-          <div class="pct" id="em-today-pct"></div>
-        </div>
-        <div class="limit-row">
-          <div class="top"><span>Resend emails — this month</span><span><b id="em-month">–</b> / <span id="em-month-lim">3000</span></span></div>
-          <div class="bar"><span id="em-month-bar"></span></div>
-          <div class="pct" id="em-month-pct"></div>
-        </div>
-        <div class="limit-row">
-          <div class="top"><span>Vercel — API calls this month</span><span><b id="vc-invoc">–</b></span></div>
-          <div class="bar"><span id="vc-bar" style="background:var(--steel)"></span></div>
-          <div class="pct">Self-counted activity proxy (Hobby plan has no simple usage API). Watch the trend, not a hard cap.</div>
-        </div>
-        <div class="note">Emails counted are every outbound Resend send (welcome, summaries, follow-ups, feedback logs). Resend free tier ≈ 100/day, 3000/month.</div>
+      <!-- Top stats -->
+      <div class="grid cols-4">
+        <div class="card stat live"><div class="num"><span class="dot"></span><span id="s-live">–</span></div><div class="lbl">Live now</div></div>
+        <div class="card stat"><div class="num" id="s-visit-today">–</div><div class="lbl">Visits today</div><div class="pct-chip" id="s-visit-today-chg"></div></div>
+        <div class="card stat"><div class="num" id="s-uniq-today">–</div><div class="lbl">Unique today</div></div>
+        <div class="card stat"><div class="num" id="s-signups">–</div><div class="lbl">Total signups</div><div class="pct-chip" id="s-signups-chg"></div></div>
       </div>
-    </div>
-
-    <div class="grid cols-2 section">
-      <!-- Health -->
-      <div class="card">
-        <h2>API Health <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">(live ping)</span></h2>
-        <div id="healthBody"></div>
-        <div class="note">A green status means the function responds quickly. It does not run the full AI path (that would cost a model call per check).</div>
+      <div class="grid cols-4" style="margin-top:1rem">
+        <div class="card stat"><div class="num" id="s-visit-total">–</div><div class="lbl">Visits all-time</div></div>
+        <div class="card stat"><div class="num" id="s-uniq-total">–</div><div class="lbl">Unique all-time</div></div>
+        <div class="card stat"><div class="num" id="s-uses-total">–</div><div class="lbl">AI tool uses (total)</div></div>
+        <div class="card stat"><div class="num" id="s-invoc">–</div><div class="lbl">API calls this month</div></div>
       </div>
 
-      <!-- Signups database -->
-      <div class="card">
-        <h2>Signups Database <span class="muted" id="signup-count" style="font-weight:400"></span></h2>
-        <div style="max-height:320px;overflow:auto">
+      <!-- Gauges: balance + most-used tools -->
+      <div class="grid cols-3 section">
+        <div class="card gauge-card">
+          <h2>Anthropic Balance</h2>
+          <div class="gauge-wrap" id="balanceGauge"></div>
+          <div class="muted" id="balanceStamp" style="font-size:.72rem"></div>
+          <div class="inline-edit">
+            <input id="balanceInput" type="number" step="0.01" min="0" placeholder="Balance $">
+            <input id="thresholdInput" type="number" step="1" min="0" placeholder="Low @ $">
+            <button id="balanceSaveBtn">Save</button>
+          </div>
+          <div class="err" id="balanceErr"></div>
+        </div>
+        <div class="card gauge-card">
+          <h2>Most Used Tool — All Time</h2>
+          <div class="gauge-wrap" id="topToolGauge"></div>
+          <div class="muted" id="topToolLabel" style="font-size:.78rem"></div>
+        </div>
+        <div class="card gauge-card">
+          <h2>Most Used Tool — Today</h2>
+          <div class="gauge-wrap" id="topToolTodayGauge"></div>
+          <div class="muted" id="topToolTodayLabel" style="font-size:.78rem"></div>
+        </div>
+      </div>
+
+      <!-- Cost summary + cost by service -->
+      <div class="grid cols-2 section">
+        <div class="card">
+          <h2>Cost Summary <span class="muted" id="costSummaryStamp" style="font-weight:400;text-transform:none;letter-spacing:0"></span></h2>
+          <div id="costDonut"></div>
+        </div>
+        <div class="card">
+          <h2>Cost by Service</h2>
+          <div id="costByServiceBar"></div>
+        </div>
+      </div>
+
+      <!-- 7-day visitor trend -->
+      <div class="card section">
+        <h2>Last 7 Days <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">— visits (bars) & unique visitors (line)</span></h2>
+        <div id="trendChart"></div>
+      </div>
+
+      <div class="grid cols-2 section">
+        <!-- Feature usage -->
+        <div class="card">
+          <h2>AI Feature Usage <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">— all time</span></h2>
           <table>
-            <thead><tr><th>Name</th><th>Email</th><th>Joined</th></tr></thead>
-            <tbody id="signupBody"></tbody>
+            <thead><tr><th>Feature</th><th class="n">Total</th><th class="n">Unique</th><th class="n">Repeat</th></tr></thead>
+            <tbody id="toolBody"></tbody>
           </table>
         </div>
+
+        <!-- Free-tier limits -->
+        <div class="card">
+          <h2>Free-tier Limits</h2>
+          <div class="limit-row">
+            <div class="top"><span>Resend emails — today</span><span><b id="em-today">–</b> / <span id="em-today-lim">100</span></span></div>
+            <div class="bar"><span id="em-today-bar"></span></div>
+            <div class="pct" id="em-today-pct"></div>
+          </div>
+          <div class="limit-row">
+            <div class="top"><span>Resend emails — this month</span><span><b id="em-month">–</b> / <span id="em-month-lim">3000</span></span></div>
+            <div class="bar"><span id="em-month-bar"></span></div>
+            <div class="pct" id="em-month-pct"></div>
+          </div>
+          <div class="limit-row">
+            <div class="top"><span>Vercel — API calls this month</span><span><b id="vc-invoc">–</b></span></div>
+            <div class="bar"><span id="vc-bar" style="background:var(--steel)"></span></div>
+            <div class="pct">Self-counted activity proxy (Hobby plan has no simple usage API). Watch the trend, not a hard cap.</div>
+          </div>
+          <div class="note">Emails counted are every outbound Resend send (welcome, summaries, follow-ups, feedback logs). Resend free tier ≈ 100/day, 3000/month.</div>
+        </div>
+      </div>
+
+      <div class="grid cols-2 section">
+        <!-- Health -->
+        <div class="card">
+          <h2>API Health <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">(live ping)</span></h2>
+          <div id="healthBody"></div>
+          <div class="note">A green status means the function responds quickly. It does not run the full AI path (that would cost a model call per check).</div>
+        </div>
+
+        <!-- Signups database (recent) -->
+        <div class="card">
+          <h2>Recent Signups <span class="muted" id="signup-count" style="font-weight:400"></span></h2>
+          <div style="max-height:320px;overflow:auto">
+            <table>
+              <thead><tr><th>Name</th><th>Email</th><th>Joined</th></tr></thead>
+              <tbody id="signupBody"></tbody>
+            </table>
+          </div>
+          <div class="note">Full searchable signup table is in the <b>Database</b> tab.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================ COSTS TAB ============================ -->
+    <div id="tab-costs" class="tab-panel" style="display:none">
+      <div class="refresh-row">
+        <button class="tab-refresh" id="refreshCostsBtn">↻ Refresh</button>
+        <span class="muted" id="costsStamp" style="font-size:.76rem"></span>
+      </div>
+      <div id="costsBanner"></div>
+
+      <div class="grid cols-3">
+        <div class="card stat"><div class="num" id="c-anthropic-month">–</div><div class="lbl">Anthropic — 30 days</div><div class="stat-mini" id="c-anthropic-avg"></div></div>
+        <div class="card stat"><div class="num" id="c-polly-month">–</div><div class="lbl">AWS Polly — 30 days (est.)</div><div class="stat-mini" id="c-polly-avg"></div></div>
+        <div class="card stat"><div class="num" id="c-total-month">–</div><div class="lbl">Total — 30 days</div><div class="stat-mini" id="c-total-trend"></div></div>
+      </div>
+
+      <div class="card section">
+        <h2>Anthropic — Daily Cost (last 30 days) <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">— real, from Anthropic Admin API</span></h2>
+        <div id="anthropicChart"></div>
+        <div class="stat-mini section" id="anthropicStats" style="margin-top:.75rem"></div>
+      </div>
+
+      <div class="card section">
+        <h2>AWS Polly — Daily Cost (last 30 days) <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">— estimated from character counts × list price</span></h2>
+        <div id="pollyChart"></div>
+        <div class="stat-mini section" id="pollyStats" style="margin-top:.75rem"></div>
+      </div>
+
+      <div class="grid cols-2 section">
+        <div class="card">
+          <h2>Cost by Service <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">— 30 days</span></h2>
+          <div id="costsByServiceBar"></div>
+        </div>
+        <div class="card">
+          <h2>Vercel</h2>
+          <div class="stat" style="padding:1rem 0">
+            <div class="num" style="color:var(--green)">$0.00</div>
+            <div class="lbl">Hobby (Free) plan</div>
+          </div>
+          <div class="note">Hobby plan has no paid usage and no billing API. The "API calls this month" figure on the Overview tab is a self-counted activity proxy, not a charge.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================ USAGE TAB ============================ -->
+    <div id="tab-usage" class="tab-panel" style="display:none">
+      <div class="refresh-row">
+        <button class="tab-refresh" id="refreshUsageBtn">↻ Refresh</button>
+        <span class="muted" id="usageStamp" style="font-size:.76rem"></span>
+      </div>
+
+      <div class="grid cols-2">
+        <div class="card">
+          <h2>Tool Leaderboard <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">— all time</span></h2>
+          <div id="leaderAllTime"></div>
+        </div>
+        <div class="card">
+          <h2>Tool Leaderboard <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">— today</span></h2>
+          <div id="leaderToday"></div>
+          <div class="note">Today/30-day views are derived from genuine-session logs and are best-effort (CV Tailor &amp; AskAI aren't logged there). The all-time board is the authoritative count.</div>
+        </div>
+      </div>
+
+      <div class="grid cols-2 section">
+        <div class="card">
+          <h2>Tool Ratings <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">— average stars</span></h2>
+          <div id="ratingsBody"></div>
+        </div>
+        <div class="card">
+          <h2>User Engagement</h2>
+          <div id="engagementBody"></div>
+          <div class="note">Engagement = repeat uses ÷ total uses per tool (higher = users coming back). Derived from existing counters; no extra tracking.</div>
+        </div>
+      </div>
+
+      <div class="card section">
+        <h2>Usage Trend <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">— genuine sessions per tool, last 30 days</span></h2>
+        <div id="usageTrendChart"></div>
+      </div>
+
+      <div class="card section">
+        <h2>Visitor Growth <span class="muted" style="font-weight:400;text-transform:none;letter-spacing:0">— last 30 days</span></h2>
+        <div id="visitorTrend30Chart"></div>
+      </div>
+    </div>
+
+    <!-- ============================ DATABASE TAB ============================ -->
+    <div id="tab-database" class="tab-panel" style="display:none">
+      <div class="refresh-row">
+        <button class="tab-refresh" id="refreshUsersBtn">↻ Refresh</button>
+        <span class="muted" id="usersStamp" style="font-size:.76rem"></span>
+      </div>
+
+      <div class="grid cols-4">
+        <div class="card stat"><div class="num" id="db-total">–</div><div class="lbl">Total signups</div></div>
+        <div class="card stat"><div class="num" id="db-today">–</div><div class="lbl">New today</div></div>
+        <div class="card stat"><div class="num" id="db-week">–</div><div class="lbl">New this week</div></div>
+        <div class="card stat"><div class="num" id="db-trend">–</div><div class="lbl">vs yesterday</div></div>
+      </div>
+
+      <div class="card section">
+        <h2>All Signups</h2>
+        <div class="db-controls">
+          <input id="dbSearch" type="text" placeholder="Search name, email, company…">
+          <select id="dbFieldFilter"><option value="">All fields</option></select>
+          <select id="dbCountryFilter"><option value="">All countries</option></select>
+        </div>
+        <div style="overflow:auto">
+          <table>
+            <thead><tr id="dbHead"></tr></thead>
+            <tbody id="dbBody"></tbody>
+          </table>
+        </div>
+        <div class="pager">
+          <button id="dbPrev">← Prev</button>
+          <span id="dbPageInfo"></span>
+          <button id="dbNext">Next →</button>
+        </div>
+      </div>
+
+      <div class="grid cols-2 section">
+        <div class="card">
+          <h2>By Field</h2>
+          <div id="dbByField"></div>
+        </div>
+        <div class="card">
+          <h2>By Country</h2>
+          <div id="dbByCountry"></div>
+        </div>
+      </div>
+
+      <div class="card section">
+        <h2>By Company</h2>
+        <div id="dbByCompany"></div>
       </div>
     </div>
   </div>
@@ -194,7 +437,8 @@
 
 <script>
   const KEY_STORE = 'uq_dash_key';
-  const TOOL_LABELS = { meeting:'Meeting Room', quiz:'Interview Prep', gaap:'GAAP Compare', tailor:'CV Tailor', 'cv-review':'CV Review', ask:'AskAI', fsreview:'FS Review' };
+  const TOOL_LABELS = { meeting:'Meeting Room', quiz:'Interview Prep', gaap:'GAAP Compare', tailor:'CV Tailor', 'cv-review':'CV Review', ask:'AskAI', fsreview:'FS Review', 'resume-session':'Resume Session' };
+  const SERVICE_COLORS = { Anthropic:'var(--gold)', 'AWS Polly':'var(--teal)', Vercel:'var(--steel)' };
   // Endpoints pinged client-side for health. GET on a POST-only function returns a fast 405 = alive.
   const HEALTH = [
     { label:'Accounts (me)', url:'/api/account?action=me' },
@@ -211,9 +455,15 @@
   ];
 
   let dashKey = null, timer = null;
+  let lastDashboard = null;   // most recent ?action=dashboard payload (reused by Usage tab)
+  let lastCosts = null;       // most recent ?action=dashboard-costs payload (reused by Overview)
 
   const $ = id => document.getElementById(id);
   const fmt = n => (n==null ? '0' : Number(n).toLocaleString());
+  const usd = n => '$' + Number(n||0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const usd4 = n => '$' + Number(n||0).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+  function toolLabel(t){ return TOOL_LABELS[t] || t; }
 
   function showGate(msg){
     $('gate').style.display='block'; $('dash').style.display='none';
@@ -221,6 +471,124 @@
     if(timer){ clearInterval(timer); timer=null; }
   }
   function showDash(){ $('gate').style.display='none'; $('dash').style.display='block'; }
+
+  // ===== Reusable chart helpers (hand-rolled SVG / CSS — no external libraries) =====
+
+  // Semicircular speedometer gauge with a colored arc + rotating needle.
+  // opts: { value, min, max, redBelow, amberBelow, invert, label, sublabel }
+  // invert=false → HIGH is bad (cost vs budget). invert=true → LOW is bad (balance running out).
+  function renderGauge(elId, { value, min=0, max=100, redBelow=null, amberBelow=null, invert=false, label='', sublabel='' }){
+    const el = $(elId); if(!el) return;
+    const span = (max - min) || 1;
+    const pct = Math.max(0, Math.min(1, (value - min) / span));
+    const angle = -90 + pct * 180;            // -90deg at min (left) → +90deg at max (right)
+    const ARC = Math.PI * 90;                 // semicircle arc length for r=90 (~282.74)
+    let color = 'var(--gold)';
+    if(redBelow != null){
+      const bad  = invert ? (value <= redBelow) : (value >= redBelow);
+      const warn = amberBelow != null ? (invert ? (value <= amberBelow) : (value >= amberBelow)) : false;
+      color = bad ? 'var(--red)' : warn ? 'var(--amber)' : 'var(--green)';
+    }
+    el.innerHTML = `
+      <svg viewBox="0 0 200 130" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <path d="M20,110 A90,90 0 0,1 180,110" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="14" stroke-linecap="round"/>
+        <path d="M20,110 A90,90 0 0,1 180,110" fill="none" stroke="${color}" stroke-width="14" stroke-linecap="round"
+          stroke-dasharray="${(pct*ARC).toFixed(1)} ${ARC.toFixed(1)}"/>
+        <line x1="100" y1="110" x2="100" y2="34" stroke="var(--white)" stroke-width="3" stroke-linecap="round"
+          style="transform-origin:100px 110px; transform:rotate(${angle.toFixed(1)}deg); transition:transform .6s ease"/>
+        <circle cx="100" cy="110" r="5.5" fill="var(--white)"/>
+      </svg>
+      <div class="gv">${label}</div>
+      <div class="muted" style="font-size:.74rem">${sublabel}</div>`;
+  }
+
+  // Donut via CSS conic-gradient. segments: [{label, value, color}]. centerLabel: small HTML.
+  function renderDonut(elId, segments, centerLabel){
+    const el = $(elId); if(!el) return;
+    const total = segments.reduce((s,x)=>s+x.value, 0);
+    if(!total){ el.innerHTML = '<div class="muted" style="font-size:.84rem">No cost data yet.</div>'; return; }
+    let acc = 0;
+    const stops = segments.map(s => {
+      const start = acc/total*360; acc += s.value; const end = acc/total*360;
+      return `${s.color} ${start.toFixed(2)}deg ${end.toFixed(2)}deg`;
+    }).join(', ');
+    el.innerHTML = `
+      <div style="display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap">
+        <div style="width:140px;height:140px;border-radius:50%;background:conic-gradient(${stops});
+          display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .4s ease">
+          <div style="width:84px;height:84px;border-radius:50%;background:var(--navy);display:flex;
+            align-items:center;justify-content:center;text-align:center;font-size:.78rem;color:var(--cream)">${centerLabel||''}</div>
+        </div>
+        <div style="flex:1;min-width:150px">${segments.map(s=>`
+          <div class="donut-legend-row">
+            <span class="swatch" style="background:${s.color}"></span>
+            <span style="flex:1">${esc(s.label)}</span><span class="muted">${s.fmt||fmt(s.value)}</span>
+          </div>`).join('')}</div>
+      </div>`;
+  }
+
+  // Horizontal ranked bar list. items: [{label, value, color, display}], pre-sorted by caller.
+  function renderBarList(elId, items){
+    const el = $(elId); if(!el) return;
+    if(!items.length){ el.innerHTML = '<div class="muted" style="font-size:.84rem">No data yet.</div>'; return; }
+    const max = Math.max(1, ...items.map(i=>i.value));
+    el.innerHTML = items.map(i => `
+      <div style="margin-bottom:.7rem">
+        <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.25rem">
+          <span>${esc(i.label)}</span><span class="muted">${i.display!=null?i.display:fmt(i.value)}</span>
+        </div>
+        <div class="bar"><span style="width:${(i.value/max*100).toFixed(1)}%;background:${i.color||'var(--gold)'}"></span></div>
+      </div>`).join('');
+  }
+
+  // Multi-series line chart. series: [{label, color, points:[{date,value}]}]. money: format axis as $.
+  function renderLineChart(elId, series, opts={}){
+    const el = $(elId); if(!el) return;
+    const allPts = series.flatMap(s=>s.points);
+    if(!allPts.length){ el.innerHTML = '<div class="muted" style="font-size:.84rem">No data yet.</div>'; return; }
+    const W=700,H=220,padL=46,padR=12,padT=14,padB=26;
+    const iw=W-padL-padR, ih=H-padT-padB;
+    const max = Math.max(opts.money?0.0001:1, ...allPts.map(p=>p.value));
+    const n = Math.max(...series.map(s=>s.points.length));
+    const x = i => padL + (n<=1 ? iw/2 : iw*i/(n-1));
+    const y = v => padT + ih - (v/max)*ih;
+    const fmtAxis = v => opts.money ? ('$'+(v>=1?v.toFixed(0):v.toFixed(2))) : (v>=1?Math.round(v):v.toFixed(1));
+    let grid='';
+    [0,0.5,1].forEach(f=>{ const gy=padT+ih-f*ih; grid+=`<line x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke="rgba(200,169,110,.12)"/><text x="${padL-6}" y="${gy+3}" text-anchor="end" font-size="9" fill="var(--steel)">${fmtAxis(max*f)}</text>`; });
+    const lines = series.map(s=>{
+      const pts = s.points.map((p,i)=>`${x(i)},${y(p.value)}`).join(' ');
+      const dots = s.points.map((p,i)=>`<circle cx="${x(i)}" cy="${y(p.value)}" r="2.4" fill="${s.color}"><title>${p.date}: ${opts.money?usd(p.value):fmt(p.value)}</title></circle>`).join('');
+      return `<polyline points="${pts}" fill="none" stroke="${s.color}" stroke-width="2"/>${dots}`;
+    }).join('');
+    // X labels: first, middle, last
+    const idxs = n>1 ? [0, Math.floor((n-1)/2), n-1] : [0];
+    const labelSrc = series[0].points;
+    const xlabels = idxs.map(i=>labelSrc[i] ? `<text x="${x(i)}" y="${H-8}" text-anchor="middle" font-size="9" fill="var(--steel-light)">${labelSrc[i].date.slice(5)}</text>` : '').join('');
+    const legend = series.length>1 ? `<div style="display:flex;gap:1rem;margin-top:.5rem;flex-wrap:wrap">${series.map(s=>`<span style="font-size:.72rem;color:var(--steel-light)"><span style="display:inline-block;width:9px;height:9px;border-radius:50%;background:${s.color};margin-right:.3rem"></span>${esc(s.label)}</span>`).join('')}</div>` : '';
+    el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block">${grid}${lines}${xlabels}</svg>${legend}`;
+  }
+
+  // Trend direction from a numeric series (first half avg vs second half avg).
+  function trendDir(values){
+    if(values.length < 2) return { sym:'→', cls:'flat', word:'flat' };
+    const mid = Math.floor(values.length/2);
+    const avg = a => a.length ? a.reduce((s,v)=>s+v,0)/a.length : 0;
+    const first = avg(values.slice(0,mid)), second = avg(values.slice(mid));
+    if(second > first*1.05) return { sym:'↑', cls:'up', word:'rising' };
+    if(second < first*0.95) return { sym:'↓', cls:'down', word:'falling' };
+    return { sym:'→', cls:'flat', word:'steady' };
+  }
+
+  function pctChip(elId, pct){
+    const el = $(elId); if(!el) return;
+    if(pct == null){ el.textContent=''; el.className='pct-chip'; return; }
+    const cls = pct>0 ? 'up' : pct<0 ? 'down' : 'flat';
+    const sym = pct>0 ? '▲' : pct<0 ? '▼' : '–';
+    el.className = 'pct-chip ' + cls;
+    el.textContent = `${sym} ${Math.abs(pct)}% vs yesterday`;
+  }
+
+  // ===== Overview =====
 
   function barColor(pct){ return pct>=90 ? 'var(--red)' : pct>=70 ? 'var(--amber)' : 'var(--gold)'; }
   function setLimit(prefix, val, lim){
@@ -231,6 +599,7 @@
   }
 
   function render(d){
+    lastDashboard = d;
     $('stamp').textContent = 'Last updated ' + new Date(d.generatedAt).toLocaleString();
     $('s-live').textContent = fmt(d.live);
     $('s-visit-today').textContent = fmt(d.visitors.today);
@@ -239,12 +608,16 @@
     $('s-visit-total').textContent = fmt(d.visitors.total);
     $('s-uniq-total').textContent = fmt(d.visitors.uniqueAll);
     $('s-invoc').textContent = fmt(d.vercel.invocationsThisMonth);
+    pctChip('s-visit-today-chg', d.visitors.pctChangeVsYesterday);
+    const sToday = d.signups.today || 0;
+    $('s-signups-chg').textContent = '+' + fmt(sToday) + ' today';
+    $('s-signups-chg').className = 'pct-chip ' + (sToday>0 ? 'up' : 'flat');
 
-    // Feature usage
+    // Feature usage table + total uses
     let totalUses = 0;
     const rows = (d.tools||[]).slice().sort((a,b)=>b.total-a.total).map(t=>{
       totalUses += t.total;
-      return `<tr><td>${TOOL_LABELS[t.tool]||t.tool}</td><td class="n">${fmt(t.total)}</td><td class="n">${fmt(t.uniqueUsers)}</td><td class="n">${fmt(t.repeatUses)}</td></tr>`;
+      return `<tr><td>${toolLabel(t.tool)}</td><td class="n">${fmt(t.total)}</td><td class="n">${fmt(t.uniqueUsers)}</td><td class="n">${fmt(t.repeatUses)}</td></tr>`;
     }).join('');
     $('toolBody').innerHTML = rows || '<tr><td colspan="4" class="muted">No usage yet</td></tr>';
     $('s-uses-total').textContent = fmt(totalUses);
@@ -257,7 +630,7 @@
     $('vc-invoc').textContent = fmt(d.vercel.invocationsThisMonth);
     $('vc-bar').style.width = Math.min(100, d.vercel.invocationsThisMonth/50)+'%';
 
-    // Signups
+    // Recent signups
     const su = d.signups.recent||[];
     $('signup-count').textContent = su.length ? `(showing ${su.length} most recent)` : '';
     $('signupBody').innerHTML = su.length
@@ -265,6 +638,9 @@
       : '<tr><td colspan="3" class="muted">No signups yet</td></tr>';
 
     renderTrend(d.trend||[]);
+    renderBalanceGauge(d.anthropicBalance);
+    renderTopToolGauges(d);
+    renderOverviewCostSummary();
   }
 
   // 7-day chart: visits as bars, unique visitors as an overlaid line. Pure inline SVG.
@@ -278,7 +654,6 @@
     const x=i=>padL + slot*i + slot/2;
     const y=v=>padT + ih - (v/max)*ih;
     const dow=ds=>new Date(ds+'T00:00:00').toLocaleDateString(undefined,{weekday:'short'});
-    // gridlines (0, 50%, 100%)
     let grid='';
     [0,0.5,1].forEach(f=>{ const gy=padT+ih-f*ih; grid+=`<line x1="${padL}" y1="${gy}" x2="${W-padR}" y2="${gy}" stroke="rgba(200,169,110,.15)"/><text x="${padL-6}" y="${gy+3}" text-anchor="end" font-size="9" fill="var(--steel)">${Math.round(max*f)}</text>`; });
     const bars=trend.map((t,i)=>`<rect x="${x(i)-bw/2}" y="${y(t.visits)}" width="${bw}" height="${padT+ih-y(t.visits)}" rx="3" fill="var(--gold)" opacity=".85"><title>${t.date}: ${t.visits} visits</title></rect>`).join('');
@@ -288,12 +663,339 @@
     el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" preserveAspectRatio="xMidYMid meet" style="display:block">${grid}${bars}${line}${labels}</svg>`;
   }
 
-  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+  function renderBalanceGauge(bal){
+    if(!bal){
+      $('balanceGauge').innerHTML = '<div class="muted" style="font-size:.84rem;padding:1rem 0">No balance set — enter it below.</div>';
+      $('balanceStamp').textContent = '';
+      return;
+    }
+    const max = Math.max(bal.balance * 1.4, (bal.lowThreshold||10) * 3, 50);
+    renderGauge('balanceGauge', {
+      value: bal.balance, min: 0, max,
+      redBelow: bal.lowThreshold, amberBelow: (bal.lowThreshold||10) * 2, invert: true,
+      label: usd(bal.balance),
+    });
+    $('balanceStamp').textContent = 'Updated ' + new Date(bal.updatedAt).toLocaleString()
+      + (bal.balance <= (bal.lowThreshold||0) ? '  ⚠️ low — top up' : '');
+    if(!$('balanceInput').value) $('balanceInput').value = bal.balance;
+    if(!$('thresholdInput').value) $('thresholdInput').value = bal.lowThreshold;
+  }
+
+  function renderTopToolGauges(d){
+    const tools = (d.tools||[]).slice().sort((a,b)=>b.total-a.total);
+    const totalUses = tools.reduce((s,t)=>s+t.total,0);
+    const top = tools[0];
+    if(top && top.total>0){
+      renderGauge('topToolGauge', { value: top.total, min:0, max: totalUses||top.total, label: fmt(top.total) });
+      $('topToolLabel').innerHTML = `<b style="color:var(--white)">${toolLabel(top.tool)}</b> — ${fmt(top.total)} uses` + (totalUses?` (${Math.round(top.total/totalUses*100)}% of all)`:'');
+    } else {
+      $('topToolGauge').innerHTML = '<div class="muted" style="font-size:.84rem;padding:1rem 0">No usage yet</div>';
+      $('topToolLabel').textContent = '';
+    }
+    const mt = d.mostUsedToolToday;
+    if(mt && mt.count>0){
+      renderGauge('topToolTodayGauge', { value: mt.count, min:0, max: Math.max(mt.count, top?top.total:mt.count, 5), label: fmt(mt.count) });
+      $('topToolTodayLabel').innerHTML = `<b style="color:var(--white)">${toolLabel(mt.tool)}</b> — ${fmt(mt.count)} use${mt.count===1?'':'s'} today`;
+    } else {
+      $('topToolTodayGauge').innerHTML = '<div class="muted" style="font-size:.84rem;padding:1rem 0">No genuine sessions logged today yet</div>';
+      $('topToolTodayLabel').textContent = '';
+    }
+  }
+
+  // Overview cost donut + cost-by-service bar. Uses cached Costs-tab data if the user has opened
+  // Costs this session; otherwise shows a "visit Costs tab" placeholder (avoids calling the
+  // Anthropic Admin API on every 15s Overview poll).
+  function renderOverviewCostSummary(){
+    if(!lastCosts){
+      $('costDonut').innerHTML = '<div class="banner info">Open the <b>Costs</b> tab to load live Anthropic &amp; Polly figures.</div>';
+      $('costByServiceBar').innerHTML = '<div class="banner info">Open the <b>Costs</b> tab to load live figures.</div>';
+      $('costSummaryStamp').textContent = '';
+      return;
+    }
+    const a = (lastCosts.anthropic && lastCosts.anthropic.ok) ? lastCosts.anthropic.totalUsd : 0;
+    const p = lastCosts.polly ? lastCosts.polly.totalUsd : 0;
+    const v = lastCosts.vercel ? lastCosts.vercel.costUsd : 0;
+    const total = a + p + v;
+    const segs = [
+      { label:'Anthropic', value:a, color:SERVICE_COLORS.Anthropic, fmt:usd(a) },
+      { label:'AWS Polly (est.)', value:p, color:SERVICE_COLORS['AWS Polly'], fmt:usd(p) },
+      { label:'Vercel', value:Math.max(v,0), color:SERVICE_COLORS.Vercel, fmt:usd(v) },
+    ];
+    renderDonut('costDonut', segs, `<div><div style="font-size:1rem;font-weight:800;color:var(--white)">${usd(total)}</div><div>30-day total</div></div>`);
+    renderBarList('costByServiceBar', [
+      { label:'Anthropic', value:a, color:SERVICE_COLORS.Anthropic, display:usd(a) },
+      { label:'AWS Polly (est.)', value:p, color:SERVICE_COLORS['AWS Polly'], display:usd(p) },
+      { label:'Vercel', value:Math.max(v,0), color:SERVICE_COLORS.Vercel, display:usd(v) },
+    ]);
+    $('costSummaryStamp').textContent = '— last 30 days';
+  }
+
+  // ===== Costs tab =====
+  async function loadCostsTab(){
+    $('costsStamp').textContent = 'Loading…';
+    try {
+      const r = await fetch('/api/account?action=dashboard-costs&key='+encodeURIComponent(dashKey));
+      if(r.status===401){ handleUnauthorized(); return; }
+      const d = await r.json();
+      if(!d.ok){ $('costsStamp').textContent=''; $('costsBanner').innerHTML = `<div class="banner warn">${esc(d.error||'Could not load costs.')}</div>`; return; }
+      lastCosts = d;
+      renderCosts(d);
+      renderOverviewCostSummary(); // refresh Overview's cached cost widgets
+      $('costsStamp').textContent = 'Updated ' + new Date(d.generatedAt).toLocaleTimeString();
+    } catch(e){ $('costsStamp').textContent = 'Network error — try Refresh.'; }
+  }
+
+  function renderCosts(d){
+    const a = d.anthropic || {};
+    const p = d.polly || {};
+
+    // Anthropic
+    if(a.ok){
+      $('costsBanner').innerHTML = '';
+      const aVals = (a.byDay||[]).map(x=>x.totalUsd);
+      const aTotal = a.totalUsd || 0;
+      const aAvg = aVals.length ? aTotal/aVals.length : 0;
+      const aDir = trendDir(aVals);
+      $('c-anthropic-month').textContent = usd(aTotal);
+      $('c-anthropic-avg').innerHTML = `${usd(aAvg)}/day · <span class="trend-dir ${aDir.cls}">${aDir.sym} ${aDir.word}</span>`;
+      renderLineChart('anthropicChart', [{ label:'Anthropic ($)', color:'var(--gold)', points:(a.byDay||[]).map(x=>({date:x.date,value:x.totalUsd})) }], { money:true });
+      const topDesc = (a.byDescription||[]).slice(0,5).map(x=>`${esc(x.description)}: ${usd(x.usd)}`).join(' · ');
+      $('anthropicStats').innerHTML = `Total <b>${usd(aTotal)}</b> · avg <b>${usd(aAvg)}/day</b>` + (topDesc?`<br><span class="muted">${topDesc}</span>`:'');
+    } else {
+      $('c-anthropic-month').textContent = '—';
+      $('c-anthropic-avg').textContent = 'not configured';
+      $('anthropicChart').innerHTML = '';
+      $('anthropicStats').textContent = '';
+      $('costsBanner').innerHTML = `<div class="banner warn"><b>Anthropic costs unavailable:</b> ${esc(a.error||'unknown error')}.<br>Add an Admin API key (Console → Settings → Admin keys, <code>sk-ant-admin01-…</code>) as the Vercel env var <b>ANTHROPIC_ADMIN_API_KEY</b>, then redeploy.</div>`;
+    }
+
+    // Polly
+    const pVals = (p.byDay||[]).map(x=>x.usd);
+    const pTotal = p.totalUsd || 0;
+    const pAvg = pVals.length ? pTotal/pVals.length : 0;
+    const pDir = trendDir(pVals);
+    $('c-polly-month').textContent = usd(pTotal);
+    $('c-polly-avg').innerHTML = `${usd(pAvg)}/day · <span class="trend-dir ${pDir.cls}">${pDir.sym} ${pDir.word}</span>`;
+    renderLineChart('pollyChart', [{ label:'Polly ($ est.)', color:'var(--teal)', points:(p.byDay||[]).map(x=>({date:x.date,value:x.usd})) }], { money:true });
+    $('pollyStats').innerHTML = `Total <b>${usd(pTotal)}</b> (est.) · ${fmt(p.totalChars||0)} chars in 30d · all-time ${fmt(p.allTimeChars||0)} chars ≈ ${usd(p.allTimeUsd||0)} · rate ${usd4((p.pricePerChar||0)*1e6)}/1M chars`;
+
+    // Total + cost-by-service
+    const anthroTotal = a.ok ? (a.totalUsd||0) : 0;
+    const total = anthroTotal + pTotal;
+    $('c-total-month').textContent = usd(total);
+    const totalDir = trendDir((a.byDay||[]).map((x,i)=> (x.totalUsd||0) + ((p.byDay&&p.byDay[i])?p.byDay[i].usd:0) ));
+    $('c-total-trend').innerHTML = `<span class="trend-dir ${totalDir.cls}">${totalDir.sym} ${totalDir.word}</span>`;
+    renderBarList('costsByServiceBar', [
+      { label:'Anthropic', value:anthroTotal, color:SERVICE_COLORS.Anthropic, display:usd(anthroTotal) },
+      { label:'AWS Polly (est.)', value:pTotal, color:SERVICE_COLORS['AWS Polly'], display:usd(pTotal) },
+      { label:'Vercel', value:0, color:SERVICE_COLORS.Vercel, display:usd(0) },
+    ]);
+  }
+
+  // ===== Usage tab =====
+  async function loadUsageTab(){
+    $('usageStamp').textContent = 'Loading…';
+    try {
+      const r = await fetch('/api/account?action=dashboard-usage&key='+encodeURIComponent(dashKey));
+      if(r.status===401){ handleUnauthorized(); return; }
+      const d = await r.json();
+      if(!d.ok){ $('usageStamp').textContent = d.error||'Could not load usage.'; return; }
+      renderUsage(d);
+      $('usageStamp').textContent = 'Updated ' + new Date(d.generatedAt).toLocaleTimeString();
+    } catch(e){ $('usageStamp').textContent = 'Network error — try Refresh.'; }
+  }
+
+  function renderUsage(d){
+    // All-time leaderboard — reuse the dashboard payload already fetched by Overview.
+    const tools = (lastDashboard && lastDashboard.tools) ? lastDashboard.tools.slice() : [];
+    tools.sort((a,b)=>b.total-a.total);
+    renderBarList('leaderAllTime', tools.filter(t=>t.total>0).map(t=>({ label:toolLabel(t.tool), value:t.total, color:'var(--gold)' })));
+
+    // Today leaderboard
+    const todayItems = Object.entries(d.todayCounts||{}).map(([tool,count])=>({ label:toolLabel(tool), value:count, color:'var(--green)' })).sort((a,b)=>b.value-a.value);
+    renderBarList('leaderToday', todayItems);
+
+    // Ratings
+    const rb = $('ratingsBody');
+    const ratings = (d.avgRatings||[]).filter(x=>x.count>0);
+    if(!ratings.length){ rb.innerHTML = '<div class="muted" style="font-size:.84rem">No ratings submitted yet.</div>'; }
+    else {
+      rb.innerHTML = ratings.map(x=>{
+        const full = Math.round(x.avg);
+        const stars = '★'.repeat(full) + '☆'.repeat(5-full);
+        return `<div style="display:flex;justify-content:space-between;align-items:center;padding:.4rem .1rem;border-bottom:1px solid rgba(200,169,110,.08);font-size:.84rem">
+          <span>${toolLabel(x.feature)}</span>
+          <span><span style="color:var(--gold);letter-spacing:1px">${stars}</span> <span class="muted">${x.avg.toFixed(1)} (${x.count})</span></span>
+        </div>`;
+      }).join('');
+    }
+
+    // Engagement (repeat ÷ total per tool, from all-time counters)
+    const eng = tools.filter(t=>t.total>0).map(t=>({ label:toolLabel(t.tool), value: t.total ? Math.round(t.repeatUses/t.total*100) : 0, color:'var(--purple)', display: (t.total?Math.round(t.repeatUses/t.total*100):0)+'%' }));
+    renderBarList('engagementBody', eng);
+
+    // 30-day per-tool usage trend
+    const dates = lastNDates(30);
+    const trendSeries = Object.entries(d.trend30||{}).map(([tool,byDate],i)=>({
+      label: toolLabel(tool),
+      color: SERIES_COLORS[i % SERIES_COLORS.length],
+      points: dates.map(dt=>({ date:dt, value: byDate[dt]||0 })),
+    }));
+    if(trendSeries.length) renderLineChart('usageTrendChart', trendSeries);
+    else $('usageTrendChart').innerHTML = '<div class="muted" style="font-size:.84rem">No genuine sessions logged in the last 30 days yet.</div>';
+
+    // 30-day visitor growth
+    const vt = (d.visitorTrend30||[]);
+    renderLineChart('visitorTrend30Chart', [
+      { label:'Visits', color:'var(--gold)', points: vt.map(x=>({date:x.date,value:x.visits})) },
+      { label:'Unique', color:'var(--green)', points: vt.map(x=>({date:x.date,value:x.unique})) },
+    ]);
+  }
+
+  const SERIES_COLORS = ['var(--gold)','var(--green)','var(--blue)','var(--purple)','var(--teal)','var(--amber)','var(--red)','var(--steel-light)'];
+  function lastNDates(n){
+    const out = [];
+    for(let i=n-1;i>=0;i--){ out.push(new Date(Date.now()-i*86400000).toISOString().slice(0,10)); }
+    return out;
+  }
+
+  // ===== Database tab =====
+  let dbAll = [], dbFiltered = [], dbPage = 0, dbSort = { key:'createdAt', dir:-1 };
+  const DB_PAGE_SIZE = 50;
+  const DB_COLUMNS = [
+    { key:'createdAt', label:'Date', fmt:v=>v?new Date(v).toLocaleDateString():'–' },
+    { key:'name', label:'Name' },
+    { key:'email', label:'Email' },
+    { key:'field', label:'Field' },          // derived (department or departmentOther)
+    { key:'company', label:'Company' },
+    { key:'designation', label:'Designation', fmt:(v,r)=> r.designation==='Other' ? (r.designationOther||'Other') : (v||'–') },
+    { key:'department', label:'Department', fmt:(v,r)=> r.department==='Other' ? (r.departmentOther||'Other') : (v||'–') },
+    { key:'country', label:'Country' },
+    { key:'city', label:'City' },
+  ];
+
+  async function loadDatabaseTab(){
+    $('usersStamp').textContent = 'Loading…';
+    try {
+      const r = await fetch('/api/account?action=dashboard-users&key='+encodeURIComponent(dashKey));
+      if(r.status===401){ handleUnauthorized(); return; }
+      const d = await r.json();
+      if(!d.ok){ $('usersStamp').textContent = d.error||'Could not load signups.'; return; }
+      renderDatabase(d);
+      $('usersStamp').textContent = 'Updated ' + new Date(d.generatedAt).toLocaleTimeString();
+    } catch(e){ $('usersStamp').textContent = 'Network error — try Refresh.'; }
+  }
+
+  function fieldOf(s){ return s.department==='Other' ? (s.departmentOther||'Other') : (s.department||'Unknown'); }
+
+  function renderDatabase(d){
+    dbAll = (d.signups||[]).map(s => ({ ...s, field: fieldOf(s) }));
+
+    // Summary
+    $('db-total').textContent = fmt(d.total||dbAll.length);
+    if(lastDashboard && lastDashboard.signups){
+      $('db-today').textContent = fmt(lastDashboard.signups.today||0);
+      $('db-week').textContent = fmt(lastDashboard.signups.thisWeek||0);
+      const chg = lastDashboard.signups.pctChangeVsYesterday;
+      $('db-trend').textContent = chg==null ? '—' : (chg>0?'+':'')+chg+'%';
+    } else {
+      const today = new Date().toISOString().slice(0,10);
+      $('db-today').textContent = fmt(dbAll.filter(s=>(s.createdAt||'').slice(0,10)===today).length);
+      const weekAgo = Date.now()-7*86400000;
+      $('db-week').textContent = fmt(dbAll.filter(s=>new Date(s.createdAt).getTime()>=weekAgo).length);
+      $('db-trend').textContent = '—';
+    }
+
+    // Header (sortable)
+    $('dbHead').innerHTML = DB_COLUMNS.map(c=>`<th class="sortable" data-key="${c.key}">${c.label} <span class="arrow" data-arrow="${c.key}"></span></th>`).join('');
+    document.querySelectorAll('#dbHead th').forEach(th=>{
+      th.addEventListener('click', ()=>{
+        const k = th.dataset.key;
+        if(dbSort.key===k) dbSort.dir *= -1; else { dbSort.key=k; dbSort.dir=1; }
+        dbPage = 0; applyDbFilters();
+      });
+    });
+
+    // Filter dropdowns
+    const fields = [...new Set(dbAll.map(s=>s.field).filter(Boolean))].sort();
+    $('dbFieldFilter').innerHTML = '<option value="">All fields</option>' + fields.map(f=>`<option value="${esc(f)}">${esc(f)}</option>`).join('');
+    const countries = [...new Set(dbAll.map(s=>s.country).filter(Boolean))].sort();
+    $('dbCountryFilter').innerHTML = '<option value="">All countries</option>' + countries.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join('');
+
+    // Breakdowns
+    const bd = d.breakdowns || {};
+    renderDonut('dbByField', (bd.byDepartment||[]).map((x,i)=>({ label:x.key, value:x.count, color:SERIES_COLORS[i%SERIES_COLORS.length], fmt:fmt(x.count) })), `<div><div style="font-size:1rem;font-weight:800;color:var(--white)">${fmt(d.total||0)}</div><div>signups</div></div>`);
+    renderBarList('dbByCountry', (bd.byCountry||[]).slice(0,15).map(x=>({ label:x.key, value:x.count, color:'var(--blue)' })));
+    const companies = (bd.byCompany||[]);
+    renderBarList('dbByCompany', companies.slice(0,15).map(x=>({ label:x.key, value:x.count, color:'var(--teal)' })));
+
+    applyDbFilters();
+  }
+
+  function applyDbFilters(){
+    const q = ($('dbSearch').value||'').trim().toLowerCase();
+    const fField = $('dbFieldFilter').value;
+    const fCountry = $('dbCountryFilter').value;
+    dbFiltered = dbAll.filter(s=>{
+      if(fField && s.field !== fField) return false;
+      if(fCountry && s.country !== fCountry) return false;
+      if(q){
+        const hay = [s.name,s.email,s.company,s.field,s.country,s.city].map(v=>(v||'').toLowerCase()).join(' ');
+        if(!hay.includes(q)) return false;
+      }
+      return true;
+    });
+    const k = dbSort.key, dir = dbSort.dir;
+    dbFiltered.sort((a,b)=>{
+      let av=a[k], bv=b[k];
+      if(k==='createdAt'){ av=new Date(av).getTime()||0; bv=new Date(bv).getTime()||0; }
+      else { av=(av==null?'':String(av)).toLowerCase(); bv=(bv==null?'':String(bv)).toLowerCase(); }
+      if(av<bv) return -1*dir; if(av>bv) return 1*dir; return 0;
+    });
+    // arrows
+    document.querySelectorAll('#dbHead .arrow').forEach(a=>a.textContent='');
+    const arrow = document.querySelector(`#dbHead .arrow[data-arrow="${k}"]`);
+    if(arrow) arrow.textContent = dir>0 ? '▲' : '▼';
+    renderDbPage();
+  }
+
+  function renderDbPage(){
+    const totalPages = Math.max(1, Math.ceil(dbFiltered.length/DB_PAGE_SIZE));
+    if(dbPage >= totalPages) dbPage = totalPages-1;
+    if(dbPage < 0) dbPage = 0;
+    const start = dbPage*DB_PAGE_SIZE;
+    const rows = dbFiltered.slice(start, start+DB_PAGE_SIZE);
+    $('dbBody').innerHTML = rows.length
+      ? rows.map(s=>`<tr>${DB_COLUMNS.map(c=>{
+          const raw = c.key==='field' ? s.field : s[c.key];
+          const val = c.fmt ? c.fmt(raw, s) : (raw!=null?raw:'–');
+          return `<td>${esc(val)}</td>`;
+        }).join('')}</tr>`).join('')
+      : `<tr><td colspan="${DB_COLUMNS.length}" class="muted">No matching signups.</td></tr>`;
+    $('dbPageInfo').textContent = `${dbFiltered.length} result${dbFiltered.length===1?'':'s'} · page ${dbPage+1} of ${totalPages}`;
+    $('dbPrev').disabled = dbPage<=0;
+    $('dbNext').disabled = dbPage>=totalPages-1;
+  }
+
+  // ===== Tab switching =====
+  const TAB_LOADERS = { costs: loadCostsTab, usage: loadUsageTab, database: loadDatabaseTab };
+  const loadedTabs = new Set(['overview']);
+  function switchTab(name){
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab===name));
+    document.querySelectorAll('.tab-panel').forEach(p => { p.style.display = (p.id === 'tab-'+name ? 'block' : 'none'); });
+    if(!loadedTabs.has(name) && TAB_LOADERS[name]){ loadedTabs.add(name); TAB_LOADERS[name](); }
+  }
+
+  // ===== Core load / health (Overview poll) =====
+  function handleUnauthorized(){
+    const n=(dashKey||'').length; localStorage.removeItem(KEY_STORE); dashKey=null;
+    showGate('That key was rejected (you entered '+n+' characters). Check the admin key you were given.');
+  }
 
   async function load(){
     try{
       const r = await fetch('/api/account?action=dashboard&key='+encodeURIComponent(dashKey));
-      if(r.status===401){ const n=(dashKey||'').length; localStorage.removeItem(KEY_STORE); dashKey=null; showGate('That key was rejected (you entered '+n+' characters). Check the admin key you were given.'); return; }
+      if(r.status===401){ handleUnauthorized(); return; }
       const d = await r.json();
       if(!d.ok){ showGate(d.error||'Could not load dashboard.'); return; }
       showDash();
@@ -308,7 +1010,7 @@
       let up=false;
       try{
         const r = await fetch(h.url, { method:'GET', cache:'no-store' });
-        up = r.status < 500; // 200/400/405 = function is alive; 5xx/network = down
+        up = r.status < 500;
       }catch(e){ up=false; }
       const ms = Math.round(performance.now()-t0);
       const row = $('h-'+h.label);
@@ -325,6 +1027,26 @@
     $('healthBody').innerHTML = HEALTH.map(h=>
       `<div class="health-item" id="h-${h.label}"><span>${h.label}</span><span style="display:flex;gap:.6rem;align-items:center"><span class="lat"></span><span class="pill wait">…</span></span></div>`
     ).join('');
+  }
+
+  // ===== Balance save =====
+  async function saveBalance(){
+    const balance = parseFloat($('balanceInput').value);
+    const lowThreshold = parseFloat($('thresholdInput').value);
+    if(!Number.isFinite(balance) || balance < 0){ $('balanceErr').textContent='Enter a valid balance.'; return; }
+    $('balanceErr').textContent=''; $('balanceSaveBtn').disabled=true; $('balanceSaveBtn').textContent='Saving…';
+    try{
+      const r = await fetch('/api/account?action=dashboard-set-balance&key='+encodeURIComponent(dashKey), {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({ balance, lowThreshold: Number.isFinite(lowThreshold)?lowThreshold:undefined }),
+      });
+      if(r.status===401){ handleUnauthorized(); return; }
+      const d = await r.json();
+      if(!d.ok){ $('balanceErr').textContent = d.error||'Could not save.'; return; }
+      if(lastDashboard) lastDashboard.anthropicBalance = d.balance;
+      renderBalanceGauge(d.balance);
+    }catch(e){ $('balanceErr').textContent='Network error.'; }
+    finally{ $('balanceSaveBtn').disabled=false; $('balanceSaveBtn').textContent='Save'; }
   }
 
   function start(){
@@ -348,6 +1070,16 @@
   $('keyInput').addEventListener('keydown', e=>{ if(e.key==='Enter') $('keyBtn').click(); });
   $('refreshBtn').addEventListener('click', ()=>{ load(); pingHealth(); });
   $('logoutBtn').addEventListener('click', ()=>{ localStorage.removeItem(KEY_STORE); dashKey=null; showGate('Key forgotten.'); });
+  document.querySelectorAll('.tab-btn').forEach(b => b.addEventListener('click', ()=>switchTab(b.dataset.tab)));
+  $('refreshCostsBtn').addEventListener('click', loadCostsTab);
+  $('refreshUsageBtn').addEventListener('click', loadUsageTab);
+  $('refreshUsersBtn').addEventListener('click', loadDatabaseTab);
+  $('balanceSaveBtn').addEventListener('click', saveBalance);
+  $('dbSearch').addEventListener('input', ()=>{ dbPage=0; applyDbFilters(); });
+  $('dbFieldFilter').addEventListener('change', ()=>{ dbPage=0; applyDbFilters(); });
+  $('dbCountryFilter').addEventListener('change', ()=>{ dbPage=0; applyDbFilters(); });
+  $('dbPrev').addEventListener('click', ()=>{ dbPage--; renderDbPage(); });
+  $('dbNext').addEventListener('click', ()=>{ dbPage++; renderDbPage(); });
 
   dashKey = cleanKey(localStorage.getItem(KEY_STORE));
   if(dashKey){ localStorage.setItem(KEY_STORE, dashKey); start(); } else { showGate(); }

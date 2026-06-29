@@ -6,10 +6,13 @@ import { saveConsultation, scheduleFollowup } from '../lib/consultations.js';
 import { createMeetingSession, getMeetingSession, saveMeetingSession } from '../lib/meetingSession.js';
 import { getProfile, saveProfile } from '../lib/profile.js';
 import { sendEmail } from '../lib/email.js';
-import { recordVisit, recordPresence, recordSignup, getDashboardData } from '../lib/metrics.js';
+import { recordVisit, recordPresence, recordSignup, getDashboardData, getVisitorTrend30, pipe } from '../lib/metrics.js';
 import { logAndCheckUsage } from '../lib/ipUsage.js';
 import { buildWorkbook } from '../lib/exportData.js';
 import { appendUserToSheet } from '../lib/googleSheets.js';
+import { getUsageAggregates, getMostUsedToolToday } from '../lib/featureLog.js';
+import { getAnthropicCostReport } from '../lib/anthropicCost.js';
+import { getPollyCostTrend } from '../lib/pollyCost.js';
 
 const TOOL_LABELS = { meeting: 'Meeting Room consultation', quiz: 'Interview Prep session' };
 const SIGNUP_LINE = "If you haven't already, signing up is free and unlocks your personal workspace — every consultation saved, and you can resume any conversation right where you left off. It stays free after signing up too.";
@@ -596,12 +599,122 @@ async function handleTrack(req, res, { kvUrl, kvToken }) {
 }
 
 // Owner-only analytics read. Gated by DASHBOARD_KEY (separate from the Redis token — see lib/auth.js).
+// Powers the Overview tab + its 15s poll. Kept lightweight; the Costs/Usage/Database tabs have
+// their own dedicated actions so this payload doesn't balloon on every tick.
 async function handleDashboard(req, res, { kvUrl, kvToken }) {
   if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Storage not configured yet' }); return; }
   const provided = req.query?.key || req.headers['x-dashboard-key'];
   if (!verifyAdminKey(provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
   const data = await getDashboardData({ kvUrl, kvToken });
-  res.status(200).json({ ok: true, ...data });
+
+  // Most-used-tool-today — best-effort; a feature_usage_log read failure must not break Overview.
+  let mostUsedToolToday = null;
+  try {
+    const { todayCounts } = await getUsageAggregates({ kvUrl, kvToken });
+    mostUsedToolToday = getMostUsedToolToday(todayCounts);
+  } catch { /* non-fatal */ }
+
+  res.status(200).json({ ok: true, ...data, mostUsedToolToday });
+}
+
+// Manually-entered Anthropic prepaid balance (no Anthropic API exposes remaining balance).
+// GET reads the stored value; POST updates it. Same DASHBOARD_KEY gate as every dashboard action.
+async function handleDashboardSetBalance(req, res, { kvUrl, kvToken }) {
+  if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Storage not configured yet' }); return; }
+  const provided = req.query?.key || req.headers['x-dashboard-key'];
+  if (!verifyAdminKey(provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
+
+  if (req.method === 'GET') {
+    const [raw] = await pipe({ kvUrl, kvToken }, [['GET', 'dashboard:anthropic_balance']]);
+    let parsed = null;
+    try { parsed = raw ? JSON.parse(raw) : null; } catch { parsed = null; }
+    res.status(200).json({ ok: true, balance: parsed });
+    return;
+  }
+
+  // POST
+  const cleanBalance = Number(req.body?.balance);
+  const cleanThreshold = Number(req.body?.lowThreshold);
+  if (!Number.isFinite(cleanBalance) || cleanBalance < 0) {
+    res.status(400).json({ error: 'Please provide a valid non-negative balance' });
+    return;
+  }
+  const record = {
+    balance: cleanBalance,
+    lowThreshold: Number.isFinite(cleanThreshold) && cleanThreshold >= 0 ? cleanThreshold : 10,
+    updatedAt: new Date().toISOString(),
+  };
+  await pipe({ kvUrl, kvToken }, [['SET', 'dashboard:anthropic_balance', JSON.stringify(record)]]);
+  res.status(200).json({ ok: true, balance: record });
+}
+
+// Costs tab — real Anthropic spend (live Admin API, internally cached 10 min) + estimated Polly
+// cost (from daily char counters) + static Vercel Hobby fact. Not part of the 15s Overview poll.
+async function handleDashboardCosts(req, res, { kvUrl, kvToken }) {
+  if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Storage not configured yet' }); return; }
+  const provided = req.query?.key || req.headers['x-dashboard-key'];
+  if (!verifyAdminKey(provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
+
+  const adminApiKey = process.env.ANTHROPIC_ADMIN_API_KEY;
+  const [anthropic, polly] = await Promise.all([
+    getAnthropicCostReport({ kvUrl, kvToken, adminApiKey, days: 30 }),
+    getPollyCostTrend({ kvUrl, kvToken }, 30),
+  ]);
+
+  res.status(200).json({
+    ok: true,
+    generatedAt: new Date().toISOString(),
+    anthropic,
+    polly,
+    vercel: { plan: 'Hobby', costUsd: 0 },
+  });
+}
+
+// Usage tab — today leaderboard + ratings + 30-day per-tool trend (from feature_usage_log) plus
+// 30-day visitor growth. The all-time leaderboard is already in ?action=dashboard's tools[]; the
+// frontend reuses that rather than re-fetching it here.
+async function handleDashboardUsage(req, res, { kvUrl, kvToken }) {
+  if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Storage not configured yet' }); return; }
+  const provided = req.query?.key || req.headers['x-dashboard-key'];
+  if (!verifyAdminKey(provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
+
+  const [aggregates, visitorTrend30] = await Promise.all([
+    getUsageAggregates({ kvUrl, kvToken }),
+    getVisitorTrend30({ kvUrl, kvToken }),
+  ]);
+  res.status(200).json({ ok: true, generatedAt: new Date().toISOString(), ...aggregates, visitorTrend30 });
+}
+
+// Database tab — full signup list (capped at 4999 by signups_log itself) + server-computed
+// breakdowns. Deliberately separate from the 200-entry signups.recent in ?action=dashboard.
+async function handleDashboardUsers(req, res, { kvUrl, kvToken }) {
+  if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Storage not configured yet' }); return; }
+  const provided = req.query?.key || req.headers['x-dashboard-key'];
+  if (!verifyAdminKey(provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
+
+  const [raw] = await pipe({ kvUrl, kvToken }, [['LRANGE', 'signups_log', '0', '-1']]);
+  const signups = (Array.isArray(raw) ? raw : [])
+    .map(s => { try { return JSON.parse(s); } catch { return null; } })
+    .filter(Boolean);
+
+  const byDepartment = {}, byCountry = {}, byCompany = {};
+  signups.forEach(s => {
+    const dept = s.department === 'Other' ? (s.departmentOther || 'Other') : (s.department || 'Unknown');
+    byDepartment[dept] = (byDepartment[dept] || 0) + 1;
+    const country = s.country || 'Unknown';
+    byCountry[country] = (byCountry[country] || 0) + 1;
+    const company = s.company || 'Unknown';
+    byCompany[company] = (byCompany[company] || 0) + 1;
+  });
+  const toSorted = obj => Object.entries(obj).map(([key, count]) => ({ key, count })).sort((a, b) => b.count - a.count);
+
+  res.status(200).json({
+    ok: true,
+    generatedAt: new Date().toISOString(),
+    signups,             // signups_log entries never contain passwordHash
+    total: signups.length,
+    breakdowns: { byDepartment: toSorted(byDepartment), byCountry: toSorted(byCountry), byCompany: toSorted(byCompany) },
+  });
 }
 
 export default async function handler(req, res) {
@@ -635,6 +748,10 @@ export default async function handler(req, res) {
       case 'meeting-end': return req.method === 'POST' ? await handleMeetingEnd(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       case 'track': return await handleTrack(req, res, ctx);
       case 'dashboard': return req.method === 'GET' ? await handleDashboard(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
+      case 'dashboard-set-balance': return (req.method === 'GET' || req.method === 'POST') ? await handleDashboardSetBalance(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
+      case 'dashboard-costs': return req.method === 'GET' ? await handleDashboardCosts(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
+      case 'dashboard-usage': return req.method === 'GET' ? await handleDashboardUsage(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
+      case 'dashboard-users': return req.method === 'GET' ? await handleDashboardUsers(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       case 'cron-export-data': return await handleCronExportData(req, res, ctx);
       case 'export-data': return req.method === 'GET' ? await handleExportData(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       default: res.status(400).json({ error: 'Unknown or missing action' });

@@ -5,6 +5,7 @@ import { getUserFromRequest } from '../lib/auth.js';
 import { saveConsultation } from '../lib/consultations.js';
 import { sendEmail } from '../lib/email.js';
 import { logFeatureUse } from '../lib/featureLog.js';
+import { synthesize } from '../lib/tts.js';
 
 const FRAMEWORKS = new Set(['FRS 101', 'FRS 102', 'Full IFRS', 'US GAAP', 'AICPA']);
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
@@ -235,7 +236,8 @@ If isFinancialStatement is false, leave inlineComments and additionalNotes as em
       await logFeatureUse({ kvUrl, kvToken }, { tool: 'fsreview', email: user.email, detail: { framework: selectedFramework } });
     }
 
-    res.status(200).json({ isFinancialStatement: true, summary, additionalNotes: allNotes, emailed: true, usage });
+    const audioUrl = await synthesize(summary, 'default', { kv: { url: kvUrl, token: kvToken } });
+    res.status(200).json({ isFinancialStatement: true, summary, audioUrl: audioUrl || null, additionalNotes: allNotes, emailed: true, usage });
   } catch (err) {
     console.error('[fsreview] unhandled error:', err.message);
     res.status(500).json({

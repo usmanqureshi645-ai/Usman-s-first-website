@@ -4,6 +4,7 @@
   "type": "module",
   "dependencies": {
     "jszip": "^3.10.1",
-    "exceljs": "^4.4.0"
+    "exceljs": "^4.4.0",
+    "@aws-sdk/client-polly": "^3.600.0"
   }
 }

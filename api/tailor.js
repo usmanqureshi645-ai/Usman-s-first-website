@@ -1,5 +1,6 @@
 import { logAndCheckUsage } from '../lib/ipUsage.js';
 import { getUserFromRequest } from '../lib/auth.js';
+import { synthesize } from '../lib/tts.js';
 
 // Fetch a company web page and reduce it to plain text we can feed the model.
 // Best-effort only: a failure or timeout just means we fall back to model knowledge.
@@ -97,7 +98,8 @@ Respond with ONLY the cover letter text, nothing else.`;
     }
 
     const coverLetter = (data?.content?.[0]?.text || '').trim();
-    res.status(200).json({ coverLetter, usage });
+    const audioUrl = await synthesize(coverLetter, 'default', { kv: { url: process.env.UPSTASH_REDIS_REST_URL, token: process.env.UPSTASH_REDIS_REST_TOKEN } });
+    res.status(200).json({ coverLetter, audioUrl: audioUrl || null, usage });
   } catch (err) {
     res.status(500).json({ error: 'Request failed' });
   }

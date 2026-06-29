@@ -1,6 +1,7 @@
 import { buildMeetingSystemPrompt } from '../lib/meetingPersonas.js';
 import { logAndCheckUsage } from '../lib/ipUsage.js';
 import { getUserFromRequest } from '../lib/auth.js';
+import { synthesize } from '../lib/tts.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -67,7 +68,8 @@ export default async function handler(req, res) {
     }
 
     const text = data?.content?.[0]?.text || '';
-    res.status(200).json({ text, usage });
+    const audioUrl = await synthesize(text, agents?.[0] || 'default', { kv: { url: process.env.UPSTASH_REDIS_REST_URL, token: process.env.UPSTASH_REDIS_REST_TOKEN } });
+    res.status(200).json({ text, audioUrl: audioUrl || null, usage });
   } catch (err) {
     res.status(500).json({ error: 'Request failed' });
   }

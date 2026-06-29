@@ -1204,6 +1204,20 @@ letter-spacing:.08em;
 white-space:nowrap;
 }
 
+/* Scrollbar styling for cohesive theme */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: rgba(26,45,70,0.5); }
+::-webkit-scrollbar-thumb { background: var(--slate-mid); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: var(--gold); }
+
+/* Ripple effect for hear button during playback */
+@keyframes ripple-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(200,169,110,0.7); }
+  70% { box-shadow: 0 0 0 8px rgba(200,169,110,0); }
+  100% { box-shadow: 0 0 0 0 rgba(200,169,110,0); }
+}
+.mr-mic.playing { animation: ripple-pulse 1.5s infinite; background: rgba(200,169,110,.15); border-color: var(--gold); color: var(--gold-light); }
+
 </style>
 
 <style id="premium-upgrade">
@@ -1704,7 +1718,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
         <span class="mr-mic-label">Hear</span>
       </button>
-      <input type="text" id="mrInput" placeholder="Ask the panel a technical accounting question…" />
+      <input type="text" id="mrInput" placeholder="Ask the panel a technical accounting question…" autocomplete="off" />
       <button id="mrSend" onclick="mrSendMessage()">Send</button>
     </div>
   </div>
@@ -1761,7 +1775,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
       <span class="mr-mic-label">Hear</span>
     </button>
-    <input type="text" id="qzInput" placeholder="Type your answer…" />
+    <input type="text" id="qzInput" placeholder="Type your answer…" autocomplete="off" />
     <button id="qzSend" onclick="qzSendMessage()">Send</button>
   </div>
 </div>
@@ -1897,7 +1911,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
       <span class="mr-mic-label">Hear</span>
     </button>
-    <input type="text" id="gaapInput" placeholder="Ask in plain language — e.g. 'How does goodwill differ under IFRS vs US GAAP?'" />
+    <input type="text" id="gaapInput" placeholder="Ask in plain language — e.g. 'How does goodwill differ under IFRS vs US GAAP?'" autocomplete="off" />
     <button id="gaapSend" onclick="gaapSendMessage()">Ask</button>
   </div>
 </div>
@@ -4327,6 +4341,7 @@ const mrRoles={
   'Charlotte Sinclair':'Technical Accounting Consultant'
 };
 let mrVoiceEnabled=false; // opt-in only — avoids clashing with ambient music & unwanted auto-speech
+let mrLastAudioUrl=null; // store last audio for replay anytime
 const mrPitches={'Sarah Bennett':1.04,'David Whitfield':0.92,'Amelia Hartley':1.08,'Marcus Lee':0.88,'Elena Rossi':1.12,'James Carter':0.85,'Charlotte Sinclair':1.1};
 // Each panel member speaks in their own actual gender's voice — no manual selector needed,
 // since a real mixed panel shouldn't all share one voice toggle.
@@ -4339,12 +4354,19 @@ function mrSpeak(name, text){
 }
 function mrPlayAudio(audioUrl){
   if(!audioUrl || typeof audioUrl !== 'string') return;
+  mrLastAudioUrl = audioUrl;
   try {
     if(window.MusicDuck) window.MusicDuck.duck('tts', 1500);
+    const voiceBtn = document.getElementById('mrVoiceToggle');
+    if(voiceBtn) voiceBtn.classList.add('playing');
     const audio = new Audio(audioUrl);
-    audio.onended = () => { if(window.MusicDuck) window.MusicDuck.unduck('tts'); };
-    audio.onerror = () => { if(window.MusicDuck) window.MusicDuck.unduck('tts'); };
-    audio.play().catch(() => { if(window.MusicDuck) window.MusicDuck.unduck('tts'); });
+    const cleanup = () => {
+      if(voiceBtn) voiceBtn.classList.remove('playing');
+      if(window.MusicDuck) window.MusicDuck.unduck('tts');
+    };
+    audio.onended = cleanup;
+    audio.onerror = cleanup;
+    audio.play().catch(cleanup);
   } catch {
     if(window.MusicDuck) window.MusicDuck.unduck('tts');
   }
@@ -4354,6 +4376,7 @@ function mrToggleVoice(){
   const btn=document.getElementById('mrVoiceToggle');
   if(btn) btn.classList.toggle('active', mrVoiceEnabled);
   if(!mrVoiceEnabled) VoiceEngine.cancel();
+  else if(mrLastAudioUrl) mrPlayAudio(mrLastAudioUrl);
 }
 function mrAppendMessage(role, name, text, skipBrowserTts){
   const wrap=document.getElementById('mrMessages');
@@ -5382,6 +5405,7 @@ function openGaapSlide(jurisdiction, idx){
 const gaapHistory=[];
 let gaapResumedSession=false; // set true by handleResume()
 let gaapVoiceEnabled=false;
+let gaapLastAudioUrl=null;
 // GAAP Champion is always a male voice — no selector, fixed character.
 function gaapSpeak(text){ if(gaapVoiceEnabled) VoiceEngine.speak(text, 0.92, false, 'male'); }
 // Fade the music out gently the first time the user engages with GAAP (speak or type).
@@ -5391,11 +5415,31 @@ function gaapDuckOnce(){
   gaapStarted=true;
   window.MusicDuck?.duck('gaap', 2500); // slow, graceful fade-out
 }
+function gaapPlayAudio(audioUrl){
+  gaapLastAudioUrl = audioUrl;
+  if(!audioUrl || typeof audioUrl !== 'string') return;
+  try {
+    if(window.MusicDuck) window.MusicDuck.duck('tts', 1500);
+    const voiceBtn = document.getElementById('gaapVoiceToggle');
+    if(voiceBtn) voiceBtn.classList.add('playing');
+    const audio = new Audio(audioUrl);
+    const cleanup = () => {
+      if(voiceBtn) voiceBtn.classList.remove('playing');
+      if(window.MusicDuck) window.MusicDuck.unduck('tts');
+    };
+    audio.onended = cleanup;
+    audio.onerror = cleanup;
+    audio.play().catch(cleanup);
+  } catch {
+    if(window.MusicDuck) window.MusicDuck.unduck('tts');
+  }
+}
 function gaapToggleVoice(){
   gaapVoiceEnabled=!gaapVoiceEnabled;
   const btn=document.getElementById('gaapVoiceToggle');
   if(btn) btn.classList.toggle('active', gaapVoiceEnabled);
   if(!gaapVoiceEnabled) VoiceEngine.cancel();
+  else if(gaapLastAudioUrl) gaapPlayAudio(gaapLastAudioUrl);
 }
 function gaapAppendMessage(role, text, audioUrl){
   const wrap=document.getElementById('gaapMessages');
@@ -5407,7 +5451,7 @@ function gaapAppendMessage(role, text, audioUrl){
   wrap.appendChild(div);
   wrap.scrollTop=wrap.scrollHeight;
   if(role!=='user'){
-    if(audioUrl && gaapVoiceEnabled) mrPlayAudio(audioUrl);
+    if(audioUrl && gaapVoiceEnabled) gaapPlayAudio(audioUrl);
     else gaapSpeak(text);
   }
   if(typeof mrLiveStageRefresh==='function') mrLiveStageRefresh();
@@ -5515,13 +5559,34 @@ document.getElementById('gaapMic')?.addEventListener('click', gaapDuckOnce);
 const qzHistory=[];
 let qzResumedSession=false; // set true by handleResume()
 let qzVoiceEnabled=false;
+let qzLastAudioUrl=null;
 // Interview Coach is always a female voice — no selector, fixed character.
 function qzSpeak(text){ if(qzVoiceEnabled) VoiceEngine.speak(text, 1, true, 'female'); }
+function qzPlayAudio(audioUrl){
+  qzLastAudioUrl = audioUrl;
+  if(!audioUrl || typeof audioUrl !== 'string') return;
+  try {
+    if(window.MusicDuck) window.MusicDuck.duck('tts', 1500);
+    const voiceBtn = document.getElementById('qzVoiceToggle');
+    if(voiceBtn) voiceBtn.classList.add('playing');
+    const audio = new Audio(audioUrl);
+    const cleanup = () => {
+      if(voiceBtn) voiceBtn.classList.remove('playing');
+      if(window.MusicDuck) window.MusicDuck.unduck('tts');
+    };
+    audio.onended = cleanup;
+    audio.onerror = cleanup;
+    audio.play().catch(cleanup);
+  } catch {
+    if(window.MusicDuck) window.MusicDuck.unduck('tts');
+  }
+}
 function qzToggleVoice(){
   qzVoiceEnabled=!qzVoiceEnabled;
   const btn=document.getElementById('qzVoiceToggle');
   if(btn) btn.classList.toggle('active', qzVoiceEnabled);
   if(!qzVoiceEnabled) VoiceEngine.cancel();
+  else if(qzLastAudioUrl) qzPlayAudio(qzLastAudioUrl);
 }
 function qzAppendMessage(role, text, audioUrl){
   const wrap=document.getElementById('qzMessages');
@@ -5533,7 +5598,7 @@ function qzAppendMessage(role, text, audioUrl){
   wrap.appendChild(div);
   wrap.scrollTop=wrap.scrollHeight;
   if(role!=='user'){
-    if(audioUrl && qzVoiceEnabled) mrPlayAudio(audioUrl);
+    if(audioUrl && qzVoiceEnabled) qzPlayAudio(audioUrl);
     else qzSpeak(text);
   }
   if(typeof mrLiveStageRefresh==='function') mrLiveStageRefresh();

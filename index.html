@@ -1911,7 +1911,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
       <span class="mr-mic-label">Speak</span>
     </button>
-    <button id="gaapVoiceToggle" class="mr-mic" title="Hear the assistant's replies aloud" onclick="gaapToggleVoice()">
+    <button id="gaapVoiceToggle" class="mr-mic active" title="Hear the assistant's replies aloud" onclick="gaapToggleVoice()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
       <span class="mr-mic-label">Hear</span>
     </button>
@@ -4366,8 +4366,9 @@ const mrRoles={
   'James Carter':'Legal & Regulatory Advisor',
   'Charlotte Sinclair':'Technical Accounting Consultant'
 };
-let mrVoiceEnabled=false; // opt-in only — avoids clashing with ambient music & unwanted auto-speech
-let mrLastAudioUrl=null; // store last audio for replay anytime
+let mrVoiceEnabled=false;
+let mrLastAudioUrl=null;
+let mrCurrentAudio=null; // track active audio so we can stop it before starting a new one
 const mrPitches={'Sarah Bennett':1.04,'David Whitfield':0.92,'Amelia Hartley':1.08,'Marcus Lee':0.88,'Elena Rossi':1.12,'James Carter':0.85,'Charlotte Sinclair':1.1};
 // Each panel member speaks in their own actual gender's voice — no manual selector needed,
 // since a real mixed panel shouldn't all share one voice toggle.
@@ -4381,20 +4382,25 @@ function mrSpeak(name, text){
 function mrPlayAudio(audioUrl){
   if(!audioUrl || typeof audioUrl !== 'string') return;
   mrLastAudioUrl = audioUrl;
+  // Stop any currently playing audio before starting new one
+  if(mrCurrentAudio){ mrCurrentAudio.pause(); mrCurrentAudio.src=''; mrCurrentAudio=null; }
   try {
     if(window.MusicDuck) window.MusicDuck.duck('tts', 1500);
     const voiceBtn = document.getElementById('mrVoiceToggle');
     if(voiceBtn) voiceBtn.classList.add('playing');
     const audio = new Audio(audioUrl);
+    mrCurrentAudio = audio;
     const cleanup = () => {
       if(voiceBtn) voiceBtn.classList.remove('playing');
       if(window.MusicDuck) window.MusicDuck.unduck('tts');
+      mrCurrentAudio = null;
     };
     audio.onended = cleanup;
     audio.onerror = cleanup;
     audio.play().catch(cleanup);
   } catch {
     if(window.MusicDuck) window.MusicDuck.unduck('tts');
+    mrCurrentAudio = null;
   }
 }
 function mrToggleVoice(){
@@ -4834,6 +4840,10 @@ function mrStartMeeting(){
   document.getElementById('mrStartBtn').disabled=true;
   document.getElementById('mrChips').style.display='flex';
   document.getElementById('mrInputBar').style.display='flex';
+  // Auto-enable voice when meeting starts so the first reply plays immediately
+  mrVoiceEnabled=true;
+  const mrHearBtn=document.getElementById('mrVoiceToggle');
+  if(mrHearBtn) mrHearBtn.classList.add('active');
   const siteUser=window.getSiteUser();
   const presentNames=mrPresentNames();
   const kickoff=`[The user has just entered the Meeting Room. The following specialists are present: ${presentNames.join(', ')}. The user is already signed in as "${siteUser.name}" — greet them warmly by name as the panel (briefly, 1-2 sentences total from one spokesperson), explain in one sentence what the Meeting Room is for, then ask what they'd like to discuss today. Do NOT ask for their name — you already know it, never ask again.]`;
@@ -5430,8 +5440,9 @@ function openGaapSlide(jurisdiction, idx){
 /* ── IFRS vs GAAP comparison bot ── */
 const gaapHistory=[];
 let gaapResumedSession=false; // set true by handleResume()
-let gaapVoiceEnabled=false;
+let gaapVoiceEnabled=true;
 let gaapLastAudioUrl=null;
+let gaapCurrentAudio=null;
 // GAAP Champion is always a male voice — no selector, fixed character.
 function gaapSpeak(text){ if(gaapVoiceEnabled) VoiceEngine.speak(text, 0.92, false, 'male'); }
 // Fade the music out gently the first time the user engages with GAAP (speak or type).
@@ -5444,20 +5455,25 @@ function gaapDuckOnce(){
 function gaapPlayAudio(audioUrl){
   gaapLastAudioUrl = audioUrl;
   if(!audioUrl || typeof audioUrl !== 'string') return;
+  // Stop any currently playing audio before starting new one
+  if(gaapCurrentAudio){ gaapCurrentAudio.pause(); gaapCurrentAudio.src=''; gaapCurrentAudio=null; }
   try {
     if(window.MusicDuck) window.MusicDuck.duck('tts', 1500);
     const voiceBtn = document.getElementById('gaapVoiceToggle');
     if(voiceBtn) voiceBtn.classList.add('playing');
     const audio = new Audio(audioUrl);
+    gaapCurrentAudio = audio;
     const cleanup = () => {
       if(voiceBtn) voiceBtn.classList.remove('playing');
       if(window.MusicDuck) window.MusicDuck.unduck('tts');
+      gaapCurrentAudio = null;
     };
     audio.onended = cleanup;
     audio.onerror = cleanup;
     audio.play().catch(cleanup);
   } catch {
     if(window.MusicDuck) window.MusicDuck.unduck('tts');
+    gaapCurrentAudio = null;
   }
 }
 function gaapToggleVoice(){

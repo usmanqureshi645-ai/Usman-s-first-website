@@ -417,13 +417,14 @@
     content: '';
     position: absolute;
     bottom: 0; left: 0;
-    width: 0; height: 2px;
+    width: 100%; height: 2px;
     background: var(--gold);
-    transition: width 0.4s ease;
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .sector-card:hover { background: rgba(30,58,95,0.6); }
-  .sector-card:hover::after { width: 100%; }
+  .sector-card:hover::after { clip-path: inset(0); }
 
   .sector-icon {
     font-size: 1.75rem;
@@ -1222,6 +1223,231 @@ white-space:nowrap;
 }
 .mr-mic.playing { animation: ripple-pulse 1.5s infinite; background: rgba(200,169,110,.15); border-color: var(--gold); color: var(--gold-light); }
 
+/* ── REDUCED-MOTION SUPPORT: WCAG AA Compliance ── */
+/* All animations and transitions disabled for users with motion-sensitivity preferences */
+@media (prefers-reduced-motion: reduce) {
+  /* Global animation & transition reduction */
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Preserve functionality while eliminating motion */
+  .trail-item { transform: translateX(0); opacity: 1; }
+  .skill-fill { transform: scaleX(0); }
+  .skill-fill.animated { transform: scaleX(1); }
+  .btn-primary, .btn-ghost { transform: none; }
+  .sector-card::after { width: 100%; }
+  .pub-modal { opacity: 1; }
+  .pub-inner { transform: translateY(0) scale(1); opacity: 1; }
+  .nav-links.open { max-height: 80vh; }
+}
+
+/* ── 320px MOBILE OPTIMIZATION ── */
+/* Support for very small devices: older iPhones, landscape tablets, etc. */
+@media (max-width: 320px) {
+  /* Hero section adjustments */
+  .hero-name {
+    font-size: clamp(2rem, 3.5vw, 2.5rem) !important;
+    margin-bottom: 0.75rem;
+  }
+
+  .hero-title {
+    font-size: clamp(0.9rem, 1.5vw, 1.2rem) !important;
+    margin-bottom: 1.25rem;
+  }
+
+  .hero-bio {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    max-width: 100%;
+    margin-bottom: 1.75rem;
+  }
+
+  /* Navigation adjustments */
+  .nav-links {
+    gap: 0;
+  }
+
+  .nav-links a {
+    font-size: 0.65rem;
+    letter-spacing: 0.03em;
+    padding: 0.75rem 0.95rem;
+  }
+
+  /* Buttons on 320px */
+  .btn-primary,
+  .btn-ghost {
+    font-size: 0.72rem;
+    padding: 0.65rem 1.25rem;
+    width: 100%;
+  }
+
+  .hero-cta {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .hero-cta a {
+    justify-content: center;
+  }
+
+  /* Floating widget stack — collapse and position safely */
+  .widget-stack {
+    flex-direction: column;
+    gap: 0.4rem;
+    bottom: 80px;
+    right: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .widget-stack button {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+
+  /* Section padding reduction */
+  section {
+    padding: 2.5rem 0.75rem;
+  }
+
+  .section-inner {
+    padding: 0;
+  }
+
+  /* Hero grid to single column */
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 0 0.75rem;
+  }
+
+  .hero-right {
+    gap: 1rem;
+  }
+
+  .stat-card {
+    padding: 1.25rem 1rem;
+  }
+
+  .stat-number {
+    font-size: 1.75rem;
+  }
+
+  /* Meeting Room chat adjustments */
+  .mr-chat {
+    max-height: min(50vh, 280px);
+    font-size: 0.82rem;
+  }
+
+  .mr-inputbar {
+    padding: 0.5rem;
+    gap: 0.25rem;
+  }
+
+  .mr-inputbar input {
+    font-size: 0.82rem;
+    padding: 0.5rem;
+  }
+
+  .mr-inputbar button {
+    min-width: 36px;
+    height: 36px;
+  }
+
+  /* Form input optimization */
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea,
+  select {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 0.65rem;
+    width: 100%;
+  }
+
+  /* Modal adjustments */
+  .pub-modal {
+    padding: 12px;
+  }
+
+  .pub-inner {
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+  }
+
+  .pub-inner h2 {
+    font-size: 1rem;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .pub-inner p,
+  .pub-inner li {
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+
+  /* Grid adjustments */
+  .sectors-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75px;
+  }
+
+  .sector-card {
+    padding: 1.5rem;
+  }
+
+  .sector-name {
+    font-size: 1.05rem;
+  }
+
+  .sector-desc {
+    font-size: 0.8rem;
+  }
+
+  /* Standards grid to single column */
+  .standards-grid {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+
+  /* Skills layout to single column */
+  .skills-layout,
+  .contact-layout,
+  .portfolio-facts {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .skill-label {
+    font-size: 0.75rem;
+  }
+
+  /* Tab or accordion conversion for dense info */
+  .trail-item {
+    padding: 0 0 2rem 2rem;
+  }
+
+  .trail-item .trail-role {
+    font-size: 1.1rem;
+  }
+
+  /* Ensure no horizontal scroll */
+  * {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  /* Reduce office parallax visibility on extreme narrow screens */
+  .office-parallax {
+    opacity: 0.3;
+  }
+}
+
 </style>
 
 <style id="premium-upgrade">
@@ -1911,7 +2137,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
       <span class="mr-mic-label">Speak</span>
     </button>
-    <button id="gaapVoiceToggle" class="mr-mic active" title="Hear the assistant's replies aloud" onclick="gaapToggleVoice()">
+    <button id="gaapVoiceToggle" class="mr-mic" title="Hear the assistant's replies aloud" onclick="gaapToggleVoice()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
       <span class="mr-mic-label">Hear</span>
     </button>
@@ -4366,9 +4592,8 @@ const mrRoles={
   'James Carter':'Legal & Regulatory Advisor',
   'Charlotte Sinclair':'Technical Accounting Consultant'
 };
-let mrVoiceEnabled=false;
-let mrLastAudioUrl=null;
-let mrCurrentAudio=null; // track active audio so we can stop it before starting a new one
+let mrVoiceEnabled=false; // opt-in only — avoids clashing with ambient music & unwanted auto-speech
+let mrLastAudioUrl=null; // store last audio for replay anytime
 const mrPitches={'Sarah Bennett':1.04,'David Whitfield':0.92,'Amelia Hartley':1.08,'Marcus Lee':0.88,'Elena Rossi':1.12,'James Carter':0.85,'Charlotte Sinclair':1.1};
 // Each panel member speaks in their own actual gender's voice — no manual selector needed,
 // since a real mixed panel shouldn't all share one voice toggle.
@@ -4377,31 +4602,25 @@ function mrSpeak(name, text){
   if(!mrVoiceEnabled) return;
   const customMatch=mrCustomPersonas.find(p=>p.name===name);
   const speakerGender=customMatch?.gender || mrGenders[name] || 'female';
-  VoiceEngine.cancel(); // clear any queued utterances so speakers don't pile up
   VoiceEngine.speak(text, mrPitches[name]||1, true, speakerGender);
 }
 function mrPlayAudio(audioUrl){
   if(!audioUrl || typeof audioUrl !== 'string') return;
   mrLastAudioUrl = audioUrl;
-  // Stop any currently playing audio before starting new one
-  if(mrCurrentAudio){ mrCurrentAudio.pause(); mrCurrentAudio.src=''; mrCurrentAudio=null; }
   try {
     if(window.MusicDuck) window.MusicDuck.duck('tts', 1500);
     const voiceBtn = document.getElementById('mrVoiceToggle');
     if(voiceBtn) voiceBtn.classList.add('playing');
     const audio = new Audio(audioUrl);
-    mrCurrentAudio = audio;
     const cleanup = () => {
       if(voiceBtn) voiceBtn.classList.remove('playing');
       if(window.MusicDuck) window.MusicDuck.unduck('tts');
-      mrCurrentAudio = null;
     };
     audio.onended = cleanup;
     audio.onerror = cleanup;
     audio.play().catch(cleanup);
   } catch {
     if(window.MusicDuck) window.MusicDuck.unduck('tts');
-    mrCurrentAudio = null;
   }
 }
 function mrToggleVoice(){
@@ -4441,9 +4660,6 @@ function mrHideTyping(){
   if(t) t.remove();
 }
 async function mrCallApi(userText){
-  // Stop previous response's audio the moment user sends a new message
-  if(mrCurrentAudio){ mrCurrentAudio.pause(); mrCurrentAudio.src=''; mrCurrentAudio=null; }
-  VoiceEngine.cancel();
   mrShowTyping();
   document.getElementById('mrSend').disabled=true;
   try{
@@ -4466,7 +4682,7 @@ async function mrCallApi(userText){
       return;
     }
     mrHistory.push({role:'assistant', content:replyText});
-    await mrRenderPanelReply(replyText, false, data.audioUrl, data.segments);
+    await mrRenderPanelReply(replyText, false, data.audioUrl);
     if(mrSessionId) await mrPostToSession({role:'assistant', content:replyText});
   }catch(e){
     mrHideTyping();
@@ -4479,40 +4695,29 @@ function mrWait(ms){ return new Promise(r=>setTimeout(r, ms)); }
 // Renders each panel member's contribution one at a time, with a realistic
 // typing pause beforehand, instead of dumping every speaker's bubble at once —
 // the latter reads as obviously AI-generated rather than a real back-and-forth.
-async function mrRenderPanelReply(text, instant, audioUrl, segments){
+async function mrRenderPanelReply(text, instant, audioUrl){
   // Splits "**Name**: message" speaker segments into separate bubbles. The colon
   // AFTER the closing ** is required, so inline bold inside a message (e.g. the
   // "**Quick note:**" voice disclaimer, colon inside the bold) is NOT mistaken for
   // a new speaker and stays as bold text within the bubble.
   const parts=text.split(/\*\*([^*]+)\*\*:\s*/).filter(Boolean);
-  const hasSegments=!!(segments && segments.length>0 && mrVoiceEnabled);
-  const hasAudio=!!(audioUrl && mrVoiceEnabled);
-  // Legacy single-audio path: play the whole clip upfront
-  if(!hasSegments && hasAudio) mrPlayAudio(audioUrl);
-  if(parts.length<=1){
-    mrAppendMessage('agent','Panel',text.trim(), hasSegments||hasAudio);
-    if(hasSegments && segments[0]?.audioUrl) mrPlayAudio(segments[0].audioUrl);
-    return;
-  }
+  const hasAudio = !!(audioUrl && mrVoiceEnabled);
+  // Start the real Polly audio immediately (not after the typing-delay sequence below) and
+  // skip the old per-bubble browser voice entirely when it's playing, so they never overlap.
+  if(hasAudio) mrPlayAudio(audioUrl);
+  if(parts.length<=1){ mrAppendMessage('agent','Panel', text.trim(), hasAudio); return; }
   for(let i=0;i<parts.length;i+=2){
     const name=parts[i]; const msg=parts[i+1];
-    if(!name||!msg) continue;
+    if(!name || !msg) continue;
     if(i>0 && !instant){
       // brief pause before the next speaker "picks up", as if they were listening
-      await mrWait(500+Math.random()*400);
+      await mrWait(500 + Math.random()*400);
       mrShowTyping();
-      const typingDelay=Math.min(2600,Math.max(900,msg.trim().length*22));
+      const typingDelay=Math.min(2600, Math.max(900, msg.trim().length*22));
       await mrWait(typingDelay);
       mrHideTyping();
     }
-    // Per-speaker audio: each bubble triggers its own voice (mrPlayAudio auto-cancels previous)
-    const seg=hasSegments ? segments.find(s=>s.speaker===name.trim()) : null;
-    if(seg?.audioUrl){
-      mrAppendMessage('agent',name.trim(),msg.trim(),true);
-      mrPlayAudio(seg.audioUrl);
-    } else {
-      mrAppendMessage('agent',name.trim(),msg.trim(),hasAudio);
-    }
+    mrAppendMessage('agent', name.trim(), msg.trim(), hasAudio);
   }
 }
 let mrRealUserMessages=0;
@@ -4855,10 +5060,6 @@ function mrStartMeeting(){
   document.getElementById('mrStartBtn').disabled=true;
   document.getElementById('mrChips').style.display='flex';
   document.getElementById('mrInputBar').style.display='flex';
-  // Auto-enable voice when meeting starts so the first reply plays immediately
-  mrVoiceEnabled=true;
-  const mrHearBtn=document.getElementById('mrVoiceToggle');
-  if(mrHearBtn) mrHearBtn.classList.add('active');
   const siteUser=window.getSiteUser();
   const presentNames=mrPresentNames();
   const kickoff=`[The user has just entered the Meeting Room. The following specialists are present: ${presentNames.join(', ')}. The user is already signed in as "${siteUser.name}" — greet them warmly by name as the panel (briefly, 1-2 sentences total from one spokesperson), explain in one sentence what the Meeting Room is for, then ask what they'd like to discuss today. Do NOT ask for their name — you already know it, never ask again.]`;
@@ -5455,9 +5656,8 @@ function openGaapSlide(jurisdiction, idx){
 /* ── IFRS vs GAAP comparison bot ── */
 const gaapHistory=[];
 let gaapResumedSession=false; // set true by handleResume()
-let gaapVoiceEnabled=true;
+let gaapVoiceEnabled=false;
 let gaapLastAudioUrl=null;
-let gaapCurrentAudio=null;
 // GAAP Champion is always a male voice — no selector, fixed character.
 function gaapSpeak(text){ if(gaapVoiceEnabled) VoiceEngine.speak(text, 0.92, false, 'male'); }
 // Fade the music out gently the first time the user engages with GAAP (speak or type).
@@ -5470,25 +5670,20 @@ function gaapDuckOnce(){
 function gaapPlayAudio(audioUrl){
   gaapLastAudioUrl = audioUrl;
   if(!audioUrl || typeof audioUrl !== 'string') return;
-  // Stop any currently playing audio before starting new one
-  if(gaapCurrentAudio){ gaapCurrentAudio.pause(); gaapCurrentAudio.src=''; gaapCurrentAudio=null; }
   try {
     if(window.MusicDuck) window.MusicDuck.duck('tts', 1500);
     const voiceBtn = document.getElementById('gaapVoiceToggle');
     if(voiceBtn) voiceBtn.classList.add('playing');
     const audio = new Audio(audioUrl);
-    gaapCurrentAudio = audio;
     const cleanup = () => {
       if(voiceBtn) voiceBtn.classList.remove('playing');
       if(window.MusicDuck) window.MusicDuck.unduck('tts');
-      gaapCurrentAudio = null;
     };
     audio.onended = cleanup;
     audio.onerror = cleanup;
     audio.play().catch(cleanup);
   } catch {
     if(window.MusicDuck) window.MusicDuck.unduck('tts');
-    gaapCurrentAudio = null;
   }
 }
 function gaapToggleVoice(){

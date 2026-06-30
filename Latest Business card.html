@@ -4377,6 +4377,7 @@ function mrSpeak(name, text){
   if(!mrVoiceEnabled) return;
   const customMatch=mrCustomPersonas.find(p=>p.name===name);
   const speakerGender=customMatch?.gender || mrGenders[name] || 'female';
+  VoiceEngine.cancel(); // clear any queued utterances so speakers don't pile up
   VoiceEngine.speak(text, mrPitches[name]||1, true, speakerGender);
 }
 function mrPlayAudio(audioUrl){
@@ -4440,6 +4441,9 @@ function mrHideTyping(){
   if(t) t.remove();
 }
 async function mrCallApi(userText){
+  // Stop previous response's audio the moment user sends a new message
+  if(mrCurrentAudio){ mrCurrentAudio.pause(); mrCurrentAudio.src=''; mrCurrentAudio=null; }
+  VoiceEngine.cancel();
   mrShowTyping();
   document.getElementById('mrSend').disabled=true;
   try{

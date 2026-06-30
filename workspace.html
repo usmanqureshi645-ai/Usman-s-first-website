@@ -220,6 +220,12 @@
   .mr-mic:hover{ border-color:var(--gold); background:rgba(200,169,110,.08); }
   .mr-mic.active{ background:rgba(200,169,110,.22); border-color:var(--gold); color:var(--gold-light); }
   .mr-mic.listening{ background:rgba(200,80,80,.18); border-color:#d88a8a; color:#e7b4b4; }
+  @keyframes ripple-pulse { 0%{box-shadow:0 0 0 0 rgba(200,169,110,.7);} 70%{box-shadow:0 0 0 8px rgba(200,169,110,0);} 100%{box-shadow:0 0 0 0 rgba(200,169,110,0);} }
+  .mr-mic.playing{ animation:ripple-pulse 1.5s infinite; background:rgba(200,169,110,.15); border-color:var(--gold); color:var(--gold-light); }
+  .mr-mic .mr-icon-stop{ display:none; }
+  .mr-mic.playing .mr-icon-play{ display:none; }
+  .mr-mic.playing .mr-icon-stop{ display:inline-block; }
+  .mr-mic:disabled{ opacity:.4; cursor:default; }
   @media (max-width:480px){ .mr-mic-label{ display:none; } .mr-mic{ padding:0; width:40px; height:40px; justify-content:center; } }
   /* Focus mode: the review chat fills the screen and everything else is hidden behind it. */
   #cvReviewChat.cv-chat-max{ position:fixed!important; inset:0!important; z-index:10000!important; margin:0!important; border:none!important; border-radius:0!important; background:#0a1424!important; padding:1.1rem 1.1rem 1.25rem!important; display:flex; flex-direction:column; max-width:none!important; height:100dvh; }
@@ -458,7 +464,6 @@
                   </button>
                 </div>
                 <div id="cvChatLog" style="max-height:380px;overflow-y:auto;display:flex;flex-direction:column;gap:.7rem;margin-bottom:.7rem"></div>
-                <p id="cvVoiceNote" style="display:none;font-size:.7rem;color:var(--steel-light);margin:0 0 .5rem;font-style:italic">🔊 Eleanor's replies will be read aloud. We use text-to-speech, so voices may sound slightly robotic. This is neural synthesis, not human voice actors. We're hiring voice cloners to enhance your experience — this is just the start. You can press the Stop button anytime to interrupt.</p>
                 <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem">
                   <button id="cvMic" class="mr-mic" title="Speak to Eleanor">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
@@ -469,19 +474,17 @@
                     <span class="mr-mic-label">Attach</span>
                   </button>
                   <input type="file" id="cvChatFile" accept=".pdf,.docx,.txt" style="display:none" onchange="cvChatHandleFile(this)">
-                  <button id="cvVoiceToggle" class="mr-mic" title="Hear Eleanor's replies aloud" onclick="cvToggleVoice()">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a9 9 0 010 14" stroke-linecap="round"/></svg>
-                    <span class="mr-mic-label">Hear</span>
-                  </button>
-                  <button id="cvStopBtn" class="mr-mic" title="Stop audio playback" onclick="globalStopAudio()" style="display:none;border-color:var(--gold);color:var(--gold)">
-                    <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="7" height="16" rx="1"/><rect x="13" y="4" width="7" height="16" rx="1"/></svg>
-                    <span class="mr-mic-label">Stop</span>
+                  <button id="cvPlayBtn" class="mr-mic" title="Play / stop Eleanor's spoken replies" onclick="cvPlayToggle()" disabled>
+                    <svg class="mr-icon-play" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a9 9 0 010 14" stroke-linecap="round"/></svg>
+                    <svg class="mr-icon-stop" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" style="display:none"><rect x="4" y="4" width="7" height="16" rx="1"/><rect x="13" y="4" width="7" height="16" rx="1"/></svg>
+                    <span class="mr-mic-label">Play</span>
                   </button>
                 </div>
                 <div style="display:flex;gap:.5rem">
-                  <textarea id="cvChatInput" placeholder="Tell Eleanor what you changed, or paste your updated text…" autocomplete="off" style="flex:1;min-height:56px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.65rem;color:var(--cream);font-family:inherit;font-size:.83rem;resize:vertical"></textarea>
+                  <textarea id="cvChatInput" placeholder="Tell Eleanor what you changed, or paste your updated text…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="true" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" data-form-type="other" name="cv-msg-field-z2m5" style="flex:1;min-height:56px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.65rem;color:var(--cream);font-family:inherit;font-size:.83rem;resize:vertical"></textarea>
                   <button class="btn-gold" id="cvChatSendBtn" onclick="cvChatSend()" style="align-self:flex-end">Send</button>
                 </div>
+                <p id="cvVoiceNote" style="font-size:.7rem;color:var(--steel-light);margin:.5rem 0 0;font-style:italic">🔊 Voice powered by one of the world's leading text-to-speech engines for fast, reliable spoken responses. We're also building natural, human-like cloned voices — designed to sound like real hiring managers, interviewers and professional consultants — coming soon.</p>
               </div>
             </div>
           </div>
@@ -1150,45 +1153,50 @@
       };
     }
 
-    let cvVoiceEnabled = false;
-    let globalCurrentAudio = null;
-    function globalStopAudio() {
-      if(globalCurrentAudio && typeof globalCurrentAudio.pause === 'function') {
-        globalCurrentAudio.pause();
-        globalCurrentAudio.currentTime = 0;
-        globalCurrentAudio = null;
-      }
-      VoiceEngine.cancel();
-      if(window.MusicDuck) window.MusicDuck.unduck('tts');
-    }
-    function cvToggleVoice() {
-      cvVoiceEnabled = !cvVoiceEnabled;
-      const btn = document.getElementById('cvVoiceToggle');
-      btn.classList.toggle('active', cvVoiceEnabled);
-      const note = document.getElementById('cvVoiceNote');
-      if (note) note.style.display = cvVoiceEnabled ? 'block' : 'none';
-      const stopBtn = document.getElementById('cvStopBtn');
-      if(stopBtn) stopBtn.style.display = cvVoiceEnabled ? 'flex' : 'none';
-      if (!cvVoiceEnabled) VoiceEngine.cancel();
-    }
-    window.cvToggleVoice = cvToggleVoice;
-    function cvSpeak(text) { if (cvVoiceEnabled) VoiceEngine.speak(text, 1, 'female'); }
-    function cvPlayAudio(audioUrl) {
-      if (!audioUrl || typeof audioUrl !== 'string' || !cvVoiceEnabled) return;
-      try {
-        if (window.MusicDuck) window.MusicDuck.duck('tts', 1500);
+    let cvVoiceEnabled = true; // voice always on
+    let cvLastAudioUrl = null;
+    // Global speech manager (own instance — workspace.html is a separate document from index.html)
+    const GlobalSpeechManager = {
+      currentAudio: null,
+      currentFeature: null,
+      activeButtonEl: null,
+      play(audioUrl, featureId, buttonEl) {
+        this.stop();
         const audio = new Audio(audioUrl);
-        globalCurrentAudio = audio;
-        const cleanup = () => {
-          if (window.MusicDuck) window.MusicDuck.unduck('tts');
-          globalCurrentAudio = null;
-        };
-        audio.onended = cleanup;
-        audio.onerror = cleanup;
-        audio.play().catch(cleanup);
-      } catch {
+        this.currentAudio = audio; this.currentFeature = featureId; this.activeButtonEl = buttonEl;
+        buttonEl?.classList.add('playing');
+        if (window.MusicDuck) window.MusicDuck.duck('tts', 1500);
+        return new Promise(resolve => {
+          const done = () => { this._cleanup(buttonEl); resolve(); };
+          audio.onended = done; audio.onerror = done;
+          audio.play().catch(done);
+        });
+      },
+      stop() {
+        if (this.currentAudio) { this.currentAudio.pause(); this.currentAudio.currentTime = 0; }
+        if (typeof VoiceEngine !== 'undefined') VoiceEngine.cancel();
+        this._cleanup(this.activeButtonEl);
+      },
+      _cleanup(buttonEl) {
+        buttonEl?.classList.remove('playing');
+        this.currentAudio = null; this.currentFeature = null; this.activeButtonEl = null;
         if (window.MusicDuck) window.MusicDuck.unduck('tts');
       }
+    };
+    window.GlobalSpeechManager = GlobalSpeechManager;
+    window.globalStopAudio = () => GlobalSpeechManager.stop();
+    function cvPlayToggle() {
+      if (GlobalSpeechManager.currentFeature === 'cv') { GlobalSpeechManager.stop(); return; }
+      if (cvLastAudioUrl) cvPlayAudio(cvLastAudioUrl);
+    }
+    window.cvPlayToggle = cvPlayToggle;
+    function cvSpeak(text) { if (cvVoiceEnabled) VoiceEngine.speak(text, 1, 'female'); }
+    async function cvPlayAudio(audioUrl) {
+      if (!audioUrl || typeof audioUrl !== 'string') return;
+      cvLastAudioUrl = audioUrl;
+      const btn = document.getElementById('cvPlayBtn');
+      if (btn) btn.disabled = false;
+      await GlobalSpeechManager.play(audioUrl, 'cv', btn);
     }
 
     // Focus mode: reparent the chat to <body> so no ancestor's overflow/stacking can clip it,
@@ -1273,6 +1281,17 @@
     }
     window.cvChatHandleFile = cvChatHandleFile;
 
+    const cvMessageQueue = [];
+    let cvIsProcessing = false;
+    async function cvProcessQueue() {
+      if (cvIsProcessing) return;
+      cvIsProcessing = true;
+      while (cvMessageQueue.length) {
+        const thinking = cvMessageQueue.shift();
+        await cvSendToEleanor(thinking);
+      }
+      cvIsProcessing = false;
+    }
     async function cvChatSend() {
       const input = document.getElementById('cvChatInput');
       const text = input.value.trim();
@@ -1281,7 +1300,8 @@
       cvAppendChat('user', text);
       cvChatMessages.push({ role: 'user', content: text });
       const thinking = cvAppendChat('assistant', 'Thinking…');
-      await cvSendToEleanor(thinking);
+      cvMessageQueue.push(thinking);
+      await cvProcessQueue();
     }
     window.cvChatSend = cvChatSend;
 
@@ -1303,12 +1323,24 @@
         if (!r.ok) { cvSetAssistant(thinking, data.error || 'Something went wrong — please try again.'); return; }
         cvSetAssistant(thinking, data.reply || '');
         cvChatMessages.push({ role: 'assistant', content: data.reply || '' });
-        if (data.audioUrl) cvPlayAudio(data.audioUrl);
+        if (data.audioUrl) await cvPlayAudio(data.audioUrl);
         else cvSpeak(data.reply || '');
       } catch (e) { cvSetAssistant(thinking, 'Connection issue — please try again.'); }
       finally { btn.disabled = false; btn.textContent = 'Send'; }
     }
     window.cvChatSend = cvChatSend;
+    // Auto-stop speech when the cv chat panel scrolls out of view
+    (function(){
+      const panel = document.getElementById('cvReviewChat');
+      if(panel && 'IntersectionObserver' in window){
+        const obs = new IntersectionObserver(entries=>{
+          entries.forEach(entry=>{
+            if(!entry.isIntersecting && GlobalSpeechManager.currentFeature==='cv') GlobalSpeechManager.stop();
+          });
+        }, { threshold: 0 });
+        obs.observe(panel);
+      }
+    })();
     wireMic('cvMic', 'cvChatInput', cvChatSend);
     document.getElementById('cvChatInput')?.addEventListener('keydown', e => {
       if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); cvChatSend(); }

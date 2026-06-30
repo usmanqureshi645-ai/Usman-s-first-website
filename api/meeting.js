@@ -68,8 +68,25 @@ export default async function handler(req, res) {
     }
 
     const text = data?.content?.[0]?.text || '';
-    const audioUrl = await synthesize(text, agents?.[0] || 'default', { kv: { url: process.env.UPSTASH_REDIS_REST_URL, token: process.env.UPSTASH_REDIS_REST_TOKEN } });
-    res.status(200).json({ text, audioUrl: audioUrl || null, usage });
+    const kvOpts = { kv: { url: process.env.UPSTASH_REDIS_REST_URL, token: process.env.UPSTASH_REDIS_REST_TOKEN } };
+
+    // Parse "**Name**: message" speaker segments and synthesize each with their own voice
+    const segParts = text.split(/\*\*([^*]+)\*\*:\s*/).filter(Boolean);
+    let audioUrl = null;
+    let segments = null;
+    if (segParts.length > 1) {
+      const speakerSegs = [];
+      for (let i = 0; i < segParts.length; i += 2) {
+        if (segParts[i] && segParts[i+1]) speakerSegs.push({ speaker: segParts[i].trim(), text: segParts[i+1].trim() });
+      }
+      const results = await Promise.all(
+        speakerSegs.map(s => synthesize(s.text, s.speaker, kvOpts).then(url => ({ speaker: s.speaker, audioUrl: url || null })))
+      );
+      segments = results;
+    } else {
+      audioUrl = await synthesize(text, agents?.[0] || 'default', kvOpts);
+    }
+    res.status(200).json({ text, audioUrl: audioUrl || null, segments: segments || null, usage });
   } catch (err) {
     res.status(500).json({ error: 'Request failed' });
   }

@@ -4466,7 +4466,7 @@ async function mrCallApi(userText){
       return;
     }
     mrHistory.push({role:'assistant', content:replyText});
-    await mrRenderPanelReply(replyText, false, data.audioUrl);
+    await mrRenderPanelReply(replyText, false, data.audioUrl, data.segments);
     if(mrSessionId) await mrPostToSession({role:'assistant', content:replyText});
   }catch(e){
     mrHideTyping();
@@ -4479,29 +4479,40 @@ function mrWait(ms){ return new Promise(r=>setTimeout(r, ms)); }
 // Renders each panel member's contribution one at a time, with a realistic
 // typing pause beforehand, instead of dumping every speaker's bubble at once —
 // the latter reads as obviously AI-generated rather than a real back-and-forth.
-async function mrRenderPanelReply(text, instant, audioUrl){
+async function mrRenderPanelReply(text, instant, audioUrl, segments){
   // Splits "**Name**: message" speaker segments into separate bubbles. The colon
   // AFTER the closing ** is required, so inline bold inside a message (e.g. the
   // "**Quick note:**" voice disclaimer, colon inside the bold) is NOT mistaken for
   // a new speaker and stays as bold text within the bubble.
   const parts=text.split(/\*\*([^*]+)\*\*:\s*/).filter(Boolean);
-  const hasAudio = !!(audioUrl && mrVoiceEnabled);
-  // Start the real Polly audio immediately (not after the typing-delay sequence below) and
-  // skip the old per-bubble browser voice entirely when it's playing, so they never overlap.
-  if(hasAudio) mrPlayAudio(audioUrl);
-  if(parts.length<=1){ mrAppendMessage('agent','Panel', text.trim(), hasAudio); return; }
+  const hasSegments=!!(segments && segments.length>0 && mrVoiceEnabled);
+  const hasAudio=!!(audioUrl && mrVoiceEnabled);
+  // Legacy single-audio path: play the whole clip upfront
+  if(!hasSegments && hasAudio) mrPlayAudio(audioUrl);
+  if(parts.length<=1){
+    mrAppendMessage('agent','Panel',text.trim(), hasSegments||hasAudio);
+    if(hasSegments && segments[0]?.audioUrl) mrPlayAudio(segments[0].audioUrl);
+    return;
+  }
   for(let i=0;i<parts.length;i+=2){
     const name=parts[i]; const msg=parts[i+1];
-    if(!name || !msg) continue;
+    if(!name||!msg) continue;
     if(i>0 && !instant){
       // brief pause before the next speaker "picks up", as if they were listening
-      await mrWait(500 + Math.random()*400);
+      await mrWait(500+Math.random()*400);
       mrShowTyping();
-      const typingDelay=Math.min(2600, Math.max(900, msg.trim().length*22));
+      const typingDelay=Math.min(2600,Math.max(900,msg.trim().length*22));
       await mrWait(typingDelay);
       mrHideTyping();
     }
-    mrAppendMessage('agent', name.trim(), msg.trim(), hasAudio);
+    // Per-speaker audio: each bubble triggers its own voice (mrPlayAudio auto-cancels previous)
+    const seg=hasSegments ? segments.find(s=>s.speaker===name.trim()) : null;
+    if(seg?.audioUrl){
+      mrAppendMessage('agent',name.trim(),msg.trim(),true);
+      mrPlayAudio(seg.audioUrl);
+    } else {
+      mrAppendMessage('agent',name.trim(),msg.trim(),hasAudio);
+    }
   }
 }
 let mrRealUserMessages=0;

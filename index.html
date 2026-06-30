@@ -4631,6 +4631,7 @@ const GlobalSpeechManager = {
   currentAudio: null,
   currentFeature: null,
   activeButtonEl: null,
+  _resolve: null,
   play(audioUrl, featureId, buttonEl) {
     this.stop();
     const audio = new Audio(audioUrl);
@@ -4638,6 +4639,7 @@ const GlobalSpeechManager = {
     buttonEl?.classList.add('playing');
     if (window.MusicDuck) window.MusicDuck.duck('tts', 1500);
     return new Promise(resolve => {
+      this._resolve = resolve;
       const done = () => { this._cleanup(buttonEl); resolve(); };
       audio.onended = done; audio.onerror = done;
       audio.play().catch(done);
@@ -4646,7 +4648,14 @@ const GlobalSpeechManager = {
   stop() {
     if (this.currentAudio) { this.currentAudio.pause(); this.currentAudio.currentTime = 0; }
     if (typeof VoiceEngine !== 'undefined') VoiceEngine.cancel();
+    // A pending play() promise may still be awaited by a feature's message queue —
+    // if we don't resolve it here too, stopping audio (e.g. scroll-away, or another
+    // feature taking over) leaves that await hanging forever and silently freezes
+    // that feature until the page is reloaded.
+    const resolve = this._resolve;
+    this._resolve = null;
     this._cleanup(this.activeButtonEl);
+    if (resolve) resolve();
   },
   _cleanup(buttonEl) {
     buttonEl?.classList.remove('playing');
@@ -4782,6 +4791,7 @@ async function mrRenderPanelReply(text, instant, audioUrl, segments){
     }
   }
 }
+let mrFlushTimer=null;
 let mrRealUserMessages=0;
 const MR_EMAIL_RE=/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/;
 const mrMessageQueue=[];
@@ -4819,8 +4829,13 @@ async function mrSendMessage(){
     mrSendSummaryTo(emailMatch[0], {skipUserBubble:true});
     return;
   }
-  mrMessageQueue.push(text);
-  mrProcessQueue();
+  // Debounce bursts of rapid messages into a single API call covering all of them.
+  if(mrFlushTimer) clearTimeout(mrFlushTimer);
+  mrFlushTimer=setTimeout(()=>{
+    mrFlushTimer=null;
+    mrMessageQueue.push(text);
+    mrProcessQueue();
+  }, 700);
 }
 document.getElementById('mrInput').addEventListener('keydown', e=>{
   if(e.key==='Enter') mrSendMessage();
@@ -5865,6 +5880,7 @@ async function gaapProcessQueue(){
   }
   gaapIsProcessing=false;
 }
+let gaapFlushTimer=null;
 function gaapSendMessage(){
   if(!window.getSiteUser?.()){ window.toggleSignup?.(true); return; }
   const input=document.getElementById('gaapInput');
@@ -5874,8 +5890,13 @@ function gaapSendMessage(){
   gaapAppendMessage('user', text);
   gaapHistory.push({role:'user', content:text});
   input.value='';
-  gaapMessageQueue.push(text);
-  gaapProcessQueue();
+  // Debounce bursts of rapid messages into a single API call covering all of them.
+  if(gaapFlushTimer) clearTimeout(gaapFlushTimer);
+  gaapFlushTimer=setTimeout(()=>{
+    gaapFlushTimer=null;
+    gaapMessageQueue.push(true);
+    gaapProcessQueue();
+  }, 700);
 }
 function gaapAsk(question){
   document.getElementById('gaapInput').value=question;
@@ -6012,6 +6033,7 @@ async function qzProcessQueue(){
   }
   qzIsProcessing=false;
 }
+let qzFlushTimer=null;
 function qzSendMessage(){
   const input=document.getElementById('qzInput');
   const text=input.value.trim();
@@ -6019,8 +6041,15 @@ function qzSendMessage(){
   qzAppendMessage('user', text);
   qzHistory.push({role:'user', content:text});
   input.value='';
-  qzMessageQueue.push(text);
-  qzProcessQueue();
+  // Debounce: if the user fires off several messages in quick succession, don't make
+  // one API call per message — wait briefly for the burst to settle, then send a single
+  // request that covers everything queued so far (qzHistory already has every line).
+  if(qzFlushTimer) clearTimeout(qzFlushTimer);
+  qzFlushTimer=setTimeout(()=>{
+    qzFlushTimer=null;
+    qzMessageQueue.push(true);
+    qzProcessQueue();
+  }, 700);
 }
 document.getElementById('qzInput').addEventListener('keydown', e=>{
   if(e.key==='Enter') qzSendMessage();

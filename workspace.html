@@ -1160,6 +1160,7 @@
       currentAudio: null,
       currentFeature: null,
       activeButtonEl: null,
+      _resolve: null,
       play(audioUrl, featureId, buttonEl) {
         this.stop();
         const audio = new Audio(audioUrl);
@@ -1167,6 +1168,7 @@
         buttonEl?.classList.add('playing');
         if (window.MusicDuck) window.MusicDuck.duck('tts', 1500);
         return new Promise(resolve => {
+          this._resolve = resolve;
           const done = () => { this._cleanup(buttonEl); resolve(); };
           audio.onended = done; audio.onerror = done;
           audio.play().catch(done);
@@ -1175,7 +1177,10 @@
       stop() {
         if (this.currentAudio) { this.currentAudio.pause(); this.currentAudio.currentTime = 0; }
         if (typeof VoiceEngine !== 'undefined') VoiceEngine.cancel();
+        const resolve = this._resolve;
+        this._resolve = null;
         this._cleanup(this.activeButtonEl);
+        if (resolve) resolve();
       },
       _cleanup(buttonEl) {
         buttonEl?.classList.remove('playing');
@@ -1292,6 +1297,7 @@
       }
       cvIsProcessing = false;
     }
+    let cvFlushTimer = null;
     async function cvChatSend() {
       const input = document.getElementById('cvChatInput');
       const text = input.value.trim();
@@ -1299,9 +1305,16 @@
       input.value = '';
       cvAppendChat('user', text);
       cvChatMessages.push({ role: 'user', content: text });
-      const thinking = cvAppendChat('assistant', 'Thinking…');
-      cvMessageQueue.push(thinking);
-      await cvProcessQueue();
+      // Debounce bursts of rapid messages: wait briefly for the burst to settle, then
+      // send one request that covers everything typed so far (cvChatMessages already
+      // has every line), instead of firing one API call per message.
+      if (cvFlushTimer) clearTimeout(cvFlushTimer);
+      cvFlushTimer = setTimeout(() => {
+        cvFlushTimer = null;
+        const thinking = cvAppendChat('assistant', 'Thinking…');
+        cvMessageQueue.push(thinking);
+        cvProcessQueue();
+      }, 700);
     }
     window.cvChatSend = cvChatSend;
 

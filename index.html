@@ -1923,6 +1923,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 
   <div class="mr-chat" id="mrChatWrap">
     <div class="mr-chat-topbar"><button class="mr-maximize-btn" type="button" onclick="mrToggleMaximize('mrChatWrap')" title="Maximize">⛶</button></div>
+    <p class="mr-note" id="mrTtsNote" style="display:none;margin:0 0 .75rem;font-size:.75rem;color:var(--steel-light)">🔊 Sound is on — We use text-to-speech, so voices may sound slightly robotic. This is neural synthesis, not human voice actors. We're hiring voice cloners to enhance your experience — this is just the start. You can press the Stop button anytime to interrupt.</p>
     <div class="mr-messages" id="mrMessages"></div>
     <div class="mr-chips" id="mrChips" style="display:none">
       <span id="mrTopicChips" style="display:contents">
@@ -1947,6 +1948,10 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
       <button id="mrVoiceToggle" class="mr-mic" title="Hear the panel's replies aloud" onclick="mrToggleVoice()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
         <span class="mr-mic-label">Hear</span>
+      </button>
+      <button id="mrStopBtn" class="mr-mic" title="Stop audio playback" onclick="globalStopAudio()" style="display:none;border-color:var(--gold);color:var(--gold)">
+        <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="7" height="16" rx="1"/><rect x="13" y="4" width="7" height="16" rx="1"/></svg>
+        <span class="mr-mic-label">Stop</span>
       </button>
       <input type="text" id="mrInput" placeholder="Ask the panel a technical accounting question…" autocomplete="off" />
       <button id="mrSend" onclick="mrSendMessage()">Send</button>
@@ -1991,6 +1996,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
     <span style="font-size:.85rem;font-weight:700;color:var(--gold)">Interview Coach</span>
     <button class="mr-maximize-btn" type="button" onclick="mrToggleMaximize('qzChatWrap')" title="Maximize" style="margin-left:auto">⛶</button>
   </div>
+  <p class="mr-note" id="qzTtsNote" style="display:none;margin:0 0 .75rem;font-size:.75rem;color:var(--steel-light)">🔊 Sound is on — We use text-to-speech, so voices may sound slightly robotic. This is neural synthesis, not human voice actors. We're hiring voice cloners to enhance your experience — this is just the start. You can press the Stop button anytime to interrupt.</p>
   <div class="mr-messages" id="qzMessages"></div>
   <div class="mr-chips">
     <button class="mr-chip" id="qzEndBtn" onclick="qzEndSession()" style="border-color:var(--steel);color:var(--steel-light)">End session &amp; email my feedback</button>
@@ -2004,6 +2010,10 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
     <button id="qzVoiceToggle" class="mr-mic" title="Hear the coach's questions aloud" onclick="qzToggleVoice()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
       <span class="mr-mic-label">Hear</span>
+    </button>
+    <button id="qzStopBtn" class="mr-mic" title="Stop audio playback" onclick="globalStopAudio()" style="display:none;border-color:var(--gold);color:var(--gold)">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="7" height="16" rx="1"/><rect x="13" y="4" width="7" height="16" rx="1"/></svg>
+      <span class="mr-mic-label">Stop</span>
     </button>
     <input type="text" id="qzInput" placeholder="Type your answer…" autocomplete="off" />
     <button id="qzSend" onclick="qzSendMessage()">Send</button>
@@ -2124,6 +2134,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
     <span style="font-size:.85rem;font-weight:700;color:var(--gold)">GAAP Champion</span>
     <button class="mr-maximize-btn" type="button" onclick="mrToggleMaximize('gaapChatWrap')" title="Maximize" style="margin-left:auto">⛶</button>
   </div>
+  <p class="mr-note" id="gaapTtsNote" style="display:none;margin:0 0 .75rem;font-size:.75rem;color:var(--steel-light)">🔊 Sound is on — We use text-to-speech, so voices may sound slightly robotic. This is neural synthesis, not human voice actors. We're hiring voice cloners to enhance your experience — this is just the start. You can press the Stop button anytime to interrupt.</p>
   <div class="mr-messages" id="gaapMessages"></div>
   <div class="mr-chips" id="gaapChips">
     <button class="mr-chip" onclick="gaapAsk('In plain English, what is the biggest practical difference between IFRS and US GAAP for leases?')">Leases: biggest difference?</button>
@@ -2140,6 +2151,10 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
     <button id="gaapVoiceToggle" class="mr-mic" title="Hear the assistant's replies aloud" onclick="gaapToggleVoice()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/><path d="M16 8a5 5 0 010 8" stroke-linecap="round"/></svg>
       <span class="mr-mic-label">Hear</span>
+    </button>
+    <button id="gaapStopBtn" class="mr-mic" title="Stop audio playback" onclick="globalStopAudio()" style="display:none;border-color:var(--gold);color:var(--gold)">
+      <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="7" height="16" rx="1"/><rect x="13" y="4" width="7" height="16" rx="1"/></svg>
+      <span class="mr-mic-label">Stop</span>
     </button>
     <input type="text" id="gaapInput" placeholder="Ask in plain language — e.g. 'How does goodwill differ under IFRS vs US GAAP?'" autocomplete="off" />
     <button id="gaapSend" onclick="gaapSendMessage()">Ask</button>
@@ -4598,6 +4613,17 @@ const mrPitches={'Sarah Bennett':1.04,'David Whitfield':0.92,'Amelia Hartley':1.
 // Each panel member speaks in their own actual gender's voice — no manual selector needed,
 // since a real mixed panel shouldn't all share one voice toggle.
 const mrGenders={'Sarah Bennett':'female','David Whitfield':'male','Amelia Hartley':'female','Marcus Lee':'male','Elena Rossi':'female','James Carter':'male','Charlotte Sinclair':'female'};
+// Global audio control for stopping TTS playback
+let globalCurrentAudio = null;
+function globalStopAudio() {
+  if(globalCurrentAudio && typeof globalCurrentAudio.pause === 'function') {
+    globalCurrentAudio.pause();
+    globalCurrentAudio.currentTime = 0;
+    globalCurrentAudio = null;
+  }
+  VoiceEngine.cancel();
+  if(window.MusicDuck) window.MusicDuck.unduck('tts');
+}
 function mrSpeak(name, text){
   if(!mrVoiceEnabled) return;
   const customMatch=mrCustomPersonas.find(p=>p.name===name);
@@ -4612,9 +4638,11 @@ function mrPlayAudio(audioUrl){
     const voiceBtn = document.getElementById('mrVoiceToggle');
     if(voiceBtn) voiceBtn.classList.add('playing');
     const audio = new Audio(audioUrl);
+    globalCurrentAudio = audio;
     const cleanup = () => {
       if(voiceBtn) voiceBtn.classList.remove('playing');
       if(window.MusicDuck) window.MusicDuck.unduck('tts');
+      globalCurrentAudio = null;
     };
     audio.onended = cleanup;
     audio.onerror = cleanup;
@@ -4627,6 +4655,10 @@ function mrToggleVoice(){
   mrVoiceEnabled=!mrVoiceEnabled;
   const btn=document.getElementById('mrVoiceToggle');
   if(btn) btn.classList.toggle('active', mrVoiceEnabled);
+  const ttsNote=document.getElementById('mrTtsNote');
+  if(ttsNote) ttsNote.style.display=mrVoiceEnabled?'block':'none';
+  const stopBtn=document.getElementById('mrStopBtn');
+  if(stopBtn) stopBtn.style.display=mrVoiceEnabled?'flex':'none';
   if(!mrVoiceEnabled) VoiceEngine.cancel();
   else if(mrLastAudioUrl) mrPlayAudio(mrLastAudioUrl);
 }
@@ -5067,10 +5099,19 @@ function mrStartMeeting(){
   console.log('Meeting started, ducking music');
   window.MusicDuck?.duck('meeting-room', 2500); // slow, graceful fade-out
   mrMeetingStarted=true;
+  // Auto-enable sound and show disclaimer
+  mrVoiceEnabled=true;
+  const voiceBtn=document.getElementById('mrVoiceToggle');
+  if(voiceBtn) voiceBtn.classList.add('active');
+  const ttsNote=document.getElementById('mrTtsNote');
+  if(ttsNote) ttsNote.style.display='block';
   document.getElementById('mrStartBtn').textContent='Meeting in progress — tick/untick anyone above to add or remove them';
   document.getElementById('mrStartBtn').disabled=true;
   document.getElementById('mrChips').style.display='flex';
   document.getElementById('mrInputBar').style.display='flex';
+  // Show stop button
+  const stopBtn=document.getElementById('mrStopBtn');
+  if(stopBtn) stopBtn.style.display='flex';
   const siteUser=window.getSiteUser();
   const presentNames=mrPresentNames();
   const kickoff=`[The user has just entered the Meeting Room. The following specialists are present: ${presentNames.join(', ')}. The user is already signed in as "${siteUser.name}" — greet them warmly by name as the panel (briefly, 1-2 sentences total from one spokesperson), explain in one sentence what the Meeting Room is for, then ask what they'd like to discuss today. Do NOT ask for their name — you already know it, never ask again.]`;
@@ -5676,6 +5717,14 @@ let gaapStarted=false;
 function gaapDuckOnce(){
   if(gaapStarted) return;
   gaapStarted=true;
+  // Auto-enable sound when user engages with GAAP
+  gaapVoiceEnabled=true;
+  const voiceBtn=document.getElementById('gaapVoiceToggle');
+  if(voiceBtn) voiceBtn.classList.add('active');
+  const ttsNote=document.getElementById('gaapTtsNote');
+  if(ttsNote) ttsNote.style.display='block';
+  const stopBtn=document.getElementById('gaapStopBtn');
+  if(stopBtn) stopBtn.style.display='flex';
   window.MusicDuck?.duck('gaap', 2500); // slow, graceful fade-out
 }
 function gaapPlayAudio(audioUrl){
@@ -5686,9 +5735,11 @@ function gaapPlayAudio(audioUrl){
     const voiceBtn = document.getElementById('gaapVoiceToggle');
     if(voiceBtn) voiceBtn.classList.add('playing');
     const audio = new Audio(audioUrl);
+    globalCurrentAudio = audio;
     const cleanup = () => {
       if(voiceBtn) voiceBtn.classList.remove('playing');
       if(window.MusicDuck) window.MusicDuck.unduck('tts');
+      globalCurrentAudio = null;
     };
     audio.onended = cleanup;
     audio.onerror = cleanup;
@@ -5701,6 +5752,10 @@ function gaapToggleVoice(){
   gaapVoiceEnabled=!gaapVoiceEnabled;
   const btn=document.getElementById('gaapVoiceToggle');
   if(btn) btn.classList.toggle('active', gaapVoiceEnabled);
+  const ttsNote=document.getElementById('gaapTtsNote');
+  if(ttsNote) ttsNote.style.display=gaapVoiceEnabled?'block':'none';
+  const stopBtn=document.getElementById('gaapStopBtn');
+  if(stopBtn) stopBtn.style.display=gaapVoiceEnabled?'flex':'none';
   if(!gaapVoiceEnabled) VoiceEngine.cancel();
   else if(gaapLastAudioUrl) gaapPlayAudio(gaapLastAudioUrl);
 }
@@ -5833,9 +5888,11 @@ function qzPlayAudio(audioUrl){
     const voiceBtn = document.getElementById('qzVoiceToggle');
     if(voiceBtn) voiceBtn.classList.add('playing');
     const audio = new Audio(audioUrl);
+    globalCurrentAudio = audio;
     const cleanup = () => {
       if(voiceBtn) voiceBtn.classList.remove('playing');
       if(window.MusicDuck) window.MusicDuck.unduck('tts');
+      globalCurrentAudio = null;
     };
     audio.onended = cleanup;
     audio.onerror = cleanup;
@@ -5848,6 +5905,10 @@ function qzToggleVoice(){
   qzVoiceEnabled=!qzVoiceEnabled;
   const btn=document.getElementById('qzVoiceToggle');
   if(btn) btn.classList.toggle('active', qzVoiceEnabled);
+  const ttsNote=document.getElementById('qzTtsNote');
+  if(ttsNote) ttsNote.style.display=qzVoiceEnabled?'block':'none';
+  const stopBtn=document.getElementById('qzStopBtn');
+  if(stopBtn) stopBtn.style.display=qzVoiceEnabled?'flex':'none';
   if(!qzVoiceEnabled) VoiceEngine.cancel();
   else if(qzLastAudioUrl) qzPlayAudio(qzLastAudioUrl);
 }
@@ -5906,6 +5967,15 @@ function qzStart(level){
   document.getElementById('qzChatWrap').style.display='flex';
   document.getElementById('qzNote').style.display='block';
   document.getElementById('qzMessages').innerHTML='';
+  // Auto-enable sound and show disclaimer
+  qzVoiceEnabled=true;
+  const voiceBtn=document.getElementById('qzVoiceToggle');
+  if(voiceBtn) voiceBtn.classList.add('active');
+  const ttsNote=document.getElementById('qzTtsNote');
+  if(ttsNote) ttsNote.style.display='block';
+  // Show stop button
+  const stopBtn=document.getElementById('qzStopBtn');
+  if(stopBtn) stopBtn.style.display='flex';
   qzHistory.length=0;
   qzHistory.push({role:'user', content:`[Start a new interview-prep session at ${level} level. Follow your onboarding flow: introduce yourself as a friend helping with interview prep, ask what role they're applying for, then ask about their experience — do not start interview questions yet.]`});
   qzCallApi();

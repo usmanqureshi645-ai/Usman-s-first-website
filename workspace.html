@@ -458,7 +458,7 @@
                   </button>
                 </div>
                 <div id="cvChatLog" style="max-height:380px;overflow-y:auto;display:flex;flex-direction:column;gap:.7rem;margin-bottom:.7rem"></div>
-                <p id="cvVoiceNote" style="display:none;font-size:.7rem;color:var(--steel-light);margin:0 0 .5rem;font-style:italic">Eleanor's replies will be read aloud.</p>
+                <p id="cvVoiceNote" style="display:none;font-size:.7rem;color:var(--steel-light);margin:0 0 .5rem;font-style:italic">🔊 Eleanor's replies will be read aloud. We use text-to-speech, so voices may sound slightly robotic. This is neural synthesis, not human voice actors. We're hiring voice cloners to enhance your experience — this is just the start. You can press the Stop button anytime to interrupt.</p>
                 <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.5rem">
                   <button id="cvMic" class="mr-mic" title="Speak to Eleanor">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>
@@ -472,6 +472,10 @@
                   <button id="cvVoiceToggle" class="mr-mic" title="Hear Eleanor's replies aloud" onclick="cvToggleVoice()">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M11 5L6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 010 7M19 5a9 9 0 010 14" stroke-linecap="round"/></svg>
                     <span class="mr-mic-label">Hear</span>
+                  </button>
+                  <button id="cvStopBtn" class="mr-mic" title="Stop audio playback" onclick="globalStopAudio()" style="display:none;border-color:var(--gold);color:var(--gold)">
+                    <svg viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7"><rect x="4" y="4" width="7" height="16" rx="1"/><rect x="13" y="4" width="7" height="16" rx="1"/></svg>
+                    <span class="mr-mic-label">Stop</span>
                   </button>
                 </div>
                 <div style="display:flex;gap:.5rem">
@@ -1147,12 +1151,24 @@
     }
 
     let cvVoiceEnabled = false;
+    let globalCurrentAudio = null;
+    function globalStopAudio() {
+      if(globalCurrentAudio && typeof globalCurrentAudio.pause === 'function') {
+        globalCurrentAudio.pause();
+        globalCurrentAudio.currentTime = 0;
+        globalCurrentAudio = null;
+      }
+      VoiceEngine.cancel();
+      if(window.MusicDuck) window.MusicDuck.unduck('tts');
+    }
     function cvToggleVoice() {
       cvVoiceEnabled = !cvVoiceEnabled;
       const btn = document.getElementById('cvVoiceToggle');
       btn.classList.toggle('active', cvVoiceEnabled);
       const note = document.getElementById('cvVoiceNote');
       if (note) note.style.display = cvVoiceEnabled ? 'block' : 'none';
+      const stopBtn = document.getElementById('cvStopBtn');
+      if(stopBtn) stopBtn.style.display = cvVoiceEnabled ? 'flex' : 'none';
       if (!cvVoiceEnabled) VoiceEngine.cancel();
     }
     window.cvToggleVoice = cvToggleVoice;
@@ -1162,9 +1178,14 @@
       try {
         if (window.MusicDuck) window.MusicDuck.duck('tts', 1500);
         const audio = new Audio(audioUrl);
-        audio.onended = () => { if (window.MusicDuck) window.MusicDuck.unduck('tts'); };
-        audio.onerror = () => { if (window.MusicDuck) window.MusicDuck.unduck('tts'); };
-        audio.play().catch(() => { if (window.MusicDuck) window.MusicDuck.unduck('tts'); });
+        globalCurrentAudio = audio;
+        const cleanup = () => {
+          if (window.MusicDuck) window.MusicDuck.unduck('tts');
+          globalCurrentAudio = null;
+        };
+        audio.onended = cleanup;
+        audio.onerror = cleanup;
+        audio.play().catch(cleanup);
       } catch {
         if (window.MusicDuck) window.MusicDuck.unduck('tts');
       }

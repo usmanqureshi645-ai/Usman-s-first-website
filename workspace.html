@@ -226,7 +226,18 @@
   .mr-mic.playing .mr-icon-play{ display:none; }
   .mr-mic.playing .mr-icon-stop{ display:inline-block; }
   .mr-mic:disabled{ opacity:.4; cursor:default; }
-  @media (max-width:480px){ .mr-mic-label{ display:none; } .mr-mic{ padding:0; width:40px; height:40px; justify-content:center; } }
+  @media (max-width:480px){ .mr-mic-label{ display:none; } .mr-mic{ padding:0; width:34px; height:34px; justify-content:center; } .mr-mic svg{ width:14px; height:14px; } }
+  /* Eleanor review chat on phones: smaller avatar/header and tighter bubbles so a full
+     reply is visible without constant scrolling, and the log gets more of the screen. */
+  @media (max-width:520px){
+    #cvReviewChat{ padding:.6rem; }
+    #cvReviewChat > div:first-child{ gap:.4rem; margin-bottom:.5rem; padding-bottom:.5rem; }
+    #cvReviewChat > div:first-child img{ width:28px!important; height:28px!important; }
+    #cvReviewChat > div:first-child > div > div:first-child{ font-size:.78rem; }
+    #cvReviewChat > div:first-child > div > div:last-child{ font-size:.62rem; }
+    #cvChatLog{ max-height:58vh; }
+    #cvChatLog > div{ font-size:.78rem!important; padding:.5rem .7rem!important; }
+  }
   /* Focus mode: the review chat fills the screen and everything else is hidden behind it. */
   #cvReviewChat.cv-chat-max{ position:fixed!important; inset:0!important; z-index:10000!important; margin:0!important; border:none!important; border-radius:0!important; background:#0a1424!important; padding:1.1rem 1.1rem 1.25rem!important; display:flex; flex-direction:column; max-width:none!important; height:100dvh; }
   #cvReviewChat.cv-chat-max #cvChatLog{ max-height:none!important; flex:1 1 auto; }
@@ -484,8 +495,8 @@
                   <textarea id="cvChatInput" placeholder="Tell Eleanor what you changed, or paste your updated text…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="true" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" data-form-type="other" name="cv-msg-field-z2m5" style="flex:1;min-height:56px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.65rem;color:var(--cream);font-family:inherit;font-size:.83rem;resize:vertical"></textarea>
                   <button class="btn-gold" id="cvChatSendBtn" onclick="cvChatSend()" style="align-self:flex-end">Send</button>
                 </div>
-                <p id="cvVoiceNote" style="font-size:.7rem;color:var(--steel-light);margin:.5rem 0 0;font-style:italic">🔊 Voice powered by one of the world's leading text-to-speech engines for fast, reliable spoken responses. We're also building natural, human-like cloned voices — designed to sound like real hiring managers, interviewers and professional consultants — coming soon.</p>
               </div>
+              <p id="cvVoiceNote" style="text-align:center;font-size:.7rem;color:var(--steel-light);margin:.6rem 0 0;font-style:italic">🔊 Voice powered by one of the world's leading text-to-speech engines for fast, reliable spoken responses. We're also building natural, human-like cloned voices — designed to sound like real hiring managers, interviewers and professional consultants — coming soon.</p>
             </div>
           </div>
         </div>

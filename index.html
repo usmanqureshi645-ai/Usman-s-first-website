@@ -813,7 +813,7 @@
 
     /* Meeting room mobile */
     .mr-layout{ grid-template-columns:1fr; }
-    .mr-chat{ height:480px; }
+    .mr-chat{ height:74vh; min-height:440px; }
     .mr-panel{ display:flex; flex-wrap:wrap; gap:.5rem; padding:1rem; }
     .mr-agent{ flex:1 1 45%; }
     .mr-note{ width:100%; }
@@ -1658,13 +1658,27 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 .mr-mic:hover{border-color:var(--gold);background:rgba(200,169,110,.08)}
 @media (max-width:520px){
   .mr-mic-label{ display:none; } /* icon-only on small screens so mic+hear+send fit in one row */
-  .mr-mic{ padding:0; width:40px; flex-shrink:0; }
-  .mr-inputbar{ flex-wrap:wrap; gap:.5rem; }
-  .mr-inputbar input{ flex:1 1 100%; order:3; font-size:16px; } /* 16px stops iOS Safari auto-zoom on focus */
+  .mr-mic{ padding:0; width:34px; height:34px; flex-shrink:0; }
+  .mr-mic svg{ width:14px; height:14px; }
+  .mr-inputbar{ flex-wrap:wrap; gap:.4rem; padding:.6rem .7rem; }
+  .mr-inputbar input,.mr-inputbar textarea{ flex:1 1 100%; order:3; font-size:16px; } /* 16px stops iOS Safari auto-zoom on focus */
   .mr-chips{ flex-wrap:nowrap; overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:.6rem; }
-  .mr-chip{ flex-shrink:0; white-space:nowrap; }
-  .mr-panel{ max-height:240px; overflow-y:auto; }
-  .mr-chat{ height:62vh; min-height:380px; }
+  .mr-chip{ flex-shrink:0; white-space:nowrap; font-size:.72rem; padding:.35rem .7rem; }
+  .mr-panel{ max-height:200px; overflow-y:auto; }
+  /* Maximize vertical space for the actual conversation on phones: smaller header,
+     smaller avatars, tighter message padding — so a full reply fits with less scrolling. */
+  .mr-chat{ height:78vh; min-height:420px; max-height:none; }
+  .mr-chat > div:first-child .mr-avatar{ width:24px!important; height:24px!important; }
+  .mr-chat > div:first-child{ padding:.5rem .65rem!important; gap:.4rem!important; }
+  .mr-chat > div:first-child span{ font-size:.76rem!important; }
+  .mr-avatar{ width:30px; height:30px; font-size:.7rem; }
+  .mr-stage-tile .mr-avatar{ width:30px; height:30px; }
+  .mr-stage{ padding:.5rem .6rem; gap:.5rem; }
+  .mr-stage-name{ font-size:.6rem; }
+  .mr-messages{ padding:.85rem .9rem; gap:.7rem; }
+  .mr-msg{ max-width:90%; }
+  .mr-bubble{ padding:.5rem .75rem; font-size:.76rem; line-height:1.42; }
+  .mr-msg-name{ font-size:.62rem; margin-bottom:.1rem; }
 }
 .mr-mic.listening{
   background:rgba(200,169,110,.25);border-color:var(--gold);
@@ -1928,7 +1942,6 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 
   <div class="mr-chat" id="mrChatWrap">
     <div class="mr-chat-topbar"><button class="mr-maximize-btn" type="button" onclick="mrToggleMaximize('mrChatWrap')" title="Maximize">⛶</button></div>
-    <p class="mr-note" id="mrTtsNote" style="margin:0 0 .75rem;font-size:.75rem;color:var(--steel-light)">🔊 Voice powered by one of the world's leading text-to-speech engines for fast, reliable spoken responses. We're also building natural, human-like cloned voices — designed to sound like real hiring managers, interviewers and professional consultants — coming soon.</p>
     <div class="mr-messages" id="mrMessages"></div>
     <div class="mr-chips" id="mrChips" style="display:none">
       <span id="mrTopicChips" style="display:contents">
@@ -1960,6 +1973,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
     </div>
   </div>
 </div>
+<p class="mr-note" id="mrTtsNote" style="text-align:center;margin-top:1rem;font-size:.75rem;color:var(--steel-light)">🔊 Voice powered by one of the world's leading text-to-speech engines for fast, reliable spoken responses. We're also building natural, human-like cloned voices — designed to sound like real hiring managers, interviewers and professional consultants — coming soon.</p>
 </div>
 </section>
 
@@ -1992,13 +2006,12 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
   </div>
 </div>
 
-<div class="mr-chat" id="qzChatWrap" style="height:560px;max-width:900px;margin:2rem auto 0;display:none">
+<div class="mr-chat" id="qzChatWrap" style="max-width:900px;margin:2rem auto 0;display:none">
   <div style="display:flex;align-items:center;gap:.6rem;padding:.85rem 1rem;border-bottom:1px solid rgba(255,255,255,.08)">
     <div class="mr-avatar photo av-ic" style="width:34px;height:34px;border-radius:8px">IC</div>
     <span style="font-size:.85rem;font-weight:700;color:var(--gold)">Interview Coach</span>
     <button class="mr-maximize-btn" type="button" onclick="mrToggleMaximize('qzChatWrap')" title="Maximize" style="margin-left:auto">⛶</button>
   </div>
-  <p class="mr-note" id="qzTtsNote" style="margin:0 0 .75rem;font-size:.75rem;color:var(--steel-light)">🔊 Voice powered by one of the world's leading text-to-speech engines for fast, reliable spoken responses. We're also building natural, human-like cloned voices — designed to sound like real hiring managers, interviewers and professional consultants — coming soon.</p>
   <div class="mr-messages" id="qzMessages"></div>
   <div class="mr-chips">
     <button class="mr-chip" id="qzEndBtn" onclick="qzEndSession()" style="border-color:var(--steel);color:var(--steel-light)">End session &amp; email my feedback</button>
@@ -2018,7 +2031,8 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
     <button id="qzSend" onclick="qzSendMessage()">Send</button>
   </div>
 </div>
-<p class="mr-note" id="qzNote" style="text-align:center;margin-top:1rem;display:none">Simulated AI interview coach — for practice and education, not a guarantee of real interview outcomes.</p>
+<p class="mr-note" id="qzTtsNote" style="text-align:center;margin-top:1rem;font-size:.75rem;color:var(--steel-light);display:none">🔊 Voice powered by one of the world's leading text-to-speech engines for fast, reliable spoken responses. We're also building natural, human-like cloned voices — designed to sound like real hiring managers, interviewers and professional consultants — coming soon.</p>
+<p class="mr-note" id="qzNote" style="text-align:center;margin-top:.4rem;display:none">Simulated AI interview coach — for practice and education, not a guarantee of real interview outcomes.</p>
 
 </div>
 </section>
@@ -2127,13 +2141,12 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 </div>
 
 <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">Ask the GAAP Champion</h3>
-<div class="mr-chat" id="gaapChatWrap" style="height:520px;max-width:900px;margin:0 auto">
+<div class="mr-chat" id="gaapChatWrap" style="max-width:900px;margin:0 auto">
   <div style="display:flex;align-items:center;gap:.6rem;padding:.85rem 1rem;border-bottom:1px solid rgba(255,255,255,.08)">
     <div class="mr-avatar photo av-ga" style="width:34px;height:34px;border-radius:8px">GA</div>
     <span style="font-size:.85rem;font-weight:700;color:var(--gold)">GAAP Champion</span>
     <button class="mr-maximize-btn" type="button" onclick="mrToggleMaximize('gaapChatWrap')" title="Maximize" style="margin-left:auto">⛶</button>
   </div>
-  <p class="mr-note" id="gaapTtsNote" style="margin:0 0 .75rem;font-size:.75rem;color:var(--steel-light)">🔊 Voice powered by one of the world's leading text-to-speech engines for fast, reliable spoken responses. We're also building natural, human-like cloned voices — designed to sound like real hiring managers, interviewers and professional consultants — coming soon.</p>
   <div class="mr-messages" id="gaapMessages"></div>
   <div class="mr-chips" id="gaapChips">
     <button class="mr-chip" onclick="gaapAsk('In plain English, what is the biggest practical difference between IFRS and US GAAP for leases?')">Leases: biggest difference?</button>
@@ -2156,6 +2169,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
     <button id="gaapSend" onclick="gaapSendMessage()">Ask</button>
   </div>
 </div>
+<p class="mr-note" id="gaapTtsNote" style="text-align:center;margin-top:.75rem;font-size:.75rem;color:var(--steel-light)">🔊 Voice powered by one of the world's leading text-to-speech engines for fast, reliable spoken responses. We're also building natural, human-like cloned voices — designed to sound like real hiring managers, interviewers and professional consultants — coming soon.</p>
 
 </div>
 </section>
@@ -5950,7 +5964,7 @@ try{
     setTimeout(()=>{
       document.getElementById('qzChatWrap').style.display='flex';
       document.getElementById('qzLevels').style.display='none';
-      document.getElementById('qzNote').style.display='block';
+      document.getElementById('qzNote').style.display='block'; document.getElementById('qzTtsNote').style.display='block';
       savedQz.forEach(m=>qzAppendMessage(m.role, m.content, null, true));
     }, 0);
   }
@@ -5993,7 +6007,7 @@ function qzStart(level){
   window.MusicDuck?.duck('interview-prep', 2500); // slow, graceful fade-out
   document.getElementById('qzLevels').style.display='none';
   document.getElementById('qzChatWrap').style.display='flex';
-  document.getElementById('qzNote').style.display='block';
+  document.getElementById('qzNote').style.display='block'; document.getElementById('qzTtsNote').style.display='block';
   document.getElementById('qzMessages').innerHTML='';
   qzHistory.length=0;
   qzHistory.push({role:'user', content:`[Start a new interview-prep session at ${level} level. Follow your onboarding flow: introduce yourself as a friend helping with interview prep, ask what role they're applying for, then ask about their experience — do not start interview questions yet.]`});
@@ -6149,7 +6163,7 @@ window.mrTryJoinSession=async function(joinId){
       qzResumedSession=true;
       document.getElementById('qzLevels').style.display='none';
       document.getElementById('qzChatWrap').style.display='flex';
-      document.getElementById('qzNote').style.display='block';
+      document.getElementById('qzNote').style.display='block'; document.getElementById('qzTtsNote').style.display='block';
       qzHistory.push(...transcript);
       transcript.forEach(m=>{
         if(typeof m.content==='string' && m.content.startsWith('[')) return;

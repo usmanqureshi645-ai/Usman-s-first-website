@@ -72,44 +72,128 @@
   .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
   .btn-primary {
     background: var(--gold); color: var(--navy); padding: .85rem 1.8rem;
-    border-radius: 8px; font-weight: 700; font-size: .95rem;
+    border-radius: 8px; font-weight: 700; font-size: .95rem; border: none;
+    font-family: inherit; cursor: pointer; display: inline-block; text-align: center;
   }
   .btn-primary:hover { background: var(--gold-light); color: var(--navy); }
   .btn-ghost {
-    border: 1px solid rgba(200,169,110,.4); color: var(--cream);
+    background: transparent; border: 1px solid rgba(200,169,110,.4); color: var(--cream);
     padding: .85rem 1.8rem; border-radius: 8px; font-weight: 600; font-size: .95rem;
+    font-family: inherit; cursor: pointer; display: inline-block; text-align: center;
   }
-  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); background: rgba(200,169,110,.06); }
+
+  .hero-wrap { position: relative; }
+  .hero-text {
+    transition: transform 1.2s cubic-bezier(.22,1,.36,1), opacity 1.2s ease;
+  }
+  .hero-auth-wrap {
+    display: grid; grid-template-rows: 0fr; transition: grid-template-rows 1.2s cubic-bezier(.25,.46,.45,.94);
+  }
+  .hero-auth-wrap > .hero-auth-panel { overflow: hidden; min-height: 0; }
+  .hero-auth-panel {
+    position: relative; opacity: 0; transform: translateY(18px); pointer-events: none;
+    transition: opacity 1.2s ease-in-out, transform 1.2s cubic-bezier(.25,.46,.45,.94);
+    background: transparent; padding: 0 2rem 0 0; margin-top: 0; text-align: left;
+  }
+  .hero-auth-close {
+    position: absolute; top: 1rem; right: 1.2rem; background: none; border: none;
+    color: var(--steel-light); font-size: 1.6rem; line-height: 1; cursor: pointer; padding: .2rem .4rem;
+  }
+  .hero-auth-close:hover { color: var(--gold); }
+  .hero.auth-open .hero-text { transform: translateY(-6px); opacity: .92; }
+  .hero.auth-open .hero-auth-wrap { grid-template-rows: 1fr; }
+  .hero.auth-open .hero-auth-panel { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+  @media (min-width: 900px) {
+    .hero-wrap { position: relative; min-height: 1px; }
+    .hero-text { transition: transform .55s cubic-bezier(.22,1,.36,1), opacity .45s ease; }
+    .hero-auth-wrap {
+      display: block; grid-template-rows: none; overflow: visible;
+      position: absolute; top: 0; right: 0; width: 420px; max-width: 40%;
+    }
+    .hero-auth-wrap > .hero-auth-panel { margin-top: 0; }
+    .hero-auth-panel { transform: translateX(24px); }
+    .hero.auth-open .hero-text { max-width: 48%; text-align: left; transform: translateX(0); opacity: 1; }
+    .hero.auth-open .hero-text .hero-sub { margin-left: 0; margin-right: 0; }
+    .hero.auth-open .hero-text .hero-ctas { justify-content: flex-start; }
+    .hero.auth-open .hero-auth-panel { transform: translateX(0); }
+  }
 
   section { padding: 4rem 0; }
   .section-header { text-align: center; max-width: 700px; margin: 0 auto 2.8rem; }
   .section-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; margin: .4rem 0 .8rem; }
   .section-sub { color: var(--steel-light); line-height: 1.6; }
 
-  .tool-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.4rem;
+  /* ---- "What's Inside" giant-tile looping carousel ---- */
+  .wi-stage {
+    position: relative; height: 620px; max-height: 78vh; overflow: hidden;
+    background: transparent;
   }
-  .tool-card {
-    background: rgba(255,255,255,.04);
-    backdrop-filter: blur(14px);
-    border: 1px solid rgba(200,169,110,.18);
-    border-radius: 14px;
-    padding: 1.6rem;
-    display: flex; flex-direction: column; gap: .6rem;
-    transition: border-color .25s ease, transform .25s ease;
+  .wi-track { position: absolute; inset: 0; transition: transform 1.4s cubic-bezier(.25,.46,.45,.94); }
+  .wi-track.no-anim { transition: none; }
+  .wi-slide {
+    position: absolute; left: 0; right: 0; height: 552px; padding: 2.4rem 2.6rem;
+    display: grid; grid-template-columns: 1.05fr 1fr; gap: 2.4rem; align-items: center;
+    opacity: 0; pointer-events: none;
   }
-  .tool-card:hover { border-color: var(--gold); transform: translateY(-3px); }
-  .tool-icon { font-size: 1.8rem; }
-  .tool-card h3 { margin: 0; font-size: 1.1rem; color: var(--cream); }
-  .tool-card p { margin: 0; color: var(--steel-light); font-size: .92rem; line-height: 1.55; }
-  .tool-card .tool-link { font-weight: 700; font-size: .85rem; margin-top: .3rem; }
-  .tool-visual {
-    height: 92px; border-radius: 10px; margin: .2rem 0 .3rem;
-    background: rgba(200,169,110,.05); border: 1px solid rgba(200,169,110,.12);
-    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  .wi-slide.wi-active { opacity: 1; pointer-events: auto; transition: opacity 1.2s ease-in-out; }
+  .wi-slide.wi-peek { opacity: .38; filter: blur(1px); pointer-events: none; transition: opacity 1.2s ease-in-out; }
+  .wi-eyebrow { text-transform: uppercase; letter-spacing: .14em; font-size: .74rem; color: var(--gold); font-weight: 700; margin: 0 0 .7rem; }
+  .wi-info h3 { margin: 0 0 .7rem; font-size: 1.7rem; color: var(--cream); }
+  .wi-info > p { margin: 0 0 1rem; color: var(--steel-light); font-size: 1rem; line-height: 1.6; }
+  .wi-info .tool-steps { margin-bottom: 1.3rem; }
+  .wi-info .tool-link { display: inline-block; font-family: inherit; }
+  .wi-visual {
+    height: 100%; border-radius: 14px; background: rgba(200,169,110,.05);
+    border: 1px solid rgba(200,169,110,.14); padding: 1.4rem; display: flex; flex-direction: column; gap: 1rem;
+    overflow: hidden;
   }
-  .tool-visual svg { width: 100%; height: 100%; }
+  .wi-chat-heads { display: flex; align-items: center; gap: .8rem; }
+  .wi-head {
+    width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 1.05rem; position: relative; flex: none;
+  }
+  .wi-head.user { background: rgba(184,200,216,.18); color: var(--steel-light); }
+  .wi-head.ai { background: rgba(200,169,110,.22); color: var(--gold-light); }
+  .wi-head.ai::after {
+    content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1.5px solid var(--gold);
+    opacity: 0; transform: scale(1);
+  }
+  .wi-head.ai.speaking::after { animation: wiSpeakRing 1.3s ease-out infinite; }
+  @keyframes wiSpeakRing { 0%{ opacity:.7; transform:scale(1);} 100%{ opacity:0; transform:scale(1.35);} }
+  .wi-speaking-label { font-size: .75rem; color: var(--gold); font-weight: 700; letter-spacing: .04em; opacity: 0; transition: opacity .3s ease; }
+  .wi-speaking-label.on { opacity: 1; }
+  .wi-bubbles { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: .7rem; min-height: 0; }
+  .wi-bubble {
+    max-width: 86%; padding: .7rem 1rem; border-radius: 12px; font-size: .88rem; line-height: 1.5;
+    opacity: 0; transform: translateY(10px); transition: opacity .45s ease, transform .45s ease;
+  }
+  .wi-bubble.show { opacity: 1; transform: translateY(0); }
+  .wi-bubble.q { align-self: flex-start; background: rgba(184,200,216,.1); color: var(--cream); border: 1px solid rgba(184,200,216,.15); }
+  .wi-bubble.a { align-self: flex-end; background: rgba(200,169,110,.16); color: var(--cream); border: 1px solid rgba(200,169,110,.3); }
+  .wi-nav { display: flex; align-items: center; justify-content: center; gap: 1.1rem; margin-top: 1.4rem; }
+  .wi-arrow {
+    width: 38px; height: 38px; border-radius: 50%; border: 1px solid rgba(200,169,110,.35);
+    background: transparent; color: var(--cream); cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-family: inherit; font-size: 1rem; transition: border-color .2s ease, color .2s ease;
+  }
+  .wi-arrow:hover { border-color: var(--gold); color: var(--gold); }
+  .wi-dots { display: flex; gap: .5rem; }
+  .wi-dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(200,169,110,.25); cursor: pointer; padding: 0; border: none; }
+  .wi-dot.active { background: var(--gold); }
+  @media (max-width: 860px) {
+    .wi-stage { height: 780px; max-height: none; }
+    .wi-slide { height: 720px; grid-template-columns: 1fr; grid-template-rows: auto 1fr; padding: 1.8rem; gap: 1.4rem; }
+    .wi-visual { min-height: 260px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wi-track { transition: none; }
+    .wi-slide { transition: none; }
+    .wi-head.ai.speaking::after { animation: none; }
+    .wi-bubble { transition: none; }
+  }
+
   .tool-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .35rem; flex: 1; }
   .tool-steps li {
     display: flex; gap: .55rem; align-items: flex-start;
@@ -128,17 +212,15 @@
     border-top: 1px solid rgba(200,169,110,.15);
     border-bottom: 1px solid rgba(200,169,110,.15);
   }
-  .strip .wrap { display: flex; gap: 2.5rem; flex-wrap: wrap; justify-content: center; padding: 2.5rem; }
-  .strip-item { text-align: center; }
-  .strip-item .num { font-size: 1.7rem; font-weight: 800; color: var(--gold); }
-  .strip-item .label { font-size: .8rem; color: var(--steel-light); text-transform: uppercase; letter-spacing: .06em; }
+  .strip .wrap { display: flex; gap: 2.2rem; flex-wrap: wrap; justify-content: center; padding: 2.2rem; }
+  .strip-item { display: flex; flex-direction: column; align-items: center; gap: .55rem; text-align: center; max-width: 130px; }
+  .strip-item svg { width: 26px; height: 26px; stroke: var(--gold); fill: none; }
+  .strip-item .label { font-size: .78rem; color: var(--steel-light); text-transform: uppercase; letter-spacing: .06em; line-height: 1.4; }
 
   .signup-section { padding-top: 1rem; }
   .signup-card {
-    max-width: 620px; margin: 0 auto;
-    background: rgba(255,255,255,.04); backdrop-filter: blur(14px);
-    border: 1px solid rgba(200,169,110,.18); border-radius: 16px;
-    padding: 2.2rem;
+    max-width: none; margin: 0;
+    background: transparent; padding: 0;
   }
   .signup-tabs { display: flex; gap: .5rem; margin-bottom: 1.4rem; justify-content: center; }
   .signup-tab {
@@ -281,26 +363,95 @@
   <button class="nav-cta" id="workspaceBtn" onclick="goWorkspace()">My Workspace</button>
 </nav>
 
-<section class="hero">
-  <div class="wrap">
-    <p class="eyebrow">Live AI Tools for Finance &amp; Audit</p>
-    <h1>An AI workspace for <span class="accent">finance, audit &amp; accounting</span> professionals</h1>
-    <p class="hero-sub">Talk to an AI panel of audit and IFRS specialists in real time, get your CV scored in seconds, compare IFRS against five GAAPs, review financial statements for compliance, and prep for interviews with an AI coach. Every tool is live and free to try.</p>
-    <div class="hero-ctas">
-      <button class="btn-primary" onclick="scrollToHomeSignup('signup')" style="border:none;font-family:inherit;cursor:pointer">Sign Up &amp; Try the Tools — Free</button>
-      <button class="btn-ghost" onclick="scrollToHomeSignup('login')" style="font-family:inherit;cursor:pointer">Login</button>
-      <a href="index.html#aitools" class="btn-ghost">Explore the Tools</a>
+<section class="hero" id="heroSection">
+  <div class="wrap hero-wrap">
+    <div class="hero-text" id="heroText">
+      <p class="eyebrow">Live AI Tools for Finance &amp; Audit</p>
+      <h1>An AI workspace for <span class="accent">finance, audit &amp; accounting</span> professionals</h1>
+      <p class="hero-sub">Talk to an AI panel of audit and IFRS specialists in real time, get your CV scored in seconds, compare IFRS against five GAAPs, review financial statements for compliance, and prep for interviews with an AI coach. Every tool is live and free to try.</p>
+      <div class="hero-ctas">
+        <button class="btn-primary" onclick="openHeroAuth('signup')" style="font-family:inherit;cursor:pointer">Sign Up &amp; Try the Tools — Free</button>
+        <button class="btn-ghost" onclick="openHeroAuth('login')" style="font-family:inherit;cursor:pointer">Login</button>
+        <a href="index.html#aitools" class="btn-ghost">Explore the Tools</a>
+      </div>
+    </div>
+
+    <div class="hero-auth-wrap" id="heroAuthWrap">
+      <div class="hero-auth-panel" id="heroAuthPanel">
+        <button class="hero-auth-close" onclick="closeHeroAuth()" type="button" aria-label="Close">&times;</button>
+        <div class="signup-card">
+          <div class="signup-tabs">
+            <button class="signup-tab active" id="tabSignup" onclick="setHomeAuthMode('signup')">Sign Up</button>
+            <button class="signup-tab" id="tabLogin" onclick="setHomeAuthMode('login')">Login</button>
+          </div>
+          <p class="eyebrow" style="margin-bottom:.3rem" id="signupHeading">Sign up free — try every tool</p>
+          <p class="section-sub" style="text-align:left;margin-bottom:1.2rem" id="signupSub">Takes a minute. No card, no spam — just your workspace.</p>
+
+          <form class="signup-form" id="homeAuthForm" onsubmit="return false">
+            <input type="text" id="haName" class="form-input" placeholder="Your name">
+            <input type="email" id="haEmail" class="form-input" placeholder="Your email">
+            <input type="password" id="haPassword" class="form-input" placeholder="Choose a password (6+ characters)">
+            <input type="text" id="haCompany" class="form-input" placeholder="Company">
+            <div class="form-row">
+              <div class="searchable-dd" id="haDepartment">
+                <input type="text" class="form-input" id="haDepartmentInput" placeholder="Department" autocomplete="off">
+                <div class="searchable-dd-list" id="haDepartmentList"></div>
+                <input type="hidden" id="haDepartmentValue">
+              </div>
+              <div class="searchable-dd" id="haDesignation">
+                <input type="text" class="form-input" id="haDesignationInput" placeholder="Designation" autocomplete="off">
+                <div class="searchable-dd-list" id="haDesignationList"></div>
+                <input type="hidden" id="haDesignationValue">
+              </div>
+            </div>
+            <input type="text" id="haDepartmentOther" class="form-input" placeholder="Please specify your department" style="display:none">
+            <input type="text" id="haDesignationOther" class="form-input" placeholder="Please specify your designation" style="display:none">
+            <div class="form-row">
+              <div class="searchable-dd" id="haCountry">
+                <input type="text" class="form-input" id="haCountryInput" placeholder="Country" autocomplete="off">
+                <div class="searchable-dd-list" id="haCountryList"></div>
+                <input type="hidden" id="haCountryValue">
+              </div>
+              <input type="text" id="haCity" class="form-input" placeholder="City">
+            </div>
+
+            <input type="email" id="haForgotEmail" class="form-input" placeholder="Your email" style="display:none">
+            <input type="text" id="haForgotCode" class="form-input" placeholder="5-digit code from your email" style="display:none">
+            <input type="password" id="haForgotNewPassword" class="form-input" placeholder="New password (6+ characters)" style="display:none">
+
+            <div class="form-msg" id="haMessage"></div>
+            <button class="btn-primary" id="haSubmitBtn" onclick="submitHomeAuth()" type="button" style="font-family:inherit;cursor:pointer">Sign Up Free</button>
+            <button class="signup-toggle-link" id="haForgotLink" onclick="setHomeAuthMode('forgot')" type="button" style="display:none">Forgot password?</button>
+            <button class="signup-toggle-link" id="haBackLink" onclick="setHomeAuthMode('login')" type="button" style="display:none">Back to log in</button>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
 <div class="strip">
   <div class="wrap">
-    <div class="strip-item"><div class="num">7</div><div class="label">Live AI Tools</div></div>
-    <div class="strip-item"><div class="num">🗂️</div><div class="label">Your Own Workspace</div></div>
-    <div class="strip-item"><div class="num">100%</div><div class="label">Free to Try</div></div>
-    <div class="strip-item"><div class="num">24/7</div><div class="label">Always Available</div></div>
-    <div class="strip-item"><div class="num">🔒</div><div class="label">Data Protected</div></div>
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" aria-hidden="true"><rect x="5" y="8" width="14" height="11" rx="2"/><path d="M9 8V6a3 3 0 016 0v2" stroke-linecap="round"/><circle cx="9.5" cy="13.5" r="1.1" fill="var(--gold)" stroke="none"/><circle cx="14.5" cy="13.5" r="1.1" fill="var(--gold)" stroke="none"/></svg>
+      <div class="label">7 Live AI Tools</div>
+    </div>
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" aria-hidden="true"><path d="M4 8a2 2 0 012-2h4l2 2h6a2 2 0 012 2v7a2 2 0 01-2 2H6a2 2 0 01-2-2V8z" stroke-linejoin="round"/></svg>
+      <div class="label">Your Own Workspace</div>
+    </div>
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9 12l2 2 4-4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="label">100% Free to Try</div>
+    </div>
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div class="label">24/7 Always Available</div>
+    </div>
+    <div class="strip-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3" stroke-linecap="round"/></svg>
+      <div class="label">Data Protected</div>
+    </div>
   </div>
 </div>
 
@@ -308,212 +459,17 @@
   <div class="wrap">
     <div class="section-header">
       <p class="eyebrow">What's Inside</p>
-      <h2 class="section-title">Six tools, one workspace</h2>
-      <p class="section-sub">Each card links straight to the live tool. Sign up free to unlock all of them.</p>
+      <h2 class="section-title">Seven tools, one workspace</h2>
+      <p class="section-sub">Swipe, scroll or click through — sign up free to unlock all of them.</p>
     </div>
-    <div class="tool-grid">
 
-      <div class="tool-card">
-        <span class="tool-icon">🟢</span>
-        <h3>The Meeting Room</h3>
-        <div class="tool-visual">
-          <svg viewBox="0 0 260 92" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="26" cy="24" r="11" fill="#C8A96E" opacity=".8"/>
-            <circle cx="52" cy="24" r="11" fill="#8899AA" opacity=".7"/>
-            <circle cx="78" cy="24" r="11" fill="#E0C99A" opacity=".6"/>
-            <rect x="14" y="46" width="150" height="16" rx="8" fill="#1E3A5F"/>
-            <rect x="24" y="51" width="90" height="6" rx="3" fill="#B8C8D8" opacity=".6"/>
-            <rect x="96" y="68" width="150" height="16" rx="8" fill="#C8A96E" opacity=".85"/>
-            <rect x="106" y="73" width="110" height="6" rx="3" fill="#0A1628" opacity=".55"/>
-          </svg>
-        </div>
-        <p>Talk live with an AI panel of audit, IFRS/tax, forensic, ESG, legal and technical accounting specialists.</p>
-        <ol class="tool-steps">
-          <li><span class="step-num">1</span>Pick your specialists</li>
-          <li><span class="step-num">2</span>Ask a real question</li>
-          <li><span class="step-num">3</span>Get live, sourced answers</li>
-        </ol>
-        <a href="index.html#meetingroom" class="tool-link">Enter the Meeting Room →</a>
-      </div>
-
-      <div class="tool-card">
-        <span class="tool-icon">🎯</span>
-        <h3>Interview Preparation</h3>
-        <div class="tool-visual">
-          <svg viewBox="0 0 260 92" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="24" y="30" width="16" height="32" rx="8" fill="#C8A96E"/>
-            <path d="M16 46 a16 16 0 0 0 32 0" fill="none" stroke="#E0C99A" stroke-width="3" stroke-linecap="round"/>
-            <line x1="32" y1="62" x2="32" y2="72" stroke="#E0C99A" stroke-width="3" stroke-linecap="round"/>
-            <rect x="70" y="30" width="6" height="32" rx="3" fill="#8899AA" opacity=".55"/>
-            <rect x="84" y="20" width="6" height="52" rx="3" fill="#C8A96E" opacity=".8"/>
-            <rect x="98" y="34" width="6" height="24" rx="3" fill="#8899AA" opacity=".55"/>
-            <rect x="112" y="14" width="6" height="64" rx="3" fill="#E0C99A" opacity=".7"/>
-            <rect x="126" y="28" width="6" height="36" rx="3" fill="#8899AA" opacity=".55"/>
-            <rect x="140" y="22" width="6" height="48" rx="3" fill="#C8A96E" opacity=".8"/>
-            <rect x="164" y="38" width="82" height="16" rx="8" fill="#1E3A5F"/>
-            <rect x="174" y="43" width="52" height="6" rx="3" fill="#B8C8D8" opacity=".6"/>
-          </svg>
-        </div>
-        <p>Role-specific interview and exam coaching from an AI interviewer, with an emailed feedback report.</p>
-        <ol class="tool-steps">
-          <li><span class="step-num">1</span>Choose your role &amp; level</li>
-          <li><span class="step-num">2</span>Answer live questions</li>
-          <li><span class="step-num">3</span>Get an emailed feedback report</li>
-        </ol>
-        <a href="index.html#knowledgetest" class="tool-link">Start Practicing →</a>
-      </div>
-
-      <div class="tool-card">
-        <span class="tool-icon">💼</span>
-        <h3>Score My Resume</h3>
-        <div class="tool-visual">
-          <svg viewBox="0 0 260 92" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <path d="M40 76 A40 40 0 0 1 120 76" fill="none" stroke="#1E3A5F" stroke-width="10" stroke-linecap="round"/>
-            <path d="M40 76 A40 40 0 0 1 100 39" fill="none" stroke="#C8A96E" stroke-width="10" stroke-linecap="round"/>
-            <text x="80" y="70" text-anchor="middle" font-size="20" font-weight="800" fill="#E0C99A" font-family="Manrope, sans-serif">86</text>
-            <rect x="150" y="20" width="96" height="10" rx="5" fill="#1E3A5F"/>
-            <rect x="150" y="20" width="80" height="10" rx="5" fill="#C8A96E" opacity=".85"/>
-            <rect x="150" y="40" width="96" height="10" rx="5" fill="#1E3A5F"/>
-            <rect x="150" y="40" width="60" height="10" rx="5" fill="#8899AA" opacity=".8"/>
-            <rect x="150" y="60" width="96" height="10" rx="5" fill="#1E3A5F"/>
-            <rect x="150" y="60" width="72" height="10" rx="5" fill="#E0C99A" opacity=".8"/>
-          </svg>
-        </div>
-        <p>Your CV and cover letter scored from three angles at once: HR, ATS algorithm, and hiring manager.</p>
-        <ol class="tool-steps">
-          <li><span class="step-num">1</span>Upload your CV</li>
-          <li><span class="step-num">2</span>AI scores it from 3 angles</li>
-          <li><span class="step-num">3</span>Get specific, actionable fixes</li>
-        </ol>
-        <a href="index.html#jobhub" class="tool-link">Score My CV →</a>
-      </div>
-
-      <div class="tool-card">
-        <span class="tool-icon">📊</span>
-        <h3>GAAP Compare</h3>
-        <div class="tool-visual">
-          <svg viewBox="0 0 260 92" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="14" y="14" width="110" height="16" rx="4" fill="#C8A96E" opacity=".85"/>
-            <rect x="130" y="14" width="116" height="16" rx="4" fill="#1E3A5F"/>
-            <rect x="14" y="36" width="110" height="14" rx="4" fill="rgba(200,169,110,.14)"/>
-            <rect x="130" y="36" width="116" height="14" rx="4" fill="rgba(255,255,255,.05)"/>
-            <rect x="14" y="56" width="110" height="14" rx="4" fill="rgba(200,169,110,.14)"/>
-            <rect x="130" y="56" width="116" height="14" rx="4" fill="rgba(255,255,255,.05)"/>
-            <rect x="14" y="76" width="110" height="14" rx="4" fill="rgba(200,169,110,.14)"/>
-            <rect x="130" y="76" width="116" height="14" rx="4" fill="rgba(255,255,255,.05)"/>
-          </svg>
-        </div>
-        <p>A live comparison table and chat bot covering IFRS against five local GAAPs.</p>
-        <ol class="tool-steps">
-          <li><span class="step-num">1</span>Pick a topic &amp; jurisdiction</li>
-          <li><span class="step-num">2</span>See IFRS vs local GAAP side by side</li>
-          <li><span class="step-num">3</span>Ask the bot follow-up questions</li>
-        </ol>
-        <a href="index.html#gaapcompare" class="tool-link">Compare GAAPs →</a>
-      </div>
-
-      <div class="tool-card">
-        <span class="tool-icon">📝</span>
-        <h3>Financial Statement Review</h3>
-        <div class="tool-visual">
-          <svg viewBox="0 0 260 92" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="18" y="10" width="130" height="72" rx="6" fill="none" stroke="rgba(200,169,110,.4)" stroke-width="2"/>
-            <rect x="30" y="24" width="106" height="6" rx="3" fill="#B8C8D8" opacity=".55"/>
-            <rect x="30" y="38" width="80" height="6" rx="3" fill="#B8C8D8" opacity=".55"/>
-            <rect x="30" y="52" width="106" height="6" rx="3" fill="#B8C8D8" opacity=".55"/>
-            <rect x="30" y="66" width="60" height="6" rx="3" fill="#B8C8D8" opacity=".55"/>
-            <rect x="26" y="34" width="88" height="12" rx="3" fill="#C8A96E" opacity=".35"/>
-            <circle cx="184" cy="30" r="18" fill="none" stroke="#E0C99A" stroke-width="2.5"/>
-            <path d="M176 30l6 6 12-13" fill="none" stroke="#E0C99A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            <rect x="164" y="58" width="70" height="16" rx="8" fill="#1E3A5F"/>
-            <rect x="172" y="63" width="46" height="6" rx="3" fill="#B8C8D8" opacity=".6"/>
-          </svg>
-        </div>
-        <p>Upload a financial statement (PDF, docx or txt) and get real tracked-comment feedback.</p>
-        <ol class="tool-steps">
-          <li><span class="step-num">1</span>Upload your statement</li>
-          <li><span class="step-num">2</span>AI panel reviews for compliance</li>
-          <li><span class="step-num">3</span>Get tracked-comment feedback</li>
-        </ol>
-        <a href="index.html#fsreview" class="tool-link">Review a Statement →</a>
-      </div>
-
-      <div class="tool-card">
-        <span class="tool-icon">📰</span>
-        <h3>Hot Market Topics</h3>
-        <div class="tool-visual">
-          <svg viewBox="0 0 260 92" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect x="14" y="16" width="150" height="10" rx="5" fill="#E0C99A" opacity=".85"/>
-            <rect x="14" y="34" width="120" height="7" rx="3.5" fill="#B8C8D8" opacity=".5"/>
-            <rect x="14" y="48" width="130" height="7" rx="3.5" fill="#B8C8D8" opacity=".5"/>
-            <rect x="14" y="62" width="90" height="7" rx="3.5" fill="#B8C8D8" opacity=".5"/>
-            <polyline points="180,74 198,54 212,62 246,22" fill="none" stroke="#C8A96E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-            <circle cx="246" cy="22" r="5" fill="#C8A96E"/>
-          </svg>
-        </div>
-        <p>Auto-refreshed industry news plus curated briefings on the trends actually moving the profession.</p>
-        <ol class="tool-steps">
-          <li><span class="step-num">1</span>Auto-refreshed briefings</li>
-          <li><span class="step-num">2</span>Curated by relevance</li>
-          <li><span class="step-num">3</span>Stay current without searching</li>
-        </ol>
-        <a href="index.html#hottopics" class="tool-link">See What's Trending →</a>
-      </div>
-
+    <div class="wi-stage" id="wiStage">
+      <div class="wi-track" id="wiTrack"></div>
     </div>
-  </div>
-</section>
-
-<section id="signupSection" class="signup-section">
-  <div class="wrap">
-    <div class="section-header">
-      <p class="eyebrow">Get Started</p>
-      <h2 class="section-title" id="signupHeading">Sign up free — try every tool</h2>
-      <p class="section-sub" id="signupSub">Takes a minute. No card, no spam — just your workspace.</p>
-    </div>
-    <div class="signup-card">
-      <div class="signup-tabs">
-        <button class="signup-tab active" id="tabSignup" onclick="setHomeAuthMode('signup')">Sign Up</button>
-        <button class="signup-tab" id="tabLogin" onclick="setHomeAuthMode('login')">Login</button>
-      </div>
-
-      <form class="signup-form" id="homeAuthForm" onsubmit="return false">
-        <input type="text" id="haName" class="form-input" placeholder="Your name">
-        <input type="email" id="haEmail" class="form-input" placeholder="Your email">
-        <input type="password" id="haPassword" class="form-input" placeholder="Choose a password (6+ characters)">
-        <input type="text" id="haCompany" class="form-input" placeholder="Company">
-        <div class="form-row">
-          <div class="searchable-dd" id="haDepartment">
-            <input type="text" class="form-input" id="haDepartmentInput" placeholder="Department" autocomplete="off">
-            <div class="searchable-dd-list" id="haDepartmentList"></div>
-            <input type="hidden" id="haDepartmentValue">
-          </div>
-          <div class="searchable-dd" id="haDesignation">
-            <input type="text" class="form-input" id="haDesignationInput" placeholder="Designation" autocomplete="off">
-            <div class="searchable-dd-list" id="haDesignationList"></div>
-            <input type="hidden" id="haDesignationValue">
-          </div>
-        </div>
-        <input type="text" id="haDepartmentOther" class="form-input" placeholder="Please specify your department" style="display:none">
-        <input type="text" id="haDesignationOther" class="form-input" placeholder="Please specify your designation" style="display:none">
-        <div class="form-row">
-          <div class="searchable-dd" id="haCountry">
-            <input type="text" class="form-input" id="haCountryInput" placeholder="Country" autocomplete="off">
-            <div class="searchable-dd-list" id="haCountryList"></div>
-            <input type="hidden" id="haCountryValue">
-          </div>
-          <input type="text" id="haCity" class="form-input" placeholder="City">
-        </div>
-
-        <input type="email" id="haForgotEmail" class="form-input" placeholder="Your email" style="display:none">
-        <input type="text" id="haForgotCode" class="form-input" placeholder="5-digit code from your email" style="display:none">
-        <input type="password" id="haForgotNewPassword" class="form-input" placeholder="New password (6+ characters)" style="display:none">
-
-        <div class="form-msg" id="haMessage"></div>
-        <button class="btn-primary" id="haSubmitBtn" onclick="submitHomeAuth()" type="button" style="border:none;font-family:inherit;cursor:pointer">Sign Up Free</button>
-        <button class="signup-toggle-link" id="haForgotLink" onclick="setHomeAuthMode('forgot')" type="button" style="display:none">Forgot password?</button>
-        <button class="signup-toggle-link" id="haBackLink" onclick="setHomeAuthMode('login')" type="button" style="display:none">Back to log in</button>
-      </form>
+    <div class="wi-nav">
+      <button class="wi-arrow" id="wiPrev" type="button" aria-label="Previous tool">&uarr;</button>
+      <div class="wi-dots" id="wiDots"></div>
+      <button class="wi-arrow" id="wiNext" type="button" aria-label="Next tool">&darr;</button>
     </div>
   </div>
 </section>
@@ -551,10 +507,13 @@
 </div>
 
 <script>
-  // Scroll the hero Sign Up / Login buttons down to the dedicated form section.
-  function scrollToHomeSignup(mode){
+  // Open the inline hero auth panel (Sign Up / Login), sliding the hero copy aside.
+  function openHeroAuth(mode){
     setHomeAuthMode(mode);
-    document.getElementById('signupSection').scrollIntoView({behavior:'smooth'});
+    document.getElementById('heroSection').classList.add('auth-open');
+  }
+  function closeHeroAuth(){
+    document.getElementById('heroSection').classList.remove('auth-open');
   }
 
   // Searchable dropdown helper (same pattern as index.html's signup widget).
@@ -835,6 +794,256 @@
     if(storedOn==='1'||storedOn===null){
       ['click','touchstart','keydown','scroll'].forEach(ev=>window.addEventListener(ev,autoStartOnce,{once:true}));
     } else { setPlaying(false); }
+  })();
+
+  // ---- "What's Inside" giant-tile looping carousel ----
+  (function(){
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const tools = [
+      { eyebrow:'The Meeting Room', title:'The Meeting Room',
+        desc:'Talk live with an AI panel of audit, IFRS/tax, forensic, ESG, legal and technical accounting specialists.',
+        steps:['Pick your specialists','Ask a real question','Get live, sourced answers'],
+        href:'index.html#meetingroom', link:'Enter the Meeting Room →',
+        scenarios:[
+          {q:'How do we treat a lease modification that shrinks the leased space under IFRS 16?', a:'Partial derecognition — reduce the right-of-use asset and lease liability proportionally, and take any difference to profit or loss.'},
+          {q:'When can variable consideration be included in the IFRS 15 transaction price?', a:'Only to the extent it’s highly probable there won’t be a significant revenue reversal once the uncertainty resolves.'},
+          {q:'Is a related-party loan at a below-market rate still an IAS 24 disclosure item?', a:'Yes — IAS 24 requires disclosure of the relationship and terms regardless of whether pricing is at arm’s length.'}
+        ]},
+      { eyebrow:'Interview Preparation', title:'Interview Preparation',
+        desc:'Role-specific interview and exam coaching from an AI interviewer, with an emailed feedback report.',
+        steps:['Choose your role & level','Answer live questions','Get an emailed feedback report'],
+        href:'index.html#knowledgetest', link:'Start Practicing →',
+        scenarios:[
+          {q:'Walk me through auditing a goodwill impairment model with an aggressive terminal growth rate.', a:'Good structure — now also challenge the discount rate and stress-test the headroom for reasonableness.'},
+          {q:'Two CGUs share a factory. How do you allocate the impairment loss between them?', a:'Pro-rata to carrying amounts, but never below the higher of fair value less costs of disposal, value in use, or zero.'},
+          {q:'A client capitalizes internally-generated brand costs. Your response?', a:'Flag it immediately — IAS 38 explicitly prohibits recognizing internally-generated brands as intangible assets.'}
+        ]},
+      { eyebrow:'Score My Resume', title:'Score My Resume',
+        desc:'Your CV and cover letter scored from three angles at once: HR, ATS algorithm, and hiring manager.',
+        steps:['Upload your CV','AI scores it from 3 angles','Get specific, actionable fixes'],
+        href:'index.html#jobhub', link:'Score My CV →',
+        scenarios:[
+          {q:'My CV lists duties, not results. What’s the fastest fix?', a:'Reframe each line as an outcome — "reduced audit cycle time by 18% across 6 engagements", not "responsible for audits".'},
+          {q:'Will an ATS parse my two-column layout correctly?', a:'Often not — single-column, standard headings, and no text-in-images will parse far more reliably.'},
+          {q:'Should I tailor my CV per application?', a:'Yes — mirror the job description’s exact keywords for the ATS and lead with the most relevant experience.'}
+        ]},
+      { eyebrow:'Personalized Job Search For You', title:'Personalized Job Search For You',
+        desc:'A search agent that matches roles to your exact profile, experience and preferences — not just keywords.',
+        steps:['Tell it what you want','It searches & filters live roles','Get a ranked shortlist with reasons'],
+        href:'index.html#jobhub', link:'Find My Roles →',
+        scenarios:[
+          {q:'Find me IFRS technical accounting roles that don’t require relocation.', a:'Found 12 matches — ranked by seniority fit, remote flexibility, and reporting-standard overlap with your CV.'},
+          {q:'I want to move from external audit into industry FP&A.', a:'Prioritizing roles that value audit-trained analytical rigor, with transition-friendly seniority levels.'},
+          {q:'Exclude anything requiring a professional qualification I don’t hold yet.', a:'Filtered — showing only roles matching your current ACCA progress and confirmed experience.'}
+        ]},
+      { eyebrow:'GAAP Compare', title:'GAAP Compare',
+        desc:'A live comparison table and chat bot covering IFRS against five local GAAPs.',
+        steps:['Pick a topic & jurisdiction','See IFRS vs local GAAP side by side','Ask the bot follow-up questions'],
+        href:'index.html#gaapcompare', link:'Compare GAAPs →',
+        scenarios:[
+          {q:'How does US GAAP differ from IFRS 16 on lease classification?', a:'US GAAP (ASC 842) still splits into operating vs. finance leases for the income statement; IFRS 16 uses a single on-balance-sheet model.'},
+          {q:'Development costs — IFRS vs US GAAP?', a:'IFRS capitalizes once technical/commercial feasibility criteria are met; US GAAP expenses R&D immediately, with narrow software exceptions.'},
+          {q:'Are actuarial gains/losses on pensions treated the same?', a:'No — IFRS (IAS 19) recognizes them in OCI with no recycling; US GAAP allows immediate P&L recognition or deferred amortization.'}
+        ]},
+      { eyebrow:'Financial Statement Review', title:'Financial Statement Review',
+        desc:'Upload a financial statement (PDF, docx or txt) and get real tracked-comment feedback.',
+        steps:['Upload your statement','AI panel reviews for compliance','Get tracked-comment feedback'],
+        href:'index.html#fsreview', link:'Review a Statement →',
+        scenarios:[
+          {q:'Revenue was recognized before the performance obligation was satisfied — flag it?', a:'Flagged as an IFRS 15 violation, with the clause and page reference tracked as a comment for your reviewer.'},
+          {q:'A contingent liability is disclosed but not recognized — is that right?', a:'Correct if outflow is only possible, not probable, per IAS 37 — otherwise it should be recognized, not just disclosed.'},
+          {q:'Deferred tax asset for unused losses, but no supporting forecast — issue?', a:'Yes — IAS 12 requires probable future taxable profit before recognizing that asset; comment added for review.'}
+        ]},
+      { eyebrow:'Hot Market Topics', title:'Hot Market Topics',
+        desc:'Auto-refreshed industry news plus curated briefings on the trends actually moving the profession.',
+        steps:['Auto-refreshed briefings','Curated by relevance','Stay current without searching'],
+        href:'index.html#hottopics', link:'See What’s Trending →',
+        scenarios:[
+          {q:'What changed in the latest ISSB sustainability disclosure update?', a:'Briefing ready — scope 3 emissions phase-in timelines were extended for smaller reporters this cycle.'},
+          {q:'Any major PCAOB inspection findings this quarter?', a:'Yes — a fresh briefing flags recurring deficiencies in revenue recognition testing procedures.'},
+          {q:'Summarize this week’s IFRS exposure draft comment deadlines.', a:'Two exposure drafts close for comment this month — both summarized with direct links in your briefing feed.'}
+        ]}
+    ];
+
+    const track = document.getElementById('wiTrack');
+    const dotsWrap = document.getElementById('wiDots');
+    if(!track) return;
+
+    function stepsHtml(steps){
+      return '<ol class="tool-steps">' + steps.map((s,i)=>`<li><span class="step-num">${i+1}</span>${s}</li>`).join('') + '</ol>';
+    }
+    function slideHtml(tool, i){
+      return `
+        <div class="wi-slide" data-real="${i}">
+          <div class="wi-info">
+            <p class="wi-eyebrow">Tool ${i+1} of ${tools.length}</p>
+            <h3>${tool.title}</h3>
+            <p>${tool.desc}</p>
+            ${stepsHtml(tool.steps)}
+            <a href="${tool.href}" class="btn-primary tool-link">${tool.link}</a>
+          </div>
+          <div class="wi-visual">
+            <div class="wi-chat-heads">
+              <svg class="wi-head user" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="24" cy="16" r="8" fill="#B8C8D8"/>
+                <path d="M8 36c0-6.627 7.163-12 16-12s16 5.373 16 12v4H8v-4z" fill="#B8C8D8"/>
+              </svg>
+              <svg class="wi-head ai" data-role="ai" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <circle cx="24" cy="24" r="18" fill="none" stroke="#C8A96E" stroke-width="2"/>
+                <circle cx="16" cy="20" r="2" fill="#C8A96E"/>
+                <circle cx="32" cy="20" r="2" fill="#C8A96E"/>
+                <path d="M16 32c0-4.418 3.582-8 8-8s8 3.582 8 8" fill="none" stroke="#C8A96E" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+              <div class="wi-speaking-label" data-role="label">Speaking…</div>
+            </div>
+            <div class="wi-bubbles" data-role="bubbles"></div>
+          </div>
+        </div>`;
+    }
+
+    // Real slides 0..N-1, plus a leading clone of the last and a trailing clone of the first for a seamless loop.
+    const n = tools.length;
+    const order = [n-1, ...tools.map((_,i)=>i), 0];
+    track.innerHTML = order.map((toolIndex,pos)=> slideHtml(tools[toolIndex], toolIndex)).join('');
+    const slideEls = Array.from(track.children);
+    slideEls.forEach(el=>{ el.style.top = '0'; });
+
+    dotsWrap.innerHTML = tools.map((_,i)=>`<button class="wi-dot${i===0?' active':''}" data-goto="${i}" aria-label="Go to tool ${i+1}"></button>`).join('');
+    const dotEls = Array.from(dotsWrap.children);
+
+    let pos = 1; // index into slideEls; 1..n correspond to real tools 0..n-1
+    function stepH(){ return slideEls[0].offsetHeight + 24; } // slide height + peek gap
+
+    function layout(animate){
+      const stageH = stepH();
+      track.classList.toggle('no-anim', !animate);
+      track.style.transform = `translateY(${-pos * stageH}px)`;
+      slideEls.forEach((el,idx)=>{
+        el.style.transform = `translateY(${idx * stageH}px)`;
+        el.classList.remove('wi-active','wi-peek');
+        if(idx===pos) el.classList.add('wi-active');
+        else if(idx===pos+1) el.classList.add('wi-peek');
+      });
+      const realIndex = ((pos-1)%n+n)%n;
+      dotEls.forEach((d,i)=>d.classList.toggle('active', i===realIndex));
+    }
+
+    track.addEventListener('transitionend', ()=>{
+      if(pos===0){ pos = n; layoutWithChat(false); }
+      else if(pos===slideEls.length-1){ pos = 1; layoutWithChat(false); }
+    });
+
+    function goTo(newPos){
+      pos = newPos;
+      layoutWithChat(true);
+    }
+    function next(){ goTo(pos+1); }
+    function prev(){ goTo(pos-1); }
+
+    document.getElementById('wiNext').addEventListener('click', ()=>{ resetAuto(); next(); });
+    document.getElementById('wiPrev').addEventListener('click', ()=>{ resetAuto(); prev(); });
+    dotEls.forEach((d,i)=>d.addEventListener('click', ()=>{ resetAuto(); goTo(i+1); }));
+
+    // Wheel / touch swipe
+    const stage = document.getElementById('wiStage');
+    let wheelLock = false;
+    stage.addEventListener('wheel', (e)=>{
+      e.preventDefault();
+      if(wheelLock) return;
+      wheelLock = true;
+      resetAuto();
+      if(e.deltaY > 0) next(); else prev();
+      setTimeout(()=>{ wheelLock = false; }, 1800);
+    }, { passive:false });
+
+    let touchStartY = null;
+    stage.addEventListener('touchstart', (e)=>{ touchStartY = e.touches[0].clientY; }, { passive:true });
+    stage.addEventListener('touchend', (e)=>{
+      if(touchStartY===null) return;
+      const dy = touchStartY - e.changedTouches[0].clientY;
+      if(Math.abs(dy) > 40){ resetAuto(); dy > 0 ? next() : prev(); }
+      touchStartY = null;
+    }, { passive:true });
+
+    // Auto-advance
+    let autoTimer = null;
+    function startAuto(){ if(reduceMotion) return; autoTimer = setInterval(next, 12000); }
+    function resetAuto(){ if(autoTimer) clearInterval(autoTimer); startAuto(); }
+
+    // Per-slide "speaking" chat cycle
+    let chatTimer = null;
+    function startChat(realIndex){
+      if(chatTimer){ clearInterval(chatTimer); chatTimer = null; }
+      const activeEl = slideEls[pos];
+      if(!activeEl) return;
+      const bubblesEl = activeEl.querySelector('[data-role="bubbles"]');
+      const headEl = activeEl.querySelector('[data-role="ai"]');
+      const labelEl = activeEl.querySelector('[data-role="label"]');
+      if(!bubblesEl || !headEl || !labelEl) return;
+      const scenarios = tools[realIndex].scenarios;
+      let s = 0;
+      function typeText(el, text, onComplete){
+        el.textContent = '';
+        el.classList.add('show');
+        let i = 0;
+        const charsPerFrame = Math.max(1, Math.ceil(text.length / (text.length > 100 ? 20 : 40)));
+        function type(){
+          const startI = i;
+          while(i < startI + charsPerFrame && i < text.length){
+            el.textContent += text[i];
+            i++;
+          }
+          if(i < text.length){
+            setTimeout(type, 60);
+          } else if(onComplete) onComplete();
+        }
+        type();
+      }
+      function renderScenario(){
+        if(!bubblesEl.parentElement) return;
+        const { q, a } = scenarios[s % scenarios.length];
+        bubblesEl.innerHTML = `<div class="wi-bubble q"></div><div class="wi-bubble a"></div>`;
+        const qEl = bubblesEl.children[0], aEl = bubblesEl.children[1];
+        headEl.classList.remove('speaking'); labelEl.classList.remove('on');
+        if(reduceMotion){
+          qEl.textContent = q; qEl.classList.add('show');
+          aEl.textContent = a; aEl.classList.add('show');
+          s++; return;
+        }
+        typeText(qEl, q, ()=>{
+          if(!bubblesEl.parentElement) return;
+          setTimeout(()=>{
+            if(!headEl.parentElement || !labelEl.parentElement || !aEl.parentElement) return;
+            headEl.classList.add('speaking');
+            labelEl.classList.add('on');
+            typeText(aEl, a, ()=>{
+              if(!headEl.parentElement || !labelEl.parentElement) return;
+              setTimeout(()=>{
+                headEl.classList.remove('speaking');
+                labelEl.classList.remove('on');
+              }, 800);
+            });
+          }, 600);
+        });
+        s++;
+      }
+      renderScenario();
+      if(!reduceMotion) chatTimer = setInterval(renderScenario, 9000);
+    }
+
+    let lastRealIndex = -1;
+    function layoutWithChat(animate){
+      layout(animate);
+      const realIndex = ((pos-1)%n+n)%n;
+      if(realIndex !== lastRealIndex){
+        lastRealIndex = realIndex;
+        startChat(realIndex);
+      }
+    }
+
+    layoutWithChat(false);
+    startAuto();
+    window.addEventListener('resize', ()=> layoutWithChat(false));
   })();
 </script>
 

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goodwill Impairment: IFRS 36 vs ASC 350 Deep Dive (2026)</title>
+    <meta name="description" content="IFRS 36 vs ASC 350 goodwill impairment comparison. One-step vs two-step test, value-in-use vs fair value, recoverable amount, worked examples for auditors.">
+    <meta name="keywords" content="IFRS 36 goodwill impairment, ASC 350 goodwill, goodwill impairment test, value-in-use, fair value, recoverable amount, two-step impairment test, goodwill write-down">
+    <meta name="author" content="Usman Qureshi">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://uqconsulting.org/blog/goodwill-impairment-ifrs-36-vs-asc-350-deep-dive.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Goodwill Impairment: IFRS 36 vs ASC 350 Deep Dive">
+    <meta property="og:description" content="IFRS 36 one-step vs ASC 350 two-step goodwill impairment test with worked examples.">
+    <meta property="og:image" content="https://uqconsulting.org/images/og-image.png">
+    <meta property="og:url" content="https://uqconsulting.org/blog/goodwill-impairment-ifrs-36-vs-asc-350-deep-dive.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Goodwill Impairment: IFRS 36 vs ASC 350">
+    <meta name="twitter:description" content="Deep dive into goodwill impairment testing under IFRS 36 and ASC 350.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Goodwill Impairment: IFRS 36 vs ASC 350 Deep Dive",
+      "description": "Comprehensive comparison of IFRS 36 and ASC 350 goodwill impairment standards with worked examples of one-step vs two-step testing, value-in-use, fair value, and recoverable amount calculations.",
+      "image": "https://uqconsulting.org/images/og-image.png",
+      "datePublished": "2026-07-04",
+      "dateModified": "2026-07-04",
+      "author": { "@type": "Person", "name": "Usman Qureshi", "jobTitle": "Chartered Accountant (ACCA, ACA)" },
+      "publisher": { "@type": "Person", "name": "Usman Qureshi" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://uqconsulting.org/blog/goodwill-impairment-ifrs-36-vs-asc-350-deep-dive.html" }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the main difference between IFRS 36 and ASC 350 goodwill impairment?",
+          "acceptedAnswer": { "@type": "Answer", "text": "IFRS 36 uses a one-step test: compare carrying amount to recoverable amount (fair value less costs, or value-in-use). ASC 350 uses a two-step test: compare fair value to carrying; if less, test implied goodwill value. Result: IFRS often produces lower impairments." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is value-in-use in IFRS 36?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Present value of future cash flows the asset is expected to generate, using the entity's own discount rate reflecting asset-specific risks. Often higher than market fair value because it reflects management's internal projections." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can IFRS 36 and ASC 350 produce different goodwill impairment amounts for the same asset?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. IFRS 36 can use value-in-use (often higher), while ASC 350 must use market fair value (often lower). In down markets, ASC 350 goodwill write-downs are typically larger." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the two-step test under ASC 350?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Step 1: Compare fair value of reporting unit to carrying amount (including goodwill). If fair value exceeds carrying, no impairment. Step 2: If fair value is less, calculate implied goodwill value by subtracting fair values of identifiable net assets from fair value of unit. Impair if carrying exceeds implied value." }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
+        .topbar { background: #1a2f5a; padding: 16px 20px; text-align: center; }
+        .topbar a { color: #d4af37; text-decoration: none; font-weight: 600; }
+        .article-container { max-width: 760px; margin: 0 auto; padding: 50px 20px; }
+        .breadcrumb { font-size: 0.85em; color: #8593a8; margin-bottom: 24px; }
+        .breadcrumb a { color: #8593a8; text-decoration: none; }
+        h1 { font-size: 2.3em; color: #1a2f5a; line-height: 1.2; margin-bottom: 16px; }
+        .meta { color: #8593a8; font-size: 0.9em; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid #e4e9f0; }
+        .lead { font-size: 1.2em; color: #4a5568; margin-bottom: 30px; }
+        .toc { background: #fff; border: 1px solid #e4e9f0; border-radius: 8px; padding: 22px 26px; margin-bottom: 36px; }
+        .toc strong { color: #1a2f5a; display: block; margin-bottom: 10px; text-transform: uppercase; }
+        .toc ul { columns: 2; gap: 30px; }
+        .toc a { color: #2a4a7a; text-decoration: none; }
+        article h2 { font-size: 1.6em; color: #1a2f5a; margin: 44px 0 16px; }
+        article h3 { font-size: 1.2em; color: #2a4a7a; margin: 28px 0 12px; }
+        article p { margin-bottom: 18px; }
+        article ul { margin: 0 0 18px 28px; }
+        .callout { background: #fff; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin: 24px 0; background: #fff; }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e4e9f0; }
+        th { background: #1a2f5a; color: #fff; }
+        .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; border-radius: 4px; }
+        .faq-item { background: #fff; border-radius: 8px; padding: 20px 24px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .cta-box { background: linear-gradient(135deg, #1a2f5a 0%, #2a4a7a 100%); color: #fff; padding: 32px; border-radius: 10px; text-align: center; margin: 40px 0; }
+        .cta-button { display: inline-block; background: #d4af37; color: #1a2f5a; padding: 14px 34px; font-weight: 600; border-radius: 8px; text-decoration: none; }
+        .author-bio { display: flex; gap: 20px; background: #fff; border-radius: 10px; padding: 24px 28px; margin: 44px 0 30px; }
+        .avatar { width: 64px; height: 64px; border-radius: 50%; background: #1a2f5a; color: #d4af37; display: flex; align-items: center; font-weight: 700; flex-shrink: 0; }
+        .related { margin-top: 40px; padding-top: 30px; border-top: 2px solid #e4e9f0; }
+        .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; display: block; margin-bottom: 8px; }
+        .disclaimer { font-size: 0.82em; color: #8593a8; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a href="https://uqconsulting.org/home.html">← Usman Qureshi — Free AI Tools for Accountants &amp; Auditors</a>
+    </div>
+
+    <div class="article-container">
+        <div class="breadcrumb">
+            <a href="https://uqconsulting.org/home.html">Home</a> &nbsp;›&nbsp;
+            <a href="https://uqconsulting.org/blog/">Blog</a> &nbsp;›&nbsp;
+            Goodwill Impairment: IFRS 36 vs ASC 350
+        </div>
+
+        <h1>Goodwill Impairment: IFRS 36 vs ASC 350 Deep Dive</h1>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed July 2026 · 10 min read</div>
+
+        <p class="lead">Goodwill is the most audited line item in M&amp;A deals. IFRS 36 and ASC 350 both require annual impairment testing, but they test differently. IFRS uses a one-step comparison to recoverable amount (fair value or value-in-use); US GAAP uses a two-step test (fair value → implied goodwill value). In down markets, these differences produce materially different write-downs. This guide walks through both methods with worked examples so you understand where auditors challenge and why a £10M acquisition might survive IFRS testing but fail ASC 350.</p>
+
+        <div class="toc">
+            <strong>In this guide</strong>
+            <ul>
+                <li><a href="#overview">The headline difference</a></li>
+                <li><a href="#ifrs-method">IFRS 36: The one-step test</a></li>
+                <li><a href="#asc-method">ASC 350: The two-step test</a></li>
+                <li><a href="#value-in-use">Value-in-use vs fair value</a></li>
+                <li><a href="#worked-example">Worked example: acquisition impairment</a></li>
+                <li><a href="#cash-generating">Cash-generating units vs reporting units</a></li>
+                <li><a href="#discount-rate">Discount rate assumptions</a></li>
+                <li><a href="#audit-implications">Audit implications and red flags</a></li>
+                <li><a href="#faq">FAQs</a></li>
+            </ul>
+        </div>
+
+        <article>
+            <h2 id="overview">The Headline Difference</h2>
+            <p><strong>IFRS 36:</strong> Compare carrying amount to recoverable amount (the higher of fair value less costs and value-in-use). If carrying exceeds recoverable, impair the difference.</p>
+            <p><strong>ASC 350:</strong> Step 1: Compare fair value of reporting unit to carrying amount (including goodwill). If fair value exceeds carrying, no impairment. Step 2: If fair value is less, compare carrying amount of goodwill to implied fair value of goodwill. If carrying exceeds implied, impair.</p>
+            <p><strong>Key insight:</strong> IFRS allows value-in-use (management's internal projections, often higher). ASC requires market fair value (market-based, often lower, especially in down markets). Result: IFRS goodwill often survives; ASC goodwill gets written down.</p>
+
+            <h2 id="ifrs-method">IFRS 36: The One-Step Test</h2>
+            <p><strong>Step 1: Determine Recoverable Amount</strong></p>
+            <p>Recoverable amount = Higher of:</p>
+            <ul>
+                <li><strong>Fair value less costs of disposal (FVLCD):</strong> What a third party would pay for the unit, less costs to sell</li>
+                <li><strong>Value-in-use (VIU):</strong> PV of cash flows management expects to generate from continued use</li>
+            </ul>
+            <p><strong>Step 2: Compare and Impair</strong></p>
+            <p>If carrying amount &gt; recoverable amount, impair the difference to goodwill.</p>
+            <p class="ref">Reference: IFRS 36 paragraphs 18–55.</p>
+
+            <h2 id="asc-method">ASC 350: The Two-Step Test</h2>
+            <p><strong>Step 1: Compare Fair Value to Carrying Amount</strong></p>
+            <p>Fair value of reporting unit &gt; Carrying amount (including goodwill)? → No impairment.</p>
+            <p>Fair value of reporting unit &lt; Carrying amount? → Proceed to Step 2.</p>
+            <p><strong>Step 2: Calculate Implied Goodwill Value</strong></p>
+            <p>Implied goodwill = Fair value of reporting unit − Fair value of identifiable net assets.</p>
+            <p>If carrying amount of goodwill &gt; implied goodwill value, impair the difference.</p>
+            <p class="ref">Reference: ASC 350-20-35-3 onwards.</p>
+
+            <h2 id="value-in-use">Value-in-Use vs Fair Value: Why It Matters</h2>
+            <p><strong>Value-in-use (IFRS):</strong> Uses entity-specific assumptions (growth rates, margins, terminal values based on management's budget). Often reflects optimistic internal views. Can be higher than market fair value.</p>
+            <p><strong>Fair value (ASC):</strong> Market-based (what a willing buyer would pay). Reflects current market conditions, not management's view. Often conservative.</p>
+            <p><strong>In a down market:</strong> Fair value drops 20–30%; VIU may drop only 10% (because management believes a recovery is coming). This divergence creates audit risk.</p>
+
+            <h2 id="worked-example">Worked Example: Acquisition Impairment</h2>
+            <div class="example-box">
+                <h4>Scenario: Software Company Acquired for £50M</h4>
+                <p><strong>Acquisition details (Jan 2024):</strong></p>
+                <ul>
+                    <li>Purchase price: £50M</li>
+                    <li>Fair value of identifiable net assets: £30M</li>
+                    <li>Goodwill recognised: £20M</li>
+                </ul>
+                <p><strong>Impairment testing (Dec 2025, Year 2 of ownership):</strong> Market downturn; software spending falling. Carrying amount of reporting unit: £50M (assume no depreciation for simplicity).</p>
+                <p><strong>Fair value estimate:</strong> £40M (market comparables, likely buyer interest).</p>
+                <p><strong>Fair value of identifiable net assets:</strong> £32M (updated valuations).</p>
+                <p><strong>IFRS 36 Analysis:</strong></p>
+                <ul>
+                    <li>FVLCD = £40M − £1M (disposal costs) = £39M</li>
+                    <li>VIU = PV of cash flows (5-year forecast + terminal): £38M (management assumes 8% growth, 3-year recovery)</li>
+                    <li>Recoverable amount = Higher of £39M and £38M = £39M</li>
+                    <li>Carrying amount of unit: £50M</li>
+                    <li><strong>Impairment: £50M − £39M = £11M goodwill write-down</strong></li>
+                </ul>
+                <p><strong>ASC 350 Analysis:</strong></p>
+                <ul>
+                    <li>Step 1: Fair value (£40M) &lt; Carrying amount (£50M) → Proceed to Step 2</li>
+                    <li>Step 2: Implied goodwill = £40M − £32M = £8M</li>
+                    <li>Carrying goodwill: £20M</li>
+                    <li><strong>Impairment: £20M − £8M = £12M goodwill write-down</strong></li>
+                </ul>
+                <p><strong>Outcome:</strong> Both standards result in significant write-downs (£11M vs £12M), but IFRS is marginally more lenient because VIU is £38M (management's view) vs fair value £40M (market). If management is really optimistic (VIU £42M), IFRS impairment drops to £9M, while ASC stays at £12M.</p>
+            </div>
+
+            <h2 id="cash-generating">Cash-Generating Units vs Reporting Units</h2>
+            <p><strong>IFRS 36:</strong> Tests goodwill at the cash-generating unit (CGU) level — the smallest group of assets generating independent cash inflows.</p>
+            <p><strong>ASC 350:</strong> Tests at the reporting unit level — typically aligns with operating segments.</p>
+            <p><strong>Audit implication:</strong> IFRS may result in more granular impairment testing (more CGUs = more write-downs if individual units underperform). ASC is more lenient (larger reporting units can offset underperformers).</p>
+
+            <h2 id="discount-rate">Discount Rate Assumptions</h2>
+            <p><strong>IFRS 36:</strong> Uses a pre-tax discount rate reflecting the asset-specific risks (WACC adjusted for risk).</p>
+            <p><strong>ASC 350:</strong> Uses post-tax discount rate (or pre-tax, but adjusted differently).</p>
+            <p>Small differences in discount rate produce large differences in VIU/impairment amounts. A 1% difference in discount rate can move impairment by £1–2M for a £20M goodwill balance.</p>
+
+            <h2 id="audit-implications">Audit Implications and Red Flags</h2>
+            <h3>For auditors:</h3>
+            <ul>
+                <li><strong>Challenge VIU assumptions:</strong> Growth rates, terminal values, margins. Are they backed by external data or just management optimism?</li>
+                <li><strong>Fair value benchmarking:</strong> If fair value is higher than VIU, question why. Market should reflect reality better than internal models.</li>
+                <li><strong>Discount rate:</strong> Build-up from scratch; don't accept management's rate without challenge. Small changes matter.</li>
+                <li><strong>IFRS vs ASC divergence:</strong> If testing under both standards, document why results differ. Market fair value should generally be stricter.</li>
+                <li><strong>Subsequent quarters:</strong> If impairment was avoided in Year 1 but conditions deteriorated, push harder in Year 2. Auditors often challenge deferred write-downs.</li>
+            </ul>
+            <h3>For controllers and CFOs:</h3>
+            <ul>
+                <li>Document your impairment model thoroughly. Auditors will rebuild it from scratch.</li>
+                <li>If you are IFRS, don't rely solely on VIU. Benchmark to market fair value. Auditors will question if you ignore the market.</li>
+                <li>If underperforming post-acquisition, proactively consider impairment. Delaying a write-down signals weak controls to auditors.</li>
+            </ul>
+
+            <div class="cta-box">
+                <h3>Need help with goodwill impairment testing?</h3>
+                <p>Use GAAP Compare to research IFRS 36 vs ASC 350 treatment, or bring your acquisition to the Meeting Room for an expert walkthrough.</p>
+                <a href="https://uqconsulting.org/gaap-compare.html" class="cta-button">Try GAAP Compare Free →</a>
+            </div>
+
+            <h2 id="faq">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>What is the main difference between IFRS 36 and ASC 350 goodwill impairment?</h3>
+                <p>IFRS 36 uses one-step test (fair value or value-in-use). ASC 350 uses two-step test (fair value → implied goodwill). IFRS allows value-in-use (often higher); ASC requires market fair value (often lower).</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is value-in-use?</h3>
+                <p>PV of future cash flows the asset is expected to generate, using the entity's discount rate. Management-specific; often higher than market fair value.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can IFRS 36 and ASC 350 produce different impairment amounts?</h3>
+                <p>Yes. IFRS can use value-in-use (higher); ASC uses fair value (lower). In down markets, ASC write-downs are typically larger.</p>
+            </div>
+
+            <div class="author-bio">
+                <div class="avatar">UQ</div>
+                <div>
+                    <h4>About the author — Usman Qureshi (ACCA, ACA)</h4>
+                    <p>Usman has audited goodwill impairment across mergers, acquisitions, and portfolio companies. He specialises in challenging management assumptions in VIU models and benchmarking against market fair values.</p>
+                </div>
+            </div>
+
+            <div class="related">
+                <h3>Related resources</h3>
+                <a href="https://uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">→ Back to IFRS vs US GAAP Comparison</a>
+                <a href="https://uqconsulting.org/meeting-room.html">→ Ask an expert (free)</a>
+            </div>
+
+            <p class="disclaimer">This guide is simplified for educational purposes. Goodwill impairment testing is complex; outcomes depend on specific facts, assumptions, and judgments. Consult IFRS 36 and ASC 350 full text, and your own advisors, before finalising impairment treatment.</p>
+        </article>
+    </div>
+</body>
+</html>

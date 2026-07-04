@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revenue Recognition: IFRS 15 vs ASC 606 Deep Dive (2026)</title>
+    <meta name="description" content="IFRS 15 vs ASC 606 comparison with worked examples. Contract modifications, licensing, performance obligations, transaction price, revenue timing. Real scenarios for auditors.">
+    <meta name="keywords" content="IFRS 15 vs ASC 606, revenue recognition differences, contract modification IFRS ASC, performance obligation, transaction price allocation, license accounting, revenue timing, ASC 606 worked example">
+    <meta name="author" content="Usman Qureshi">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://uqconsulting.org/blog/revenue-recognition-ifrs-15-vs-asc-606-deep-dive.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Revenue Recognition: IFRS 15 vs ASC 606 Deep Dive">
+    <meta property="og:description" content="Detailed comparison of IFRS 15 and ASC 606 with worked examples: contract modifications, licensing, performance obligations, transaction price allocation.">
+    <meta property="og:image" content="https://uqconsulting.org/images/og-image.png">
+    <meta property="og:url" content="https://uqconsulting.org/blog/revenue-recognition-ifrs-15-vs-asc-606-deep-dive.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Revenue Recognition: IFRS 15 vs ASC 606">
+    <meta name="twitter:description" content="Deep dive into IFRS 15 vs ASC 606 differences with real worked examples.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Revenue Recognition: IFRS 15 vs ASC 606 Deep Dive",
+      "description": "Comprehensive comparison of IFRS 15 and ASC 606 revenue recognition standards with detailed worked examples of contract modifications, licensing, performance obligations, and transaction price allocation.",
+      "image": "https://uqconsulting.org/images/og-image.png",
+      "datePublished": "2026-07-04",
+      "dateModified": "2026-07-04",
+      "author": {
+        "@type": "Person",
+        "name": "Usman Qureshi",
+        "url": "https://uqconsulting.org/home.html",
+        "jobTitle": "Chartered Accountant (ACCA, ACA)",
+        "knowsAbout": ["IFRS 15", "ASC 606", "Revenue Recognition", "Audit"]
+      },
+      "publisher": { "@type": "Person", "name": "Usman Qureshi" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://uqconsulting.org/blog/revenue-recognition-ifrs-15-vs-asc-606-deep-dive.html" }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are IFRS 15 and ASC 606 identical?",
+          "acceptedAnswer": { "@type": "Answer", "text": "IFRS 15 and ASC 606 are substantially converged and use the same five-step model. However, they differ on contract modifications, licensing, and some transition guidance. Most transactions are identical; edge cases differ." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the main difference in contract modifications between IFRS 15 and ASC 606?",
+          "acceptedAnswer": { "@type": "Answer", "text": "IFRS 15 treats some modifications as separate contracts; ASC 606 has different criteria for separating modifications. The result: IFRS may defer revenue recognition longer, while ASC 606 may recognise more immediately." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do IFRS 15 and ASC 606 differ on licensing?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Both standards have similar rules but apply judgment differently. IFRS 15 distinguishes between right-to-use and right-to-access licenses; ASC 606 does the same but with marginally different application guidance." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do performance obligations differ under IFRS 15 and ASC 606?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No, the definition and identification of performance obligations is identical under both standards. The difference is in how modifications and subsequent changes affect the original obligations." }
+        },
+        {
+          "@type": "Question",
+          "name": "How is the transaction price determined under both standards?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Both IFRS 15 and ASC 606 determine transaction price identically: contract price plus adjustments for variable consideration (estimated using expected value or most likely amount), less discounts, rebates, and customer credit risk." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can revenue recognition timing differ between IFRS 15 and ASC 606 for the same contract?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes, primarily due to contract modification treatment. IFRS 15 may recognise revenue later if a modification is treated as separate; ASC 606 may recognise it sooner if treated as a contract change." }
+        },
+        {
+          "@type": "Question",
+          "name": "How does transition guidance differ between IFRS 15 and ASC 606?",
+          "acceptedAnswer": { "@type": "Answer", "text": "IFRS 15 and ASC 606 offered different transition options at adoption. Going forward, differences in transition guidance are less relevant; focus is on ongoing application." }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #f4f6f9;
+            color: #2a3342;
+            line-height: 1.7;
+        }
+        .topbar {
+            background: #1a2f5a;
+            padding: 16px 20px;
+            text-align: center;
+        }
+        .topbar a { color: #d4af37; text-decoration: none; font-weight: 600; font-size: 0.95em; }
+        .article-container { max-width: 760px; margin: 0 auto; padding: 50px 20px; }
+        .breadcrumb { font-size: 0.85em; color: #8593a8; margin-bottom: 24px; }
+        .breadcrumb a { color: #8593a8; text-decoration: none; }
+        .breadcrumb a:hover { color: #d4af37; }
+        h1 {
+            font-size: 2.3em;
+            color: #1a2f5a;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+        .meta {
+            color: #8593a8;
+            font-size: 0.9em;
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid #e4e9f0;
+        }
+        .lead {
+            font-size: 1.2em;
+            color: #4a5568;
+            margin-bottom: 30px;
+        }
+        .toc {
+            background: #fff;
+            border: 1px solid #e4e9f0;
+            border-radius: 8px;
+            padding: 22px 26px;
+            margin-bottom: 36px;
+        }
+        .toc strong { color: #1a2f5a; display: block; margin-bottom: 10px; font-size: 0.95em; text-transform: uppercase; letter-spacing: 0.05em; }
+        .toc ul { list-style: none; margin: 0; columns: 2; column-gap: 30px; }
+        .toc li { margin-bottom: 7px; font-size: 0.92em; }
+        .toc a { color: #2a4a7a; text-decoration: none; }
+        .toc a:hover { color: #d4af37; }
+        article h2 {
+            font-size: 1.6em;
+            color: #1a2f5a;
+            margin: 44px 0 16px;
+            scroll-margin-top: 20px;
+        }
+        article h3 {
+            font-size: 1.2em;
+            color: #2a4a7a;
+            margin: 28px 0 12px;
+        }
+        article p { margin-bottom: 18px; }
+        article ul, article ol { margin: 0 0 18px 28px; }
+        article li { margin-bottom: 8px; }
+        .ref { font-size: 0.85em; color: #8593a8; font-style: italic; }
+        .callout {
+            background: #fff;
+            border-left: 4px solid #d4af37;
+            padding: 20px 24px;
+            margin: 28px 0;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .callout strong { color: #1a2f5a; }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+            background: #fff;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e4e9f0; font-size: 0.95em; }
+        th { background: #1a2f5a; color: #fff; font-weight: 600; }
+        tr:last-child td { border-bottom: none; }
+        .example-box {
+            background: #f9f5f0;
+            border-left: 4px solid #d4af37;
+            padding: 20px 24px;
+            margin: 28px 0;
+            border-radius: 4px;
+        }
+        .example-box h4 { color: #1a2f5a; margin-bottom: 12px; }
+        .example-box p { margin-bottom: 10px; font-size: 0.95em; }
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 24px 0;
+        }
+        .comp-col {
+            background: #fff;
+            border-radius: 8px;
+            padding: 18px 22px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .comp-col h4 { color: #1a2f5a; margin-bottom: 10px; font-size: 1em; border-bottom: 2px solid #d4af37; padding-bottom: 8px; }
+        .comp-col ul { margin-left: 20px; }
+        .comp-col li { font-size: 0.92em; margin-bottom: 6px; }
+        .faq-item { background: #fff; border-radius: 8px; padding: 20px 24px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .faq-item h3 { margin: 0 0 8px; color: #1a2f5a; font-size: 1.08em; }
+        .faq-item p { margin: 0; font-size: 0.96em; }
+        .cta-box {
+            background: linear-gradient(135deg, #1a2f5a 0%, #2a4a7a 100%);
+            color: #fff;
+            padding: 32px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        .cta-box h3 { color: #fff; margin-top: 0; }
+        .cta-box p { color: #c8d4e6; margin-bottom: 20px; }
+        .cta-button {
+            display: inline-block;
+            background: #d4af37;
+            color: #1a2f5a;
+            padding: 14px 34px;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .cta-button:hover { background: #c99e2b; }
+        .author-bio {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            background: #fff;
+            border-radius: 10px;
+            padding: 24px 28px;
+            margin: 44px 0 30px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        }
+        .author-bio .avatar {
+            width: 64px; height: 64px; border-radius: 50%;
+            background: #1a2f5a; color: #d4af37;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 700; font-size: 1.3em; flex-shrink: 0;
+        }
+        .author-bio h4 { color: #1a2f5a; margin-bottom: 6px; }
+        .author-bio p { font-size: 0.92em; color: #556; margin: 0; }
+        .related {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e4e9f0;
+        }
+        .related h3 { color: #1a2f5a; margin-bottom: 16px; }
+        .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; display: block; margin-bottom: 8px; }
+        .related a:hover { color: #d4af37; }
+        .disclaimer {
+            font-size: 0.82em;
+            color: #8593a8;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e4e9f0;
+            font-style: italic;
+        }
+        @media (max-width: 600px) {
+            .toc ul { columns: 1; }
+            .comparison { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a href="https://uqconsulting.org/home.html">← Usman Qureshi — Free AI Tools for Accountants &amp; Auditors</a>
+    </div>
+
+    <div class="article-container">
+        <div class="breadcrumb">
+            <a href="https://uqconsulting.org/home.html">Home</a> &nbsp;›&nbsp;
+            <a href="https://uqconsulting.org/blog/">Blog</a> &nbsp;›&nbsp;
+            Revenue Recognition: IFRS 15 vs ASC 606
+        </div>
+
+        <h1>Revenue Recognition: IFRS 15 vs ASC 606 Deep Dive</h1>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed July 2026 · 12 min read</div>
+
+        <p class="lead">IFRS 15 and ASC 606 look identical on the surface — both use the same five-step model and were jointly developed. But in practice, they diverge on contract modifications, licensing, and subsequent judgments. This guide walks through the differences with worked examples so you understand where auditors challenge revenue treatment and where IFRS and US GAAP companies report different numbers.</p>
+
+        <div class="toc">
+            <strong>In this guide</strong>
+            <ul>
+                <li><a href="#overview">Are they really converged?</a></li>
+                <li><a href="#five-step">The five-step model</a></li>
+                <li><a href="#modifications">Contract modifications (the biggest difference)</a></li>
+                <li><a href="#modifications-example">Worked example: modification treatment</a></li>
+                <li><a href="#licensing">Licensing and right-to-use vs right-to-access</a></li>
+                <li><a href="#licensing-example">Worked example: software license</a></li>
+                <li><a href="#variable">Variable consideration</a></li>
+                <li><a href="#transaction-price">Transaction price allocation</a></li>
+                <li><a href="#contract-costs">Contract costs and asset capitalization</a></li>
+                <li><a href="#principal-agent">Principal vs agent assessment</a></li>
+                <li><a href="#implications">Audit implications and red flags</a></li>
+                <li><a href="#faq">FAQs</a></li>
+            </ul>
+        </div>
+
+        <article>
+            <h2 id="overview">Are They Really Converged?</h2>
+            <p><strong>Short answer:</strong> Yes and no. IFRS 15 and ASC 606 were jointly developed by the IASB and FASB and use the same core five-step revenue recognition model. For most revenue contracts, the accounting is identical.</p>
+            <p><strong>But.</strong> They differ on:</p>
+            <ul>
+                <li>How to account for contract modifications (the biggest source of difference)</li>
+                <li>Licensing of intellectual property (software, royalties)</li>
+                <li>Some transition guidance (mostly historical now)</li>
+                <li>Application guidance in edge cases</li>
+            </ul>
+            <p>These differences mean two companies with identical contracts — one reporting under IFRS, one under US GAAP — could recognise revenue at different times, or in different amounts. Auditors routinely challenge revenue on these points.</p>
+            <p class="ref">Reference: IFRS 15 paragraphs 1–140; ASC 606-10-1 onwards.</p>
+
+            <h2 id="five-step">The Five-Step Model (Identical)</h2>
+            <p>Both standards use the same model:</p>
+            <ol>
+                <li><strong>Identify the contract</strong> with a customer (or group of customers)</li>
+                <li><strong>Identify performance obligations</strong> (goods or services promised)</li>
+                <li><strong>Determine the transaction price</strong> (contract consideration)</li>
+                <li><strong>Allocate the transaction price</strong> to each obligation</li>
+                <li><strong>Recognise revenue</strong> when (or as) each obligation is satisfied</li>
+            </ol>
+            <p>The definitions and requirements are word-for-word identical. Performance obligations, control of goods/services, transaction price — all the same. The divergence comes in applying these principles to complex contracts.</p>
+
+            <h2 id="modifications">Contract Modifications: The Biggest Difference</h2>
+            <p>This is where IFRS 15 and ASC 606 diverge most. A <strong>contract modification</strong> is a change to the scope, price, or terms that was not in the original contract.</p>
+            <h3>IFRS 15 Approach (Stricter)</h3>
+            <p>IFRS 15 requires you to account for a modification as either:</p>
+            <ul>
+                <li><strong>A separate contract</strong> (if the promised goods/services are distinct and the price reflects the entity's standalone selling price)</li>
+                <li><strong>A contract change</strong> (if goods/services are distinct but not at standalone selling price; adjusts the existing obligation)</li>
+                <li><strong>A modification of existing obligation</strong> (if goods/services are not distinct; adjusts the original obligation retroactively — can even require reversal of prior revenue)</li>
+            </ul>
+            <p>The key: if the modification adds <em>distinct</em> goods/services at <em>standalone selling price</em>, it is a new contract. Otherwise, it changes the original contract.</p>
+            <h3>ASC 606 Approach (More Liberal)</h3>
+            <p>ASC 606 has similar rules but applies the "distinct goods/services" and "standalone selling price" tests with different application guidance. In practice, ASC 606 is more likely to treat a modification as a contract change (adjusting the existing contract) rather than a separate contract.</p>
+            <p><strong>Audit implication:</strong> IFRS auditors will ask: Is this really a separate contract? Prove it has distinct goods and standalone price. US GAAP auditors are slightly more flexible — a contract change is acceptable even if the conditions are not quite met.</p>
+
+            <h2 id="modifications-example">Worked Example: Contract Modification</h2>
+            <div class="example-box">
+                <h4>Scenario: Software Licence with Support Services</h4>
+                <p><strong>Original contract (Jan 2026):</strong> XYZ Ltd sells a software licence to Customer A for £100,000/year. Includes 24/7 support. 3-year contract.</p>
+                <p><strong>Modification (Jul 2026):</strong> Customer wants to add a second licence for a different module. XYZ agrees to add it for an additional £50,000/year for the remaining 2.5 years.</p>
+                <p><strong>Standalone selling price check:</strong> XYZ's standard price for that module is £60,000/year (standalone). But XYZ agrees to £50,000 because of the customer's existing relationship (volume discount).</p>
+                <p><strong>IFRS 15 treatment:</strong></p>
+                <ul>
+                    <li>The new module is <strong>distinct</strong> (separable from the original licence)</li>
+                    <li>But the price (£50,000) is <strong>NOT</strong> the standalone selling price (£60,000)</li>
+                    <li>Therefore: treat the modification as a <strong>contract change</strong>, not a separate contract</li>
+                    <li>Adjustment to transaction price: +£50,000/year × 2.5 years = +£125,000</li>
+                    <li>Allocate this proportionally to the original and new performance obligations based on their updated relative prices</li>
+                </ul>
+                <p><strong>ASC 606 treatment:</strong></p>
+                <ul>
+                    <li>ASC 606 guidance suggests similar accounting, but allows more flexibility</li>
+                    <li>Could treat as a contract change OR, given the customer relationship, as a modification of the existing services</li>
+                    <li>Result: likely £125,000 additional revenue over 2.5 years, same as IFRS</li>
+                </ul>
+                <p><strong>Key difference:</strong> Under IFRS, the analysis is rigid (distinct + standalone price = separate contract). Under ASC 606, there is more judgment on whether the change is truly "separate" or a modification of existing obligations.</p>
+            </div>
+            <p class="ref">Reference: IFRS 15 paragraphs 18–20; ASC 606-10-25-12 onwards.</p>
+
+            <h2 id="licensing">Licensing and Right-to-Use vs Right-to-Access</h2>
+            <p>Both standards require you to distinguish:</p>
+            <div class="comparison">
+                <div class="comp-col">
+                    <h4>Right-to-Use</h4>
+                    <ul>
+                        <li>Customer receives a licence to intellectual property at a point in time</li>
+                        <li>Revenue recognised when licence is granted</li>
+                        <li>Example: perpetual software licence sold to customer</li>
+                    </ul>
+                </div>
+                <div class="comp-col">
+                    <h4>Right-to-Access</h4>
+                    <ul>
+                        <li>Customer has access to IP for a period; entity controls changes</li>
+                        <li>Revenue recognised over time as customer has access</li>
+                        <li>Example: software as a service (SaaS), cloud subscriptions</li>
+                    </ul>
+                </div>
+            </div>
+            <p>Both IFRS 15 and ASC 606 use this distinction, but the language differs slightly. IFRS emphasises "control" (entity controls the IP and restricts customer use); ASC 606 emphasises "benefit" (customer accesses the IP over time).</p>
+            <p><strong>In practice:</strong> Most SaaS contracts are right-to-access (revenue over time). Most perpetual licences are right-to-use (revenue at a point in time). Where they diverge: hybrid contracts (e.g., a licence with mandatory updates and support) — IFRS may call it right-to-access; ASC 606 might call it right-to-use.</p>
+
+            <h2 id="licensing-example">Worked Example: Software Licence Classification</h2>
+            <div class="example-box">
+                <h4>Scenario: Enterprise Software Deal</h4>
+                <p><strong>Contract terms:</strong></p>
+                <ul>
+                    <li>Customer buys a perpetual licence to CRM software for £200,000 (one-time payment)</li>
+                    <li>Includes 1 year of updates and support (£30,000 value)</li>
+                    <li>Customer can upgrade annually (optional, £20,000/year)</li>
+                    <li>Entity reserves the right to modify IP if needed for security</li>
+                </ul>
+                <p><strong>Analysis:</strong></p>
+                <p><strong>IFRS 15:</strong> The entity controls the IP (reserves the right to modify). The customer gets a perpetual licence but cannot independently use future updates. Likely <strong>right-to-access</strong> — entity controls IP, so revenue recognised over time (or at end of licence term if no further control required). Probable treatment: £200,000 as point-in-time, £30,000 over 1 year.</p>
+                <p><strong>ASC 606:</strong> Customer has a perpetual licence, can use the software independently for the licence term. Likely <strong>right-to-use</strong> — customer receives the IP upfront. Revenue recognised when licence is granted. Treatment: £200,000 at point in time + £30,000 over 1 year for updates/support.</p>
+                <p><strong>Outcome:</strong> Both may end up with similar total revenue (£200k + £30k), but IFRS recognises £200k over the licence term (amortised); ASC 606 recognises £200k upfront. Different timing, same total.</p>
+            </div>
+            <p class="ref">Reference: IFRS 15 paragraphs 31–41; ASC 606-10-25-49 onwards.</p>
+
+            <h2 id="variable">Variable Consideration: Expected Value vs Most Likely</h2>
+            <p>Both standards allow variable revenue (e.g., sales bonuses, discounts, rebates). You estimate variable consideration using either:</p>
+            <ul>
+                <li><strong>Expected value:</strong> Probability-weighted average of all outcomes (IFRS or ASC)</li>
+                <li><strong>Most likely amount:</strong> Single most-likely scenario (IFRS or ASC)</li>
+            </ul>
+            <p>Both standards say to use whichever is more predictive given the facts. In practice, both IFRS and ASC 606 reach the same estimates — there is no divergence here.</p>
+            <p><strong>Constraint:</strong> Both standards require you to only include variable amounts that are <strong>not probable to reverse</strong> (IFRS) or are <strong>resolved within 12 months</strong> (ASC 606, with a 5% margin-of-safety test). This is where auditors challenge: if you are unsure about a bonus, don't include it.</p>
+            <p class="ref">Reference: IFRS 15 paragraphs 56–58; ASC 606-10-32-5 onwards.</p>
+
+            <h2 id="transaction-price">Transaction Price Allocation</h2>
+            <p>Once you have the total transaction price (including variable amounts), you allocate it to each performance obligation based on their <strong>relative standalone selling prices</strong>.</p>
+            <p><strong>IFRS 15 method:</strong> Allocate based on observable standalone selling price. If not observable, estimate using expected cost plus margin, or adjust market approach.</p>
+            <p><strong>ASC 606 method:</strong> Identical. Use observable prices if available; estimate if not.</p>
+            <p><strong>Difference:</strong> Both are the same. Auditors challenge on what qualifies as "standalone selling price" — does the volume discount that Customer A gets apply, or should you use list price? Both standards have similar answers: use what a customer would pay for that item separately.</p>
+
+            <h2 id="contract-costs">Contract Costs and Asset Capitalization</h2>
+            <p>Both standards allow you to <strong>capitalise costs to obtain a contract</strong> (e.g., sales commissions) or <strong>fulfil a contract</strong> (e.g., setup, installation, training).</p>
+            <p><strong>IFRS 15:</strong> Capitalise if the cost is incremental and the entity expects to recover it. Amortise over the contract period.</p>
+            <p><strong>ASC 606:</strong> Capitalize if the cost is incremental. Amortise over the contract period or expected customer life (if longer).</p>
+            <p><strong>Practical difference:</strong> ASC 606 may allow longer amortisation periods (contract life vs expected customer life), which could defer costs. IFRS is stricter: amortise only over the contract you have.</p>
+
+            <h2 id="principal-agent">Principal vs Agent Assessment</h2>
+            <p>When you are an intermediary (e.g., marketplace, distributor), you must assess whether you are the <strong>principal</strong> (revenue = gross amount) or <strong>agent</strong> (revenue = commission only).</p>
+            <p><strong>Both IFRS 15 and ASC 606 use the same test:</strong> Do you control the goods/services before they transfer to the customer?</p>
+            <p><strong>Control indicators:</strong></p>
+            <ul>
+                <li>You are responsible for fulfilling the obligation</li>
+                <li>You have discretion over pricing</li>
+                <li>You bear credit risk</li>
+                <li>You can select the supplier</li>
+            </ul>
+            <p>No divergence here — both standards reach the same conclusion in most cases.</p>
+
+            <h2 id="implications">Audit Implications and Red Flags</h2>
+            <h3>For auditors:</h3>
+            <ul>
+                <li><strong>Contract modifications:</strong> Challenge whether a modification is truly separate or a contract change. Request analysis of whether distinct goods/services are at standalone selling price. IFRS is stricter.</li>
+                <li><strong>Licensing:</strong> Verify right-to-use vs right-to-access classification. This drives timing — point-in-time vs over-time revenue. Software companies frequently misclassify.</li>
+                <li><strong>Variable consideration:</strong> Push back on aggressive estimates. If a bonus is uncertain, exclude it — both standards are clear.</li>
+                <li><strong>Standalone selling prices:</strong> Request evidence. Don't accept management estimates without benchmarking. This is a high-risk area.</li>
+                <li><strong>Contract costs:</strong> Verify capitalization is justified and amortization is over the correct period. Watch for over-amortization (IFRS stricter).</li>
+            </ul>
+            <h3>For controllers and CFOs:</h3>
+            <ul>
+                <li>Document contract modifications carefully. Define whether the added items are distinct and at standalone price.</li>
+                <li>Maintain pricing lists for standalone selling prices. Auditors will ask to see them.</li>
+                <li>If you are IFRS, contract modifications are stricter — expect longer periods before revenue recognition.</li>
+                <li>For SaaS and subscriptions, make sure you are not capitalizing things that should be expensed under both standards.</li>
+            </ul>
+
+            <div class="cta-box">
+                <h3>Need a quick revenue comparison for your specific contract?</h3>
+                <p>Use our free GAAP Compare tool to research IFRS 15 vs ASC 606, or bring your contract to the Meeting Room and walk through it with an expert. No consulting fees, no credit card.</p>
+                <a href="https://uqconsulting.org/gaap-compare.html" class="cta-button">Try GAAP Compare Free →</a>
+            </div>
+
+            <h2 id="faq">Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>Are IFRS 15 and ASC 606 identical?</h3>
+                <p>Substantially yes — they use the same five-step model. But they diverge on contract modifications, licensing, and application guidance in edge cases. Most transactions are identical; complex contracts may differ.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is the main difference in contract modifications between IFRS 15 and ASC 606?</h3>
+                <p>IFRS 15 is stricter on when a modification is a separate contract (requires distinct goods/services AND standalone selling price). ASC 606 has more flexibility — a contract change is acceptable even if conditions are not met. Result: IFRS may defer revenue longer.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How do IFRS 15 and ASC 606 differ on licensing?</h3>
+                <p>Both distinguish right-to-use (point-in-time) from right-to-access (over-time). IFRS emphasises entity control; ASC 606 emphasises customer benefit. Same result in most cases, but hybrid contracts (licence + support) may diverge.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can revenue timing differ between IFRS 15 and ASC 606 for the same contract?</h3>
+                <p>Yes, primarily due to contract modification treatment and licensing classification. A £100k modification might be recognised immediately under ASC 606 but deferred under IFRS if it fails the distinct + standalone price test.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How are variable amounts estimated under both standards?</h3>
+                <p>Both allow expected value or most likely amount — whichever is more predictive. Both also require amounts to be probable of not reversing (IFRS) or resolved within 12 months (ASC 606). Same method, same estimates.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is the difference in principal vs agent assessment?</h3>
+                <p>No difference. Both IFRS 15 and ASC 606 use the same control test: do you control goods/services before transfer? If yes, you are principal (gross revenue). If no, you are agent (net revenue).</p>
+            </div>
+
+            <div class="author-bio">
+                <div class="avatar">UQ</div>
+                <div>
+                    <h4>About the author — Usman Qureshi (ACCA, ACA)</h4>
+                    <p>Usman is a chartered accountant with Big Four audit experience auditing complex revenue contracts under both IFRS 15 and ASC 606. He has managed revenue audit programmes for software, SaaS, and manufacturing clients across multiple jurisdictions.</p>
+                </div>
+            </div>
+
+            <div class="related">
+                <h3>Related resources</h3>
+                <a href="https://uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">→ Back to IFRS vs US GAAP Comparison</a>
+                <a href="https://uqconsulting.org/gaap-compare.html">→ GAAP Compare Tool (free)</a>
+                <a href="https://uqconsulting.org/meeting-room.html">→ Ask an expert in the Meeting Room (free)</a>
+            </div>
+
+            <p class="disclaimer">This guide is simplified for educational purposes and does not constitute professional accounting advice. Actual IFRS 15 vs ASC 606 assessments depend on specific contract facts, facts patterns, and judgments. Auditors and preparers should consult the full text of IFRS 15 and ASC 606, and their own professional advisors, before finalising revenue accounting treatment. The article reflects IFRS Accounting Standards and US GAAP effective as of July 2026.</p>
+        </article>
+    </div>
+</body>
+</html>

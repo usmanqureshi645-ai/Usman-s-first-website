@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provisions & Contingencies: IFRS 37 vs ASC 450 Deep Dive (2026)</title>
+    <meta name="description" content="IFRS 37 vs ASC 450 provisions and contingencies. Probable threshold, recognition criteria, present value, restructuring, worked examples.">
+    <meta name="keywords" content="IFRS 37 provisions, ASC 450 contingencies, probable threshold, present value, restructuring provision, onerous contract, contingent liability">
+    <meta name="author" content="Usman Qureshi">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://uqconsulting.org/blog/provisions-contingencies-ifrs-37-vs-asc-450-deep-dive.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Provisions & Contingencies: IFRS 37 vs ASC 450 Deep Dive">
+    <meta property="og:description" content="Detailed comparison of IFRS 37 and ASC 450 on provisions, contingencies, and restructuring.">
+    <meta property="og:image" content="https://uqconsulting.org/images/og-image.png">
+    <meta property="og:url" content="https://uqconsulting.org/blog/provisions-contingencies-ifrs-37-vs-asc-450-deep-dive.html">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "Provisions & Contingencies: IFRS 37 vs ASC 450 Deep Dive",
+      "description": "Comprehensive comparison of IFRS 37 and ASC 450 standards on provisions, contingencies, and restructuring.",
+      "image": "https://uqconsulting.org/images/og-image.png",
+      "datePublished": "2026-07-04",
+      "dateModified": "2026-07-04",
+      "author": { "@type": "Person", "name": "Usman Qureshi", "jobTitle": "Chartered Accountant (ACCA, ACA)" },
+      "publisher": { "@type": "Person", "name": "Usman Qureshi" }
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
+        .topbar { background: #1a2f5a; padding: 16px 20px; text-align: center; }
+        .topbar a { color: #d4af37; text-decoration: none; font-weight: 600; }
+        .article-container { max-width: 760px; margin: 0 auto; padding: 50px 20px; }
+        h1 { font-size: 2.3em; color: #1a2f5a; margin-bottom: 16px; }
+        .meta { color: #8593a8; font-size: 0.9em; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid #e4e9f0; }
+        .lead { font-size: 1.2em; color: #4a5568; margin-bottom: 30px; }
+        .toc { background: #fff; border: 1px solid #e4e9f0; border-radius: 8px; padding: 22px; margin-bottom: 36px; }
+        .toc strong { color: #1a2f5a; display: block; margin-bottom: 10px; }
+        .toc ul { columns: 2; gap: 30px; list-style: none; }
+        article h2 { font-size: 1.6em; color: #1a2f5a; margin: 36px 0 12px; }
+        article h3 { font-size: 1.1em; color: #2a4a7a; margin: 20px 0 8px; }
+        article p { margin-bottom: 16px; }
+        article ul { margin: 0 0 16px 28px; }
+        .callout { background: #fff; border-left: 4px solid #d4af37; padding: 18px 22px; margin: 22px 0; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background: #fff; }
+        th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #e4e9f0; font-size: 0.93em; }
+        th { background: #1a2f5a; color: #fff; }
+        .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 18px; margin: 20px 0; border-radius: 4px; }
+        .faq-item { background: #fff; border-radius: 8px; padding: 16px 20px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .cta-box { background: linear-gradient(135deg, #1a2f5a, #2a4a7a); color: #fff; padding: 28px; border-radius: 10px; text-align: center; margin: 36px 0; }
+        .cta-button { display: inline-block; background: #d4af37; color: #1a2f5a; padding: 12px 30px; font-weight: 600; border-radius: 8px; text-decoration: none; }
+        .author-bio { display: flex; gap: 16px; background: #fff; border-radius: 10px; padding: 20px; margin: 36px 0; }
+        .avatar { width: 56px; height: 56px; border-radius: 50%; background: #1a2f5a; color: #d4af37; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+        .related { margin-top: 32px; padding-top: 20px; border-top: 2px solid #e4e9f0; }
+        .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; display: block; margin-bottom: 6px; }
+        .disclaimer { font-size: 0.8em; color: #8593a8; margin-top: 32px; padding-top: 16px; border-top: 1px solid #e4e9f0; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a href="https://uqconsulting.org/home.html">← Usman Qureshi — Free AI Tools for Accountants &amp; Auditors</a>
+    </div>
+
+    <div class="article-container">
+        <h1>Provisions & Contingencies: IFRS 37 vs ASC 450 Deep Dive</h1>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed July 2026 · 9 min read</div>
+
+        <p class="lead">When a company announces a restructuring, faces a lawsuit, or commits to a costly contract, both IFRS 37 and ASC 450 require accounting for the obligation. But they diverge on the threshold for recognition (probable), measurement (present value), and when to disclose vs recognise. A £5M restructuring might be a recognised provision under IFRS but only a footnote disclosure under ASC. This guide explains both with worked examples.</p>
+
+        <div class="toc">
+            <strong>In this guide</strong>
+            <ul>
+                <li><a href="#overview">Provisions vs contingencies</a></li>
+                <li><a href="#probable">The "probable" threshold</a></li>
+                <li><a href="#recognition">When to recognise</a></li>
+                <li><a href="#measurement">Measurement and present value</a></li>
+                <li><a href="#restructuring">Restructuring: the big difference</a></li>
+                <li><a href="#worked">Worked example: restructuring provision</a></li>
+                <li><a href="#onerous">Onerous contracts</a></li>
+                <li><a href="#audit">Audit implications</a></li>
+                <li><a href="#faq">FAQs</a></li>
+            </ul>
+        </div>
+
+        <article>
+            <h2 id="overview">Provisions vs Contingencies</h2>
+            <p><strong>Provision:</strong> A recognised liability for a present obligation (legal or constructive) with probable outflow. Goes on the balance sheet.</p>
+            <p><strong>Contingent liability:</strong> Possible obligation or remote likelihood. Disclosed in footnotes (not on balance sheet).</p>
+
+            <h2 id="probable">The "Probable" Threshold</h2>
+            <p><strong>IFRS 37:</strong> "Probable" = more likely than not (>50% chance). Provisions recognised when probable. Contingencies disclosed when possible but not probable.</p>
+            <p><strong>ASC 450:</strong> "Probable" = likely to occur (similar to IFRS but less rigid). Threshold is slightly higher than 50%. Contingencies are disclosure-only; provisions are rare in ASC (mostly limited to restructuring, warranties, environmental).</p>
+            <p><strong>Practical difference:</strong> IFRS recognises more items as provisions (broader scope). ASC defers many to disclosure.</p>
+
+            <h2 id="recognition">When to Recognise</h2>
+            <p><strong>IFRS 37 requirements:</strong></p>
+            <ol>
+                <li>Present obligation (legal or constructive)</li>
+                <li>Probable outflow of resources</li>
+                <li>Reliable estimate of amount</li>
+            </ol>
+            <p><strong>ASC 450 requirements:</strong> Similar, but contingencies are narrowly defined. Most litigation, claims, and environmental matters are disclosure-only unless the threshold for accrual is clearly met.</p>
+
+            <h2 id="measurement">Measurement and Present Value</h2>
+            <p><strong>IFRS 37:</strong> Provisions measured at <strong>present value</strong> of expected outflows. Discounting is mandatory for long-term amounts using a pre-tax rate reflecting the specific risks.</p>
+            <p><strong>ASC 450:</strong> Contingencies measured at undiscounted amount (or best estimate without discounting in many cases). No mandatory discounting.</p>
+            <p><strong>Impact:</strong> IFRS provisions are often lower (discounted). ASC contingencies, when recognised, are at full undiscounted amount.</p>
+
+            <h2 id="restructuring">Restructuring: The Big Difference</h2>
+            <p><strong>IFRS 37:</strong> A restructuring provision is recognised only when a detailed plan is approved and announced, creating a constructive obligation. A constructive obligation arises when the entity has created a valid expectation in others that it will carry out the restructuring.</p>
+            <p><strong>ASC 450:</strong> Restructuring costs are sometimes accrued, but only when the plan is formally approved and committed.</p>
+            <p><strong>Real difference:</strong> IFRS may recognise a restructuring provision before ASC, creating a timing difference in P&amp;L.</p>
+
+            <h2 id="worked">Worked Example: Restructuring Provision</h2>
+            <div class="example-box">
+                <h4>Scenario: Plant Closure and Severance</h4>
+                <p><strong>Context:</strong> UK manufacturing company announces plan to close a factory in Q3 2026, with severance payable over 12 months (Q4 2026 – Q3 2027).</p>
+                <ul>
+                    <li>Estimated severance costs: £2M</li>
+                    <li>One-time closure costs (lease termination, equipment disposal): £500k</li>
+                    <li>Timeline: announcement Sep 2026, payments start Oct 2026</li>
+                </ul>
+                <p><strong>IFRS 37 (as at Sep 2026, announcement date):</strong></p>
+                <ul>
+                    <li>Detailed plan is in place and approved by the board</li>
+                    <li>Announcement creates constructive obligation (employees have valid expectation)</li>
+                    <li>Recognise provision: £2M severance + £500k closure = £2.5M (discounted at say 3% = £2.43M)</li>
+                    <li>Expense recorded in Q3 2026</li>
+                </ul>
+                <p><strong>ASC 450 (as at Sep 2026):</strong></p>
+                <ul>
+                    <li>Plan is approved, but not yet committed with a detailed communication (some may argue commitment is sufficient)</li>
+                    <li>May accrue (or may only disclose as a contingency)</li>
+                    <li>If accrued: £2.5M at full undiscounted amount (no present value discount)</li>
+                    <li>If not accrued: disclosure only in footnotes</li>
+                </ul>
+                <p><strong>Outcome:</strong> IFRS company records £2.43M provision in Q3; ASC company might delay accrual to Q4 (when payments begin) or accrue at higher undiscounted amount (£2.5M).</p>
+            </div>
+
+            <h2 id="onerous">Onerous Contracts</h2>
+            <p>Both standards require a provision for onerous contracts (unfavourable contracts where unavoidable costs exceed benefits).</p>
+            <p><strong>Examples:</strong> A long-term fixed-price supply contract where costs have risen beyond the fixed price.</p>
+            <p><strong>IFRS 37:</strong> Provision recognised for the excess of expected costs over revenue for the remaining contract term.</p>
+            <p><strong>ASC 450:</strong> Similar, but recognition threshold is slightly higher.</p>
+
+            <h2 id="audit">Audit Implications</h2>
+            <ul>
+                <li><strong>Restructuring:</strong> Challenge timing. IFRS auditors expect earlier recognition (constructive obligation). ASC auditors may accept later timing.</li>
+                <li><strong>Present value:</strong> IFRS requires discounting; ensure management has applied correct discount rate. ASC does not require discounting.</li>
+                <li><strong>Contingency disclosures:</strong> Both standards require disclosure of possible/remote obligations. Ensure completeness — pending litigation, environmental claims, warranty claims.</li>
+                <li><strong>Estimate changes:</strong> Track provisions period-to-period. Significant reversals signal weak initial estimates.</li>
+            </ul>
+
+            <div class="cta-box">
+                <h3>Need help with a restructuring or contingency?</h3>
+                <p>Use GAAP Compare to research IFRS 37 vs ASC 450, or ask an expert in the Meeting Room.</p>
+                <a href="https://uqconsulting.org/gaap-compare.html" class="cta-button">Compare Standards →</a>
+            </div>
+
+            <h2 id="faq">FAQs</h2>
+            <div class="faq-item">
+                <h3>What is the difference between a provision and a contingency?</h3>
+                <p>A provision is a recognised liability for a probable obligation (balance sheet). A contingency is a possible obligation disclosed in footnotes only.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is the probable threshold?</h3>
+                <p>IFRS 37: more likely than not (>50%). ASC 450: likely to occur (similar but slightly higher threshold).</p>
+            </div>
+            <div class="faq-item">
+                <h3>When can a restructuring be recognised as a provision?</h3>
+                <p>IFRS 37: when a detailed plan is approved and creates a constructive obligation (announcement date). ASC 450: when formally approved and committed (may be later).</p>
+            </div>
+
+            <div class="author-bio">
+                <div class="avatar">UQ</div>
+                <div>
+                    <h4>About the author — Usman Qureshi (ACCA, ACA)</h4>
+                    <p>Usman has audited provisions and contingencies across litigation, environmental, restructuring, and warranty claims. He specialises in challenging management estimates.</p>
+                </div>
+            </div>
+
+            <div class="related">
+                <h3>Related resources</h3>
+                <a href="https://uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">→ Back to IFRS vs US GAAP Comparison</a>
+            </div>
+
+            <p class="disclaimer">This guide is simplified. Provisions depend on specific facts and legal advice. Consult IFRS 37 and ASC 450 full text, and your own advisors.</p>
+        </article>
+    </div>
+</body>
+</html>

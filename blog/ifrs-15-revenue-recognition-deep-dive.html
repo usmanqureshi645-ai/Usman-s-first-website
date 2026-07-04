@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFRS 15 Revenue Recognition Deep Dive: Complex Scenarios (2026)</title>
+    <meta name="description" content="IFRS 15 revenue recognition. Five-step model, performance obligations, variable consideration, contract modifications. Complex worked examples.">
+    <meta name="keywords" content="IFRS 15, revenue recognition, performance obligations, five-step model, variable consideration, contract modifications, SaaS, software revenue">
+    <meta name="author" content="Usman Qureshi">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://uqconsulting.org/blog/ifrs-15-revenue-recognition-deep-dive.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="IFRS 15 Revenue Recognition Deep Dive">
+    <meta property="og:description" content="Complex revenue recognition scenarios under IFRS 15 with detailed worked examples.">
+    <meta property="og:image" content="https://uqconsulting.org/images/og-image.png">
+    <meta property="og:url" content="https://uqconsulting.org/blog/ifrs-15-revenue-recognition-deep-dive.html">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "IFRS 15 Revenue Recognition Deep Dive: Complex Scenarios",
+      "description": "Comprehensive guide to IFRS 15 revenue recognition with complex worked examples for SaaS, software, and service contracts.",
+      "image": "https://uqconsulting.org/images/og-image.png",
+      "datePublished": "2026-07-04",
+      "dateModified": "2026-07-04",
+      "author": { "@type": "Person", "name": "Usman Qureshi", "jobTitle": "Chartered Accountant (ACCA, ACA)" },
+      "publisher": { "@type": "Person", "name": "Usman Qureshi" }
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
+        .topbar { background: #1a2f5a; padding: 16px 20px; text-align: center; }
+        .topbar a { color: #d4af37; text-decoration: none; font-weight: 600; }
+        .article-container { max-width: 760px; margin: 0 auto; padding: 50px 20px; }
+        h1 { font-size: 2.3em; color: #1a2f5a; margin-bottom: 16px; }
+        .meta { color: #8593a8; font-size: 0.9em; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid #e4e9f0; }
+        .lead { font-size: 1.2em; color: #4a5568; margin-bottom: 30px; }
+        .toc { background: #fff; border: 1px solid #e4e9f0; border-radius: 8px; padding: 22px; margin-bottom: 36px; }
+        .toc strong { color: #1a2f5a; display: block; margin-bottom: 10px; }
+        .toc ul { columns: 2; gap: 30px; list-style: none; }
+        article h2 { font-size: 1.6em; color: #1a2f5a; margin: 36px 0 12px; }
+        article h3 { font-size: 1.1em; color: #2a4a7a; margin: 20px 0 8px; }
+        article p { margin-bottom: 16px; }
+        article ul { margin: 0 0 16px 28px; }
+        .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 16px; margin: 20px 0; border-radius: 4px; }
+        .callout { background: #fff; border-left: 4px solid #d4af37; padding: 18px 22px; margin: 22px 0; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background: #fff; }
+        th, td { padding: 10px 14px; text-align: left; border-bottom: 1px solid #e4e9f0; font-size: 0.93em; }
+        th { background: #1a2f5a; color: #fff; }
+        .cta-box { background: linear-gradient(135deg, #1a2f5a, #2a4a7a); color: #fff; padding: 28px; border-radius: 10px; text-align: center; margin: 36px 0; }
+        .cta-button { display: inline-block; background: #d4af37; color: #1a2f5a; padding: 12px 30px; font-weight: 600; border-radius: 8px; }
+        .author-bio { display: flex; gap: 16px; background: #fff; border-radius: 10px; padding: 20px; margin: 36px 0; }
+        .avatar { width: 56px; height: 56px; border-radius: 50%; background: #1a2f5a; color: #d4af37; display: flex; align-items: center; font-weight: 700; flex-shrink: 0; }
+        .related { margin-top: 32px; padding-top: 20px; border-top: 2px solid #e4e9f0; }
+        .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; display: block; margin-bottom: 6px; }
+        .disclaimer { font-size: 0.8em; color: #8593a8; margin-top: 32px; padding-top: 16px; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a href="https://uqconsulting.org/home.html">← Usman Qureshi — Free AI Tools for Accountants &amp; Auditors</a>
+    </div>
+
+    <div class="article-container">
+        <h1>IFRS 15 Revenue Recognition Deep Dive: Complex Scenarios</h1>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed July 2026 · 12 min read</div>
+
+        <p class="lead">IFRS 15 (Revenue from Contracts with Customers) simplified revenue accounting by introducing a single five-step model. But the standard's application to complex contracts (SaaS, software, contracts with multiple performance obligations, variable consideration) is where auditor risk is highest. This deep dive covers the trickiest scenarios: multi-year SaaS contracts with discounts, performance bonuses tied to customer outcomes, licensing rights-of-use vs rights-of-access, and contract modifications. Real examples from tech, professional services, and manufacturing sectors.</p>
+
+        <div class="toc">
+            <strong>In this guide</strong>
+            <ul>
+                <li><a href="#overview">IFRS 15 five-step model recap</a></li>
+                <li><a href="#performance">Identifying performance obligations</a></li>
+                <li><a href="#variable">Variable consideration & price adjustments</a></li>
+                <li><a href="#licensing">Licensing contracts: right-to-use vs right-to-access</a></li>
+                <li><a href="#modification">Contract modifications & amendments</a></li>
+                <li><a href="#saas">SaaS multi-year contracts: worked example</a></li>
+                <li><a href="#audit">Audit procedures & high-risk areas</a></li>
+                <li><a href="#faq">FAQs</a></li>
+            </ul>
+        </div>
+
+        <article>
+            <h2 id="overview">IFRS 15 Five-Step Model Recap</h2>
+            <ol>
+                <li>Identify the contract</li>
+                <li>Identify performance obligations</li>
+                <li>Determine transaction price</li>
+                <li>Allocate price to obligations</li>
+                <li>Recognise revenue when obligations are satisfied</li>
+            </ol>
+            <p><strong>Key principle:</strong> Revenue is recognised when (or as) control of promised goods/services transfers to the customer. "Control" = ability to direct use and obtain benefits.</p>
+            <p class="ref">Reference: IFRS 15 paragraphs 1–120, examples in Appendix B.</p>
+
+            <h2 id="performance">Identifying Performance Obligations</h2>
+            <p><strong>Definition:</strong> A promise to transfer a good or service (or group of goods/services) that is distinct.</p>
+            <p><strong>Distinct test:</strong> A good/service is distinct if:</p>
+            <ol>
+                <li>Customer can benefit from it on its own (or with resources readily available), AND</li>
+                <li>It is separately identifiable from other promises in the contract</li>
+            </ol>
+            <p><strong>Example divergence (auditors' nightmare):</strong></p>
+            <p><em>Contract: Software license + implementation + annual support</em></p>
+            <ul>
+                <li><strong>One obligation:</strong> If implementation is critical to the license (customer can't use it without setup), then software + implementation = one obligation, recognised over the support term</li>
+                <li><strong>Three obligations:</strong> If implementation is separable (customer could use software without vendor's setup), then license, implementation, and support = three obligations, recognised at different times</li>
+            </ul>
+            <p><strong>Audit procedure:</strong> Obtain contracts and test management's identification of obligations. Did they consider whether components are functionally interdependent? Document the conclusion.</p>
+
+            <h2 id="variable">Variable Consideration & Price Adjustments</h2>
+            <p><strong>Variable consideration = payments that depend on future events (rebates, performance bonuses, discounts).</strong></p>
+            <p><strong>Measurement rule:</strong> Include variable consideration in transaction price if it's probable that it will not be reversed (i.e., highly probable that revenue will not be offset by a subsequent adjustment).</p>
+            <p><strong>Example 1 (include):</strong> Contract offers 10% volume discount if customer purchases >100 units. After 3 months, customer has already purchased 150 units. Highly probable they'll reach 100 → include full discount in transaction price now.</p>
+            <p><strong>Example 2 (exclude):</strong> Contract offers £10k bonus if customer achieves 95% uptime SLA. Uptime is at 80% after 6 months with 6 months remaining. Not highly probable to achieve 95% → exclude bonus from transaction price; recognise only if/when achieved.</p>
+
+            <h2 id="licensing">Licensing Contracts: Right-to-Use vs Right-to-Access</h2>
+            <p><strong>Right-to-use (point in time recognition):</strong> Customer obtains control of the IP. Revenue recognised at a point in time (e.g., upfront when license is granted).</p>
+            <p><strong>Right-to-access (over time recognition):</strong> Customer has access to the licensor's IP as it evolves (e.g., software as a service, where vendor patches and updates during the term). Revenue recognised over time.</p>
+            <p><strong>How to distinguish:</strong></p>
+            <ul>
+                <li>Does the contract specify a fixed version (right-to-use) or does the customer benefit from updates/improvements (right-to-access)?</li>
+                <li>Can the customer use the license independently, or does it depend on vendor's ongoing support (right-to-access)?</li>
+            </ul>
+            <p><strong>Example:</strong> Annual SaaS license (email analytics software). Contract specifies "latest version of software as maintained by vendor." Upgrades, bug fixes, and new features are delivered continuously. → Right-to-access → Recognise over 12 months.</p>
+
+            <h2 id="modification">Contract Modifications & Amendments</h2>
+            <p><strong>Three ways to treat a modification:</strong></p>
+            <ol>
+                <li><strong>New contract:</strong> If the modification adds new, distinct services AND the price reflects the standalone price → treat as separate contract, recognise new revenue</li>
+                <li><strong>Cumulative catch-up:</strong> If the modification changes obligations but is part of the same contract → adjust transaction price, recognise cumulative catch-up adjustment in current period</li>
+                <li><strong>Prospective:</strong> If the modification is a minor change → adjust transaction price prospectively</li>
+            </ol>
+            <p><strong>Worked example:</strong> Year 1 SaaS contract £100k/year. In month 7, customer adds a new module (value £30k for the remaining 6 months). Is this a new contract or an amendment?<br><br>
+            If the module is <em>distinct</em> and the price (£30k) equals the standalone price for 6 months → new contract, recognise £30k over remaining 6 months.<br><br>
+            If the module is <em>not distinct</em> (integrated into existing service) → amendment, increase transaction price from £100k to £130k, recognise the £30k over remaining 6 months (cumulative catch-up in month 7).</p>
+
+            <h2 id="saas">SaaS Multi-Year Contract: Worked Example</h2>
+            <div class="example-box">
+                <h4>Scenario: Cloud Accounting Software Subscription</h4>
+                <p><strong>Contract terms:</strong></p>
+                <ul>
+                    <li>3-year subscription: £100k per annum (total £300k)</li>
+                    <li>Setup/implementation: £30k (included in first-year fee, completed in month 2)</li>
+                    <li>Annual support & updates: included</li>
+                    <li>Volume discount: if customer processes >10M transactions/year, 10% discount applies (customer is at 12M, so discount applies)</li>
+                    <li>Performance bonus: if customer achieves 99% uptime, vendor pays rebate of £5k/year (current uptime: 98%)</li>
+                </ul>
+                <p><strong>Analysis:</strong></p>
+                <p><strong>1. Identify obligations:</strong> Software access + updates + support = one obligation (right-to-access, inseparable from vendor's ongoing performance). Implementation = separate obligation (can be used without vendor's implementation, but contract links it).</p>
+                <p><strong>2. Transaction price:</strong><br>
+                Contracted amount: £300k<br>
+                Less: Volume discount (10% highly probable): −£30k<br>
+                Less: Uptime bonus (not highly probable at 98%): £0<br>
+                Net transaction price: £270k</p>
+                <p><strong>3. Allocate to obligations:</strong><br>
+                Implementation (month 2): £30k<br>
+                SaaS access (months 1–36): £240k (= £270k − £30k)</p>
+                <p><strong>4. Recognise revenue:</strong><br>
+                Year 1: £30k (implementation in month 2, if substantial) + £80k (SaaS 12 months) = £110k<br>
+                Year 2: £80k<br>
+                Year 3: £80k<br>
+                Total: £270k</p>
+                <p><strong>Watch for errors:</strong><br>
+                − Recognising £100k/year upfront (ignoring that setup is separate)<br>
+                − Including the uptime bonus (not highly probable)<br>
+                − Not allocating the discount proportionally to SaaS (should reduce the £240k, not the implementation)<br>
+                − Recognising all £270k upfront (SaaS is over-time, not point-in-time)</p>
+            </div>
+
+            <h2 id="audit">Audit Procedures & High-Risk Areas</h2>
+            <ul>
+                <li><strong>Performance obligation testing:</strong> For contracts with multiple components, obtain the contract, document management's PO identification logic, challenge "bundled" claims</li>
+                <li><strong>Standalone selling price:</strong> When allocating transaction price, verify that allocation percentages match standalone prices (not arbitrary allocation)</li>
+                <li><strong>Variable consideration:</strong> For bonuses, rebates, or volume discounts, verify the likelihood assessment and the supporting data (sales history, current volumes)</li>
+                <li><strong>Licensing classification:</strong> For software/IP contracts, determine right-to-use vs right-to-access by reviewing contract terms (fixed version? ongoing updates?) and substance over form</li>
+                <li><strong>Subsequent amendments:</strong> Post-year-end, check for amendments to contracts signed in the audit period. These may trigger cumulative catch-up adjustments</li>
+                <li><strong>Month-end channel stuffing:</strong> Unusual contracts at year-end (especially with right-of-return) are fraud risk. Confirm with customer and review payment terms</li>
+            </ul>
+
+            <div class="cta-box">
+                <h3>Need help with complex revenue scenarios?</h3>
+                <p>Use GAAP Compare to research IFRS 15 guidance, or ask an expert in the Meeting Room.</p>
+                <a href="https://uqconsulting.org/gaap-compare.html" class="cta-button">Compare Standards →</a>
+            </div>
+
+            <h2 id="faq">FAQs</h2>
+            <div class="callout">
+                <h3>Is IFRS 15 the same as ASC 606?</h3>
+                <p>Substantially yes. Both use the five-step model. Minor differences exist in contract modifications and transition guidance, but 95% of scenarios are treated identically.</p>
+            </div>
+            <div class="callout">
+                <h3>How do I know if a license is "right-to-use" or "right-to-access"?</h3>
+                <p>Look at whether the customer gets a fixed version (right-to-use, point-in-time) or continuously benefits from vendor updates (right-to-access, over-time). SaaS is typically right-to-access. Perpetual software licenses are typically right-to-use.</p>
+            </div>
+            <div class="callout">
+                <h3>Can I allocate transaction price to obligations using cost?</h3>
+                <p>No. Allocation must be based on standalone selling prices, not cost. If a standalone price isn't directly observable, estimate it using cost-plus or other techniques, but cost ≠ allocation percentage.</p>
+            </div>
+
+            <div class="author-bio">
+                <div class="avatar">UQ</div>
+                <div>
+                    <h4>About the author — Usman Qureshi (ACCA, ACA)</h4>
+                    <p>Usman has audited IFRS 15 implementations for SaaS, software, and professional services firms. He specialises in complex performance obligation and licensing scenarios.</p>
+                </div>
+            </div>
+
+            <div class="related">
+                <h3>Related resources</h3>
+                <a href="https://uqconsulting.org/blog/revenue-recognition-ifrs-15-vs-asc-606-deep-dive.html">→ IFRS 15 vs ASC 606 Comparison</a>
+                <a href="https://uqconsulting.org/gaap-compare.html">→ GAAP Compare Tool</a>
+            </div>
+
+            <p class="disclaimer">This guide is simplified. IFRS 15 revenue accounting depends on specific contract facts and management judgment. Always consult the full IFRS 15 text, examples, and your own advisors before finalising treatment.</p>
+        </article>
+    </div>
+</body>
+</html>

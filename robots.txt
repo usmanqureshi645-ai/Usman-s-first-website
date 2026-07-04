@@ -1,0 +1,13 @@
+# robots.txt for uqconsulting.org
+# Welcomes all search engines and points them to the sitemap.
+
+User-agent: *
+Allow: /
+
+# Private / non-public areas — no SEO value, keep crawlers out
+Disallow: /api/
+Disallow: /dashboard.html
+Disallow: /workspace.html
+
+# Full list of pages we want indexed
+Sitemap: https://uqconsulting.org/sitemap.xml

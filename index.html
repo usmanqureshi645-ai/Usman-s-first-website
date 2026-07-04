@@ -1467,16 +1467,22 @@ body{background:linear-gradient(180deg,#050b15,#0a1628)}
 #hottopics .knowledge-grid .knowledge-card{flex:1 1 280px;max-width:380px}
 .client-card,.knowledge-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:1.6rem;border-radius:18px;backdrop-filter:blur(18px);transition:.4s;font-family:inherit}
 .knowledge-card h3,.knowledge-card p{font-family:inherit}
-.tool-showcase-tile{display:grid;grid-template-columns:1fr 140px;gap:1.5rem;align-items:start;padding:2rem !important;cursor:pointer}
-.tool-tile-content{display:flex;flex-direction:column;gap:1rem}
-.tool-tile-content h3{margin:0;font-size:1.25rem;color:var(--cream);font-weight:600}
-.tool-tile-desc{margin:0;font-size:.9rem;line-height:1.6;color:var(--steel-light)}
-.tool-tile-steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.5rem;flex:1}
-.tool-tile-steps li{display:flex;gap:.6rem;align-items:flex-start;color:var(--steel-light);font-size:.85rem;line-height:1.4}
-.tool-tile-steps .step-num{flex:none;width:1.25rem;height:1.25rem;border-radius:50%;background:rgba(200,169,110,.18);color:var(--gold);font-size:.7rem;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:.05rem}
-.tool-tile-visual{display:flex;align-items:center;justify-content:center;border-radius:12px;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.16);padding:1.5rem;aspect-ratio:1;flex-shrink:0}
-.tool-visual-icon{font-size:3rem;text-align:center}
-@media (max-width:600px){.tool-showcase-tile{grid-template-columns:1fr;gap:1rem;padding:1.6rem !important}.tool-tile-visual{aspect-ratio:auto;min-height:100px}}
+.tool-showcase-tile{display:flex;flex-direction:column;gap:1.2rem;padding:1.8rem !important;cursor:pointer}
+.tool-tile-content{display:flex;flex-direction:column;gap:.9rem}
+.tool-tile-content h3{margin:0;font-size:1.2rem;color:var(--cream);font-weight:600}
+.tool-tile-desc{margin:0;font-size:.88rem;line-height:1.6;color:var(--steel-light)}
+.tool-tile-steps{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.45rem}
+.tool-tile-steps li{display:flex;gap:.6rem;align-items:flex-start;color:var(--steel-light);font-size:.83rem;line-height:1.4}
+.tool-tile-steps .step-num{flex:none;width:1.2rem;height:1.2rem;border-radius:50%;background:rgba(200,169,110,.18);color:var(--gold);font-size:.68rem;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:.05rem}
+.tool-tile-visual{display:flex;flex-direction:column;gap:.7rem;border-radius:12px;background:rgba(200,169,110,.06);border:1px solid rgba(200,169,110,.14);padding:1.1rem}
+.tool-tile-avatars{display:flex;align-items:center}
+.tool-tile-avatar{width:34px;height:34px;border-radius:50%;border:2px solid var(--navy);background-size:cover;background-position:center top;flex-shrink:0}
+.tool-tile-avatars .tool-tile-avatar:not(:first-child){margin-left:-10px}
+.tool-tile-bubbles{display:flex;flex-direction:column;gap:.5rem}
+.tool-tile-bubble{max-width:92%;padding:.55rem .8rem;border-radius:10px;font-size:.78rem;line-height:1.45}
+.tool-tile-bubble.q{align-self:flex-start;background:rgba(184,200,216,.1);color:var(--cream);border:1px solid rgba(184,200,216,.15)}
+.tool-tile-bubble.a{align-self:flex-end;background:rgba(200,169,110,.16);color:var(--cream);border:1px solid rgba(200,169,110,.3)}
+.mr-avatar.av-cv{background-image:url("images/team/cv-reviewer.png")}
 .client-card:hover,.knowledge-card:hover,.sector-card:hover{transform:translateY(-10px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
 .pub-btn{margin-top:1rem;background:#C8A96E;color:#0A1628;border:none;padding:.8rem 1.2rem;border-radius:10px;font-weight:700;cursor:pointer}
 .pub-modal{position:fixed;inset:0;background:rgba(0,0,0,.82);display:none;z-index:99999;padding:30px;overflow:auto}
@@ -1820,7 +1826,15 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 </ol>
 </div>
 <div class="tool-tile-visual">
-<div class="tool-visual-icon">🟢</div>
+<div class="tool-tile-avatars">
+<div class="tool-tile-avatar mr-avatar av-sc" title="Sarah Bennett"></div>
+<div class="tool-tile-avatar mr-avatar av-dw" title="David Whitfield"></div>
+<div class="tool-tile-avatar mr-avatar av-as" title="Amelia Hartley"></div>
+</div>
+<div class="tool-tile-bubbles">
+<div class="tool-tile-bubble q">How do we treat a lease modification that shrinks the leased space under IFRS 16?</div>
+<div class="tool-tile-bubble a">That's a partial derecognition — remeasure using a revised incremental borrowing rate.</div>
+</div>
 </div>
 </div>
 <div class="knowledge-card tool-showcase-tile" onclick="document.getElementById('knowledgetest').scrollIntoView({behavior:'smooth'})">
@@ -1834,7 +1848,13 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 </ol>
 </div>
 <div class="tool-tile-visual">
-<div class="tool-visual-icon">🎯</div>
+<div class="tool-tile-avatars">
+<div class="tool-tile-avatar mr-avatar av-ic" title="Interview Coach"></div>
+</div>
+<div class="tool-tile-bubbles">
+<div class="tool-tile-bubble q">Walk me through auditing a goodwill impairment model with an aggressive terminal growth rate.</div>
+<div class="tool-tile-bubble a">Good structure — now also challenge the discount rate and stress-test the headroom.</div>
+</div>
 </div>
 </div>
 <div class="knowledge-card tool-showcase-tile" onclick="document.getElementById('jobhub').scrollIntoView({behavior:'smooth'})">
@@ -1848,7 +1868,13 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 </ol>
 </div>
 <div class="tool-tile-visual">
-<div class="tool-visual-icon">💼</div>
+<div class="tool-tile-avatars">
+<div class="tool-tile-avatar mr-avatar av-cv" title="CV Reviewer"></div>
+</div>
+<div class="tool-tile-bubbles">
+<div class="tool-tile-bubble q">My CV lists duties, not results. What's the fastest fix?</div>
+<div class="tool-tile-bubble a">Reframe each line as an outcome — "reduced audit cycle time 18%", not "responsible for audits".</div>
+</div>
 </div>
 </div>
 <div class="knowledge-card tool-showcase-tile" onclick="document.getElementById('jobsearch').scrollIntoView({behavior:'smooth'})">
@@ -1862,7 +1888,13 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 </ol>
 </div>
 <div class="tool-tile-visual">
-<div class="tool-visual-icon">🎯</div>
+<div class="tool-tile-avatars">
+<div class="tool-tile-avatar mr-avatar av-pn" title="Priya Nair"></div>
+</div>
+<div class="tool-tile-bubbles">
+<div class="tool-tile-bubble q">Find me IFRS technical accounting roles that don't require relocation.</div>
+<div class="tool-tile-bubble a">Found 12 matches — ranked by seniority fit and reporting-standard overlap with your CV.</div>
+</div>
 </div>
 </div>
 <div class="knowledge-card tool-showcase-tile" onclick="document.getElementById('gaapcompare').scrollIntoView({behavior:'smooth'})">
@@ -1876,7 +1908,13 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 </ol>
 </div>
 <div class="tool-tile-visual">
-<div class="tool-visual-icon">📊</div>
+<div class="tool-tile-avatars">
+<div class="tool-tile-avatar mr-avatar av-ga" title="GAAP Specialist"></div>
+</div>
+<div class="tool-tile-bubbles">
+<div class="tool-tile-bubble q">How does US GAAP differ from IFRS 16 on lease classification?</div>
+<div class="tool-tile-bubble a">US GAAP still splits operating vs finance leases; IFRS 16 uses one on-balance-sheet model.</div>
+</div>
 </div>
 </div>
 <div class="knowledge-card tool-showcase-tile" onclick="document.getElementById('fsreview').scrollIntoView({behavior:'smooth'})">
@@ -1890,7 +1928,13 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 </ol>
 </div>
 <div class="tool-tile-visual">
-<div class="tool-visual-icon">📝</div>
+<div class="tool-tile-avatars">
+<div class="tool-tile-avatar mr-avatar av-ml" title="Marcus Lee"></div>
+</div>
+<div class="tool-tile-bubbles">
+<div class="tool-tile-bubble q">Revenue was recognized before the performance obligation was satisfied — flag it?</div>
+<div class="tool-tile-bubble a">Flagged as an IFRS 15 violation, with the clause tracked as a comment for your reviewer.</div>
+</div>
 </div>
 </div>
 <div class="knowledge-card tool-showcase-tile" onclick="document.getElementById('hottopics').scrollIntoView({behavior:'smooth'})">
@@ -1904,7 +1948,13 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 </ol>
 </div>
 <div class="tool-tile-visual">
-<div class="tool-visual-icon">📰</div>
+<div class="tool-tile-avatars">
+<div class="tool-tile-avatar mr-avatar av-jc" title="James Carter"></div>
+</div>
+<div class="tool-tile-bubbles">
+<div class="tool-tile-bubble q">What changed in the latest ISSB sustainability disclosure update?</div>
+<div class="tool-tile-bubble a">Briefing ready — scope 3 emissions phase-in timelines were extended for smaller reporters.</div>
+</div>
 </div>
 </div>
 <div class="knowledge-card tool-showcase-tile" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
@@ -1918,7 +1968,13 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 </ol>
 </div>
 <div class="tool-tile-visual">
-<div class="tool-visual-icon">🤖</div>
+<div class="tool-tile-avatars">
+<div class="tool-tile-avatar mr-avatar av-gen-m" title="Usman Qureshi"></div>
+</div>
+<div class="tool-tile-bubbles">
+<div class="tool-tile-bubble q">Who built this entire platform?</div>
+<div class="tool-tile-bubble a">One person — Usman, ACCA/ACA — wrote every prompt, agent and line of code.</div>
+</div>
 </div>
 </div>
 </div>

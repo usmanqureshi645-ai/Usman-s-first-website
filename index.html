@@ -1729,20 +1729,13 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false" style="text-decoration:none;color:inherit;cursor:pointer">Usman Qureshi, ACCA, ACA</a>
-  
+  <a href="home.html" class="nav-logo" style="text-decoration:none;color:inherit;cursor:pointer">Usman Qureshi, ACCA, ACA</a>
+
 <ul class="nav-links" id="navLinks">
-<li><a href="#about">About</a></li>
-<li><a href="#services">Services</a></li>
-<li><a href="#publications">Publications</a></li>
-<li><a href="#trainings">Trainings</a></li>
-<li><a href="#gaapcompare">GAAP Compare</a></li>
+<li><a href="#aitools" class="nav-meetingroom">AI Tools <span class="live-dot"></span></a></li>
 <li><a href="#hottopics">Hot Market Topics</a></li>
-<li><a href="#jobhub">Score My Resume</a></li>
-<li><a href="#knowledgetest">Interview Preparation</a></li>
-<li><a href="#meetingroom" class="nav-meetingroom">Meeting Room <span class="live-dot"></span></a></li>
-<li><a href="#contact">Contact</a></li>
 <li id="navWorkspaceLink" style="display:none"><a href="workspace.html">My Workspace</a></li>
+<li><a href="#whoami">Who am I</a></li>
 </ul>
 
 <button class="nav-toggle" id="navToggle" aria-label="Menu">
@@ -1797,62 +1790,15 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
   </g>
 </svg>
 
-<!-- HERO -->
-<section class="hero" id="hero">
-  <div class="hero-grid">
-    <div class="hero-left">
-      <p class="hero-eyebrow">Audit &amp; Advisory</p>
-      <h1 class="hero-name">Usman Qureshi</h1>
-      <p class="hero-title">Audit • IFRS Technical Training & Workshops • Technical Accounting & Financial Reporting Advisory</p>
-      <p class="hero-bio">
-        Helping growing and complex businesses navigate statutory audits, IFRS implementation, financial reporting challenges and transaction-related accounting with Big Four expertise and practical commercial insight.
-      </p>
-      <div class="hero-cta">
-        <a href="#services" class="btn-ghost">View Services</a>
-        <a href="#contact" class="btn-ghost">Book a Consultation</a>
-      </div>
-      <div class="site-stats-badge" id="siteStatsBadge"></div>
-    </div>
-
-    <div class="hero-right">
-      <div class="stat-card">
-        <div class="stat-number">10</div>
-        <div class="stat-label">Years of Ongoing Big 4 Experience</div>
-        <div class="stat-sub">Audit, Advisory &amp; Financial Reporting — Deloitte UK · PwC · BDO Bahrain</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">£20–30M</div>
-        <div class="stat-label">Combined Annual Fees Managed</div>
-        <div class="stat-sub">Current active portfolio</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">8</div>
-        <div class="stat-label">Sectors of Deep Expertise</div>
-        <div class="stat-sub">Banking · Automotive · Media · PE · Pharma · Tech · Public Sector · Education</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">22</div>
-        <div class="stat-label">Largest Team Led</div>
-        <div class="stat-sub">22-member team, including onshore &amp; offshore resources</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-number">Artificial Intelligence (AI)</div>
-        <div class="stat-label">Hands-On AI &amp; Web Expertise</div>
-        <div class="stat-sub">Prompt engineering, AI agents, web development &amp; design — built this entire site himself</div>
-      </div>
-    </div>
-  </div>
-
-</section>
-
 <!-- USP SHOWCASE — interactive tools lead the site -->
-<section id="toolsshowcase" style="padding-top:3rem;padding-bottom:3rem">
+<section id="aitools" style="padding-top:3rem;padding-bottom:3rem">
 <div class="section-inner">
 <div class="section-header" style="margin-bottom:2rem">
-<p class="section-eyebrow">What Makes This Site Different</p>
+<p class="section-eyebrow">What This Site Actually Is</p>
 <h2 class="section-title">Live AI Tools — Try Them Now</h2>
+<p class="section-sub">This isn't a CV. It's a working set of AI-powered tools built for finance, audit and accounting professionals: a live Meeting Room with AI specialists, instant CV scoring, GAAP comparisons, interview coaching and more. Everything below is fully functional, click any tool to try it.</p>
 </div>
-<div class="knowledge-grid">
+<div id="toolsshowcase" class="knowledge-grid">
 <div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('meetingroom').scrollIntoView({behavior:'smooth'})">
 <span class="sector-icon">🟢</span><h3>The Meeting Room</h3>
 <p>Talk live with an AI panel of audit, tax, legal and technical specialists.</p>
@@ -1973,7 +1919,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
     </div>
   </div>
 </div>
-<p class="mr-note" id="mrTtsNote" style="text-align:center;margin-top:1rem;font-size:.75rem;color:var(--steel-light)">🔊 Voice powered by one of the world's leading text-to-speech engines for fast, reliable spoken responses. We're also building natural, human-like cloned voices — designed to sound like real hiring managers, interviewers and professional consultants — coming soon.</p>
+<p class="mr-note" id="mrTtsNote" style="text-align:center;margin-top:1rem;font-size:.75rem;color:var(--steel-light)">🔊 Voice powered by one of the world's leading text-to-speech engines for fast, reliable spoken responses. We're also building natural, human-like cloned voices — designed to sound like real hiring managers, interviewers and professional consultants — <span style="color:var(--gold-light);font-weight:600">coming soon</span>.</p>
 </div>
 </section>
 
@@ -2031,7 +1977,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
     <button id="qzSend" onclick="qzSendMessage()">Send</button>
   </div>
 </div>
-<p class="mr-note" id="qzTtsNote" style="text-align:center;margin-top:1rem;font-size:.75rem;color:var(--steel-light);display:none">🔊 Voice powered by one of the world's leading text-to-speech engines for fast, reliable spoken responses. We're also building natural, human-like cloned voices — designed to sound like real hiring managers, interviewers and professional consultants — coming soon.</p>
+<p class="mr-note" id="qzTtsNote" style="text-align:center;margin-top:1rem;font-size:.75rem;color:var(--steel-light);display:none">🔊 Voice powered by one of the world's leading text-to-speech engines for fast, reliable spoken responses. We're also building natural, human-like cloned voices — designed to sound like real hiring managers, interviewers and professional consultants — <span style="color:var(--gold-light);font-weight:600">coming soon</span>.</p>
 <p class="mr-note" id="qzNote" style="text-align:center;margin-top:.4rem;display:none">Simulated AI interview coach — for practice and education, not a guarantee of real interview outcomes.</p>
 
 </div>
@@ -2169,7 +2115,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
     <button id="gaapSend" onclick="gaapSendMessage()">Ask</button>
   </div>
 </div>
-<p class="mr-note" id="gaapTtsNote" style="text-align:center;margin-top:.75rem;font-size:.75rem;color:var(--steel-light)">🔊 Voice powered by one of the world's leading text-to-speech engines for fast, reliable spoken responses. We're also building natural, human-like cloned voices — designed to sound like real hiring managers, interviewers and professional consultants — coming soon.</p>
+<p class="mr-note" id="gaapTtsNote" style="text-align:center;margin-top:.75rem;font-size:.75rem;color:var(--steel-light)">🔊 Voice powered by one of the world's leading text-to-speech engines for fast, reliable spoken responses. We're also building natural, human-like cloned voices — designed to sound like real hiring managers, interviewers and professional consultants — <span style="color:var(--gold-light);font-weight:600">coming soon</span>.</p>
 
 </div>
 </section>
@@ -2323,41 +2269,56 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 
 <hr class="gold-rule">
 
-<section id="trust">
-<div class="section-inner flow-reveal">
-<div class="section-header">
-<p class="section-eyebrow">Why Clients Engage</p>
-<h2 class="section-title">Trusted Experience. Practical Advice.</h2>
-</div>
-<div class="trust-grid reveal">
-<div class="trust-card"><h3>10+ Years</h3><p>Ongoing Big 4 audit, advisory and financial reporting experience.</p></div>
-<div class="trust-card"><h3>Big Four Background</h3><p>Deloitte and PwC experience across complex engagements.</p></div>
-<div class="trust-card"><h3>£30M+</h3><p>Portfolio responsibility and stakeholder management.</p></div>
-<div class="trust-card"><h3>IFRS Specialist</h3><p>IFRS 2, 3, 9, 10, 15, 16, 17, 18 and group reporting.</p></div>
-<div class="trust-card"><h3>ISA &amp; PCAOB Specialist</h3><p>ISA 240, 315, 330, 570, 600 and PCAOB auditing standards.</p></div>
-</div>
-</div>
+<div id="whoami"></div>
+<!-- HERO -->
+<section class="hero" id="hero">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <p class="hero-eyebrow">Audit &amp; Advisory</p>
+      <h1 class="hero-name">Usman Qureshi</h1>
+      <p class="hero-title">Audit • IFRS Technical Training & Workshops • Technical Accounting & Financial Reporting Advisory</p>
+      <p class="hero-bio">
+        Helping growing and complex businesses navigate statutory audits, IFRS implementation, financial reporting challenges and transaction-related accounting with Big Four expertise and practical commercial insight.
+      </p>
+      <div class="hero-cta">
+        <a href="#services" class="btn-ghost">View Services</a>
+        <a href="#contact" class="btn-ghost">Book a Consultation</a>
+      </div>
+      <div class="site-stats-badge" id="siteStatsBadge"></div>
+    </div>
+
+    <div class="hero-right">
+      <div class="stat-card">
+        <div class="stat-number">10</div>
+        <div class="stat-label">Years of Ongoing Big 4 Experience</div>
+        <div class="stat-sub">Audit, Advisory &amp; Financial Reporting — Deloitte UK · PwC · BDO Bahrain</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">£20–30M</div>
+        <div class="stat-label">Combined Annual Fees Managed</div>
+        <div class="stat-sub">Current active portfolio</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">8</div>
+        <div class="stat-label">Sectors of Deep Expertise</div>
+        <div class="stat-sub">Banking · Automotive · Media · PE · Pharma · Tech · Public Sector · Education</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">22</div>
+        <div class="stat-label">Largest Team Led</div>
+        <div class="stat-sub">22-member team, including onshore &amp; offshore resources</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">Artificial Intelligence (AI)</div>
+        <div class="stat-label">Hands-On AI &amp; Web Expertise</div>
+        <div class="stat-sub">Prompt engineering, AI agents, web development &amp; design — built this entire site himself</div>
+      </div>
+    </div>
+  </div>
+
 </section>
 
-<section id="services">
-<div class="section-inner flow-reveal">
-<div class="section-header">
-<p class="section-eyebrow">Services</p>
-<h2 class="section-title">Services I Offer</h2><p class="section-sub">Practical, Big Four quality support for finance leaders, founders, SMEs, multinational groups and private equity-backed businesses.</p>
-</div>
-<div class="service-grid reveal">
-<div class="service-card"><h3>IFRS Technical Training & Workshops</h3><p>Implementation, technical accounting and complex transactions.</p></div>
-<div class="service-card"><h3>Statutory & External Audit</h3><p>End-to-end audit delivery, ISA/PCAOB compliance and technical issue resolution.</p></div>
-<div class="service-card"><h3>Technical Accounting & Financial Reporting Advisory</h3><p>Year-end reporting, disclosures and consolidation support.</p></div>
-<div class="service-card"><h3>Transaction Accounting</h3><p>Business combinations, PPAs and acquisition accounting.</p></div>
-<div class="service-card"><h3>Internal Controls</h3><p>Risk assessment, governance and control frameworks.</p></div>
-<div class="service-card"><h3>CFO Advisory</h3><p>Finance transformation and reporting optimisation.</p></div>
-<div class="service-card"><h3>CV Reviews, Career Coaching & Interview Preparation</h3><p>Audit readiness, technical papers and issue resolution.</p></div>
-<div class="service-card"><h3>Website Development, Design & AI Agents</h3><p>This very site — and every AI tool on it — built end-to-end by Usman: web development, website design, prompt engineering and custom AI agents.</p></div>
-</div>
-</div>
-</section>
-
+<hr class="gold-rule">
 
 <!-- EXPERIENCE TIMELINE -->
 <section id="about">
@@ -2400,6 +2361,168 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
         <p class="trail-desc">Over four and a half years at PwC, developing core audit competencies across banking, microfinance, pharmaceuticals and healthcare. Managed audit field work, built technical skills in IFRS and UK GAAP, and earned ACCA membership in 2021. Led teams on listed and large private-sector engagements with a strong focus on internal controls and regulatory compliance.</p>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<hr class="gold-rule">
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-inner flow-reveal">
+    <div class="section-header">
+      <p class="section-eyebrow">Capabilities</p>
+      <h2 class="section-title">Core Skills</h2>
+    </div>
+
+    <div class="skills-layout">
+      <div>
+        <div class="skill-block">
+          <div class="skill-block-title">Audit &amp; Technical Accounting & Financial Reporting Advisory</div>
+
+          <div class="skill-item">
+            <div class="skill-label"><span>External &amp; Statutory Audit</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="0.98"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>IFRS Technical Accounting</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="0.96"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>Group &amp; Consolidation Audits</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="0.93"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>Risk Assessment &amp; Internal Controls</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="0.95"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>Financial Modelling &amp; ECL Models</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="0.9"></div></div>
+          </div>
+        </div>
+
+        <div class="skill-block">
+          <div class="skill-block-title">Leadership &amp; Management</div>
+
+          <div class="skill-item">
+            <div class="skill-label"><span>Team Leadership &amp; Coaching</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="0.95"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>Stakeholder &amp; Client Management</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="0.94"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>Engagement Budget &amp; Resource Planning</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="0.9"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-label"><span>Data Analytics &amp; Power BI</span></div>
+            <div class="skill-bar"><div class="skill-fill" data-width="0.85"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <p class="skill-block-title" style="margin-bottom:1.25rem;">Current Portfolio at a Glance</p>
+        <div class="portfolio-facts">
+          <div class="fact-box">
+            <span class="fact-num">4</span>
+            <span class="fact-label">Active Audit Projects</span>
+          </div>
+          <div class="fact-box">
+            <span class="fact-num">8</span>
+            <span class="fact-label">Target Projects FY26</span>
+          </div>
+          <div class="fact-box">
+            <span class="fact-num">17</span>
+            <span class="fact-label">Avg. Team Size</span>
+          </div>
+          <div class="fact-box">
+            <span class="fact-num">6–8</span>
+            <span class="fact-label">Direct Reports</span>
+          </div>
+        </div>
+
+        <div style="margin-top:2rem;">
+          <p class="skill-block-title">Also Proficient In</p>
+          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem;">
+            <span class="std-pill">Advanced Excel</span>
+            <span class="std-pill">Power BI</span>
+            <span class="std-pill">AI-Enabled Audit Tools</span>
+            <span class="std-pill">SOX Testing</span>
+            <span class="std-pill">Technical Paper Writing</span>
+            <span class="std-pill">Cost-Benefit Analysis</span>
+            <span class="std-pill">Business Modelling</span>
+            <span class="std-pill">Training &amp; Facilitation</span>
+            <span class="std-pill">Budget Setting &amp; Monitoring</span>
+            <span class="std-pill">Resource Allocation</span>
+            <span class="std-pill">Multi-Jurisdiction Team Management</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="gold-rule">
+
+<!-- STANDARDS -->
+<section id="standards">
+  <div class="section-inner flow-reveal">
+    <div class="section-header">
+      <p class="section-eyebrow">Technical Mastery</p>
+      <h2 class="section-title">Standards &amp; Frameworks</h2>
+      <p class="section-sub">A breadth of technical coverage rarely held by a single professional — spanning financial reporting, auditing, regulatory and governance frameworks across multiple jurisdictions.</p>
+    </div>
+
+    <div class="standards-grid">
+      <div class="std-group">
+        <div class="std-group-title">IFRS Standards</div>
+        <div class="std-list">
+          <span class="std-pill">IFRS 2</span>
+          <span class="std-pill">IFRS 3</span>
+          <span class="std-pill">IFRS 9</span>
+          <span class="std-pill">IFRS 10</span>
+          <span class="std-pill">IFRS 15</span>
+          <span class="std-pill">IFRS 16</span>
+          <span class="std-pill">IFRS 18</span>
+          <span class="std-pill">IAS 21</span>
+          <span class="std-pill">IAS 36</span>
+        </div>
+      </div>
+
+      <div class="std-group">
+        <div class="std-group-title">Auditing Standards</div>
+        <div class="std-list">
+          <span class="std-pill">ISA 240</span>
+          <span class="std-pill">ISA 570</span>
+          <span class="std-pill">ISA 600</span>
+          <span class="std-pill">PCAOB</span>
+          <span class="std-pill">ISAs (Full Suite)</span>
+        </div>
+      </div>
+
+      <div class="std-group">
+        <div class="std-group-title">Reporting Frameworks</div>
+        <div class="std-list">
+          <span class="std-pill">UK GAAP (FRS 101)</span>
+          <span class="std-pill">UK GAAP (FRS 102)</span>
+          <span class="std-pill">US GAAP</span>
+          <span class="std-pill">IFRS (Full)</span>
+        </div>
+      </div>
+
+      <div class="std-group">
+        <div class="std-group-title">Controls &amp; Governance</div>
+        <div class="std-list">
+          <span class="std-pill">SOX Compliance</span>
+          <span class="std-pill">Internal Controls</span>
+          <span class="std-pill">Risk Assessment</span>
+          <span class="std-pill">Regulatory Compliance</span>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -2537,172 +2660,6 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 
 <hr class="gold-rule">
 
-<!-- STANDARDS -->
-<section id="standards">
-  <div class="section-inner flow-reveal">
-    <div class="section-header">
-      <p class="section-eyebrow">Technical Mastery</p>
-      <h2 class="section-title">Standards &amp; Frameworks</h2>
-      <p class="section-sub">A breadth of technical coverage rarely held by a single professional — spanning financial reporting, auditing, regulatory and governance frameworks across multiple jurisdictions.</p>
-    </div>
-
-    <div class="standards-grid">
-      <div class="std-group">
-        <div class="std-group-title">IFRS Standards</div>
-        <div class="std-list">
-          <span class="std-pill">IFRS 2</span>
-          <span class="std-pill">IFRS 3</span>
-          <span class="std-pill">IFRS 9</span>
-          <span class="std-pill">IFRS 10</span>
-          <span class="std-pill">IFRS 15</span>
-          <span class="std-pill">IFRS 16</span>
-          <span class="std-pill">IFRS 18</span>
-          <span class="std-pill">IAS 21</span>
-          <span class="std-pill">IAS 36</span>
-        </div>
-      </div>
-
-      <div class="std-group">
-        <div class="std-group-title">Auditing Standards</div>
-        <div class="std-list">
-          <span class="std-pill">ISA 240</span>
-          <span class="std-pill">ISA 570</span>
-          <span class="std-pill">ISA 600</span>
-          <span class="std-pill">PCAOB</span>
-          <span class="std-pill">ISAs (Full Suite)</span>
-        </div>
-      </div>
-
-      <div class="std-group">
-        <div class="std-group-title">Reporting Frameworks</div>
-        <div class="std-list">
-          <span class="std-pill">UK GAAP (FRS 101)</span>
-          <span class="std-pill">UK GAAP (FRS 102)</span>
-          <span class="std-pill">US GAAP</span>
-          <span class="std-pill">IFRS (Full)</span>
-        </div>
-      </div>
-
-      <div class="std-group">
-        <div class="std-group-title">Controls &amp; Governance</div>
-        <div class="std-list">
-          <span class="std-pill">SOX Compliance</span>
-          <span class="std-pill">Internal Controls</span>
-          <span class="std-pill">Risk Assessment</span>
-          <span class="std-pill">Regulatory Compliance</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="gold-rule">
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="section-inner flow-reveal">
-    <div class="section-header">
-      <p class="section-eyebrow">Capabilities</p>
-      <h2 class="section-title">Core Skills</h2>
-    </div>
-
-    <div class="skills-layout">
-      <div>
-        <div class="skill-block">
-          <div class="skill-block-title">Audit &amp; Technical Accounting & Financial Reporting Advisory</div>
-
-          <div class="skill-item">
-            <div class="skill-label"><span>External &amp; Statutory Audit</span></div>
-            <div class="skill-bar"><div class="skill-fill" data-width="0.98"></div></div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-label"><span>IFRS Technical Accounting</span></div>
-            <div class="skill-bar"><div class="skill-fill" data-width="0.96"></div></div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-label"><span>Group &amp; Consolidation Audits</span></div>
-            <div class="skill-bar"><div class="skill-fill" data-width="0.93"></div></div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-label"><span>Risk Assessment &amp; Internal Controls</span></div>
-            <div class="skill-bar"><div class="skill-fill" data-width="0.95"></div></div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-label"><span>Financial Modelling &amp; ECL Models</span></div>
-            <div class="skill-bar"><div class="skill-fill" data-width="0.9"></div></div>
-          </div>
-        </div>
-
-        <div class="skill-block">
-          <div class="skill-block-title">Leadership &amp; Management</div>
-
-          <div class="skill-item">
-            <div class="skill-label"><span>Team Leadership &amp; Coaching</span></div>
-            <div class="skill-bar"><div class="skill-fill" data-width="0.95"></div></div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-label"><span>Stakeholder &amp; Client Management</span></div>
-            <div class="skill-bar"><div class="skill-fill" data-width="0.94"></div></div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-label"><span>Engagement Budget &amp; Resource Planning</span></div>
-            <div class="skill-bar"><div class="skill-fill" data-width="0.9"></div></div>
-          </div>
-          <div class="skill-item">
-            <div class="skill-label"><span>Data Analytics &amp; Power BI</span></div>
-            <div class="skill-bar"><div class="skill-fill" data-width="0.85"></div></div>
-          </div>
-        </div>
-      </div>
-
-      <div>
-        <p class="skill-block-title" style="margin-bottom:1.25rem;">Current Portfolio at a Glance</p>
-        <div class="portfolio-facts">
-          <div class="fact-box">
-            <span class="fact-num">4</span>
-            <span class="fact-label">Active Audit Projects</span>
-          </div>
-          <div class="fact-box">
-            <span class="fact-num">8</span>
-            <span class="fact-label">Target Projects FY26</span>
-          </div>
-          <div class="fact-box">
-            <span class="fact-num">17</span>
-            <span class="fact-label">Avg. Team Size</span>
-          </div>
-          <div class="fact-box">
-            <span class="fact-num">6–8</span>
-            <span class="fact-label">Direct Reports</span>
-          </div>
-        </div>
-
-        <div style="margin-top:2rem;">
-          <p class="skill-block-title">Also Proficient In</p>
-          <div style="display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.75rem;">
-            <span class="std-pill">Advanced Excel</span>
-            <span class="std-pill">Power BI</span>
-            <span class="std-pill">AI-Enabled Audit Tools</span>
-            <span class="std-pill">SOX Testing</span>
-            <span class="std-pill">Technical Paper Writing</span>
-            <span class="std-pill">Cost-Benefit Analysis</span>
-            <span class="std-pill">Business Modelling</span>
-            <span class="std-pill">Training &amp; Facilitation</span>
-            <span class="std-pill">Budget Setting &amp; Monitoring</span>
-            <span class="std-pill">Resource Allocation</span>
-            <span class="std-pill">Multi-Jurisdiction Team Management</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<hr class="gold-rule">
-
-<!-- CONTACT -->
-
-<hr class="gold-rule">
-
 <section id="clientexp">
 <div class="section-inner">
 <div class="section-header">
@@ -2722,36 +2679,6 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 <div class="client-card"><h3>IVC Holdco</h3><p>Pharmaceuticals &amp; Healthcare • Global Audit • Inventory &amp; Provisions</p></div>
 <div class="client-card"><h3>Ahlia University</h3><p>Education (Bahrain) • Fee Income • Grant Accounting • Governance</p></div>
 <div class="client-card"><h3>NRSP Microfinance</h3><p>Microfinance • IFRS 9 ECL • Regulatory Compliance</p></div>
-</div>
-</div>
-</section>
-
-<section id="publications">
-<div class="section-inner flow-reveal">
-<div class="section-header">
-<p class="section-eyebrow">Knowledge Centre</p>
-<h2 class="section-title">Technical Publications & Executive Training</h2>
-<p class="section-sub">Deep-dive technical content designed for CFOs, Finance Directors, Controllers, Audit Committees and Audit Professionals.</p>
-</div>
-<div class="knowledge-grid">
-<div class="knowledge-card">
-<span class="sector-icon">📘</span>
-<h3>IFRS 18 – Executive Masterclass</h3>
-<p>Complete technical guide covering implementation, MPMs, transition requirements, industry impacts, FTSE case studies and readiness planning.</p>
-<button class="pub-btn" onclick="openPub('ifrs18modal')">Open Publication</button>
-</div>
-<div class="knowledge-card">
-<span class="sector-icon">📗</span>
-<h3>FRS 102 Amendments (2024/2026)</h3>
-<p>Revenue recognition (IFRS 15-aligned model), on-balance-sheet leases, transition options and practical implementation considerations for UK GAAP preparers.</p>
-<button class="pub-btn" onclick="openPub('frs102modal')">Open Publication</button>
-</div>
-<div class="knowledge-card">
-<span class="sector-icon">🤖</span>
-<h3>AI, Audit & Future of Finance</h3>
-<p>How AI is reshaping audit delivery, technical accounting and finance leadership — and what it means for the next decade of the profession.</p>
-<button class="pub-btn" onclick="openPub('aiauditmodal')">Open Publication</button>
-</div>
 </div>
 </div>
 </section>
@@ -2828,6 +2755,45 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 <div id="gaapSlideContent"></div>
 </div>
 </div>
+
+<hr class="gold-rule">
+
+<section id="services">
+<div class="section-inner flow-reveal">
+<div class="section-header">
+<p class="section-eyebrow">Services</p>
+<h2 class="section-title">Services I Offer</h2><p class="section-sub">Practical, Big Four quality support for finance leaders, founders, SMEs, multinational groups and private equity-backed businesses.</p>
+</div>
+<div class="service-grid reveal">
+<div class="service-card"><h3>IFRS Technical Training & Workshops</h3><p>Implementation, technical accounting and complex transactions.</p></div>
+<div class="service-card"><h3>Statutory & External Audit</h3><p>End-to-end audit delivery, ISA/PCAOB compliance and technical issue resolution.</p></div>
+<div class="service-card"><h3>Technical Accounting & Financial Reporting Advisory</h3><p>Year-end reporting, disclosures and consolidation support.</p></div>
+<div class="service-card"><h3>Transaction Accounting</h3><p>Business combinations, PPAs and acquisition accounting.</p></div>
+<div class="service-card"><h3>Internal Controls</h3><p>Risk assessment, governance and control frameworks.</p></div>
+<div class="service-card"><h3>CFO Advisory</h3><p>Finance transformation and reporting optimisation.</p></div>
+<div class="service-card"><h3>CV Reviews, Career Coaching & Interview Preparation</h3><p>Audit readiness, technical papers and issue resolution.</p></div>
+<div class="service-card"><h3>Website Development, Design & AI Agents</h3><p>This very site — and every AI tool on it — built end-to-end by Usman: web development, website design, prompt engineering and custom AI agents.</p></div>
+</div>
+</div>
+</section>
+
+<hr class="gold-rule">
+
+<section id="trust">
+<div class="section-inner flow-reveal">
+<div class="section-header">
+<p class="section-eyebrow">Why Clients Engage</p>
+<h2 class="section-title">Trusted Experience. Practical Advice.</h2>
+</div>
+<div class="trust-grid reveal">
+<div class="trust-card"><h3>10+ Years</h3><p>Ongoing Big 4 audit, advisory and financial reporting experience.</p></div>
+<div class="trust-card"><h3>Big Four Background</h3><p>Deloitte and PwC experience across complex engagements.</p></div>
+<div class="trust-card"><h3>£30M+</h3><p>Portfolio responsibility and stakeholder management.</p></div>
+<div class="trust-card"><h3>IFRS Specialist</h3><p>IFRS 2, 3, 9, 10, 15, 16, 17, 18 and group reporting.</p></div>
+<div class="trust-card"><h3>ISA &amp; PCAOB Specialist</h3><p>ISA 240, 315, 330, 570, 600 and PCAOB auditing standards.</p></div>
+</div>
+</div>
+</section>
 
 <hr class="gold-rule">
 
@@ -2973,7 +2939,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
       <button id="forgotBackLink" onclick="toggleForgotMode(false)" style="display:none;background:none;border:none;color:var(--steel-light);font-size:.75rem;text-decoration:underline;cursor:pointer;text-align:center">Back to log in</button>
     </div>
   </div>
-  <button class="welcome-bot-toggle widget-tip" data-tooltip="Sign up free" id="signupToggle" style="background:linear-gradient(135deg,#5fd97a,#C8A96E)">✨</button>
+  <button class="welcome-bot-toggle widget-tip" data-tooltip="Sign up free" id="signupToggle" style="background:linear-gradient(135deg,#5fd97a,#C8A96E);display:none">✨</button>
 </div>
 
 <!-- PERSONAL GPT WIDGET -->
@@ -2993,93 +2959,10 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 </div>
 
 
-<div class="pub-modal" id="ifrs18modal">
-<div class="pub-inner">
-<span class="closepub" onclick="closePub('ifrs18modal')">&times;</span>
-<button class="pub-back" onclick="closePub('ifrs18modal')">&larr; Back to Publications</button>
-<h1>IFRS 18 – Presentation of Financial Statements</h1>
-<p><strong>Author:</strong> Usman Qureshi ACCA | Executive Technical Training Programme</p>
-<div class="toc">
-<a href="#ifrs18-background">Background &amp; Rationale</a><a href="#ifrs18-effective">Effective Date</a><a href="#ifrs18-structure">Income Statement Structure</a><a href="#ifrs18-mpms">MPMs</a><a href="#ifrs18-impact">Industry Impact</a><a href="#ifrs18-case">FTSE Case Study</a><a href="#ifrs18-roadmap">Implementation Roadmap</a><a href="#ifrs18-cpd">CPD Outcomes</a>
-</div>
-<h2 id="ifrs18-background">Background &amp; Rationale</h2>
-<p>The IASB introduced IFRS 18 <em>Presentation and Disclosure in Financial Statements</em> to replace IAS 1 and improve comparability, regulate company-defined Management Performance Measures (MPMs) and standardise the presentation of financial performance across all listed entities. It responds directly to long-standing investor criticism that income statements were too inconsistent in structure to compare across companies and sectors.</p>
-<h2 id="ifrs18-effective">Effective Date</h2>
-<p>IFRS 18 is effective for annual reporting periods beginning on or after <strong>1 January 2027</strong>, with earlier application permitted. Full retrospective restatement of comparative periods is required, meaning FY2026 comparatives will need to be prepared on an IFRS 18 basis ahead of formal adoption.</p>
-<h2 id="ifrs18-structure">Income Statement Structure</h2>
-<p>The standard introduces three mandatory categories — <strong>Operating</strong>, <strong>Investing</strong> and <strong>Financing</strong> — with two new mandatory subtotals: <strong>Operating Profit</strong> and <strong>Profit before Financing and Income Tax</strong>. Every line item must be classified into one of these categories based on an entity's main business activities, removing the discretion companies previously had over income statement layout.</p>
-<h2 id="ifrs18-mpms">Management Performance Measures (MPMs)</h2>
-<p>MPMs — subtotals like "adjusted operating profit" that management uses in public communications — are formally brought into the financial statements for the first time. Companies must disclose a reconciliation from the MPM to the most comparable IFRS-defined subtotal, explain the rationale for the measure, and apply consistent definitions period to period. This directly targets the proliferation of inconsistent non-GAAP metrics seen in investor presentations.</p>
-<h2 id="ifrs18-impact">Industry Impact</h2>
-<p>Banking, Technology, Media, Real Estate, Asset Management, Manufacturing and listed groups generally face the most significant change, particularly where current income statements rely heavily on adjusted/underlying profit measures or where operating, investing and financing activities are not cleanly separated in existing systems.</p>
-<h2 id="ifrs18-case">FTSE Case Study</h2>
-<p>A FTSE 250 industrial group's dry-run restatement under IFRS 18 found that roughly 18% of its existing income statement line items needed reclassification between operating and investing categories — primarily around equity-accounted associates and gains on disposal of non-core assets. The group's previously-reported "adjusted EBIT" required a full MPM reconciliation disclosure, prompting a board-level review of which adjusting items could still be justified.</p>
-<h2 id="ifrs18-roadmap">Implementation Roadmap</h2>
-<p>Gap Assessment → Policy Design → Systems &amp; Chart-of-Accounts Changes → MPM Reconciliation Design → Dry-Run Comparatives → Audit Committee Sign-off → Go Live.</p>
-<h2 id="ifrs18-cpd">CPD Outcomes</h2>
-<p>Participants will be able to perform impact assessments, classify income statement items into the new categories, design MPM reconciliations, update accounting policies and prepare IFRS 18-compliant reporting ahead of the 1 January 2027 effective date.</p>
-<div class="further-reading">
-<h2>Further Reading &amp; Authoritative Sources</h2>
-<ul>
-<li><a href="https://www.ifrs.org/issued-standards/list-of-standards/ifrs-18-presentation-and-disclosure-in-financial-statements/" target="_blank" rel="noopener">IFRS Foundation — IFRS 18 Standard &amp; Project Summary</a></li>
-<li><a href="https://www2.deloitte.com/global/en/pages/audit/articles/ifrs-in-focus.html" target="_blank" rel="noopener">Deloitte IFRS in Focus — IFRS 18 Publications</a></li>
-<li><a href="https://www.pwc.com/gx/en/services/audit-assurance/ifrs-reporting.html" target="_blank" rel="noopener">PwC — IFRS 18 Reporting Guidance</a></li>
-<li><a href="https://kpmg.com/xx/en/our-insights/ifrg/2024/ifrs-18-presentation-disclosure.html" target="_blank" rel="noopener">KPMG — IFRS 18 Presentation &amp; Disclosure Insights</a></li>
-<li><a href="https://www.ey.com/en_gl/ifrs-technical-resources" target="_blank" rel="noopener">EY — IFRS Technical Resources</a></li>
-</ul>
-</div>
-</div></div>
-
-<div class="pub-modal" id="frs102modal">
-<div class="pub-inner">
-<span class="closepub" onclick="closePub('frs102modal')">&times;</span>
-<button class="pub-back" onclick="closePub('frs102modal')">&larr; Back to Publications</button>
-<h1>FRS 102 — The Financial Reporting Standard Applicable in the UK and Republic of Ireland</h1>
-<p><strong>Author:</strong> Usman Qureshi ACCA | Executive Technical Training Programme</p>
-<div class="toc">
-<a href="#frs102-why">Why the Changes</a><a href="#frs102-effective">Effective Date</a><a href="#frs102-revenue">Revenue Model</a><a href="#frs102-leases">On-BS Leases</a><a href="#frs102-transition">Transition Choices</a><a href="#frs102-impacted">Who's Impacted</a><a href="#frs102-plan">Implementation Plan</a><a href="#frs102-cpd">CPD Outcomes</a>
-</div>
-<h2 id="frs102-why">Why the Changes</h2>
-<p>The FRC's periodic review aligns FRS 102 more closely with IFRS 15 (revenue) and IFRS 16 (leases), closing a long-standing gap between UK GAAP and full IFRS for two of the most judgemental areas of financial reporting — driven by feedback that UK GAAP revenue and lease accounting had become noticeably out of step with international practice.</p>
-<h2 id="frs102-effective">Effective Date</h2>
-<p>The amendments apply for accounting periods beginning on or after <strong>1 January 2026</strong>, with early adoption permitted. Entities choosing early adoption must apply all the amendments together — partial early adoption of only the revenue or only the leases changes is not permitted.</p>
-<h2 id="frs102-revenue">Revenue Recognition Model</h2>
-<ul>
-<li>New five-step revenue recognition model mirroring IFRS 15 — replacing the existing risk-and-rewards approach</li>
-<li>Identification of distinct performance obligations within a contract and allocation of the transaction price across them</li>
-<li>Variable consideration, financing components and contract modifications now follow an IFRS 15-style judgemental framework rather than bright-line rules</li>
-</ul>
-<h2 id="frs102-leases">On-Balance-Sheet Leases</h2>
-<ul>
-<li>Most operating leases brought on-balance-sheet via a right-of-use asset and lease liability, IFRS 16-style</li>
-<li>Recognition exemptions retained for short-life (≤12 months) and low-value asset leases</li>
-<li>Lessor accounting remains largely unchanged, preserving the existing finance/operating lease distinction</li>
-</ul>
-<h2 id="frs102-transition">Transition Choices</h2>
-<p>Preparers may choose between a modified retrospective approach (recognising the cumulative effect at the date of initial application, with no restatement of comparatives) or full retrospective application (restating comparatives as if the new requirements had always applied). The modified approach is operationally simpler but produces a one-off transition adjustment to opening reserves.</p>
-<h2 id="frs102-impacted">Who Is Most Impacted?</h2>
-<p>Construction and long-term contracting, software/SaaS, retail and leisure groups with significant property leases, and any UK GAAP reporter with multi-element or subscription-style revenue arrangements.</p>
-<h2 id="frs102-plan">Implementation Plan</h2>
-<p>Contract &amp; Lease Population Review → Accounting Policy Redesign → Transition Method Decision → Systems &amp; Disclosure Update → Comparative Dry Run → Go Live.</p>
-<h2 id="frs102-cpd">CPD Outcomes</h2>
-<p>Participants will be able to map existing revenue streams and leases to the new requirements, choose an appropriate transition method, and prepare FRS 102-compliant disclosures ahead of the effective date.</p>
-<div class="further-reading">
-<h2>Further Reading &amp; Authoritative Sources</h2>
-<ul>
-<li><a href="https://www.frc.org.uk/library/standards-codes-policy/accounting-and-reporting/frs-102/" target="_blank" rel="noopener">Financial Reporting Council — FRS 102 &amp; Periodic Review</a></li>
-<li><a href="/training-assets/re15_frs102-periodic-review-amendments.pdf" target="_blank" rel="noopener">FRC — Full Periodic Review Amendments Document (PDF)</a></li>
-<li><a href="https://www2.deloitte.com/uk/en/pages/audit/articles/frs-102.html" target="_blank" rel="noopener">Deloitte UK — FRS 102 Amendments Guidance</a></li>
-<li><a href="https://www.pwc.co.uk/audit-assurance/assets/frs-102.html" target="_blank" rel="noopener">PwC UK — UK GAAP &amp; FRS 102 Insights</a></li>
-<li><a href="https://kpmg.com/uk/en/home/insights/2023/12/frs-102-periodic-review.html" target="_blank" rel="noopener">KPMG UK — FRS 102 Periodic Review Insights</a></li>
-<li><a href="https://www.bdo.co.uk/en-gb/insights/business-edge/frs-102" target="_blank" rel="noopener">BDO UK — FRS 102 Practical Guidance</a></li>
-</ul>
-</div>
-</div></div>
-
 <div class="pub-modal" id="ifrs9modal">
 <div class="pub-inner">
 <span class="closepub" onclick="closePub('ifrs9modal')">&times;</span>
-<button class="pub-back" onclick="closePub('ifrs9modal')">&larr; Back to Publications</button>
+<button class="pub-back" onclick="closePub('ifrs9modal')">&larr; Back to Trainings</button>
 <h1>IFRS 9 — Financial Instruments</h1>
 <p><strong>Author:</strong> Usman Qureshi ACCA, ACA | Executive Technical Training Programme</p>
 <div class="toc">
@@ -3136,7 +3019,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 <div class="pub-modal" id="ifrss12modal">
 <div class="pub-inner">
 <span class="closepub" onclick="closePub('ifrss12modal')">&times;</span>
-<button class="pub-back" onclick="closePub('ifrss12modal')">&larr; Back to Publications</button>
+<button class="pub-back" onclick="closePub('ifrss12modal')">&larr; Back to Trainings</button>
 <h1>IFRS S1 &amp; S2 — Sustainability Disclosures</h1>
 <p><strong>Author:</strong> Usman Qureshi ACCA, ACA | Executive Technical Training Programme</p>
 <div class="toc">
@@ -3175,47 +3058,6 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 <li><a href="https://www.ey.com/en_gl/sustainability/ifrs-s1-s2" target="_blank" rel="noopener">EY — IFRS S1 &amp; S2 Implementation Guidance</a></li>
 <li><a href="https://www2.deloitte.com/global/en/pages/audit/articles/issb-sustainability-standards.html" target="_blank" rel="noopener">Deloitte — ISSB Standards Resource Hub</a></li>
 <li><a href="https://www.efrag.org/en/sustainability-reporting" target="_blank" rel="noopener">EFRAG — ESRS &amp; CSRD (EU equivalent regime)</a></li>
-</ul>
-</div>
-</div></div>
-
-<div class="pub-modal" id="aiauditmodal">
-<div class="pub-inner">
-<span class="closepub" onclick="closePub('aiauditmodal')">&times;</span>
-<button class="pub-back" onclick="closePub('aiauditmodal')">&larr; Back to Publications</button>
-<h1>AI, Audit &amp; the Future of Finance</h1>
-<p><strong>Author:</strong> Usman Qureshi ACCA | Executive Technical Training Programme</p>
-<div class="toc">
-<a href="#ai-why">Why It Matters</a><a href="#ai-usecases">Audit Use Cases</a><a href="#ai-risk">Risk &amp; Controls</a><a href="#ai-regulatory">Regulatory View</a><a href="#ai-skills">Skills Shift</a><a href="#ai-outlook">5-Year Outlook</a><a href="#ai-cpd">CPD Outcomes</a>
-</div>
-<h2 id="ai-why">Why AI Matters to the Profession</h2>
-<p>AI-enabled audit tools — full-population testing, anomaly detection and automated journal entry analysis — are moving audit from sample-based assurance toward continuous, data-driven assurance. Big Four firms now run proprietary platforms (e.g. Deloitte Omnia, PwC Halo, KPMG Clara, EY Helix) embedding AI directly into the audit file.</p>
-<h2 id="ai-usecases">Core Use Cases</h2>
-<ul>
-<li>Full-population journal entry testing and anomaly/fraud-risk scoring</li>
-<li>Automated contract and lease abstraction for IFRS 15 / IFRS 16</li>
-<li>Predictive analytics for going concern and impairment indicators</li>
-<li>Natural-language drafting support for technical memos and disclosures</li>
-<li>Continuous controls monitoring in ERP environments</li>
-</ul>
-<h2 id="ai-risk">Risk, Controls &amp; Professional Scepticism</h2>
-<p>Regulators (FRC, PCAOB, IAASB) are clear that AI augments — not replaces — professional judgement. Firms must evidence challenge of AI outputs, manage model risk, and maintain ISA 200-level professional scepticism even where tools generate the initial analysis.</p>
-<h2 id="ai-regulatory">Regulatory Direction</h2>
-<p>The IAASB's evolving guidance and the FRC's technology strategy both point toward standards updates addressing automated tools, audit evidence from AI systems, and firm-level governance over algorithmic risk.</p>
-<h2 id="ai-skills">Skills Shift for Finance Professionals</h2>
-<p>Demand is rising for hybrid technical-plus-data skillsets: IFRS/ISA technical depth combined with data analytics, prompt design and the judgement to interrogate AI-generated output rather than accept it at face value.</p>
-<h2 id="ai-outlook">5-Year Outlook</h2>
-<p>Expect continuous, full-population audit testing to become the baseline rather than the exception within five years, with sample-based testing reserved for residual judgemental areas. Audit reports may begin to reference the use of AI-assisted evidence-gathering, and regulators are likely to introduce specific documentation requirements for algorithmic audit tools. Finance functions will increasingly need "AI-fluent" controllers who can both use and challenge these tools.</p>
-<h2 id="ai-cpd">CPD Outcomes</h2>
-<p>Participants will understand current AI audit tooling, the professional scepticism implications of AI-assisted evidence, and how to position their own skillset for an AI-augmented finance function.</p>
-<div class="further-reading">
-<h2>Further Reading &amp; Authoritative Sources</h2>
-<ul>
-<li><a href="https://www.iaasb.org/focus-areas/technology" target="_blank" rel="noopener">IAASB — Technology &amp; AI in Auditing</a></li>
-<li><a href="https://www.frc.org.uk/about-the-frc/who-we-are-and-what-we-do/our-strategy/" target="_blank" rel="noopener">Financial Reporting Council — Technology Strategy</a></li>
-<li><a href="https://www2.deloitte.com/global/en/pages/audit/solutions/audit-innovation.html" target="_blank" rel="noopener">Deloitte — Audit Innovation &amp; Omnia</a></li>
-<li><a href="https://www.pwc.com/gx/en/issues/data-and-analytics.html" target="_blank" rel="noopener">PwC — Halo &amp; Audit Data Analytics</a></li>
-<li><a href="https://kpmg.com/xx/en/home/insights/2023/01/kpmg-clara.html" target="_blank" rel="noopener">KPMG Clara — Smart Audit Platform</a></li>
 </ul>
 </div>
 </div></div>
@@ -3455,7 +3297,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       addMsg('bot', `📊 <strong>GAAP Compare</strong> — IFRS vs US GAAP, with a live bot grounded in KPMG's comparison handbook.`, [
         { label:'Open GAAP Compare', action:()=>{ document.getElementById('gaapcompare').scrollIntoView({behavior:'smooth'}); toggleWelcomeBot(false); } }
       ]);
-      addMsg('bot', `Plus deep-dive <strong>Publications</strong> on IFRS 18, FRS 102 and more. Where would you like to start?`);
+      addMsg('bot', `Plus deep-dive <strong>Trainings</strong> on IFRS 18, FRS 102 and more. Where would you like to start?`);
     }
 
     window.toggleWelcomeBot=function(force){
@@ -6127,6 +5969,11 @@ window.mrTryJoinSession=async function(joinId){
 (async function handleResume(){
   const params=new URLSearchParams(location.search);
   if(params.get('openAsk')==='1') window.toggleAsk?.(true);
+  if(params.get('signup')==='1'){
+    // Sent here from the home page "My Workspace" / sign-up CTA when not logged in.
+    // Open the sign-up/login panel once the page settles.
+    setTimeout(()=>window.toggleSignup?.(true), 600);
+  }
   const resumeId=params.get('resume');
   const tool=params.get('tool');
   if(!resumeId || !tool) return;

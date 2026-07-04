@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Usman Qureshi — Live AI Tools for Finance &amp; Audit Professionals</title>
+<meta name="description" content="A suite of live AI tools for finance, audit and accounting: a real-time Meeting Room with AI specialists, instant CV scoring, GAAP comparisons, interview coaching, financial statement review and more.">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0A1628;
+    --slate: #1E3A5F;
+    --slate-mid: #2A4A72;
+    --gold: #C8A96E;
+    --gold-light: #E0C99A;
+    --cream: #F0EDE6;
+    --steel: #8899AA;
+    --steel-light: #B8C8D8;
+    --white: #FFFFFF;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; background: var(--navy); }
+  body {
+    margin: 0;
+    font-family: 'Manrope', 'Century Gothic', sans-serif;
+    background: var(--navy);
+    color: var(--cream);
+    overflow-x: hidden;
+    position: relative;
+  }
+  a { color: var(--gold); text-decoration: none; }
+  a:hover { color: var(--gold-light); }
+
+  /* ── Office parallax background (matches the rest of the site) ── */
+  .office-parallax{ position:fixed; inset:0; width:100vw; height:100vh; pointer-events:none; z-index:0; }
+  .office-parallax g{ transition:transform .3s cubic-bezier(.22,1,.36,1); }
+  @media (max-width:980px){ .office-parallax{ opacity:0.55; } }
+  section, footer { position: relative; z-index: 1; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 2rem;
+    background: rgba(10,22,40,.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(200,169,110,.15);
+  }
+  .nav-logo { font-weight: 700; letter-spacing: .02em; color: var(--cream); }
+  .nav-cta {
+    border: 1px solid var(--gold); color: var(--gold);
+    padding: .55rem 1.2rem; border-radius: 6px; font-size: .85rem; font-weight: 600;
+    background: none; font-family: inherit; cursor: pointer;
+  }
+  .nav-cta:hover { background: var(--gold); color: var(--navy); }
+
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+  .hero { padding: 9rem 0 5rem; text-align: center; }
+  .eyebrow {
+    text-transform: uppercase; letter-spacing: .14em; font-size: .78rem;
+    color: var(--gold); font-weight: 700; margin-bottom: 1rem;
+  }
+  h1 {
+    font-size: clamp(2.1rem, 5vw, 3.4rem);
+    line-height: 1.15; margin: 0 0 1.2rem; font-weight: 800;
+  }
+  h1 .accent { color: var(--gold); }
+  .hero-sub {
+    font-size: 1.1rem; color: var(--steel-light); max-width: 660px;
+    margin: 0 auto 2.2rem; line-height: 1.6;
+  }
+  .hero-ctas { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold); color: var(--navy); padding: .85rem 1.8rem;
+    border-radius: 8px; font-weight: 700; font-size: .95rem;
+  }
+  .btn-primary:hover { background: var(--gold-light); color: var(--navy); }
+  .btn-ghost {
+    border: 1px solid rgba(200,169,110,.4); color: var(--cream);
+    padding: .85rem 1.8rem; border-radius: 8px; font-weight: 600; font-size: .95rem;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  section { padding: 4rem 0; }
+  .section-header { text-align: center; max-width: 700px; margin: 0 auto 2.8rem; }
+  .section-title { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; margin: .4rem 0 .8rem; }
+  .section-sub { color: var(--steel-light); line-height: 1.6; }
+
+  .tool-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.4rem;
+  }
+  .tool-card {
+    background: rgba(255,255,255,.04);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(200,169,110,.18);
+    border-radius: 14px;
+    padding: 1.6rem;
+    display: flex; flex-direction: column; gap: .6rem;
+    transition: border-color .25s ease, transform .25s ease;
+  }
+  .tool-card:hover { border-color: var(--gold); transform: translateY(-3px); }
+  .tool-icon { font-size: 1.8rem; }
+  .tool-card h3 { margin: 0; font-size: 1.1rem; color: var(--cream); }
+  .tool-card p { margin: 0; color: var(--steel-light); font-size: .92rem; line-height: 1.55; flex: 1; }
+  .tool-card .tool-link { font-weight: 700; font-size: .85rem; margin-top: .3rem; }
+
+  .strip {
+    background: rgba(30,58,95,.55);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(200,169,110,.15);
+    border-bottom: 1px solid rgba(200,169,110,.15);
+  }
+  .strip .wrap { display: flex; gap: 2.5rem; flex-wrap: wrap; justify-content: center; padding: 2.5rem; }
+  .strip-item { text-align: center; }
+  .strip-item .num { font-size: 1.7rem; font-weight: 800; color: var(--gold); }
+  .strip-item .label { font-size: .8rem; color: var(--steel-light); text-transform: uppercase; letter-spacing: .06em; }
+
+  .whoami-card {
+    display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;
+    background: rgba(255,255,255,.04); backdrop-filter: blur(14px);
+    border: 1px solid rgba(200,169,110,.18);
+    border-radius: 16px; padding: 2.2rem;
+  }
+  .whoami-card .text { flex: 1; min-width: 260px; }
+  .whoami-card h3 { margin: 0 0 .6rem; font-size: 1.3rem; }
+  .whoami-card p { color: var(--steel-light); line-height: 1.65; margin: 0 0 1.2rem; }
+
+  /* ── FOOTER (matches the rest of the site) ── */
+  footer {
+    padding: 2rem 4rem;
+    border-top: 1px solid rgba(200,169,110,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-logo { font-size: 1rem; color: var(--gold); }
+  .footer-note { font-size: 0.75rem; color: var(--steel); letter-spacing: 0.05em; }
+
+  /* ── Ambient audio toggle (matches the rest of the site) ── */
+  .audio-toggle{
+    position:fixed;bottom:28px;right:28px;z-index:9998;
+    width:56px;height:56px;border-radius:50%;
+    background:rgba(20,32,52,.7);backdrop-filter:blur(14px);
+    border:1px solid rgba(200,169,110,.3);
+    display:flex;align-items:center;justify-content:center;
+    cursor:pointer;transition:all .4s cubic-bezier(.22,1,.36,1);
+    box-shadow:0 8px 30px rgba(0,0,0,.3);
+  }
+  .audio-toggle:hover{border-color:var(--gold);transform:scale(1.08)}
+  .audio-toggle svg{width:20px;height:20px;stroke:var(--gold)}
+  .audio-toggle.playing{box-shadow:0 0 0 0 rgba(200,169,110,.5)}
+  .audio-toggle.playing::after{
+    content:'';position:absolute;inset:0;border-radius:50%;
+    border:1px solid rgba(200,169,110,.5);
+    animation:pulseRing 2.4s ease-out infinite;
+  }
+  @keyframes pulseRing{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.6);opacity:0}}
+
+  @media (max-width:600px){
+    nav { padding: 1rem 1.2rem; }
+    .nav-logo { font-size: .82rem; }
+    footer { padding: 2rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Office parallax background -->
+<svg class="office-parallax" id="officeParallax" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+  <g id="opLayerWindow" opacity="0.1">
+    <rect x="1080" y="40" width="440" height="600" rx="4" fill="none" stroke="#C8A96E" stroke-width="2"/>
+    <line x1="1300" y1="40" x2="1300" y2="640" stroke="#C8A96E" stroke-width="1.5"/>
+    <line x1="1080" y1="340" x2="1520" y2="340" stroke="#C8A96E" stroke-width="1.5"/>
+    <circle cx="1300" cy="190" r="140" fill="#C8A96E" opacity="0.55"/>
+  </g>
+  <g id="opLayerShelf" opacity="0.1">
+    <rect x="60" y="60" width="380" height="14" fill="#E0C99A"/>
+    <rect x="60" y="160" width="380" height="14" fill="#E0C99A"/>
+    <rect x="60" y="260" width="380" height="14" fill="#E0C99A"/>
+    <rect x="80" y="78" width="28" height="78" fill="none" stroke="#E0C99A" stroke-width="2"/>
+    <rect x="118" y="78" width="20" height="78" fill="none" stroke="#E0C99A" stroke-width="2"/>
+    <rect x="148" y="68" width="36" height="88" fill="none" stroke="#E0C99A" stroke-width="2"/>
+    <rect x="100" y="178" width="30" height="78" fill="none" stroke="#E0C99A" stroke-width="2"/>
+    <rect x="140" y="178" width="22" height="78" fill="none" stroke="#E0C99A" stroke-width="2"/>
+    <circle cx="320" cy="115" r="35" fill="none" stroke="#C8A96E" stroke-width="2"/>
+  </g>
+  <g id="opLayerDesk" opacity="0.13">
+    <rect x="220" y="700" width="780" height="16" rx="2" fill="#C8A96E"/>
+    <rect x="260" y="716" width="18" height="190" fill="#C8A96E"/>
+    <rect x="940" y="716" width="18" height="190" fill="#C8A96E"/>
+    <rect x="480" y="630" width="170" height="74" rx="3" fill="none" stroke="#C8A96E" stroke-width="2.5"/>
+    <rect x="505" y="595" width="120" height="40" rx="2" fill="none" stroke="#C8A96E" stroke-width="2"/>
+    <rect x="700" y="660" width="90" height="44" rx="2" fill="none" stroke="#C8A96E" stroke-width="2"/>
+  </g>
+  <g id="opLayerChair" opacity="0.12">
+    <path d="M340 940 Q340 740 470 740 Q600 740 600 940" fill="none" stroke="#E0C99A" stroke-width="3.5"/>
+    <rect x="355" y="850" width="230" height="26" rx="12" fill="none" stroke="#E0C99A" stroke-width="3"/>
+    <line x1="380" y1="876" x2="368" y2="965" stroke="#E0C99A" stroke-width="3.5"/>
+    <line x1="560" y1="876" x2="572" y2="965" stroke="#E0C99A" stroke-width="3.5"/>
+  </g>
+  <g id="opLayerLamp" opacity="0.13">
+    <line x1="1150" y1="740" x2="1150" y2="580" stroke="#C8A96E" stroke-width="3.5"/>
+    <path d="M1095 580 L1205 580 L1180 525 L1120 525 Z" fill="none" stroke="#C8A96E" stroke-width="3"/>
+    <circle cx="1150" cy="740" r="36" fill="none" stroke="#C8A96E" stroke-width="3"/>
+  </g>
+  <g id="opLayerPlant" opacity="0.1">
+    <path d="M1420 900 L1460 900 L1450 800 L1430 800 Z" fill="none" stroke="#E0C99A" stroke-width="2.5"/>
+    <path d="M1440 800 Q1400 740 1410 690" fill="none" stroke="#E0C99A" stroke-width="2"/>
+    <path d="M1440 800 Q1480 730 1470 680" fill="none" stroke="#E0C99A" stroke-width="2"/>
+    <path d="M1440 800 Q1440 700 1440 650" fill="none" stroke="#E0C99A" stroke-width="2"/>
+  </g>
+</svg>
+
+<nav>
+  <a href="home.html" class="nav-logo">Usman Qureshi, ACCA, ACA</a>
+  <button class="nav-cta" id="workspaceBtn" onclick="goWorkspace()">My Workspace</button>
+</nav>
+
+<section class="hero">
+  <div class="wrap">
+    <p class="eyebrow">Live AI Tools for Finance &amp; Audit</p>
+    <h1>An AI workspace for <span class="accent">finance, audit &amp; accounting</span> professionals</h1>
+    <p class="hero-sub">Talk to an AI panel of audit and IFRS specialists in real time, get your CV scored in seconds, compare IFRS against five GAAPs, review financial statements for compliance, and prep for interviews with an AI coach. Every tool is live and free to try.</p>
+    <div class="hero-ctas">
+      <a href="index.html#aitools" class="btn-primary">Sign Up &amp; Try the Tools — Free</a>
+      <a href="index.html#aitools" class="btn-ghost">Explore the Tools</a>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <div class="strip-item"><div class="num">7</div><div class="label">Live AI Tools</div></div>
+    <div class="strip-item"><div class="num">5</div><div class="label">GAAPs Compared</div></div>
+    <div class="strip-item"><div class="num">100%</div><div class="label">Free to Try</div></div>
+    <div class="strip-item"><div class="num">24/7</div><div class="label">Always Available</div></div>
+  </div>
+</div>
+
+<section id="tools">
+  <div class="wrap">
+    <div class="section-header">
+      <p class="eyebrow">What's Inside</p>
+      <h2 class="section-title">Six tools, one workspace</h2>
+      <p class="section-sub">Each card links straight to the live tool. Sign up free to unlock all of them.</p>
+    </div>
+    <div class="tool-grid">
+
+      <div class="tool-card">
+        <span class="tool-icon">🟢</span>
+        <h3>The Meeting Room</h3>
+        <p>Talk live with an AI panel of audit, IFRS/tax, forensic, ESG, legal and technical accounting specialists. Pick the personas, ask real questions, get real answers.</p>
+        <a href="index.html#meetingroom" class="tool-link">Enter the Meeting Room →</a>
+      </div>
+
+      <div class="tool-card">
+        <span class="tool-icon">🎯</span>
+        <h3>Interview Preparation</h3>
+        <p>Role-specific interview and exam coaching from an AI interviewer, with an emailed feedback report so you can track improvement.</p>
+        <a href="index.html#knowledgetest" class="tool-link">Start Practicing →</a>
+      </div>
+
+      <div class="tool-card">
+        <span class="tool-icon">💼</span>
+        <h3>Score My Resume</h3>
+        <p>Your CV and cover letter scored from three angles at once: HR, ATS algorithm, and hiring manager, with specific, actionable feedback.</p>
+        <a href="index.html#jobhub" class="tool-link">Score My CV →</a>
+      </div>
+
+      <div class="tool-card">
+        <span class="tool-icon">📊</span>
+        <h3>GAAP Compare</h3>
+        <p>A live comparison table and chat bot covering IFRS against five local GAAPs. Ask follow-up questions and get sourced, specific answers.</p>
+        <a href="index.html#gaapcompare" class="tool-link">Compare GAAPs →</a>
+      </div>
+
+      <div class="tool-card">
+        <span class="tool-icon">📝</span>
+        <h3>Financial Statement Review</h3>
+        <p>Upload a financial statement (PDF, docx or txt) and get it reviewed by an AI panel for framework compliance, with real tracked-comment feedback.</p>
+        <a href="index.html#fsreview" class="tool-link">Review a Statement →</a>
+      </div>
+
+      <div class="tool-card">
+        <span class="tool-icon">📰</span>
+        <h3>Hot Market Topics</h3>
+        <p>Auto-refreshed industry news plus curated briefings on the regulatory and audit trends actually moving the profession right now.</p>
+        <a href="index.html#hottopics" class="tool-link">See What's Trending →</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="whoami-card">
+      <div class="text">
+        <p class="eyebrow" style="margin-bottom:.5rem">Behind the Tools</p>
+        <h3>Built by a Big 4-trained auditor who codes</h3>
+        <p>Every tool here is designed and built by Usman Qureshi, ACCA/ACA, a practicing audit &amp; advisory professional with Big 4 experience across multiple sectors, who also builds the prompt engineering, AI agents and web infrastructure behind this entire site.</p>
+        <a href="index.html#whoami" class="btn-ghost" style="display:inline-block">Read the Full Background →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Usman Qureshi · ACCA · ACA</div>
+  <div class="footer-note"><a href="index.html#aitools">AI Tools</a> · <a href="index.html#hottopics">Hot Market Topics</a> · <a href="index.html#whoami">Who am I</a></div>
+  <div class="footer-note">© 2025 Usman Qureshi · All rights reserved</div>
+</footer>
+
+<!-- Ambient music toggle -->
+<div class="audio-toggle" id="audioToggle" title="Background music">
+  <svg id="audioIconOn" viewBox="0 0 24 24" fill="none" stroke-width="1.6" style="display:none">
+    <path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M16 8a5 5 0 010 8" stroke-linecap="round"/>
+    <path d="M19 5a9 9 0 010 14" stroke-linecap="round"/>
+  </svg>
+  <svg id="audioIconOff" viewBox="0 0 24 24" fill="none" stroke-width="1.6">
+    <path d="M11 5L6 9H3v6h3l5 4V5z" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M16 9l5 6M21 9l-5 6" stroke-linecap="round"/>
+  </svg>
+</div>
+
+<script>
+  // My Workspace button — open the workspace if already signed in, otherwise
+  // send the visitor to the sign-up / log-in flow on the main app.
+  async function goWorkspace(){
+    try{
+      const r=await fetch('/api/account?action=me');
+      const d=await r.json();
+      if(d && d.loggedIn){ window.location.href='workspace.html'; return; }
+    }catch(e){}
+    window.location.href='index.html?signup=1';
+  }
+
+  // Boutique office parallax background — moves with the cursor, depth-layered
+  (function(){
+    const layers=[
+      { el:document.getElementById('opLayerWindow'), depth:10 },
+      { el:document.getElementById('opLayerShelf'), depth:6 },
+      { el:document.getElementById('opLayerDesk'), depth:8 },
+      { el:document.getElementById('opLayerChair'), depth:18 },
+      { el:document.getElementById('opLayerLamp'), depth:14 },
+      { el:document.getElementById('opLayerPlant'), depth:12 },
+    ];
+    window.addEventListener('mousemove', e=>{
+      const x=e.clientX/window.innerWidth-0.5;
+      const y=e.clientY/window.innerHeight-0.5;
+      layers.forEach(l=>{ if(l.el) l.el.style.transform=`translate(${(-x*l.depth).toFixed(1)}px, ${(-y*l.depth).toFixed(1)}px)`; });
+    });
+  })();
+
+  // Ambient background music — shares localStorage state with the rest of the
+  // site so the same track keeps playing as visitors move between pages.
+  (function(){
+    let playing=false;
+    const toggle=document.getElementById('audioToggle');
+    const iconOn=document.getElementById('audioIconOn');
+    const iconOff=document.getElementById('audioIconOff');
+    const playlist=['audio/soft-piano.mp3','audio/flute-melody.mp3','audio/soft-background.mp3'];
+    let order=null;
+    try{ const s=JSON.parse(localStorage.getItem('bgMusicOrder')||'null'); if(Array.isArray(s)&&s.length===playlist.length&&s.every(t=>playlist.includes(t))) order=s; }catch(e){}
+    if(!order) order=[...playlist].sort(()=>Math.random()-0.5);
+    let trackIdx=parseInt(localStorage.getItem('bgMusicTrackIdx')||'0',10);
+    if(!(trackIdx>=0&&trackIdx<order.length)) trackIdx=0;
+    const savedTime=parseFloat(localStorage.getItem('bgMusicTime')||'0')||0;
+    const player=new Audio(order[trackIdx]);
+    player.loop=false; player.volume=0; player.preload='auto';
+    if(savedTime>0){ player.addEventListener('loadedmetadata',()=>{ try{ if(savedTime<player.duration-1) player.currentTime=savedTime; }catch(e){} },{once:true}); }
+    function persistOrder(){ try{ localStorage.setItem('bgMusicOrder',JSON.stringify(order)); }catch(e){} }
+    function persistPosition(){ try{ localStorage.setItem('bgMusicTrackIdx',String(trackIdx)); localStorage.setItem('bgMusicTime',String(player.currentTime||0)); }catch(e){} }
+    persistOrder();
+    let lastPersist=0;
+    player.addEventListener('timeupdate',()=>{ const n=performance.now(); if(n-lastPersist>2000){ lastPersist=n; persistPosition(); } });
+    window.addEventListener('pagehide',persistPosition);
+    document.addEventListener('visibilitychange',()=>{ if(document.hidden) persistPosition(); });
+    player.addEventListener('ended',()=>{ trackIdx=(trackIdx+1)%order.length; if(trackIdx===0){ order=[...playlist].sort(()=>Math.random()-0.5); persistOrder(); } player.src=order[trackIdx]; persistPosition(); if(playing) player.play().catch(()=>{}); });
+    player.addEventListener('error',()=>{ if(!playing) return; trackIdx=(trackIdx+1)%order.length; player.src=order[trackIdx]; player.play().catch(()=>{}); });
+    function fadeTo(target,ms){ const start=player.volume; const st=performance.now(); (function step(){ const t=Math.min(1,(performance.now()-st)/ms); player.volume=start+(target-start)*t; if(t<1) requestAnimationFrame(step); })(); }
+    function setPlaying(state){
+      playing=state;
+      try{ localStorage.setItem('bgMusicOn',playing?'1':'0'); }catch(e){}
+      toggle.classList.toggle('playing',playing);
+      iconOn.style.display=playing?'block':'none';
+      iconOff.style.display=playing?'none':'block';
+      if(playing){ player.play().then(()=>fadeTo(0.42,1800)).catch(()=>{}); }
+      else { fadeTo(0,1500); setTimeout(()=>{ if(!playing) player.pause(); },1550); }
+    }
+    toggle.addEventListener('click',(e)=>{
+      e.stopPropagation();
+      if(playing&&player.paused){ player.play().then(()=>fadeTo(0.42,800)).catch(()=>{}); return; }
+      setPlaying(!playing);
+    });
+    function autoStartOnce(){
+      if(!playing) setPlaying(true);
+      else if(player.paused) player.play().then(()=>fadeTo(0.42,800)).catch(()=>{});
+      ['click','touchstart','keydown','scroll'].forEach(ev=>window.removeEventListener(ev,autoStartOnce));
+    }
+    let storedOn=null; try{ storedOn=localStorage.getItem('bgMusicOn'); }catch(e){}
+    if(storedOn==='1'){ setPlaying(true); }
+    if(storedOn==='1'||storedOn===null){
+      ['click','touchstart','keydown','scroll'].forEach(ev=>window.addEventListener(ev,autoStartOnce,{once:true}));
+    } else { setPlaying(false); }
+  })();
+</script>
+
+</body>
+</html>

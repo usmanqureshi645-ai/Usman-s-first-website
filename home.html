@@ -85,15 +85,15 @@
 
   .hero-wrap { position: relative; }
   .hero-text {
-    transition: transform 1.2s cubic-bezier(.22,1,.36,1), opacity 1.2s ease;
+    transition: transform .65s cubic-bezier(.22,1,.36,1), opacity .65s ease, max-width .65s cubic-bezier(.22,1,.36,1);
   }
   .hero-auth-wrap {
-    display: grid; grid-template-rows: 0fr; transition: grid-template-rows 1.2s cubic-bezier(.25,.46,.45,.94);
+    display: grid; grid-template-rows: 0fr; transition: grid-template-rows .65s cubic-bezier(.25,.46,.45,.94);
   }
   .hero-auth-wrap > .hero-auth-panel { overflow: hidden; min-height: 0; }
   .hero-auth-panel {
     position: relative; opacity: 0; transform: translateY(18px); pointer-events: none;
-    transition: opacity 1.2s ease-in-out, transform 1.2s cubic-bezier(.25,.46,.45,.94);
+    transition: opacity .65s ease-in-out, transform .65s cubic-bezier(.25,.46,.45,.94);
     background: transparent; padding: 0 2rem 0 0; margin-top: 0; text-align: left;
   }
   .hero-auth-close {
@@ -107,7 +107,7 @@
 
   @media (min-width: 900px) {
     .hero-wrap { position: relative; min-height: 1px; }
-    .hero-text { transition: transform .55s cubic-bezier(.22,1,.36,1), opacity .45s ease; }
+    .hero-text { max-width: 100%; transition: transform .65s cubic-bezier(.22,1,.36,1), opacity .65s ease, max-width .65s cubic-bezier(.22,1,.36,1); }
     .hero-auth-wrap {
       display: block; grid-template-rows: none; overflow: visible;
       position: absolute; top: 0; right: 0; width: 420px; max-width: 40%;
@@ -149,13 +149,16 @@
     border: 1px solid rgba(200,169,110,.14); padding: 1.4rem; display: flex; flex-direction: column; gap: 1rem;
     overflow: hidden;
   }
-  .wi-chat-heads { display: flex; align-items: center; gap: .8rem; }
+  .wi-chat-heads { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+  .wi-head-group { display: flex; align-items: center; }
+  .wi-head-group .wi-head:not(:first-child) { margin-left: -12px; }
   .wi-head {
     width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
     font-size: 1.05rem; position: relative; flex: none;
+    background-size: cover; background-position: center; border: 2px solid var(--navy);
   }
-  .wi-head.user { background: rgba(184,200,216,.18); color: var(--steel-light); }
-  .wi-head.ai { background: rgba(200,169,110,.22); color: var(--gold-light); }
+  .wi-head.user { background-color: rgba(184,200,216,.18); color: var(--steel-light); }
+  .wi-head.ai { background-color: rgba(200,169,110,.22); color: var(--gold-light); }
   .wi-head.ai::after {
     content: ''; position: absolute; inset: -4px; border-radius: 50%; border: 1.5px solid var(--gold);
     opacity: 0; transform: scale(1);
@@ -372,7 +375,7 @@
       <div class="hero-ctas">
         <button class="btn-primary" onclick="openHeroAuth('signup')" style="font-family:inherit;cursor:pointer">Sign Up &amp; Try the Tools — Free</button>
         <button class="btn-ghost" onclick="openHeroAuth('login')" style="font-family:inherit;cursor:pointer">Login</button>
-        <a href="index.html#aitools" class="btn-ghost">Explore the Tools</a>
+        <a href="index.html#tools" class="btn-ghost">Explore the Tools</a>
       </div>
     </div>
 
@@ -474,7 +477,7 @@
   </div>
 </section>
 
-<section>
+<section id="whoami">
   <div class="wrap">
     <div class="whoami-card">
       <div class="text">
@@ -489,7 +492,7 @@
 
 <footer>
   <div class="footer-logo">Usman Qureshi · ACCA · ACA</div>
-  <div class="footer-note"><a href="index.html#aitools">AI Tools</a> · <a href="index.html#hottopics">Hot Market Topics</a> · <a href="index.html#whoami">Who am I</a></div>
+  <div class="footer-note"><a href="index.html#tools">AI Tools</a> · <a href="index.html#tools">Hot Market Topics</a> · <a href="index.html#whoami">Who am I</a></div>
   <div class="footer-note">© 2025 Usman Qureshi · All rights reserved</div>
 </footer>
 
@@ -669,7 +672,7 @@
         return;
       }
       haSetMsg(`${loginMode ? 'Welcome back' : "You're in"}, ${data.name.split(' ')[0]}! Taking you to the tools…`,'success');
-      setTimeout(()=>{ window.location.href='index.html#aitools'; }, 900);
+      setTimeout(()=>{ window.location.href='index.html#tools'; }, 900);
     }catch(e){
       haSetMsg('Connection issue — please try again.','error');
     }finally{
@@ -709,7 +712,7 @@
         const data=await r.json();
         if(!r.ok){ haSetMsg('Sorry, something went wrong: '+(data.error||'unknown error'),'error'); return; }
         haSetMsg(`Password reset — welcome back, ${data.name.split(' ')[0]}! Taking you to the tools…`,'success');
-        setTimeout(()=>{ window.location.href='index.html#aitools'; }, 900);
+        setTimeout(()=>{ window.location.href='index.html#tools'; }, 900);
       }catch(e){ haSetMsg('Connection issue — please try again.','error'); }
       finally{ btn.disabled=false; btn.textContent='Reset password'; }
     }
@@ -724,6 +727,12 @@
       if(d && d.loggedIn){ window.location.href='workspace.html'; return; }
     }catch(e){}
     window.location.href='index.html?signup=1';
+  }
+
+  // Landing here via a "?signup=1" redirect (e.g. from My Workspace while
+  // logged out) should actually open the sign-up panel, not just sit there.
+  if(new URLSearchParams(window.location.search).get('signup') === '1'){
+    openHeroAuth('signup');
   }
 
   // Boutique office parallax background — moves with the cursor, depth-layered
@@ -804,15 +813,20 @@
         desc:'Talk live with an AI panel of audit, IFRS/tax, forensic, ESG, legal and technical accounting specialists.',
         steps:['Pick your specialists','Ask a real question','Get live, sourced answers'],
         href:'index.html#meetingroom', link:'Enter the Meeting Room →',
+        heads:[{src:'images/team/sarah-chen.png',name:'Sarah Chen'},{src:'images/team/david-whitfield.png',name:'David Whitfield'},{src:'images/team/amara-singh.png',name:'Amara Singh'}],
         scenarios:[
-          {q:'How do we treat a lease modification that shrinks the leased space under IFRS 16?', a:'Partial derecognition — reduce the right-of-use asset and lease liability proportionally, and take any difference to profit or loss.'},
-          {q:'When can variable consideration be included in the IFRS 15 transaction price?', a:'Only to the extent it’s highly probable there won’t be a significant revenue reversal once the uncertainty resolves.'},
-          {q:'Is a related-party loan at a below-market rate still an IAS 24 disclosure item?', a:'Yes — IAS 24 requires disclosure of the relationship and terms regardless of whether pricing is at arm’s length.'}
+          {q:'How do we treat a lease modification that shrinks the leased space under IFRS 16?',
+           answers:['Partial derecognition — reduce the right-of-use asset proportionally.','And take any difference on that reduction straight to profit or loss.','Worth double-checking the incremental borrowing rate used for the remeasurement.']},
+          {q:'When can variable consideration be included in the IFRS 15 transaction price?',
+           answers:['Only to the extent it’s highly probable there won’t be a significant revenue reversal.','I’d also stress-test that against the most likely outcome method.']},
+          {q:'Is a related-party loan at a below-market rate still an IAS 24 disclosure item?',
+           answers:['Yes — IAS 24 requires disclosure of the relationship and terms regardless of pricing.','I’d flag the below-market rate itself as a separate related-party transaction to disclose.','And confirm management has documented the commercial rationale.']}
         ]},
       { eyebrow:'Interview Preparation', title:'Interview Preparation',
         desc:'Role-specific interview and exam coaching from an AI interviewer, with an emailed feedback report.',
         steps:['Choose your role & level','Answer live questions','Get an emailed feedback report'],
         href:'index.html#knowledgetest', link:'Start Practicing →',
+        heads:[{src:'images/team/interview-coach.png',name:'Interview Coach'}],
         scenarios:[
           {q:'Walk me through auditing a goodwill impairment model with an aggressive terminal growth rate.', a:'Good structure — now also challenge the discount rate and stress-test the headroom for reasonableness.'},
           {q:'Two CGUs share a factory. How do you allocate the impairment loss between them?', a:'Pro-rata to carrying amounts, but never below the higher of fair value less costs of disposal, value in use, or zero.'},
@@ -822,6 +836,7 @@
         desc:'Your CV and cover letter scored from three angles at once: HR, ATS algorithm, and hiring manager.',
         steps:['Upload your CV','AI scores it from 3 angles','Get specific, actionable fixes'],
         href:'index.html#jobhub', link:'Score My CV →',
+        heads:[{src:'images/team/cv-reviewer.png',name:'CV Reviewer'}],
         scenarios:[
           {q:'My CV lists duties, not results. What’s the fastest fix?', a:'Reframe each line as an outcome — "reduced audit cycle time by 18% across 6 engagements", not "responsible for audits".'},
           {q:'Will an ATS parse my two-column layout correctly?', a:'Often not — single-column, standard headings, and no text-in-images will parse far more reliably.'},
@@ -831,6 +846,7 @@
         desc:'A search agent that matches roles to your exact profile, experience and preferences — not just keywords.',
         steps:['Tell it what you want','It searches & filters live roles','Get a ranked shortlist with reasons'],
         href:'index.html#jobhub', link:'Find My Roles →',
+        heads:[{src:'images/team/priya-nair.png',name:'Priya Nair'}],
         scenarios:[
           {q:'Find me IFRS technical accounting roles that don’t require relocation.', a:'Found 12 matches — ranked by seniority fit, remote flexibility, and reporting-standard overlap with your CV.'},
           {q:'I want to move from external audit into industry FP&A.', a:'Prioritizing roles that value audit-trained analytical rigor, with transition-friendly seniority levels.'},
@@ -840,6 +856,7 @@
         desc:'A live comparison table and chat bot covering IFRS against five local GAAPs.',
         steps:['Pick a topic & jurisdiction','See IFRS vs local GAAP side by side','Ask the bot follow-up questions'],
         href:'index.html#gaapcompare', link:'Compare GAAPs →',
+        heads:[{src:'images/team/gaap-assistant.png',name:'GAAP Specialist'}],
         scenarios:[
           {q:'How does US GAAP differ from IFRS 16 on lease classification?', a:'US GAAP (ASC 842) still splits into operating vs. finance leases for the income statement; IFRS 16 uses a single on-balance-sheet model.'},
           {q:'Development costs — IFRS vs US GAAP?', a:'IFRS capitalizes once technical/commercial feasibility criteria are met; US GAAP expenses R&D immediately, with narrow software exceptions.'},
@@ -849,6 +866,7 @@
         desc:'Upload a financial statement (PDF, docx or txt) and get real tracked-comment feedback.',
         steps:['Upload your statement','AI panel reviews for compliance','Get tracked-comment feedback'],
         href:'index.html#fsreview', link:'Review a Statement →',
+        heads:[{src:'images/team/marcus-lee.png',name:'Marcus Lee'}],
         scenarios:[
           {q:'Revenue was recognized before the performance obligation was satisfied — flag it?', a:'Flagged as an IFRS 15 violation, with the clause and page reference tracked as a comment for your reviewer.'},
           {q:'A contingent liability is disclosed but not recognized — is that right?', a:'Correct if outflow is only possible, not probable, per IAS 37 — otherwise it should be recognized, not just disclosed.'},
@@ -857,7 +875,8 @@
       { eyebrow:'Hot Market Topics', title:'Hot Market Topics',
         desc:'Auto-refreshed industry news plus curated briefings on the trends actually moving the profession.',
         steps:['Auto-refreshed briefings','Curated by relevance','Stay current without searching'],
-        href:'index.html#hottopics', link:'See What’s Trending →',
+        href:'index.html#tools', link:'See What’s Trending →',
+        heads:[{src:'images/team/james-carter.png',name:'James Carter'}],
         scenarios:[
           {q:'What changed in the latest ISSB sustainability disclosure update?', a:'Briefing ready — scope 3 emissions phase-in timelines were extended for smaller reporters this cycle.'},
           {q:'Any major PCAOB inspection findings this quarter?', a:'Yes — a fresh briefing flags recurring deficiencies in revenue recognition testing procedures.'},
@@ -872,7 +891,12 @@
     function stepsHtml(steps){
       return '<ol class="tool-steps">' + steps.map((s,i)=>`<li><span class="step-num">${i+1}</span>${s}</li>`).join('') + '</ol>';
     }
+    function headHtml(src, label, isAi){
+      const style = `background-image:url('${src}')`;
+      return `<div class="wi-head${isAi ? ' ai' : ' user'}"${isAi ? ' data-role="ai"' : ''} style="${style}" title="${label}" aria-label="${label}"></div>`;
+    }
     function slideHtml(tool, i){
+      const specialistHeads = tool.heads.map(h=>headHtml(h.src, h.name, true)).join('');
       return `
         <div class="wi-slide" data-real="${i}">
           <div class="wi-info">
@@ -884,16 +908,8 @@
           </div>
           <div class="wi-visual">
             <div class="wi-chat-heads">
-              <svg class="wi-head user" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="24" cy="16" r="8" fill="#B8C8D8"/>
-                <path d="M8 36c0-6.627 7.163-12 16-12s16 5.373 16 12v4H8v-4z" fill="#B8C8D8"/>
-              </svg>
-              <svg class="wi-head ai" data-role="ai" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                <circle cx="24" cy="24" r="18" fill="none" stroke="#C8A96E" stroke-width="2"/>
-                <circle cx="16" cy="20" r="2" fill="#C8A96E"/>
-                <circle cx="32" cy="20" r="2" fill="#C8A96E"/>
-                <path d="M16 32c0-4.418 3.582-8 8-8s8 3.582 8 8" fill="none" stroke="#C8A96E" stroke-width="2" stroke-linecap="round"/>
-              </svg>
+              <div class="wi-head-group">${specialistHeads}</div>
+              ${headHtml('images/team/generic-male.png', 'You', false)}
               <div class="wi-speaking-label" data-role="label">Speaking…</div>
             </div>
             <div class="wi-bubbles" data-role="bubbles"></div>
@@ -930,8 +946,8 @@
 
     track.addEventListener('transitionend', (e)=>{
       if(e.target !== track) return;
-      if(pos===0){ pos = n; layoutWithChat(false); }
-      else if(pos===slideEls.length-1){ pos = 1; layoutWithChat(false); }
+      if(pos===0){ pos = n; requestAnimationFrame(()=> layoutWithChat(false)); }
+      else if(pos===slideEls.length-1){ pos = 1; requestAnimationFrame(()=> layoutWithChat(false)); }
     });
 
     function goTo(newPos){
@@ -954,7 +970,7 @@
       wheelLock = true;
       resetAuto();
       if(e.deltaY > 0) next(); else prev();
-      setTimeout(()=>{ wheelLock = false; }, 1800);
+      setTimeout(()=>{ wheelLock = false; }, 1550);
     }, { passive:false });
 
     let touchStartY = null;
@@ -978,9 +994,9 @@
       const activeEl = slideEls[pos];
       if(!activeEl) return;
       const bubblesEl = activeEl.querySelector('[data-role="bubbles"]');
-      const headEl = activeEl.querySelector('[data-role="ai"]');
+      const headEls = Array.from(activeEl.querySelectorAll('[data-role="ai"]'));
       const labelEl = activeEl.querySelector('[data-role="label"]');
-      if(!bubblesEl || !headEl || !labelEl) return;
+      if(!bubblesEl || !headEls.length || !labelEl) return;
       const scenarios = tools[realIndex].scenarios;
       let s = 0;
       function typeText(el, text, onComplete){
@@ -1002,27 +1018,34 @@
       }
       function renderScenario(){
         if(!bubblesEl.parentElement) return;
-        const { q, a } = scenarios[s % scenarios.length];
-        bubblesEl.innerHTML = `<div class="wi-bubble q"></div><div class="wi-bubble a"></div>`;
-        const qEl = bubblesEl.children[0], aEl = bubblesEl.children[1];
-        headEl.classList.remove('speaking'); labelEl.classList.remove('on');
+        const scenario = scenarios[s % scenarios.length];
+        const answers = scenario.answers || [scenario.a];
+        bubblesEl.innerHTML = `<div class="wi-bubble q"></div>` + answers.map(()=>'<div class="wi-bubble a"></div>').join('');
+        const qEl = bubblesEl.children[0];
+        const aEls = Array.from(bubblesEl.children).slice(1);
+        headEls.forEach(h=>h.classList.remove('speaking')); labelEl.classList.remove('on');
         if(reduceMotion){
-          qEl.textContent = q; qEl.classList.add('show');
-          aEl.textContent = a; aEl.classList.add('show');
+          qEl.textContent = scenario.q; qEl.classList.add('show');
+          aEls.forEach((aEl,i)=>{ aEl.textContent = answers[i]; aEl.classList.add('show'); });
           s++; return;
         }
-        typeText(qEl, q, ()=>{
+        typeText(qEl, scenario.q, ()=>{
           if(!bubblesEl.parentElement) return;
           setTimeout(()=>{
-            if(!headEl.parentElement || !labelEl.parentElement || !aEl.parentElement) return;
-            headEl.classList.add('speaking');
+            if(!labelEl.parentElement || !aEls.every(el=>el.parentElement)) return;
+            headEls.forEach(h=>h.classList.add('speaking'));
             labelEl.classList.add('on');
-            typeText(aEl, a, ()=>{
-              if(!headEl.parentElement || !labelEl.parentElement) return;
-              setTimeout(()=>{
-                headEl.classList.remove('speaking');
-                labelEl.classList.remove('on');
-              }, 800);
+            let remaining = aEls.length;
+            aEls.forEach((aEl,i)=>{
+              typeText(aEl, answers[i], ()=>{
+                remaining--;
+                if(remaining>0) return;
+                if(!labelEl.parentElement) return;
+                setTimeout(()=>{
+                  headEls.forEach(h=>h.classList.remove('speaking'));
+                  labelEl.classList.remove('on');
+                }, 800);
+              });
             });
           }, 600);
         });
@@ -1045,6 +1068,19 @@
     layoutWithChat(false);
     startAuto();
     window.addEventListener('resize', ()=> layoutWithChat(false));
+
+    // Pause timers while the tab is backgrounded so a stale setInterval backlog
+    // doesn't fire against a stage that hasn't finished reflowing on return.
+    document.addEventListener('visibilitychange', ()=>{
+      if(document.hidden){
+        if(autoTimer){ clearInterval(autoTimer); autoTimer = null; }
+        if(chatTimer){ clearInterval(chatTimer); chatTimer = null; }
+      } else {
+        layout(false);
+        startChat(((pos-1)%n+n)%n);
+        startAuto();
+      }
+    });
   })();
 </script>
 

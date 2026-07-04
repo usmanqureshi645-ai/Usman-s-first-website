@@ -369,7 +369,6 @@
       <div class="ws-tabs">
         <button class="ws-tab active" data-panel="history">History</button>
         <button class="ws-tab" data-panel="cv">My CV &amp; Cover Letter Scoring</button>
-        <button class="ws-tab" data-panel="jobsearch">Job Search</button>
         <button class="ws-tab" data-panel="tools">AI Tools</button>
         <button class="ws-tab" data-panel="contact">Contact</button>
       </div>
@@ -502,59 +501,12 @@
         </div>
       </div>
 
-      <div class="ws-panel" id="panel-jobsearch">
-        <div class="state-card" style="text-align:left">
-          <p style="margin-top:0">Upload your CV (and optionally a cover letter), set your filters, and get AI-curated job search titles and links matched to your background — across LinkedIn, Indeed, TotalJobs and eFinancialCareers. This doesn't auto-apply or scrape listings — it generates the right search for you to browse.</p>
-          <label style="font-size:.78rem;color:var(--steel-light);display:block;margin:1rem 0 .4rem">1. Upload your CV (.pdf, .docx, or .txt) — required</label>
-          <div class="job-upload-box" id="jsCvUploadBox" onclick="document.getElementById('jsCvFile').click()" style="background:rgba(255,255,255,.05);border:1px dashed rgba(200,169,110,.3);border-radius:10px;padding:1rem;cursor:pointer;text-align:center;font-size:.85rem;color:var(--steel-light)">
-            <input type="file" id="jsCvFile" accept=".pdf,.docx,.txt" style="display:none" onchange="jsHandleFile(this,'cv')">
-            <span id="jsCvUploadLabel">📄 Click to upload your CV</span>
-          </div>
-          <label style="font-size:.78rem;color:var(--steel-light);display:block;margin:1rem 0 .4rem">Optional: upload your cover letter too</label>
-          <div class="job-upload-box" id="jsCoverUploadBox" onclick="document.getElementById('jsCoverFile').click()" style="background:rgba(255,255,255,.05);border:1px dashed rgba(200,169,110,.3);border-radius:10px;padding:1rem;cursor:pointer;text-align:center;font-size:.85rem;color:var(--steel-light)">
-            <input type="file" id="jsCoverFile" accept=".pdf,.docx,.txt" style="display:none" onchange="jsHandleFile(this,'cover')">
-            <span id="jsCoverUploadLabel">✉️ Click to upload your cover letter (optional)</span>
-          </div>
-
-          <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem;margin-top:1.25rem">
-            <div>
-              <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">Country</label>
-              <select id="jsCountry" onchange="jsPopulateCities()" style="width:100%;height:40px;border-radius:8px;border:1px solid rgba(200,169,110,.2);background:rgba(255,255,255,.03);color:var(--cream)"></select>
-            </div>
-            <div>
-              <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">City / Location</label>
-              <select id="jsCitySelect" onchange="jsHandleCityChange()" style="width:100%;height:40px;border-radius:8px;border:1px solid rgba(200,169,110,.2);background:rgba(255,255,255,.03);color:var(--cream)"></select>
-              <input type="text" id="jsCityOther" placeholder="Type your city" style="display:none;width:100%;height:40px;border-radius:8px;border:1px solid rgba(200,169,110,.2);background:rgba(255,255,255,.03);color:var(--cream);padding:0 .6rem;margin-top:.5rem">
-            </div>
-            <div>
-              <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">Experience level</label>
-              <select id="jsExperience" style="width:100%;height:40px;border-radius:8px;border:1px solid rgba(200,169,110,.2);background:rgba(255,255,255,.03);color:var(--cream)">
-                <option value="graduate">Graduate / Entry-level</option>
-                <option value="associate">Associate / Senior Associate</option>
-                <option value="assistant-manager">Assistant Manager</option>
-                <option value="manager" selected>Manager</option>
-                <option value="senior">Senior Manager / Director</option>
-              </select>
-            </div>
-          </div>
-
-          <div style="text-align:center;margin-top:1.5rem">
-            <button class="btn-gold" id="jsSubmitBtn" onclick="jsFindJobs()">Find My Jobs</button>
-          </div>
-
-          <div id="jsResult" style="display:none;margin-top:1.5rem">
-            <p id="jsSummary" style="color:var(--steel-light);font-size:.9rem;line-height:1.6"></p>
-            <div id="jsLinks" style="display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem"></div>
-          </div>
-        </div>
-      </div>
-
       <div class="ws-panel" id="panel-tools">
         <div class="tools-grid">
           <a class="tool-link-card" href="index.html#meetingroom"><span class="ti">🤝</span><span class="tt">Meeting Room</span><span class="td">Discuss a real scenario with a panel of finance/audit/tax specialists.</span></a>
           <a class="tool-link-card" href="index.html#knowledgetest"><span class="ti">📝</span><span class="tt">Interview Prep</span><span class="td">Practice technical/behavioural interview questions with a kind, encouraging coach.</span></a>
           <a class="tool-link-card" href="index.html#jobhub"><span class="ti">📄</span><span class="tt">Score My Resume</span><span class="td">An honest score on your CV and cover letter from HR, ATS and a hiring manager.</span></a>
-          <a class="tool-link-card" href="#" onclick="activateTab('jobsearch');document.querySelector('.ws-tab[data-panel=jobsearch]').scrollIntoView({behavior:'smooth'});return false"><span class="ti">🎯</span><span class="tt">Personalized Job Search</span><span class="td">AI-curated job titles and search links matched to your CV.</span></a>
+          <a class="tool-link-card" href="index.html#jobsearch"><span class="ti">🎯</span><span class="tt">Personalized Job Search</span><span class="td">AI-curated job titles and search links matched to your CV.</span></a>
           <a class="tool-link-card" href="index.html#gaapcompare"><span class="ti">⚖️</span><span class="tt">GAAP Compare</span><span class="td">Jurisdiction-aware research on accounting standard differences.</span></a>
           <a class="tool-link-card" href="index.html#hottopics"><span class="ti">📰</span><span class="tt">Hot Market Topics</span><span class="td">Current IFRS/FRC/audit news and discussion points.</span></a>
           <a class="tool-link-card" href="index.html?openAsk=1#hero"><span class="ti">🤖</span><span class="tt">AskAI</span><span class="td">Your personal assistant for quick questions, any time.</span></a>
@@ -673,9 +625,6 @@
 
     const requestedTab = new URLSearchParams(location.search).get('tab');
 
-    /* ── Personalized Job Search ── */
-    let jsCvText = '', jsCoverText = '';
-
     function loadScriptOnce(src) {
       return new Promise((resolve, reject) => {
         if (document.querySelector(`script[src="${src}"]`)) { resolve(); return; }
@@ -710,99 +659,6 @@
       throw new Error('Unsupported file type');
     }
 
-    const JS_COUNTRY_CITIES = {
-      'United Kingdom': ['London', 'Manchester', 'Birmingham', 'Edinburgh', 'Leeds', 'Bristol', 'Glasgow'],
-      'United States': ['New York', 'San Francisco', 'Chicago', 'Boston', 'Los Angeles', 'Dallas', 'Atlanta'],
-      'Ireland': ['Dublin', 'Cork', 'Galway'],
-      'Luxembourg': ['Luxembourg City'],
-      'Australia': ['Sydney', 'Melbourne', 'Brisbane', 'Perth'],
-      'United Arab Emirates': ['Dubai', 'Abu Dhabi'],
-      'Canada': ['Toronto', 'Vancouver', 'Montreal', 'Calgary'],
-      'Singapore': ['Singapore'],
-      'Germany': ['Frankfurt', 'Berlin', 'Munich'],
-      'Netherlands': ['Amsterdam', 'Rotterdam'],
-      'Switzerland': ['Zurich', 'Geneva'],
-      'India': ['Mumbai', 'Bangalore', 'Delhi', 'Pune', 'Hyderabad'],
-      'Pakistan': ['Karachi', 'Lahore', 'Islamabad'],
-      'Hong Kong': ['Hong Kong'],
-      'France': ['Paris'],
-    };
-
-    function jsPopulateCountries() {
-      const sel = document.getElementById('jsCountry');
-      sel.innerHTML = Object.keys(JS_COUNTRY_CITIES).map(c => `<option value="${c}">${c}</option>`).join('')
-        + '<option value="Other">Other (type below)</option>';
-      jsPopulateCities();
-    }
-
-    function jsPopulateCities() {
-      const country = document.getElementById('jsCountry').value;
-      const sel = document.getElementById('jsCitySelect');
-      const cities = JS_COUNTRY_CITIES[country] || [];
-      sel.innerHTML = cities.map(c => `<option value="${c}">${c}</option>`).join('')
-        + '<option value="Other">Other (type below)</option>';
-      sel.style.display = '';
-      jsHandleCityChange();
-    }
-
-    function jsHandleCityChange() {
-      const isOther = document.getElementById('jsCitySelect').value === 'Other';
-      document.getElementById('jsCityOther').style.display = isOther ? '' : 'none';
-    }
-
-    jsPopulateCountries();
-
-    async function jsHandleFile(input, kind) {
-      const file = input.files[0];
-      if (!file) return;
-      const label = document.getElementById(kind === 'cv' ? 'jsCvUploadLabel' : 'jsCoverUploadLabel');
-      label.textContent = `Extracting text from ${file.name}…`;
-      try {
-        const text = await extractFileText(file);
-        if (kind === 'cv') jsCvText = text; else jsCoverText = text;
-        label.textContent = `✓ ${file.name} — ${text.trim().split(/\s+/).length} words extracted · saved`;
-        // Keep the shared profile in sync so the CV tab and main-site tools see it too.
-        if (window.saveProfilePatch) await window.saveProfilePatch(kind === 'cv' ? { cv: text, cvFilename: file.name } : { coverLetter: text, coverFilename: file.name });
-      } catch (e) {
-        label.textContent = `Couldn't read ${file.name} — try a .txt, .pdf or .docx file`;
-      }
-    }
-
-    async function jsFindJobs() {
-      if (!jsCvText.trim()) { alert('Please upload your CV first.'); return; }
-      const btn = document.getElementById('jsSubmitBtn');
-      btn.disabled = true; btn.textContent = 'Finding jobs…';
-      // Remember the chosen filters so they're pre-selected next time.
-      const chosenCountry = document.getElementById('jsCountry').value === 'Other' ? '' : document.getElementById('jsCountry').value;
-      window.saveProfilePatch?.({ country: chosenCountry, experienceLevel: document.getElementById('jsExperience').value });
-      try {
-        const resp = await fetch('/api/account?action=personalized-jobs', {
-          method: 'POST',
-          headers: { 'content-type': 'application/json' },
-          body: JSON.stringify({
-            cv: jsCvText,
-            coverLetter: jsCoverText || undefined,
-            location: (document.getElementById('jsCitySelect').value === 'Other'
-              ? document.getElementById('jsCityOther').value.trim()
-              : document.getElementById('jsCitySelect').value),
-            country: document.getElementById('jsCountry').value === 'Other' ? '' : document.getElementById('jsCountry').value,
-            experienceLevel: document.getElementById('jsExperience').value,
-          }),
-        });
-        const data = await resp.json();
-        if (!resp.ok) { alert(data.error || 'Something went wrong — please try again.'); return; }
-        document.getElementById('jsSummary').textContent = data.summary || '';
-        document.getElementById('jsLinks').innerHTML = (data.links || []).map(l =>
-          `<a href="${l.url}" target="_blank" rel="noopener" style="background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.25);color:var(--gold-light);border-radius:20px;padding:.45rem 1rem;font-size:.8rem;text-decoration:none">${escapeHtml(l.label)}</a>`
-        ).join('');
-        document.getElementById('jsResult').style.display = 'block';
-      } catch (e) {
-        alert('Something went wrong — please try again.');
-      } finally {
-        btn.disabled = false; btn.textContent = 'Find My Jobs';
-      }
-    }
-
     function toggleSummary(id) {
       const isOpen = document.getElementById(`summary-${id}`).classList.toggle('open');
       document.getElementById(`summaryBtn-${id}`).textContent = isOpen ? 'Hide summary' : 'View summary';
@@ -830,8 +686,9 @@
     }
     window.saveProfilePatch = saveProfilePatch;
 
-    // Take whatever is saved server-side and reflect it into the CV tab and the Job Search tab,
-    // so neither one asks for a CV the user has already provided.
+    // Take whatever is saved server-side and reflect it into the CV tab
+    // so it never asks for a CV the user has already provided. (Personalized Job
+    // Search now lives on index.html and reuses the same saved CV there.)
     function applyProfileToWorkspace() {
       const p = window.wsProfile || {};
       if (p.cv) {
@@ -839,23 +696,13 @@
         document.getElementById('cvCvLabel').innerHTML = `✓ ${p.cvFilename || 'CV saved'} — ${wordCount(p.cv)} words · click to replace`;
         document.getElementById('cvViewCvBtn').style.display = 'inline-block';
         document.getElementById('cvClearCvBtn').style.display = 'inline-block';
-        // Reuse it in the Job Search tab too.
-        jsCvText = p.cv;
-        const jsLbl = document.getElementById('jsCvUploadLabel');
-        if (jsLbl) jsLbl.textContent = `✓ Using your saved CV${p.cvFilename ? ` (${p.cvFilename})` : ''} — click to replace`;
       }
       if (p.coverLetter) {
         coverText = p.coverLetter;
         document.getElementById('cvCoverLabel').innerHTML = `✓ ${p.coverFilename || 'Cover letter saved'} — ${wordCount(p.coverLetter)} words · click to replace`;
         document.getElementById('cvViewCoverBtn').style.display = 'inline-block';
         document.getElementById('cvClearCoverBtn').style.display = 'inline-block';
-        jsCoverText = p.coverLetter;
-        const jsCLbl = document.getElementById('jsCoverUploadLabel');
-        if (jsCLbl) jsCLbl.textContent = `✓ Using your saved cover letter${p.coverFilename ? ` (${p.coverFilename})` : ''} — click to replace`;
       }
-      // Pre-select saved job-search filters.
-      if (p.country) { const sel = document.getElementById('jsCountry'); if (sel && [...sel.options].some(o => o.value === p.country)) { sel.value = p.country; jsPopulateCities(); } }
-      if (p.experienceLevel) { const sel = document.getElementById('jsExperience'); if (sel) sel.value = p.experienceLevel; }
     }
     window.applyProfileToWorkspace = applyProfileToWorkspace;
 
@@ -873,8 +720,8 @@
           input.value = '';
           return;
         }
-        if (kind === 'cv') { cvText = text; jsCvText = text; }
-        else { coverText = text; jsCoverText = text; }
+        if (kind === 'cv') { cvText = text; }
+        else { coverText = text; }
         label.innerHTML = `✓ ${file.name} — ${wordCount(text)} words · saved`;
         document.getElementById(kind === 'cv' ? 'cvViewCvBtn' : 'cvViewCoverBtn').style.display = 'inline-block';
         document.getElementById(kind === 'cv' ? 'cvClearCvBtn' : 'cvClearCoverBtn').style.display = 'inline-block';
@@ -900,14 +747,12 @@
     async function cvClear(kind) {
       const what = kind === 'cv' ? 'CV' : 'cover letter';
       if (!confirm(`Remove your saved ${what}? This deletes it from your workspace and the other tools will stop using it.`)) return;
-      if (kind === 'cv') { cvText = ''; jsCvText = ''; } else { coverText = ''; jsCoverText = ''; }
+      if (kind === 'cv') { cvText = ''; } else { coverText = ''; }
       // Empty string clears the field server-side (saveProfile merge-patches whatever is sent).
       await saveProfilePatch(kind === 'cv' ? { cv: '', cvFilename: '' } : { coverLetter: '', coverFilename: '' });
       document.getElementById(kind === 'cv' ? 'cvCvLabel' : 'cvCoverLabel').textContent = kind === 'cv' ? '📄 Click to upload your CV' : '✉️ Click to upload your cover letter';
       document.getElementById(kind === 'cv' ? 'cvViewCvBtn' : 'cvViewCoverBtn').style.display = 'none';
       document.getElementById(kind === 'cv' ? 'cvClearCvBtn' : 'cvClearCoverBtn').style.display = 'none';
-      const jsLbl = document.getElementById(kind === 'cv' ? 'jsCvUploadLabel' : 'jsCoverUploadLabel');
-      if (jsLbl) jsLbl.textContent = kind === 'cv' ? '📄 Click to upload your CV' : '✉️ Click to upload your cover letter (optional)';
       if (cvViewing === kind) { document.getElementById('cvViewBox').style.display = 'none'; cvViewing = null; }
     }
     window.cvClear = cvClear;

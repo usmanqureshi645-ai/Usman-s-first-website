@@ -1811,7 +1811,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 <span class="sector-icon">💼</span><h3>Score Your Resume</h3>
 <p>Upload your CV for an honest score from HR, ATS and a hiring manager, with a clear fix for every weakness.</p>
 </div>
-<div class="knowledge-card" style="cursor:pointer" onclick="window.openPersonalizedJobSearch()">
+<div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('jobsearch').scrollIntoView({behavior:'smooth'})">
 <span class="sector-icon">🎯</span><h3>Personalized Job Search For You</h3>
 <p>Sign up, upload your CV, and get AI-curated job search links and titles matched to your background.</p>
 </div>
@@ -1991,7 +1991,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 <div class="section-header">
 <p class="section-eyebrow">Career Toolkit</p>
 <h2 class="section-title">Score My Resume</h2>
-<p class="section-sub">Upload your CV, paste the job posting and, if you like, add your cover letter. We score it honestly from three angles, HR, the applicant tracking system and the hiring manager, and lay out every criticism next to a specific fix you can make yourself. Sign up free to use this tool — it only takes a minute, and unlocks every AI tool on the site. Once you're in, your CV and cover letter are saved privately to your workspace so you never have to re-upload them. Looking for a job to apply to? Sign up free for <a href="#" onclick="window.openPersonalizedJobSearch();return false" style="color:var(--gold)">Personalized Job Search</a> in your workspace.</p>
+<p class="section-sub">Upload your CV, paste the job posting and, if you like, add your cover letter. We score it honestly from three angles, HR, the applicant tracking system and the hiring manager, and lay out every criticism next to a specific fix you can make yourself. Sign up free to use this tool — it only takes a minute, and unlocks every AI tool on the site. Once you're in, your CV and cover letter are saved privately to your workspace so you never have to re-upload them. Looking for a job to apply to? Try <a href="#" onclick="window.openPersonalizedJobSearch();return false" style="color:var(--gold)">Personalized Job Search</a> just below.</p>
 </div>
 
 <h3 style="color:var(--gold);font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1rem">CV &amp; Cover Letter Scoring</h3>
@@ -2027,6 +2027,62 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
     <p class="mr-note" style="max-width:680px;margin:0 auto 1.25rem">Once you have made these edits yourself, get a fresh read on your new version. Your CV and cover letter live in your private workspace, where a recruiter-minded AI will talk through each change with you.</p>
     <button class="pub-btn" id="jobReviewAgainBtn" onclick="jobReviewAgain()">I've made my edits, review them again</button>
   </div>
+</div>
+
+</div>
+</section>
+
+<hr class="gold-rule">
+
+<!-- PERSONALIZED JOB SEARCH -->
+<section id="jobsearch">
+<div class="section-inner flow-reveal">
+<div class="section-header">
+<p class="section-eyebrow">Career Toolkit</p>
+<h2 class="section-title">Personalized Job Search</h2>
+<p class="section-sub">Upload your CV (and optionally a cover letter), set your filters, and get AI-curated job search titles and links matched to your background — across LinkedIn, Indeed, TotalJobs and eFinancialCareers. This doesn't auto-apply or scrape listings — it builds the right search for you to browse. Sign up free to use it; if you've already saved your CV in another tool, we'll reuse it here automatically.</p>
+</div>
+
+<label style="font-size:.78rem;color:var(--steel-light);display:block;margin:0 0 .5rem">1. Upload your CV (.docx preferred, .pdf or .txt also fine) — required</label>
+<div class="job-upload-box" id="jsCvUploadBox" onclick="document.getElementById('jsCvFile').click()">
+  <input type="file" id="jsCvFile" accept=".pdf,.docx,.txt" style="display:none" onchange="jsHandleFile(this,'cv')">
+  <span id="jsCvUploadLabel">📄 Click to upload your CV</span>
+</div>
+<label style="font-size:.78rem;color:var(--steel-light);display:block;margin:1rem 0 .5rem">Optional: upload your cover letter too</label>
+<div class="job-upload-box" id="jsCoverUploadBox" onclick="document.getElementById('jsCoverFile').click()">
+  <input type="file" id="jsCoverFile" accept=".pdf,.docx,.txt" style="display:none" onchange="jsHandleFile(this,'cover')">
+  <span id="jsCoverUploadLabel">✉️ Click to upload your cover letter (optional)</span>
+</div>
+
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:1.5rem">
+  <div>
+    <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">Country</label>
+    <select id="jsCountry" onchange="jsPopulateCities()" style="width:100%;height:42px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:var(--cream);padding:0 .6rem"></select>
+  </div>
+  <div>
+    <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">City / Location</label>
+    <select id="jsCitySelect" onchange="jsHandleCityChange()" style="width:100%;height:42px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:var(--cream);padding:0 .6rem"></select>
+    <input type="text" id="jsCityOther" placeholder="Type your city" style="display:none;width:100%;height:42px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:var(--cream);padding:0 .6rem;margin-top:.5rem">
+  </div>
+  <div>
+    <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.4rem">Experience level</label>
+    <select id="jsExperience" style="width:100%;height:42px;border-radius:8px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.05);color:var(--cream);padding:0 .6rem">
+      <option value="graduate">Graduate / Entry-level</option>
+      <option value="associate">Associate / Senior Associate</option>
+      <option value="assistant-manager">Assistant Manager</option>
+      <option value="manager" selected>Manager</option>
+      <option value="senior">Senior Manager / Director</option>
+    </select>
+  </div>
+</div>
+
+<div style="text-align:center;margin-top:1.75rem">
+  <button class="pub-btn" id="jsSubmitBtn" onclick="jsFindJobs()">Find My Jobs</button>
+</div>
+
+<div id="jsResult" style="display:none;margin-top:1.75rem">
+  <p id="jsSummary" style="color:var(--steel-light);font-size:.9rem;line-height:1.6"></p>
+  <div id="jsLinks" style="display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem"></div>
 </div>
 
 </div>
@@ -3830,7 +3886,10 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
   // dashboard tab if logged in, or opens the signup panel otherwise (every tool now
   // requires signup before use).
   window.openPersonalizedJobSearch=function(){
-    if(window.getSiteUser?.()){ window.location.href='workspace.html?tab=jobsearch'; return; }
+    const sec=document.getElementById('jobsearch');
+    if(sec){ sec.scrollIntoView({behavior:'smooth'}); return; }
+    // Fallback (should not happen now the tool lives on this page).
+    if(window.getSiteUser?.()){ window.location.href='index.html#jobsearch'; return; }
     window.toggleSignup?.(true);
   };
 
@@ -6136,7 +6195,125 @@ window.applySavedProfileToTools=function(){
     if(cLabel){ cLabel.innerHTML=`✓ Using your saved cover letter${p.coverFilename?` (${p.coverFilename})`:''} — click to replace`; }
     cBox?.classList.add('has-file');
   }
+  // Personalized Job Search shares the same saved CV / cover letter and remembers filters.
+  if(typeof jsSyncFromProfile==='function') jsSyncFromProfile(p);
 };
+
+/* ── Personalized Job Search (moved here from the workspace) ──
+   Shares jobCvText/jobCoverText with Score My Resume, reuses extractFileText,
+   and hits the same /api/account?action=personalized-jobs endpoint. */
+const JS_COUNTRY_CITIES = {
+  'United Kingdom': ['London', 'Manchester', 'Birmingham', 'Edinburgh', 'Leeds', 'Bristol', 'Glasgow'],
+  'United States': ['New York', 'San Francisco', 'Chicago', 'Boston', 'Los Angeles', 'Dallas', 'Atlanta'],
+  'Ireland': ['Dublin', 'Cork', 'Galway'],
+  'Luxembourg': ['Luxembourg City'],
+  'Australia': ['Sydney', 'Melbourne', 'Brisbane', 'Perth'],
+  'United Arab Emirates': ['Dubai', 'Abu Dhabi'],
+  'Canada': ['Toronto', 'Vancouver', 'Montreal', 'Calgary'],
+  'Singapore': ['Singapore'],
+  'Germany': ['Frankfurt', 'Berlin', 'Munich'],
+  'Netherlands': ['Amsterdam', 'Rotterdam'],
+  'Switzerland': ['Zurich', 'Geneva'],
+  'India': ['Mumbai', 'Bangalore', 'Delhi', 'Pune', 'Hyderabad'],
+  'Pakistan': ['Karachi', 'Lahore', 'Islamabad'],
+  'Hong Kong': ['Hong Kong'],
+  'France': ['Paris'],
+};
+
+function jsPopulateCountries(){
+  const sel=document.getElementById('jsCountry'); if(!sel) return;
+  sel.innerHTML=Object.keys(JS_COUNTRY_CITIES).map(c=>`<option value="${c}">${c}</option>`).join('')
+    +'<option value="Other">Other (type below)</option>';
+  jsPopulateCities();
+}
+function jsPopulateCities(){
+  const country=document.getElementById('jsCountry').value;
+  const sel=document.getElementById('jsCitySelect');
+  const cities=JS_COUNTRY_CITIES[country]||[];
+  sel.innerHTML=cities.map(c=>`<option value="${c}">${c}</option>`).join('')
+    +'<option value="Other">Other (type below)</option>';
+  sel.style.display='';
+  jsHandleCityChange();
+}
+function jsHandleCityChange(){
+  const isOther=document.getElementById('jsCitySelect').value==='Other';
+  document.getElementById('jsCityOther').style.display=isOther?'':'none';
+}
+
+// Reflect the CV/cover-letter/filters a logged-in user has saved into the Job Search box.
+function jsSyncFromProfile(p){
+  p=p||window.getSiteProfile?.()||{};
+  if(jobCvText){
+    const l=document.getElementById('jsCvUploadLabel');
+    if(l) l.textContent=`✓ Using your saved CV${p.cvFilename?` (${p.cvFilename})`:''} — click to replace`;
+  }
+  if(jobCoverText){
+    const l=document.getElementById('jsCoverUploadLabel');
+    if(l) l.textContent=`✓ Using your saved cover letter${p.coverFilename?` (${p.coverFilename})`:''} — click to replace`;
+  }
+  if(p.country){ const sel=document.getElementById('jsCountry'); if(sel && [...sel.options].some(o=>o.value===p.country)){ sel.value=p.country; jsPopulateCities(); } }
+  if(p.experienceLevel){ const sel=document.getElementById('jsExperience'); if(sel) sel.value=p.experienceLevel; }
+}
+
+async function jsHandleFile(input, kind){
+  const file=input.files[0]; if(!file) return;
+  const label=document.getElementById(kind==='cv'?'jsCvUploadLabel':'jsCoverUploadLabel');
+  const box=document.getElementById(kind==='cv'?'jsCvUploadBox':'jsCoverUploadBox');
+  label.textContent=`Extracting text from ${file.name}…`;
+  try{
+    const text=await extractFileText(file);
+    if(kind==='cv') jobCvText=text; else jobCoverText=text;
+    box?.classList.add('has-file');
+    label.textContent=`✓ ${file.name} — ${text.trim().split(/\s+/).length} words extracted`;
+    // Keep it saved so the CV is reused across every tool and next visit.
+    if(window.getSiteUser?.()){
+      window.saveSiteProfile?.(kind==='cv'?{cv:text,cvFilename:file.name}:{coverLetter:text,coverFilename:file.name});
+      label.textContent+=' · saved to your workspace';
+    }
+    // Mirror into the Score My Resume box too, so both stay consistent.
+    const otherLabel=document.getElementById(kind==='cv'?'jobCvUploadLabel':'jobCoverUploadLabel');
+    if(otherLabel){ otherLabel.innerHTML=`✓ ${file.name} — ${text.trim().split(/\s+/).length} words extracted`; document.getElementById(kind==='cv'?'jobCvUploadBox':'jobCoverUploadBox')?.classList.add('has-file'); }
+  }catch(e){
+    label.textContent=`Couldn't read ${file.name} — try a .txt, .pdf or .docx file`;
+    box?.classList.remove('has-file');
+  }
+}
+
+async function jsFindJobs(){
+  // Same hard-login gate every other tool uses; server also 401s without a session.
+  if(!window.getSiteUser?.()){ window.toggleSignup?.(true); return; }
+  if(!jobCvText || !jobCvText.trim()){ alert('Please upload your CV first.'); return; }
+  const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  const btn=document.getElementById('jsSubmitBtn'); btn.disabled=true; btn.textContent='Finding jobs…';
+  const chosenCountry=document.getElementById('jsCountry').value==='Other'?'':document.getElementById('jsCountry').value;
+  window.saveSiteProfile?.({country:chosenCountry, experienceLevel:document.getElementById('jsExperience').value});
+  try{
+    const resp=await fetch('/api/account?action=personalized-jobs',{
+      method:'POST', headers:{'content-type':'application/json'},
+      body:JSON.stringify({
+        cv:jobCvText,
+        coverLetter:jobCoverText||undefined,
+        location:(document.getElementById('jsCitySelect').value==='Other'
+          ? document.getElementById('jsCityOther').value.trim()
+          : document.getElementById('jsCitySelect').value),
+        country:chosenCountry,
+        experienceLevel:document.getElementById('jsExperience').value,
+      }),
+    });
+    const data=await resp.json();
+    if(!resp.ok){ alert(data.error||'Something went wrong — please try again.'); return; }
+    document.getElementById('jsSummary').textContent=data.summary||'';
+    document.getElementById('jsLinks').innerHTML=(data.links||[]).map(l=>
+      `<a href="${l.url}" target="_blank" rel="noopener" style="background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.25);color:var(--gold-light);border-radius:20px;padding:.45rem 1rem;font-size:.8rem;text-decoration:none">${esc(l.label)}</a>`
+    ).join('');
+    document.getElementById('jsResult').style.display='block';
+  }catch(e){
+    alert('Something went wrong — please try again.');
+  }finally{
+    btn.disabled=false; btn.textContent='Find My Jobs';
+  }
+}
+jsPopulateCountries();
 
 let fsExtractedText='', fsFileName='', fsFileBase64='';
 

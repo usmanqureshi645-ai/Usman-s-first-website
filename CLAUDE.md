@@ -3,7 +3,7 @@
 A single-page personal/professional site for Usman (ACCA, ACA — Big 4 audit & advisory) with several AI-powered interactive tools built on top of a static HTML/CSS/JS frontend and Vercel serverless functions.
 
 ## Stack
-- Frontend: single `index.html` (mirrored to `Latest Business card.html` — **always copy before committing**, they must stay byte-identical)
+- Frontend: three distinct pages — `home.html` (marketing landing page, `/` redirects here via `vercel.json`), `index.html` (the "body": all AI tools + the four tabs AI Tools → Hot Market Topics → My Workspace → Who am I), and `workspace.html` (logged-in workspace). `index.html` is mirrored to `Latest Business card.html` — **always `cp index.html "Latest Business card.html"` before committing**, they must stay byte-identical. **⚠️ NEVER copy `home.html` onto `index.html` (or vice-versa).** They are different files. Doing so wipes out the tools body — this exact mistake ("Copy home.html to index.html") clobbered the body three times on 2026-07-04 and had to be restored from git commit `4a03876`. The ONLY mirror relationship is `index.html` ↔ `Latest Business card.html`.
 - Backend: `/api/*.js` serverless functions on Vercel, calling the Anthropic API (model `claude-sonnet-4-6`)
 - Hosting: Vercel project `usman-s-first-website`, auto-deploys on push to `main` on GitHub (`usmanqureshi645-ai/Usman-s-first-website`)
 - Email: Resend API
@@ -67,5 +67,5 @@ Audio toggle (ambient music), Welcome/Site Guide bot, Feedback widget, Sign-up/L
 - Vercel functions are stateless — no real filesystem persistence. Use Upstash Redis (already wired) or email for anything that needs to persist.
 
 ## Workflow expectations
-- After any code change: verify in the local preview (`.claude/launch.json` static server proxies `/api/*` to the live Vercel deployment), then `cp index.html "Latest Business card.html" && git add -A && git commit && git push` — Vercel deploys automatically.
+- After any code change: verify in the local preview (`.claude/launch.json` static server proxies `/api/*` to the live Vercel deployment), then `cp index.html "Latest Business card.html" && git add -A && git commit && git push` — Vercel deploys automatically. (Mirror is `index.html` → `Latest Business card.html` ONLY. Never `cp home.html index.html`.)
 - After deploying, verify live endpoints with `curl` against `https://usman-s-first-website.vercel.app` rather than assuming success.

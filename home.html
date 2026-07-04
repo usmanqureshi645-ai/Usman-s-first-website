@@ -375,7 +375,7 @@
       <div class="hero-ctas">
         <button class="btn-primary" onclick="openHeroAuth('signup')" style="font-family:inherit;cursor:pointer">Sign Up &amp; Try the Tools — Free</button>
         <button class="btn-ghost" onclick="openHeroAuth('login')" style="font-family:inherit;cursor:pointer">Login</button>
-        <a href="index.html#tools" class="btn-ghost">Explore the Tools</a>
+        <a href="index.html#aitools" class="btn-ghost">Explore the Tools</a>
       </div>
     </div>
 
@@ -492,7 +492,7 @@
 
 <footer>
   <div class="footer-logo">Usman Qureshi · ACCA · ACA</div>
-  <div class="footer-note"><a href="index.html#tools">AI Tools</a> · <a href="index.html#tools">Hot Market Topics</a> · <a href="index.html#whoami">Who am I</a></div>
+  <div class="footer-note"><a href="index.html#aitools">AI Tools</a> · <a href="index.html#hottopics">Hot Market Topics</a> · <a href="index.html#whoami">Who am I</a></div>
   <div class="footer-note">© 2025 Usman Qureshi · All rights reserved</div>
 </footer>
 
@@ -672,7 +672,7 @@
         return;
       }
       haSetMsg(`${loginMode ? 'Welcome back' : "You're in"}, ${data.name.split(' ')[0]}! Taking you to the tools…`,'success');
-      setTimeout(()=>{ window.location.href='index.html#tools'; }, 900);
+      setTimeout(()=>{ window.location.href='index.html#aitools'; }, 900);
     }catch(e){
       haSetMsg('Connection issue — please try again.','error');
     }finally{
@@ -712,7 +712,7 @@
         const data=await r.json();
         if(!r.ok){ haSetMsg('Sorry, something went wrong: '+(data.error||'unknown error'),'error'); return; }
         haSetMsg(`Password reset — welcome back, ${data.name.split(' ')[0]}! Taking you to the tools…`,'success');
-        setTimeout(()=>{ window.location.href='index.html#tools'; }, 900);
+        setTimeout(()=>{ window.location.href='index.html#aitools'; }, 900);
       }catch(e){ haSetMsg('Connection issue — please try again.','error'); }
       finally{ btn.disabled=false; btn.textContent='Reset password'; }
     }
@@ -875,7 +875,7 @@
       { eyebrow:'Hot Market Topics', title:'Hot Market Topics',
         desc:'Auto-refreshed industry news plus curated briefings on the trends actually moving the profession.',
         steps:['Auto-refreshed briefings','Curated by relevance','Stay current without searching'],
-        href:'index.html#tools', link:'See What’s Trending →',
+        href:'index.html#hottopics', link:'See What’s Trending →',
         heads:[{src:'images/team/james-carter.png',name:'James Carter'}],
         scenarios:[
           {q:'What changed in the latest ISSB sustainability disclosure update?', a:'Briefing ready — scope 3 emissions phase-in timelines were extended for smaller reporters this cycle.'},

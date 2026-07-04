@@ -922,13 +922,14 @@
         el.style.transform = `translateY(${idx * stageH}px)`;
         el.classList.remove('wi-active','wi-peek');
         if(idx===pos) el.classList.add('wi-active');
-        else if(idx===pos+1) el.classList.add('wi-peek');
+        else if(idx===pos+1 || idx===pos-1) el.classList.add('wi-peek');
       });
       const realIndex = ((pos-1)%n+n)%n;
       dotEls.forEach((d,i)=>d.classList.toggle('active', i===realIndex));
     }
 
-    track.addEventListener('transitionend', ()=>{
+    track.addEventListener('transitionend', (e)=>{
+      if(e.target !== track) return;
       if(pos===0){ pos = n; layoutWithChat(false); }
       else if(pos===slideEls.length-1){ pos = 1; layoutWithChat(false); }
     });

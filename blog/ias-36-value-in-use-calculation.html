@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9LKFW8QCC8"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9LKFW8QCC8');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAS 36 Value-in-Use: Calculating WACC, Terminal Value & Discount Rate</title>
+    <meta name="description" content="IAS 36 value-in-use: WACC calculation, cost of equity (CAPM), cost of debt, terminal value, sensitivity analysis, audit challenges.">
+    <meta name="keywords" content="IAS 36 value-in-use, WACC, cost of equity, CAPM, terminal value, discount rate, sensitivity analysis">
+    <meta name="author" content="Usman Qureshi">
+    <link rel="canonical" href="https://uqconsulting.org/blog/ias-36-value-in-use-calculation.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
+        .topbar { background: #1a2f5a; padding: 16px 20px; text-align: center; }
+        .topbar a { color: #d4af37; text-decoration: none; font-weight: 600; font-size: 0.9em; }
+        .article-container { max-width: 760px; margin: 0 auto; padding: 50px 20px; }
+        h1 { font-size: 1.9em; color: #1a2f5a; margin-bottom: 10px; }
+        .meta { color: #8593a8; font-size: 0.85em; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid #e4e9f0; }
+        article h2 { font-size: 1.3em; color: #1a2f5a; margin: 26px 0 10px; }
+        article p { margin-bottom: 12px; font-size: 0.95em; }
+        article ul { margin: 0 0 12px 24px; }
+        .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 12px 14px; margin: 14px 0; border-radius: 4px; font-size: 0.9em; }
+        table { width: 100%; border-collapse: collapse; margin: 14px 0; font-size: 0.88em; }
+        th, td { padding: 8px 10px; border-bottom: 1px solid #e4e9f0; }
+        th { background: #1a2f5a; color: #fff; font-weight: 600; }
+        .disclaimer { font-size: 0.76em; color: #8593a8; margin-top: 24px; padding-top: 10px; border-top: 1px solid #e4e9f0; }
+    </style>
+</head>
+<body>
+    <div class="topbar"><a href="https://uqconsulting.org/home.html">← Home</a></div>
+    <div class="article-container">
+        <h1>IAS 36 Value-in-Use: Calculating WACC, Terminal Value & Discount Rate</h1>
+        <div class="meta">By Usman Qureshi · July 2026 · 8 min read</div>
+
+        <article>
+            <p>Value-in-use (VIU) is where the technical work happens in impairment testing: cash flow projections, discount rate (WACC), terminal value. This guide walks through WACC calculation, cost of equity (CAPM), terminal growth, and the sensitivity analysis auditors demand.</p>
+
+            <h2>WACC Components</h2>
+            <table>
+                <tr>
+                    <th>Component</th>
+                    <th>Definition</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td><strong>Cost of Equity</strong></td>
+                    <td>Return shareholders expect (CAPM)</td>
+                    <td>8–12% (higher for risky businesses)</td>
+                </tr>
+                <tr>
+                    <td><strong>Cost of Debt</strong></td>
+                    <td>Interest rate on borrowings</td>
+                    <td>3–6% (lower for stable, investment-grade firms)</td>
+                </tr>
+                <tr>
+                    <td><strong>Tax Shield</strong></td>
+                    <td>Debt provides tax deduction</td>
+                    <td>Cost of debt × (1 − tax rate)</td>
+                </tr>
+                <tr>
+                    <td><strong>Capital Structure</strong></td>
+                    <td>E/V (equity %) and D/V (debt %)</td>
+                    <td>60% equity, 40% debt</td>
+                </tr>
+            </table>
+
+            <h2>Cost of Equity via CAPM</h2>
+            <p><strong>Formula:</strong> Cost of Equity = Risk-Free Rate + Beta × Equity Risk Premium</p>
+            <ul>
+                <li><strong>Risk-free rate:</strong> Government bond yield (e.g., 10-year UK gilt: ~4%)</li>
+                <li><strong>Beta:</strong> Stock volatility vs market (1.0 = market, >1.0 = riskier)</li>
+                <li><strong>Equity risk premium:</strong> Market return − risk-free rate (historically ~5–6%)</li>
+            </ul>
+
+            <h2>Worked Example: WACC Calculation</h2>
+            <p><strong>Company: Mid-cap retailer with acquisition</strong></p>
+            <ul>
+                <li>Capital structure: 70% equity, 30% debt</li>
+                <li>Cost of equity: 4% (risk-free) + 1.2 (Beta) × 5% (ERP) = 10%</li>
+                <li>Cost of debt: 4.5%, tax rate 20%</li>
+                <li>After-tax cost of debt: 4.5% × (1 − 20%) = 3.6%</li>
+                <li><strong>WACC = (70% × 10%) + (30% × 3.6%) = 7% + 1.08% = 8.08%</strong></li>
+            </ul>
+
+            <h2>Terminal Value (Perpetuity)</h2>
+            <p>Projects beyond explicit forecast period assume perpetual growth:</p>
+            <p><strong>Terminal Value = Final Year Cash Flow × (1 + g) / (WACC − g)</strong></p>
+            <p><strong>Where g =</strong> long-term growth rate (typically 2–3%, capped at GDP growth)</p>
+
+            <h2>Audit Red Flags: WACC &amp; Terminal Value</h2>
+            <ul>
+                <li><strong>WACC too low:</strong> Company uses 5% WACC when market data suggests 7–8%. Auditor recalculates and increases WACC, reducing VIU and triggering impairment.</li>
+                <li><strong>Terminal growth too high:</strong> Assumes 5% perpetual growth in flat industry. Auditor reduces to 2%; impacts terminal value significantly.</li>
+                <li><strong>No sensitivity analysis:</strong> Impairment is borderline; changing WACC by 0.5% flips the result. Auditor requires sensitivity table.</li>
+            </ul>
+
+            <div class="example-box">
+                <strong>Common audit adjustment:</strong> "Your WACC is 6%, but your debt is speculative-grade (rating BB). Credit spreads suggest 7.5% cost of debt. WACC should be 8.2%, not 6%." Result: VIU drops 15–20%; impairment required.
+            </div>
+
+            <div class="disclaimer">
+                Educational content. WACC calculations and terminal assumptions are heavily audited. Engage a valuation specialist.
+            </div>
+        </article>
+    </div>
+</body>
+</html>

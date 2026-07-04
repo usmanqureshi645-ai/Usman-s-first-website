@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9LKFW8QCC8"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9LKFW8QCC8');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFRS 9 Impairment Accounting: Lifetime ECL vs 12-Month ECL & Stage Movements</title>
+    <meta name="description" content="IFRS 9 impairment: lifetime ECL vs 12-month ECL, stage movements, SICR reassessment, reversal of allowances, low credit risk exemption.">
+    <meta name="keywords" content="IFRS 9 impairment, lifetime ECL, 12-month ECL, stage movement, SICR reassessment, impairment reversal, low credit risk">
+    <meta name="author" content="Usman Qureshi">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://uqconsulting.org/blog/ifrs-9-impairment-accounting.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
+        .topbar { background: #1a2f5a; padding: 16px 20px; text-align: center; }
+        .topbar a { color: #d4af37; text-decoration: none; font-weight: 600; }
+        .article-container { max-width: 760px; margin: 0 auto; padding: 50px 20px; }
+        h1 { font-size: 2.3em; color: #1a2f5a; margin-bottom: 16px; }
+        .meta { color: #8593a8; font-size: 0.9em; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid #e4e9f0; }
+        .lead { font-size: 1.2em; color: #4a5568; margin-bottom: 30px; font-weight: 500; }
+        .toc { background: #fff; border: 1px solid #e4e9f0; border-radius: 8px; padding: 22px 26px; margin-bottom: 36px; }
+        .toc strong { color: #1a2f5a; display: block; margin-bottom: 10px; text-transform: uppercase; }
+        .toc ul { list-style: none; columns: 1; }
+        .toc a { color: #2a4a7a; text-decoration: none; }
+        article h2 { font-size: 1.6em; color: #1a2f5a; margin: 44px 0 16px; }
+        article h3 { font-size: 1.2em; color: #2a4a7a; margin: 28px 0 12px; }
+        article p { margin-bottom: 18px; }
+        article ul { margin: 0 0 18px 28px; }
+        .callout { background: #fff; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin: 24px 0; background: #fff; }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e4e9f0; }
+        th { background: #1a2f5a; color: #fff; font-weight: 600; }
+        .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; }
+        .author-bio { background: #fff; border-radius: 10px; padding: 24px; margin: 44px 0; }
+        .disclaimer { font-size: 0.82em; color: #8593a8; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a href="https://uqconsulting.org/home.html">← Usman Qureshi — Accountants &amp; Auditors</a>
+    </div>
+
+    <div class="article-container">
+        <h1>IFRS 9 Impairment Accounting: Lifetime ECL vs 12-Month ECL & Stage Movements</h1>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 11 min read</div>
+
+        <p class="lead">IFRS 9's impairment model hinges on a simple but powerful distinction: Stage 1 assets use 12-month ECL (optimistic), while Stage 2/3 assets use lifetime ECL (conservative). This guide covers stage movements, when to reclassify assets, low-credit-risk exemptions, reversal of allowances, and the audit challenges around borderline determinations.</p>
+
+        <div class="toc">
+            <strong>Quick navigation</strong>
+            <ul>
+                <li><a href="#12m-vs-lifetime">12-Month ECL vs Lifetime ECL: The difference</a></li>
+                <li><a href="#stage-movements">Stage movements and reclassification</a></li>
+                <li><a href="#low-credit-risk">Low credit risk exemption</a></li>
+                <li><a href="#reversals">Reversal of impairment losses</a></li>
+                <li><a href="#practical-example">Practical example: Loan portfolio changes</a></li>
+                <li><a href="#audit-challenges">Audit challenges</a></li>
+            </ul>
+        </div>
+
+        <article>
+            <h2 id="12m-vs-lifetime">12-Month ECL vs Lifetime ECL: The Difference</h2>
+
+            <h3>Stage 1: 12-Month ECL (Performing Assets)</h3>
+            <p><strong>Assumption:</strong> Asset is in good health; no SICR since recognition.</p>
+            <p><strong>ECL scope:</strong> Only losses expected in the next 12 months</p>
+            <p><strong>Formula:</strong> ECL = PD (12-month) × LGD × EAD</p>
+            <p><strong>Impact:</strong> Most assets are Stage 1; lower impairment allowance overall</p>
+            <p><strong>Example:</strong> New mortgage (month 3, borrower paying on time): 12-month PD = 0.15%, ECL = £1,200 on £500k mortgage</p>
+
+            <h3>Stage 2 & 3: Lifetime ECL (Underperforming or Defaulted)</h3>
+            <p><strong>Assumption:</strong> Asset is deteriorating or in default; recognize full lifetime losses</p>
+            <p><strong>ECL scope:</strong> All losses expected over the remaining life of the asset</p>
+            <p><strong>Formula:</strong> ECL = PD (lifetime) × LGD × EAD</p>
+            <p><strong>Impact:</strong> Significantly higher allowance; can be 5–10× Stage 1 ECL</p>
+            <p><strong>Example:</strong> Mortgage with 30-day arrears (moves to Stage 2): lifetime PD = 3%, ECL = £15,000 on same £500k mortgage</p>
+
+            <h3>Why the Jump?</h3>
+            <p>The move to lifetime ECL reflects the SICR trigger: credit risk has increased significantly, so it's no longer reasonable to assume the asset will perform over the remaining 27 years. Instead, you must plan for higher probability of eventual default.</p>
+
+            <h2 id="stage-movements">Stage Movements and Reclassification</h2>
+
+            <h3>Forward Movements (Stage 1 → 2 → 3)</h3>
+            <table>
+                <tr>
+                    <th>From Stage</th>
+                    <th>To Stage</th>
+                    <th>Trigger</th>
+                    <th>ECL Change</th>
+                </tr>
+                <tr>
+                    <td>Stage 1</td>
+                    <td>Stage 2</td>
+                    <td>SICR (credit rating ↓, arrears 30+, covenant breach)</td>
+                    <td>12M ECL → Lifetime ECL (jump of 5–10×)</td>
+                </tr>
+                <tr>
+                    <td>Stage 2</td>
+                    <td>Stage 3</td>
+                    <td>Default (>90 days arrears, bankruptcy)</td>
+                    <td>Lifetime ECL unchanged but with pessimistic recovery</td>
+                </tr>
+                <tr>
+                    <td>Stage 1</td>
+                    <td>Stage 3</td>
+                    <td>Direct default (rare; sudden collapse)</td>
+                    <td>12M ECL → Lifetime ECL with full loss</td>
+                </tr>
+            </table>
+
+            <h3>Backward Movements (Reversal)</h3>
+            <p>Assets can move backward if the credit condition improves:</p>
+            <ul>
+                <li><strong>Stage 2 → Stage 1:</strong> Arrears cured; credit rating restored</li>
+                <li><strong>Stage 3 → Stage 2:</strong> Default resolved; payment arrangement established (rare)</li>
+            </ul>
+
+            <p class="callout"><strong>Common mistake:</strong> Companies rarely move assets backward. Auditors often find that Stage 2 assets meeting recovery criteria should have moved back to Stage 1, understating the ECL relief available.</p>
+
+            <h2 id="low-credit-risk">Low Credit Risk Exemption</h2>
+            <p>IFRS 9 allows an optional exemption: if a financial asset is in "low credit risk" at the balance sheet date, you can continue to use 12-month ECL even if it would otherwise be in Stage 2.</p>
+
+            <h3>What Qualifies as Low Credit Risk?</h3>
+            <ul>
+                <li><strong>Investment-grade debt:</strong> Credit rating BBB− or higher (S&P/Moody's)</li>
+                <li><strong>Sovereign debt:</strong> Low default probability (e.g., UK, US, Germany government bonds)</li>
+                <li><strong>Short-term trade receivables:</strong> <3 months old and no indicators of impairment</li>
+            </ul>
+
+            <p class="example-box"><strong>Low Credit Risk Example</strong><br>
+            Bank holds £50m of US Treasury bonds rated AAA. A technical indicator (internal risk score) suggests SICR, but the credit rating remains AAA.<br>
+            • Bank can elect the low-credit-risk exemption<br>
+            • Continue using 12-month ECL despite the SICR indicator<br>
+            • Avoids mechanical Stage 2 movement when credit quality hasn't truly deteriorated
+            </p>
+
+            <h2 id="reversals">Reversal of Impairment Losses</h2>
+            <p>When an asset's credit condition improves, the impairment allowance should be reduced (reversed).</p>
+
+            <h3>Journal Entry for Reversal</h3>
+            <div style="background: #1a2f5a; color: #e8eef7; padding: 14px; border-radius: 4px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
+                Dr Loss Allowance on Loans &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5,000,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Impairment Gain (P&L) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5,000,000
+            </div>
+
+            <p>(The loss allowance decreases; the gain flows to P&L.)</p>
+
+            <h3>Reversal Limits</h3>
+            <p>You can reverse an allowance, but <strong>not beyond zero</strong>. The revised allowance cannot be lower than the balance at the start of the period minus any write-offs during the period.</p>
+
+            <h2 id="practical-example">Practical Example: Loan Portfolio Stage Movements</h2>
+
+            <h3>Q1 2025: Initial Portfolio</h3>
+            <table>
+                <tr>
+                    <th>Loan</th>
+                    <th>Outstanding</th>
+                    <th>Stage</th>
+                    <th>ECL Allowance</th>
+                </tr>
+                <tr>
+                    <td>Loan A (€5m, retail mortgage)</td>
+                    <td>€5m</td>
+                    <td>Stage 1</td>
+                    <td>€10k (12M, 0.2%)</td>
+                </tr>
+                <tr>
+                    <td>Loan B (€3m, small business)</td>
+                    <td>€3m</td>
+                    <td>Stage 1</td>
+                    <td>€6k (12M, 0.2%)</td>
+                </tr>
+                <tr>
+                    <td>Loan C (€2m, corporate)</td>
+                    <td>€2m</td>
+                    <td>Stage 2</td>
+                    <td>€60k (Lifetime, 3%)</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>€10m</strong></td>
+                    <td></td>
+                    <td><strong>€76k</strong></td>
+                </tr>
+            </table>
+
+            <h3>Q2 2025: SICR Occurs on Loan A</h3>
+            <p><strong>Event:</strong> Borrower's employer downsizes; income drops 20%; SICR triggered</p>
+            <p><strong>Reclassification:</strong> Loan A moves Stage 1 → Stage 2</p>
+            <p><strong>New ECL (Lifetime, 2.8%):</strong> €5m × 2.8% = €140k</p>
+            <p><strong>Journal Entry:</strong></p>
+            <div style="background: #1a2f5a; color: #e8eef7; padding: 14px; border-radius: 4px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
+                Dr Impairment Loss &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 130,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Loss Allowance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 130,000
+            </div>
+
+            <h3>Q3 2025: Loan B Default & Recovery</h3>
+            <p><strong>Event:</strong> Business fails; loan defaults (>90 days arrears)</p>
+            <p><strong>Reclassification:</strong> Loan B moves Stage 1 → Stage 3</p>
+            <p><strong>New ECL (Lifetime, 40% loss):</strong> €3m × 40% = €1,200k</p>
+            <p><strong>Journal Entry:</strong></p>
+            <div style="background: #1a2f5a; color: #e8eef7; padding: 14px; border-radius: 4px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
+                Dr Impairment Loss &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,194,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Loss Allowance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,194,000
+            </div>
+
+            <h3>Q4 2025: Loan C Recovery</h3>
+            <p><strong>Event:</strong> Loan C's borrower reorganizes; covenant breach resolved; credit rating restored</p>
+            <p><strong>Reclassification:</strong> Loan C moves Stage 2 → Stage 1</p>
+            <p><strong>New ECL (12M, 0.5%):</strong> €2m × 0.5% = €10k</p>
+            <p><strong>Journal Entry (Reversal):</strong></p>
+            <div style="background: #1a2f5a; color: #e8eef7; padding: 14px; border-radius: 4px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
+                Dr Loss Allowance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 50,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Impairment Gain (P&L) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 50,000
+            </div>
+
+            <h2 id="audit-challenges">Audit Challenges in Impairment Accounting</h2>
+
+            <h3>Challenge 1: Borderline SICR Assessments</h3>
+            <p><strong>Situation:</strong> Asset is 31 days overdue (just past the 30-day SICR threshold). Bank argues it's still Stage 1; auditor pushes for Stage 2.</p>
+            <p><strong>Impact:</strong> Difference of £500k+ in ECL allowance</p>
+
+            <h3>Challenge 2: Forgotten Reversals</h3>
+            <p><strong>Situation:</strong> Asset in Stage 2 with £100k allowance was cured 6 months ago but never moved back to Stage 1.</p>
+            <p><strong>Impact:</strong> ECL overstated by £90k (should be £10k at Stage 1)</p>
+
+            <h3>Challenge 3: Low Credit Risk Abuse</h3>
+            <p><strong>Situation:</strong> Bank applies low-credit-risk exemption to an asset with technical SICR indicators to avoid Stage 2 movement.</p>
+            <p><strong>Auditor action:</strong> Challenge the exemption; require proof that credit risk is genuinely low (e.g., credit rating upgrade or economic improvement)</p>
+
+            <div class="author-bio">
+                <h4>Usman Qureshi (ACCA, ACA)</h4>
+                <p>The 12-month vs lifetime ECL distinction is elegant in theory but brutal in practice. A single SICR judgment call can swing ECL by millions. I've seen 6-figure audit adjustments result from a 10-day reclassification disagreement.</p>
+            </div>
+
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> This is educational content. IFRS 9 impairment is highly fact-specific. Consult a qualified accountant or auditor for your specific circumstances.
+            </div>
+        </article>
+    </div>
+</body>
+</html>

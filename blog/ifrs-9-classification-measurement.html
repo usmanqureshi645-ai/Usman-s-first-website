@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9LKFW8QCC8"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9LKFW8QCC8');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFRS 9 Classification & Measurement: Business Model Test & SPPI Explained</title>
+    <meta name="description" content="Master IFRS 9 classification: business model test (HTC, HTCS, Other), SPPI test (Solely Payments Principal Interest), amortised cost vs FVOCI vs FVPL, with worked examples.">
+    <meta name="keywords" content="IFRS 9 classification, business model test, SPPI test, amortised cost, FVOCI, FVPL, measurement category">
+    <meta name="author" content="Usman Qureshi">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://uqconsulting.org/blog/ifrs-9-classification-measurement.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
+        .topbar { background: #1a2f5a; padding: 16px 20px; text-align: center; }
+        .topbar a { color: #d4af37; text-decoration: none; font-weight: 600; }
+        .article-container { max-width: 760px; margin: 0 auto; padding: 50px 20px; }
+        h1 { font-size: 2.3em; color: #1a2f5a; margin-bottom: 16px; }
+        .meta { color: #8593a8; font-size: 0.9em; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid #e4e9f0; }
+        .lead { font-size: 1.2em; color: #4a5568; margin-bottom: 30px; font-weight: 500; }
+        .toc { background: #fff; border: 1px solid #e4e9f0; border-radius: 8px; padding: 22px 26px; margin-bottom: 36px; }
+        .toc strong { color: #1a2f5a; display: block; margin-bottom: 10px; text-transform: uppercase; }
+        .toc ul { list-style: none; columns: 1; }
+        .toc a { color: #2a4a7a; text-decoration: none; }
+        article h2 { font-size: 1.6em; color: #1a2f5a; margin: 44px 0 16px; }
+        article h3 { font-size: 1.2em; color: #2a4a7a; margin: 28px 0 12px; }
+        article p { margin-bottom: 18px; }
+        article ul { margin: 0 0 18px 28px; }
+        .callout { background: #fff; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin: 24px 0; background: #fff; }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e4e9f0; }
+        th { background: #1a2f5a; color: #fff; font-weight: 600; }
+        .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; }
+        .author-bio { background: #fff; border-radius: 10px; padding: 24px; margin: 44px 0 30px; }
+        .disclaimer { font-size: 0.82em; color: #8593a8; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a href="https://uqconsulting.org/home.html">← Usman Qureshi — Accountants &amp; Auditors</a>
+    </div>
+
+    <div class="article-container">
+        <h1>IFRS 9 Classification & Measurement: Business Model Test & SPPI Explained</h1>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 10 min read</div>
+
+        <p class="lead">IFRS 9 classification determines whether a financial asset is measured at amortised cost, fair value through OCI, or fair value through P&L. The decision hinges on two gates: the business model test (what does management intend?) and the SPPI test (do cash flows consist solely of principal + interest?). This guide walks you through both tests with decision trees and real examples.</p>
+
+        <div class="toc">
+            <strong>Quick navigation</strong>
+            <ul>
+                <li><a href="#classification-gateway">Classification: The gateway decision</a></li>
+                <li><a href="#business-model-test">Business model test (three models explained)</a></li>
+                <li><a href="#sppi-test">SPPI test (principal + interest only?)</a></li>
+                <li><a href="#measurement-outcomes">Measurement outcomes by combination</a></li>
+                <li><a href="#worked">Worked examples by asset type</a></li>
+                <li><a href="#audit-challenges">Audit challenges in classification</a></li>
+            </ul>
+        </div>
+
+        <article>
+            <h2 id="classification-gateway">Classification: The Gateway Decision</h2>
+            <p>The first step in IFRS 9 is classifying every financial asset into one of three measurement categories:</p>
+            <table>
+                <tr>
+                    <th>Category</th>
+                    <th>Measurement</th>
+                    <th>When Changes in FV Go</th>
+                </tr>
+                <tr>
+                    <td><strong>Amortised Cost (AC)</strong></td>
+                    <td>Book value (cost − repayments − impairment)</td>
+                    <td>Fair value changes are not recognized</td>
+                </tr>
+                <tr>
+                    <td><strong>FVOCI</strong></td>
+                    <td>Fair value (balance sheet)</td>
+                    <td>Changes in fair value go to OCI; reclassified to P&L when sold</td>
+                </tr>
+                <tr>
+                    <td><strong>FVPL</strong></td>
+                    <td>Fair value (balance sheet)</td>
+                    <td>Changes in fair value go immediately to P&L</td>
+                </tr>
+            </table>
+
+            <h2 id="business-model-test">Business Model Test: What's Management's Intention?</h2>
+            <p>IFRS 9 recognizes three business models for holding financial assets:</p>
+
+            <h3>Model 1: Hold to Collect (HTC)</h3>
+            <p><strong>Objective:</strong> Hold the asset to maturity to collect contractual cash flows</p>
+            <p><strong>Key indicators:</strong></p>
+            <ul>
+                <li>No active trading or frequent exits</li>
+                <li>Sales are exceptional or for liquidity/credit quality reasons</li>
+                <li>Portfolio is held for fixed, predictable cash flows (e.g., pension fund matching liabilities)</li>
+            </ul>
+            <p><strong>Measurement potential:</strong> Amortised Cost (if SPPI passes)</p>
+
+            <h3>Model 2: Hold to Collect and Sell (HTCS)</h3>
+            <p><strong>Objective:</strong> Collect contractual cash flows AND manage the portfolio by selling assets as needed</p>
+            <p><strong>Key indicators:</strong></p>
+            <ul>
+                <li>Sales are expected and significant (e.g., 10–30% per year)</li>
+                <li>Sales are part of the management strategy (e.g., rebalancing, interest rate management)</li>
+                <li>Asset is typically held to maturity, but not exclusively</li>
+            </ul>
+            <p><strong>Measurement potential:</strong> FVOCI (if SPPI passes)</p>
+
+            <h3>Model 3: Other (Active Trading)</h3>
+            <p><strong>Objective:</strong> Manage the portfolio for trading profits, not primarily for cash flows</p>
+            <p><strong>Key indicators:</strong></p>
+            <ul>
+                <li>Frequent buying and selling</li>
+                <li>Performance evaluated by fair value changes</li>
+                <li>Asset is a trading position (e.g., derivatives, trading desk holdings)</li>
+            </ul>
+            <p><strong>Measurement potential:</strong> FVPL (always)</p>
+
+            <h2 id="sppi-test">SPPI Test: Solely Payments of Principal and Interest?</h2>
+            <p>This test asks: <strong>Do the contractual cash flows consist solely of principal and interest?</strong></p>
+            <p>If YES → can be classified AC or FVOCI (depending on business model)</p>
+            <p>If NO → must be classified FVPL</p>
+
+            <h3>What Passes SPPI</h3>
+            <ul>
+                <li>Fixed-rate bonds ✓</li>
+                <li>Variable-rate loans (interest resets per market rates) ✓</li>
+                <li>Mortgages with standard terms ✓</li>
+                <li>Trade receivables (with normal credit terms) ✓</li>
+            </ul>
+
+            <h3>What Fails SPPI</h3>
+            <ul>
+                <li>Equities (no principal repayment) ✗</li>
+                <li>Convertible bonds (embedded equity option changes the cash flows) ✗</li>
+                <li>Structured products with leveraged returns ✗</li>
+                <li>Loans with contingent payments tied to EBITDA or stock price ✗</li>
+                <li>Loans where prepayment penalties compensate lender for lost interest (judgment) ✗</li>
+            </ul>
+
+            <h2 id="measurement-outcomes">Measurement Outcomes: Test Combinations</h2>
+            <table>
+                <tr>
+                    <th>Business Model</th>
+                    <th>SPPI Pass?</th>
+                    <th>Measurement Category</th>
+                </tr>
+                <tr>
+                    <td>HTC</td>
+                    <td>Yes</td>
+                    <td>Amortised Cost (AC)</td>
+                </tr>
+                <tr>
+                    <td>HTC</td>
+                    <td>No</td>
+                    <td>FVPL</td>
+                </tr>
+                <tr>
+                    <td>HTCS</td>
+                    <td>Yes</td>
+                    <td>FVOCI</td>
+                </tr>
+                <tr>
+                    <td>HTCS</td>
+                    <td>No</td>
+                    <td>FVPL</td>
+                </tr>
+                <tr>
+                    <td>Other (Trading)</td>
+                    <td>Yes or No</td>
+                    <td>FVPL</td>
+                </tr>
+            </table>
+
+            <h2 id="worked">Worked Examples by Asset Type</h2>
+
+            <h3>Example 1: Corporate Bond (Amortised Cost)</h3>
+            <p><strong>Scenario:</strong> Bank purchases a 5-year £10m corporate bond at par, 4% fixed coupon, held to maturity</p>
+            <ul>
+                <li><strong>Business model:</strong> HTC (held to maturity)</li>
+                <li><strong>SPPI test:</strong> Cash flows = £4m annual coupon + £10m principal. Solely principal + interest? YES</li>
+                <li><strong>Classification:</strong> Amortised Cost</li>
+                <li><strong>Measurement:</strong> £10m on balance sheet (adjusted for amortization and any impairment). Interest income £400k/year. Fair value changes are not recognized.</li>
+            </ul>
+
+            <h3>Example 2: Bond Portfolio with Sales (FVOCI)</h3>
+            <p><strong>Scenario:</strong> Insurance company holds a £50m bond portfolio. Usually holds to maturity, but sells ~15% annually to rebalance</p>
+            <ul>
+                <li><strong>Business model:</strong> HTCS (hold to collect and sell)</li>
+                <li><strong>SPPI test:</strong> Bonds are standard; SPPI passes YES</li>
+                <li><strong>Classification:</strong> FVOCI</li>
+                <li><strong>Measurement:</strong> Fair value on balance sheet (updated each period). Gains/losses sit in OCI. When sold, OCI is reclassified to P&L (reclassification adjustment).</li>
+            </ul>
+
+            <h3>Example 3: Convertible Bond (FVPL)</h3>
+            <p><strong>Scenario:</strong> Company purchases a convertible bond with coupon + embedded call option</p>
+            <ul>
+                <li><strong>Business model:</strong> Assume HTC</li>
+                <li><strong>SPPI test:</strong> Cash flows include principal + coupon, but ALSO an embedded equity conversion option. Is this solely principal + interest? NO</li>
+                <li><strong>Classification:</strong> FVPL (SPPI failed, so FVPL regardless of business model)</li>
+                <li><strong>Measurement:</strong> Fair value on balance sheet. All gains/losses go directly to P&L.</li>
+            </ul>
+
+            <p class="callout"><strong>Key Point:</strong> If SPPI fails, the asset goes to FVPL even if management intends to hold it to maturity. SPPI is a contractual test, not a behavioral test.</p>
+
+            <h2 id="audit-challenges">Audit Challenges in Classification</h2>
+
+            <h3>Challenge 1: Business Model Misclassification</h3>
+            <p><strong>Situation:</strong> Bank classifies a loan portfolio as HTC, but auditors find that 20% of the portfolio is sold each year for profit.</p>
+            <p><strong>Auditor action:</strong> Reclassify to HTCS (FVOCI). This can increase fair value volatility in OCI by £5–10m+.</p>
+
+            <h3>Challenge 2: Undocumented Business Model</h3>
+            <p><strong>Situation:</strong> No written policy on business model determination; classification appears arbitrary.</p>
+            <p><strong>Auditor action:</strong> Require documented policy and retroactive support for classifications.</p>
+
+            <h3>Challenge 3: SPPI Edge Cases</h3>
+            <p><strong>Situation:</strong> Company claims a structured product with partial capital protection (e.g., "100% principal guaranteed, but upside capped at 5%") passes SPPI.</p>
+            <p><strong>Auditor challenge:</strong> "The cap is not an interest rate component; it's a contingent payment feature. SPPI fails." Result: must be FVPL.</p>
+
+            <div class="author-bio">
+                <h4>Usman Qureshi (ACCA, ACA)</h4>
+                <p>Classification is the foundation of IFRS 9 accounting. Get it wrong, and everything downstream is wrong. I've seen misclassifications move entire portfolios to FVPL, creating 10-figure OCI volatility swings during audit.</p>
+            </div>
+
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> This is educational content. IFRS 9 classification requires professional judgment on facts and contractual terms. Consult a qualified accountant for your specific circumstances.
+            </div>
+        </article>
+    </div>
+</body>
+</html>

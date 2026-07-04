@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9LKFW8QCC8"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9LKFW8QCC8');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFRS 9 Expected Credit Loss (ECL) Model: Three-Stage Impairment Guide with Calculations</title>
+    <meta name="description" content="Master IFRS 9 Expected Credit Loss: 12-month ECL, lifetime ECL, Stage 1/2/3, SICR triggers, PD/LGD/EAD calculation, real worked examples, auditor challenges.">
+    <meta name="keywords" content="IFRS 9 ECL, expected credit loss, three-stage model, Stage 1 Stage 2 Stage 3, SICR significant increase credit risk, 12-month ECL lifetime ECL, PD LGD EAD, impairment calculation">
+    <meta name="author" content="Usman Qureshi">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://uqconsulting.org/blog/ifrs-9-expected-credit-loss-model.html">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
+        .topbar { background: #1a2f5a; padding: 16px 20px; text-align: center; }
+        .topbar a { color: #d4af37; text-decoration: none; font-weight: 600; font-size: 0.95em; }
+        .article-container { max-width: 760px; margin: 0 auto; padding: 50px 20px; }
+        .breadcrumb { font-size: 0.85em; color: #8593a8; margin-bottom: 24px; }
+        .breadcrumb a { color: #8593a8; text-decoration: none; }
+        .breadcrumb a:hover { color: #d4af37; }
+        h1 { font-size: 2.3em; color: #1a2f5a; line-height: 1.2; margin-bottom: 16px; }
+        .meta { color: #8593a8; font-size: 0.9em; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid #e4e9f0; }
+        .lead { font-size: 1.2em; color: #4a5568; margin-bottom: 30px; font-weight: 500; }
+        .toc { background: #fff; border: 1px solid #e4e9f0; border-radius: 8px; padding: 22px 26px; margin-bottom: 36px; }
+        .toc strong { color: #1a2f5a; display: block; margin-bottom: 10px; font-size: 0.95em; text-transform: uppercase; letter-spacing: 0.05em; }
+        .toc ul { list-style: none; margin: 0; columns: 2; column-gap: 30px; }
+        .toc li { margin-bottom: 7px; font-size: 0.92em; }
+        .toc a { color: #2a4a7a; text-decoration: none; }
+        .toc a:hover { color: #d4af37; }
+        article h2 { font-size: 1.6em; color: #1a2f5a; margin: 44px 0 16px; scroll-margin-top: 20px; }
+        article h3 { font-size: 1.2em; color: #2a4a7a; margin: 28px 0 12px; }
+        article p { margin-bottom: 18px; }
+        article ul, article ol { margin: 0 0 18px 28px; }
+        article li { margin-bottom: 8px; }
+        .callout { background: #fff; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .callout strong { color: #1a2f5a; }
+        table { width: 100%; border-collapse: collapse; margin: 24px 0; background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e4e9f0; }
+        th { background: #1a2f5a; color: #fff; font-weight: 600; font-size: 0.9em; }
+        td { font-size: 0.95em; }
+        tr:last-child td { border-bottom: none; }
+        .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; border-radius: 4px; }
+        .formula { background: #1a2f5a; color: #e8eef7; padding: 16px 20px; border-radius: 6px; margin: 24px 0; font-family: 'Courier New', monospace; font-size: 1em; text-align: center; }
+        .author-bio { display: flex; gap: 20px; align-items: flex-start; background: #fff; border-radius: 10px; padding: 24px 28px; margin: 44px 0 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .avatar { width: 64px; height: 64px; border-radius: 50%; background: #1a2f5a; color: #d4af37; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.3em; flex-shrink: 0; }
+        .related { margin-top: 40px; padding-top: 30px; border-top: 2px solid #e4e9f0; }
+        .related h3 { color: #1a2f5a; margin-bottom: 16px; }
+        .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; display: block; margin-bottom: 8px; padding: 8px; border-radius: 4px; border: 1px solid #e4e9f0; }
+        .related a:hover { background: #f4f6f9; color: #d4af37; }
+        .disclaimer { font-size: 0.82em; color: #8593a8; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a href="https://uqconsulting.org/home.html">← Usman Qureshi — Free AI Tools for Accountants &amp; Auditors</a>
+    </div>
+
+    <div class="article-container">
+        <div class="breadcrumb">
+            <a href="https://uqconsulting.org/home.html">Home</a> &nbsp;›&nbsp;
+            <a href="https://uqconsulting.org/blog/">Blog</a> &nbsp;›&nbsp;
+            <a href="https://uqconsulting.org/blog/ifrs-9-financial-instruments-complete-guide.html">IFRS 9</a> &nbsp;›&nbsp;
+            Expected Credit Loss
+        </div>
+
+        <h1>IFRS 9 Expected Credit Loss (ECL) Model: Three-Stage Impairment with Worked Examples</h1>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed July 2026 · 14 min read</div>
+
+        <p class="lead">The Expected Credit Loss (ECL) model is the heart of IFRS 9. It requires you to recognize losses before a borrower defaults — not after. This guide walks through the three-stage model, SICR identification, ECL calculation (PD × LGD × EAD), and real-world audit challenges including post-model adjustments, forward-looking info, and the common mistakes that cost auditors hundreds of hours.</p>
+
+        <div class="toc">
+            <strong>In this guide</strong>
+            <ul>
+                <li><a href="#ecl-intro">What is ECL and why it matters</a></li>
+                <li><a href="#three-stages">The three-stage model structure</a></li>
+                <li><a href="#stage-1">Stage 1: Performing assets (12-month ECL)</a></li>
+                <li><a href="#stage-2">Stage 2: Underperforming (lifetime ECL at SICR)</a></li>
+                <li><a href="#stage-3">Stage 3: Defaulted assets (lifetime ECL)</a></li>
+                <li><a href="#sicr-deep">SICR triggers and thresholds</a></li>
+                <li><a href="#ecl-components">PD, LGD, EAD: The three components</a></li>
+                <li><a href="#mortgage-calc">Worked example: Mortgage ECL calculation</a></li>
+                <li><a href="#corporate-loan">Worked example: Corporate loan portfolio</a></li>
+                <li><a href="#pma">Post-model adjustments (PMAs)</a></li>
+                <li><a href="#audit-red-flags">Audit red flags</a></li>
+            </ul>
+        </div>
+
+        <article>
+            <h2 id="ecl-intro">What is ECL and Why It Matters</h2>
+            <p>Under IAS 39 (the old standard), you recognized losses only when evidence of impairment existed — typically when a payment was late or default occurred. This is the "incurred loss" model.</p>
+            <p>IFRS 9 flipped the model to forward-looking: you estimate the probability of default and recognize an allowance <strong>even for performing assets</strong>. This reflects economic reality: a loan made today has some probability of defaulting in the future, so that risk should be recognized now.</p>
+
+            <h2 id="three-stages">The Three-Stage ECL Model</h2>
+            <p>IFRS 9 uses three stages to determine how much ECL to recognize:</p>
+            <table>
+                <tr>
+                    <th>Stage</th>
+                    <th>Asset Status</th>
+                    <th>ECL Type</th>
+                    <th>Trigger</th>
+                </tr>
+                <tr>
+                    <td><strong>Stage 1</strong></td>
+                    <td>Performing (Low credit risk)</td>
+                    <td>12-month ECL</td>
+                    <td>No SICR since recognition</td>
+                </tr>
+                <tr>
+                    <td><strong>Stage 2</strong></td>
+                    <td>Underperforming (Increased risk)</td>
+                    <td>Lifetime ECL</td>
+                    <td>SICR occurred, but not in default</td>
+                </tr>
+                <tr>
+                    <td><strong>Stage 3</strong></td>
+                    <td>Credit-impaired (In default)</td>
+                    <td>Lifetime ECL</td>
+                    <td>Default criteria met (>90 days arrears, bankruptcy, etc.)</td>
+                </tr>
+            </table>
+
+            <h2 id="stage-1">Stage 1: Performing Assets (12-Month ECL)</h2>
+            <p>Most financial assets start in Stage 1 when initially recognized. The ECL allowance covers only the probability of default within the next 12 months.</p>
+
+            <h3>ECL Calculation for Stage 1</h3>
+            <div class="formula">ECL = PD (12-month) × LGD × EAD</div>
+
+            <p><strong>Example: Bank mortgage, Stage 1</strong></p>
+            <ul>
+                <li>Mortgage balance: £300,000</li>
+                <li>PD (12-month): 0.15% (0.0015) based on historical mortgage default rates</li>
+                <li>LGD: 25% (0.25) — property can be sold for ~75% of loan value</li>
+                <li>EAD: £300,000</li>
+            </ul>
+            <p><strong>ECL = 0.15% × 25% × £300,000 = £1,125</strong></p>
+            <p>The bank records a loss allowance of £1,125 against this mortgage, even though the borrower is current and paying on time.</p>
+
+            <h2 id="stage-2">Stage 2: Underperforming Assets (Lifetime ECL at SICR)</h2>
+            <p>When credit risk increases significantly, the asset moves to Stage 2. Now you recognize the full lifetime ECL — the probability of default any time in the remaining life of the asset.</p>
+
+            <h3>ECL Calculation for Stage 2</h3>
+            <div class="formula">ECL = PD (lifetime) × LGD × EAD</div>
+
+            <p><strong>Same mortgage, now in Stage 2 (SICR triggered)</strong></p>
+            <ul>
+                <li>Mortgage balance: £290,000 (£10k principal repaid)</li>
+                <li>PD (lifetime, 27 years remaining): 2.5% (0.025) — borrower's credit rating dropped; unemployment risk increased</li>
+                <li>LGD: 30% (0.30) — collateral slightly impaired</li>
+                <li>EAD: £290,000</li>
+            </ul>
+            <p><strong>ECL = 2.5% × 30% × £290,000 = £21,750</strong></p>
+            <p>The loss allowance jumped from £1,125 to £21,750. The increase (£20,625) is recognized as an impairment loss in P&L.</p>
+
+            <h3>SICR Indicator: What Triggered the Move?</h3>
+            <p>Possible triggers for this mortgage:</p>
+            <ul>
+                <li>Borrower's credit score dropped 100+ points</li>
+                <li>Payment was 30 days late (but not yet 90)</li>
+                <li>Borrower's employer issued a redundancy notice</li>
+                <li>Local unemployment spiked to 8%+</li>
+            </ul>
+
+            <h2 id="stage-3">Stage 3: Credit-Impaired Assets (Default &amp; Lifetime ECL)</h2>
+            <p>When an asset meets the default criteria (typically >90 days past due, bankruptcy filing, or unlikely to pay), it moves to Stage 3. The ECL remains lifetime, but recovery expectations are more pessimistic.</p>
+
+            <h3>ECL Calculation for Stage 3</h3>
+            <div class="formula">ECL = PD (100%, assumed default) × LGD × EAD</div>
+
+            <p><strong>Same mortgage, now in Stage 3 (Default)</strong></p>
+            <ul>
+                <li>Mortgage balance: £280,000</li>
+                <li>PD: 100% (assumed defaulted; we're calculating loss, not probability)</li>
+                <li>LGD: 45% (0.45) — property market weakened; recovery expected at 55% of outstanding)</li>
+                <li>EAD: £280,000</li>
+            </ul>
+            <p><strong>ECL = 100% × 45% × £280,000 = £126,000</strong></p>
+            <p>The full loss allowance is £126,000. Interest income on this mortgage is now calculated on the net amount (£280,000 − £126,000 = £154,000), not the gross balance.</p>
+
+            <h2 id="sicr-deep">SICR Triggers and Thresholds</h2>
+            <p>SICR is the judgment call that determines when to move assets from Stage 1 to Stage 2. It's also where auditors spend the most time.</p>
+
+            <h3>Quantitative SICR Triggers</h3>
+            <table>
+                <tr>
+                    <th>Portfolio Type</th>
+                    <th>SICR Threshold</th>
+                    <th>Example</th>
+                </tr>
+                <tr>
+                    <td>Retail mortgages</td>
+                    <td>30 days arrears OR PD ↑ 200 bps</td>
+                    <td>Payment 30+ days late; or PD from 0.5% to 2.5%</td>
+                </tr>
+                <tr>
+                    <td>Credit cards</td>
+                    <td>60 days arrears OR PD ↑ 150 bps</td>
+                    <td>Account delinquent; or risk premium increased</td>
+                </tr>
+                <tr>
+                    <td>Corporate loans</td>
+                    <td>Covenant breach OR credit rating downgrade ≥2 notches OR PD ↑ 300 bps</td>
+                    <td>Debt/EBITDA covenant breached; or S&P downgraded to speculative</td>
+                </tr>
+            </table>
+
+            <h3>Qualitative SICR Triggers</h3>
+            <ul>
+                <li><strong>Management change:</strong> CFO departed unexpectedly; board shake-up</li>
+                <li><strong>Regulatory action:</strong> License revoked; legal sanction</li>
+                <li><strong>Restructuring:</strong> Bankruptcy filing; debt-for-equity swap offered</li>
+                <li><strong>Industry decline:</strong> Oil price crash; retail sector downturn affecting borrower</li>
+                <li><strong>Collateral decline:</strong> Property value dropped 25%+; inventory obsolete</li>
+            </ul>
+
+            <p class="callout"><strong>Audit Challenge:</strong> Many banks set SICR thresholds too conservatively (e.g., 500 bps PD increase). Auditors push back: "Market guidance is 300 bps. Your higher threshold delays Stage 2 movement and understates ECL." Result: ECL increases by 5–10%+ in final audit adjustments.</p>
+
+            <h2 id="ecl-components">PD, LGD, EAD: The Three Components</h2>
+
+            <h3>PD (Probability of Default)</h3>
+            <p><strong>Definition:</strong> The % probability that a borrower will default within a specified time frame (12 months for Stage 1, lifetime for Stage 2/3).</p>
+            <p><strong>Estimation methods:</strong></p>
+            <ul>
+                <li><strong>Historical default rates:</strong> "In the past 20 years, 0.5% of mortgages defaulted"</li>
+                <li><strong>Credit rating PD:</strong> S&P/Moody's publish PDs by rating (e.g., BBB = 0.3% 1-year PD)</li>
+                <li><strong>Market-implied PD:</strong> From CDS spreads or bond yields</li>
+                <li><strong>Borrower-specific:</strong> Internal risk models based on FICO scores, income, debt ratios</li>
+            </ul>
+
+            <h3>LGD (Loss Given Default)</h3>
+            <p><strong>Definition:</strong> The % of exposure that is lost if the borrower defaults.</p>
+            <p><strong>Components:</strong> LGD = (EAD − Recovery) / EAD</p>
+            <p><strong>Estimation methods:</strong></p>
+            <ul>
+                <li><strong>Collateral value:</strong> If the loan is secured, LGD = 1 − (collateral value / loan value)</li>
+                <li><strong>Historical recovery rates:</strong> "We recovered 65% of mortgages in default"</li>
+                <li><strong>Seniority:</strong> Secured loans have lower LGD; unsecured have higher</li>
+                <li><strong>Industry benchmarks:</strong> Retail loans typically 40–50% LGD; unsecured consumer 60–80%</li>
+            </ul>
+
+            <h3>EAD (Exposure at Default)</h3>
+            <p><strong>Definition:</strong> The total amount outstanding at the time of default.</p>
+            <p><strong>For a term loan:</strong> Simply the principal outstanding</p>
+            <p><strong>For a credit facility:</strong> Drawn amount + estimated future drawings</p>
+            <ul>
+                <li><strong>Example:</strong> £500k line of credit, £300k drawn, £200k undrawn. If default happens, bank may draw the remaining £200k before the default materializes. EAD = £500k, not £300k.</li>
+            </ul>
+
+            <h2 id="mortgage-calc">Worked Example: Mortgage Portfolio ECL</h2>
+
+            <h3>Bank's Retail Mortgage Portfolio (31 Dec 2025)</h3>
+            <ul>
+                <li><strong>Total mortgages:</strong> £2 billion</li>
+                <li><strong>Stage 1 (performing):</strong> £1.8bn</li>
+                <li><strong>Stage 2 (SICR):</strong> £160m</li>
+                <li><strong>Stage 3 (defaulted):</strong> £40m</li>
+            </ul>
+
+            <h3>Stage 1 Calculation</h3>
+            <p><strong>Parameters:</strong> PD 12m = 0.18%, LGD = 25%, EAD = £1.8bn</p>
+            <p><strong>ECL = 0.18% × 25% × £1.8bn = £810,000</strong></p>
+
+            <h3>Stage 2 Calculation</h3>
+            <p><strong>Parameters:</strong> PD lifetime = 2.2%, LGD = 28%, EAD = £160m</p>
+            <p><strong>ECL = 2.2% × 28% × £160m = £9,856,000</strong></p>
+
+            <h3>Stage 3 Calculation</h3>
+            <p><strong>Parameters:</strong> PD = 100%, LGD = 42%, EAD = £40m</p>
+            <p><strong>ECL = 100% × 42% × £40m = £16,800,000</strong></p>
+
+            <h3>Total ECL Allowance</h3>
+            <div class="formula">£810k + £9,856k + £16,800k = £27,466,000</div>
+
+            <p><strong>Journal Entry (31 December 2025):</strong></p>
+            <div style="background: #1a2f5a; color: #e8eef7; padding: 16px 20px; border-radius: 6px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
+                Dr Impairment Loss on Financial Assets &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 27,466,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Loss Allowance on Mortgages &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 27,466,000
+            </div>
+
+            <h2 id="corporate-loan">Worked Example: Corporate Loan Portfolio Movement</h2>
+
+            <h3>Scenario: Technology Company Loan (1-Year Period)</h3>
+
+            <p><strong>1 January 2025: Initial recognition (Stage 1)</strong></p>
+            <ul>
+                <li>Loan balance: £10m</li>
+                <li>PD (12m): 0.8%</li>
+                <li>LGD: 35%</li>
+                <li>ECL = 0.8% × 35% × £10m = £28,000</li>
+            </ul>
+
+            <p><strong>30 June 2025: SICR occurs (moves to Stage 2)</strong></p>
+            <ul>
+                <li>Borrower's credit rating downgraded from BB+ to BB− (2-notch decline)</li>
+                <li>Loan balance: £9.5m (£500k repaid)</li>
+                <li>PD (lifetime, 4.5 years): 4.5%</li>
+                <li>LGD: 38%</li>
+                <li>ECL = 4.5% × 38% × £9.5m = £1,620,750</li>
+            </ul>
+
+            <p><strong>Journal Entry (30 June 2025):</strong></p>
+            <div style="background: #1a2f5a; color: #e8eef7; padding: 16px 20px; border-radius: 6px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
+                Dr Impairment Loss (SICR adjustment) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,592,750<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Loss Allowance on Loan &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,592,750
+            </div>
+
+            <p>(The increase from £28k to £1,620,750 is £1,592,750 of incremental impairment loss.)</p>
+
+            <h2 id="pma">Post-Model Adjustments (PMAs)</h2>
+            <p>Many banks don't rely solely on the mechanical ECL formula. They apply "post-model adjustments" for factors the model doesn't capture:</p>
+            <ul>
+                <li><strong>Macroeconomic scenarios:</strong> "Our model assumes baseline growth; recession is 30% likely, which would increase PD by 150 bps"</li>
+                <li><strong>Portfolio concentrations:</strong> "Retail portfolio is 40% real estate; commercial real estate downside is significant"</li>
+                <li><strong>Recent events:</strong> "Tech IPO market collapsed; our venture debt losses rose; lifetime PD increases 200 bps"</li>
+            </ul>
+
+            <p class="callout"><strong>Audit Challenge:</strong> PMAs are subjective. Auditors scrutinize: "How did you justify a £5m PMA? Is it documented? Is it reversible or permanent? How does it correlate to your forward-looking info?"</p>
+
+            <h2 id="audit-red-flags">Audit Red Flags in ECL</h2>
+
+            <h3>Red Flag 1: Stage 2 Thresholds Too High</h3>
+            <p><strong>Finding:</strong> Bank's SICR threshold is 500 bps PD increase; market standard is 300 bps.</p>
+            <p><strong>Auditor action:</strong> Recalculate ECL using 300 bps threshold; estimate the impact (+£8m); propose adjustment.</p>
+
+            <h3>Red Flag 2: Lack of Documentation</h3>
+            <p><strong>Finding:</strong> No written policy on how SICR is identified; asset reclassifications appear arbitrary.</p>
+            <p><strong>Auditor action:</strong> Require documented SICR policy, then retroactively reclassify assets under that policy.</p>
+
+            <h3>Red Flag 3: PMAs Unexplained</h3>
+            <p><strong>Finding:</strong> Management applied a £10m PMA for "general economic uncertainty" but provided no detailed justification.</p>
+            <p><strong>Auditor action:</strong> Challenge the PMA; often it's reduced or eliminated.</p>
+
+            <h3>Red Flag 4: Interest Income Misstatement in Stage 3</h3>
+            <p><strong>Finding:</strong> Bank continues to recognize interest on Stage 3 loans using the gross carrying amount, not the net amount (gross − allowance).</p>
+            <p><strong>Auditor action:</strong> Correct interest income; likely a £2–5m adjustment for large Stage 3 portfolios.</p>
+
+            <div class="author-bio">
+                <div class="avatar">UQ</div>
+                <div>
+                    <h4>Usman Qureshi (ACCA, ACA)</h4>
+                    <p>ECL is where Big 4 auditors spend the most time on financial instruments. I've audited bank portfolios with £500m+ in ECL allowances. The three-stage model is elegant in theory but brutal in judgment-call battles during audit execution.</p>
+                </div>
+            </div>
+
+            <div class="related">
+                <h3>Explore the IFRS 9 Cluster</h3>
+                <div class="related-grid">
+                    <a href="https://uqconsulting.org/blog/ifrs-9-financial-instruments-complete-guide.html">← Back to IFRS 9 Complete Guide</a>
+                    <a href="https://uqconsulting.org/blog/ifrs-9-classification-measurement.html">Classification & Measurement</a>
+                </div>
+            </div>
+
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> This is educational content. IFRS 9 ECL application is highly fact-specific and requires professional judgment. Consult a qualified accountant or auditor for your specific circumstances.
+            </div>
+        </article>
+    </div>
+</body>
+</html>

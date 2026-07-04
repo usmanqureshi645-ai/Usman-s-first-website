@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9LKFW8QCC8"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9LKFW8QCC8');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFRS 9 Hedge Accounting: Cash Flow & Fair Value Hedges with Effectiveness Testing</title>
+    <meta name="description" content="IFRS 9 hedge accounting explained: cash flow hedges, fair value hedges, net investment hedges, effectiveness testing, hedge ineffectiveness, economic relationship.">
+    <meta name="keywords" content="IFRS 9 hedge accounting, cash flow hedge, fair value hedge, hedge effectiveness, hedged item, hedging instrument, net investment hedge">
+    <meta name="author" content="Usman Qureshi">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://uqconsulting.org/blog/ifrs-9-hedge-accounting.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
+        .topbar { background: #1a2f5a; padding: 16px 20px; text-align: center; }
+        .topbar a { color: #d4af37; text-decoration: none; font-weight: 600; }
+        .article-container { max-width: 760px; margin: 0 auto; padding: 50px 20px; }
+        h1 { font-size: 2.3em; color: #1a2f5a; margin-bottom: 16px; }
+        .meta { color: #8593a8; font-size: 0.9em; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid #e4e9f0; }
+        .lead { font-size: 1.2em; color: #4a5568; margin-bottom: 30px; font-weight: 500; }
+        .toc { background: #fff; border: 1px solid #e4e9f0; border-radius: 8px; padding: 22px 26px; margin-bottom: 36px; }
+        .toc strong { color: #1a2f5a; display: block; margin-bottom: 10px; text-transform: uppercase; }
+        .toc ul { list-style: none; columns: 1; }
+        .toc a { color: #2a4a7a; text-decoration: none; }
+        article h2 { font-size: 1.6em; color: #1a2f5a; margin: 44px 0 16px; }
+        article h3 { font-size: 1.2em; color: #2a4a7a; margin: 28px 0 12px; }
+        article p { margin-bottom: 18px; }
+        article ul { margin: 0 0 18px 28px; }
+        .callout { background: #fff; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin: 24px 0; background: #fff; }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e4e9f0; }
+        th { background: #1a2f5a; color: #fff; font-weight: 600; }
+        .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; }
+        .author-bio { background: #fff; border-radius: 10px; padding: 24px; margin: 44px 0; }
+        .disclaimer { font-size: 0.82em; color: #8593a8; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a href="https://uqconsulting.org/home.html">← Usman Qureshi — Accountants &amp; Auditors</a>
+    </div>
+
+    <div class="article-container">
+        <h1>IFRS 9 Hedge Accounting: Cash Flow & Fair Value Hedges with Effectiveness Testing</h1>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 12 min read</div>
+
+        <p class="lead">Hedge accounting is the optional "relief" under IFRS 9 that allows a company to offset gains on a hedging instrument against losses on a hedged item, reducing P&L volatility. Without it, hedges create accounting noise. This guide covers cash flow hedges, fair value hedges, net investment hedges, effectiveness testing, and the common audit challenges.</p>
+
+        <div class="toc">
+            <strong>Quick navigation</strong>
+            <ul>
+                <li><a href="#hedge-purpose">Purpose of hedge accounting</a></li>
+                <li><a href="#three-types">Three hedge types explained</a></li>
+                <li><a href="#cash-flow">Cash flow hedges (variable cash flow exposure)</a></li>
+                <li><a href="#fair-value">Fair value hedges (FV exposure)</a></li>
+                <li><a href="#net-investment">Net investment hedges (foreign currency)</a></li>
+                <li><a href="#effectiveness">Effectiveness testing and ineffectiveness</a></li>
+                <li><a href="#worked">Worked example: Interest rate swap</a></li>
+                <li><a href="#audit-challenges">Audit challenges</a></li>
+            </ul>
+        </div>
+
+        <article>
+            <h2 id="hedge-purpose">Purpose of Hedge Accounting</h2>
+            <p>Without hedge accounting, a company that hedges an exposure recognizes both:</p>
+            <ul>
+                <li>The loss on the hedged item (e.g., future cash flow declined due to interest rate rise)</li>
+                <li>The gain on the hedging instrument (e.g., swap gained value due to interest rate rise)</li>
+            </ul>
+            <p>This creates accounting noise: the gains/losses offset in economics, but not in the P&L.</p>
+            <p>Hedge accounting allows matching: gains on the hedge offset losses on the hedged item, so only the ineffective portion hits P&L.</p>
+
+            <h2 id="three-types">Three Types of Hedges</h2>
+
+            <h3>1. Cash Flow Hedge</h3>
+            <p><strong>Exposure:</strong> Variability in future cash flows</p>
+            <p><strong>Example:</strong> Company has a variable-rate loan maturing in 2 years. Wants to lock in the interest rate. Enters an interest rate swap to convert variable to fixed.</p>
+            <p><strong>Accounting:</strong> Effective portion of the swap's gain/loss goes to OCI; ineffective portion goes to P&L.</p>
+
+            <h3>2. Fair Value Hedge</h3>
+            <p><strong>Exposure:</strong> Changes in fair value of a recognized asset or liability</p>
+            <p><strong>Example:</strong> Company holds a fixed-rate bond. Interest rates rise, so the bond's fair value falls. Company enters a swap to hedge the FV decline.</p>
+            <p><strong>Accounting:</strong> Gains/losses on both the hedged item and the hedge go to P&L (matching).</p>
+
+            <h3>3. Net Investment Hedge</h3>
+            <p><strong>Exposure:</strong> Foreign currency exposure in a foreign subsidiary's net asset value</p>
+            <p><strong>Example:</strong> US parent has a £100m investment in a UK subsidiary. Wants to hedge the £/$ exchange risk. Borrows £50m (foreign currency debt) to partially hedge the exposure.</p>
+            <p><strong>Accounting:</strong> Effective portion of the hedge's gain/loss goes to OCI (within equity); ineffective portion goes to P&L.</p>
+
+            <h2 id="cash-flow">Cash Flow Hedges: Variable Exposure</h2>
+
+            <h3>Structure</h3>
+            <ul>
+                <li><strong>Hedged item:</strong> A variable-rate loan, future purchase, or forecast transaction</li>
+                <li><strong>Hedging instrument:</strong> A swap, forward, or option that locks in the rate</li>
+                <li><strong>Expected impact:</strong> If rates move against the company, the swap gains to offset cash flow loss</li>
+            </ul>
+
+            <h3>Accounting for Cash Flow Hedges</h3>
+            <table>
+                <tr>
+                    <th>Item</th>
+                    <th>Accounting Treatment</th>
+                </tr>
+                <tr>
+                    <td>Effective portion of hedge gain/loss</td>
+                    <td>Other Comprehensive Income (OCI) — deferred</td>
+                </tr>
+                <tr>
+                    <td>Ineffective portion</td>
+                    <td>P&L immediately</td>
+                </tr>
+                <tr>
+                    <td>When hedged item affects P&L</td>
+                    <td>Accumulated OCI is reclassified to P&L (reclassification adjustment)</td>
+                </tr>
+            </table>
+
+            <p class="example-box"><strong>Cash Flow Hedge Example: Variable-Rate Loan</strong><br>
+            <strong>Scenario:</strong> Company borrows £50m at LIBOR + 200 bps for 3 years. LIBOR is currently 5%. Concerned rates will rise.<br>
+            <strong>Hedge:</strong> Enters a 3-year interest rate swap: pays fixed 6.5%, receives LIBOR.<br><br>
+            <strong>Year 1: LIBOR rises to 6% (effective hedge)</strong><br>
+            • Loan interest cost increased: +£500k (1% on £50m)<br>
+            • Swap marked to fair value: £1.5m gain (fixed 6.5% is now cheaper than floating 7%)<br>
+            • Effective portion: ~£1.5m to OCI<br>
+            • Ineffective portion: ~£0k to P&L (the hedge is very effective)<br><br>
+            <strong>At maturity (Year 3): Loan is repaid</strong><br>
+            • Accumulated OCI (£1.5m cumulative gains) is reclassified to P&L as the loan is paid off<br>
+            • This matches the cash flow relief the company gained from the swap offsetting higher interest costs
+            </p>
+
+            <h2 id="fair-value">Fair Value Hedges: Fixed-Rate Asset Exposure</h2>
+
+            <h3>Structure</h3>
+            <ul>
+                <li><strong>Hedged item:</strong> A fixed-rate asset or liability (bond, fixed-rate receivable)</li>
+                <li><strong>Hedging instrument:</strong> A swap, option, or forward that gains if the asset's FV declines</li>
+                <li><strong>Expected impact:</strong> If rates rise and the bond's value falls, the hedge instrument gains to offset</li>
+            </ul>
+
+            <h3>Key Difference from Cash Flow Hedge</h3>
+            <p>In a fair value hedge, <strong>both the hedged item and the hedging instrument are marked to fair value in P&L</strong> each period. If the hedge is perfectly effective, the gains/losses offset and P&L is neutral.</p>
+
+            <p class="example-box"><strong>Fair Value Hedge Example: Bond Portfolio</strong><br>
+            <strong>Scenario:</strong> Insurance company holds £100m of fixed-rate bonds (3% coupon). Expects rates to rise and wants to protect against FV decline.<br>
+            <strong>Hedge:</strong> Enters a 5-year interest rate swap: pays LIBOR, receives fixed 3%.<br><br>
+            <strong>Year 1: Interest rates rise 1% (bonds fall in value)</strong><br>
+            • Bond FV decline: ~£2.5m (assuming 2.5% duration effect)<br>
+            • Swap FV gain: ~£2.5m (now paying LIBOR + receiving fixed 3%, which is more attractive)<br>
+            • P&L impact: –£2.5m (bond FV loss) + £2.5m (swap FV gain) = £0 net<br>
+            • The hedge is perfectly effective; no P&L impact
+            </p>
+
+            <h2 id="net-investment">Net Investment Hedges: Foreign Currency Exposure</h2>
+            <p>When a parent company invests in a foreign subsidiary, it has an implicit foreign currency exposure: if the foreign currency weakens, the parent's consolidated equity is impaired.</p>
+
+            <h3>Hedging Strategy</h3>
+            <p>Parent borrows in the foreign currency (or enters a forward contract) to partially offset the net investment FV exposure.</p>
+
+            <p class="example-box"><strong>Net Investment Hedge Example</strong><br>
+            <strong>Scenario:</strong> US parent invests £100m in UK subsidiary (net assets).<br>
+            <strong>Hedge:</strong> Parent borrows £50m (50% of exposure).<br><br>
+            <strong>Year 1: £ weakens 10% vs $ (adverse to parent)</strong><br>
+            • Equity loss (unhedged portion): 10% × £50m = £5m (in $ terms)<br>
+            • Liability gain (hedged portion): 10% × £50m = £5m (the £50m debt is now "cheaper" to repay in $)<br>
+            • Net P&L impact: –£5m + £5m = neutral on the hedged portion<br>
+            • OCI impact: The £5m gain on the debt is recorded in OCI (hedging loss offset by FX gain)
+            </p>
+
+            <h2 id="effectiveness">Effectiveness Testing and Ineffectiveness</h2>
+
+            <h3>What's "Effective"?</h3>
+            <p>A hedge is effective if changes in the hedged item's value are substantially offset by the hedging instrument's value changes. IFRS 9 doesn't require a precise % (unlike IAS 39); instead, it requires an "economic relationship."</p>
+
+            <h3>Testing Ineffectiveness</h3>
+            <p><strong>Ineffectiveness arises when:</strong></p>
+            <ul>
+                <li>The hedge ratio is imperfect (e.g., hedge 90 contracts to cover 100 contracts of exposure)</li>
+                <li>The hedged item and hedging instrument don't perfectly correlate (e.g., LIBOR rate moves 1% but the bond moves 0.8%)</li>
+                <li>Timing mismatches (e.g., hedge expires before the hedged item matures)</li>
+                <li>Counterparty credit risk (e.g., if the swap counterparty defaults, you lose the hedge)</li>
+            </ul>
+
+            <h3>Accounting for Ineffectiveness</h3>
+            <p>The ineffective portion of the hedge gain/loss is recognized immediately in P&L. Typically, this is 1–10% of the total hedge gain/loss.</p>
+
+            <h2 id="worked">Worked Example: Interest Rate Swap Hedge</h2>
+
+            <h3>Setup</h3>
+            <ul>
+                <li>Company has £20m variable-rate debt maturing in 5 years</li>
+                <li>Current rate: LIBOR + 200 bps (currently 6.5% total)</li>
+                <li>Company enters a 5-year pay-fixed swap: pays 6.5% fixed, receives LIBOR</li>
+                <li>Swap has £20m notional (50% of debt) — intentionally underhedged</li>
+            </ul>
+
+            <h3>Year 1 Journal Entries (LIBOR rises from 4.5% to 5.5%)</h3>
+            <p><strong>Loan interest expense:</strong></p>
+            <div style="background: #1a2f5a; color: #e8eef7; padding: 14px; border-radius: 4px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
+                Dr Interest Expense &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,300,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Cash (interest paid) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,300,000
+            </div>
+
+            <p><strong>Swap marked to fair value (swap gained because fixed 6.5% is now cheaper than floating 7.5%):</strong></p>
+            <div style="background: #1a2f5a; color: #e8eef7; padding: 14px; border-radius: 4px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
+                Dr Swap Asset (fair value) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 400,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Other Comprehensive Income (OCI) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 400,000
+            </div>
+
+            <p><strong>P&L impact: Year 1</strong></p>
+            <ul>
+                <li>Interest expense (debt): £1.3m</li>
+                <li>Swap gain (OCI): £0 (deferred)</li>
+                <li>P&L: £1.3m interest expense</li>
+            </ul>
+
+            <h2 id="audit-challenges">Audit Challenges in Hedge Accounting</h2>
+
+            <h3>Challenge 1: Ineffective Hedges</h3>
+            <p><strong>Situation:</strong> Company claims a 50% hedge is 100% effective. Auditor finds the hedging instrument is under-notional or has timing mismatches.</p>
+            <p><strong>Auditor action:</strong> Reclassify to FVPL (stop using hedge accounting); recognize all gains/losses in P&L immediately.</p>
+
+            <h3>Challenge 2: Undocumented Hedge Intent</h3>
+            <p><strong>Situation:</strong> No documented hedging strategy; the hedge relationship is implied but not formally designated.</p>
+            <p><strong>Auditor action:</strong> Require documentation at hedge inception; if lacking, treat as a non-hedging derivative (FVPL).</p>
+
+            <h3>Challenge 3: Hedge Rebalancing</h3>
+            <p><strong>Situation:</strong> Company rebalances a hedge mid-way through the period, which breaks the economic relationship.</p>
+            <p><strong>Auditor action:</strong> Determine whether rebalancing reinstates the relationship or is a new hedge; may require P&L recognition of the old hedge's portion.</p>
+
+            <div class="author-bio">
+                <h4>Usman Qureshi (ACCA, ACA)</h4>
+                <p>Hedge accounting is beautiful in theory and messy in practice. I've spent entire weeks on single hedge relationship questions during audit — testing effectiveness, rebalancing logic, and counterparty credit assumptions. IFRS 9's "economic relationship" test is simpler than IAS 39's quantitative % rules, but the judgment calls are just as tough.</p>
+            </div>
+
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> This is educational content. Hedge accounting is highly fact-specific and requires deep understanding of derivatives and offsetting exposures. Consult a qualified accountant or auditor for your specific circumstances.
+            </div>
+        </article>
+    </div>
+</body>
+</html>

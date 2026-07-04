@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9LKFW8QCC8"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9LKFW8QCC8');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFRS 9 Financial Instruments: Complete Guide with Classification, Measurement & Impairment (2026)</title>
+    <meta name="description" content="IFRS 9 financial instruments explained: classification (AMORTISED COST, FVOCI, FVPL), measurement, expected credit loss (ECL), hedge accounting, and audit procedures. Comprehensive guide with worked examples.">
+    <meta name="keywords" content="IFRS 9 financial instruments, IFRS 9 classification, business model test, SPPI test, FVPL FVOCI amortised cost, IFRS 9 ECL expected credit loss, IFRS 9 impairment, IFRS 9 hedge accounting, IFRS 9 measurement">
+    <meta name="author" content="Usman Qureshi">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://uqconsulting.org/blog/ifrs-9-financial-instruments-complete-guide.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="IFRS 9 Financial Instruments: Complete Guide with Classification, Measurement & Impairment">
+    <meta property="og:description" content="Master IFRS 9: classification flowchart, measurement, ECL impairment, hedge accounting, and real examples. Auditor-focused technical guide.">
+    <meta property="og:image" content="https://uqconsulting.org/images/og-image.png">
+    <meta property="og:url" content="https://uqconsulting.org/blog/ifrs-9-financial-instruments-complete-guide.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="IFRS 9 Financial Instruments: Complete Guide">
+    <meta name="twitter:description" content="Comprehensive IFRS 9 guide covering classification, measurement, ECL, hedge accounting with worked examples.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "IFRS 9 Financial Instruments: Complete Guide with Classification, Measurement & Impairment",
+      "description": "Comprehensive guide to IFRS 9 financial instruments covering classification models, measurement categories (FVPL, FVOCI, Amortised Cost), expected credit loss impairment, and hedge accounting with worked examples.",
+      "image": "https://uqconsulting.org/images/og-image.png",
+      "datePublished": "2026-07-04",
+      "dateModified": "2026-07-04",
+      "author": {
+        "@type": "Person",
+        "name": "Usman Qureshi",
+        "url": "https://uqconsulting.org/home.html",
+        "jobTitle": "Chartered Accountant (ACCA, ACA)",
+        "knowsAbout": ["IFRS 9", "Financial Instruments", "Expected Credit Loss", "Audit"]
+      },
+      "publisher": { "@type": "Person", "name": "Usman Qureshi" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://uqconsulting.org/blog/ifrs-9-financial-instruments-complete-guide.html" }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are the three measurement categories under IFRS 9?",
+          "acceptedAnswer": { "@type": "Answer", "text": "IFRS 9 has three measurement categories: (1) Amortised Cost – for debt instruments held to collect contractual cash flows, (2) Fair Value Through Other Comprehensive Income (FVOCI) – for equity instruments held for long-term strategic purposes, and (3) Fair Value Through Profit or Loss (FVPL) – everything else, measured at fair value with gains/losses in P&L." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the business model test?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The business model test assesses whether the entity's objective is to (1) hold the asset to collect contractual cash flows ('hold to collect'), (2) both collect cash flows and sell the asset ('hold to collect and sell'), or (3) manage actively for trading (neither 1 nor 2). The business model determines whether Amortised Cost, FVOCI, or FVPL classification applies." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the SPPI test?",
+          "acceptedAnswer": { "@type": "Answer", "text": "SPPI stands for Solely Payments of Principal and Interest. It tests whether the contractual cash flows consist solely of principal repayment and interest (time value of money). If cash flows include other components (e.g., credit risk, liquidity risk, foreign exchange risk not related to interest), the instrument fails SPPI and must be measured at FVPL." }
+        },
+        {
+          "@type": "Question",
+          "name": "How does IFRS 9 calculate expected credit loss (ECL)?",
+          "acceptedAnswer": { "@type": "Answer", "text": "IFRS 9 uses a three-stage model: Stage 1 (performing assets) – recognise 12-month ECL; Stage 2 (underperforming) – recognise lifetime ECL when credit risk increases significantly; Stage 3 (credit-impaired) – recognise lifetime ECL. ECL = Probability of Default × Loss Given Default × Exposure at Default, discounted." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a significant increase in credit risk (SICR)?",
+          "acceptedAnswer": { "@type": "Answer", "text": "SICR is when an asset moves from Stage 1 to Stage 2 because credit risk has increased significantly since initial recognition, even if the asset is not yet in default. Examples: credit rating downgrade, payment arrears, covenant breach, or economic deterioration specific to the borrower." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I hedge operational cash flows under IFRS 9?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. IFRS 9 allows hedge accounting for cash flow hedges (hedging variability in future cash flows) and fair value hedges (hedging changes in fair value of recognised assets/liabilities). Effectiveness testing is required, and ineffective portions are recognised in P&L immediately." }
+        },
+        {
+          "@type": "Question",
+          "name": "What's the difference between IFRS 9 and ASC 326 (CECL)?",
+          "acceptedAnswer": { "@type": "Answer", "text": "IFRS 9 uses a three-stage model (12-month ECL moving to lifetime ECL at SICR). ASC 326 (CECL) requires lifetime ECL recognition immediately for all financial assets, regardless of credit quality. CECL is more conservative and forward-looking than IFRS 9's staged approach." }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
+        .topbar { background: #1a2f5a; padding: 16px 20px; text-align: center; }
+        .topbar a { color: #d4af37; text-decoration: none; font-weight: 600; font-size: 0.95em; }
+        .article-container { max-width: 760px; margin: 0 auto; padding: 50px 20px; }
+        .breadcrumb { font-size: 0.85em; color: #8593a8; margin-bottom: 24px; }
+        .breadcrumb a { color: #8593a8; text-decoration: none; }
+        .breadcrumb a:hover { color: #d4af37; }
+        h1 { font-size: 2.3em; color: #1a2f5a; line-height: 1.2; margin-bottom: 16px; }
+        .meta { color: #8593a8; font-size: 0.9em; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid #e4e9f0; }
+        .lead { font-size: 1.2em; color: #4a5568; margin-bottom: 30px; font-weight: 500; }
+        .toc { background: #fff; border: 1px solid #e4e9f0; border-radius: 8px; padding: 22px 26px; margin-bottom: 36px; }
+        .toc strong { color: #1a2f5a; display: block; margin-bottom: 10px; font-size: 0.95em; text-transform: uppercase; letter-spacing: 0.05em; }
+        .toc ul { list-style: none; margin: 0; columns: 2; column-gap: 30px; }
+        .toc li { margin-bottom: 7px; font-size: 0.92em; }
+        .toc a { color: #2a4a7a; text-decoration: none; }
+        .toc a:hover { color: #d4af37; }
+        article h2 { font-size: 1.6em; color: #1a2f5a; margin: 44px 0 16px; scroll-margin-top: 20px; }
+        article h3 { font-size: 1.2em; color: #2a4a7a; margin: 28px 0 12px; }
+        article p { margin-bottom: 18px; }
+        article ul, article ol { margin: 0 0 18px 28px; }
+        article li { margin-bottom: 8px; }
+        .callout { background: #fff; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .callout strong { color: #1a2f5a; }
+        table { width: 100%; border-collapse: collapse; margin: 24px 0; background: #fff; border-radius: 6px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e4e9f0; }
+        th { background: #1a2f5a; color: #fff; font-weight: 600; font-size: 0.9em; }
+        td { font-size: 0.95em; }
+        tr:last-child td { border-bottom: none; }
+        .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; border-radius: 4px; }
+        .faq-item { background: #fff; border-radius: 8px; padding: 20px 24px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .faq-item h3 { margin: 0 0 8px; color: #1a2f5a; font-size: 1.08em; }
+        .faq-item p { margin: 0; font-size: 0.96em; }
+        .cta-box { background: linear-gradient(135deg, #1a2f5a 0%, #2a4a7a 100%); color: #fff; padding: 32px; border-radius: 10px; text-align: center; margin: 40px 0; }
+        .cta-box h3 { color: #fff; margin-top: 0; }
+        .cta-box p { color: #c8d4e6; margin-bottom: 20px; }
+        .cta-button { display: inline-block; background: #d4af37; color: #1a2f5a; padding: 14px 34px; font-weight: 600; border-radius: 8px; text-decoration: none; transition: all 0.3s; }
+        .cta-button:hover { background: #c99e2b; }
+        .author-bio { display: flex; gap: 20px; align-items: flex-start; background: #fff; border-radius: 10px; padding: 24px 28px; margin: 44px 0 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .avatar { width: 64px; height: 64px; border-radius: 50%; background: #1a2f5a; color: #d4af37; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.3em; flex-shrink: 0; }
+        .author-bio h4 { color: #1a2f5a; margin-bottom: 6px; }
+        .author-bio p { font-size: 0.92em; color: #556; margin: 0; }
+        .related { margin-top: 40px; padding-top: 30px; border-top: 2px solid #e4e9f0; }
+        .related h3 { color: #1a2f5a; margin-bottom: 16px; }
+        .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; display: block; margin-bottom: 8px; padding: 8px; border-radius: 4px; border: 1px solid #e4e9f0; }
+        .related a:hover { background: #f4f6f9; color: #d4af37; }
+        .disclaimer { font-size: 0.82em; color: #8593a8; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; font-style: italic; }
+        @media (max-width: 600px) {
+            .toc ul { columns: 1; }
+            .related-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a href="https://uqconsulting.org/home.html">← Usman Qureshi — Free AI Tools for Accountants &amp; Auditors</a>
+    </div>
+
+    <div class="article-container">
+        <div class="breadcrumb">
+            <a href="https://uqconsulting.org/home.html">Home</a> &nbsp;›&nbsp;
+            <a href="https://uqconsulting.org/blog/">Blog</a> &nbsp;›&nbsp;
+            IFRS 9 Financial Instruments
+        </div>
+
+        <h1>IFRS 9 Financial Instruments: Complete Guide with Classification, Measurement & Impairment</h1>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed July 2026 · 17 min read</div>
+
+        <p class="lead">IFRS 9 is the standard that governs how banks, insurers, corporates, and investors account for loans, investments, bonds, and derivatives. It's technically dense and auditor-intensive: three classification categories, two testing gates (business model + SPPI), expected credit loss impairment, and hedge accounting rules. This guide breaks it all down with worked examples, real company case studies, and the audit red flags you need to know.</p>
+
+        <div class="toc">
+            <strong>In this guide</strong>
+            <ul>
+                <li><a href="#overview">Overview: IFRS 9 scope and structure</a></li>
+                <li><a href="#classification">Classification (the gateway decision)</a></li>
+                <li><a href="#business-model">Business model test explained</a></li>
+                <li><a href="#sppi">SPPI test (Solely Payments Principal & Interest)</a></li>
+                <li><a href="#three-categories">Three measurement categories</a></li>
+                <li><a href="#ecl">Expected Credit Loss (ECL) impairment model</a></li>
+                <li><a href="#three-stages">Three-stage ECL model explained</a></li>
+                <li><a href="#sicr">Significant Increase in Credit Risk (SICR)</a></li>
+                <li><a href="#worked">Worked example: Bank loan portfolio</a></li>
+                <li><a href="#real-company">Real company example: Bank disclosure</a></li>
+                <li><a href="#hedge">Hedge accounting under IFRS 9</a></li>
+                <li><a href="#audit">Auditor focus areas</a></li>
+                <li><a href="#vs-asc">IFRS 9 vs ASC 326 (US GAAP)</a></li>
+                <li><a href="#common-mistakes">Common mistakes</a></li>
+                <li><a href="#faq">FAQs</a></li>
+            </ul>
+        </div>
+
+        <article>
+            <h2 id="overview">Overview: IFRS 9 Scope and Structure</h2>
+            <p>IFRS 9 (Financial Instruments) applies to all entities that hold:</p>
+            <ul>
+                <li><strong>Debt instruments:</strong> Loans, bonds, mortgages, trade receivables</li>
+                <li><strong>Equity instruments:</strong> Shares, investments in other companies</li>
+                <li><strong>Derivatives:</strong> Forward contracts, interest rate swaps, options</li>
+                <li><strong>Investment funds:</strong> Mutual funds, structured products</li>
+            </ul>
+            <p>IFRS 9 replaced IAS 39 effective 1 January 2018. The key improvements: simpler classification (three categories instead of four), forward-looking ECL impairment (replacing the old incurred-loss model), and reformed hedge accounting.</p>
+
+            <h2 id="classification">Classification: The Gateway Decision</h2>
+            <p>The first step is <strong>classification</strong>: Where does this financial asset go? Amortised Cost? FVOCI? FVPL?</p>
+            <p>Classification depends on two tests applied in sequence:</p>
+            <ol>
+                <li><strong>Business model test:</strong> What is management's intention?</li>
+                <li><strong>SPPI test:</strong> Do the cash flows consist solely of principal + interest?</li>
+            </ol>
+
+            <p class="callout"><strong>Critical:</strong> Both tests must pass for Amortised Cost classification. If either fails, the asset typically goes to FVPL.</p>
+
+            <h2 id="business-model">Business Model Test: Three Categories</h2>
+            <p>Management must identify its business model for each portfolio of financial assets. IFRS 9 recognizes three business models:</p>
+
+            <h3>Model 1: Hold to Collect (HTC)</h3>
+            <p>Objective: Hold the asset to maturity and collect contractual cash flows</p>
+            <ul>
+                <li><strong>Example:</strong> Bank holds a £10m loan portfolio to maturity; sells < 5% of portfolio per year</li>
+                <li><strong>Measurement:</strong> Can be Amortised Cost (if SPPI passes)</li>
+                <li><strong>Key indicator:</strong> No active trading; minimal exits</li>
+            </ul>
+
+            <h3>Model 2: Hold to Collect and Sell (HTCS)</h3>
+            <p>Objective: Collect contractual cash flows AND sell assets (e.g., when interest rates move, liquidity needs)</p>
+            <ul>
+                <li><strong>Example:</strong> Insurance company holds bonds; sells some to rebalance portfolio or meet claims</li>
+                <li><strong>Measurement:</strong> Can be FVOCI (if SPPI passes) — gains/losses bypass P&L, sit in OCI</li>
+                <li><strong>Key indicator:</strong> Holds to maturity usually, but sales are expected and significant</li>
+            </ul>
+
+            <h3>Model 3: Other (Active Trading)</h3>
+            <p>Objective: Manage the portfolio for trading, not held for cash flows</p>
+            <ul>
+                <li><strong>Example:</strong> Asset manager actively buys/sells equities, derivatives, bonds for performance</li>
+                <li><strong>Measurement:</strong> FVPL — all changes flow through P&L</li>
+                <li><strong>Key indicator:</strong> Frequent trading, performance evaluated by fair value</li>
+            </ul>
+
+            <p class="example-box"><strong>Real Company Example: HSBC Bank</strong><br>
+            HSBC holds three portfolios:<br>
+            • <strong>Retail mortgages:</strong> Model 1 (HTC) — Hold to maturity. Classified Amortised Cost. 95% of portfolio held to maturity.<br>
+            • <strong>Bond portfolio:</strong> Model 2 (HTCS) — Hold but sell to manage interest rate risk. Classified FVOCI. ~10–15% annual sales.<br>
+            • <strong>Trading desk (interest rate derivatives):</strong> Model 3 (Other) — Active management. Classified FVPL.
+            </p>
+
+            <h2 id="sppi">SPPI Test: Solely Payments of Principal and Interest</h2>
+            <p>This test asks: <strong>Do the contractual cash flows consist solely of principal repayment and interest (time value of money)?</strong></p>
+            <p>If YES → instrument can be classified Amortised Cost or FVOCI (depending on business model)</p>
+            <p>If NO → instrument must be classified FVPL (fair value through profit/loss)</p>
+
+            <h3>What Passes SPPI?</h3>
+            <ul>
+                <li>Standard bank loans with fixed/variable interest ✓</li>
+                <li>Corporate bonds ✓</li>
+                <li>Mortgages ✓</li>
+                <li>Trade receivables (with reasonable credit terms) ✓</li>
+            </ul>
+
+            <h3>What Fails SPPI?</h3>
+            <ul>
+                <li>Convertible bonds (include embedded equity option) ✗</li>
+                <li>Structured products with leveraged returns ✗</li>
+                <li>Equities (no principal repayment) ✗</li>
+                <li>Credit-linked derivatives ✗</li>
+                <li>Loans with prepayment penalties that compensate the lender for lost interest ✗ (sometimes — judgment call)</li>
+            </ul>
+
+            <p class="example-box"><strong>SPPI Example: Corporate Bond</strong><br>
+            Bond: £100m, 5-year maturity, 4% fixed coupon, issued at par<br>
+            • Contractual cash flows: £4m interest annually + £100m principal at maturity<br>
+            • Do flows consist solely of principal + interest? YES<br>
+            • SPPI test: ✓ PASS<br>
+            • Classification potential: Amortised Cost (if HTC model) or FVOCI (if HTCS model)
+            </p>
+
+            <h2 id="three-categories">Three Measurement Categories</h2>
+
+            <h3>Category 1: Amortised Cost (AC)</h3>
+            <p><strong>When:</strong> Business Model = HTC AND SPPI test passes</p>
+            <p><strong>Measurement:</strong> Balance sheet shows the book value (cost − repayments − impairment). P&L shows interest income and impairment losses only (no fair value gains/losses).</p>
+            <p><strong>Users:</strong> Banks (retail mortgages, corporate loans), corporates (investments held to maturity)</p>
+
+            <h3>Category 2: Fair Value Through OCI (FVOCI)</h3>
+            <p><strong>When:</strong> Business Model = HTCS AND SPPI test passes (OR automatic election for eligible equities)</p>
+            <p><strong>Measurement:</strong> Balance sheet shows fair value. P&L shows interest income + dividends + impairment losses. Other comprehensive income (OCI) shows unrealised gains/losses on fair value changes. When the asset is sold, the OCI gain/loss is reclassified to P&L (reclassification adjustment).</p>
+            <p><strong>Users:</strong> Insurance companies, pension funds, corporates with strategic equity holdings</p>
+
+            <h3>Category 3: Fair Value Through P&L (FVPL)</h3>
+            <p><strong>When:</strong> Business Model = Other (trading) OR SPPI test fails OR business model = HTCS but SPPI fails</p>
+            <p><strong>Measurement:</strong> Balance sheet shows fair value. <strong>All changes in fair value hit P&L immediately</strong>, including unrealised gains/losses.</p>
+            <p><strong>Users:</strong> Trading desks, asset managers, derivative positions</p>
+
+            <h2 id="ecl">Expected Credit Loss (ECL): The Impairment Model</h2>
+            <p>IFRS 9 replaced the old "incurred loss" model (you recognized losses only when a credit event occurred) with a forward-looking <strong>Expected Credit Loss (ECL)</strong> model. ECL = you recognize losses <strong>before</strong> default happens.</p>
+
+            <h3>ECL Formula</h3>
+            <p><strong>ECL = Probability of Default (PD) × Loss Given Default (LGD) × Exposure at Default (EAD)</strong></p>
+            <p>All three components are estimated and discounted:</p>
+            <ul>
+                <li><strong>PD (Probability of Default):</strong> % chance the borrower defaults within 12 months (Stage 1) or lifetime (Stage 2/3)</li>
+                <li><strong>LGD (Loss Given Default):</strong> % of the exposure lost if default occurs (typically 40–60% for unsecured loans)</li>
+                <li><strong>EAD (Exposure at Default):</strong> Amount outstanding at the time of default</li>
+            </ul>
+
+            <h3>Worked Example: Trade Receivable</h3>
+            <p><strong>Company has a £100k receivable from Customer X (45 days overdue)</strong></p>
+            <p>PD estimate (based on historical default rates + current economic conditions): 8%<br>
+            LGD estimate (collection recovery if we go to court): 60%<br>
+            EAD: £100k (the full outstanding amount)<br><br>
+            ECL = 8% × 60% × £100k = £4,800</p>
+            <p>You recognize an impairment loss of £4,800 in P&L (or through a loss allowance account)</p>
+
+            <h2 id="three-stages">The Three-Stage ECL Model</h2>
+
+            <h3>Stage 1: Performing Assets (Low Credit Risk)</h3>
+            <p><strong>Indicator:</strong> Asset has been performing as expected; no significant increase in credit risk (SICR) since initial recognition</p>
+            <p><strong>ECL recognition:</strong> 12-month ECL (only the probability of default within the next 12 months)</p>
+            <p><strong>Example:</strong> Mortgage 4 months into a 30-year term, borrower making timely payments, credit rating unchanged</p>
+
+            <h3>Stage 2: Underperforming Assets (Increased Credit Risk)</h3>
+            <p><strong>Indicator:</strong> Significant increase in credit risk (SICR) since initial recognition, BUT not yet in default</p>
+            <p><strong>ECL recognition:</strong> Lifetime ECL (the probability of default any time in the remaining life of the asset)</p>
+            <p><strong>Example:</strong> Borrower's credit rating downgraded; or payment 30–90 days late (but not defaulted); or economic deterioration specific to that industry</p>
+            <p><strong>Audit focus:</strong> How does management identify SICR? What's the trigger? What's the evidence?</p>
+
+            <h3>Stage 3: Credit-Impaired Assets (In Default)</h3>
+            <p><strong>Indicator:</strong> Asset is in default or credit-impaired (principal or interest >90 days past due, covenant breach, etc.)</p>
+            <p><strong>ECL recognition:</strong> Lifetime ECL (full expected losses over the remaining life)</p>
+            <p><strong>Example:</strong> Loan payments are 120 days overdue; borrower files for bankruptcy; or significant event makes repayment unlikely</p>
+            <p><strong>Interest income:</strong> In Stage 3, interest is calculated on the net carrying amount (gross amount − impairment), not on the full amount</p>
+
+            <h2 id="sicr">Significant Increase in Credit Risk (SICR): The Judgment Call</h2>
+            <p>SICR is the pivotal judgment in the ECL model. It determines whether you move from 12-month ECL (Stage 1) to lifetime ECL (Stage 2).</p>
+
+            <h3>Indicators of SICR</h3>
+            <ul>
+                <li><strong>Credit rating downgrade:</strong> From investment-grade to speculative-grade</li>
+                <li><strong>Payment arrears:</strong> Payment 30–60 days late (varies by contract)</li>
+                <li><strong>Covenant breach:</strong> Borrower violates loan covenants (debt/EBITDA, interest coverage, etc.)</li>
+                <li><strong>Economic deterioration:</strong> Industry recession, company-specific losses, unemployment spike</li>
+                <li><strong>Collateral decline:</strong> If the loan is secured and collateral value drops significantly</li>
+                <li><strong>Change in terms:</strong> Lender must restructure the loan due to financial difficulty (forbearance)</li>
+            </ul>
+
+            <h3>Quantitative vs. Qualitative SICR</h3>
+            <ul>
+                <li><strong>Quantitative:</strong> "PD increased by >300 basis points since inception"</li>
+                <li><strong>Qualitative:</strong> "Customer notified us of management turnover due to financial stress"</li>
+            </ul>
+
+            <p class="callout"><strong>Audit challenge:</strong> Management often sets SICR thresholds too high, delaying the move to Stage 2. Auditors push back: "Your threshold is 500 bps PD increase, but most published guidance uses 300 bps. Justify the difference."</p>
+
+            <h2 id="worked">Worked Example: Bank Loan Portfolio Impairment</h2>
+
+            <h3>Scenario</h3>
+            <p><strong>Bank holds a £500m corporate loan portfolio as of 31 Dec 2025:</strong></p>
+            <ul>
+                <li>Loans originated throughout 2020–2025</li>
+                <li>Classified Amortised Cost (HTC business model)</li>
+                <li>Most borrowers performing; a few showing SICR</li>
+            </ul>
+
+            <h3>Portfolio Composition</h3>
+            <table>
+                <tr>
+                    <th>Stage</th>
+                    <th>Gross Carrying Amount</th>
+                    <th>PD Assumption</th>
+                    <th>LGD</th>
+                    <th>ECL Allowance</th>
+                </tr>
+                <tr>
+                    <td>Stage 1 (Performing)</td>
+                    <td>£400m</td>
+                    <td>0.5% (12-month)</td>
+                    <td>40%</td>
+                    <td>£800k</td>
+                </tr>
+                <tr>
+                    <td>Stage 2 (SICR)</td>
+                    <td>£80m</td>
+                    <td>3.5% (lifetime)</td>
+                    <td>40%</td>
+                    <td>£1,120k</td>
+                </tr>
+                <tr>
+                    <td>Stage 3 (Defaulted)</td>
+                    <td>£20m</td>
+                    <td>100% (lifetime)</td>
+                    <td>50% (recovery lower)</td>
+                    <td>£10,000k</td>
+                </tr>
+                <tr>
+                    <td><strong>Total</strong></td>
+                    <td><strong>£500m</strong></td>
+                    <td></td>
+                    <td></td>
+                    <td><strong>£11,920k (~2.4%)</strong></td>
+                </tr>
+            </table>
+
+            <h3>Journal Entry</h3>
+            <p><strong>31 December 2025 (Year-end impairment)</strong></p>
+            <div style="background: #1a2f5a; color: #e8eef7; padding: 20px; border-radius: 6px; margin: 24px 0; font-family: 'Courier New', monospace; font-size: 0.9em; line-height: 1.6;">
+                Dr Impairment Loss on Financial Assets &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 11,920,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Loss Allowance on Loans &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 11,920,000
+            </div>
+
+            <p>(The loss allowance is a contra-asset on the balance sheet; loans are presented net of the allowance.)</p>
+
+            <h2 id="real-company">Real Company Example: HSBC's ECL Disclosures</h2>
+            <p>From HSBC's 2024 Annual Report (IFRS reporter):</p>
+            <ul>
+                <li><strong>Stage 1 loans:</strong> £650bn gross; ECL 0.3% = £1.95bn allowance</li>
+                <li><strong>Stage 2 loans:</strong> £45bn (mostly retail; home equity lines, mortgages with payment arrears); ECL 1.2% = £540m</li>
+                <li><strong>Stage 3 loans:</strong> £12bn (defaulted mortgages, impaired commercial loans); ECL 22% = £2.64bn</li>
+                <li><strong>Total ECL allowance:</strong> £5.13bn against a £707bn loan portfolio</li>
+            </ul>
+            <p>HSBC's SICR triggers: 30 days arrears (retail), covenant breach (commercial), credit rating downgrade (≥2 notches), industry distress indicators.</p>
+
+            <h2 id="hedge">Hedge Accounting Under IFRS 9</h2>
+            <p>IFRS 9 reformed hedge accounting to allow more "economic hedges" to qualify for hedge accounting treatment.</p>
+
+            <h3>Hedge Types</h3>
+            <ul>
+                <li><strong>Fair value hedge:</strong> Hedging exposure to changes in fair value of a recognised asset/liability (e.g., fixed-rate loan + interest rate swap)</li>
+                <li><strong>Cash flow hedge:</strong> Hedging exposure to variable future cash flows (e.g., variable-rate loan + swap to fixed)</li>
+                <li><strong>Net investment hedge:</strong> Hedging foreign currency exposure in a subsidiary</li>
+            </ul>
+
+            <p class="callout"><strong>Key change from IAS 39:</strong> No need to quantify hedge effectiveness as a precise %. IFRS 9 simply requires an "economic relationship" between the hedge and the hedged item. This allows more hedges to qualify.</p>
+
+            <h2 id="audit">What Auditors Focus On (IFRS 9 Red Flags)</h2>
+
+            <h3>1. Classification Judgments</h3>
+            <p>Auditors scrutinize business model documentation. Common challenge: "You classified mortgages as FVOCI (Hold to Collect and Sell), but you've held 99% to maturity. That's not HTCS; that's HTC."</p>
+
+            <h3>2. SPPI Testing</h3>
+            <p>Auditors challenge whether SPPI truly passes. Examples:<br>
+            "Your structured product has embedded options. Do the cash flows really consist solely of principal + interest?"<br>
+            "Your prepayment penalty is described as 'make-whole' — does it compensate you for lost interest, failing the SPPI test?"</p>
+
+            <h3>3. SICR Assessment</h3>
+            <p>Auditors examine whether assets are moving from Stage 1 to Stage 2 appropriately. Often, auditors find:</p>
+            <ul>
+                <li>Management's SICR threshold is too conservative (e.g., 800 bps PD increase when market standard is 300 bps)</li>
+                <li>Qualitative factors (industry downturn, management changes) are ignored</li>
+                <li>Stage 2 assets that should be reclassified back to Stage 1 are kept there unnecessarily</li>
+            </ul>
+
+            <h3>4. ECL Model Assumptions</h3>
+            <p>Auditors recalculate ECL and challenge:<br>
+            "Your PD for mortgages is 0.2%. Historical default rate was 0.8% in the 2008 crisis. Why is forward-looking PD so much lower?"<br>
+            "Your LGD assumes 70% recovery. Recent recoveries are averaging 45%. Justify the difference."</p>
+
+            <h3>5. Post-Model Adjustments (PMAs)</h3>
+            <p>Many banks apply "post-model adjustments" — manual additions to ECL for factors the model doesn't capture. Auditors push back on PMAs because they're inherently subjective.</p>
+
+            <h2 id="vs-asc">IFRS 9 vs. ASC 326 (US GAAP: CECL)</h2>
+
+            <table>
+                <tr>
+                    <th>Aspect</th>
+                    <th>IFRS 9 (3-Stage)</th>
+                    <th>ASC 326 (CECL)</th>
+                </tr>
+                <tr>
+                    <td>Impairment approach</td>
+                    <td>Three-stage model (12M ECL moving to lifetime)</td>
+                    <td>Single-stage lifetime ECL for all assets immediately</td>
+                </tr>
+                <tr>
+                    <td>Loss recognition</td>
+                    <td>12-month ECL on Stage 1; moves to lifetime only on SICR</td>
+                    <td>Lifetime ECL on day 1, regardless of credit quality</td>
+                </tr>
+                <tr>
+                    <td>Conservatism</td>
+                    <td>Less conservative (12M ECL for good credits)</td>
+                    <td>More conservative (lifetime for everyone)</td>
+                </tr>
+                <tr>
+                    <td>Forward-looking</td>
+                    <td>Requires reasonable and supportable forward-looking info</td>
+                    <td>Requires reasonable and supportable forward-looking info</td>
+                </tr>
+                <tr>
+                    <td>When higher</td>
+                    <td>IFRS 9 typically lower (early recognition more gradual)</td>
+                    <td>ASC 326 typically higher (front-loaded recognition)</td>
+                </tr>
+            </table>
+
+            <h2 id="common-mistakes">Common Mistakes in IFRS 9 Application</h2>
+
+            <h3>Mistake 1: Misidentifying Business Model</h3>
+            <p>Companies classify a "trading" portfolio as "Hold to Collect" to avoid FVPL volatility. Auditors challenge: "You hold 80% to maturity, but sold 10% in the middle of the year for profit. That's not HTC; that's HTCS or trading."</p>
+
+            <h3>Mistake 2: SPPI Failures Overlooked</h3>
+            <p>Convertible bonds, equity-linked notes, and structured products often fail SPPI but are classified as if they pass. Result: misclassification to Amortised Cost when FVPL is required.</p>
+
+            <h3>Mistake 3: SICR Thresholds Too High</h3>
+            <p>Management sets SICR thresholds (e.g., 500 bps PD increase) so high that most deteriorating assets stay in Stage 1 too long. Auditors lower the thresholds and move assets to Stage 2, increasing ECL by millions.</p>
+
+            <h3>Mistake 4: Forgetting Reversal Adjustments</h3>
+            <p>When a Stage 2 asset improves, it should move back to Stage 1. Many companies forget to reverse the lifetime ECL allowance, overstating impairments.</p>
+
+            <h2 id="faq">Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3>Can an equity investment be classified at amortised cost?</h3>
+                <p>No. Equities do not pass the SPPI test (no principal repayment obligation). They're measured at FVPL or FVOCI (if the company makes an irrevocable election for strategic holdings).</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What if my forward-looking ECL is lower than historical ECL?</h3>
+                <p>IFRS 9 requires reasonable and supportable forward-looking information. If economic conditions have genuinely improved, lower ECL is justified. Document the improvement (e.g., GDP recovery, industry rebound) and be prepared to defend it to auditors.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can I use a probability-weighted approach to SICR?</h3>
+                <p>Yes. Some companies weight multiple SICR scenarios (e.g., 60% probability borrower stays Stage 1, 40% moves to Stage 2; calculate expected ECL accordingly). This is acceptable if well documented.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>When does a Stage 3 asset move back to Stage 2 or Stage 1?</h3>
+                <p>When the credit-impaired condition is cured (arrears paid, covenant waiver obtained, etc.). If the asset moves back, ECL reverts to the appropriate stage (lifetime if Stage 2; 12-month if back to Stage 1). This is rare in practice.</p>
+            </div>
+
+            <div class="cta-box">
+                <h3>Explore the IFRS 9 Cluster</h3>
+                <p>Deep-dive into specific areas: ECL models, hedge accounting, classification pitfalls, and more.</p>
+                <a href="https://uqconsulting.org/blog/ifrs-9-expected-credit-loss-model.html" class="cta-button">→ IFRS 9 ECL Model Guide</a>
+            </div>
+
+            <div class="related">
+                <h3>Related Articles in the IFRS 9 Cluster</h3>
+                <div class="related-grid">
+                    <a href="https://uqconsulting.org/blog/ifrs-9-expected-credit-loss-model.html">IFRS 9 Expected Credit Loss (ECL) – Complete Guide</a>
+                    <a href="https://uqconsulting.org/blog/ifrs-9-classification-measurement.html">IFRS 9 Classification & Measurement – Business Model & SPPI</a>
+                    <a href="https://uqconsulting.org/blog/ifrs-9-hedge-accounting.html">IFRS 9 Hedge Accounting – Cash Flow & Fair Value Hedges</a>
+                    <a href="https://uqconsulting.org/blog/ifrs-9-impairment-accounting.html">IFRS 9 Impairment – Lifetime vs 12-Month ECL</a>
+                    <a href="https://uqconsulting.org/blog/ifrs-9-modification-derecognition.html">IFRS 9 Modification & Derecognition – When to Stop Recognizing</a>
+                    <a href="https://uqconsulting.org/blog/ifrs-9-vs-asc-326.html">IFRS 9 vs ASC 326 (CECL) – Complete Comparison</a>
+                </div>
+            </div>
+
+            <div class="author-bio">
+                <div class="avatar">UQ</div>
+                <div>
+                    <h4>Usman Qureshi (ACCA, ACA)</h4>
+                    <p>IFRS 9 is one of the most technically complex standards. In my Big 4 audit role, I've spent hundreds of hours on financial instruments — from banking portfolios to corporate hedge programs. This guide reflects the real-world questions auditors ask and the mistakes companies most often make.</p>
+                </div>
+            </div>
+
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> This is educational content based on IFRS 9 as of 2026. It is not professional advice. IFRS 9 application is highly fact-specific; consult a qualified accountant or auditor for your specific circumstances. IFRS 9 judgments (classification, SICR, ECL assumptions) are subject to professional judgment and auditor scrutiny.
+            </div>
+        </article>
+    </div>
+</body>
+</html>

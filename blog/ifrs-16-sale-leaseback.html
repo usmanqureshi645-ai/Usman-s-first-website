@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9LKFW8QCC8"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9LKFW8QCC8');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFRS 16 Sale and Leaseback: Accounting Treatment & Journal Entries Explained</title>
+    <meta name="description" content="IFRS 16 sale and leaseback accounting: seller-lessee treatment, buyer-lessor treatment, gain recognition, journal entries. Worked examples with real-world scenarios.">
+    <meta name="keywords" content="IFRS 16 sale and leaseback, IFRS 16 SLB accounting, seller-lessee, buyer-lessor, sale and leaseback gain, IFRS 16 SLB journal entries, sale-leaseback treatment">
+    <meta name="author" content="Usman Qureshi">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://uqconsulting.org/blog/ifrs-16-sale-leaseback.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="IFRS 16 Sale and Leaseback: Accounting Treatment & Journal Entries">
+    <meta property="og:description" content="Complete guide to IFRS 16 sale and leaseback transactions, gain recognition, and journal entries.">
+    <meta property="og:image" content="https://uqconsulting.org/images/og-image.png">
+    <meta property="og:url" content="https://uqconsulting.org/blog/ifrs-16-sale-leaseback.html">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "IFRS 16 Sale and Leaseback: Accounting Treatment & Journal Entries Explained",
+      "description": "Complete guide to IFRS 16 sale and leaseback transactions, gain/loss recognition, and accounting entries for seller-lessees and buyer-lessors.",
+      "image": "https://uqconsulting.org/images/og-image.png",
+      "datePublished": "2026-07-04",
+      "author": { "@type": "Person", "name": "Usman Qureshi", "jobTitle": "Chartered Accountant (ACCA, ACA)" },
+      "publisher": { "@type": "Person", "name": "Usman Qureshi" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://uqconsulting.org/blog/ifrs-16-sale-leaseback.html" }
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
+        .topbar { background: #1a2f5a; padding: 16px 20px; text-align: center; }
+        .topbar a { color: #d4af37; text-decoration: none; font-weight: 600; }
+        .article-container { max-width: 760px; margin: 0 auto; padding: 50px 20px; }
+        .breadcrumb { font-size: 0.85em; color: #8593a8; margin-bottom: 24px; }
+        h1 { font-size: 2.3em; color: #1a2f5a; line-height: 1.2; margin-bottom: 16px; }
+        .meta { color: #8593a8; font-size: 0.9em; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid #e4e9f0; }
+        .lead { font-size: 1.15em; color: #4a5568; margin-bottom: 30px; }
+        .toc { background: #fff; border: 1px solid #e4e9f0; border-radius: 8px; padding: 22px 26px; margin-bottom: 36px; }
+        .toc strong { color: #1a2f5a; display: block; margin-bottom: 10px; text-transform: uppercase; }
+        .toc ul { list-style: none; columns: 2; gap: 20px; }
+        .toc li { margin-bottom: 8px; }
+        .toc a { color: #2a4a7a; text-decoration: none; }
+        article h2 { font-size: 1.6em; color: #1a2f5a; margin: 40px 0 16px; }
+        article h3 { font-size: 1.2em; color: #2a4a7a; margin: 28px 0 12px; }
+        article p { margin-bottom: 18px; }
+        article ul { margin: 0 0 18px 28px; }
+        article li { margin-bottom: 8px; }
+        .callout { background: #fff; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; border-radius: 4px; }
+        .journal { font-family: 'Courier New', monospace; background: #1a2f5a; color: #e8eef7; padding: 20px 24px; border-radius: 6px; margin: 24px 0; font-size: 0.9em; overflow-x: auto; line-height: 1.6; }
+        table { width: 100%; border-collapse: collapse; margin: 24px 0; background: #fff; }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e4e9f0; }
+        th { background: #1a2f5a; color: #fff; }
+        .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; border-radius: 4px; }
+        .faq-item { background: #fff; border-radius: 8px; padding: 20px 24px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .faq-item h3 { margin: 0 0 8px; color: #1a2f5a; }
+        .author-bio { display: flex; gap: 20px; background: #fff; border-radius: 10px; padding: 24px 28px; margin: 44px 0; }
+        .avatar { width: 64px; height: 64px; border-radius: 50%; background: #1a2f5a; color: #d4af37; display: flex; align-items: center; font-weight: 700; flex-shrink: 0; }
+        .related { margin-top: 40px; padding-top: 30px; border-top: 2px solid #e4e9f0; }
+        .related h3 { color: #1a2f5a; }
+        .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+        .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; padding: 8px; border: 1px solid #e4e9f0; border-radius: 4px; display: block; }
+        .disclaimer { font-size: 0.82em; color: #8593a8; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a href="https://uqconsulting.org/home.html">← Usman Qureshi — Free AI Tools for Accountants &amp; Auditors</a>
+    </div>
+
+    <div class="article-container">
+        <div class="breadcrumb">
+            <a href="https://uqconsulting.org/home.html">Home</a> &nbsp;›&nbsp;
+            <a href="https://uqconsulting.org/blog/">Blog</a> &nbsp;›&nbsp;
+            <a href="https://uqconsulting.org/blog/ifrs-16-lease-accounting-complete-guide.html">IFRS 16</a> &nbsp;›&nbsp;
+            Sale and Leaseback
+        </div>
+
+        <h1>IFRS 16 Sale and Leaseback: Accounting Treatment & Journal Entries Explained</h1>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 14 min read</div>
+
+        <p class="lead">Sale and leaseback (SLB) transactions are common: a company sells an asset (building, equipment) to a buyer and immediately leases it back. The accounting is tricky. You must defer gains, recognize ROU assets, and think like both the seller and the buyer. This guide covers both sides with full journal entries and real-world examples.</p>
+
+        <div class="toc">
+            <strong>In this guide</strong>
+            <ul>
+                <li><a href="#definition">What is sale and leaseback?</a></li>
+                <li><a href="#seller">Seller-lessee accounting</a></li>
+                <li><a href="#buyer">Buyer-lessor accounting</a></li>
+                <li><a href="#gain">Gain/loss recognition</a></li>
+                <li><a href="#worked">Worked example</a></li>
+                <li><a href="#common">Common traps</a></li>
+                <li><a href="#auditor">Auditor focus areas</a></li>
+                <li><a href="#faq">FAQs</a></li>
+            </ul>
+        </div>
+
+        <article>
+            <h2 id="definition">What is Sale and Leaseback?</h2>
+            <p>A sale and leaseback (SLB) transaction is a two-step process:</p>
+            <ol>
+                <li><strong>Sale:</strong> Company A sells an asset (e.g., a building worth £10m) to a buyer (e.g., a bank, pension fund, or investor)</li>
+                <li><strong>Leaseback:</strong> Company A immediately leases the same asset back from the buyer for a defined term</li>
+            </ol>
+            <p>Result: Company A gets cash upfront, but continues using the asset and makes lease payments. The buyer becomes the owner and lessor.</p>
+
+            <p class="example-box"><strong>Real-world example:</strong> A retail chain owns a flagship store building (£50m value). It sells the building to a property company and immediately leases it back for 20 years at £3m/year. The retailer gets £50m in cash for expansion; the property company gets 20 years of rental income.</p>
+
+            <h2 id="seller">Seller-Lessee Accounting (The Company Using the Asset)</h2>
+
+            <h3>The Key Principle</h3>
+            <p>Under IFRS 16, if the leaseback is classified as a lease, you account for it as you would any other lease: recognize a right-of-use (ROU) asset and lease liability. However, you must also defer any gain on the sale.</p>
+
+            <h3>Step 1: Assess Whether the Sale is a "True Sale"</h3>
+            <p>IFRS 15 (Revenue) requires that the transfer of the asset be a "performance obligation" and that you have no ongoing control. For SLB transactions, the question is: did you really transfer the asset, or is this just a secured borrowing?</p>
+            <p>If the leaseback is a finance lease (the buyer has retained risks), the "sale" might not qualify for revenue recognition, and you keep the asset on the balance sheet.</p>
+            <p>If the leaseback is an operating lease (the buyer has transferred most risks), the sale is "true" and you derecognize the asset.</p>
+
+            <h3>Step 2: Recognize the Lease Liability and ROU Asset</h3>
+            <p>You recognize the lease liability and ROU asset just as you would with any leaseback. Calculate the PV of lease payments using your IBR.</p>
+
+            <h3>Step 3: Defer the Gain</h3>
+            <p>Any gain on the sale of the asset is NOT recognized immediately in P&L. Instead, you defer it and recognize it over the lease term (typically straight-line).</p>
+
+            <p class="callout"><strong>Audit trap:</strong> Many companies recognize the sale gain immediately, forgetting that IFRS 16.100 requires deferral. Auditors will challenge this.</p>
+
+            <h3>Journal Entries for Seller-Lessee</h3>
+
+            <p><strong>Step A: Record the Sale (simplified)</strong></p>
+            <div class="journal">
+                Dr Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [sale proceeds]<br>
+                Cr Asset (building, equipment) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [book value]<br>
+                Cr Deferred Gain — SLB &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [gain: proceeds − book value]
+            </div>
+
+            <p><strong>Step B: Recognize Lease Liability and ROU Asset</strong></p>
+            <div class="journal">
+                Dr ROU Asset &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [PV of lease payments]<br>
+                Cr Lease Liability &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [PV of lease payments]
+            </div>
+
+            <p><strong>Step C: Recognize Deferred Gain (Straight-Line Over Lease Term)</strong></p>
+            <div class="journal">
+                Dr Deferred Gain — SLB &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [annual gain / lease term]<br>
+                Cr Gain on SLB — P&L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [annual gain / lease term]
+            </div>
+
+            <h2 id="buyer">Buyer-Lessor Accounting (The Entity Purchasing and Leasing Out)</h2>
+
+            <h3>The Key Principle</h3>
+            <p>From the buyer's perspective, this is a simple lease transaction. The buyer is the lessor. Account for the lease as an operating or finance lease under IFRS 16 (lessor accounting), depending on the terms.</p>
+
+            <h3>Classification</h3>
+            <ul>
+                <li><strong>Finance lease:</strong> If the risks/rewards transfer to the seller-lessee (typical for long-term SLBs)</li>
+                <li><strong>Operating lease:</strong> If the buyer retains significant risks (less common for SLBs)</li>
+            </ul>
+
+            <h3>Journal Entries for Buyer-Lessor (Finance Lease)</h3>
+
+            <p><strong>Step A: Record the Purchase</strong></p>
+            <div class="journal">
+                Dr Property, Plant & Equipment &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [purchase price]<br>
+                Cr Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [purchase price]
+            </div>
+
+            <p><strong>Step B: Recognize Net Investment in Finance Lease</strong></p>
+            <div class="journal">
+                Dr Net Investment in Finance Lease &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [PV of lease payments]<br>
+                Cr Property, Plant & Equipment &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [amount]
+            </div>
+
+            <p class="callout"><strong>Note:</strong> The buyer-lessor derecognizes the asset from its PP&E and recognizes a "net investment in lease" (finance lease receivable). Interest income is recognized as payments are received.</p>
+
+            <h2 id="gain">Gain/Loss Recognition: The Full Picture</h2>
+
+            <table>
+                <tr>
+                    <th>Scenario</th>
+                    <th>Seller-Lessee Treatment</th>
+                    <th>Impact on P&L</th>
+                </tr>
+                <tr>
+                    <td>Sale price > Book value (gain)</td>
+                    <td>Defer entire gain; recognize ratably over lease term</td>
+                    <td>Gain recognized over lease term, not at sale date</td>
+                </tr>
+                <tr>
+                    <td>Sale price < Book value (loss)</td>
+                    <td>Recognize loss immediately in P&L</td>
+                    <td>Loss hit in year of sale</td>
+                </tr>
+                <tr>
+                    <td>Sale price = Fair value of asset being sold</td>
+                    <td>SLB is at arm's length; standard gain deferral applies</td>
+                    <td>Normal treatment</td>
+                </tr>
+                <tr>
+                    <td>Sale price > Fair value (inflated price)</td>
+                    <td>Only defer the fair-value gain; excess is interest or other income</td>
+                    <td>Gain split: defer FV gain, recognize excess separately</td>
+                </tr>
+            </table>
+
+            <h2 id="worked">Worked Example: Building Sale and Leaseback</h2>
+
+            <h3>Scenario</h3>
+            <p><strong>Seller-Lessee (Retail Chain):</strong></p>
+            <ul>
+                <li>Book value of building: £8m (no accumulated depreciation for simplicity)</li>
+                <li>Sale price: £10m (gain of £2m)</li>
+                <li>Leaseback term: 20 years</li>
+                <li>Annual lease payment: £600k (paid at year-end)</li>
+                <li>IBR: 4.5%</li>
+            </ul>
+
+            <h3>Step 1: Calculate Lease Liability</h3>
+            <p>PV of £600k annual payments over 20 years at 4.5% ≈ £9.13m</p>
+
+            <h3>Step 2: Journal Entries (Seller-Lessee)</h3>
+
+            <p><strong>Entry 1: Record the Sale</strong></p>
+            <div class="journal">
+                Dr Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 10,000,000<br>
+                Cr Building (PP&E) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 8,000,000<br>
+                Cr Deferred Gain — SLB &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2,000,000
+            </div>
+
+            <p><strong>Entry 2: Recognize Lease Liability and ROU Asset</strong></p>
+            <div class="journal">
+                Dr ROU Asset — Building &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9,130,000<br>
+                Cr Lease Liability &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9,130,000
+            </div>
+
+            <p><strong>Entry 3: Annual Deferred Gain Recognition (Year 1)</strong></p>
+            <p>Annual amount: £2,000,000 ÷ 20 years = £100,000/year</p>
+            <div class="journal">
+                Dr Deferred Gain — SLB &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 100,000<br>
+                Cr Gain on SLB — P&L &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 100,000
+            </div>
+
+            <h2 id="common">Common Traps and Auditor Red Flags</h2>
+
+            <h3>Trap 1: Recognizing the Entire Gain at Sale Date</h3>
+            <p><strong>❌ Wrong:</strong> Record £2m gain immediately in P&L when the asset is sold</p>
+            <p><strong>✓ Correct:</strong> Defer £2m and recognize £100k/year over the 20-year lease term</p>
+
+            <h3>Trap 2: Underestimating the ROU Asset</h3>
+            <p><strong>❌ Wrong:</strong> ROU asset = sale price − lease liability (£10m − £9.13m = £0.87m)</p>
+            <p><strong>✓ Correct:</strong> ROU asset = PV of lease payments = £9.13m (same as liability at inception)</p>
+
+            <h3>Trap 3: Forgetting About Operating Lease Leasebacks</h3>
+            <p>If the leaseback is an operating lease (not a finance lease), the seller-lessee does NOT recognize an ROU asset/liability. Instead, they rent the asset as before. The deferred gain treatment still applies.</p>
+
+            <h2 id="auditor">What Auditors Focus On</h2>
+
+            <h3>1. Is the Sale "Real"?</h3>
+            <p>Auditors ask: "Did you genuinely transfer risks and rewards?" If it's merely collateralized borrowing disguised as a sale, the sale should not be recorded.</p>
+
+            <h3>2. Is the Gain Deferred?</h3>
+            <p>Auditors recalculate the gain and verify it's being recognized straight-line over the lease term, not at the sale date.</p>
+
+            <h3>3. Is the Lease Correctly Classified?</h3>
+            <p>Auditors assess whether the leaseback is a finance or operating lease, and verify it's accounted for accordingly.</p>
+
+            <h2 id="faq">FAQs</h2>
+
+            <div class="faq-item">
+                <h3>If I recognize a loss on the sale, do I defer it?</h3>
+                <p>No. Losses are recognized immediately in P&L. Only gains are deferred.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What if the sale price is below fair value?</h3>
+                <p>If you sell below fair value, only defer the gain up to fair value. The excess below fair value is recognized immediately (it's an economic loss, not deferred).</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Is the ROU asset the same as the deferred gain?</h3>
+                <p>No. The ROU asset is the PV of lease payments. The deferred gain is the difference between sale price and book value. They're separate items.</p>
+            </div>
+
+            <div class="author-bio">
+                <div class="avatar">UQ</div>
+                <div>
+                    <h4>Usman Qureshi (ACCA, ACA)</h4>
+                    <p>Sale and leasebacks are common in audit, especially for real estate. The biggest mistake I see: companies immediately recognizing the entire gain instead of deferring it. This guide reflects real audit findings.</p>
+                </div>
+            </div>
+
+            <div class="related">
+                <h3>Related IFRS 16 Articles</h3>
+                <div class="related-grid">
+                    <a href="https://uqconsulting.org/blog/ifrs-16-lease-accounting-complete-guide.html">← IFRS 16 Hub</a>
+                    <a href="https://uqconsulting.org/blog/ifrs-16-lease-modifications.html">Lease Modifications</a>
+                    <a href="https://uqconsulting.org/blog/ifrs-16-journal-entries.html">Journal Entries</a>
+                    <a href="https://uqconsulting.org/blog/ifrs-16-short-term-low-value.html">Short-Term & Low-Value Leases</a>
+                </div>
+            </div>
+
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> Educational content. Sale and leaseback accounting involves judgment. Consult a qualified accountant for your specific situation.
+            </div>
+        </article>
+    </div>
+</body>
+</html>

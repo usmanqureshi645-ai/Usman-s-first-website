@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9LKFW8QCC8"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9LKFW8QCC8');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFRS 16 Discount Rate (IBR): Complete Guide to Incremental Borrowing Rate Calculation</title>
+    <meta name="description" content="How to calculate the incremental borrowing rate (IBR) under IFRS 16. Methods, practical examples, auditor challenges, and common errors. Complete technical guide.">
+    <meta name="keywords" content="IFRS 16 discount rate, incremental borrowing rate IBR, IFRS 16 IBR calculation, lease liability discount rate, interest rate implicit in lease, how to calculate IBR, IFRS 16 auditor challenge">
+    <meta name="author" content="Usman Qureshi">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://uqconsulting.org/blog/ifrs-16-discount-rate-ibr.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="IFRS 16 Discount Rate (IBR): Complete Guide to Incremental Borrowing Rate">
+    <meta property="og:description" content="Master IBR calculation for IFRS 16 leases: methods, practical examples, auditor red flags, and common mistakes.">
+    <meta property="og:image" content="https://uqconsulting.org/images/og-image.png">
+    <meta property="og:url" content="https://uqconsulting.org/blog/ifrs-16-discount-rate-ibr.html">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="IFRS 16 Discount Rate (IBR): Complete Guide">
+    <meta name="twitter:description" content="How to calculate incremental borrowing rate for IFRS 16 leases with worked examples.">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "IFRS 16 Discount Rate (IBR): Complete Guide to Incremental Borrowing Rate Calculation",
+      "description": "Comprehensive guide to calculating the incremental borrowing rate (IBR) for IFRS 16 leases, including methods, examples, auditor challenges, and common errors.",
+      "image": "https://uqconsulting.org/images/og-image.png",
+      "datePublished": "2026-07-04",
+      "dateModified": "2026-07-04",
+      "author": { "@type": "Person", "name": "Usman Qureshi", "jobTitle": "Chartered Accountant (ACCA, ACA)" },
+      "publisher": { "@type": "Person", "name": "Usman Qureshi" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://uqconsulting.org/blog/ifrs-16-discount-rate-ibr.html" }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the incremental borrowing rate (IBR)?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The incremental borrowing rate is the interest rate the lessee would incur to borrow funds to obtain a similar asset over a similar term with similar collateral. It's used as the discount rate for IFRS 16 lease liabilities when the implicit rate is not readily determinable." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the interest rate implicit in the lease?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The implicit rate is the discount rate that makes the present value of lease payments equal to the fair value of the underlying asset. It's determined by the lessor and is rarely available to the lessee in practice." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I estimate my IBR if I don't have a bank quote?",
+          "acceptedAnswer": { "@type": "Answer", "text": "You can estimate IBR using the risk-free rate (e.g., gilt yield) plus your company's credit spread (observable from your bond yields or bank borrowing rates). For example: risk-free rate 2.5% + company spread 2.0% = IBR 4.5%." }
+        },
+        {
+          "@type": "Question",
+          "name": "Should I use the same IBR for all leases?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. IBR should vary by lease term, currency, and collateral. A 5-year lease might have a different rate than a 10-year lease. However, leases of similar characteristics should use similar rates." }
+        },
+        {
+          "@type": "Question",
+          "name": "What do auditors typically challenge on IBR?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Auditors challenge IBRs that are inconsistent with observed borrowing costs, too low relative to company credit rating, or not supported by recent market data. They'll compare your IBR to your actual debt costs." }
+        }
+      ]
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
+        .topbar { background: #1a2f5a; padding: 16px 20px; text-align: center; }
+        .topbar a { color: #d4af37; text-decoration: none; font-weight: 600; }
+        .article-container { max-width: 760px; margin: 0 auto; padding: 50px 20px; }
+        .breadcrumb { font-size: 0.85em; color: #8593a8; margin-bottom: 24px; }
+        .breadcrumb a { color: #8593a8; text-decoration: none; }
+        h1 { font-size: 2.3em; color: #1a2f5a; line-height: 1.2; margin-bottom: 16px; }
+        .meta { color: #8593a8; font-size: 0.9em; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid #e4e9f0; }
+        .lead { font-size: 1.15em; color: #4a5568; margin-bottom: 30px; font-weight: 500; }
+        .toc { background: #fff; border: 1px solid #e4e9f0; border-radius: 8px; padding: 22px 26px; margin-bottom: 36px; }
+        .toc strong { color: #1a2f5a; display: block; margin-bottom: 10px; text-transform: uppercase; font-size: 0.9em; }
+        .toc ul { list-style: none; columns: 2; gap: 20px; }
+        .toc li { margin-bottom: 8px; font-size: 0.92em; }
+        .toc a { color: #2a4a7a; text-decoration: none; }
+        article h2 { font-size: 1.6em; color: #1a2f5a; margin: 40px 0 16px; }
+        article h3 { font-size: 1.2em; color: #2a4a7a; margin: 28px 0 12px; }
+        article p { margin-bottom: 18px; }
+        article ul { margin: 0 0 18px 28px; }
+        article li { margin-bottom: 8px; }
+        .callout { background: #fff; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        table { width: 100%; border-collapse: collapse; margin: 24px 0; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e4e9f0; }
+        th { background: #1a2f5a; color: #fff; font-weight: 600; }
+        .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; border-radius: 4px; }
+        .warning-box { background: #fff3cd; border-left: 4px solid #ff9800; padding: 20px 24px; margin: 28px 0; border-radius: 4px; }
+        .faq-item { background: #fff; border-radius: 8px; padding: 20px 24px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .faq-item h3 { margin: 0 0 8px; color: #1a2f5a; font-size: 1.08em; }
+        .faq-item p { margin: 0; }
+        .author-bio { display: flex; gap: 20px; align-items: flex-start; background: #fff; border-radius: 10px; padding: 24px 28px; margin: 44px 0 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .avatar { width: 64px; height: 64px; border-radius: 50%; background: #1a2f5a; color: #d4af37; display: flex; align-items: center; justify-content: center; font-weight: 700; flex-shrink: 0; }
+        .author-bio h4 { color: #1a2f5a; margin-bottom: 6px; }
+        .author-bio p { font-size: 0.92em; margin: 0; }
+        .related { margin-top: 40px; padding-top: 30px; border-top: 2px solid #e4e9f0; }
+        .related h3 { color: #1a2f5a; margin-bottom: 16px; }
+        .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; padding: 8px; border: 1px solid #e4e9f0; border-radius: 4px; display: block; }
+        .related a:hover { background: #f4f6f9; color: #d4af37; }
+        .disclaimer { font-size: 0.82em; color: #8593a8; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; font-style: italic; }
+        @media (max-width: 600px) {
+            .toc ul { columns: 1; }
+            .related-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a href="https://uqconsulting.org/home.html">← Usman Qureshi — Free AI Tools for Accountants &amp; Auditors</a>
+    </div>
+
+    <div class="article-container">
+        <div class="breadcrumb">
+            <a href="https://uqconsulting.org/home.html">Home</a> &nbsp;›&nbsp;
+            <a href="https://uqconsulting.org/blog/">Blog</a> &nbsp;›&nbsp;
+            <a href="https://uqconsulting.org/blog/ifrs-16-lease-accounting-complete-guide.html">IFRS 16 Lease Accounting</a> &nbsp;›&nbsp;
+            Discount Rate (IBR)
+        </div>
+
+        <h1>IFRS 16 Discount Rate (IBR): Complete Guide to Incremental Borrowing Rate Calculation</h1>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 12 min read</div>
+
+        <p class="lead">The incremental borrowing rate (IBR) is single biggest driver of your lease liability under IFRS 16. Get it wrong by 1%, and a £1m lease could be misstated by £50,000+. This guide walks you through how to estimate, justify, and defend your IBR against auditor scrutiny.</p>
+
+        <div class="toc">
+            <strong>In this guide</strong>
+            <ul>
+                <li><a href="#what">What is the IBR?</a></li>
+                <li><a href="#why">Why it matters for lease liability</a></li>
+                <li><a href="#methods">Four methods to calculate IBR</a></li>
+                <li><a href="#worked">Worked examples</a></li>
+                <li><a href="#implicit">Implicit rate vs IBR</a></li>
+                <li><a href="#auditor">What auditors challenge</a></li>
+                <li><a href="#policy">Building an IBR policy</a></li>
+                <li><a href="#common">Common errors</a></li>
+                <li><a href="#faq">FAQs</a></li>
+            </ul>
+        </div>
+
+        <article>
+            <h2 id="what">What is the Incremental Borrowing Rate (IBR)?</h2>
+            <p>IFRS 16.26 defines it as: "the rate of interest that a lessee would have to pay to borrow over a similar term, and with a similar security, the funds necessary to obtain an asset of a similar value to the right-of-use asset in a similar economic environment."</p>
+            <p>In plain English: <strong>the interest rate you would pay if you borrowed money to buy the leased asset, all else being equal.</strong></p>
+            <p>Because lessees almost never know the implicit rate, the IBR becomes the discount rate used to calculate lease liabilities. This makes it critical to get right.</p>
+
+            <h2 id="why">Why the Discount Rate Matters</h2>
+            <p>Remember the lease liability formula: <strong>Present Value of Lease Payments = Payment ÷ (1 + r)^t</strong></p>
+            <p>A small change in <em>r</em> (the discount rate) compounds across years. For a £500k annual lease over 10 years:</p>
+            <table>
+                <tr>
+                    <th>IBR</th>
+                    <th>Lease Liability</th>
+                    <th>Difference</th>
+                </tr>
+                <tr>
+                    <td>4.0%</td>
+                    <td>£4,063,000</td>
+                    <td>—</td>
+                </tr>
+                <tr>
+                    <td>5.0%</td>
+                    <td>£3,861,000</td>
+                    <td>−£202,000</td>
+                </tr>
+                <tr>
+                    <td>6.0%</td>
+                    <td>£3,672,000</td>
+                    <td>−£391,000</td>
+                </tr>
+            </table>
+            <p>A 2% variance in IBR swings the balance sheet by nearly £400k. Auditors are acutely aware of this.</p>
+
+            <h2 id="methods">Four Methods to Calculate or Estimate IBR</h2>
+
+            <h3>Method 1: Ask Your Bank Directly</h3>
+            <p>The simplest approach. Call your relationship manager and ask:</p>
+            <p><em>"What rate would you charge us to borrow £X over Y years with Z collateral?"</em></p>
+            <p><strong>Pros:</strong> Definitive, lender-backed, hard to argue with</p>
+            <p><strong>Cons:</strong> Requires relationship, may take time, bank may refuse for new facilities</p>
+            <p class="example-box"><strong>Example:</strong> Your bank's standard term rate for a 5-year asset loan is 6.2%. You use 6.2% for all 5-year leases. Clean and defensible.</p>
+
+            <h3>Method 2: Observe Your Existing Debt</h3>
+            <p>Look at rates you're already paying.</p>
+            <p><strong>Steps:</strong></p>
+            <ul>
+                <li>Identify all borrowing in your debt schedule (term loans, bank facilities, bonds, overdrafts)</li>
+                <li>Extract the all-in rate (including fees, margin over SONIA/SOFR, etc.)</li>
+                <li>Adjust to match lease term (e.g., if your £5m facility is 3 years at 6%, but you want a 7-year IBR, adjust upward by ~0.25–0.50% for the longer term)</li>
+            </ul>
+            <p><strong>Pros:</strong> Based on real cost of capital, easy to defend ("Our bank charged us 6% on our term loan")</p>
+            <p><strong>Cons:</strong> Existing rates may not match lease term or collateral type; requires judgment to adjust</p>
+
+            <h3>Method 3: Risk-Free Rate + Credit Spread Approach</h3>
+            <p>This is the most rigorous approach and what auditors often expect for larger lease portfolios.</p>
+            <p><strong>Formula: IBR = Risk-Free Rate + Credit Spread</strong></p>
+            <p><strong>Risk-Free Rate:</strong> Use the gilt yield (UK) or treasury yield matching your lease term</p>
+            <p><strong>Credit Spread:</strong> The additional margin your company pays above the risk-free rate, derived from:</p>
+            <ul>
+                <li>Bond yields (if you're a public company)</li>
+                <li>CDS (credit default swap) spreads</li>
+                <li>Comparable company analysis (find peers with similar credit rating)</li>
+            </ul>
+
+            <p class="example-box"><strong>Worked Example:</strong><br>
+            • 5-year lease<br>
+            • UK 5-year gilt yield: 2.5%<br>
+            • Your company is BB-rated (sub-investment grade)<br>
+            • Observable BB-rated bond spread: +2.8%<br>
+            • IBR = 2.5% + 2.8% = 5.3%
+            </p>
+
+            <h3>Method 4: Build-Up Approach</h3>
+            <p>Break down borrowing costs into components:</p>
+            <p><strong>IBR = Risk-Free Rate + Company Credit Spread + Collateral Risk Premium</strong></p>
+            <p>For example:</p>
+            <ul>
+                <li>Risk-free rate: 2.5%</li>
+                <li>Credit spread (company-specific): 2.0%</li>
+                <li>Collateral risk premium (additional security required for this asset): 0.5%</li>
+                <li><strong>Total IBR: 5.0%</strong></li>
+            </ul>
+
+            <h2 id="worked">Worked Example: Three Scenarios</h2>
+
+            <h3>Scenario 1: Public Company with Bond Issuance</h3>
+            <p><strong>Company:</strong> Large retailer, investment-grade rated (A−)<br>
+            <strong>Bond information:</strong> Issued £200m, 5-year senior bonds at 3.2%</p>
+            <p><strong>Approach:</strong> Use 3.2% as the IBR for all 5-year leases (asset-backed leases may be slightly lower, but 3.2% is defensible)</p>
+            <p><strong>Auditor view:</strong> ✓ Easy pass. Observable, recent market rate.</p>
+
+            <h3>Scenario 2: Mid-Cap Private Company, No Public Debt</h3>
+            <p><strong>Company:</strong> £50m revenue manufacturing company, privately held<br>
+            <strong>Bank facility:</strong> £10m revolving credit facility at SONIA + 2.25% (current rate ~4.50%)<br>
+            <strong>Lease term:</strong> 7 years (longer than bank facility)</p>
+
+            <p><strong>Approach:</strong></p>
+            <ul>
+                <li>Start with observed rate: 4.50% on the RCF</li>
+                <li>Adjust for term: 7-year terms usually cost 0.30–0.50% more than 3-year terms</li>
+                <li>Adjusted IBR: 4.50% + 0.40% = 4.90%</li>
+            </ul>
+
+            <p><strong>Auditor challenge:</strong> ⚠️ Likely. Auditor will ask: "How did you determine the 0.40% adder? Show comparable data."</p>
+
+            <p><strong>Better approach:</strong> Obtain a formal quote from your bank: "What would you charge for a 7-year asset-backed facility at this size?" Use that rate directly.</p>
+
+            <h3>Scenario 3: Early-Stage Startup, High Risk</h3>
+            <p><strong>Company:</strong> 2-year-old tech startup, pre-revenue<br>
+            <strong>Available debt:</strong> Only venture debt at 12% (very expensive)<br>
+            <strong>Lease:</strong> Office space, 3-year lease at £100k/year</p>
+
+            <p><strong>Approach:</strong> Venture debt at 12% is not representative of typical borrowing. Instead:</p>
+            <ul>
+                <li>Estimate credit spread for startups: typically 8–12%</li>
+                <li>Risk-free rate (3-year gilt): 2.8%</li>
+                <li>Estimated IBR: 2.8% + 9% = 11.8%</li>
+                <li>Round to 12% (conservative)</li>
+            </ul>
+
+            <p><strong>Auditor view:</strong> ✓ Reasonable. Must be supported by a brief memo explaining the estimate.</p>
+
+            <h2 id="implicit">Implicit Rate vs. IBR: When Do You Use Each?</h2>
+            <p><strong>Implicit Rate:</strong> The discount rate that equates the PV of lease payments to the fair value of the asset. It's <em>determined by the lessor</em>, rarely given to the lessee, and usually not known.</p>
+            <p><strong>When to use:</strong> Only if the lessor explicitly states it in the lease agreement. For example: "The lessor determines the implicit rate to be 4.5%." This is rare.</p>
+
+            <p><strong>IBR:</strong> The rate <em>the lessee estimates</em> based on borrowing costs. Used for 99% of leases in practice.</p>
+
+            <p class="callout"><strong>Audit practice:</strong> Auditors will ask whether you attempted to determine the implicit rate. Even if unsuccessful, show that you tried (e.g., "We requested the implicit rate from the lessor; they did not provide it. Therefore, we used IBR."). This demonstrates you followed IFRS.</p>
+
+            <h2 id="auditor">What Auditors Scrutinize (And Challenge)</h2>
+
+            <h3>Red Flag 1: IBR Is Lower Than Observable Borrowing Rates</h3>
+            <p><strong>Audit finding:</strong> "You claimed IBR of 3.5%, but your bank facility is at 6.2%. Explain the difference."</p>
+            <p><strong>How to avoid:</strong> Document why your IBR differs from existing rates. For example:</p>
+            <ul>
+                <li>"Our RCF is at 6.2% because it includes a commitment fee and fronting fee on an unused facility. For asset-backed borrowing, the rate would be 4.8%."</li>
+                <li>"Our bonds are at 3.2%, but leases are less creditworthy than secured bonds, so we add 0.5% for collateral risk: 3.7%."</li>
+            </ul>
+
+            <h3>Red Flag 2: IBR Doesn't Vary by Lease Term</h3>
+            <p><strong>Audit finding:</strong> "You used 5.0% for a 3-year lease and 5.0% for a 10-year lease. Long-term borrowing is more expensive. Why no variance?"</p>
+            <p><strong>How to avoid:</strong> Document a rate curve. For example:</p>
+            <ul>
+                <li>3-year leases: 4.8%</li>
+                <li>5-year leases: 5.2%</li>
+                <li>10-year leases: 5.8%</li>
+            </ul>
+            <p>Derive this from gilt curves or comparable bond issuances.</p>
+
+            <h3>Red Flag 3: No Supporting Documentation</h3>
+            <p><strong>Audit finding:</strong> "We asked for your IBR calculation; you provided none. How did you arrive at 5.5%?"</p>
+            <p><strong>How to avoid:</strong> Build a one-page IBR policy documenting your methodology. Include:</p>
+            <ul>
+                <li>Date the policy was set</li>
+                <li>Source of rates (e.g., "gilt yields as of 1 Jan 2026")</li>
+                <li>Calculation (e.g., "Risk-free rate 2.5% + credit spread 2.0%")</li>
+                <li>Supporting evidence (print-outs of gilt yields, bond prospectuses, etc.)</li>
+            </ul>
+
+            <h2 id="policy">Building an IBR Policy</h2>
+            <p>Here's a template:</p>
+
+            <div class="example-box">
+                <strong>Example IBR Policy (excerpt)</strong><br><br>
+                <em>Effective 1 January 2026</em><br><br>
+                <strong>Objective:</strong> Determine a consistent, defensible incremental borrowing rate for IFRS 16 lease accounting.<br><br>
+                <strong>Approach:</strong> Risk-free rate + credit spread<br><br>
+                <strong>Risk-free rate:</strong> UK gilt yield matching the lease term, sourced from the Bank of England website as of 1 January each year.<br><br>
+                <strong>Credit spread:</strong> Based on the company's A− credit rating. Sourced from:</strong>
+                <ul style="margin-top: 10px; margin-bottom: 10px;">
+                    <li>Observable bond yields (if issuer of public debt)</li>
+                    <li>Comparable A-rated company spreads (if private)</li>
+                </ul>
+                <strong>Rate schedule (as of 1 January 2026):</strong>
+                <ul style="margin-top: 10px;">
+                    <li>3-year leases: 4.2% (gilt 1.7% + spread 2.5%)</li>
+                    <li>5-year leases: 4.5% (gilt 2.0% + spread 2.5%)</li>
+                    <li>7-year leases: 4.8% (gilt 2.3% + spread 2.5%)</li>
+                    <li>10-year leases: 5.2% (gilt 2.7% + spread 2.5%)</li>
+                </ul>
+            </div>
+
+            <h2 id="common">Common IBR Errors (What Auditors Catch)</h2>
+
+            <h3>Error 1: Using Cost of Equity Instead of Borrowing Rate</h3>
+            <p><strong>❌ Wrong:</strong> "Our WACC is 8%, so IBR is 8%"</p>
+            <p><strong>✓ Correct:</strong> "Our borrowing rate (cost of debt) is 5%. That's our IBR."</p>
+            <p>Cost of equity and WACC are far too high for a borrowing rate and will overstate lease liabilities.</p>
+
+            <h3>Error 2: Not Adjusting IBR for Currency</h3>
+            <p><strong>❌ Wrong:</strong> Using a GBP-based IBR (3.5%) for a EUR lease, when EUR borrowing costs are 2.8%</p>
+            <p><strong>✓ Correct:</strong> Adjust IBR by currency. EUR leases use EUR-based IBR (2.8%), USD leases use USD-based IBR (4.2%), etc.</p>
+
+            <h3>Error 3: Forgetting to Update IBR Annually</h3>
+            <p><strong>❌ Wrong:</strong> Using the same 4.5% IBR in 2024, 2025, and 2026, even though interest rates have changed</p>
+            <p><strong>✓ Correct:</strong> Review and update IBR annually (or when rates significantly change). New leases use current rates; existing leases use rates at lease commencement (not remeasured).</p>
+
+            <h3>Error 4: Inconsistency Across Leases</h3>
+            <p><strong>❌ Wrong:</strong> Using 4.5% for one office lease and 5.5% for another nearly identical office lease</p>
+            <p><strong>✓ Correct:</strong> Standardize rates. Similar leases (same term, currency, collateral) use the same rate. Document the policy.</p>
+
+            <h2 id="faq">Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <h3>Can I use a different IBR for each lease?</h3>
+                <p>You <em>can</em>, but you <em>shouldn't</em> (unless well justified). Use consistent IBRs for leases of similar term, currency, and collateral. Variation should be rare and documented.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>What if interest rates changed after I signed the lease?</h3>
+                <p>Use the IBR at lease <em>commencement</em>, not at the measurement date. Once set, IBR stays the same for that lease's life. (Only the lease liability balance changes as you make payments.)</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Should I include inflation in the IBR?</h3>
+                <p>No. IBR is a nominal rate. If lease payments are inflation-linked, include the inflation-linked amount in the lease payment calculation; don't double-count it in IBR.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Is there a "safe harbor" IBR auditors will always accept?</h3>
+                <p>Not officially, but your bank's quoted rate is near-bulletproof. If your bank says 5.2%, that's hard to argue with. Observable market rates are safer than estimates.</p>
+            </div>
+
+            <div class="author-bio">
+                <div class="avatar">UQ</div>
+                <div>
+                    <h4>Usman Qureshi (ACCA, ACA)</h4>
+                    <p>As a Big 4 audit manager, I've reviewed IBR calculations for hundreds of leases. The most common challenge: companies use rates that don't match their actual cost of debt. This guide reflects what auditors actually ask for.</p>
+                </div>
+            </div>
+
+            <div class="related">
+                <h3>Related IFRS 16 Articles</h3>
+                <div class="related-grid">
+                    <a href="https://uqconsulting.org/blog/ifrs-16-lease-accounting-complete-guide.html">← Back to IFRS 16 Hub</a>
+                    <a href="https://uqconsulting.org/blog/ifrs-16-journal-entries.html">IFRS 16 Journal Entries</a>
+                    <a href="https://uqconsulting.org/blog/ifrs-16-lease-modifications.html">Lease Modifications</a>
+                    <a href="https://uqconsulting.org/blog/ifrs-16-sale-leaseback.html">Sale and Leaseback</a>
+                </div>
+            </div>
+
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> This is educational content, not professional advice. IBR determination is fact-specific and often requires professional judgment. Consult a qualified accountant for your specific situation.
+            </div>
+        </article>
+    </div>
+</body>
+</html>

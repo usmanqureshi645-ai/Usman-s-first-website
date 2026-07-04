@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Analytics (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9LKFW8QCC8"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9LKFW8QCC8');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFRS 16 Lease Modifications: Every Scenario Explained with Journal Entries</title>
+    <meta name="description" content="IFRS 16 lease modifications explained: scope changes, payment changes, reassessments, remeasurements. Journal entries and worked examples for auditors and finance teams.">
+    <meta name="keywords" content="IFRS 16 lease modification, lease reassessment, lease remeasurement, IFRS 16 modification accounting, extension option, scope change, lease term change, payment change">
+    <meta name="author" content="Usman Qureshi">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <link rel="canonical" href="https://uqconsulting.org/blog/ifrs-16-lease-modifications.html">
+
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="IFRS 16 Lease Modifications: Every Scenario Explained with Journal Entries">
+    <meta property="og:description" content="Complete guide to IFRS 16 lease modifications with worked examples and journal entries.">
+    <meta property="og:image" content="https://uqconsulting.org/images/og-image.png">
+    <meta property="og:url" content="https://uqconsulting.org/blog/ifrs-16-lease-modifications.html">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "IFRS 16 Lease Modifications: Every Scenario Explained with Journal Entries",
+      "description": "Complete guide to IFRS 16 lease modifications, scope changes, reassessments, and remeasurements with worked examples.",
+      "image": "https://uqconsulting.org/images/og-image.png",
+      "datePublished": "2026-07-04",
+      "author": { "@type": "Person", "name": "Usman Qureshi", "jobTitle": "Chartered Accountant (ACCA, ACA)" },
+      "publisher": { "@type": "Person", "name": "Usman Qureshi" },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://uqconsulting.org/blog/ifrs-16-lease-modifications.html" }
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
+        .topbar { background: #1a2f5a; padding: 16px 20px; text-align: center; }
+        .topbar a { color: #d4af37; text-decoration: none; font-weight: 600; }
+        .article-container { max-width: 760px; margin: 0 auto; padding: 50px 20px; }
+        .breadcrumb { font-size: 0.85em; color: #8593a8; margin-bottom: 24px; }
+        .breadcrumb a { color: #8593a8; text-decoration: none; }
+        h1 { font-size: 2.3em; color: #1a2f5a; line-height: 1.2; margin-bottom: 16px; }
+        .meta { color: #8593a8; font-size: 0.9em; margin-bottom: 32px; padding-bottom: 24px; border-bottom: 2px solid #e4e9f0; }
+        .lead { font-size: 1.15em; color: #4a5568; margin-bottom: 30px; }
+        .toc { background: #fff; border: 1px solid #e4e9f0; border-radius: 8px; padding: 22px 26px; margin-bottom: 36px; }
+        .toc strong { color: #1a2f5a; display: block; margin-bottom: 10px; text-transform: uppercase; }
+        .toc ul { list-style: none; columns: 2; gap: 20px; }
+        .toc li { margin-bottom: 8px; font-size: 0.92em; }
+        .toc a { color: #2a4a7a; text-decoration: none; }
+        article h2 { font-size: 1.6em; color: #1a2f5a; margin: 40px 0 16px; }
+        article h3 { font-size: 1.2em; color: #2a4a7a; margin: 28px 0 12px; }
+        article p { margin-bottom: 18px; }
+        article ul { margin: 0 0 18px 28px; }
+        article li { margin-bottom: 8px; }
+        .callout { background: #fff; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin: 24px 0; background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e4e9f0; }
+        th { background: #1a2f5a; color: #fff; }
+        .journal { font-family: 'Courier New', monospace; background: #1a2f5a; color: #e8eef7; padding: 20px 24px; border-radius: 6px; margin: 24px 0; font-size: 0.9em; overflow-x: auto; line-height: 1.5; }
+        .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; border-radius: 4px; }
+        .faq-item { background: #fff; border-radius: 8px; padding: 20px 24px; margin-bottom: 14px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+        .faq-item h3 { margin: 0 0 8px; color: #1a2f5a; }
+        .author-bio { display: flex; gap: 20px; background: #fff; border-radius: 10px; padding: 24px 28px; margin: 44px 0; }
+        .avatar { width: 64px; height: 64px; border-radius: 50%; background: #1a2f5a; color: #d4af37; display: flex; align-items: center; font-weight: 700; flex-shrink: 0; }
+        .related { margin-top: 40px; padding-top: 30px; border-top: 2px solid #e4e9f0; }
+        .related h3 { color: #1a2f5a; margin-bottom: 16px; }
+        .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; padding: 8px; border: 1px solid #e4e9f0; border-radius: 4px; }
+        .related a:hover { background: #f4f6f9; color: #d4af37; }
+        .disclaimer { font-size: 0.82em; color: #8593a8; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; font-style: italic; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a href="https://uqconsulting.org/home.html">← Usman Qureshi — Free AI Tools for Accountants &amp; Auditors</a>
+    </div>
+
+    <div class="article-container">
+        <div class="breadcrumb">
+            <a href="https://uqconsulting.org/home.html">Home</a> &nbsp;›&nbsp;
+            <a href="https://uqconsulting.org/blog/">Blog</a> &nbsp;›&nbsp;
+            <a href="https://uqconsulting.org/blog/ifrs-16-lease-accounting-complete-guide.html">IFRS 16</a> &nbsp;›&nbsp;
+            Lease Modifications
+        </div>
+
+        <h1>IFRS 16 Lease Modifications: Every Scenario Explained with Journal Entries</h1>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 13 min read</div>
+
+        <p class="lead">Leases rarely stay the same. The landlord extends the term. Rent increases. The lessee adds a building section. Each change triggers IFRS 16 remeasurement rules. This guide covers every scenario: scope changes, payment changes, term reassessments, and the journal entries auditors expect.</p>
+
+        <div class="toc">
+            <strong>In this guide</strong>
+            <ul>
+                <li><a href="#definition">What is a lease modification?</a></li>
+                <li><a href="#separate">Separate new lease vs. remeasurement</a></li>
+                <li><a href="#scope-change">Scope changes (add/remove asset)</a></li>
+                <li><a href="#payment-change">Payment changes (increase/decrease)</a></li>
+                <li><a href="#reassessment">Reassessments (term, options, residual)</a></li>
+                <li><a href="#journal">Journal entries</a></li>
+                <li><a href="#worked">Worked example</a></li>
+                <li><a href="#auditor">Auditor common questions</a></li>
+                <li><a href="#faq">FAQs</a></li>
+            </ul>
+        </div>
+
+        <article>
+            <h2 id="definition">What is a Lease Modification?</h2>
+            <p>IFRS 16.44 defines it as "a change in the scope of a lease, or the consideration for a lease, that was not part of the original terms and conditions." Changes include:</p>
+            <ul>
+                <li>Adding or removing an asset</li>
+                <li>Increasing or decreasing lease payments</li>
+                <li>Extending or shortening the lease term</li>
+                <li>Changing the purchase option</li>
+            </ul>
+
+            <h3>Modification vs. Reassessment</h3>
+            <p>Important distinction:</p>
+            <ul>
+                <li><strong>Modification:</strong> A change in scope or consideration (deliberate renegotiation)</li>
+                <li><strong>Reassessment:</strong> A change in facts requiring you to update estimates (e.g., you now believe you'll exercise an extension option)</li>
+            </ul>
+
+            <h2 id="separate">Step 1: Is It a Separate New Lease?</h2>
+            <p>Not all modifications are treated the same. IFRS 16.44–45 says if the modification is a "separate lease," account for it separately. A separate lease exists when:</p>
+            <ul>
+                <li>The modification adds an asset, AND</li>
+                <li>The lessee's right to use that asset is separately identifiable, AND</li>
+                <li>The price of that lease is commensurate with its standalone price</li>
+            </ul>
+
+            <p class="example-box"><strong>Example 1 (Separate lease):</strong> A retail company leases a building. The lessor offers to add a rooftop advertising space (identifiable, separately priced at £50k/year). The company treats the original lease as modified (building rent increases), and the advertising space as a new, separate lease.</p>
+
+            <p class="example-box"><strong>Example 2 (Not separate, single modification):</strong> A company leases equipment. Midway through, it requests to add more equipment at the same rate per unit. This is not separately identifiable at a standalone price, so it's a modification to the original lease, not a new lease.</p>
+
+            <h2 id="scope-change">Scope Changes: Adding or Removing an Asset</h2>
+
+            <h3>Adding an Asset (Increase in Scope)</h3>
+            <p>If the modification increases the scope and is not a separate lease, remeasure the lease:</p>
+            <ul>
+                <li>Calculate the new lease liability (PV of all remaining payments + new payments for the added asset)</li>
+                <li>Calculate the increase in ROU asset</li>
+                <li>Journal entry: Dr ROU Asset / Cr Lease Liability</li>
+            </ul>
+
+            <p class="example-box"><strong>Worked Example: Adding Parking Spaces</strong><br>
+            On 1 Jan 2026, a company leases an office building for £200k/year, 10-year term, IBR 5%.<br>
+            On 1 July 2026 (mid-year), the lessor agrees to add 10 parking spaces at £10k/year.<br><br>
+            <strong>Modification treatment:</strong><br>
+            • The parking spaces are not separately identifiable (bundled with building)<br>
+            • Recalculate lease liability: remaining building payments + parking payments<br>
+            • New lease liability = £1,680,000 (original balance: £1,550,000)<br>
+            • Increase = £130,000<br>
+            • ROU asset increases by £130,000<br><br>
+            <strong>Journal entry:</strong><br>
+            Dr ROU Asset £130,000 / Cr Lease Liability £130,000
+            </p>
+
+            <h3>Removing an Asset (Decrease in Scope)</h3>
+            <p>If the modification decreases the scope, reduce the lease liability and ROU asset. The difference hits P&L as a gain or loss.</p>
+
+            <p class="example-box"><strong>Example: Early Lease Termination (Partial)</strong><br>
+            Company leases a 3-floor office building. On 1 July 2026, it surrenders the top floor early. Remaining payments reduce by £60k/year (3 years remaining).<br><br>
+            • Old lease liability: £180k<br>
+            • New lease liability (2 floors only): £120k<br>
+            • Reduction: £60k (gain, hits P&L)<br><br>
+            <strong>Journal entry:</strong><br>
+            Dr Lease Liability £60,000 / Cr Gain on Modification £60,000
+            </p>
+
+            <h2 id="payment-change">Payment Changes: Increase or Decrease</h2>
+
+            <h3>Payment Increase (Fixed or Inflation-Linked)</h3>
+            <p>If the modification increases lease payments (e.g., rent goes from £100k to £110k/year), remeasure the lease:</p>
+            <ul>
+                <li>Recalculate the lease liability with the new payment amount</li>
+                <li>The difference adjusts the ROU asset</li>
+            </ul>
+
+            <p class="example-box"><strong>Example: Mid-Lease Rent Increase</strong><br>
+            Building lease at £500k/year, 10 years remaining, IBR 4%.<br>
+            Lessor offers: "Reduce your rent to £480k/year for the next 5 years if you renew for 10 additional years post-lease."<br><br>
+            This is a <strong>modification</strong> because the original lease didn't include the renewal at that price.<br><br>
+            • Old remaining liability: £4.1m<br>
+            • New liability (5 years at £480k + 10 years at original rate): £4.3m<br>
+            • Increase: £200k<br><br>
+            <strong>Journal entry:</strong><br>
+            Dr ROU Asset £200,000 / Cr Lease Liability £200,000
+            </p>
+
+            <h2 id="reassessment">Reassessments: When to Remeasure (vs. Modify)</h2>
+
+            <p>These are <strong>not modifications</strong> but require remeasurement:</p>
+
+            <h3>1. Change in Lease Term Assessment</h3>
+            <p>You initially didn't include an extension option (thought you wouldn't exercise it). Later, you determine you <strong>will</strong> exercise it. Reassess and remeasure.</p>
+
+            <p class="example-box"><strong>Example:</strong> 5-year office lease with a 3-year renewal option at market rate. At inception, you thought: "Probably won't renew." Now (in year 3), your business is thriving and you're certain you'll renew. Reassess the lease term to 8 years, remeasure the liability, and adjust the ROU asset.</p>
+
+            <h3>2. Change in Termination Option Assessment</h3>
+            <p>You originally included a termination option in the lease term because you thought you'd exercise it. Now you're certain you won't. Remove it from the term and remeasure.</p>
+
+            <h3>3. Change in Residual Value Guarantee</h3>
+            <p>Your estimate of the residual value you'll guarantee changes (e.g., market value of equipment drops). Update the lease liability if this affects the payment amount.</p>
+
+            <h2 id="journal">Journal Entries for Modifications</h2>
+
+            <h3>Template 1: Increase in Scope</h3>
+            <div class="journal">
+                Dr ROU Asset (increase) [amount]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Lease Liability [amount]<br><br>
+                (To record lease modification — added asset)
+            </div>
+
+            <h3>Template 2: Decrease in Scope</h3>
+            <div class="journal">
+                Dr Lease Liability (reduction) [amount]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr ROU Asset (reduction) [amount]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Gain on Lease Modification [remainder, if any]
+            </div>
+
+            <h3>Template 3: Payment Increase with Same Term</h3>
+            <div class="journal">
+                Dr ROU Asset (or Interest Expense if increase relates to accretion) [amount]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Lease Liability [amount]
+            </div>
+
+            <h2 id="worked">Worked Example: Complex Multi-Step Modification</h2>
+
+            <h3>Scenario</h3>
+            <p><strong>Original lease (1 Jan 2025):</strong><br>
+            • Annual rent: £300k<br>
+            • Lease term: 10 years<br>
+            • IBR: 5%<br>
+            • ROU asset at inception: £2,318k<br>
+            • Lease liability at inception: £2,318k</p>
+
+            <p><strong>As of 1 Jan 2026 (1 year in):</strong><br>
+            • ROU asset (net of depreciation): £2,094k<br>
+            • Lease liability (after 1 payment): £1,990k</p>
+
+            <p><strong>Modification (1 Jan 2026):</strong><br>
+            • Lessor and lessee agree:<br>
+            — Rent increases to £330k/year (3% increase)<br>
+            — Lease term extended by 2 years (now 11 years remaining)<br>
+            — Company to add parking (identifiable, £25k/year)</p>
+
+            <h3>Step 1: Identify the Lease(s)</h3>
+            <p>This is a single modification of the original lease (parking is bundled, not separate; rent increase applies to original asset).</p>
+
+            <h3>Step 2: Calculate New Lease Liability</h3>
+            <p>Remaining 11 years:</p>
+            <ul>
+                <li>Building rent: £330k × 11 years = £3,630k (undiscounted)</li>
+                <li>Parking: £25k × 11 years = £275k (undiscounted)</li>
+                <li>Total: £3,905k</li>
+            </ul>
+            <p>Discounted at 5% over 11 years ≈ £3,020k</p>
+
+            <h3>Step 3: Calculate Change in Liability</h3>
+            <ul>
+                <li>Old liability: £1,990k</li>
+                <li>New liability: £3,020k</li>
+                <li>Increase: £1,030k</li>
+            </ul>
+
+            <h3>Step 4: Journal Entry</h3>
+            <div class="journal">
+                1 January 2026<br>
+                Dr ROU Asset &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,030,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Lease Liability &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,030,000
+            </div>
+
+            <h3>Step 5: Going Forward</h3>
+            <p>Year 2 (2026) expense:</p>
+            <ul>
+                <li>ROU depreciation: (£2,094k + £1,030k) ÷ 11 years = £281k</li>
+                <li>Interest expense: £3,020k × 5% = £151k</li>
+                <li>Total lease expense: £432k</li>
+            </ul>
+
+            <h2 id="auditor">What Auditors Focus On</h2>
+
+            <h3>1. Was It a Modification?</h3>
+            <p>Auditors ask: "How did you identify this as a modification vs. a reassessment?" Document your reasoning. Review the lease agreement and the change letter. Be clear.</p>
+
+            <h3>2. Was the Calculation Correct?</h3>
+            <p>Auditors recalculate the new lease liability and verify the adjustment. Common errors:</p>
+            <ul>
+                <li>Forgetting to include certain payments (parking, residual value changes)</li>
+                <li>Using the wrong IBR (should be the original IBR, not the current IBR at modification date)</li>
+                <li>Miscounting the remaining lease term</li>
+            </ul>
+
+            <h3>3. Was the ROU Asset Adjusted Appropriately?</h3>
+            <p>If the modification increases the liability, the ROU asset increases by the same amount (not a gain). If the liability decreases, the reduction could be partly a gain. Auditors verify the split.</p>
+
+            <h2 id="faq">FAQs</h2>
+
+            <div class="faq-item">
+                <h3>When a lease is modified, do I use a new IBR?</h3>
+                <p>No. You use the IBR at the <strong>original lease commencement date</strong>, not at the modification date. This preserves consistency.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>If rent decreases and I record a gain, is it operating or other income?</h3>
+                <p>IFRS 16 doesn't specify. Your accounting policy determines this. If you classify it as an operating item, disclose it clearly. Most companies put it in "other income" to separate it from core business.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3>Can a modification be partially a new lease and partially a remeasurement?</h3>
+                <p>Yes. If you add a separately identifiable asset at a standalone price, that's a new lease. The rest of the original lease is remeasured for any other changes. Account for each separately.</p>
+            </div>
+
+            <div class="author-bio">
+                <div class="avatar">UQ</div>
+                <div>
+                    <h4>Usman Qureshi (ACCA, ACA)</h4>
+                    <p>Lease modifications are one of the trickiest areas of IFRS 16. In my audits, I've seen companies forget to record modifications entirely, or misclassify them as reassessments. This guide reflects the real-world complexity.</p>
+                </div>
+            </div>
+
+            <div class="related">
+                <h3>Related IFRS 16 Articles</h3>
+                <div class="related-grid">
+                    <a href="https://uqconsulting.org/blog/ifrs-16-lease-accounting-complete-guide.html">← IFRS 16 Hub</a>
+                    <a href="https://uqconsulting.org/blog/ifrs-16-journal-entries.html">Journal Entries</a>
+                    <a href="https://uqconsulting.org/blog/ifrs-16-discount-rate-ibr.html">Discount Rate (IBR)</a>
+                    <a href="https://uqconsulting.org/blog/ifrs-16-sale-leaseback.html">Sale and Leaseback</a>
+                </div>
+            </div>
+
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> Educational content. Lease modifications involve judgment. Consult a qualified accountant for your specific circumstances.
+            </div>
+        </article>
+    </div>
+</body>
+</html>

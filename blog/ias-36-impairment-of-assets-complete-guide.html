@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9LKFW8QCC8"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9LKFW8QCC8');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IAS 36 Impairment of Assets: Complete Guide with Goodwill, CGU & Valuation</title>
+    <meta name="description" content="IAS 36 impairment testing: goodwill impairment, CGU (cash-generating units), fair value less costs, value-in-use, discount rate (WACC), impairment indicators.">
+    <meta name="keywords" content="IAS 36 impairment, goodwill impairment, CGU cash-generating unit, fair value, value-in-use, WACC, discount rate, recoverable amount">
+    <meta name="author" content="Usman Qureshi">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://uqconsulting.org/blog/ias-36-impairment-of-assets-complete-guide.html">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "IAS 36 Impairment of Assets: Complete Guide with Goodwill, CGU & Valuation",
+      "datePublished": "2026-07-04",
+      "author": { "@type": "Person", "name": "Usman Qureshi" },
+      "description": "Comprehensive IAS 36 guide: goodwill impairment testing, CGU identification, fair value measurement, value-in-use calculation, WACC, audit procedures."
+    }
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
+        .topbar { background: #1a2f5a; padding: 16px 20px; text-align: center; }
+        .topbar a { color: #d4af37; text-decoration: none; font-weight: 600; }
+        .article-container { max-width: 760px; margin: 0 auto; padding: 50px 20px; }
+        h1 { font-size: 2.2em; color: #1a2f5a; margin-bottom: 14px; }
+        .meta { color: #8593a8; font-size: 0.9em; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 2px solid #e4e9f0; }
+        .lead { font-size: 1.15em; color: #4a5568; margin-bottom: 24px; font-weight: 500; }
+        .toc { background: #fff; border: 1px solid #e4e9f0; border-radius: 8px; padding: 20px 24px; margin-bottom: 32px; }
+        .toc strong { color: #1a2f5a; display: block; margin-bottom: 8px; text-transform: uppercase; font-size: 0.9em; }
+        .toc ul { list-style: none; columns: 1; }
+        .toc a { color: #2a4a7a; text-decoration: none; font-size: 0.93em; }
+        article h2 { font-size: 1.5em; color: #1a2f5a; margin: 40px 0 14px; }
+        article h3 { font-size: 1.1em; color: #2a4a7a; margin: 24px 0 10px; }
+        article p { margin-bottom: 16px; }
+        article ul { margin: 0 0 16px 26px; }
+        .callout { background: #fff; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 24px 0; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; background: #fff; }
+        th, td { padding: 11px 14px; text-align: left; border-bottom: 1px solid #e4e9f0; }
+        th { background: #1a2f5a; color: #fff; font-weight: 600; font-size: 0.9em; }
+        .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
+        .disclaimer { font-size: 0.81em; color: #8593a8; margin-top: 36px; padding-top: 16px; border-top: 1px solid #e4e9f0; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a href="https://uqconsulting.org/home.html">← Usman Qureshi — Accountants &amp; Auditors</a>
+    </div>
+
+    <div class="article-container">
+        <h1>IAS 36 Impairment of Assets: Complete Guide with Goodwill, CGU & Valuation</h1>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed July 2026 · 16 min read</div>
+
+        <p class="lead">IAS 36 (Impairment of Assets) is where auditors spend serious time. Goodwill impairment, Cash-Generating Unit (CGU) identification, fair value measurement, value-in-use calculations with WACC—all carry significant judgment and all are audit hot spots. This guide covers the full impairment testing model with worked examples, real company case studies, and the red flags auditors hunt for.</p>
+
+        <div class="toc">
+            <strong>In this guide</strong>
+            <ul>
+                <li><a href="#ias36-overview">IAS 36 scope and framework</a></li>
+                <li><a href="#impairment-indicators">Impairment indicators: When to test</a></li>
+                <li><a href="#cgu">Cash-Generating Units (CGU): Identification & allocation</a></li>
+                <li><a href="#recoverable-amount">Recoverable amount: Fair value vs value-in-use</a></li>
+                <li><a href="#fair-value">Fair value measurement</a></li>
+                <li><a href="#viu">Value-in-use calculation: Discount rate (WACC) &amp; cash flows</a></li>
+                <li><a href="#goodwill">Goodwill impairment testing</a></li>
+                <li><a href="#worked-goodwill">Worked example: Goodwill impairment</a></li>
+                <li><a href="#real-company">Real company example: Unilever acquisition writeoff</a></li>
+                <li><a href="#audit-red-flags">Audit red flags</a></li>
+                <li><a href="#ias-vs-asc">IAS 36 vs ASC 360/350 (US GAAP)</a></li>
+            </ul>
+        </div>
+
+        <article>
+            <h2 id="ias36-overview">IAS 36 Scope and Framework</h2>
+            <p>IAS 36 applies to <strong>all assets</strong> except:</p>
+            <ul>
+                <li>Inventories (IAS 2)</li>
+                <li>Deferred tax (IAS 12)</li>
+                <li>Financial instruments (IFRS 9)</li>
+                <li>Investment property measured at fair value (IAS 40)</li>
+            </ul>
+
+            <p>The core principle: an asset is impaired if its carrying amount exceeds its <strong>recoverable amount</strong> (the higher of fair value less costs and value-in-use).</p>
+
+            <h2 id="impairment-indicators">Impairment Indicators: When to Test</h2>
+            <p>You must test for impairment if there are <strong>external or internal indicators</strong> that an asset may be impaired:</p>
+
+            <h3>External Indicators</h3>
+            <ul>
+                <li>Market value decline (technology obsolescence, real estate crash)</li>
+                <li>Industry downturn (retail sector distress, commodity price collapse)</li>
+                <li>Economic conditions (recession, interest rate spike)</li>
+                <li>Regulatory changes (license revoked, pollution standards tighten)</li>
+            </ul>
+
+            <h3>Internal Indicators</h3>
+            <ul>
+                <li>Asset no longer used as planned (discontinued product line)</li>
+                <li>Actual performance < budget (sales 40% below plan)</li>
+                <li>Asset damage or obsolescence</li>
+                <li>Strategic decision to restructure or divest</li>
+            </ul>
+
+            <p class="callout"><strong>Audit focus:</strong> Did management identify indicators during the year? Many companies miss them. Auditors will specifically look for external/internal events and challenge if impairment wasn't tested.</p>
+
+            <h2 id="cgu">Cash-Generating Units: Identification &amp; Allocation</h2>
+            <p>A CGU is the smallest identifiable group of assets that generates independent cash flows.</p>
+
+            <h3>Examples of CGU Identification</h3>
+            <table>
+                <tr>
+                    <th>Entity Type</th>
+                    <th>CGU Definition</th>
+                    <th>Why</th>
+                </tr>
+                <tr>
+                    <td>Retail chain</td>
+                    <td>Individual store or store cluster</td>
+                    <td>Each store generates separate cash flows; can be tested/sold independently</td>
+                </tr>
+                <tr>
+                    <td>Manufacturing (multi-product)</td>
+                    <td>Production line or division</td>
+                    <td>Each line has distinct cash flows and customer base</td>
+                </tr>
+                <tr>
+                    <td>Software company</td>
+                    <td>Each product (SaaS subscription, license)</td>
+                    <td>Different revenue streams, customer bases, margins</td>
+                </tr>
+                <tr>
+                    <td>Bank (multi-business)</td>
+                    <td>Retail banking, investment banking, trading</td>
+                    <td>Distinct cash flows and risk profiles</td>
+                </tr>
+            </table>
+
+            <h2 id="recoverable-amount">Recoverable Amount: Fair Value vs Value-in-Use</h2>
+            <div style="background: #1a2f5a; color: #e8eef7; padding: 16px; border-radius: 6px; margin: 20px 0; text-align: center;">
+                <strong>Recoverable Amount = Higher of:</strong><br>
+                1. Fair Value Less Costs of Disposal (FVLCD)<br>
+                2. Value-in-Use (VIU)
+            </div>
+
+            <h2 id="fair-value">Fair Value Measurement</h2>
+            <p>FVLCD is what you'd get if you sold the asset today in an orderly transaction.</p>
+
+            <h3>Valuation Approach: Three Methods</h3>
+            <ul>
+                <li><strong>Market approach:</strong> Use comparable assets' selling prices (rare for specialized assets)</li>
+                <li><strong>Cost approach:</strong> Replacement cost minus depreciation (often used for PP&E)</li>
+                <li><strong>Income approach:</strong> Present value of future cash flows (most common for CGU-level)</li>
+            </ul>
+
+            <h2 id="viu">Value-in-Use: Discount Rate (WACC) &amp; Cash Flows</h2>
+            <p>VIU = PV of future cash flows the asset is expected to generate over its life.</p>
+
+            <h3>Three Components</h3>
+            <ul>
+                <li><strong>Forecast period (5–10 years):</strong> Detailed cash flow projections</li>
+                <li><strong>Terminal value:</strong> Perpetual cash flows beyond forecast period (often 2–3% growth)</li>
+                <li><strong>Discount rate (WACC):</strong> Weighted average cost of capital</li>
+            </ul>
+
+            <h3>WACC Formula</h3>
+            <div style="background: #1a2f5a; color: #e8eef7; padding: 12px; border-radius: 6px; margin: 16px 0; font-family: 'Courier New', monospace; text-align: center; font-size: 0.95em;">
+                WACC = (E/V × Cost of Equity) + (D/V × Cost of Debt × (1 − Tax Rate))
+            </div>
+
+            <p><strong>Where:</strong></p>
+            <ul>
+                <li>E/V = Proportion of equity in capital structure</li>
+                <li>D/V = Proportion of debt in capital structure</li>
+                <li>Cost of Equity = Risk-free rate + Beta × equity risk premium (CAPM)</li>
+                <li>Cost of Debt = Interest rate on debt (adjusted for credit risk)</li>
+            </ul>
+
+            <p class="example-box"><strong>WACC Example</strong><br>
+            Company's capital structure: 60% equity, 40% debt<br>
+            • Cost of equity: 10% (risk-free rate 3% + Beta 1.4 × 5% equity risk premium)<br>
+            • Cost of debt: 5%<br>
+            • Tax rate: 20%<br><br>
+            WACC = (60% × 10%) + (40% × 5% × (1 − 20%))<br>
+            = 6% + (2% × 0.8)<br>
+            = 6% + 1.6% = <strong>7.6%</strong>
+            </p>
+
+            <h2 id="goodwill">Goodwill Impairment Testing</h2>
+            <p>Goodwill <strong>must</strong> be tested annually (or whenever indicators arise). No exceptions.</p>
+
+            <h3>Allocation Process</h3>
+            <ol>
+                <li>Identify the CGU(s) that benefited from the goodwill acquisition</li>
+                <li>Allocate goodwill to each CGU</li>
+                <li>Test the CGU (including allocated goodwill) for impairment</li>
+                <li>If CGU's recoverable amount < carrying amount, impair goodwill first</li>
+            </ol>
+
+            <h2 id="worked-goodwill">Worked Example: Goodwill Impairment</h2>
+
+            <h3>Scenario: Acquisition of Tech Startup</h3>
+            <ul>
+                <li>Parent company acquired Tech Startup for £50m in 2023</li>
+                <li>Fair value of net assets acquired: £35m</li>
+                <li>Goodwill recognized: £15m</li>
+                <li>Carrying amount (1 Dec 2025): £15m (no amortization under IFRS 3)</li>
+            </ul>
+
+            <h3>Impairment Test (31 Dec 2025): Revenue Down 30%</h3>
+            <ul>
+                <li><strong>Recoverable amount of CGU (Tech Startup):</strong> £35m (calculated via value-in-use)</li>
+                <li><strong>Carrying amount of CGU (net assets + goodwill):</strong> £40m (£25m assets + £15m goodwill)</li>
+                <li><strong>Impairment loss:</strong> £40m − £35m = £5m</li>
+                <li><strong>Goodwill impairment:</strong> £5m (all impairment allocated to goodwill first)</li>
+            </ul>
+
+            <h3>Journal Entry</h3>
+            <div style="background: #1a2f5a; color: #e8eef7; padding: 12px; border-radius: 6px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
+                Dr Impairment Loss (P&L) £5,000,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Goodwill £5,000,000
+            </div>
+
+            <p>Goodwill reduced from £15m to £10m. Future periods: goodwill is retested; additional impairments likely if Tech Startup remains underperforming.</p>
+
+            <h2 id="real-company">Real Company Example: Unilever's Acquisition Writeoff (2017)</h2>
+            <p>Unilever acquired Tresemmé/Sun Silk hair brands for ~£850m in 2014. In 2017, facing sluggish sales and market consolidation, Unilever wrote down ~£650m of the goodwill. The impairment test showed that value-in-use (based on updated cash flows) fell significantly below the acquisition price due to:</p>
+            <ul>
+                <li>Lower-than-expected organic growth in the acquired brands</li>
+                <li>Increased competitive pressure in the hair care segment</li>
+                <li>Higher discount rates reflecting increased business risk</li>
+            </ul>
+
+            <h2 id="audit-red-flags">Audit Red Flags in IAS 36</h2>
+
+            <h3>Red Flag 1: No Impairment Test Despite Indicators</h3>
+            <p><strong>Finding:</strong> Company's revenue dropped 25%, but management didn't test goodwill for impairment.</p>
+            <p><strong>Auditor action:</strong> Perform impairment test yourself; likely find significant impairment required.</p>
+
+            <h3>Red Flag 2: Overstated Terminal Value Growth</h3>
+            <p><strong>Finding:</strong> VIU assumes 4% perpetual growth, but long-term GDP growth is 2% and the company faces headwinds.</p>
+            <p><strong>Auditor action:</strong> Reduce terminal growth to GDP proxy; increases discount rate; reduces recoverable amount → impairment.</p>
+
+            <h3>Red Flag 3: Underestimated Discount Rate (WACC)</h3>
+            <p><strong>Finding:</strong> WACC is 5%, but company's debt is speculative-grade; cost of debt should be 8%+.</p>
+            <p><strong>Auditor action:</strong> Recalculate WACC with risk-adjusted rates; typically increases WACC by 1–2%, reducing VIU significantly.</p>
+
+            <h3>Red Flag 4: No Sensitivity Analysis</h3>
+            <p><strong>Finding:</strong> Impairment model shows no sensitivity to changes in key assumptions (WACC, growth rate).</p>
+            <p><strong>Auditor action:</strong> Require sensitivity analysis; if impairment is near the threshold, small assumption changes flip the outcome.</p>
+
+            <h2 id="ias-vs-asc">IAS 36 vs ASC 350/360 (US GAAP)</h2>
+            <p>Key difference: <strong>Two-step goodwill test</strong> (ASC 360). Step 1 tests if impairment is likely (qualitative); Step 2 measures it (quantitative). IFRS uses simpler single-step (direct VIU/FV comparison). But both eventually reach the same conclusion.</p>
+
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> This is educational content. IAS 36 impairment testing involves complex valuations and professional judgment heavily scrutinized by auditors. Consult a qualified accountant or valuation specialist for your specific circumstances. WACC calculations, terminal growth assumptions, and CGU definitions are common areas of audit challenge and adjustment.
+            </div>
+        </article>
+    </div>
+</body>
+</html>

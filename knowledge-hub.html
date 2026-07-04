@@ -40,6 +40,11 @@
         .cluster a:hover { color: #d4af37; text-decoration: underline; }
         .cluster-hub { font-weight: 600; color: #1a2f5a; }
         .satellite { color: #4a5568; font-size: 0.95em; padding-left: 12px; }
+        .filter-container { text-align: center; margin-bottom: 40px; }
+        .filter-btn { background: #fff; border: 2px solid #d4af37; color: #1a2f5a; padding: 8px 16px; margin: 6px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 0.95em; transition: all 0.2s; }
+        .filter-btn.active { background: #d4af37; color: #1a2f5a; }
+        .filter-btn:hover { border-color: #1a2f5a; }
+        .cluster.hidden { display: none; }
         .footer { text-align: center; color: #8593a8; font-size: 0.9em; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; }
     </style>
 </head>
@@ -52,137 +57,144 @@
         <h1>Accounting Standards Blog</h1>
         <p class="intro">Comprehensive guides to IFRS, IAS, and FRS 102 standards. Topical clusters with worked examples, audit procedures, and real-world applications.</p>
 
+        <div class="filter-container">
+            <button class="filter-btn active" onclick="filterClusters('all')">All Topics</button>
+            <button class="filter-btn" onclick="filterClusters('audit')">Audit Standards</button>
+            <button class="filter-btn" onclick="filterClusters('accounting')">Accounting Standards</button>
+            <button class="filter-btn" onclick="filterClusters('cv')">Interview & CV</button>
+        </div>
+
         <div class="clusters">
-            <div class="cluster">
+            <div class="cluster" data-category="accounting">
                 <h2>IFRS 16: Leases</h2>
                 <p class="cluster-count">6 articles</p>
                 <ul>
-                    <li><a href="blog/ifrs-16-lease-accounting-complete-guide.html" class="cluster-hub">Complete Guide to Lease Accounting</a></li>
-                    <li class="satellite"><a href="blog/ifrs-16-discount-rate-ibr.html">Incremental Borrowing Rate (IBR)</a></li>
-                    <li class="satellite"><a href="blog/ifrs-16-lease-modifications.html">Lease Modifications</a></li>
-                    <li class="satellite"><a href="blog/ifrs-16-journal-entries.html">Journal Entries &amp; Examples</a></li>
-                    <li class="satellite"><a href="blog/ifrs-16-sale-leaseback.html">Sale-Leaseback Transactions</a></li>
-                    <li class="satellite"><a href="blog/ifrs-16-short-term-low-value.html">Short-Term &amp; Low-Value Exemptions</a></li>
+                    <li><a target="_blank" href="blog/ifrs-16-lease-accounting-complete-guide.html" class="cluster-hub">Complete Guide to Lease Accounting</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-16-discount-rate-ibr.html">Incremental Borrowing Rate (IBR)</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-16-lease-modifications.html">Lease Modifications</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-16-journal-entries.html">Journal Entries &amp; Examples</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-16-sale-leaseback.html">Sale-Leaseback Transactions</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-16-short-term-low-value.html">Short-Term &amp; Low-Value Exemptions</a></li>
                 </ul>
             </div>
 
-            <div class="cluster">
+            <div class="cluster" data-category="accounting">
                 <h2>IFRS 9: Financial Instruments</h2>
                 <p class="cluster-count">6 articles</p>
                 <ul>
-                    <li><a href="blog/ifrs-9-financial-instruments-complete-guide.html" class="cluster-hub">Complete Guide to Financial Instruments</a></li>
-                    <li class="satellite"><a href="blog/ifrs-9-expected-credit-loss-model.html">Expected Credit Loss (ECL) Model</a></li>
-                    <li class="satellite"><a href="blog/ifrs-9-classification-measurement.html">Classification &amp; Measurement</a></li>
-                    <li class="satellite"><a href="blog/ifrs-9-hedge-accounting.html">Hedge Accounting</a></li>
-                    <li class="satellite"><a href="blog/ifrs-9-impairment-accounting.html">Impairment Accounting</a></li>
-                    <li class="satellite"><a href="blog/ifrs-9-modification-derecognition.html">Modification &amp; Derecognition</a></li>
+                    <li><a target="_blank" href="blog/ifrs-9-financial-instruments-complete-guide.html" class="cluster-hub">Complete Guide to Financial Instruments</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-9-expected-credit-loss-model.html">Expected Credit Loss (ECL) Model</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-9-classification-measurement.html">Classification &amp; Measurement</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-9-hedge-accounting.html">Hedge Accounting</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-9-impairment-accounting.html">Impairment Accounting</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-9-modification-derecognition.html">Modification &amp; Derecognition</a></li>
                 </ul>
             </div>
 
-            <div class="cluster">
+            <div class="cluster" data-category="accounting">
                 <h2>IFRS 15: Revenue Recognition</h2>
                 <p class="cluster-count">5 articles</p>
                 <ul>
-                    <li><a href="blog/ifrs-15-revenue-recognition-complete-guide.html" class="cluster-hub">Complete Guide to Revenue Recognition</a></li>
-                    <li class="satellite"><a href="blog/ifrs-15-performance-obligations.html">Performance Obligations</a></li>
-                    <li class="satellite"><a href="blog/ifrs-15-variable-consideration.html">Variable Consideration</a></li>
-                    <li class="satellite"><a href="blog/ifrs-15-contract-assets-liabilities.html">Contract Assets &amp; Liabilities</a></li>
-                    <li class="satellite"><a href="blog/ifrs-15-over-time-vs-point-in-time.html">Over-Time vs Point-in-Time Revenue</a></li>
+                    <li><a target="_blank" href="blog/ifrs-15-revenue-recognition-complete-guide.html" class="cluster-hub">Complete Guide to Revenue Recognition</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-15-performance-obligations.html">Performance Obligations</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-15-variable-consideration.html">Variable Consideration</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-15-contract-assets-liabilities.html">Contract Assets &amp; Liabilities</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-15-over-time-vs-point-in-time.html">Over-Time vs Point-in-Time Revenue</a></li>
                 </ul>
             </div>
 
-            <div class="cluster">
+            <div class="cluster" data-category="accounting">
                 <h2>IAS 36: Impairment of Assets</h2>
                 <p class="cluster-count">3 articles</p>
                 <ul>
-                    <li><a href="blog/ias-36-impairment-of-assets-complete-guide.html" class="cluster-hub">Complete Guide to Asset Impairment</a></li>
-                    <li class="satellite"><a href="blog/ias-36-cgu-identification.html">CGU Identification &amp; Goodwill Allocation</a></li>
-                    <li class="satellite"><a href="blog/ias-36-value-in-use-calculation.html">Value-in-Use Calculation (WACC)</a></li>
+                    <li><a target="_blank" href="blog/ias-36-impairment-of-assets-complete-guide.html" class="cluster-hub">Complete Guide to Asset Impairment</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ias-36-cgu-identification.html">CGU Identification &amp; Goodwill Allocation</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ias-36-value-in-use-calculation.html">Value-in-Use Calculation (WACC)</a></li>
                 </ul>
             </div>
 
-            <div class="cluster">
+            <div class="cluster" data-category="accounting">
                 <h2>IFRS 37: Provisions &amp; Contingencies</h2>
                 <p class="cluster-count">1 article</p>
                 <ul>
-                    <li><a href="blog/ifrs-37-provisions-contingencies-complete-guide.html" class="cluster-hub">Complete Guide to Provisions</a></li>
+                    <li><a target="_blank" href="blog/ifrs-37-provisions-contingencies-complete-guide.html" class="cluster-hub">Complete Guide to Provisions</a></li>
                 </ul>
             </div>
 
-            <div class="cluster">
+            <div class="cluster" data-category="accounting">
                 <h2>IFRS 18: Presentation of Financial Statements</h2>
                 <p class="cluster-count">1 article</p>
                 <ul>
-                    <li><a href="blog/ifrs-18-presentation-of-financial-statements-complete-guide.html" class="cluster-hub">Complete Guide to Financial Statement Presentation</a></li>
+                    <li><a target="_blank" href="blog/ifrs-18-presentation-of-financial-statements-complete-guide.html" class="cluster-hub">Complete Guide to Financial Statement Presentation</a></li>
                 </ul>
             </div>
 
-            <div class="cluster">
+            <div class="cluster" data-category="accounting">
                 <h2>IFRS 3: Business Combinations</h2>
                 <p class="cluster-count">6 articles</p>
                 <ul>
-                    <li><a href="blog/ifrs-3-business-combinations-complete-guide.html" class="cluster-hub">Complete Guide to Business Combinations</a></li>
-                    <li class="satellite"><a href="blog/ifrs-3-purchase-price-allocation-ppa.html">Purchase Price Allocation (PPA)</a></li>
-                    <li class="satellite"><a href="blog/ifrs-3-fair-value-measurement.html">Fair Value Measurement of Intangibles</a></li>
-                    <li class="satellite"><a href="blog/ifrs-3-contingent-consideration.html">Contingent Consideration (Earnouts)</a></li>
-                    <li class="satellite"><a href="blog/ifrs-3-reverse-acquisitions.html">Reverse Acquisitions</a></li>
-                    <li class="satellite"><a href="blog/ifrs-3-step-acquisitions.html">Step Acquisitions</a></li>
+                    <li><a target="_blank" href="blog/ifrs-3-business-combinations-complete-guide.html" class="cluster-hub">Complete Guide to Business Combinations</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-3-purchase-price-allocation-ppa.html">Purchase Price Allocation (PPA)</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-3-fair-value-measurement.html">Fair Value Measurement of Intangibles</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-3-contingent-consideration.html">Contingent Consideration (Earnouts)</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-3-reverse-acquisitions.html">Reverse Acquisitions</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ifrs-3-step-acquisitions.html">Step Acquisitions</a></li>
                 </ul>
             </div>
 
-            <div class="cluster">
+            <div class="cluster" data-category="accounting">
                 <h2>IAS 12: Deferred Tax</h2>
                 <p class="cluster-count">6 articles</p>
                 <ul>
-                    <li><a href="blog/ias-12-deferred-tax-complete-guide.html" class="cluster-hub">Complete Guide to Deferred Tax</a></li>
-                    <li class="satellite"><a href="blog/ias-12-tax-loss-carryforwards.html">Tax Loss Carryforwards</a></li>
-                    <li class="satellite"><a href="blog/ias-12-valuation-allowances.html">Valuation Allowances</a></li>
-                    <li class="satellite"><a href="blog/ias-12-tax-rate-changes.html">Tax Rate Changes</a></li>
-                    <li class="satellite"><a href="blog/ias-12-deferred-tax-sorie.html">Deferred Tax on OCI Items (SORIE)</a></li>
-                    <li class="satellite"><a href="blog/ias-12-acquisition-deferred-tax.html">Acquisition Deferred Tax (Fair Value Step-Ups)</a></li>
+                    <li><a target="_blank" href="blog/ias-12-deferred-tax-complete-guide.html" class="cluster-hub">Complete Guide to Deferred Tax</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ias-12-tax-loss-carryforwards.html">Tax Loss Carryforwards</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ias-12-valuation-allowances.html">Valuation Allowances</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ias-12-tax-rate-changes.html">Tax Rate Changes</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ias-12-deferred-tax-sorie.html">Deferred Tax on OCI Items (SORIE)</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/ias-12-acquisition-deferred-tax.html">Acquisition Deferred Tax (Fair Value Step-Ups)</a></li>
                 </ul>
             </div>
 
-            <div class="cluster">
+            <div class="cluster" data-category="accounting">
                 <h2>FRS 102: UK GAAP</h2>
                 <p class="cluster-count">4 articles</p>
                 <ul>
-                    <li><a href="blog/frs-102-uk-gaap-complete-guide.html" class="cluster-hub">Complete Guide to FRS 102</a></li>
-                    <li class="satellite"><a href="blog/frs-102-small-entities-exemptions.html">Small Entities Exemptions</a></li>
-                    <li class="satellite"><a href="blog/frs-102-transition-from-ifrs.html">Transition from IFRS to FRS 102</a></li>
-                    <li class="satellite"><a href="blog/frs-102-financial-instruments.html">Financial Instruments (3-Category Model)</a></li>
+                    <li><a target="_blank" href="blog/frs-102-uk-gaap-complete-guide.html" class="cluster-hub">Complete Guide to FRS 102</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/frs-102-small-entities-exemptions.html">Small Entities Exemptions</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/frs-102-transition-from-ifrs.html">Transition from IFRS to FRS 102</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/frs-102-financial-instruments.html">Financial Instruments (3-Category Model)</a></li>
                 </ul>
             </div>
 
-            <div class="cluster">
+            <div class="cluster" data-category="cv">
                 <h2>Career Development & Interview Prep</h2>
                 <p class="cluster-count">3 articles</p>
                 <ul>
-                    <li><a href="blog/accountant-cv-writing-guide.html" class="cluster-hub">Accountant CV Writing Guide</a></li>
-                    <li class="satellite"><a href="blog/accounting-interview-technical-questions.html">Accounting Interview Technical Questions</a></li>
-                    <li class="satellite"><a href="blog/acca-interview-questions-answers.html">ACCA Interview Questions & Answers</a></li>
+                    <li><a target="_blank" href="blog/accountant-cv-writing-guide.html" class="cluster-hub">Accountant CV Writing Guide</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/accounting-interview-technical-questions.html">Accounting Interview Technical Questions</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/acca-interview-questions-answers.html">ACCA Interview Questions & Answers</a></li>
                 </ul>
             </div>
 
-            <div class="cluster">
+            <div class="cluster" data-category="accounting">
                 <h2>IFRS vs US GAAP Deep Dives</h2>
                 <p class="cluster-count">7 articles</p>
                 <ul>
-                    <li><a href="blog/ifrs-vs-us-gaap-comparison.html" class="cluster-hub">IFRS vs US GAAP: Complete Comparison</a></li>
-                    <li class="satellite"><a href="blog/lease-accounting-ifrs-16-vs-asc-842-deep-dive.html">Lease Accounting: IFRS 16 vs ASC 842</a></li>
-                    <li class="satellite"><a href="blog/revenue-recognition-ifrs-15-vs-asc-606-deep-dive.html">Revenue Recognition: IFRS 15 vs ASC 606</a></li>
-                    <li class="satellite"><a href="blog/financial-instruments-ifrs-9-vs-asc-320-321-deep-dive.html">Financial Instruments: IFRS 9 vs ASC 320/321</a></li>
-                    <li class="satellite"><a href="blog/goodwill-impairment-ifrs-36-vs-asc-350-deep-dive.html">Goodwill Impairment: IFRS 36 vs ASC 350</a></li>
-                    <li class="satellite"><a href="blog/provisions-contingencies-ifrs-37-vs-asc-450-deep-dive.html">Provisions: IFRS 37 vs ASC 450</a></li>
-                    <li class="satellite"><a href="blog/inventory-valuation-ifrs-2-vs-asc-330-deep-dive.html">Inventory Valuation: IFRS 2 vs ASC 330</a></li>
+                    <li><a target="_blank" href="blog/ifrs-vs-us-gaap-comparison.html" class="cluster-hub">IFRS vs US GAAP: Complete Comparison</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/lease-accounting-ifrs-16-vs-asc-842-deep-dive.html">Lease Accounting: IFRS 16 vs ASC 842</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/revenue-recognition-ifrs-15-vs-asc-606-deep-dive.html">Revenue Recognition: IFRS 15 vs ASC 606</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/financial-instruments-ifrs-9-vs-asc-320-321-deep-dive.html">Financial Instruments: IFRS 9 vs ASC 320/321</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/goodwill-impairment-ifrs-36-vs-asc-350-deep-dive.html">Goodwill Impairment: IFRS 36 vs ASC 350</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/provisions-contingencies-ifrs-37-vs-asc-450-deep-dive.html">Provisions: IFRS 37 vs ASC 450</a></li>
+                    <li class="satellite"><a target="_blank" href="blog/inventory-valuation-ifrs-2-vs-asc-330-deep-dive.html">Inventory Valuation: IFRS 2 vs ASC 330</a></li>
                 </ul>
             </div>
 
-            <div class="cluster">
+            <div class="cluster" data-category="audit">
                 <h2>Audit & Quality Standards</h2>
                 <p class="cluster-count">1 article</p>
                 <ul>
-                    <li><a href="blog/pcaob-standards-audit-quality-guide.html" class="cluster-hub">PCAOB Standards & Audit Quality Guide</a></li>
+                    <li><a target="_blank" href="blog/pcaob-standards-audit-quality-guide.html" class="cluster-hub">PCAOB Standards & Audit Quality Guide</a></li>
                 </ul>
             </div>
         </div>
@@ -191,5 +203,26 @@
             <p>53 articles across 13 topical clusters | Updated July 2026 | All content by Usman Qureshi (ACCA, ACA)</p>
         </div>
     </div>
+    <script>
+        function filterClusters(category) {
+            const clusters = document.querySelectorAll('.cluster');
+            const buttons = document.querySelectorAll('.filter-btn');
+
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            clusters.forEach(cluster => {
+                if (category === 'all') {
+                    cluster.classList.remove('hidden');
+                } else {
+                    if (cluster.getAttribute('data-category') === category) {
+                        cluster.classList.remove('hidden');
+                    } else {
+                        cluster.classList.add('hidden');
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 </html>

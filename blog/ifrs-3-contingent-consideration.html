@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9LKFW8QCC8"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9LKFW8QCC8');</script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFRS 3 Contingent Consideration: Earnouts, Adjustments & Remeasurement</title>
+    <meta name="description" content="IFRS 3 contingent consideration: earnouts, earn-ins, fair value measurement, remeasurement through P&L, audit challenges.">
+    <meta name="keywords" content="IFRS 3 contingent consideration, earnout, earn-in, fair value, remeasurement, acquisition">
+    <meta name="author" content="Usman Qureshi">
+    <link rel="canonical" href="https://uqconsulting.org/blog/ifrs-3-contingent-consideration.html">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
+        .topbar { background: #1a2f5a; padding: 16px 20px; text-align: center; }
+        .topbar a { color: #d4af37; text-decoration: none; font-weight: 600; }
+        .article-container { max-width: 760px; margin: 0 auto; padding: 50px 20px; }
+        h1 { font-size: 2em; color: #1a2f5a; margin-bottom: 14px; }
+        .meta { color: #8593a8; font-size: 0.9em; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 2px solid #e4e9f0; }
+        article h2 { font-size: 1.5em; color: #1a2f5a; margin: 40px 0 14px; }
+        article h3 { font-size: 1.1em; color: #2a4a7a; margin: 24px 0 10px; }
+        article p { margin-bottom: 16px; }
+        article ul { margin: 0 0 16px 26px; }
+        .callout { background: #fff; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 24px 0; border-radius: 4px; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 11px 14px; text-align: left; border-bottom: 1px solid #e4e9f0; }
+        th { background: #1a2f5a; color: #fff; font-weight: 600; }
+        .formula { background: #1a2f5a; color: #e8eef7; padding: 12px; border-radius: 6px; margin: 14px 0; text-align: center; }
+        .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
+        .disclaimer { font-size: 0.81em; color: #8593a8; margin-top: 36px; padding-top: 16px; border-top: 1px solid #e4e9f0; }
+    </style>
+</head>
+<body>
+    <div class="topbar">
+        <a href="https://uqconsulting.org/home.html">← Usman Qureshi — Accountants &amp; Auditors</a>
+    </div>
+
+    <div class="article-container">
+        <h1>IFRS 3 Contingent Consideration: Earnouts, Remeasurement & Accounting</h1>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 10 min read</div>
+
+        <article>
+            <p>Contingent consideration (earnouts) are future payments tied to acquisition targets being met. They increase the initial consideration, then are remeasured each reporting period—creating post-acquisition volatility that auditors scrutinize heavily. This guide covers measurement, remeasurement mechanics, and the audit challenges.</p>
+
+            <h2>What is Contingent Consideration?</h2>
+            <p>Payment obligations that depend on future events or conditions:</p>
+            <ul>
+                <li><strong>Revenue earnout:</strong> "Pay additional £10m if revenue hits £50m in Year 1"</li>
+                <li><strong>EBITDA earnout:</strong> "Pay 2× EBITDA over £5m in Year 2"</li>
+                <li><strong>Milestone:</strong> "Pay £5m on FDA approval of drug"</li>
+                <li><strong>Closing balance sheet adjustment:</strong> "Pay/receive £1m per £1m variation in net working capital"</li>
+            </ul>
+
+            <h2>Initial Recognition (Acquisition Date)</h2>
+            <p>Measure contingent consideration at fair value, using one of two approaches:</p>
+
+            <h3>Probability-Weighted Approach</h3>
+            <p class="formula">
+                Fair Value = (Scenario 1 Payout × Probability 1) + (Scenario 2 Payout × Probability 2) + ...
+            </p>
+
+            <p class="example-box">
+                <strong>Example:</strong> Earnout of £10m if revenue ≥ £50m in Year 1<br>
+                • 70% probability of hitting target: £10m<br>
+                • 30% probability of missing: £0m<br>
+                <strong>Fair value = (£10m × 70%) + (£0m × 30%) = £7m</strong>
+            </p>
+
+            <h3>Most Likely Amount Approach</h3>
+            <p>Used when only two outcomes likely and one significantly more probable. Less common but acceptable.</p>
+
+            <h2>Time Value of Money</h2>
+            <p>If contingent consideration won't be paid for >1 year, discount to present value:</p>
+            <div class="formula">
+                PV = Estimated Payment / (1 + Discount Rate)^Years
+            </div>
+
+            <h3>Discount Rate Selection</h3>
+            <ul>
+                <li><strong>Probability-weighted expected rate:</strong> Discount rate reflecting the specific risk of that payment</li>
+                <li>Typically 5–10% depending on certainty of outcome</li>
+                <li>Lower rate for high-probability items; higher for uncertain outcomes</li>
+            </ul>
+
+            <h2>Remeasurement After Acquisition (Subsequent Reporting Periods)</h2>
+
+            <h3>Key Rule: Not Goodwill</h3>
+            <p class="callout"><strong>Critical:</strong> Changes in fair value of contingent consideration do NOT adjust goodwill. Remeasurement gains/losses go to P&L (or OCI if equity-settled).</p>
+
+            <h3>Remeasurement Timing</h3>
+            <ul>
+                <li><strong>Each reporting date (quarterly/annually):</strong> Remeasure at fair value</li>
+                <li><strong>Recognition:</strong> Gain or loss in P&L (line item: "Contingent consideration remeasurement")</li>
+            </ul>
+
+            <h2>Worked Example: Software Acquisition Earnout Accounting</h2>
+
+            <h3>Deal Details</h3>
+            <p><strong>Acquisition date:</strong> 1 January 2025<br>
+            <strong>Base consideration:</strong> £80m cash<br>
+            <strong>Contingent consideration (earnout):</strong> "Pay additional £20m if ARR (annual recurring revenue) reaches £15m by 31 Dec 2025"<br>
+            <strong>Current ARR:</strong> £12m<br>
+            <strong>Management estimate of likelihood:</strong> 60% probability</p>
+
+            <h3>Initial Recognition (1 Jan 2025)</h3>
+            <p><strong>Fair value of contingent consideration:</strong> £20m × 60% = £12m<br>
+            <strong>No time value discount needed (due within 1 year, but still discount at say 4%)</strong><br>
+            <strong>PV = £12m / 1.04 = £11.54m</strong><br><br>
+            <strong>Consideration transferred:</strong> £80m + £11.54m = £91.54m</p>
+
+            <h3>Mid-Year Reassessment (30 June 2025)</h3>
+            <p>ARR tracking suggests 75% probability of hitting £15m target by year-end.</p>
+            <ul>
+                <li>New fair value: £20m × 75% = £15m</li>
+                <li>PV discount (6 months remaining): £15m / 1.02 = £14.71m</li>
+                <li>Increase from opening balance: £14.71m − £11.54m = £3.17m</li>
+                <li><strong>P&L Entry:</strong> Dr Contingent Consideration Liability £3.17m / Cr Contingent Consideration Remeasurement Gain £3.17m</li>
+            </ul>
+
+            <h3>Year-End (31 Dec 2025)</h3>
+            <p>ARR confirmed at £15.2m. Target met. Fair value = £20m (cash payment imminent).</p>
+            <ul>
+                <li>Change from 30 June: £20m − £14.71m = £5.29m</li>
+                <li><strong>P&L Entry:</strong> Dr Contingent Consideration Liability £5.29m / Cr Contingent Consideration Remeasurement Gain £5.29m</li>
+            </ul>
+
+            <h3>Payment (January 2026)</h3>
+            <p>Cash paid £20m against the liability. No P&L impact (already accrued).</p>
+
+            <h2>Audit Red Flags: Contingent Consideration</h2>
+
+            <h3>Red Flag 1: Unrealistic Probability Estimates</h3>
+            <p><strong>Finding:</strong> Management estimates 90% probability of hitting ambitious EBITDA target with no supporting analysis.</p>
+            <p><strong>Auditor action:</strong> Review historical performance of acquired company, industry benchmarks, management credibility. Adjust probability downward if unsupported.</p>
+
+            <h3>Red Flag 2: Contingent Liability Not Remeasured</h3>
+            <p><strong>Finding:</strong> Contingent consideration recognized at £10m on acquisition date, but not remeasured in subsequent quarters despite changing market conditions.</p>
+            <p><strong>Auditor action:</strong> Require remeasurement; significant P&L impact likely.</p>
+
+            <h3>Red Flag 3: Time Value Not Considered</h3>
+            <p><strong>Finding:</strong> Earnout of £50m due in 3 years recognized at nominal £50m without discounting.</p>
+            <p><strong>Auditor action:</strong> Apply present value discount (5% = £43.1m); adjust liability and goodwill (if within the measurement period) or P&L (if after measurement period closes).</p>
+
+            <h3>Red Flag 4: Measurement Period Confusion</h3>
+            <p><strong>Finding:</strong> Adjustment for earnout reversal booked to goodwill 18 months post-acquisition (outside the 12-month measurement period).</p>
+            <p><strong>Auditor action:</strong> Measurement period is 12 months only. After that, remeasurement goes to P&L, not goodwill.</p>
+
+            <h2>Earnout Accounting Summary</h2>
+            <table>
+                <tr>
+                    <th>Event</th>
+                    <th>Accounting</th>
+                </tr>
+                <tr>
+                    <td>Initial recognition (acquisition date)</td>
+                    <td>Fair value (PW or most likely) in consideration; affects goodwill</td>
+                </tr>
+                <tr>
+                    <td>Remeasurement within 12-month measurement period</td>
+                    <td>Adjust contingent liability AND goodwill (if probability/PV changes)</td>
+                </tr>
+                <tr>
+                    <td>Remeasurement after 12-month period</td>
+                    <td>Adjust contingent liability; remeasurement gain/loss to P&L</td>
+                </tr>
+                <tr>
+                    <td>Payment</td>
+                    <td>Cash out; reduce liability (no P&L impact if previously accrued)</td>
+                </tr>
+            </table>
+
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> Contingent consideration accounting is notoriously complex and heavily audited. Probability estimates are heavily challenged. Document all assumptions. Consider engaging valuation specialists for large earnouts. Be prepared for significant post-acquisition P&L volatility as probabilities shift.
+            </div>
+        </article>
+    </div>
+</body>
+</html>

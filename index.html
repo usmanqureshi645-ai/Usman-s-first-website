@@ -1794,20 +1794,20 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 <section id="aitools" style="padding-top:3rem;padding-bottom:3rem">
 <div class="section-inner">
 <div class="section-header" style="margin-bottom:2rem">
-<p class="section-eyebrow">What This Site Actually Is</p>
-<h2 class="section-title">Live AI Tools — Try Them Now</h2>
-<p class="section-sub">This isn't a CV. It's a working set of AI-powered tools built for finance, audit and accounting professionals: a live Meeting Room with AI specialists, instant CV scoring, GAAP comparisons, interview coaching and more. Everything below is fully functional, click any tool to try it.</p>
+<p class="section-eyebrow">What's Inside</p>
+<h2 class="section-title">AI Tools for Finance Professionals</h2>
+<p class="section-sub">Sign up free to unlock a complete toolkit: live Meeting Room with AI specialists, instant resume scoring, GAAP comparisons, interview coaching, financial statement review, and more. All data is encrypted and protected — your workspace, your insights, your control.</p>
 </div>
 <div id="toolsshowcase" class="knowledge-grid">
-<div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('meetingroom').scrollIntoView({behavior:'smooth'})">
+<div class="knowledge-card" style="cursor:pointer" onclick="if(!window.getSiteUser?.())window.toggleSignup?.(true);else document.getElementById('meetingroom').scrollIntoView({behavior:'smooth'})">
 <span class="sector-icon">🟢</span><h3>The Meeting Room</h3>
 <p>Talk live with an AI panel of audit, tax, legal and technical specialists.</p>
 </div>
-<div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('knowledgetest').scrollIntoView({behavior:'smooth'})">
+<div class="knowledge-card" style="cursor:pointer" onclick="if(!window.getSiteUser?.())window.toggleSignup?.(true);else document.getElementById('knowledgetest').scrollIntoView({behavior:'smooth'})">
 <span class="sector-icon">🎯</span><h3>Interview Preparation</h3>
 <p>Interview &amp; exam prep with a friendly AI coach — get an emailed feedback report.</p>
 </div>
-<div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('jobhub').scrollIntoView({behavior:'smooth'})">
+<div class="knowledge-card" style="cursor:pointer" onclick="if(!window.getSiteUser?.())window.toggleSignup?.(true);else document.getElementById('jobhub').scrollIntoView({behavior:'smooth'})">
 <span class="sector-icon">💼</span><h3>Score Your Resume</h3>
 <p>Upload your CV for an honest score from HR, ATS and a hiring manager, with a clear fix for every weakness.</p>
 </div>
@@ -1815,11 +1815,11 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 <span class="sector-icon">🎯</span><h3>Personalized Job Search For You</h3>
 <p>Sign up, upload your CV, and get AI-curated job search links and titles matched to your background.</p>
 </div>
-<div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('gaapcompare').scrollIntoView({behavior:'smooth'})">
+<div class="knowledge-card" style="cursor:pointer" onclick="if(!window.getSiteUser?.())window.toggleSignup?.(true);else document.getElementById('gaapcompare').scrollIntoView({behavior:'smooth'})">
 <span class="sector-icon">📊</span><h3>GAAP Compare</h3>
 <p>IFRS vs US/UK/Irish/Luxembourg/Australian GAAP, with a live research bot.</p>
 </div>
-<div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('fsreview').scrollIntoView({behavior:'smooth'})">
+<div class="knowledge-card" style="cursor:pointer" onclick="if(!window.getSiteUser?.())window.toggleSignup?.(true);else document.getElementById('fsreview').scrollIntoView({behavior:'smooth'})">
 <span class="sector-icon">📝</span><h3>Financial Statement Review</h3>
 <p>Upload your financial statements — an AI panel reviews them for FRS/IFRS/US GAAP compliance and adds real Word comments.</p>
 </div>
@@ -1830,6 +1830,26 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 <div class="knowledge-card" style="cursor:pointer" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">
 <span class="sector-icon">🤖</span><h3>AI &amp; Web Development</h3>
 <p>This entire site — every AI tool on it — was built by Usman himself: prompt engineering, AI agents, and full web development &amp; design.</p>
+</div>
+</div>
+<div style="margin-top:3rem;padding:2rem;background:rgba(200,169,110,.08);border:1px solid rgba(200,169,110,.2);border-radius:12px">
+<p style="text-align:center;color:var(--gold);font-size:.9rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:1.5rem">Why Sign Up Free</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1.5rem">
+<div style="text-align:center">
+<div style="font-size:2rem;margin-bottom:.5rem">🔒</div>
+<p style="color:var(--cream);font-weight:600;font-size:.9rem;margin-bottom:.3rem">Your Data Protected</p>
+<p style="color:var(--steel-light);font-size:.8rem;line-height:1.5">All your information is encrypted end-to-end. Your workspace is yours alone.</p>
+</div>
+<div style="text-align:center">
+<div style="font-size:2rem;margin-bottom:.5rem">💼</div>
+<p style="color:var(--cream);font-weight:600;font-size:.9rem;margin-bottom:.3rem">Your Workspace</p>
+<p style="color:var(--steel-light);font-size:.8rem;line-height:1.5">Save your work, track insights, and build a personal repository of your career growth.</p>
+</div>
+<div style="text-align:center">
+<div style="font-size:2rem;margin-bottom:.5rem">⚡</div>
+<p style="color:var(--cream);font-weight:600;font-size:.9rem;margin-bottom:.3rem">Instant Results</p>
+<p style="color:var(--steel-light);font-size:.8rem;line-height:1.5">Get AI-powered feedback within seconds. No waiting, no subscriptions, completely free.</p>
+</div>
 </div>
 </div>
 </div>
@@ -2281,8 +2301,8 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
         Helping growing and complex businesses navigate statutory audits, IFRS implementation, financial reporting challenges and transaction-related accounting with Big Four expertise and practical commercial insight.
       </p>
       <div class="hero-cta">
-        <a href="#services" class="btn-ghost">View Services</a>
-        <a href="#contact" class="btn-ghost">Book a Consultation</a>
+        <button class="btn-primary" onclick="window.toggleSignup?.(true)" style="border:none;cursor:pointer">Sign Up &amp; Try Tools Free</button>
+        <button class="btn-ghost" onclick="window.toggleSignupMode?.();window.toggleSignup?.(true)" style="border:1px solid rgba(200,169,110,0.4);background:none;cursor:pointer">Login</button>
       </div>
       <div class="site-stats-badge" id="siteStatsBadge"></div>
     </div>
@@ -2867,7 +2887,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 </div>
 
 <!-- WELCOME CHATBOT -->
-<div class="welcome-bot">
+<div class="welcome-bot" style="bottom:346px;display:none">
   <div class="welcome-bot-panel" id="welcomeBotPanel">
     <div class="welcome-bot-header">
       <span>👋 Site Guide</span>
@@ -2875,7 +2895,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
     </div>
     <div class="welcome-bot-messages" id="welcomeBotMessages"></div>
   </div>
-  <button class="welcome-bot-toggle widget-tip" data-tooltip="Site guide" id="welcomeBotToggle">💬</button>
+  <button class="welcome-bot-toggle widget-tip" data-tooltip="Site guide" id="welcomeBotToggle" style="display:none">💬</button>
 </div>
 
 <!-- FEEDBACK WIDGET -->

@@ -1,283 +1,163 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google Analytics (GA4) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9LKFW8QCC8"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9LKFW8QCC8');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accounting & Audit Blog | Free Guides & Resources</title>
-    <meta name="description" content="Free accounting and audit blog. IFRS vs US GAAP, revenue recognition, lease accounting, goodwill, interview prep, CV writing. Expert guides for accountants and auditors.">
-    <meta name="keywords" content="accounting blog, audit blog, IFRS, US GAAP, revenue recognition, lease accounting, interview prep, accounting career, financial reporting">
+    <title>IFRS & FRS 102 Accounting Blog | Audit Knowledge Base</title>
+    <meta name="description" content="Comprehensive IFRS, IAS, and FRS 102 accounting guides. Topical clusters on leases, financial instruments, revenue, impairment, tax, and more.">
+    <meta name="keywords" content="IFRS, IAS, FRS 102, accounting standards, audit, financial reporting, lease accounting, revenue recognition">
     <meta name="author" content="Usman Qureshi">
-    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://uqconsulting.org/blog/">
-
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Accounting & Audit Blog | Free Guides">
-    <meta property="og:description" content="Free resources on IFRS, US GAAP, audit standards, interview prep, and accounting career guidance.">
-    <meta property="og:image" content="https://uqconsulting.org/images/og-image.png">
-    <meta property="og:url" content="https://uqconsulting.org/blog/">
-    <meta name="twitter:card" content="summary_large_image">
 
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "Blog",
-      "name": "Usman Qureshi's Accounting & Audit Blog",
-      "description": "Free guides on IFRS, US GAAP, audit standards, and accounting career guidance.",
-      "url": "https://uqconsulting.org/blog/",
-      "author": {
-        "@type": "Person",
-        "name": "Usman Qureshi",
-        "jobTitle": "Chartered Accountant (ACCA, ACA)"
-      }
+      "name": "Accounting Standards Blog",
+      "description": "IFRS, IAS, and FRS 102 accounting knowledge base",
+      "author": { "@type": "Person", "name": "Usman Qureshi" }
     }
     </script>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background: #f4f6f9;
-            color: #2a3342;
-            line-height: 1.7;
-        }
-        .topbar {
-            background: #1a2f5a;
-            padding: 16px 20px;
-            text-align: center;
-        }
-        .topbar a { color: #d4af37; text-decoration: none; font-weight: 600; font-size: 0.95em; }
-        .container { max-width: 900px; margin: 0 auto; padding: 50px 20px; }
-        .breadcrumb { font-size: 0.85em; color: #8593a8; margin-bottom: 24px; }
-        .breadcrumb a { color: #8593a8; text-decoration: none; }
-        .breadcrumb a:hover { color: #d4af37; }
-        h1 { font-size: 2.5em; color: #1a2f5a; line-height: 1.2; margin-bottom: 12px; }
-        .lead { font-size: 1.1em; color: #4a5568; margin-bottom: 40px; }
-        .filter { margin-bottom: 32px; }
-        .filter button {
-            background: #fff; border: 2px solid #d4af37; color: #1a2f5a;
-            padding: 10px 20px; margin-right: 10px; margin-bottom: 10px; border-radius: 6px;
-            cursor: pointer; font-weight: 600; font-size: 0.9em; transition: all 0.3s;
-        }
-        .filter button:hover, .filter button.active { background: #d4af37; color: #fff; }
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 24px;
-            margin-bottom: 50px;
-        }
-        .article-card {
-            background: #fff;
-            border-radius: 10px;
-            padding: 26px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            transition: all 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-        .article-card:hover {
-            box-shadow: 0 8px 16px rgba(0,0,0,0.12);
-            transform: translateY(-4px);
-        }
-        .article-tag {
-            display: inline-block;
-            background: #f0f0f0; color: #1a2f5a;
-            font-size: 0.8em; padding: 4px 10px; border-radius: 4px;
-            margin-bottom: 12px; font-weight: 600; width: fit-content;
-        }
-        .article-card h3 { color: #1a2f5a; font-size: 1.3em; margin-bottom: 10px; line-height: 1.3; }
-        .article-card p { color: #556; font-size: 0.95em; margin-bottom: 16px; flex-grow: 1; }
-        .article-meta { font-size: 0.85em; color: #8593a8; margin-bottom: 16px; }
-        .article-card a {
-            color: #d4af37; text-decoration: none; font-weight: 600; display: inline-block;
-            margin-top: auto;
-        }
-        .article-card a:hover { color: #c99e2b; }
-        .section-title { font-size: 1.8em; color: #1a2f5a; margin: 40px 0 20px; padding-top: 20px; border-top: 2px solid #e4e9f0; }
-        .about { background: #fff; border-radius: 10px; padding: 28px; margin-top: 40px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-        .about h2 { color: #1a2f5a; margin-bottom: 12px; }
-        .about p { margin-bottom: 12px; }
-        footer { text-align: center; padding: 30px 20px; border-top: 2px solid #e4e9f0; margin-top: 50px; color: #8593a8; font-size: 0.9em; }
-        @media (max-width: 768px) {
-            h1 { font-size: 1.8em; }
-            .articles-grid { grid-template-columns: 1fr; }
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
+        .topbar { background: #1a2f5a; padding: 16px 20px; text-align: center; }
+        .topbar a { color: #d4af37; text-decoration: none; font-weight: 600; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 50px 20px; }
+        h1 { font-size: 2.2em; color: #1a2f5a; margin-bottom: 14px; text-align: center; }
+        .intro { font-size: 1.1em; color: #4a5568; text-align: center; margin-bottom: 48px; max-width: 700px; margin-left: auto; margin-right: auto; }
+        .clusters { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; margin-bottom: 40px; }
+        .cluster { background: #fff; border-radius: 8px; border-left: 5px solid #d4af37; padding: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+        .cluster h2 { color: #1a2f5a; font-size: 1.3em; margin-bottom: 12px; }
+        .cluster-count { color: #8593a8; font-size: 0.9em; margin-bottom: 16px; }
+        .cluster ul { list-style: none; }
+        .cluster li { margin-bottom: 8px; }
+        .cluster a { color: #2a4a7a; text-decoration: none; transition: color 0.2s; }
+        .cluster a:hover { color: #d4af37; text-decoration: underline; }
+        .cluster-hub { font-weight: 600; color: #1a2f5a; }
+        .satellite { color: #4a5568; font-size: 0.95em; padding-left: 12px; }
+        .footer { text-align: center; color: #8593a8; font-size: 0.9em; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; }
     </style>
 </head>
 <body>
     <div class="topbar">
-        <a href="https://uqconsulting.org/home.html">← Usman Qureshi — Free AI Tools for Accountants &amp; Auditors</a>
+        <a href="https://uqconsulting.org/home.html">← Usman Qureshi — Accountants &amp; Auditors</a>
     </div>
 
     <div class="container">
-        <div class="breadcrumb">
-            <a href="https://uqconsulting.org/home.html">Home</a> &nbsp;›&nbsp;
-            Blog
-        </div>
+        <h1>Accounting Standards Blog</h1>
+        <p class="intro">Comprehensive guides to IFRS, IAS, and FRS 102 standards. Topical clusters with worked examples, audit procedures, and real-world applications.</p>
 
-        <h1>Accounting & Audit Blog</h1>
-        <p class="lead">Free guides on IFRS, US GAAP, audit standards, revenue recognition, and accounting career development. Written by Usman Qureshi (ACCA, ACA) with Big 4 audit experience.</p>
-
-        <div class="filter">
-            <button class="active" onclick="filterArticles('all')">All Articles</button>
-            <button onclick="filterArticles('standards')">Standards & Technical</button>
-            <button onclick="filterArticles('career')">Career & Interview</button>
-        </div>
-
-        <div class="articles-grid" id="articlesGrid">
-            <!-- Standards & Technical Articles -->
-            <div class="article-card" data-category="standards">
-                <span class="article-tag">IFRS vs GAAP</span>
-                <h3><a href="ifrs-vs-us-gaap-comparison.html">IFRS vs US GAAP: Key Accounting Differences</a></h3>
-                <p>Side-by-side comparison of IFRS and US GAAP accounting standards. Revenue recognition, lease accounting, goodwill impairment, inventory, and more.</p>
-                <div class="article-meta">July 2026 · 10 min read</div>
-                <a href="ifrs-vs-us-gaap-comparison.html">Read →</a>
+        <div class="clusters">
+            <div class="cluster">
+                <h2>IFRS 16: Leases</h2>
+                <p class="cluster-count">6 articles</p>
+                <ul>
+                    <li><a href="ifrs-16-lease-accounting-complete-guide.html" class="cluster-hub">Complete Guide to Lease Accounting</a></li>
+                    <li class="satellite"><a href="ifrs-16-discount-rate-ibr.html">Incremental Borrowing Rate (IBR)</a></li>
+                    <li class="satellite"><a href="ifrs-16-lease-modifications.html">Lease Modifications</a></li>
+                    <li class="satellite"><a href="ifrs-16-journal-entries.html">Journal Entries &amp; Examples</a></li>
+                    <li class="satellite"><a href="ifrs-16-sale-leaseback.html">Sale-Leaseback Transactions</a></li>
+                    <li class="satellite"><a href="ifrs-16-short-term-low-value.html">Short-Term &amp; Low-Value Exemptions</a></li>
+                </ul>
             </div>
 
-            <div class="article-card" data-category="standards">
-                <span class="article-tag">IFRS 16 / IFRS 15</span>
-                <h3><a href="ifrs-16-lease-accounting-example.html">IFRS 16 Lease Accounting Worked Example</a></h3>
-                <p>Comprehensive IFRS 16 example with real numbers. ROU asset calculation, lease liability, journal entries, financial statement impact.</p>
-                <div class="article-meta">July 2026 · 8 min read</div>
-                <a href="ifrs-16-lease-accounting-example.html">Read →</a>
+            <div class="cluster">
+                <h2>IFRS 9: Financial Instruments</h2>
+                <p class="cluster-count">6 articles</p>
+                <ul>
+                    <li><a href="ifrs-9-financial-instruments-complete-guide.html" class="cluster-hub">Complete Guide to Financial Instruments</a></li>
+                    <li class="satellite"><a href="ifrs-9-expected-credit-loss-model.html">Expected Credit Loss (ECL) Model</a></li>
+                    <li class="satellite"><a href="ifrs-9-classification-measurement.html">Classification &amp; Measurement</a></li>
+                    <li class="satellite"><a href="ifrs-9-hedge-accounting.html">Hedge Accounting</a></li>
+                    <li class="satellite"><a href="ifrs-9-impairment-accounting.html">Impairment Accounting</a></li>
+                    <li class="satellite"><a href="ifrs-9-modification-derecognition.html">Modification &amp; Derecognition</a></li>
+                </ul>
             </div>
 
-            <div class="article-card" data-category="standards">
-                <span class="article-tag">IFRS 15 Deep Dive</span>
-                <h3><a href="revenue-recognition-ifrs-15-vs-asc-606-deep-dive.html">Revenue Recognition: IFRS 15 vs ASC 606</a></h3>
-                <p>Detailed comparison of IFRS 15 and ASC 606. Contract modifications, licensing (right-to-use vs right-to-access), variable consideration.</p>
-                <div class="article-meta">July 2026 · 9 min read</div>
-                <a href="revenue-recognition-ifrs-15-vs-asc-606-deep-dive.html">Read →</a>
+            <div class="cluster">
+                <h2>IFRS 15: Revenue Recognition</h2>
+                <p class="cluster-count">5 articles</p>
+                <ul>
+                    <li><a href="ifrs-15-revenue-recognition-complete-guide.html" class="cluster-hub">Complete Guide to Revenue Recognition</a></li>
+                    <li class="satellite"><a href="ifrs-15-performance-obligations.html">Performance Obligations</a></li>
+                    <li class="satellite"><a href="ifrs-15-variable-consideration.html">Variable Consideration</a></li>
+                    <li class="satellite"><a href="ifrs-15-contract-assets-liabilities.html">Contract Assets &amp; Liabilities</a></li>
+                    <li class="satellite"><a href="ifrs-15-over-time-vs-point-in-time.html">Over-Time vs Point-in-Time Revenue</a></li>
+                </ul>
             </div>
 
-            <div class="article-card" data-category="standards">
-                <span class="article-tag">IFRS 16 Deep Dive</span>
-                <h3><a href="lease-accounting-ifrs-16-vs-asc-842-deep-dive.html">Lease Accounting: IFRS 16 vs ASC 842</a></h3>
-                <p>Complex lease scenarios. ROU asset differences, initial direct costs, reassessment triggers, practical expedients with worked examples.</p>
-                <div class="article-meta">July 2026 · 9 min read</div>
-                <a href="lease-accounting-ifrs-16-vs-asc-842-deep-dive.html">Read →</a>
+            <div class="cluster">
+                <h2>IAS 36: Impairment of Assets</h2>
+                <p class="cluster-count">3 articles</p>
+                <ul>
+                    <li><a href="ias-36-impairment-of-assets-complete-guide.html" class="cluster-hub">Complete Guide to Asset Impairment</a></li>
+                    <li class="satellite"><a href="ias-36-cgu-identification.html">CGU Identification &amp; Goodwill Allocation</a></li>
+                    <li class="satellite"><a href="ias-36-value-in-use-calculation.html">Value-in-Use Calculation (WACC)</a></li>
+                </ul>
             </div>
 
-            <div class="article-card" data-category="standards">
-                <span class="article-tag">IFRS 36 / Goodwill</span>
-                <h3><a href="goodwill-impairment-ifrs-36-vs-asc-350-deep-dive.html">Goodwill Impairment: IFRS 36 vs ASC 350</a></h3>
-                <p>One-step (IFRS) vs two-step (ASC) goodwill impairment tests. Value-in-use vs fair value. Worked acquisition example with impact analysis.</p>
-                <div class="article-meta">July 2026 · 9 min read</div>
-                <a href="goodwill-impairment-ifrs-36-vs-asc-350-deep-dive.html">Read →</a>
+            <div class="cluster">
+                <h2>IFRS 37: Provisions &amp; Contingencies</h2>
+                <p class="cluster-count">1 article</p>
+                <ul>
+                    <li><a href="ifrs-37-provisions-contingencies-complete-guide.html" class="cluster-hub">Complete Guide to Provisions</a></li>
+                </ul>
             </div>
 
-            <div class="article-card" data-category="standards">
-                <span class="article-tag">IFRS 2 / Inventory</span>
-                <h3><a href="inventory-valuation-ifrs-2-vs-asc-330-deep-dive.html">Inventory Valuation: IFRS 2 vs ASC 330</a></h3>
-                <p>LIFO (banned IFRS, allowed ASC), NRV vs market value, write-down reversals. Obsolescence scenarios with real worked examples.</p>
-                <div class="article-meta">July 2026 · 9 min read</div>
-                <a href="inventory-valuation-ifrs-2-vs-asc-330-deep-dive.html">Read →</a>
+            <div class="cluster">
+                <h2>IFRS 18: Presentation of Financial Statements</h2>
+                <p class="cluster-count">1 article</p>
+                <ul>
+                    <li><a href="ifrs-18-presentation-of-financial-statements-complete-guide.html" class="cluster-hub">Complete Guide to Financial Statement Presentation</a></li>
+                </ul>
             </div>
 
-            <div class="article-card" data-category="standards">
-                <span class="article-tag">IFRS 37 / Provisions</span>
-                <h3><a href="provisions-contingencies-ifrs-37-vs-asc-450-deep-dive.html">Provisions & Contingencies: IFRS 37 vs ASC 450</a></h3>
-                <p>Provision vs contingency distinction. "Probable" threshold, present value, restructuring timing. Plant closure example.</p>
-                <div class="article-meta">July 2026 · 9 min read</div>
-                <a href="provisions-contingencies-ifrs-37-vs-asc-450-deep-dive.html">Read →</a>
+            <div class="cluster">
+                <h2>IFRS 3: Business Combinations</h2>
+                <p class="cluster-count">6 articles</p>
+                <ul>
+                    <li><a href="ifrs-3-business-combinations-complete-guide.html" class="cluster-hub">Complete Guide to Business Combinations</a></li>
+                    <li class="satellite"><a href="ifrs-3-purchase-price-allocation-ppa.html">Purchase Price Allocation (PPA)</a></li>
+                    <li class="satellite"><a href="ifrs-3-fair-value-measurement.html">Fair Value Measurement of Intangibles</a></li>
+                    <li class="satellite"><a href="ifrs-3-contingent-consideration.html">Contingent Consideration (Earnouts)</a></li>
+                    <li class="satellite"><a href="ifrs-3-reverse-acquisitions.html">Reverse Acquisitions</a></li>
+                    <li class="satellite"><a href="ifrs-3-step-acquisitions.html">Step Acquisitions</a></li>
+                </ul>
             </div>
 
-            <div class="article-card" data-category="standards">
-                <span class="article-tag">IFRS 9 / Financial Instruments</span>
-                <h3><a href="financial-instruments-ifrs-9-vs-asc-320-321-deep-dive.html">Financial Instruments: IFRS 9 vs ASC 320/321</a></h3>
-                <p>Classification, impairment (ECL vs CECL), held-to-maturity strictness, debt modification. Portfolio analysis examples.</p>
-                <div class="article-meta">July 2026 · 9 min read</div>
-                <a href="financial-instruments-ifrs-9-vs-asc-320-321-deep-dive.html">Read →</a>
+            <div class="cluster">
+                <h2>IAS 12: Deferred Tax</h2>
+                <p class="cluster-count">6 articles</p>
+                <ul>
+                    <li><a href="ias-12-deferred-tax-complete-guide.html" class="cluster-hub">Complete Guide to Deferred Tax</a></li>
+                    <li class="satellite"><a href="ias-12-tax-loss-carryforwards.html">Tax Loss Carryforwards</a></li>
+                    <li class="satellite"><a href="ias-12-valuation-allowances.html">Valuation Allowances</a></li>
+                    <li class="satellite"><a href="ias-12-tax-rate-changes.html">Tax Rate Changes</a></li>
+                    <li class="satellite"><a href="ias-12-deferred-tax-sorie.html">Deferred Tax on OCI Items (SORIE)</a></li>
+                    <li class="satellite"><a href="ias-12-acquisition-deferred-tax.html">Acquisition Deferred Tax (Fair Value Step-Ups)</a></li>
+                </ul>
             </div>
 
-            <div class="article-card" data-category="standards">
-                <span class="article-tag">Presentation & Display</span>
-                <h3><a href="presentation-display-ifrs-vs-us-gaap-deep-dive.html">Presentation & Display: IFRS vs US GAAP</a></h3>
-                <p>Nature vs function classification, balance sheet structure, operating vs financing items, EBITDA comparability challenges.</p>
-                <div class="article-meta">July 2026 · 9 min read</div>
-                <a href="presentation-display-ifrs-vs-us-gaap-deep-dive.html">Read →</a>
-            </div>
-
-            <div class="article-card" data-category="standards">
-                <span class="article-tag">IFRS 18 / New Standard</span>
-                <h3><a href="ifrs-18-presentation-guide.html">IFRS 18 Presentation of Financial Statements</a></h3>
-                <p>New standard effective Jan 2025. Management-defined operating activities, non-GAAP metrics in primary statements, transition from IAS 1.</p>
-                <div class="article-meta">July 2026 · 9 min read</div>
-                <a href="ifrs-18-presentation-guide.html">Read →</a>
-            </div>
-
-            <div class="article-card" data-category="standards">
-                <span class="article-tag">IFRS 15 Complex Scenarios</span>
-                <h3><a href="ifrs-15-revenue-recognition-deep-dive.html">IFRS 15 Revenue Recognition: Complex Scenarios</a></h3>
-                <p>Performance obligations, variable consideration, licensing (right-to-use vs right-to-access), SaaS contracts, contract modifications.</p>
-                <div class="article-meta">July 2026 · 12 min read</div>
-                <a href="ifrs-15-revenue-recognition-deep-dive.html">Read →</a>
-            </div>
-
-            <div class="article-card" data-category="standards">
-                <span class="article-tag">Audit Standards</span>
-                <h3><a href="pcaob-standards-audit-quality-guide.html">PCAOB Audit Standards & Quality Guide</a></h3>
-                <p>PCAOB AS 1200, AS 1210, AS 2401. Risk assessment, fraud detection, quality control. PCAOB vs ISA differences. US public company audits.</p>
-                <div class="article-meta">July 2026 · 10 min read</div>
-                <a href="pcaob-standards-audit-quality-guide.html">Read →</a>
-            </div>
-
-            <!-- Career & Interview Articles -->
-            <div class="article-card" data-category="career">
-                <span class="article-tag">CV & Career</span>
-                <h3><a href="accountant-cv-writing-guide.html">Accountant CV Writing Guide: Impact & Keywords</a></h3>
-                <p>ATS optimization, impact statements vs activity statements, Big 4 experience positioning. Before/after examples with real scenarios.</p>
-                <div class="article-meta">July 2026 · 10 min read</div>
-                <a href="accountant-cv-writing-guide.html">Read →</a>
-            </div>
-
-            <div class="article-card" data-category="career">
-                <span class="article-tag">Interview Prep</span>
-                <h3><a href="acca-interview-questions-answers.html">ACCA Interview Questions & Model Answers</a></h3>
-                <p>Real ACCA interview questions on technical accounting, audit, ethics, and professional judgment. Model answers with explanations.</p>
-                <div class="article-meta">July 2026 · 11 min read</div>
-                <a href="acca-interview-questions-answers.html">Read →</a>
-            </div>
-
-            <div class="article-card" data-category="career">
-                <span class="article-tag">Interview Prep</span>
-                <h3><a href="accounting-interview-technical-questions.html">Accounting Interview: Technical & Behavioral Questions</a></h3>
-                <p>Technical accounting scenarios, behavioral questions with STAR method. Conflict resolution, teamwork, leadership. Interview tips and dos/don'ts.</p>
-                <div class="article-meta">July 2026 · 12 min read</div>
-                <a href="accounting-interview-technical-questions.html">Read →</a>
+            <div class="cluster">
+                <h2>FRS 102: UK GAAP</h2>
+                <p class="cluster-count">4 articles</p>
+                <ul>
+                    <li><a href="frs-102-uk-gaap-complete-guide.html" class="cluster-hub">Complete Guide to FRS 102</a></li>
+                    <li class="satellite"><a href="frs-102-small-entities-exemptions.html">Small Entities Exemptions</a></li>
+                    <li class="satellite"><a href="frs-102-transition-from-ifrs.html">Transition from IFRS to FRS 102</a></li>
+                    <li class="satellite"><a href="frs-102-financial-instruments.html">Financial Instruments (3-Category Model)</a></li>
+                </ul>
             </div>
         </div>
 
-        <div class="about">
-            <h2>About This Blog</h2>
-            <p>Written by <strong>Usman Qureshi (ACCA, ACA)</strong>, a chartered accountant with Big 4 audit and advisory experience. All articles are written to help accountants, auditors, and finance professionals understand complex standards, prepare for interviews, and develop their careers.</p>
-            <p><strong>Each article includes:</strong> worked examples with real numbers, FAQ sections, author credentials, internal links to free tools (GAAP Compare, Meeting Room, Knowledge Test), and simplification disclaimers.</p>
-            <p><strong>Use our free tools:</strong> <a href="https://uqconsulting.org/gaap-compare.html">GAAP Compare</a> · <a href="https://uqconsulting.org/meeting-room.html">Meeting Room</a> · <a href="https://uqconsulting.org/interview-prep.html">Interview Prep</a> · <a href="https://uqconsulting.org/cv-review.html">CV Scoring</a></p>
+        <div class="footer">
+            <p>38 articles across 9 topical clusters | Updated July 2026 | All content by Usman Qureshi (ACCA, ACA)</p>
         </div>
     </div>
-
-    <footer>
-        <p>&copy; 2026 Usman Qureshi. All articles are educational guides. Always consult full standards and your own advisors before finalising accounting treatments.</p>
-    </footer>
-
-    <script>
-        function filterArticles(category) {
-            const cards = document.querySelectorAll('.article-card');
-            const buttons = document.querySelectorAll('.filter button');
-
-            buttons.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-
-            cards.forEach(card => {
-                if (category === 'all' || card.dataset.category === category) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        }
-    </script>
 </body>
 </html>

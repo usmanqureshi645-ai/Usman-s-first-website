@@ -67,4 +67,119 @@
     <priority>0.8</priority>
   </url>
 
+  <!-- Phase 3 SEO blog articles -->
+  <url>
+    <loc>https://uqconsulting.org/blog/</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Technical standards articles -->
+  <url>
+    <loc>https://uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://uqconsulting.org/blog/ifrs-16-lease-accounting-example.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://uqconsulting.org/blog/revenue-recognition-ifrs-15-vs-asc-606-deep-dive.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://uqconsulting.org/blog/lease-accounting-ifrs-16-vs-asc-842-deep-dive.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://uqconsulting.org/blog/goodwill-impairment-ifrs-36-vs-asc-350-deep-dive.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://uqconsulting.org/blog/inventory-valuation-ifrs-2-vs-asc-330-deep-dive.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://uqconsulting.org/blog/provisions-contingencies-ifrs-37-vs-asc-450-deep-dive.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://uqconsulting.org/blog/financial-instruments-ifrs-9-vs-asc-320-321-deep-dive.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://uqconsulting.org/blog/presentation-display-ifrs-vs-us-gaap-deep-dive.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://uqconsulting.org/blog/ifrs-18-presentation-guide.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://uqconsulting.org/blog/ifrs-15-revenue-recognition-deep-dive.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://uqconsulting.org/blog/pcaob-standards-audit-quality-guide.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Career & interview guidance articles -->
+  <url>
+    <loc>https://uqconsulting.org/blog/accountant-cv-writing-guide.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://uqconsulting.org/blog/acca-interview-questions-answers.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://uqconsulting.org/blog/accounting-interview-technical-questions.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
 </urlset>

@@ -17,6 +17,14 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Knowledge Hub (content hub — funnels authority to tools) -->
+  <url>
+    <loc>https://uqconsulting.org/knowledge-hub.html</loc>
+    <lastmod>2026-07-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Phase 2 SEO landing pages (tool-specific entry points) -->
   <url>
     <loc>https://uqconsulting.org/cv-review.html</loc>

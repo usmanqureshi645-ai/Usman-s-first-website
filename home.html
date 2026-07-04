@@ -102,8 +102,25 @@
   .tool-card:hover { border-color: var(--gold); transform: translateY(-3px); }
   .tool-icon { font-size: 1.8rem; }
   .tool-card h3 { margin: 0; font-size: 1.1rem; color: var(--cream); }
-  .tool-card p { margin: 0; color: var(--steel-light); font-size: .92rem; line-height: 1.55; flex: 1; }
+  .tool-card p { margin: 0; color: var(--steel-light); font-size: .92rem; line-height: 1.55; }
   .tool-card .tool-link { font-weight: 700; font-size: .85rem; margin-top: .3rem; }
+  .tool-visual {
+    height: 92px; border-radius: 10px; margin: .2rem 0 .3rem;
+    background: rgba(200,169,110,.05); border: 1px solid rgba(200,169,110,.12);
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .tool-visual svg { width: 100%; height: 100%; }
+  .tool-steps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: .35rem; flex: 1; }
+  .tool-steps li {
+    display: flex; gap: .55rem; align-items: flex-start;
+    color: var(--steel-light); font-size: .85rem; line-height: 1.45;
+  }
+  .tool-steps .step-num {
+    flex: none; width: 1.15rem; height: 1.15rem; border-radius: 50%;
+    background: rgba(200,169,110,.18); color: var(--gold);
+    font-size: .68rem; font-weight: 800; display: flex; align-items: center; justify-content: center;
+    margin-top: .1rem;
+  }
 
   .strip {
     background: rgba(30,58,95,.55);
@@ -115,6 +132,51 @@
   .strip-item { text-align: center; }
   .strip-item .num { font-size: 1.7rem; font-weight: 800; color: var(--gold); }
   .strip-item .label { font-size: .8rem; color: var(--steel-light); text-transform: uppercase; letter-spacing: .06em; }
+
+  .signup-section { padding-top: 1rem; }
+  .signup-card {
+    max-width: 620px; margin: 0 auto;
+    background: rgba(255,255,255,.04); backdrop-filter: blur(14px);
+    border: 1px solid rgba(200,169,110,.18); border-radius: 16px;
+    padding: 2.2rem;
+  }
+  .signup-tabs { display: flex; gap: .5rem; margin-bottom: 1.4rem; justify-content: center; }
+  .signup-tab {
+    background: none; border: 1px solid rgba(200,169,110,.3); color: var(--steel-light);
+    padding: .55rem 1.4rem; border-radius: 8px; font-family: inherit; font-size: .88rem;
+    font-weight: 700; cursor: pointer; transition: all .2s ease;
+  }
+  .signup-tab.active { background: var(--gold); color: var(--navy); border-color: var(--gold); }
+  .signup-form { display: flex; flex-direction: column; gap: .8rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .8rem; }
+  @media (max-width: 560px) { .form-row { grid-template-columns: 1fr; } }
+  .form-input {
+    width: 100%; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12);
+    border-radius: 8px; padding: .75rem .9rem; color: var(--cream); font-family: inherit;
+    font-size: .9rem;
+  }
+  .form-input:focus { outline: none; border-color: var(--gold); }
+  .form-input::placeholder { color: var(--steel); }
+  .searchable-dd { position: relative; }
+  .searchable-dd-list {
+    display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 50;
+    max-height: 180px; overflow-y: auto; background: var(--navy);
+    border: 1px solid rgba(200,169,110,.3); border-radius: 8px; margin-top: 4px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.4);
+  }
+  .searchable-dd-list.open { display: block; }
+  .searchable-dd-option { padding: .55rem .9rem; font-size: .85rem; color: var(--cream); cursor: pointer; }
+  .searchable-dd-option:hover { background: rgba(200,169,110,.18); }
+  .searchable-dd-option.no-match { color: var(--steel-light); cursor: default; }
+  .signup-toggle-link {
+    background: none; border: none; color: var(--steel-light); font-size: .82rem;
+    text-decoration: underline; cursor: pointer; text-align: center; font-family: inherit; padding: 0;
+  }
+  .signup-toggle-link:hover { color: var(--gold); }
+  .form-msg { font-size: .85rem; line-height: 1.5; text-align: center; min-height: 1.2em; }
+  .form-msg.error { color: #e0958a; }
+  .form-msg.success { color: var(--gold-light); }
+  .form-msg a { text-decoration: underline; }
 
   .whoami-card {
     display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;
@@ -225,7 +287,8 @@
     <h1>An AI workspace for <span class="accent">finance, audit &amp; accounting</span> professionals</h1>
     <p class="hero-sub">Talk to an AI panel of audit and IFRS specialists in real time, get your CV scored in seconds, compare IFRS against five GAAPs, review financial statements for compliance, and prep for interviews with an AI coach. Every tool is live and free to try.</p>
     <div class="hero-ctas">
-      <a href="index.html#aitools" class="btn-primary">Sign Up &amp; Try the Tools — Free</a>
+      <button class="btn-primary" onclick="scrollToHomeSignup('signup')" style="border:none;font-family:inherit;cursor:pointer">Sign Up &amp; Try the Tools — Free</button>
+      <button class="btn-ghost" onclick="scrollToHomeSignup('login')" style="font-family:inherit;cursor:pointer">Login</button>
       <a href="index.html#aitools" class="btn-ghost">Explore the Tools</a>
     </div>
   </div>
@@ -234,9 +297,10 @@
 <div class="strip">
   <div class="wrap">
     <div class="strip-item"><div class="num">7</div><div class="label">Live AI Tools</div></div>
-    <div class="strip-item"><div class="num">5</div><div class="label">GAAPs Compared</div></div>
+    <div class="strip-item"><div class="num">🗂️</div><div class="label">Your Own Workspace</div></div>
     <div class="strip-item"><div class="num">100%</div><div class="label">Free to Try</div></div>
     <div class="strip-item"><div class="num">24/7</div><div class="label">Always Available</div></div>
+    <div class="strip-item"><div class="num">🔒</div><div class="label">Data Protected</div></div>
   </div>
 </div>
 
@@ -252,45 +316,204 @@
       <div class="tool-card">
         <span class="tool-icon">🟢</span>
         <h3>The Meeting Room</h3>
-        <p>Talk live with an AI panel of audit, IFRS/tax, forensic, ESG, legal and technical accounting specialists. Pick the personas, ask real questions, get real answers.</p>
+        <div class="tool-visual">
+          <svg viewBox="0 0 260 92" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="26" cy="24" r="11" fill="#C8A96E" opacity=".8"/>
+            <circle cx="52" cy="24" r="11" fill="#8899AA" opacity=".7"/>
+            <circle cx="78" cy="24" r="11" fill="#E0C99A" opacity=".6"/>
+            <rect x="14" y="46" width="150" height="16" rx="8" fill="#1E3A5F"/>
+            <rect x="24" y="51" width="90" height="6" rx="3" fill="#B8C8D8" opacity=".6"/>
+            <rect x="96" y="68" width="150" height="16" rx="8" fill="#C8A96E" opacity=".85"/>
+            <rect x="106" y="73" width="110" height="6" rx="3" fill="#0A1628" opacity=".55"/>
+          </svg>
+        </div>
+        <p>Talk live with an AI panel of audit, IFRS/tax, forensic, ESG, legal and technical accounting specialists.</p>
+        <ol class="tool-steps">
+          <li><span class="step-num">1</span>Pick your specialists</li>
+          <li><span class="step-num">2</span>Ask a real question</li>
+          <li><span class="step-num">3</span>Get live, sourced answers</li>
+        </ol>
         <a href="index.html#meetingroom" class="tool-link">Enter the Meeting Room →</a>
       </div>
 
       <div class="tool-card">
         <span class="tool-icon">🎯</span>
         <h3>Interview Preparation</h3>
-        <p>Role-specific interview and exam coaching from an AI interviewer, with an emailed feedback report so you can track improvement.</p>
+        <div class="tool-visual">
+          <svg viewBox="0 0 260 92" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="24" y="30" width="16" height="32" rx="8" fill="#C8A96E"/>
+            <path d="M16 46 a16 16 0 0 0 32 0" fill="none" stroke="#E0C99A" stroke-width="3" stroke-linecap="round"/>
+            <line x1="32" y1="62" x2="32" y2="72" stroke="#E0C99A" stroke-width="3" stroke-linecap="round"/>
+            <rect x="70" y="30" width="6" height="32" rx="3" fill="#8899AA" opacity=".55"/>
+            <rect x="84" y="20" width="6" height="52" rx="3" fill="#C8A96E" opacity=".8"/>
+            <rect x="98" y="34" width="6" height="24" rx="3" fill="#8899AA" opacity=".55"/>
+            <rect x="112" y="14" width="6" height="64" rx="3" fill="#E0C99A" opacity=".7"/>
+            <rect x="126" y="28" width="6" height="36" rx="3" fill="#8899AA" opacity=".55"/>
+            <rect x="140" y="22" width="6" height="48" rx="3" fill="#C8A96E" opacity=".8"/>
+            <rect x="164" y="38" width="82" height="16" rx="8" fill="#1E3A5F"/>
+            <rect x="174" y="43" width="52" height="6" rx="3" fill="#B8C8D8" opacity=".6"/>
+          </svg>
+        </div>
+        <p>Role-specific interview and exam coaching from an AI interviewer, with an emailed feedback report.</p>
+        <ol class="tool-steps">
+          <li><span class="step-num">1</span>Choose your role &amp; level</li>
+          <li><span class="step-num">2</span>Answer live questions</li>
+          <li><span class="step-num">3</span>Get an emailed feedback report</li>
+        </ol>
         <a href="index.html#knowledgetest" class="tool-link">Start Practicing →</a>
       </div>
 
       <div class="tool-card">
         <span class="tool-icon">💼</span>
         <h3>Score My Resume</h3>
-        <p>Your CV and cover letter scored from three angles at once: HR, ATS algorithm, and hiring manager, with specific, actionable feedback.</p>
+        <div class="tool-visual">
+          <svg viewBox="0 0 260 92" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M40 76 A40 40 0 0 1 120 76" fill="none" stroke="#1E3A5F" stroke-width="10" stroke-linecap="round"/>
+            <path d="M40 76 A40 40 0 0 1 100 39" fill="none" stroke="#C8A96E" stroke-width="10" stroke-linecap="round"/>
+            <text x="80" y="70" text-anchor="middle" font-size="20" font-weight="800" fill="#E0C99A" font-family="Manrope, sans-serif">86</text>
+            <rect x="150" y="20" width="96" height="10" rx="5" fill="#1E3A5F"/>
+            <rect x="150" y="20" width="80" height="10" rx="5" fill="#C8A96E" opacity=".85"/>
+            <rect x="150" y="40" width="96" height="10" rx="5" fill="#1E3A5F"/>
+            <rect x="150" y="40" width="60" height="10" rx="5" fill="#8899AA" opacity=".8"/>
+            <rect x="150" y="60" width="96" height="10" rx="5" fill="#1E3A5F"/>
+            <rect x="150" y="60" width="72" height="10" rx="5" fill="#E0C99A" opacity=".8"/>
+          </svg>
+        </div>
+        <p>Your CV and cover letter scored from three angles at once: HR, ATS algorithm, and hiring manager.</p>
+        <ol class="tool-steps">
+          <li><span class="step-num">1</span>Upload your CV</li>
+          <li><span class="step-num">2</span>AI scores it from 3 angles</li>
+          <li><span class="step-num">3</span>Get specific, actionable fixes</li>
+        </ol>
         <a href="index.html#jobhub" class="tool-link">Score My CV →</a>
       </div>
 
       <div class="tool-card">
         <span class="tool-icon">📊</span>
         <h3>GAAP Compare</h3>
-        <p>A live comparison table and chat bot covering IFRS against five local GAAPs. Ask follow-up questions and get sourced, specific answers.</p>
+        <div class="tool-visual">
+          <svg viewBox="0 0 260 92" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="14" y="14" width="110" height="16" rx="4" fill="#C8A96E" opacity=".85"/>
+            <rect x="130" y="14" width="116" height="16" rx="4" fill="#1E3A5F"/>
+            <rect x="14" y="36" width="110" height="14" rx="4" fill="rgba(200,169,110,.14)"/>
+            <rect x="130" y="36" width="116" height="14" rx="4" fill="rgba(255,255,255,.05)"/>
+            <rect x="14" y="56" width="110" height="14" rx="4" fill="rgba(200,169,110,.14)"/>
+            <rect x="130" y="56" width="116" height="14" rx="4" fill="rgba(255,255,255,.05)"/>
+            <rect x="14" y="76" width="110" height="14" rx="4" fill="rgba(200,169,110,.14)"/>
+            <rect x="130" y="76" width="116" height="14" rx="4" fill="rgba(255,255,255,.05)"/>
+          </svg>
+        </div>
+        <p>A live comparison table and chat bot covering IFRS against five local GAAPs.</p>
+        <ol class="tool-steps">
+          <li><span class="step-num">1</span>Pick a topic &amp; jurisdiction</li>
+          <li><span class="step-num">2</span>See IFRS vs local GAAP side by side</li>
+          <li><span class="step-num">3</span>Ask the bot follow-up questions</li>
+        </ol>
         <a href="index.html#gaapcompare" class="tool-link">Compare GAAPs →</a>
       </div>
 
       <div class="tool-card">
         <span class="tool-icon">📝</span>
         <h3>Financial Statement Review</h3>
-        <p>Upload a financial statement (PDF, docx or txt) and get it reviewed by an AI panel for framework compliance, with real tracked-comment feedback.</p>
+        <div class="tool-visual">
+          <svg viewBox="0 0 260 92" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="18" y="10" width="130" height="72" rx="6" fill="none" stroke="rgba(200,169,110,.4)" stroke-width="2"/>
+            <rect x="30" y="24" width="106" height="6" rx="3" fill="#B8C8D8" opacity=".55"/>
+            <rect x="30" y="38" width="80" height="6" rx="3" fill="#B8C8D8" opacity=".55"/>
+            <rect x="30" y="52" width="106" height="6" rx="3" fill="#B8C8D8" opacity=".55"/>
+            <rect x="30" y="66" width="60" height="6" rx="3" fill="#B8C8D8" opacity=".55"/>
+            <rect x="26" y="34" width="88" height="12" rx="3" fill="#C8A96E" opacity=".35"/>
+            <circle cx="184" cy="30" r="18" fill="none" stroke="#E0C99A" stroke-width="2.5"/>
+            <path d="M176 30l6 6 12-13" fill="none" stroke="#E0C99A" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="164" y="58" width="70" height="16" rx="8" fill="#1E3A5F"/>
+            <rect x="172" y="63" width="46" height="6" rx="3" fill="#B8C8D8" opacity=".6"/>
+          </svg>
+        </div>
+        <p>Upload a financial statement (PDF, docx or txt) and get real tracked-comment feedback.</p>
+        <ol class="tool-steps">
+          <li><span class="step-num">1</span>Upload your statement</li>
+          <li><span class="step-num">2</span>AI panel reviews for compliance</li>
+          <li><span class="step-num">3</span>Get tracked-comment feedback</li>
+        </ol>
         <a href="index.html#fsreview" class="tool-link">Review a Statement →</a>
       </div>
 
       <div class="tool-card">
         <span class="tool-icon">📰</span>
         <h3>Hot Market Topics</h3>
-        <p>Auto-refreshed industry news plus curated briefings on the regulatory and audit trends actually moving the profession right now.</p>
+        <div class="tool-visual">
+          <svg viewBox="0 0 260 92" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <rect x="14" y="16" width="150" height="10" rx="5" fill="#E0C99A" opacity=".85"/>
+            <rect x="14" y="34" width="120" height="7" rx="3.5" fill="#B8C8D8" opacity=".5"/>
+            <rect x="14" y="48" width="130" height="7" rx="3.5" fill="#B8C8D8" opacity=".5"/>
+            <rect x="14" y="62" width="90" height="7" rx="3.5" fill="#B8C8D8" opacity=".5"/>
+            <polyline points="180,74 198,54 212,62 246,22" fill="none" stroke="#C8A96E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="246" cy="22" r="5" fill="#C8A96E"/>
+          </svg>
+        </div>
+        <p>Auto-refreshed industry news plus curated briefings on the trends actually moving the profession.</p>
+        <ol class="tool-steps">
+          <li><span class="step-num">1</span>Auto-refreshed briefings</li>
+          <li><span class="step-num">2</span>Curated by relevance</li>
+          <li><span class="step-num">3</span>Stay current without searching</li>
+        </ol>
         <a href="index.html#hottopics" class="tool-link">See What's Trending →</a>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<section id="signupSection" class="signup-section">
+  <div class="wrap">
+    <div class="section-header">
+      <p class="eyebrow">Get Started</p>
+      <h2 class="section-title" id="signupHeading">Sign up free — try every tool</h2>
+      <p class="section-sub" id="signupSub">Takes a minute. No card, no spam — just your workspace.</p>
+    </div>
+    <div class="signup-card">
+      <div class="signup-tabs">
+        <button class="signup-tab active" id="tabSignup" onclick="setHomeAuthMode('signup')">Sign Up</button>
+        <button class="signup-tab" id="tabLogin" onclick="setHomeAuthMode('login')">Login</button>
+      </div>
+
+      <form class="signup-form" id="homeAuthForm" onsubmit="return false">
+        <input type="text" id="haName" class="form-input" placeholder="Your name">
+        <input type="email" id="haEmail" class="form-input" placeholder="Your email">
+        <input type="password" id="haPassword" class="form-input" placeholder="Choose a password (6+ characters)">
+        <input type="text" id="haCompany" class="form-input" placeholder="Company">
+        <div class="form-row">
+          <div class="searchable-dd" id="haDepartment">
+            <input type="text" class="form-input" id="haDepartmentInput" placeholder="Department" autocomplete="off">
+            <div class="searchable-dd-list" id="haDepartmentList"></div>
+            <input type="hidden" id="haDepartmentValue">
+          </div>
+          <div class="searchable-dd" id="haDesignation">
+            <input type="text" class="form-input" id="haDesignationInput" placeholder="Designation" autocomplete="off">
+            <div class="searchable-dd-list" id="haDesignationList"></div>
+            <input type="hidden" id="haDesignationValue">
+          </div>
+        </div>
+        <input type="text" id="haDepartmentOther" class="form-input" placeholder="Please specify your department" style="display:none">
+        <input type="text" id="haDesignationOther" class="form-input" placeholder="Please specify your designation" style="display:none">
+        <div class="form-row">
+          <div class="searchable-dd" id="haCountry">
+            <input type="text" class="form-input" id="haCountryInput" placeholder="Country" autocomplete="off">
+            <div class="searchable-dd-list" id="haCountryList"></div>
+            <input type="hidden" id="haCountryValue">
+          </div>
+          <input type="text" id="haCity" class="form-input" placeholder="City">
+        </div>
+
+        <input type="email" id="haForgotEmail" class="form-input" placeholder="Your email" style="display:none">
+        <input type="text" id="haForgotCode" class="form-input" placeholder="5-digit code from your email" style="display:none">
+        <input type="password" id="haForgotNewPassword" class="form-input" placeholder="New password (6+ characters)" style="display:none">
+
+        <div class="form-msg" id="haMessage"></div>
+        <button class="btn-primary" id="haSubmitBtn" onclick="submitHomeAuth()" type="button" style="border:none;font-family:inherit;cursor:pointer">Sign Up Free</button>
+        <button class="signup-toggle-link" id="haForgotLink" onclick="setHomeAuthMode('forgot')" type="button" style="display:none">Forgot password?</button>
+        <button class="signup-toggle-link" id="haBackLink" onclick="setHomeAuthMode('login')" type="button" style="display:none">Back to log in</button>
+      </form>
     </div>
   </div>
 </section>
@@ -328,6 +551,211 @@
 </div>
 
 <script>
+  // Scroll the hero Sign Up / Login buttons down to the dedicated form section.
+  function scrollToHomeSignup(mode){
+    setHomeAuthMode(mode);
+    document.getElementById('signupSection').scrollIntoView({behavior:'smooth'});
+  }
+
+  // Searchable dropdown helper (same pattern as index.html's signup widget).
+  function createSearchableDropdown(inputEl, listEl, hiddenEl, options, onSelect){
+    function render(filter){
+      const f=filter.trim().toLowerCase();
+      const matches = f ? options.filter(o=>o.toLowerCase().includes(f)) : options;
+      listEl.innerHTML = matches.length
+        ? matches.slice(0,50).map(o=>`<div class="searchable-dd-option" data-value="${o.replace(/"/g,'&quot;')}">${o}</div>`).join('')
+        : `<div class="searchable-dd-option no-match">No match</div>`;
+      listEl.querySelectorAll('.searchable-dd-option[data-value]').forEach(el=>{
+        el.addEventListener('mousedown', e=>{
+          e.preventDefault();
+          const val=el.dataset.value;
+          inputEl.value=val;
+          if(hiddenEl) hiddenEl.value=val;
+          listEl.classList.remove('open');
+          onSelect?.(val);
+        });
+      });
+    }
+    inputEl.addEventListener('focus', ()=>{ render(inputEl.value); listEl.classList.add('open'); });
+    inputEl.addEventListener('input', ()=>{ render(inputEl.value); listEl.classList.add('open'); if(hiddenEl) hiddenEl.value=''; });
+    inputEl.addEventListener('blur', ()=>{ setTimeout(()=>listEl.classList.remove('open'), 100); });
+    inputEl.addEventListener('keydown', e=>{
+      if(e.key==='Enter'){
+        const first=listEl.querySelector('.searchable-dd-option[data-value]');
+        if(first){ first.dispatchEvent(new MouseEvent('mousedown')); e.preventDefault(); }
+      }
+    });
+  }
+  const HA_COUNTRY_LIST=["Afghanistan","Albania","Algeria","Andorra","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Bosnia and Herzegovina","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cabo Verde","Cambodia","Cameroon","Canada","Central African Republic","Chad","Chile","China","Colombia","Comoros","Congo","Costa Rica","Croatia","Cuba","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Eswatini","Ethiopia","Fiji","Finland","France","Gabon","Gambia","Georgia","Germany","Ghana","Greece","Grenada","Guatemala","Guinea","Guinea-Bissau","Guyana","Haiti","Honduras","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica","Japan","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nauru","Nepal","Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North Korea","North Macedonia","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Kitts and Nevis","Saint Lucia","Saint Vincent and the Grenadines","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","Sudan","Suriname","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor-Leste","Togo","Tonga","Trinidad and Tobago","Tunisia","Turkey","Turkmenistan","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Yemen","Zambia","Zimbabwe"];
+  const HA_DEPARTMENT_OPTIONS=['Internal Audit','External Audit','Tax','Advisory','AI','Accounting & Finance','Risk & Compliance','Treasury','Other'];
+  const HA_DESIGNATION_OPTIONS=['Associate','Senior Associate','Assistant Manager','Manager','Senior Manager','Director','Partner','CEO','CFO','VP / Executive Director','Other'];
+  const HA_SIGNUP_ONLY_FIELDS=['haCompany','haDepartment','haDesignation','haCountry','haCity'];
+  const HA_SIGNUP_OTHER_FIELDS=['haDepartmentOther','haDesignationOther'];
+
+  createSearchableDropdown(
+    document.getElementById('haDepartmentInput'), document.getElementById('haDepartmentList'), document.getElementById('haDepartmentValue'),
+    HA_DEPARTMENT_OPTIONS,
+    val=>{ document.getElementById('haDepartmentOther').style.display = val==='Other' ? 'block' : 'none'; }
+  );
+  createSearchableDropdown(
+    document.getElementById('haDesignationInput'), document.getElementById('haDesignationList'), document.getElementById('haDesignationValue'),
+    HA_DESIGNATION_OPTIONS,
+    val=>{ document.getElementById('haDesignationOther').style.display = val==='Other' ? 'block' : 'none'; }
+  );
+  createSearchableDropdown(
+    document.getElementById('haCountryInput'), document.getElementById('haCountryList'), document.getElementById('haCountryValue'),
+    HA_COUNTRY_LIST, null
+  );
+
+  let haMode='signup'; // 'signup' | 'login' | 'forgot'
+  let haForgotStep=1;
+
+  function haSetMsg(text, kind){
+    const el=document.getElementById('haMessage');
+    el.textContent=text||'';
+    el.className='form-msg'+(kind?' '+kind:'');
+  }
+
+  window.setHomeAuthMode=function(mode){
+    haMode=mode;
+    haForgotStep=1;
+    haSetMsg('');
+    document.getElementById('tabSignup').classList.toggle('active', mode==='signup');
+    document.getElementById('tabLogin').classList.toggle('active', mode==='login'||mode==='forgot');
+
+    const nameEl=document.getElementById('haName');
+    const emailEl=document.getElementById('haEmail');
+    const passEl=document.getElementById('haPassword');
+    const forgotLink=document.getElementById('haForgotLink');
+    const backLink=document.getElementById('haBackLink');
+    const submitBtn=document.getElementById('haSubmitBtn');
+    const forgotEmail=document.getElementById('haForgotEmail');
+    const forgotCode=document.getElementById('haForgotCode');
+    const forgotNewPass=document.getElementById('haForgotNewPassword');
+
+    HA_SIGNUP_OTHER_FIELDS.forEach(id=>{ document.getElementById(id).style.display='none'; });
+
+    if(mode==='forgot'){
+      nameEl.style.display='none'; emailEl.style.display='none'; passEl.style.display='none';
+      HA_SIGNUP_ONLY_FIELDS.forEach(id=>{ document.getElementById(id).style.display='none'; });
+      forgotLink.style.display='none'; backLink.style.display='block';
+      forgotEmail.style.display='block'; forgotCode.style.display='none'; forgotNewPass.style.display='none';
+      submitBtn.textContent='Send reset code';
+      document.getElementById('signupHeading').textContent='Reset your password';
+      document.getElementById('signupSub').textContent="Enter your email and we'll send you a 5-digit code.";
+      return;
+    }
+
+    forgotEmail.style.display='none'; forgotCode.style.display='none'; forgotNewPass.style.display='none'; backLink.style.display='none';
+    emailEl.style.display='block'; passEl.style.display='block';
+
+    if(mode==='login'){
+      nameEl.style.display='none';
+      HA_SIGNUP_ONLY_FIELDS.forEach(id=>{ document.getElementById(id).style.display='none'; });
+      forgotLink.style.display='block';
+      submitBtn.textContent='Log In';
+      document.getElementById('signupHeading').textContent='Welcome back';
+      document.getElementById('signupSub').textContent='Log in to get back to your saved consultations.';
+    } else {
+      nameEl.style.display='block';
+      HA_SIGNUP_ONLY_FIELDS.forEach(id=>{ document.getElementById(id).style.display='block'; });
+      forgotLink.style.display='none';
+      submitBtn.textContent='Sign Up Free';
+      document.getElementById('signupHeading').textContent='Sign up free — try every tool';
+      document.getElementById('signupSub').textContent='Takes a minute. No card, no spam — just your workspace.';
+    }
+  };
+
+  window.submitHomeAuth=async function(){
+    if(haMode==='forgot') return submitHomeForgotPassword();
+
+    const name=document.getElementById('haName').value.trim();
+    const email=document.getElementById('haEmail').value.trim();
+    const password=document.getElementById('haPassword').value;
+    const company=document.getElementById('haCompany').value.trim();
+    const department=document.getElementById('haDepartmentValue').value;
+    const departmentOther=document.getElementById('haDepartmentOther').value.trim();
+    const designation=document.getElementById('haDesignationValue').value;
+    const designationOther=document.getElementById('haDesignationOther').value.trim();
+    const country=document.getElementById('haCountryValue').value;
+    const city=document.getElementById('haCity').value.trim();
+    const loginMode = haMode==='login';
+
+    if(loginMode){
+      if(!email.includes('@') || !password){ haSetMsg('Please enter your email and password.','error'); return; }
+    } else {
+      if(!name || !email.includes('@') || password.length<6){ haSetMsg('Please enter your name, a valid email, and a password (6+ characters).','error'); return; }
+      if(!company){ haSetMsg('Please enter your company.','error'); return; }
+      if(!department || (department==='Other' && !departmentOther)){ haSetMsg('Please select your department (or specify it if you chose Other).','error'); return; }
+      if(!designation || (designation==='Other' && !designationOther)){ haSetMsg('Please select your designation (or specify it if you chose Other).','error'); return; }
+      if(!country){ haSetMsg('Please select your country.','error'); return; }
+      if(!city){ haSetMsg('Please enter your city.','error'); return; }
+    }
+
+    const btn=document.getElementById('haSubmitBtn');
+    btn.disabled=true; btn.textContent=loginMode ? 'Logging in…' : 'Signing up…';
+    haSetMsg('');
+    try{
+      const r=await fetch(loginMode ? '/api/account?action=login' : '/api/account?action=signup',{
+        method:'POST', headers:{'content-type':'application/json'},
+        body:JSON.stringify(loginMode ? {email, password} : {name, email, password, company, department, departmentOther, designation, designationOther, country, city})
+      });
+      const data=await r.json();
+      if(!r.ok){
+        if(data.duplicate){
+          haSetMsg('This account already exists. Try logging in, or reset your password.','error');
+        } else {
+          haSetMsg('Sorry, something went wrong: '+(data.error||'unknown error'),'error');
+        }
+        return;
+      }
+      haSetMsg(`${loginMode ? 'Welcome back' : "You're in"}, ${data.name.split(' ')[0]}! Taking you to the tools…`,'success');
+      setTimeout(()=>{ window.location.href='index.html#aitools'; }, 900);
+    }catch(e){
+      haSetMsg('Connection issue — please try again.','error');
+    }finally{
+      btn.disabled=false; btn.textContent=loginMode ? 'Log In' : 'Sign Up Free';
+    }
+  };
+
+  async function submitHomeForgotPassword(){
+    const btn=document.getElementById('haSubmitBtn');
+    if(haForgotStep===1){
+      const email=document.getElementById('haForgotEmail').value.trim();
+      if(!email.includes('@')){ haSetMsg('Please enter a valid email.','error'); return; }
+      btn.disabled=true; btn.textContent='Sending…';
+      try{
+        const r=await fetch('/api/account?action=forgot-password',{
+          method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({email})
+        });
+        const data=await r.json();
+        if(!r.ok){ haSetMsg('Sorry, something went wrong: '+(data.error||'unknown error'),'error'); return; }
+        haForgotStep=2;
+        document.getElementById('haForgotCode').style.display='block';
+        document.getElementById('haForgotNewPassword').style.display='block';
+        btn.textContent='Reset password';
+        haSetMsg("If an account exists for that email, a 5-digit code is on its way.",'success');
+      }catch(e){ haSetMsg('Connection issue — please try again.','error'); }
+      finally{ btn.disabled=false; }
+    } else {
+      const email=document.getElementById('haForgotEmail').value.trim();
+      const code=document.getElementById('haForgotCode').value.trim();
+      const newPassword=document.getElementById('haForgotNewPassword').value;
+      if(!code || newPassword.length<6){ haSetMsg('Please enter the code and a new password (6+ characters).','error'); return; }
+      btn.disabled=true; btn.textContent='Resetting…';
+      try{
+        const r=await fetch('/api/account?action=reset-password',{
+          method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({email, code, newPassword})
+        });
+        const data=await r.json();
+        if(!r.ok){ haSetMsg('Sorry, something went wrong: '+(data.error||'unknown error'),'error'); return; }
+        haSetMsg(`Password reset — welcome back, ${data.name.split(' ')[0]}! Taking you to the tools…`,'success');
+        setTimeout(()=>{ window.location.href='index.html#aitools'; }, 900);
+      }catch(e){ haSetMsg('Connection issue — please try again.','error'); }
+      finally{ btn.disabled=false; btn.textContent='Reset password'; }
+    }
+  }
+
   // My Workspace button — open the workspace if already signed in, otherwise
   // send the visitor to the sign-up / log-in flow on the main app.
   async function goWorkspace(){

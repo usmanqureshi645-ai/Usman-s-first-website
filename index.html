@@ -3812,6 +3812,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
         });
         const data=await r.json();
         document.getElementById('askTyping')?.remove();
+        if(r.status===401){ window.toggleSignup?.(true); return; }
         if(!r.ok){ addAskMsg('bot', "Sorry, I'm temporarily unavailable — please try again shortly."); return; }
         askHistory.push({role:'assistant', content:data.text});
         addAskMsg('bot', renderMarkdown(data.text));
@@ -4586,6 +4587,7 @@ async function mrCallApi(userText){
     });
     const data=await r.json();
     mrHideTyping();
+    if(r.status===401){ window.toggleSignup?.(true); return; }
     if(!r.ok){
       mrAppendMessage('agent','Meeting Room','Sorry — the panel is temporarily unavailable. Please try again shortly.');
       return;
@@ -5670,6 +5672,7 @@ async function gaapCallApi(){
     });
     const data=await r.json();
     gaapHideTyping();
+    if(r.status===401){ window.toggleSignup?.(true); return; }
     if(!r.ok){ await gaapAppendMessage('agent','Sorry — the assistant is temporarily unavailable. Please try again shortly.'); return; }
     gaapHistory.push({role:'assistant', content:data.text});
     await gaapAppendMessage('agent', data.text, data.audioUrl);
@@ -5833,6 +5836,7 @@ async function qzCallApi(){
     });
     const data=await r.json();
     qzHideTyping();
+    if(r.status===401){ window.toggleSignup?.(true); return; }
     if(!r.ok){ await qzAppendMessage('agent','Sorry — the coach is temporarily unavailable. Please try again shortly.'); return; }
     qzHistory.push({role:'assistant', content:data.text});
     await qzAppendMessage('agent', data.text, data.audioUrl);
@@ -6187,6 +6191,7 @@ async function fsSubmitReview(){
       body:JSON.stringify({text:fsExtractedText, fileName:fsFileName, fileBase64:fsFileBase64, framework})
     });
     const data=await r.json();
+    if(r.status===401){ resultDiv.style.display='none'; window.toggleSignup?.(true); return; }
     if(!r.ok){ resultBody.innerHTML=`<p>${data.error || 'Something went wrong — please try again.'}</p>`; return; }
 
     if(data.isFinancialStatement===false){
@@ -6254,6 +6259,7 @@ async function jobReviewCv(){
       body:JSON.stringify({mode:'score', cv:jobCvText, coverLetter:jobCoverText||undefined, jobDescription:jd})
     });
     const data=await r.json();
+    if(r.status===401){ window.toggleSignup?.(true); return; }
     if(!r.ok){ alert('Sorry, something went wrong: '+(data.error||'unknown error')); return; }
     const jobCvHtml=jobRenderScorecard(data.cv,'Your CV');
     const jobCoverHtml=data.coverLetter?jobRenderScorecard(data.coverLetter,'Your Cover Letter'):'';

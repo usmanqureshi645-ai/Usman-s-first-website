@@ -1094,6 +1094,7 @@
           }),
         });
         const data = await r.json();
+        if (r.status === 401) { window.location.href = 'index.html?signup=1'; return; }
         if (!r.ok) { alert(data.error || 'Something went wrong — please try again.'); return; }
         document.getElementById('cvWrittenCover').textContent = data.coverLetter || '';
         document.getElementById('cvWriteResult').style.display = 'block';

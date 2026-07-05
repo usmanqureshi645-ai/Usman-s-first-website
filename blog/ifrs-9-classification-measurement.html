@@ -37,6 +37,8 @@
         .author-bio { background: #fff; border-radius: 10px; padding: 24px; margin: 44px 0 30px; }
         .disclaimer { font-size: 0.82em; color: #8593a8; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; font-style: italic; }
     
+
+    
 /*TOC_SIDEBAR_START*/
 .toc {
     background: #fff;
@@ -93,9 +95,9 @@
 
         <p class="lead">IFRS 9 classification determines whether a financial asset is measured at amortised cost, fair value through OCI, or fair value through P&L. The decision hinges on two gates: the business model test (what does management intend?) and the SPPI test (do cash flows consist solely of principal + interest?). This guide walks you through both tests with decision trees and real examples.</p>
 
-                <div class="toc">
+                        <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#classification-gateway">Classification: The Gateway Decision</a></li><li class="toc-l1"><a href="#business-model-test">Business Model Test: What's Management's Intention?</a><ul><li class="toc-l2"><a href="#model-1-hold-to-collect-htc">Model 1: Hold to Collect (HTC)</a></li><li class="toc-l2"><a href="#model-2-hold-to-collect-and-sell-htcs">Model 2: Hold to Collect and Sell (HTCS)</a></li><li class="toc-l2"><a href="#model-3-other-active-trading">Model 3: Other (Active Trading)</a></li></ul></li><li class="toc-l1"><a href="#sppi-test">SPPI Test: Solely Payments of Principal and Interest?</a><ul><li class="toc-l2"><a href="#what-passes-sppi">What Passes SPPI</a></li><li class="toc-l2"><a href="#what-fails-sppi">What Fails SPPI</a></li></ul></li><li class="toc-l1"><a href="#measurement-outcomes">Measurement Outcomes: Test Combinations</a></li><li class="toc-l1"><a href="#worked">Worked Examples by Asset Type</a><ul><li class="toc-l2"><a href="#example-1-corporate-bond-amortised-cost">Example 1: Corporate Bond (Amortised Cost)</a></li><li class="toc-l2"><a href="#example-2-bond-portfolio-with-sales-fvoci">Example 2: Bond Portfolio with Sales (FVOCI)</a></li><li class="toc-l2"><a href="#example-3-convertible-bond-fvpl">Example 3: Convertible Bond (FVPL)</a></li></ul></li><li class="toc-l1"><a href="#audit-challenges">Audit Challenges in Classification</a><ul><li class="toc-l2"><a href="#challenge-1-business-model-misclassification">Challenge 1: Business Model Misclassification</a></li><li class="toc-l2"><a href="#challenge-2-undocumented-business-model">Challenge 2: Undocumented Business Model</a></li><li class="toc-l2"><a href="#challenge-3-sppi-edge-cases">Challenge 3: SPPI Edge Cases</a><ul><li class="toc-l3"><a href="#usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</a></li></ul></li></ul></li></ul>
+            <ul><li class="toc-l1"><a href="#classification-gateway">Classification: The Gateway Decision</a></li><li class="toc-l1"><a href="#business-model-test">Business Model Test: What's Management's Intention?</a><ul><li class="toc-l2"><a href="#model-1-hold-to-collect-htc">Model 1: Hold to Collect (HTC)</a></li><li class="toc-l2"><a href="#model-2-hold-to-collect-and-sell-htcs">Model 2: Hold to Collect and Sell (HTCS)</a></li><li class="toc-l2"><a href="#model-3-other-active-trading">Model 3: Other (Active Trading)</a></li></ul></li><li class="toc-l1"><a href="#sppi-test">SPPI Test: Solely Payments of Principal and Interest?</a><ul><li class="toc-l2"><a href="#what-passes-sppi">What Passes SPPI</a></li><li class="toc-l2"><a href="#what-fails-sppi">What Fails SPPI</a></li></ul></li><li class="toc-l1"><a href="#measurement-outcomes">Measurement Outcomes: Test Combinations</a></li><li class="toc-l1"><a href="#worked">Worked Examples by Asset Type</a><ul><li class="toc-l2"><a href="#example-1-corporate-bond-amortised-cost">Example 1: Corporate Bond (Amortised Cost)</a></li><li class="toc-l2"><a href="#example-2-bond-portfolio-with-sales-fvoci">Example 2: Bond Portfolio with Sales (FVOCI)</a></li><li class="toc-l2"><a href="#example-3-convertible-bond-fvpl">Example 3: Convertible Bond (FVPL)</a></li></ul></li><li class="toc-l1"><a href="#audit-challenges">Audit Challenges in Classification</a><ul><li class="toc-l2"><a href="#challenge-1-business-model-misclassification">Challenge 1: Business Model Misclassification</a></li><li class="toc-l2"><a href="#challenge-2-undocumented-business-model">Challenge 2: Undocumented Business Model</a></li><li class="toc-l2"><a href="#challenge-3-sppi-edge-cases">Challenge 3: SPPI Edge Cases</a><ul><li class="toc-l3"><a href="#usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</a></li></ul></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Does a Loan Pass the SPPI Test?</a></li></ul>
         </div>
 
         <article>
@@ -263,7 +265,16 @@
                 <p>Classification is the foundation of IFRS 9 accounting. Get it wrong, and everything downstream is wrong. I've seen misclassifications move entire portfolios to FVPL, creating 10-figure OCI volatility swings during audit.</p>
             </div>
 
-            <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
+            
+<h2 id="real-life-case-study">Real-Life Case Study: Does a Loan Pass the SPPI Test?</h2>
+<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
+<p><strong>Scenario.</strong> A company holds two loans: Loan A pays principal plus interest linked to LIBOR; Loan B pays principal plus interest that steps up if the borrower's EBITDA falls below a threshold (a leverage-linked margin).</p>
+ <p><strong>Analysis.</strong> Loan A's cash flows are solely payments of principal and interest, so SPPI is met, amortised cost is available. Loan B's margin varies with a non-credit performance metric, introducing exposure beyond a basic lending return, so it fails SPPI and must be measured at FVTPL.</p>
+ <p><strong>Takeaway.</strong> Exotic pricing terms, profit-linked interest, equity conversion, leverage kickers, break the SPPI test and force fair value. Read the loan agreement's interest clause before assuming amortised cost.</p>
+<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
+</div>
+
+<div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>
     <p style="margin-bottom: 12px; color: #4a5568;"><a href="ifrs-9-financial-instruments-complete-guide.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">→ IFRS 9 Financial Instruments Hub</a></p>
     <p style="margin-bottom: 8px; color: #4a5568;"><a href="ifrs-9-expected-credit-loss-model.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• IFRS 9 Expected Credit Loss (ECL) Model: Three-Stage Impairment with Worked Examples</a></p>

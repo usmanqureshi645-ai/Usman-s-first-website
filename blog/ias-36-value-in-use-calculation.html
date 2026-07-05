@@ -27,6 +27,8 @@
         th { background: #1a2f5a; color: #fff; font-weight: 600; }
         .disclaimer { font-size: 0.76em; color: #8593a8; margin-top: 24px; padding-top: 10px; border-top: 1px solid #e4e9f0; }
     
+
+    
 /*TOC_SIDEBAR_START*/
 .toc {
     background: #fff;
@@ -78,9 +80,9 @@
 </div>
         <div class="meta">By Usman Qureshi · July 2026 · 8 min read</div>
 
-                <div class="toc">
+                        <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#wacc-components">WACC Components</a></li><li class="toc-l1"><a href="#cost-of-equity-via-capm">Cost of Equity via CAPM</a></li><li class="toc-l1"><a href="#worked-example-wacc-calculation">Worked Example: WACC Calculation</a></li><li class="toc-l1"><a href="#terminal-value-perpetuity">Terminal Value (Perpetuity)</a></li><li class="toc-l1"><a href="#audit-red-flags-wacc-amp-terminal-value">Audit Red Flags: WACC &amp; Terminal Value</a></li></ul>
+            <ul><li class="toc-l1"><a href="#wacc-components">WACC Components</a></li><li class="toc-l1"><a href="#cost-of-equity-via-capm">Cost of Equity via CAPM</a></li><li class="toc-l1"><a href="#worked-example-wacc-calculation">Worked Example: WACC Calculation</a></li><li class="toc-l1"><a href="#terminal-value-perpetuity">Terminal Value (Perpetuity)</a></li><li class="toc-l1"><a href="#audit-red-flags-wacc-amp-terminal-value">Audit Red Flags: WACC &amp; Terminal Value</a></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Building a Value-in-Use Model</a></li></ul>
         </div>
 
 
@@ -150,7 +152,20 @@
                 <strong>Common audit adjustment:</strong> "Your WACC is 6%, but your debt is speculative-grade (rating BB). Credit spreads suggest 7.5% cost of debt. WACC should be 8.2%, not 6%." Result: VIU drops 15— 20%; impairment required.
             </div>
 
-            <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
+            
+<h2 id="real-life-case-study">Real-Life Case Study: Building a Value-in-Use Model</h2>
+<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
+<p><strong>Scenario.</strong> A CGU is expected to generate cash flows of &pound;2m per year for five years, then a terminal value. The pre-tax discount rate is 11%.</p>
+ <ul>
+   <li>PV of five years at 11%: &pound;2m &times; 3.696 = &pound;7.39m</li>
+   <li>Terminal value (2% growth): &pound;2.04m &divide; (0.11 &minus; 0.02) = &pound;22.7m, discounted five years &asymp; &pound;13.5m</li>
+   <li>Value in use &asymp; &pound;20.9m</li>
+ </ul>
+ <p><strong>Takeaway.</strong> Value in use is dominated by two inputs, the discount rate and the terminal growth rate, and small moves in either swing the answer by millions. IAS 36 also bars future restructurings and enhancing capex from the cash flows, a common way models get inflated.</p>
+<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
+</div>
+
+<div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>
     <p style="margin-bottom: 12px; color: #4a5568;"><a href="ias-36-impairment-of-assets-complete-guide.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">→ IAS 36 Impairment Hub</a></p>
     <p style="margin-bottom: 8px; color: #4a5568;"><a href="ias-36-cgu-identification.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• IAS 36 CGU Identification: Allocation & Testing</a></p>

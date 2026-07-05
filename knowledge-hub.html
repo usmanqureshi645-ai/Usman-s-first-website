@@ -45,6 +45,11 @@
         .filter-btn.active { background: #d4af37; color: #1a2f5a; }
         .filter-btn:hover { border-color: #1a2f5a; }
         .cluster.hidden { display: none; }
+        .search-container { margin: 32px 0 40px 0; display: flex; justify-content: center; }
+        .search-box { width: 100%; max-width: 600px; padding: 14px 20px; font-size: 1em; border: 2px solid #d4af37; border-radius: 8px; background: #fff; color: #1a2f5a; transition: all 0.2s; }
+        .search-box:focus { outline: none; border-color: #1a2f5a; box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1); }
+        .search-box::placeholder { color: #8593a8; }
+        .no-results { text-align: center; color: #8593a8; padding: 40px 20px; font-size: 1.1em; }
         .footer { text-align: center; color: #8593a8; font-size: 0.9em; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; }
     </style>
 </head>
@@ -62,6 +67,10 @@
             <button class="filter-btn" onclick="filterClusters('audit')">Audit Standards</button>
             <button class="filter-btn" onclick="filterClusters('accounting')">Accounting Standards</button>
             <button class="filter-btn" onclick="filterClusters('cv')">Interview & CV</button>
+        </div>
+
+        <div class="search-container">
+            <input type="text" class="search-box" id="searchInput" placeholder="Search standards, topics, articles...">
         </div>
 
         <div class="clusters">
@@ -204,25 +213,77 @@
         </div>
     </div>
     <script>
+        let activeCategory = 'all';
+        let searchTerm = '';
+
         function filterClusters(category) {
+            activeCategory = category;
             const clusters = document.querySelectorAll('.cluster');
             const buttons = document.querySelectorAll('.filter-btn');
 
             buttons.forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
 
+            applyFilters();
+        }
+
+        function searchArticles(term) {
+            searchTerm = term.toLowerCase().trim();
+            applyFilters();
+        }
+
+        function applyFilters() {
+            const clusters = document.querySelectorAll('.cluster');
+            let visibleCount = 0;
+
             clusters.forEach(cluster => {
-                if (category === 'all') {
-                    cluster.classList.remove('hidden');
+                const clusterTitle = cluster.querySelector('h2').textContent.toLowerCase();
+                const links = cluster.querySelectorAll('a');
+                let hasMatchingArticle = false;
+
+                // Check if any article in the cluster matches the search
+                if (searchTerm) {
+                    links.forEach(link => {
+                        const linkText = link.textContent.toLowerCase();
+                        if (linkText.includes(searchTerm) || clusterTitle.includes(searchTerm)) {
+                            hasMatchingArticle = true;
+                        }
+                    });
                 } else {
-                    if (cluster.getAttribute('data-category') === category) {
-                        cluster.classList.remove('hidden');
-                    } else {
-                        cluster.classList.add('hidden');
-                    }
+                    hasMatchingArticle = true; // No search term, all match
+                }
+
+                // Apply category filter
+                const matchesCategory = activeCategory === 'all' || cluster.getAttribute('data-category') === activeCategory;
+
+                // Show/hide based on both filters
+                if (matchesCategory && hasMatchingArticle) {
+                    cluster.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    cluster.classList.add('hidden');
                 }
             });
+
+            // Show/hide no results message
+            const noResults = document.getElementById('noResults');
+            if (visibleCount === 0) {
+                if (!noResults) {
+                    const msg = document.createElement('div');
+                    msg.id = 'noResults';
+                    msg.className = 'no-results';
+                    msg.textContent = 'No standards found matching your search.';
+                    document.querySelector('.clusters').parentNode.insertBefore(msg, document.querySelector('.clusters'));
+                }
+            } else if (noResults) {
+                noResults.remove();
+            }
         }
+
+        // Add search event listener
+        document.getElementById('searchInput').addEventListener('keyup', function(e) {
+            searchArticles(this.value);
+        });
     </script>
 </body>
 </html>

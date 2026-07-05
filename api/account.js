@@ -1,7 +1,7 @@
 // Consolidated accounts + workspace endpoint — Vercel's Hobby plan caps a deployment at
 // 12 Serverless Functions, so every account/workspace action is routed through this one
 // file via ?action=, instead of one file per action.
-import { hashPassword, verifyPassword, setSessionCookie, clearSessionCookie, getUserFromRequest, normalizeEmail, verifyAdminKey } from '../lib/auth.js';
+import { hashPassword, verifyPassword, setSessionCookie, clearSessionCookie, getUserFromRequest, normalizeEmail, verifyAdminKey, checkLoginAttempts, recordFailedLogin, clearLoginAttempts } from '../lib/auth.js';
 import { saveConsultation, scheduleFollowup } from '../lib/consultations.js';
 import { getProfile, saveProfile } from '../lib/profile.js';
 import { sendEmail } from '../lib/email.js';
@@ -28,8 +28,8 @@ async function handleSignup(req, res, { resendKey, kvUrl, kvToken }) {
 
   const { name, email, password, company, department, departmentOther, designation, designationOther, country, city } = req.body || {};
   const normalizedEmail = normalizeEmail(email);
-  if (!name || !normalizedEmail || !normalizedEmail.includes('@') || !password || password.length < 6) {
-    res.status(400).json({ error: 'Please provide your name, a valid email, and a password (6+ characters)' });
+  if (!name || !normalizedEmail || !normalizedEmail.includes('@') || !password || password.length < 6 || password.length > 128) {
+    res.status(400).json({ error: 'Please provide your name, a valid email, and a password (6-128 characters)' });
     return;
   }
 
@@ -123,13 +123,30 @@ async function handleLogin(req, res, { kvUrl, kvToken }) {
     return;
   }
 
+  // Check if account is locked due to failed attempts
+  const attempts = await checkLoginAttempts(kvUrl, kvToken, normalizedEmail);
+  if (attempts.isLocked) {
+    res.status(429).json({ error: 'Too many failed attempts — please try again in 15 minutes' });
+    return;
+  }
+
   const getResp = await fetch(`${kvUrl}/get/user:${normalizedEmail}`, { headers: { authorization: `Bearer ${kvToken}` } });
   const getData = await getResp.json();
-  if (!getData?.result) { res.status(401).json({ error: 'No account found with that email — sign up free instead?' }); return; }
+  if (!getData?.result) {
+    await recordFailedLogin(kvUrl, kvToken, normalizedEmail);
+    res.status(401).json({ error: 'No account found with that email — sign up free instead?' });
+    return;
+  }
 
   const user = JSON.parse(getData.result);
-  if (!verifyPassword(password, user.passwordHash)) { res.status(401).json({ error: 'Incorrect password' }); return; }
+  if (!verifyPassword(password, user.passwordHash)) {
+    await recordFailedLogin(kvUrl, kvToken, normalizedEmail);
+    res.status(401).json({ error: 'Incorrect password' });
+    return;
+  }
 
+  // Clear failed attempts on successful login
+  await clearLoginAttempts(kvUrl, kvToken, normalizedEmail);
   setSessionCookie(res, { email: user.email, name: user.name });
   res.status(200).json({ ok: true, name: user.name, email: user.email });
 }
@@ -193,8 +210,8 @@ async function handleResetPassword(req, res, { kvUrl, kvToken }) {
 
   const { email, code, newPassword } = req.body || {};
   const normalizedEmail = normalizeEmail(email);
-  if (!normalizedEmail || !code || !newPassword || newPassword.length < 6) {
-    res.status(400).json({ error: 'Please provide your email, the code, and a new password (6+ characters)' });
+  if (!normalizedEmail || !code || !newPassword || newPassword.length < 6 || newPassword.length > 128) {
+    res.status(400).json({ error: 'Please provide your email, the code, and a new password (6-128 characters)' });
     return;
   }
 

@@ -20,6 +20,8 @@ async function callClaude(apiKey, { system, messages, max_tokens }) {
   return { ok: upstream.ok, status: upstream.status, data };
 }
 
+const MAX_TEXT_LENGTH = 100000; // ~25k tokens, safe limit per doc
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.status(405).json({ error: 'Method not allowed' });
@@ -42,6 +44,24 @@ export default async function handler(req, res) {
   const user = getUserFromRequest(req);
   if (mode !== 'validate' && !user) {
     res.status(401).json({ error: mode === 'chat' ? 'Sign up free to talk this through with Eleanor' : 'Sign up free to score your CV' });
+    return;
+  }
+
+  // Enforce text-size limits to prevent token-bombing
+  if (mode === 'validate' && text && typeof text === 'string' && text.length > MAX_TEXT_LENGTH) {
+    res.status(413).json({ error: 'Document too large — please upload a file under ~25k words' });
+    return;
+  }
+  if ((mode === 'score' || mode === 'chat') && cv && typeof cv === 'string' && cv.length > MAX_TEXT_LENGTH) {
+    res.status(413).json({ error: 'CV too large — please provide a document under ~25k words' });
+    return;
+  }
+  if ((mode === 'score' || mode === 'chat') && coverLetter && typeof coverLetter === 'string' && coverLetter.length > MAX_TEXT_LENGTH) {
+    res.status(413).json({ error: 'Cover letter too large — please provide a document under ~25k words' });
+    return;
+  }
+  if ((mode === 'score' || mode === 'chat') && jobDescription && typeof jobDescription === 'string' && jobDescription.length > MAX_TEXT_LENGTH) {
+    res.status(413).json({ error: 'Job description too large — please provide under ~25k words' });
     return;
   }
 

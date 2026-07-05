@@ -9,7 +9,7 @@ import { synthesize } from '../lib/tts.js';
 
 const FRAMEWORKS = new Set(['FRS 101', 'FRS 102', 'Full IFRS', 'US GAAP', 'AICPA']);
 const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
-const MAX_TEXT_LENGTH = 30000; // ~8k tokens
+const MAX_TEXT_LENGTH = 100000; // ~25k tokens, safe limit
 const API_TIMEOUT_MS = 8000; // 8 seconds
 
 function withTimeout(promise, ms) {

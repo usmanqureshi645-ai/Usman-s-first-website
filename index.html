@@ -3923,7 +3923,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
           currentUser={ name:data.name, email:data.email };
           window.toggleForgotMode(false);
           reflectSignedInState();
-          document.getElementById('signupMessages').innerHTML=`<div class="wb-msg bot"><div class="wb-bubble">Password reset — you're logged back in, ${data.name.split(' ')[0]}.</div></div>`;
+          document.getElementById('signupMessages').innerHTML=`<div class="wb-msg bot"><div class="wb-bubble">Password reset — you're logged back in, ${escapeHtml(data.name.split(' ')[0])}.</div></div>`;
           window.updateAskBranding?.();
           (async()=>{
             try{ const pr=await fetch('/api/account?action=profile-get'); const pd=await pr.json(); if(pd.ok) window._siteProfile=pd.profile||{}; }catch(e){}
@@ -3997,7 +3997,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
         }
         currentUser={ name:data.name, email:data.email };
         reflectSignedInState();
-        document.getElementById('signupMessages').innerHTML=`<div class="wb-msg bot"><div class="wb-bubble">${loginMode ? `Welcome back, ${data.name.split(' ')[0]}!` : `You're in, ${data.name.split(' ')[0]}! Check your inbox for a welcome note.`} Your <a href="workspace.html" style="color:var(--gold-light)">My Workspace</a> is ready whenever you want it.</div></div>`;
+        document.getElementById('signupMessages').innerHTML=`<div class="wb-msg bot"><div class="wb-bubble">${loginMode ? `Welcome back, ${escapeHtml(data.name.split(' ')[0])}!` : `You're in, ${escapeHtml(data.name.split(' ')[0])}! Check your inbox for a welcome note.`} Your <a href="workspace.html" style="color:var(--gold-light)">My Workspace</a> is ready whenever you want it.</div></div>`;
         window.updateAskBranding?.();
         window.bumpSignupCount?.();
         // Pull in this user's saved CV/cover/contact profile right away so the tools on
@@ -6203,14 +6203,14 @@ window.applySavedProfileToTools=function(){
     jobCvText=p.cv;
     const cvBox=document.getElementById('jobCvUploadBox');
     const cvLabel=document.getElementById('jobCvUploadLabel');
-    if(cvLabel){ cvLabel.innerHTML=`✓ Using your saved CV${p.cvFilename?` (${p.cvFilename})`:''} — click to replace`; }
+    if(cvLabel){ cvLabel.innerHTML=`✓ Using your saved CV${p.cvFilename?` (${escapeHtml(p.cvFilename)})`:''} — click to replace`; }
     cvBox?.classList.add('has-file');
   }
   if(p.coverLetter && !jobCoverText){
     jobCoverText=p.coverLetter;
     const cBox=document.getElementById('jobCoverUploadBox');
     const cLabel=document.getElementById('jobCoverUploadLabel');
-    if(cLabel){ cLabel.innerHTML=`✓ Using your saved cover letter${p.coverFilename?` (${p.coverFilename})`:''} — click to replace`; }
+    if(cLabel){ cLabel.innerHTML=`✓ Using your saved cover letter${p.coverFilename?` (${escapeHtml(p.coverFilename)})`:''} — click to replace`; }
     cBox?.classList.add('has-file');
   }
   // Personalized Job Search shares the same saved CV / cover letter and remembers filters.

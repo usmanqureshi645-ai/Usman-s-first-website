@@ -696,13 +696,13 @@
       const p = window.wsProfile || {};
       if (p.cv) {
         cvText = p.cv;
-        document.getElementById('cvCvLabel').innerHTML = `✓ ${p.cvFilename || 'CV saved'} — ${wordCount(p.cv)} words · click to replace`;
+        document.getElementById('cvCvLabel').innerHTML = `✓ ${escapeHtml(p.cvFilename || 'CV saved')} — ${wordCount(p.cv)} words · click to replace`;
         document.getElementById('cvViewCvBtn').style.display = 'inline-block';
         document.getElementById('cvClearCvBtn').style.display = 'inline-block';
       }
       if (p.coverLetter) {
         coverText = p.coverLetter;
-        document.getElementById('cvCoverLabel').innerHTML = `✓ ${p.coverFilename || 'Cover letter saved'} — ${wordCount(p.coverLetter)} words · click to replace`;
+        document.getElementById('cvCoverLabel').innerHTML = `✓ ${escapeHtml(p.coverFilename || 'Cover letter saved')} — ${wordCount(p.coverLetter)} words · click to replace`;
         document.getElementById('cvViewCoverBtn').style.display = 'inline-block';
         document.getElementById('cvClearCoverBtn').style.display = 'inline-block';
       }

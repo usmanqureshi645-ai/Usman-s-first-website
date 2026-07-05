@@ -26,6 +26,9 @@ async function handleSignup(req, res, { resendKey, kvUrl, kvToken }) {
   if (!resendKey) { res.status(500).json({ error: 'Email service not configured yet' }); return; }
   if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Accounts service not configured yet' }); return; }
 
+  const usage = await logAndCheckUsage(req, { kvUrl, kvToken }, 'signup');
+  if (usage.limited) { res.status(429).json({ error: 'Too many signup attempts — please wait 15 minutes and try again' }); return; }
+
   const { name, email, password, company, department, departmentOther, designation, designationOther, country, city } = req.body || {};
   const normalizedEmail = normalizeEmail(email);
   if (!name || !normalizedEmail || !normalizedEmail.includes('@') || !password || password.length < 6 || password.length > 128) {
@@ -115,6 +118,9 @@ async function handleSignup(req, res, { resendKey, kvUrl, kvToken }) {
 
 async function handleLogin(req, res, { kvUrl, kvToken }) {
   if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Accounts service not configured yet' }); return; }
+
+  const usage = await logAndCheckUsage(req, { kvUrl, kvToken }, 'login');
+  if (usage.limited) { res.status(429).json({ error: 'Too many login attempts — please wait a moment and try again' }); return; }
 
   const { email, password } = req.body || {};
   const normalizedEmail = normalizeEmail(email);

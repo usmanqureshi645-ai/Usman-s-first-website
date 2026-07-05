@@ -154,6 +154,7 @@
   }
   .hero-auth-wrap {
     display: grid; grid-template-rows: 0fr; transition: grid-template-rows .65s cubic-bezier(.25,.46,.45,.94);
+    pointer-events: none;
   }
   .hero-auth-wrap > .hero-auth-panel { overflow: hidden; min-height: 0; }
   .hero-auth-panel {
@@ -167,7 +168,7 @@
   }
   .hero-auth-close:hover { color: var(--gold); }
   .hero.auth-open .hero-text { transform: translateY(-6px); opacity: .92; }
-  .hero.auth-open .hero-auth-wrap { grid-template-rows: 1fr; }
+  .hero.auth-open .hero-auth-wrap { grid-template-rows: 1fr; pointer-events: auto; }
   .hero.auth-open .hero-auth-panel { opacity: 1; transform: translateY(0); pointer-events: auto; }
 
   @media (min-width: 900px) {

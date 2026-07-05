@@ -59,6 +59,45 @@
         .related { margin-top: 32px; padding-top: 20px; border-top: 2px solid #e4e9f0; }
         .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; display: block; margin-bottom: 6px; }
         .disclaimer { font-size: 0.8em; color: #8593a8; margin-top: 32px; padding-top: 16px; font-style: italic; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -72,18 +111,9 @@
 
         <p class="lead">Your CV is your first impression. In a competitive accountant job market, CVs that fail to pass Applicant Tracking Systems (ATS) don't get seen by humans. CVs that are too generic ("responsible for audit procedures") don't impress hiring managers. This guide shows you how to write a CV that gets past filters AND gets you the interview. We cover keyword strategy, impact statements, Big 4 experience positioning, and what hiring managers actually look for when screening hundreds of applications.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#overview">The CV challenge: ATS vs humans</a></li>
-                <li><a href="#structure">CV structure: what works</a></li>
-                <li><a href="#keywords">Keywords & ATS optimisation</a></li>
-                <li><a href="#impact">Impact statements vs activity statements</a></li>
-                <li><a href="#experience">Big 4 experience positioning</a></li>
-                <li><a href="#before-after">Before & after examples</a></li>
-                <li><a href="#common">Common CV mistakes</a></li>
-                <li><a href="#faq">FAQs</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#overview">The CV Challenge: ATS vs Humans</a></li><li class="toc-l1"><a href="#structure">CV Structure: What Works</a></li><li class="toc-l1"><a href="#keywords">Keywords & ATS Optimisation</a></li><li class="toc-l1"><a href="#impact">Impact Statements vs Activity Statements</a></li><li class="toc-l1"><a href="#experience">Big 4 Experience Positioning</a></li><li class="toc-l1"><a href="#before-after">Before & After Examples</a><ul><li class="toc-l3"><a href="#before-weak">Before (weak):</a></li><li class="toc-l3"><a href="#after-strong">After (strong):</a></li></ul></li><li class="toc-l1"><a href="#common">Common CV Mistakes</a><ul><li class="toc-l2"><a href="#want-your-cv-scored-by-an-expert">Want your CV scored by an expert?</a></li></ul></li><li class="toc-l1"><a href="#faq">FAQs</a><ul><li class="toc-l2"><a href="#how-long-should-an-accountant-cv-be">How long should an accountant CV be?</a></li><li class="toc-l2"><a href="#should-i-include-a-photo-on-my-cv">Should I include a photo on my CV?</a></li><li class="toc-l2"><a href="#what-if-i-dont-have-big-4-experience">What if I don't have Big 4 experience?</a><ul><li class="toc-l3"><a href="#about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</a></li></ul></li><li class="toc-l2"><a href="#related-resources">Related resources</a></li></ul></li></ul>
         </div>
 
         <article>
@@ -134,14 +164,14 @@
 
             <h2 id="before-after">Before & After Examples</h2>
             <div class="example-box">
-                <h4>Before (weak):</h4>
+                <h4 id="before-weak">Before (weak):</h4>
                 <p><em>Accountant, Corporate Finance</em><br>
                 − Prepared financial statements<br>
                 − Analysed variances<br>
                 − Supported budgeting process<br>
                 − Maintained accounting records</p>
 
-                <h4>After (strong):</h4>
+                <h4 id="after-strong">After (strong):</h4>
                 <p><em>Senior Accountant, Corporate Finance</em><br>
                 − Prepared consolidated monthly financial statements (£500M group); closed books in 8 days vs 12-day target<br>
                 − Analysed P&amp;L variances £50M+; identified supply chain cost overrun; recommended supplier renegotiation (£2M savings)<br>
@@ -160,35 +190,35 @@
             </ul>
 
             <div class="cta-box">
-                <h3>Want your CV scored by an expert?</h3>
+                <h3 id="want-your-cv-scored-by-an-expert">Want your CV scored by an expert?</h3>
                 <p>Use our free CV Scoring tool to get feedback on impact statements, ATS keywords, and interview readiness.</p>
                 <a href="https://uqconsulting.org/jobhub.html" class="cta-button">Score Your Resume →</a>
             </div>
 
             <h2 id="faq">FAQs</h2>
             <div class="callout">
-                <h3>How long should an accountant CV be?</h3>
+                <h3 id="how-long-should-an-accountant-cv-be">How long should an accountant CV be?</h3>
                 <p>1 page for junior (0— years), max 1.5 pages for mid-level (5— 0 years), 2 pages for senior (10+ years). Recruiters don't read beyond page 2.</p>
             </div>
             <div class="callout">
-                <h3>Should I include a photo on my CV?</h3>
+                <h3 id="should-i-include-a-photo-on-my-cv">Should I include a photo on my CV?</h3>
                 <p>No. In the UK, photos are discouraged (discrimination risk). In some EU countries, photos are standard. Check the job posting.</p>
             </div>
             <div class="callout">
-                <h3>What if I don't have Big 4 experience?</h3>
+                <h3 id="what-if-i-dont-have-big-4-experience">What if I don't have Big 4 experience?</h3>
                 <p>Emphasise your relevant skills: audit, standards (IFRS/GAAP), team leadership, client interaction, and risk areas you've handled (revenue, consolidation, controls).</p>
             </div>
 
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
-                    <h4>About the author — Usman Qureshi (ACCA, ACA)</h4>
+                    <h4 id="about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</h4>
                     <p>Usman has reviewed 500+ accountant CVs and interviewed candidates from Big 4, mid-tier, and corporate finance roles. He specialises in positioning career progression and impact.</p>
                 </div>
             </div>
 
             <div class="related">
-                <h3>Related resources</h3>
+                <h3 id="related-resources">Related resources</h3>
                 <a href="https://uqconsulting.org/jobhub.html">→ CV & Resume Scoring Tool (free)</a>
                 <a href="https://uqconsulting.org/blog/acca-interview-questions-answers.html">→ ACCA Interview Questions & Answers</a>
             </div>

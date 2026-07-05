@@ -28,6 +28,45 @@
         th { background: #1a2f5a; color: #fff; font-weight: 600; }
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
         .disclaimer { font-size: 0.81em; color: #8593a8; margin-top: 36px; padding-top: 16px; border-top: 1px solid #e4e9f0; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -44,30 +83,9 @@
 </div>
         <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 10 min read</div>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#the-matching-principle-for-deferred-tax">The Matching Principle for Deferred Tax</a></li>
-                <li><a href="#common-oci-items-with-deferred-tax-effects">Common OCI Items with Deferred Tax Effects</a></li>
-                  <li><a href="#1-property-revaluation-ias-16">1. Property Revaluation (IAS 16)</a></li>
-                  <li><a href="#2-foreign-currency-translation-ias-21">2. Foreign Currency Translation (IAS 21)</a></li>
-                  <li><a href="#3-financial-instruments-ifrs-9">3. Financial Instruments (IFRS 9)</a></li>
-                  <li><a href="#4-defined-benefit-pension-ias-19">4. Defined Benefit Pension (IAS 19)</a></li>
-                <li><a href="#worked-example-property-revaluation">Worked Example: Property Revaluation</a></li>
-                  <li><a href="#scenario">Scenario</a></li>
-                  <li><a href="#journal-entries-incorrect-common-error">Journal Entries (Incorrect — Common Error)</a></li>
-                  <li><a href="#journal-entries-correct">Journal Entries (Correct)</a></li>
-                  <li><a href="#scenario">Scenario</a></li>
-                  <li><a href="#journal-entry-consolidation">Journal Entry (Consolidation)</a></li>
-                <li><a href="#deferred-tax-on-oci-when-not-to-apply">Deferred Tax on OCI: When Not to Apply</a></li>
-                  <li><a href="#translation-differences">Translation Differences</a></li>
-                  <li><a href="#reclassification-adjustments">Reclassification Adjustments</a></li>
-                <li><a href="#audit-red-flags-sorie-deferred-tax">Audit Red Flags: SORIE Deferred Tax</a></li>
-                  <li><a href="#red-flag-1-tax-effect-in-wrong-location">Red Flag 1: Tax Effect in Wrong Location</a></li>
-                  <li><a href="#red-flag-2-nondeductible-revaluation-taxed">Red Flag 2: Non-Deductible Revaluation Taxed</a></li>
-                  <li><a href="#red-flag-3-tax-rate-applied-to-nontax-item">Red Flag 3: Tax Rate Applied to Non-Tax Item</a></li>
-                <li><a href="#sorie-presentation">SORIE Presentation</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#the-matching-principle-for-deferred-tax">The Matching Principle for Deferred Tax</a></li><li class="toc-l1"><a href="#common-oci-items-with-deferred-tax-effects">Common OCI Items with Deferred Tax Effects</a><ul><li class="toc-l2"><a href="#1-property-revaluation-ias-16">1. Property Revaluation (IAS 16)</a></li><li class="toc-l2"><a href="#2-foreign-currency-translation-ias-21">2. Foreign Currency Translation (IAS 21)</a></li><li class="toc-l2"><a href="#3-financial-instruments-ifrs-9">3. Financial Instruments (IFRS 9)</a></li><li class="toc-l2"><a href="#4-defined-benefit-pension-ias-19">4. Defined Benefit Pension (IAS 19)</a></li></ul></li><li class="toc-l1"><a href="#worked-example-property-revaluation">Worked Example: Property Revaluation</a><ul><li class="toc-l2"><a href="#scenario">Scenario</a></li><li class="toc-l2"><a href="#journal-entries-incorrect-common-error">Journal Entries (Incorrect — Common Error)</a></li><li class="toc-l2"><a href="#journal-entries-correct">Journal Entries (Correct)</a></li></ul></li><li class="toc-l1"><a href="#worked-example-foreign-subsidiary-consolidation-scenario-us-parent-consolidates-uk-subsidiary-uk-subsidiary-equity-10m-gbp-usd-exchange-rate-movement-130-120-usdgbp-translation-loss-10m-1120-1130-064m-uk-tax-rate-19-is-translation-difference-taxdeductible-no-foreign-translation-not-taxdeductible-journal-entry-consolidation-dr-oci-translation-reserve-064m-cr-consolidated-equity-064m-note-no-deferred-tax-adjustment-translation-differences-are-not-taxdeductible-in-most-jurisdictions-deferred-tax-on-oci-when-not-to-apply">Worked Example: Foreign Subsidiary Consolidation Scenario US parent consolidates UK subsidiary: — UK subsidiary equity: £10m (GBP) — USD exchange rate movement: 1.30 →’ 1.20 USD/GBP — Translation loss: £10m × (1/1.20 −’ 1/1.30) ≈ £0.64m — UK tax rate: 19% — Is translation difference tax-deductible? NO (foreign translation not tax-deductible) Journal Entry (Consolidation) Dr OCI (translation reserve) £0.64m &nbsp;&nbsp;&nbsp;&nbsp;Cr Consolidated equity £0.64m Note: No deferred tax adjustment (translation differences are not tax-deductible in most jurisdictions). Deferred Tax on OCI: When Not to Apply</a><ul><li class="toc-l2"><a href="#translation-differences">Translation Differences</a></li><li class="toc-l2"><a href="#reclassification-adjustments">Reclassification Adjustments</a></li></ul></li><li class="toc-l1"><a href="#audit-red-flags-sorie-deferred-tax">Audit Red Flags: SORIE Deferred Tax</a><ul><li class="toc-l2"><a href="#red-flag-1-tax-effect-in-wrong-location">Red Flag 1: Tax Effect in Wrong Location</a></li><li class="toc-l2"><a href="#red-flag-2-nondeductible-revaluation-taxed">Red Flag 2: Non-Deductible Revaluation Taxed</a></li><li class="toc-l2"><a href="#red-flag-3-tax-rate-applied-to-nontax-item">Red Flag 3: Tax Rate Applied to Non-Tax Item</a></li></ul></li><li class="toc-l1"><a href="#sorie-presentation">SORIE Presentation</a></li></ul>
         </div>
 
 
@@ -124,7 +142,7 @@
 
             <p><strong>Result:</strong> Net OCI effect: £3m −’ £0.57m = £2.43m (after-tax revaluation).</p>
 
-            <h2>Worked Example: Foreign Subsidiary Consolidation</h3>
+            <h2 id="worked-example-foreign-subsidiary-consolidation-scenario-us-parent-consolidates-uk-subsidiary-uk-subsidiary-equity-10m-gbp-usd-exchange-rate-movement-130-120-usdgbp-translation-loss-10m-1120-1130-064m-uk-tax-rate-19-is-translation-difference-taxdeductible-no-foreign-translation-not-taxdeductible-journal-entry-consolidation-dr-oci-translation-reserve-064m-cr-consolidated-equity-064m-note-no-deferred-tax-adjustment-translation-differences-are-not-taxdeductible-in-most-jurisdictions-deferred-tax-on-oci-when-not-to-apply">Worked Example: Foreign Subsidiary Consolidation</h3>
 
             <h3 id="scenario">Scenario</h3>
             <p><strong>US parent consolidates UK subsidiary:</strong><br>

@@ -29,6 +29,45 @@
         .formula { background: #1a2f5a; color: #e8eef7; padding: 12px; border-radius: 6px; margin: 14px 0; text-align: center; }
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
         .disclaimer { font-size: 0.81em; color: #8593a8; margin-top: 36px; padding-top: 16px; border-top: 1px solid #e4e9f0; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -45,32 +84,9 @@
 </div>
         <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 11 min read</div>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#what-is-a-step-acquisition">What is a Step Acquisition?</a></li>
-                  <li><a href="#common-scenarios">Common Scenarios</a></li>
-                <li><a href="#ifrs-3-treatment-the-control-date-remeasurement">IFRS 3 Treatment: The Control Date Remeasurement</a></li>
-                  <li><a href="#key-principle">Key Principle</a></li>
-                  <li><a href="#why-this-rule">Why This Rule?</a></li>
-                <li><a href="#step-acquisition-accounting-mechanics">Step Acquisition Accounting Mechanics</a></li>
-                  <li><a href="#before-control-date-eg-20-ownership">Before Control Date (e.g., 20% ownership)</a></li>
-                  <li><a href="#control-date-acquisition-moment">Control Date (Acquisition Moment)</a></li>
-                  <li><a href="#calculation-of-goodwill">Calculation of Goodwill</a></li>
-                <li><a href="#worked-example-staged-acquisition-of-manufacturing-company">Worked Example: Staged Acquisition of Manufacturing Company</a></li>
-                  <li><a href="#deal-timeline">Deal Timeline</a></li>
-                  <li><a href="#phase-1-30-ownership-equity-accounted">Phase 1: 30% Ownership (Equity Accounted)</a></li>
-                  <li><a href="#phase-2-control-date-remeasurement-1-july-2025">Phase 2: Control Date Remeasurement (1 July 2025)</a></li>
-                  <li><a href="#consolidated-balance-sheet-1-july-2025">Consolidated Balance Sheet (1 July 2025)</a></li>
-                <li><a href="#loss-of-control-scenario">Loss of Control Scenario</a></li>
-                  <li><a href="#when-seller-loses-control">When Seller Loses Control</a></li>
-                  <li><a href="#worked-example-loss-of-control">Worked Example: Loss of Control</a></li>
-                <li><a href="#audit-red-flags-step-acquisitions">Audit Red Flags: Step Acquisitions</a></li>
-                  <li><a href="#red-flag-1-remeasurement-not-recognized">Red Flag 1: Remeasurement Not Recognized</a></li>
-                  <li><a href="#red-flag-2-wrong-acquisition-date">Red Flag 2: Wrong Acquisition Date</a></li>
-                  <li><a href="#red-flag-3-goodwill-calculation-omits-prior-interest">Red Flag 3: Goodwill Calculation Omits Prior Interest</a></li>
-                  <li><a href="#red-flag-4-no-separate-disclosure-of-remeasurement-gain">Red Flag 4: No Separate Disclosure of Remeasurement Gain</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#what-is-a-step-acquisition">What is a Step Acquisition?</a><ul><li class="toc-l2"><a href="#common-scenarios">Common Scenarios</a></li></ul></li><li class="toc-l1"><a href="#ifrs-3-treatment-the-control-date-remeasurement">IFRS 3 Treatment: The Control Date Remeasurement</a><ul><li class="toc-l2"><a href="#key-principle">Key Principle</a></li><li class="toc-l2"><a href="#why-this-rule">Why This Rule?</a></li></ul></li><li class="toc-l1"><a href="#step-acquisition-accounting-mechanics">Step Acquisition Accounting Mechanics</a><ul><li class="toc-l2"><a href="#before-control-date-eg-20-ownership">Before Control Date (e.g., 20% ownership)</a></li><li class="toc-l2"><a href="#control-date-acquisition-moment">Control Date (Acquisition Moment)</a></li><li class="toc-l2"><a href="#calculation-of-goodwill">Calculation of Goodwill</a></li></ul></li><li class="toc-l1"><a href="#worked-example-staged-acquisition-of-manufacturing-company">Worked Example: Staged Acquisition of Manufacturing Company</a><ul><li class="toc-l2"><a href="#deal-timeline">Deal Timeline</a></li><li class="toc-l2"><a href="#phase-1-30-ownership-equity-accounted">Phase 1: 30% Ownership (Equity Accounted)</a></li><li class="toc-l2"><a href="#phase-2-control-date-remeasurement-1-july-2025">Phase 2: Control Date Remeasurement (1 July 2025)</a><ul><li class="toc-l3"><a href="#step-1-remeasure-30-interest">Step 1: Remeasure 30% Interest</a></li><li class="toc-l3"><a href="#step-2-consolidate-new-21-interest">Step 2: Consolidate New 21% Interest</a></li><li class="toc-l3"><a href="#step-3-calculate-consolidated-goodwill">Step 3: Calculate Consolidated Goodwill</a></li></ul></li><li class="toc-l2"><a href="#consolidated-balance-sheet-1-july-2025">Consolidated Balance Sheet (1 July 2025)</a></li></ul></li><li class="toc-l1"><a href="#loss-of-control-scenario">Loss of Control Scenario</a><ul><li class="toc-l2"><a href="#when-seller-loses-control">When Seller Loses Control</a></li><li class="toc-l2"><a href="#worked-example-loss-of-control">Worked Example: Loss of Control</a></li></ul></li><li class="toc-l1"><a href="#audit-red-flags-step-acquisitions">Audit Red Flags: Step Acquisitions</a><ul><li class="toc-l2"><a href="#red-flag-1-remeasurement-not-recognized">Red Flag 1: Remeasurement Not Recognized</a></li><li class="toc-l2"><a href="#red-flag-2-wrong-acquisition-date">Red Flag 2: Wrong Acquisition Date</a></li><li class="toc-l2"><a href="#red-flag-3-goodwill-calculation-omits-prior-interest">Red Flag 3: Goodwill Calculation Omits Prior Interest</a></li><li class="toc-l2"><a href="#red-flag-4-no-separate-disclosure-of-remeasurement-gain">Red Flag 4: No Separate Disclosure of Remeasurement Gain</a></li></ul></li></ul>
         </div>
 
 
@@ -133,7 +149,7 @@
 
             <h3 id="phase-2-control-date-remeasurement-1-july-2025">Phase 2: Control Date Remeasurement (1 July 2025)</h3>
 
-            <h4>Step 1: Remeasure 30% Interest</h4>
+            <h4 id="step-1-remeasure-30-interest">Step 1: Remeasure 30% Interest</h4>
             <ul>
                 <li><strong>Fair value of 30% at control date:</strong> 30% × £100m = £30m</li>
                 <li><strong>Carrying amount (before remeasurement):</strong> £26m</li>
@@ -141,14 +157,14 @@
                 <li><strong>P&L Entry:</strong> Dr Equity Interest (balance sheet) £4m / Cr Gain on Remeasurement of Equity Interest £4m</li>
             </ul>
 
-            <h4>Step 2: Consolidate New 21% Interest</h4>
+            <h4 id="step-2-consolidate-new-21-interest">Step 2: Consolidate New 21% Interest</h4>
             <ul>
                 <li><strong>Fair value of 21% interest acquired:</strong> 21% × £100m = £21m</li>
                 <li><strong>Cash paid:</strong> £18m</li>
                 <li><strong>P&L Entry (acquisition):</strong> Dr Equity Interest £21m / Cr Cash £18m, Cr Gain on Bargain Purchase £3m</li>
             </ul>
 
-            <h4>Step 3: Calculate Consolidated Goodwill</h4>
+            <h4 id="step-3-calculate-consolidated-goodwill">Step 3: Calculate Consolidated Goodwill</h4>
             <ul>
                 <li><strong>Fair value of 30% (after remeasurement):</strong> £30m</li>
                 <li><strong>Fair value of 21% (new acquisition):</strong> £21m</li>

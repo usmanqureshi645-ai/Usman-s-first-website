@@ -34,6 +34,45 @@
         th { background: #1a2f5a; color: #fff; font-weight: 600; }
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
         .disclaimer { font-size: 0.81em; color: #8593a8; margin-top: 36px; padding-top: 16px; border-top: 1px solid #e4e9f0; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -52,18 +91,9 @@
 
         <p class="lead">IFRS 37 (Provisions, Contingent Liabilities and Contingent Assets) governs when to recognize a liability for future obligations (warranties, legal claims, environmental cleanup). The key question: is it probable you'll need to pay? This guide walks through the recognition criteria, measurement, warranty obligations, legal claims, and the audit red flags around over/under-provisioning.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#definition">What is a provision?</a></li>
-                <li><a href="#recognition">Three recognition criteria</a></li>
-                <li><a href="#probable-test">The "probable" test: Key judgment</a></li>
-                <li><a href="#measurement">Measurement: Present value & expected value</a></li>
-                <li><a href="#warranties">Warranty obligations</a></li>
-                <li><a href="#legal">Legal claims & contingent liabilities</a></li>
-                <li><a href="#worked">Worked example: Environmental cleanup</a></li>
-                <li><a href="#audit">Audit red flags</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#definition">What is a Provision?</a></li><li class="toc-l1"><a href="#recognition">Three Recognition Criteria (All Must Be Met)</a></li><li class="toc-l1"><a href="#probable-test">The "Probable" Test: Key Judgment</a><ul><li class="toc-l2"><a href="#examples-probable-vs-not-probable">Examples: Probable vs Not Probable</a></li></ul></li><li class="toc-l1"><a href="#measurement">Measurement: Present Value & Expected Value</a><ul><li class="toc-l2"><a href="#two-methods-use-whichever-better-predicts-the-outcome">Two Methods (Use Whichever Better Predicts the Outcome)</a></li><li class="toc-l2"><a href="#present-value-adjustment-if-settlement-is-1-year-away-discount-the-provision-using-a-pretax-rate-that-reflects-the-time-value-of-money-and-specific-risks-measurement-example-warranty-provision-sold-10000-products-with-2year-warranty-cost-to-fix-per-unit-50-historical-claim-rate-year-1-20-year-2-10-total-30-expected-claims-3000-units-50-150000-timing-of-payouts-year-1-2000-units-50-100000-no-discounting-needed-year-2-1000-units-50-50000-discount-at-5-47619-total-provision-100000-47619-147619-warranty-obligations-a-provision-is-typically-required-for-warranty-claims-measured-as-the-expected-cost-based-on-historical-claim-rates-legal-claims-contingent-liabilities-if-a-lawsuit-is-unlikely-to-succeed-50-recognize-a-provision-at-estimated-settlement-amount-worked-example-environmental-cleanup-scenario-manufacturing-plant-contaminated-soil-regulator-requires-cleanup-by-2028-estimated-cost-2m-present-obligation-yes-regulation-imposed-company-responsible-probable-outflow-yes-obligation-is-certain-reliable-estimate-yes-external-contractors-quoted-2m-discount-to-present-value-2m-due-3-years-from-now-discount-at-4-1776970-provision-balance-31-dec-2025-1776970-unwinding-of-discount-31-dec-2026-add-interest-back-1776970-4-71079-expense-audit-red-flags-red-flag-1-underprovisioning">Present Value Adjustment If settlement is >1 year away, discount the provision using a pre-tax rate that reflects the time value of money and specific risks. Measurement Example: Warranty Provision Sold 10,000 products with 2-year warranty (cost to fix per unit = £50). Historical claim rate: Year 1 = 20%, Year 2 = 10% (total 30%) Expected claims: 3,000 units × £50 = £150,000 Timing of payouts: — Year 1: 2,000 units × £50 = £100,000 (no discounting needed) — Year 2: 1,000 units × £50 = £50,000 (discount at 5% = £47,619) Total provision: £100,000 + £47,619 = £147,619 Warranty Obligations A provision is typically required for warranty claims, measured as the expected cost based on historical claim rates. Legal Claims & Contingent Liabilities If a lawsuit is unlikely to succeed (50%), recognize a provision at estimated settlement amount. Worked Example: Environmental Cleanup Scenario: Manufacturing plant contaminated soil. Regulator requires cleanup by 2028. Estimated cost: £2m. Present obligation? YES (regulation imposed, company responsible) Probable outflow? YES (obligation is certain) Reliable estimate? YES (external contractors quoted £2m) Discount to present value: £2m due 3 years from now; discount at 4% = £1,776,970 Provision balance (31 Dec 2025): £1,776,970 Unwinding of discount (31 Dec 2026): Add interest back: £1,776,970 × 4% = £71,079 (expense) Audit Red Flags Red Flag 1: Under-Provisioning</a></li><li class="toc-l2"><a href="#red-flag-2-overprovisioning">Red Flag 2: Over-Provisioning</a></li><li class="toc-l2"><a href="#red-flag-3-absent-discount">Red Flag 3: Absent Discount</a></li></ul></li></ul>
         </div>
 
         <article>
@@ -82,7 +112,7 @@
             <h2 id="probable-test">The "Probable" Test: Key Judgment</h2>
             <p>IFRS 37 defines "probable" as <strong>more likely than not</strong> (>50%). This is a judgment call auditors heavily challenge.</p>
 
-            <h3>Examples: Probable vs Not Probable</h3>
+            <h3 id="examples-probable-vs-not-probable">Examples: Probable vs Not Probable</h3>
             <table>
                 <tr>
                     <th>Scenario</th>
@@ -114,13 +144,13 @@
             <h2 id="measurement">Measurement: Present Value & Expected Value</h2>
             <p>Measure a provision at the <strong>expected value</strong> of the obligation, discounted to present value.</p>
 
-            <h3>Two Methods (Use Whichever Better Predicts the Outcome)</h3>
+            <h3 id="two-methods-use-whichever-better-predicts-the-outcome">Two Methods (Use Whichever Better Predicts the Outcome)</h3>
             <ul>
                 <li><strong>Expected value:</strong> Probability-weighted average of all possible outcomes</li>
                 <li><strong>Most likely amount:</strong> If only two outcomes and one is much more likely</li>
             </ul>
 
-            <h3>Present Value Adjustment</h2>
+            <h3 id="present-value-adjustment-if-settlement-is-1-year-away-discount-the-provision-using-a-pretax-rate-that-reflects-the-time-value-of-money-and-specific-risks-measurement-example-warranty-provision-sold-10000-products-with-2year-warranty-cost-to-fix-per-unit-50-historical-claim-rate-year-1-20-year-2-10-total-30-expected-claims-3000-units-50-150000-timing-of-payouts-year-1-2000-units-50-100000-no-discounting-needed-year-2-1000-units-50-50000-discount-at-5-47619-total-provision-100000-47619-147619-warranty-obligations-a-provision-is-typically-required-for-warranty-claims-measured-as-the-expected-cost-based-on-historical-claim-rates-legal-claims-contingent-liabilities-if-a-lawsuit-is-unlikely-to-succeed-50-recognize-a-provision-at-estimated-settlement-amount-worked-example-environmental-cleanup-scenario-manufacturing-plant-contaminated-soil-regulator-requires-cleanup-by-2028-estimated-cost-2m-present-obligation-yes-regulation-imposed-company-responsible-probable-outflow-yes-obligation-is-certain-reliable-estimate-yes-external-contractors-quoted-2m-discount-to-present-value-2m-due-3-years-from-now-discount-at-4-1776970-provision-balance-31-dec-2025-1776970-unwinding-of-discount-31-dec-2026-add-interest-back-1776970-4-71079-expense-audit-red-flags-red-flag-1-underprovisioning">Present Value Adjustment</h2>
             <p>If settlement is >1 year away, discount the provision using a pre-tax rate that reflects the time value of money and specific risks.</p>
 
             <p class="example-box"><strong>Measurement Example: Warranty Provision</strong><br>
@@ -156,11 +186,11 @@
             <p><strong>Finding:</strong> Company has pending litigation with 60% probability of £5m loss, but made no provision (claiming "unlikely").</p>
             <p><strong>Auditor action:</strong> At 60% probability (>50%), recognize provision of £5m × 60% = £3m.</p>
 
-            <h3>Red Flag 2: Over-Provisioning</h3>
+            <h3 id="red-flag-2-overprovisioning">Red Flag 2: Over-Provisioning</h3>
             <p><strong>Finding:</strong> Warranty provision assumes 50% claim rate, but actual historical rate is 15%.</p>
             <p><strong>Auditor action:</strong> Reduce provision to actual expected rate; release the excess to profit.</p>
 
-            <h3>Red Flag 3: Absent Discount</h3>
+            <h3 id="red-flag-3-absent-discount">Red Flag 3: Absent Discount</h3>
             <p><strong>Finding:</strong> £10m environmental provision, due in 5 years, but not discounted.</p>
             <p><strong>Auditor action:</strong> Apply present value discount (5% = £7.8m); adjust provision and finance cost.</p>
 

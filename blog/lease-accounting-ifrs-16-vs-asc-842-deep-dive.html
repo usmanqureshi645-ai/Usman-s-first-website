@@ -253,6 +253,45 @@
             .toc ul { columns: 1; }
             .comparison { grid-template-columns: 1fr; }
         }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -272,22 +311,9 @@
 
         <p class="lead">IFRS 16 and ASC 842 are the closest the IASB and FASB have come to converging. Both abolished the operating lease / finance lease distinction and require lessees to recognise a right-of-use asset and lease liability. But they diverge on initial measurement, practical expedients, reassessment triggers, and lessor mechanics. This guide walks through the differences with worked lessee examples so you know where the standards diverge and where auditors push back.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#overview">Are they really identical?</a></li>
-                <li><a href="#lessee-basics">Lessee basics: ROU asset and liability</a></li>
-                <li><a href="#rou-measurement">ROU asset measurement: the first difference</a></li>
-                <li><a href="#worked-example">Worked example: ROU asset calculation</a></li>
-                <li><a href="#initial-direct">Initial direct costs</a></li>
-                <li><a href="#restoration">Restoration and dismantling costs</a></li>
-                <li><a href="#reassessment">Reassessment: when does the liability change?</a></li>
-                <li><a href="#reassessment-example">Worked example: lease reassessment</a></li>
-                <li><a href="#practical-expedients">Practical expedients (short-term and low-value)</a></li>
-                <li><a href="#lessor">Lessor differences</a></li>
-                <li><a href="#audit-red-flags">Audit red flags and implications</a></li>
-                <li><a href="#faq">FAQs</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#overview">Are They Really Identical?</a></li><li class="toc-l1"><a href="#lessee-basics">Lessee Basics: ROU Asset and Liability</a></li><li class="toc-l1"><a href="#rou-measurement">ROU Asset Measurement: The First Difference</a></li><li class="toc-l1"><a href="#worked-example">Worked Example: ROU Asset Calculation</a><ul><li class="toc-l3"><a href="#scenario-office-lease-with-setup-costs">Scenario: Office Lease with Setup Costs</a></li></ul></li><li class="toc-l1"><a href="#initial-direct">Initial Direct Costs</a></li><li class="toc-l1"><a href="#restoration">Restoration and Dismantling Costs</a></li><li class="toc-l1"><a href="#reassessment">Reassessment: When Does the Liability Change?</a><ul><li class="toc-l3"><a href="#ifrs-16-broader">IFRS 16 (Broader)</a></li><li class="toc-l3"><a href="#asc-842-narrower">ASC 842 (Narrower)</a></li></ul></li><li class="toc-l1"><a href="#reassessment-example">Worked Example: Lease Reassessment</a><ul><li class="toc-l3"><a href="#scenario-cpilinked-lease-payments">Scenario: CPI-Linked Lease Payments</a></li></ul></li><li class="toc-l1"><a href="#practical-expedients">Practical Expedients (Short-Term and Low-Value)</a></li><li class="toc-l1"><a href="#lessor">Lessor Differences</a></li><li class="toc-l1"><a href="#audit-red-flags">Audit Red Flags and Implications</a><ul><li class="toc-l2"><a href="#for-auditors">For auditors:</a></li><li class="toc-l2"><a href="#for-controllers-and-cfos">For controllers and CFOs:</a></li><li class="toc-l2"><a href="#need-help-with-a-specific-lease-calculation">Need help with a specific lease calculation?</a></li></ul></li><li class="toc-l1"><a href="#faq">Frequently Asked Questions</a><ul><li class="toc-l2"><a href="#are-ifrs-16-and-asc-842-identical">Are IFRS 16 and ASC 842 identical?</a></li><li class="toc-l2"><a href="#what-is-the-main-difference-between-ifrs-16-and-asc-842-rou-asset-measurement">What is the main difference between IFRS 16 and ASC 842 ROU asset measurement?</a></li><li class="toc-l2"><a href="#how-do-reassessment-requirements-differ">How do reassessment requirements differ?</a></li><li class="toc-l2"><a href="#can-ifrs-16-and-asc-842-produce-different-balance-sheet-totals-for-the-same-lease">Can IFRS 16 and ASC 842 produce different balance sheet totals for the same lease?</a><ul><li class="toc-l3"><a href="#about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</a></li></ul></li><li class="toc-l2"><a href="#related-resources">Related resources</a></li></ul></li></ul>
         </div>
 
         <article>
@@ -325,7 +351,7 @@
 
             <h2 id="worked-example">Worked Example: ROU Asset Calculation</h2>
             <div class="example-box">
-                <h4>Scenario: Office Lease with Setup Costs</h4>
+                <h4 id="scenario-office-lease-with-setup-costs">Scenario: Office Lease with Setup Costs</h4>
                 <p><strong>Lease terms:</strong></p>
                 <ul>
                     <li>5-year office lease</li>
@@ -385,7 +411,7 @@
             <p>Both standards require you to remeasure the liability if estimates change. But the triggers differ:</p>
             <div class="comparison">
                 <div class="comp-col">
-                    <h4>IFRS 16 (Broader)</h4>
+                    <h4 id="ifrs-16-broader">IFRS 16 (Broader)</h4>
                     <ul>
                         <li>Change in lease term (extension/termination option)</li>
                         <li>Change in lease payments (CPI revision, residual value guarantee)</li>
@@ -394,7 +420,7 @@
                     </ul>
                 </div>
                 <div class="comp-col">
-                    <h4>ASC 842 (Narrower)</h4>
+                    <h4 id="asc-842-narrower">ASC 842 (Narrower)</h4>
                     <ul>
                         <li>Change in lease payments (CPI, residual value, purchase option likelihood)</li>
                         <li>Lease modification</li>
@@ -407,7 +433,7 @@
 
             <h2 id="reassessment-example">Worked Example: Lease Reassessment</h2>
             <div class="example-box">
-                <h4>Scenario: CPI-Linked Lease Payments</h4>
+                <h4 id="scenario-cpilinked-lease-payments">Scenario: CPI-Linked Lease Payments</h4>
                 <p><strong>Original lease (Jan 2026):</strong> 5-year property lease, £100k/year, linked to CPI. Original CPI estimate: 2%/year. Implicit rate: unknown, so IBR used = 5%.</p>
                 <p><strong>Reassessment (Jan 2027, after Year 1):</strong> Actual CPI was 3%, so Year 2 payment is £103,000 (not £102,000). Also, implicit rate is now determinable at 4%.</p>
                 <p><strong>IFRS 16 Treatment:</strong></p>
@@ -445,7 +471,7 @@
             <p>For consolidated statements, lessor differences usually offset if your group has both lessors and lessees. But for lessor-only entities (leasing companies), the differences matter.</p>
 
             <h2 id="audit-red-flags">Audit Red Flags and Implications</h2>
-            <h3>For auditors:</h3>
+            <h3 id="for-auditors">For auditors:</h3>
             <ul>
                 <li><strong>Initial ROU asset:</strong> Verify all components are included (IFRS) or correctly omitted (ASC). Check initial direct costs and restoration obligations.</li>
                 <li><strong>Discount rate:</strong> Challenge the IBR build-up. Verify it is lease-specific, not a blanket group rate.</li>
@@ -453,7 +479,7 @@
                 <li><strong>Reassessment:</strong> Ensure management has reassessed when CPI, lease terms, or other estimates changed. IFRS may have more reassessments than ASC.</li>
                 <li><strong>Short-term and low-value:</strong> Challenge the classification. Is that 13-month lease really not short-term? Is that £8k piece of equipment really not low-value?</li>
             </ul>
-            <h3>For controllers and CFOs:</h3>
+            <h3 id="for-controllers-and-cfos">For controllers and CFOs:</h3>
             <ul>
                 <li>Document the lease term assessment (extensions, terminations, purchase options). This drives the liability — getting it wrong overstates or understates assets and liabilities.</li>
                 <li>Maintain an IBR schedule for different lease types (property, vehicles, equipment). Auditors will ask to see it.</li>
@@ -462,39 +488,39 @@
             </ul>
 
             <div class="cta-box">
-                <h3>Need help with a specific lease calculation?</h3>
+                <h3 id="need-help-with-a-specific-lease-calculation">Need help with a specific lease calculation?</h3>
                 <p>Use our free Meeting Room tool to walk through your lease with an expert, or use GAAP Compare to research IFRS 16 vs ASC 842 rules. No consulting fees, no credit card.</p>
                 <a href="https://uqconsulting.org/meeting-room.html" class="cta-button">Talk to an Expert →</a>
             </div>
 
             <h2 id="faq">Frequently Asked Questions</h2>
             <div class="faq-item">
-                <h3>Are IFRS 16 and ASC 842 identical?</h3>
+                <h3 id="are-ifrs-16-and-asc-842-identical">Are IFRS 16 and ASC 842 identical?</h3>
                 <p>For lessee accounting, they are ~95% aligned. Both require ROU asset and lease liability recognition. Minor differences exist in initial ROU measurement (IFRS mandatory add-ons; ASC optional), reassessment triggers, and lessor mechanics.</p>
             </div>
             <div class="faq-item">
-                <h3>What is the main difference between IFRS 16 and ASC 842 ROU asset measurement?</h3>
+                <h3 id="what-is-the-main-difference-between-ifrs-16-and-asc-842-rou-asset-measurement">What is the main difference between IFRS 16 and ASC 842 ROU asset measurement?</h3>
                 <p>IFRS requires ROU asset = lease liability + initial costs + restoration costs − incentives (all mandatory). ASC allows a practical expedient to measure at just the lease liability amount, with optional add-backs. Result: ASC ROU assets are often lower initially.</p>
             </div>
             <div class="faq-item">
-                <h3>How do reassessment requirements differ?</h3>
+                <h3 id="how-do-reassessment-requirements-differ">How do reassessment requirements differ?</h3>
                 <p>IFRS has broader reassessment triggers, including changes in the implicit rate. ASC locks in the IBR at commencement and only reassesses for payment/term changes. IFRS may remeasure more frequently.</p>
             </div>
             <div class="faq-item">
-                <h3>Can IFRS 16 and ASC 842 produce different balance sheet totals for the same lease?</h3>
+                <h3 id="can-ifrs-16-and-asc-842-produce-different-balance-sheet-totals-for-the-same-lease">Can IFRS 16 and ASC 842 produce different balance sheet totals for the same lease?</h3>
                 <p>For lessee accounting, the long-term totals converge (both recognize the same total depreciation + interest). But interim balance sheet values differ due to ROU asset measurement and reassessment timing.</p>
             </div>
 
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
-                    <h4>About the author — Usman Qureshi (ACCA, ACA)</h4>
+                    <h4 id="about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</h4>
                     <p>Usman has audited complex lease portfolios under both IFRS 16 and ASC 842 across property, equipment, and vehicle leases. He specialises in lease accounting implementation and has managed lease audit programmes for multinational groups.</p>
                 </div>
             </div>
 
             <div class="related">
-                <h3>Related resources</h3>
+                <h3 id="related-resources">Related resources</h3>
                 <a href="https://uqconsulting.org/blog/ifrs-16-lease-accounting-example.html">→ IFRS 16 Lease Accounting Worked Example</a>
                 <a href="https://uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">→ Back to IFRS vs US GAAP Comparison</a>
                 <a href="https://uqconsulting.org/meeting-room.html">→ Ask an expert in the Meeting Room (free)</a>

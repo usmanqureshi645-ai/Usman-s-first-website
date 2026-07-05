@@ -63,6 +63,45 @@
         .related { margin-top: 32px; padding-top: 20px; border-top: 2px solid #e4e9f0; }
         .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; display: block; margin-bottom: 6px; }
         .disclaimer { font-size: 0.8em; color: #8593a8; margin-top: 32px; padding-top: 16px; border-top: 1px solid #e4e9f0; font-style: italic; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -76,19 +115,9 @@
 
         <p class="lead">When a company announces a restructuring, faces a lawsuit, or commits to a costly contract, both IFRS 37 and ASC 450 require accounting for the obligation. But they diverge on the threshold for recognition (probable), measurement (present value), and when to disclose vs recognise. A £5M restructuring might be a recognised provision under IFRS but only a footnote disclosure under ASC. This guide explains both with worked examples.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#overview">Provisions vs contingencies</a></li>
-                <li><a href="#probable">The "probable" threshold</a></li>
-                <li><a href="#recognition">When to recognise</a></li>
-                <li><a href="#measurement">Measurement and present value</a></li>
-                <li><a href="#restructuring">Restructuring: the big difference</a></li>
-                <li><a href="#worked">Worked example: restructuring provision</a></li>
-                <li><a href="#onerous">Onerous contracts</a></li>
-                <li><a href="#audit">Audit implications</a></li>
-                <li><a href="#faq">FAQs</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#overview">Provisions vs Contingencies</a></li><li class="toc-l1"><a href="#probable">The "Probable" Threshold</a></li><li class="toc-l1"><a href="#recognition">When to Recognise</a></li><li class="toc-l1"><a href="#measurement">Measurement and Present Value</a></li><li class="toc-l1"><a href="#restructuring">Restructuring: The Big Difference</a></li><li class="toc-l1"><a href="#worked">Worked Example: Restructuring Provision</a><ul><li class="toc-l3"><a href="#scenario-plant-closure-and-severance">Scenario: Plant Closure and Severance</a></li></ul></li><li class="toc-l1"><a href="#onerous">Onerous Contracts</a></li><li class="toc-l1"><a href="#audit">Audit Implications</a><ul><li class="toc-l2"><a href="#need-help-with-a-restructuring-or-contingency">Need help with a restructuring or contingency?</a></li></ul></li><li class="toc-l1"><a href="#faq">FAQs</a><ul><li class="toc-l2"><a href="#what-is-the-difference-between-a-provision-and-a-contingency">What is the difference between a provision and a contingency?</a></li><li class="toc-l2"><a href="#what-is-the-probable-threshold">What is the probable threshold?</a></li><li class="toc-l2"><a href="#when-can-a-restructuring-be-recognised-as-a-provision">When can a restructuring be recognised as a provision?</a><ul><li class="toc-l3"><a href="#about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</a></li></ul></li><li class="toc-l2"><a href="#related-resources">Related resources</a></li></ul></li></ul>
         </div>
 
         <article>
@@ -122,7 +151,7 @@
 
             <h2 id="worked">Worked Example: Restructuring Provision</h2>
             <div class="example-box">
-                <h4>Scenario: Plant Closure and Severance</h4>
+                <h4 id="scenario-plant-closure-and-severance">Scenario: Plant Closure and Severance</h4>
                 <p><strong>Context:</strong> UK manufacturing company announces plan to close a factory in Q3 2026, with severance payable over 12 months (Q4 2026 — Q3 2027).</p>
                 <ul>
                     <li>Estimated severance costs: £2M</li>
@@ -161,35 +190,35 @@
             </ul>
 
             <div class="cta-box">
-                <h3>Need help with a restructuring or contingency?</h3>
+                <h3 id="need-help-with-a-restructuring-or-contingency">Need help with a restructuring or contingency?</h3>
                 <p>Use GAAP Compare to research IFRS 37 vs ASC 450, or ask an expert in the Meeting Room.</p>
                 <a href="https://uqconsulting.org/gaap-compare.html" class="cta-button">Compare Standards →</a>
             </div>
 
             <h2 id="faq">FAQs</h2>
             <div class="faq-item">
-                <h3>What is the difference between a provision and a contingency?</h3>
+                <h3 id="what-is-the-difference-between-a-provision-and-a-contingency">What is the difference between a provision and a contingency?</h3>
                 <p>A provision is a recognised liability for a probable obligation (balance sheet). A contingency is a possible obligation disclosed in footnotes only.</p>
             </div>
             <div class="faq-item">
-                <h3>What is the probable threshold?</h3>
+                <h3 id="what-is-the-probable-threshold">What is the probable threshold?</h3>
                 <p>IFRS 37: more likely than not (>50%). ASC 450: likely to occur (similar but slightly higher threshold).</p>
             </div>
             <div class="faq-item">
-                <h3>When can a restructuring be recognised as a provision?</h3>
+                <h3 id="when-can-a-restructuring-be-recognised-as-a-provision">When can a restructuring be recognised as a provision?</h3>
                 <p>IFRS 37: when a detailed plan is approved and creates a constructive obligation (announcement date). ASC 450: when formally approved and committed (may be later).</p>
             </div>
 
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
-                    <h4>About the author — Usman Qureshi (ACCA, ACA)</h4>
+                    <h4 id="about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</h4>
                     <p>Usman has audited provisions and contingencies across litigation, environmental, restructuring, and warranty claims. He specialises in challenging management estimates.</p>
                 </div>
             </div>
 
             <div class="related">
-                <h3>Related resources</h3>
+                <h3 id="related-resources">Related resources</h3>
                 <a href="https://uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">→ Back to IFRS vs US GAAP Comparison</a>
             </div>
 

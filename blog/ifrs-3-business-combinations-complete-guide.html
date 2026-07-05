@@ -47,6 +47,45 @@
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
         .formula { background: #1a2f5a; color: #e8eef7; padding: 12px; border-radius: 6px; margin: 14px 0; text-align: center; }
         .disclaimer { font-size: 0.81em; color: #8593a8; margin-top: 36px; padding-top: 16px; border-top: 1px solid #e4e9f0; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -65,21 +104,9 @@
 
         <p class="lead">IFRS 3 (Business Combinations) mandates the <strong>acquisition method</strong> for all business combinations. This guide covers the full purchase price allocation (PPA) process, goodwill calculation, fair value measurement of identifiable assets/liabilities, contingent consideration, and the audit challenges that turn acquisition accounting into weeks of detailed testing.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#scope">IFRS 3 scope and acquisition method</a></li>
-                <li><a href="#acquisition-date">Identification of acquisition date</a></li>
-                <li><a href="#acquirer">Identifying the acquirer</a></li>
-                <li><a href="#fair-value">Fair value measurement of consideration</a></li>
-                <li><a href="#identifiable">Identifiable assets and liabilities</a></li>
-                <li><a href="#ppa">Purchase price allocation (PPA) step-by-step</a></li>
-                <li><a href="#goodwill">Goodwill calculation</a></li>
-                <li><a href="#contingent">Contingent consideration</a></li>
-                <li><a href="#worked">Worked example: Software company acquisition</a></li>
-                <li><a href="#real-company">Real company example: Broadcom/Qualcomm</a></li>
-                <li><a href="#audit">Audit red flags</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#scope">IFRS 3 Scope and Acquisition Method</a></li><li class="toc-l1"><a href="#acquisition-date">Acquisition Date Identification</a></li><li class="toc-l1"><a href="#acquirer">Identifying the Acquirer</a></li><li class="toc-l1"><a href="#fair-value">Fair Value Measurement of Consideration</a></li><li class="toc-l1"><a href="#identifiable">Identifiable Assets and Liabilities</a></li><li class="toc-l1"><a href="#ppa">Purchase Price Allocation (PPA): Step-by-Step</a><ul><li class="toc-l2"><a href="#step-1-measure-consideration-what-did-we-pay">Step 1: Measure Consideration (What Did We Pay?)</a></li><li class="toc-l2"><a href="#step-2-identify-measure-identifiable-assetsliabilities">Step 2: Identify &amp; Measure Identifiable Assets/Liabilities</a></li><li class="toc-l2"><a href="#step-3-calculate-goodwill">Step 3: Calculate Goodwill</a></li><li class="toc-l2"><a href="#step-4-verify-sanity-check">Step 4: Verify (Sanity Check)</a></li></ul></li><li class="toc-l1"><a href="#goodwill">Goodwill Calculation &amp; Nature</a></li><li class="toc-l1"><a href="#contingent">Contingent Consideration</a><ul><li class="toc-l2"><a href="#measurement">Measurement</a></li><li class="toc-l2"><a href="#remeasurement">Remeasurement</a></li></ul></li><li class="toc-l1"><a href="#worked">Worked Example: Software Company Acquisition</a><ul><li class="toc-l2"><a href="#scenario">Scenario</a></li><li class="toc-l2"><a href="#consideration-transferred">Consideration Transferred</a></li><li class="toc-l2"><a href="#fair-value-of-softstarts-identifiable-assetsliabilities-1-july-2025">Fair Value of SoftStart's Identifiable Assets/Liabilities (1 July 2025)</a></li><li class="toc-l2"><a href="#goodwill-calculation">Goodwill Calculation</a></li><li class="toc-l2"><a href="#journal-entry-1-july-2025">Journal Entry (1 July 2025)</a></li></ul></li><li class="toc-l1"><a href="#real-company">Real Company Example: Broadcom/Qualcomm Negotiation</a></li><li class="toc-l1"><a href="#audit">Audit Red Flags in IFRS 3</a><ul><li class="toc-l2"><a href="#red-flag-1-undervalued-intangibles">Red Flag 1: Undervalued Intangibles</a></li><li class="toc-l2"><a href="#red-flag-2-inadequate-fair-value-support">Red Flag 2: Inadequate Fair Value Support</a></li><li class="toc-l2"><a href="#red-flag-3-contingent-consideration-not-fairvalued">Red Flag 3: Contingent Consideration Not Fair-Valued</a></li><li class="toc-l2"><a href="#red-flag-4-high-goodwill-weak-synergy-justification">Red Flag 4: High Goodwill, Weak Synergy Justification</a></li></ul></li></ul>
         </div>
 
         <article>
@@ -126,18 +153,18 @@
 
             <h2 id="ppa">Purchase Price Allocation (PPA): Step-by-Step</h2>
 
-            <h3>Step 1: Measure Consideration (What Did We Pay?)</h3>
+            <h3 id="step-1-measure-consideration-what-did-we-pay">Step 1: Measure Consideration (What Did We Pay?)</h3>
             <p>Calculate total fair value of all consideration transferred to acquire the business.</p>
 
-            <h3>Step 2: Identify &amp; Measure Identifiable Assets/Liabilities</h3>
+            <h3 id="step-2-identify-measure-identifiable-assetsliabilities">Step 2: Identify &amp; Measure Identifiable Assets/Liabilities</h3>
             <p>Fair value each asset and liability at acquisition date. Create a detailed schedule.</p>
 
-            <h3>Step 3: Calculate Goodwill</h3>
+            <h3 id="step-3-calculate-goodwill">Step 3: Calculate Goodwill</h3>
             <div class="formula">
                 Goodwill = Consideration Transferred −’ (Fair Value of Identifiable Assets −’ Fair Value of Liabilities Assumed)
             </div>
 
-            <h3>Step 4: Verify (Sanity Check)</h3>
+            <h3 id="step-4-verify-sanity-check">Step 4: Verify (Sanity Check)</h3>
             <p>Does goodwill represent a reasonable synergy premium (10— 50% of total consideration)? Very high goodwill (>60%) or negative goodwill (bargain purchase) raises audit questions.</p>
 
             <h2 id="goodwill">Goodwill Calculation &amp; Nature</h2>
@@ -154,21 +181,21 @@
             <h2 id="contingent">Contingent Consideration</h2>
             <p>If future payments depend on performance (e.g., "£5m if revenue hits £20m in 2027"), include at fair value in consideration.</p>
 
-            <h3>Measurement</h3>
+            <h3 id="measurement">Measurement</h3>
             <ul>
                 <li><strong>Probability-weighted approach:</strong> (70% chance £5m) + (30% chance £0) = £3.5m expected value</li>
                 <li><strong>Discount if >1 year away:</strong> £3.5m / (1.05) = £3.33m present value</li>
             </ul>
 
-            <h3>Remeasurement</h3>
+            <h3 id="remeasurement">Remeasurement</h3>
             <p>At each reporting date after acquisition, remeasure contingent consideration at fair value. Changes go to P&L (not goodwill)— a source of post-acquisition volatility auditors track closely.</p>
 
             <h2 id="worked">Worked Example: Software Company Acquisition</h2>
 
-            <h3>Scenario</h3>
+            <h3 id="scenario">Scenario</h3>
             <p><strong>TechCorp acquires SoftStart Inc. on 1 July 2025</strong></p>
 
-            <h3>Consideration Transferred</h3>
+            <h3 id="consideration-transferred">Consideration Transferred</h3>
             <ul>
                 <li>Cash paid: £80m</li>
                 <li>TechCorp shares issued: 5m shares at £10/share = £50m</li>
@@ -176,7 +203,7 @@
                 <li><strong>Total consideration: £145m</strong></li>
             </ul>
 
-            <h3>Fair Value of SoftStart's Identifiable Assets/Liabilities (1 July 2025)</h3>
+            <h3 id="fair-value-of-softstarts-identifiable-assetsliabilities-1-july-2025">Fair Value of SoftStart's Identifiable Assets/Liabilities (1 July 2025)</h3>
             <table>
                 <tr>
                     <th>Item</th>
@@ -240,12 +267,12 @@
                 </tr>
             </table>
 
-            <h3>Goodwill Calculation</h3>
+            <h3 id="goodwill-calculation">Goodwill Calculation</h3>
             <div class="formula">
                 Goodwill = Consideration (£145m) −’ Fair Value of Net Assets (£85m) = £60m
             </div>
 
-            <h3>Journal Entry (1 July 2025)</h3>
+            <h3 id="journal-entry-1-july-2025">Journal Entry (1 July 2025)</h3>
             <div style="background: #1a2f5a; color: #e8eef7; padding: 12px; border-radius: 6px; margin: 14px 0; font-family: 'Courier New', monospace; font-size: 0.85em;">
                 Dr Cash (paid) £80m<br>
                 Dr Accounts Receivable £19m<br>
@@ -272,19 +299,19 @@
 
             <h2 id="audit">Audit Red Flags in IFRS 3</h2>
 
-            <h3>Red Flag 1: Undervalued Intangibles</h3>
+            <h3 id="red-flag-1-undervalued-intangibles">Red Flag 1: Undervalued Intangibles</h3>
             <p><strong>Finding:</strong> Acquirer values a customer list at £10m, but auditor research shows comparable valuations are £25m+.</p>
             <p><strong>Impact:</strong> Goodwill is overstated by £15m; goodwill impairment risk increases.</p>
 
-            <h3>Red Flag 2: Inadequate Fair Value Support</h3>
+            <h3 id="red-flag-2-inadequate-fair-value-support">Red Flag 2: Inadequate Fair Value Support</h3>
             <p><strong>Finding:</strong> No valuation reports or external appraisals for £50m+ intangible assets.</p>
             <p><strong>Auditor action:</strong> Engage valuation specialists to independently fair-value assets; significant adjustments often result.</p>
 
-            <h3>Red Flag 3: Contingent Consideration Not Fair-Valued</h3>
+            <h3 id="red-flag-3-contingent-consideration-not-fairvalued">Red Flag 3: Contingent Consideration Not Fair-Valued</h3>
             <p><strong>Finding:</strong> Contingent consideration of £20m (100% probability) recorded at nominal amount, not present value adjusted.</p>
             <p><strong>Auditor action:</strong> Recalculate at estimated fair value (probability × time discount), adjust goodwill accordingly.</p>
 
-            <h3>Red Flag 4: High Goodwill, Weak Synergy Justification</h3>
+            <h3 id="red-flag-4-high-goodwill-weak-synergy-justification">Red Flag 4: High Goodwill, Weak Synergy Justification</h3>
             <p><strong>Finding:</strong> Goodwill = 70% of purchase price, but management can't clearly articulate expected synergies or revenue growth.</p>
             <p><strong>Auditor concern:</strong> Goodwill impairment risk immediately post-acquisition; impairment test required.</p>
 

@@ -28,6 +28,45 @@
         th { background: #1a2f5a; color: #fff; font-weight: 600; }
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
         .disclaimer { font-size: 0.81em; color: #8593a8; margin-top: 36px; padding-top: 16px; border-top: 1px solid #e4e9f0; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -44,27 +83,9 @@
 </div>
         <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 11 min read</div>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#ifrs-13-fair-value-hierarchy">IFRS 13 Fair Value Hierarchy</a></li>
-                  <li><a href="#level-1-quoted-market-prices-observable">Level 1: Quoted Market Prices (Observable)</a></li>
-                  <li><a href="#level-2-observable-market-data-comparable-transactions">Level 2: Observable Market Data (Comparable Transactions)</a></li>
-                  <li><a href="#level-3-valuation-models-unobservable-inputs">Level 3: Valuation Models (Unobservable Inputs)</a></li>
-                <li><a href="#common-intangible-assets-and-valuation-methods">Common Intangible Assets and Valuation Methods</a></li>
-                  <li><a href="#customer-listsrelationships">Customer Lists/Relationships</a></li>
-                  <li><a href="#trade-namesbrands">Trade Names/Brands</a></li>
-                  <li><a href="#technologysoftware">Technology/Software</a></li>
-                  <li><a href="#noncompete-agreements">Non-Compete Agreements</a></li>
-                <li><a href="#worked-example-saas-company-acquisition-fair-values">Worked Example: SaaS Company Acquisition Fair Values</a></li>
-                  <li><a href="#acquisition-clouddata-inc">Acquisition: CloudData Inc.</a></li>
-                  <li><a href="#intangible-asset-fair-values">Intangible Asset Fair Values</a></li>
-                  <li><a href="#summary-of-intangible-assets">Summary of Intangible Assets</a></li>
-                <li><a href="#audit-red-flags-in-fair-value-measurement">Audit Red Flags in Fair Value Measurement</a></li>
-                  <li><a href="#red-flag-1-overstated-customer-list-values">Red Flag 1: Overstated Customer List Values</a></li>
-                  <li><a href="#red-flag-2-excessively-long-useful-lives">Red Flag 2: Excessively Long Useful Lives</a></li>
-                  <li><a href="#red-flag-3-no-valuation-support">Red Flag 3: No Valuation Support</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#ifrs-13-fair-value-hierarchy">IFRS 13 Fair Value Hierarchy</a><ul><li class="toc-l2"><a href="#level-1-quoted-market-prices-observable">Level 1: Quoted Market Prices (Observable)</a></li><li class="toc-l2"><a href="#level-2-observable-market-data-comparable-transactions">Level 2: Observable Market Data (Comparable Transactions)</a></li><li class="toc-l2"><a href="#level-3-valuation-models-unobservable-inputs">Level 3: Valuation Models (Unobservable Inputs)</a></li></ul></li><li class="toc-l1"><a href="#common-intangible-assets-and-valuation-methods">Common Intangible Assets and Valuation Methods</a><ul><li class="toc-l2"><a href="#customer-listsrelationships">Customer Lists/Relationships</a></li><li class="toc-l2"><a href="#trade-namesbrands">Trade Names/Brands</a></li><li class="toc-l2"><a href="#technologysoftware">Technology/Software</a></li><li class="toc-l2"><a href="#noncompete-agreements">Non-Compete Agreements</a></li></ul></li><li class="toc-l1"><a href="#worked-example-saas-company-acquisition-fair-values">Worked Example: SaaS Company Acquisition Fair Values</a><ul><li class="toc-l2"><a href="#acquisition-clouddata-inc">Acquisition: CloudData Inc.</a></li><li class="toc-l2"><a href="#intangible-asset-fair-values">Intangible Asset Fair Values</a><ul><li class="toc-l3"><a href="#1-customer-relationships">1. Customer Relationships</a></li><li class="toc-l3"><a href="#2-softwaretechnology">2. Software/Technology</a></li><li class="toc-l3"><a href="#3-trade-name">3. Trade Name</a></li><li class="toc-l3"><a href="#4-noncompete-agreement">4. Non-Compete Agreement</a></li></ul></li><li class="toc-l2"><a href="#summary-of-intangible-assets">Summary of Intangible Assets</a></li></ul></li><li class="toc-l1"><a href="#audit-red-flags-in-fair-value-measurement">Audit Red Flags in Fair Value Measurement</a><ul><li class="toc-l2"><a href="#red-flag-1-overstated-customer-list-values">Red Flag 1: Overstated Customer List Values</a></li><li class="toc-l2"><a href="#red-flag-2-excessively-long-useful-lives">Red Flag 2: Excessively Long Useful Lives</a></li><li class="toc-l2"><a href="#red-flag-3-no-valuation-support">Red Flag 3: No Valuation Support</a></li></ul></li></ul>
         </div>
 
 
@@ -146,14 +167,14 @@
 
             <h3 id="intangible-asset-fair-values">Intangible Asset Fair Values</h3>
 
-            <h4>1. Customer Relationships</h4>
+            <h4 id="1-customer-relationships">1. Customer Relationships</h4>
             <ul>
                 <li>Gross profit on ARR: £5m × 75% = £3.75m/year</li>
                 <li>Relief-from-royalty rate: 3.5% of revenue</li>
                 <li>Fair value = £5m × 3.5% × PV factor (8% for 7 years) = £0.98m</li>
             </ul>
 
-            <h4>2. Software/Technology</h4>
+            <h4 id="2-softwaretechnology">2. Software/Technology</h4>
             <ul>
                 <li>Proprietary algorithms, cloud infrastructure, unique features</li>
                 <li>Cost-to-recreate estimate: £2.5m (3 years of development)</li>
@@ -161,7 +182,7 @@
                 <li>Fair value: £2.8m (uses income approach, slightly above recreation cost)</li>
             </ul>
 
-            <h4>3. Trade Name</h4>
+            <h4 id="3-trade-name">3. Trade Name</h4>
             <ul>
                 <li>"CloudData" is recognized in mid-market segment</li>
                 <li>Brand premium: Customers willing to pay 8% premium for CloudData vs white-label competitor</li>
@@ -169,7 +190,7 @@
                 <li>Fair value = £0.3m × 5.2 (PV factor) = £1.56m</li>
             </ul>
 
-            <h4>4. Non-Compete Agreement</h4>
+            <h4 id="4-noncompete-agreement">4. Non-Compete Agreement</h4>
             <ul>
                 <li>Founder restricted from competing for 5 years post-acquisition</li>
                 <li>Estimated probability founder would re-enter market: 30%</li>

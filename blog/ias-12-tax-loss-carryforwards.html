@@ -28,6 +28,45 @@
         th { background: #1a2f5a; color: #fff; font-weight: 600; }
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
         .disclaimer { font-size: 0.81em; color: #8593a8; margin-top: 36px; padding-top: 16px; border-top: 1px solid #e4e9f0; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -44,29 +83,9 @@
 </div>
         <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 10 min read</div>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#tax-loss-carryforward-basics">Tax Loss Carryforward Basics</a></li>
-                  <li><a href="#carryforward-periods-by-jurisdiction">Carryforward Periods by Jurisdiction</a></li>
-                <li><a href="#dta-recognition-the-probable-test">DTA Recognition: The "Probable" Test</a></li>
-                  <li><a href="#factors-supporting-dta-recognition">Factors Supporting DTA Recognition</a></li>
-                  <li><a href="#factors-against-dta-recognition">Factors Against DTA Recognition</a></li>
-                <li><a href="#valuation-allowance">Valuation Allowance</a></li>
-                <li><a href="#change-in-ownership-rules-section-382-similar">Change in Ownership Rules (Section 382 / Similar)</a></li>
-                  <li><a href="#us-section-382-limitation">US Section 382 Limitation</a></li>
-                  <li><a href="#example-section-382-limitation">Example: Section 382 Limitation</a></li>
-                <li><a href="#acquisitionrelated-loss-restrictions">Acquisition-Related Loss Restrictions</a></li>
-                <li><a href="#worked-example-tech-startup-with-loss-carryforward">Worked Example: Tech Startup with Loss Carryforward</a></li>
-                  <li><a href="#scenario">Scenario</a></li>
-                  <li><a href="#dta-assessment">DTA Assessment</a></li>
-                  <li><a href="#tax-benefit-in-current-year">Tax Benefit in Current Year</a></li>
-                <li><a href="#audit-red-flags-tax-loss-dta">Audit Red Flags: Tax Loss DTA</a></li>
-                  <li><a href="#red-flag-1-dta-recognized-despite-sustained-losses">Red Flag 1: DTA Recognized Despite Sustained Losses</a></li>
-                  <li><a href="#red-flag-2-section-382-limitation-not-assessed">Red Flag 2: Section 382 Limitation Not Assessed</a></li>
-                  <li><a href="#red-flag-3-valuation-allowance-not-adjusted">Red Flag 3: Valuation Allowance Not Adjusted</a></li>
-                  <li><a href="#red-flag-4-changeofbusiness-not-documented">Red Flag 4: Change-of-Business Not Documented</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#tax-loss-carryforward-basics">Tax Loss Carryforward Basics</a><ul><li class="toc-l2"><a href="#carryforward-periods-by-jurisdiction">Carryforward Periods by Jurisdiction</a></li></ul></li><li class="toc-l1"><a href="#dta-recognition-the-probable-test">DTA Recognition: The "Probable" Test</a><ul><li class="toc-l2"><a href="#factors-supporting-dta-recognition">Factors Supporting DTA Recognition</a></li><li class="toc-l2"><a href="#factors-against-dta-recognition">Factors Against DTA Recognition</a></li></ul></li><li class="toc-l1"><a href="#valuation-allowance">Valuation Allowance</a></li><li class="toc-l1"><a href="#change-in-ownership-rules-section-382-similar">Change in Ownership Rules (Section 382 / Similar)</a><ul><li class="toc-l2"><a href="#us-section-382-limitation">US Section 382 Limitation</a></li><li class="toc-l2"><a href="#example-section-382-limitation">Example: Section 382 Limitation</a></li></ul></li><li class="toc-l1"><a href="#acquisitionrelated-loss-restrictions">Acquisition-Related Loss Restrictions</a></li><li class="toc-l1"><a href="#worked-example-tech-startup-with-loss-carryforward">Worked Example: Tech Startup with Loss Carryforward</a><ul><li class="toc-l2"><a href="#scenario">Scenario</a></li><li class="toc-l2"><a href="#dta-assessment">DTA Assessment</a></li><li class="toc-l2"><a href="#tax-benefit-in-current-year">Tax Benefit in Current Year</a></li></ul></li><li class="toc-l1"><a href="#audit-red-flags-tax-loss-dta">Audit Red Flags: Tax Loss DTA</a><ul><li class="toc-l2"><a href="#red-flag-1-dta-recognized-despite-sustained-losses">Red Flag 1: DTA Recognized Despite Sustained Losses</a></li><li class="toc-l2"><a href="#red-flag-2-section-382-limitation-not-assessed">Red Flag 2: Section 382 Limitation Not Assessed</a></li><li class="toc-l2"><a href="#red-flag-3-valuation-allowance-not-adjusted">Red Flag 3: Valuation Allowance Not Adjusted</a></li><li class="toc-l2"><a href="#red-flag-4-changeofbusiness-not-documented">Red Flag 4: Change-of-Business Not Documented</a></li></ul></li></ul>
         </div>
 
 

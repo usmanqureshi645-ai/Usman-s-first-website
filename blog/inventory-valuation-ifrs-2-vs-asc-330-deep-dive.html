@@ -66,6 +66,45 @@
         .related { margin-top: 32px; padding-top: 20px; border-top: 2px solid #e4e9f0; }
         .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; display: block; margin-bottom: 6px; }
         .disclaimer { font-size: 0.8em; color: #8593a8; margin-top: 32px; padding-top: 16px; border-top: 1px solid #e4e9f0; font-style: italic; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -79,18 +118,9 @@
 
         <p class="lead">Both IFRS 2 and ASC 330 require inventory at the lower of cost and net realisable value (IFRS) or lower of cost and market (ASC). But they differ on method options (LIFO banned under IFRS), write-down reversals (allowed under IFRS, not ASC), and measurement. These differences matter most for manufacturing companies and those with significant obsolete inventory. This guide covers both with worked examples.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#overview">The core difference</a></li>
-                <li><a href="#methods">Cost methods: LIFO, FIFO, weighted average</a></li>
-                <li><a href="#nrv">Net realisable value vs market value</a></li>
-                <li><a href="#worked">Worked example: inventory write-down and reversal</a></li>
-                <li><a href="#reversal">Write-down reversals: the key difference</a></li>
-                <li><a href="#obsolete">Obsolete inventory</a></li>
-                <li><a href="#audit">Audit implications</a></li>
-                <li><a href="#faq">FAQs</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#overview">The Core Difference</a></li><li class="toc-l1"><a href="#methods">Cost Methods: LIFO, FIFO, Weighted Average</a></li><li class="toc-l1"><a href="#nrv">Net Realisable Value vs Market Value</a></li><li class="toc-l1"><a href="#worked">Worked Example: Inventory Write-Down and Reversal</a><ul><li class="toc-l3"><a href="#scenario-electronics-inventory-obsolescence">Scenario: Electronics Inventory Obsolescence</a></li></ul></li><li class="toc-l1"><a href="#reversal">Write-Down Reversals: The Key Difference</a></li><li class="toc-l1"><a href="#obsolete">Obsolete Inventory</a></li><li class="toc-l1"><a href="#audit">Audit Implications</a><ul><li class="toc-l2"><a href="#need-help-with-inventory-accounting">Need help with inventory accounting?</a></li></ul></li><li class="toc-l1"><a href="#faq">Frequently Asked Questions</a><ul><li class="toc-l2"><a href="#is-lifo-allowed-under-ifrs">Is LIFO allowed under IFRS?</a></li><li class="toc-l2"><a href="#can-inventory-writedowns-be-reversed">Can inventory write-downs be reversed?</a></li><li class="toc-l2"><a href="#what-is-net-realisable-value">What is net realisable value?</a><ul><li class="toc-l3"><a href="#about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</a></li></ul></li><li class="toc-l2"><a href="#related-resources">Related resources</a></li></ul></li></ul>
         </div>
 
         <article>
@@ -116,7 +146,7 @@
 
             <h2 id="worked">Worked Example: Inventory Write-Down and Reversal</h2>
             <div class="example-box">
-                <h4>Scenario: Electronics Inventory Obsolescence</h4>
+                <h4 id="scenario-electronics-inventory-obsolescence">Scenario: Electronics Inventory Obsolescence</h4>
                 <p><strong>Year 1 (Dec 2025):</strong> Inventory of electronic components.</p>
                 <ul>
                     <li>Cost: £500,000</li>
@@ -162,35 +192,35 @@
             </ul>
 
             <div class="cta-box">
-                <h3>Need help with inventory accounting?</h3>
+                <h3 id="need-help-with-inventory-accounting">Need help with inventory accounting?</h3>
                 <p>Use our free tools to research IFRS 2 vs ASC 330, or ask an expert in the Meeting Room.</p>
                 <a href="https://uqconsulting.org/gaap-compare.html" class="cta-button">Compare Standards →</a>
             </div>
 
             <h2 id="faq">Frequently Asked Questions</h2>
             <div class="faq-item">
-                <h3>Is LIFO allowed under IFRS?</h3>
+                <h3 id="is-lifo-allowed-under-ifrs">Is LIFO allowed under IFRS?</h3>
                 <p>No. IFRS 2 prohibits LIFO. Only FIFO and weighted average are permitted. ASC 330 allows all three methods.</p>
             </div>
             <div class="faq-item">
-                <h3>Can inventory write-downs be reversed?</h3>
+                <h3 id="can-inventory-writedowns-be-reversed">Can inventory write-downs be reversed?</h3>
                 <p>Under IFRS 2, yes — if circumstances improve, you reverse write-downs up to original cost. Under ASC 330, no — write-downs are permanent.</p>
             </div>
             <div class="faq-item">
-                <h3>What is net realisable value?</h3>
+                <h3 id="what-is-net-realisable-value">What is net realisable value?</h3>
                 <p>Selling price less costs to complete and sell (IFRS). ASC uses a different "market" definition based on replacement cost.</p>
             </div>
 
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
-                    <h4>About the author — Usman Qureshi (ACCA, ACA)</h4>
+                    <h4 id="about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</h4>
                     <p>Usman has audited manufacturing and retail companies with significant inventory populations. He specialises in NRV testing and write-down assessments.</p>
                 </div>
             </div>
 
             <div class="related">
-                <h3>Related resources</h3>
+                <h3 id="related-resources">Related resources</h3>
                 <a href="https://uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">→ Back to IFRS vs US GAAP Comparison</a>
                 <a href="https://uqconsulting.org/meeting-room.html">→ Ask an expert (free)</a>
             </div>

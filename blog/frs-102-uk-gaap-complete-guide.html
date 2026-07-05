@@ -46,6 +46,45 @@
         th { background: #1a2f5a; color: #fff; font-weight: 600; }
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
         .disclaimer { font-size: 0.81em; color: #8593a8; margin-top: 36px; padding-top: 16px; border-top: 1px solid #e4e9f0; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -64,18 +103,9 @@
 
         <p class="lead">FRS 102 (The Financial Reporting Standard applicable in the UK and Republic of Ireland) is the primary GAAP standard for UK-registered entities not qualifying for IFRS. It sits between IFRS (more complex) and the micro-entities regime (simpler). This guide covers scope, the Small Entities exemption, key differences from IFRS, and the 2026/27 amendments affecting UK-domiciled companies.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#scope">FRS 102 scope and effective date</a></li>
-                <li><a href="#who-applies">Who applies FRS 102?</a></li>
-                <li><a href="#small-entities">Small Entities regime (FRS 105 alternative)</a></li>
-                <li><a href="#key-differences">FRS 102 vs IFRS: Key differences</a></li>
-                <li><a href="#fvpl">FVPL investments and financial instruments</a></li>
-                <li><a href="#amendments-2026">2026/27 Amendments: What's new</a></li>
-                <li><a href="#transition">Transition from IFRS to FRS 102</a></li>
-                <li><a href="#audit">Audit red flags in FRS 102 conversions</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#scope">FRS 102 Scope and Status</a></li><li class="toc-l1"><a href="#who-applies">Who Applies FRS 102?</a><ul><li class="toc-l2"><a href="#mandatory-frs-102-users">Mandatory FRS 102 Users</a></li><li class="toc-l2"><a href="#exemptions">Exemptions</a></li></ul></li><li class="toc-l1"><a href="#small-entities">Small Entities Exemption (SE Regime)</a><ul><li class="toc-l2"><a href="#qualification-thresholds-2-of-3">Qualification Thresholds (2 of 3)</a></li><li class="toc-l2"><a href="#small-entity-exemptions">Small Entity Exemptions</a></li></ul></li><li class="toc-l1"><a href="#key-differences">FRS 102 vs IFRS: Key Differences</a><ul><li class="toc-l2"><a href="#1-financial-instruments">1. Financial Instruments</a></li><li class="toc-l2"><a href="#2-leases-ifrs-16-vs-frs-102">2. Leases (IFRS 16 vs FRS 102)</a></li><li class="toc-l2"><a href="#3-property-revaluation">3. Property Revaluation</a></li></ul></li><li class="toc-l1"><a href="#fvpl">FVPL Investments in FRS 102</a><ul><li class="toc-l2"><a href="#when-fvpl-is-permitted">When FVPL is Permitted</a></li><li class="toc-l2"><a href="#fair-value-measurement">Fair Value Measurement</a></li></ul></li><li class="toc-l1"><a href="#amendments-2026">FRS 102 2026/27 Amendments</a><ul><li class="toc-l2"><a href="#amendment-1-lease-accounting-alignment">Amendment 1: Lease Accounting Alignment</a></li><li class="toc-l2"><a href="#amendment-2-climaterelated-disclosures">Amendment 2: Climate-Related Disclosures</a></li><li class="toc-l2"><a href="#amendment-3-going-concern-liquidity">Amendment 3: Going Concern & Liquidity</a></li></ul></li><li class="toc-l1"><a href="#transition">Transition from IFRS to FRS 102</a><ul><li class="toc-l2"><a href="#asset-reclassifications">Asset Reclassifications</a></li><li class="toc-l2"><a href="#provision-adjustments">Provision Adjustments</a></li></ul></li><li class="toc-l1"><a href="#audit">Audit Red Flags: FRS 102 Conversions</a><ul><li class="toc-l2"><a href="#red-flag-1-ifrs-revaluations-not-reversed">Red Flag 1: IFRS Revaluations Not Reversed</a></li><li class="toc-l2"><a href="#red-flag-2-investment-property-fair-value-estimates-unsupported">Red Flag 2: Investment Property Fair Value Estimates Unsupported</a></li><li class="toc-l2"><a href="#red-flag-3-provisions-overstated">Red Flag 3: Provisions Overstated</a></li><li class="toc-l2"><a href="#red-flag-4-deferred-tax-not-derecognized">Red Flag 4: Deferred Tax Not De-Recognized</a></li></ul></li></ul>
         </div>
 
         <article>
@@ -86,7 +116,7 @@
 
             <h2 id="who-applies">Who Applies FRS 102?</h2>
 
-            <h3>Mandatory FRS 102 Users</h3>
+            <h3 id="mandatory-frs-102-users">Mandatory FRS 102 Users</h3>
             <ul>
                 <li><strong>Private companies:</strong> Most UK private companies (by definition, unlisted)</li>
                 <li><strong>Public unlisted companies:</strong> UK-listed entities NOT on the Premium segment (often use IFRS, but could choose FRS 102)</li>
@@ -94,7 +124,7 @@
                 <li><strong>Large unlisted groups:</strong> May voluntarily adopt FRS 102 unless group consolidated over thresholds</li>
             </ul>
 
-            <h3>Exemptions</h3>
+            <h3 id="exemptions">Exemptions</h3>
             <ul>
                 <li><strong>Micro-entities (FRS 105):</strong> Turnover <£6.5m, assets <£3.26m, employees <10 (small entity exemption available)</li>
                 <li><strong>Listed entities:</strong> Must use IFRS (FCA requirement for premium listing)</li>
@@ -104,14 +134,14 @@
             <h2 id="small-entities">Small Entities Exemption (SE Regime)</h2>
             <p>FRS 102 includes <strong>significant disclosure and measurement reliefs</strong> for entities meeting size thresholds:</p>
 
-            <h3>Qualification Thresholds (2 of 3)</h3>
+            <h3 id="qualification-thresholds-2-of-3">Qualification Thresholds (2 of 3)</h3>
             <ul>
                 <li>Turnover ≤ £10.2m (previously £8.8m; increased 2023)</li>
                 <li>Balance sheet assets ≤ £5.1m (previously £4.4m)</li>
                 <li>Employees ≤ 50</li>
             </ul>
 
-            <h3>Small Entity Exemptions</h3>
+            <h3 id="small-entity-exemptions">Small Entity Exemptions</h3>
             <ul>
                 <li><strong>Cash flow statement:</strong> Not required</li>
                 <li><strong>Related party disclosures:</strong> Minimal (only key management)</li>
@@ -122,7 +152,7 @@
 
             <h2 id="key-differences">FRS 102 vs IFRS: Key Differences</h2>
 
-            <h3>1. Financial Instruments</h3>
+            <h3 id="1-financial-instruments">1. Financial Instruments</h3>
             <table>
                 <tr>
                     <th>Aspect</th>
@@ -146,13 +176,13 @@
                 </tr>
             </table>
 
-            <h3>2. Leases (IFRS 16 vs FRS 102)</h3>
+            <h3 id="2-leases-ifrs-16-vs-frs-102">2. Leases (IFRS 16 vs FRS 102)</h3>
             <ul>
                 <li><strong>IFRS 16:</strong> All leases > 12 months capitalized as ROU assets</li>
                 <li><strong>FRS 102:</strong> Operating vs finance lease distinction (narrower capitalization)</li>
             </ul>
 
-            <h3>3. Property Revaluation</h3>
+            <h3 id="3-property-revaluation">3. Property Revaluation</h3>
             <ul>
                 <li><strong>IFRS:</strong> Revaluation through OCI (or P&L); reversals matched by reversals</li>
                 <li><strong>FRS 102:</strong> Revaluation through P&L (simpler); reversal to P&L only</li>
@@ -162,39 +192,39 @@
 
             <p>FRS 102 permits more liberal use of FVPL for equity investments, especially when held as part of a trading portfolio or when fair value is readily available.</p>
 
-            <h3>When FVPL is Permitted</h3>
+            <h3 id="when-fvpl-is-permitted">When FVPL is Permitted</h3>
             <ul>
                 <li><strong>Investments held for trading:</strong> Re-measured at fair value each period</li>
                 <li><strong>Investments in associates (no significant influence):</strong> Can use FVPL instead of equity method</li>
                 <li><strong>Financial liabilities:</strong> FVPL available for derivatives and fair value hedges</li>
             </ul>
 
-            <h3>Fair Value Measurement</h3>
+            <h3 id="fair-value-measurement">Fair Value Measurement</h3>
             <p>FRS 102 uses simpler fair value hierarchy (quoted prices > observable inputs > unobservable), but less detailed than IFRS 13.</p>
 
             <h2 id="amendments-2026">FRS 102 2026/27 Amendments</h2>
 
-            <h3>Amendment 1: Lease Accounting Alignment</h3>
+            <h3 id="amendment-1-lease-accounting-alignment">Amendment 1: Lease Accounting Alignment</h3>
             <p>Ongoing harmonization with IFRS 16 principles (though full alignment may not occur; finance lease tests tightening).</p>
 
-            <h3>Amendment 2: Climate-Related Disclosures</h3>
+            <h3 id="amendment-2-climaterelated-disclosures">Amendment 2: Climate-Related Disclosures</h3>
             <p>New guidance on climate risk disclosures (in line with UK TCFD requirements); applies to larger entities.</p>
 
-            <h3>Amendment 3: Going Concern & Liquidity</h3>
+            <h3 id="amendment-3-going-concern-liquidity">Amendment 3: Going Concern & Liquidity</h3>
             <p>Enhanced guidance on assessing going concern beyond 12 months and liquidity disclosures (especially post-pandemic volatility).</p>
 
             <h2 id="transition">Transition from IFRS to FRS 102</h2>
 
             <p>Some entities (e.g., de-listing) move from IFRS to FRS 102. Key audit areas:</p>
 
-            <h3>Asset Reclassifications</h3>
+            <h3 id="asset-reclassifications">Asset Reclassifications</h3>
             <ul>
                 <li>PP&E: Revaluation to cost-only (if using revaluation model under IFRS)</li>
                 <li>Investment property: Reclassification if no active market</li>
                 <li>Financial instruments: AFS/FVPL reclassification</li>
             </ul>
 
-            <h3>Provision Adjustments</h3>
+            <h3 id="provision-adjustments">Provision Adjustments</h3>
             <ul>
                 <li>IFRS 37 restructuring provisions may not meet FRS 102 criteria (no liability if plan not finalized)</li>
                 <li>Deferred tax: May not be recognized (simplification)</li>
@@ -202,19 +232,19 @@
 
             <h2 id="audit">Audit Red Flags: FRS 102 Conversions</h2>
 
-            <h3>Red Flag 1: IFRS Revaluations Not Reversed</h3>
+            <h3 id="red-flag-1-ifrs-revaluations-not-reversed">Red Flag 1: IFRS Revaluations Not Reversed</h3>
             <p><strong>Finding:</strong> Entity transitions from IFRS (used revaluation model for PP&E) to FRS 102 (cost model). Carrying values remain at revalued amounts without reversal.</p>
             <p><strong>Auditor action:</strong> Decide on deemed cost method (retain revalued amount as new cost) or actual reversal. Impact goodwill/impairment testing.</p>
 
-            <h3>Red Flag 2: Investment Property Fair Value Estimates Unsupported</h3>
+            <h3 id="red-flag-2-investment-property-fair-value-estimates-unsupported">Red Flag 2: Investment Property Fair Value Estimates Unsupported</h3>
             <p><strong>Finding:</strong> Investment property valued at £5m under IFRS (fair value hierarchy, market approach). Under FRS 102, no active market exists; valuation becomes cost-based, significantly lower.</p>
             <p><strong>Auditor action:</strong> Reassess fair value basis; if cost is more appropriate, write down; recognize impairment loss.</p>
 
-            <h3>Red Flag 3: Provisions Overstated</h3>
+            <h3 id="red-flag-3-provisions-overstated">Red Flag 3: Provisions Overstated</h3>
             <p><strong>Finding:</strong> Under IFRS, £10m restructuring provision recognized (IFRS 37, detailed plan). Transitioning to FRS 102, no finalized board approval for restructuring; FRS 102 does not require provision.</p>
             <p><strong>Auditor action:</strong> Reverse provision; adjust P&L; reclassify to contingent liability (if probable outflow).</p>
 
-            <h3>Red Flag 4: Deferred Tax Not De-Recognized</h3>
+            <h3 id="red-flag-4-deferred-tax-not-derecognized">Red Flag 4: Deferred Tax Not De-Recognized</h3>
             <p><strong>Finding:</strong> Deferred tax of £3m (on temporary differences) carried forward from IFRS. FRS 102 micro/small entities exemption exempts DTA recognition.</p>
             <p><strong>Auditor action:</strong> Reverse DTA; adjust retained earnings; no tax expense adjustment (simplified).</p>
 

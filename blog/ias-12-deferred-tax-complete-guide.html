@@ -47,6 +47,45 @@
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
         .formula { background: #1a2f5a; color: #e8eef7; padding: 12px; border-radius: 6px; margin: 14px 0; text-align: center; }
         .disclaimer { font-size: 0.81em; color: #8593a8; margin-top: 36px; padding-top: 16px; border-top: 1px solid #e4e9f0; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -65,19 +104,9 @@
 
         <p class="lead">IAS 12 (Income Taxes) requires recognition of deferred tax assets and liabilities arising from temporary differences between book and tax accounting. This comprehensive guide covers the deferred tax calculation, recognition criteria, valuation allowances, tax rate changes, and the audit red flags that make deferred tax one of the most heavily scrutinized areas in financial reporting.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#scope">IAS 12 scope and deferred tax concept</a></li>
-                <li><a href="#temporary-differences">Temporary differences: Book vs tax</a></li>
-                <li><a href="#dta-dtl">Deferred tax assets vs liabilities</a></li>
-                <li><a href="#calculation">Deferred tax calculation step-by-step</a></li>
-                <li><a href="#recognition">Recognition and valuation allowances</a></li>
-                <li><a href="#tax-rate">Tax rate changes</a></li>
-                <li><a href="#worked-example">Worked example: Manufacturing company</a></li>
-                <li><a href="#real-company">Real company example: Rolls-Royce deferred tax</a></li>
-                <li><a href="#audit">Audit red flags and common errors</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#scope">IAS 12 Scope and Deferred Tax Concept</a></li><li class="toc-l1"><a href="#temporary-differences">Temporary Differences: Book vs Tax</a><ul><li class="toc-l2"><a href="#example-1-depreciation-timing">Example 1: Depreciation Timing</a></li><li class="toc-l2"><a href="#example-2-warranty-provisions">Example 2: Warranty Provisions</a></li></ul></li><li class="toc-l1"><a href="#dta-dtl">Deferred Tax Assets vs Liabilities</a><ul><li class="toc-l2"><a href="#deferred-tax-liability-dtl">Deferred Tax Liability (DTL)</a></li><li class="toc-l2"><a href="#deferred-tax-asset-dta">Deferred Tax Asset (DTA)</a></li></ul></li><li class="toc-l1"><a href="#calculation">Deferred Tax Calculation Step-by-Step</a><ul><li class="toc-l2"><a href="#step-1-identify-all-temporary-differences">Step 1: Identify All Temporary Differences</a></li><li class="toc-l2"><a href="#step-2-calculate-net-deferred-tax-position">Step 2: Calculate Net Deferred Tax Position</a></li><li class="toc-l2"><a href="#step-3-assess-dta-realizability">Step 3: Assess DTA Realizability</a></li><li class="toc-l2"><a href="#step-4-measure-at-expected-tax-rate">Step 4: Measure at Expected Tax Rate</a></li></ul></li><li class="toc-l1"><a href="#recognition">Recognition and Valuation Allowances</a><ul><li class="toc-l2"><a href="#when-to-recognize-a-dta">When to Recognize a DTA</a></li><li class="toc-l2"><a href="#valuation-allowance-contraasset">Valuation Allowance (Contra-Asset)</a></li><li class="toc-l2"><a href="#example-lossmaking-subsidiary">Example: Loss-Making Subsidiary</a></li></ul></li><li class="toc-l1"><a href="#tax-rate">Tax Rate Changes</a><ul><li class="toc-l2"><a href="#worked-example-rate-increase">Worked Example: Rate Increase</a></li></ul></li><li class="toc-l1"><a href="#worked-example">Worked Example: Manufacturing Company Deferred Tax</a><ul><li class="toc-l2"><a href="#balance-sheet-as-at-31-dec-2025">Balance Sheet as at 31 Dec 2025</a></li><li class="toc-l2"><a href="#deferred-tax-calculation-tax-rate-19">Deferred Tax Calculation (Tax Rate 19%)</a></li><li class="toc-l2"><a href="#valuation-assessment">Valuation Assessment</a></li><li class="toc-l2"><a href="#balance-sheet-presentation">Balance Sheet Presentation</a></li></ul></li><li class="toc-l1"><a href="#real-company">Real Company Example: Rolls-Royce Deferred Tax</a></li><li class="toc-l1"><a href="#audit">Audit Red Flags and Common Errors</a><ul><li class="toc-l2"><a href="#red-flag-1-unrecognized-dta">Red Flag 1: Unrecognized DTA</a></li><li class="toc-l2"><a href="#red-flag-2-dtl-not-remeasured-after-tax-rate-change">Red Flag 2: DTL Not Remeasured After Tax Rate Change</a></li><li class="toc-l2"><a href="#red-flag-3-tax-loss-carryforward-not-assessed">Red Flag 3: Tax Loss Carryforward Not Assessed</a></li><li class="toc-l2"><a href="#red-flag-4-sorie-statement-of-other-comprehensive-income-not-tracked">Red Flag 4: SORIE (Statement of Other Comprehensive Income) Not Tracked</a></li><li class="toc-l2"><a href="#red-flag-5-acquisition-not-deferred-taxed">Red Flag 5: Acquisition Not Deferred Taxed</a></li></ul></li></ul>
         </div>
 
         <article>
@@ -88,7 +117,7 @@
 
             <h2 id="temporary-differences">Temporary Differences: Book vs Tax</h2>
 
-            <h3>Example 1: Depreciation Timing</h3>
+            <h3 id="example-1-depreciation-timing">Example 1: Depreciation Timing</h3>
             <table>
                 <tr>
                     <th>Item</th>
@@ -115,7 +144,7 @@
                 </tr>
             </table>
 
-            <h3>Example 2: Warranty Provisions</h3>
+            <h3 id="example-2-warranty-provisions">Example 2: Warranty Provisions</h3>
             <ul>
                 <li><strong>Book (IFRS 37):</strong> Recognize £50,000 warranty provision (expected future claims)</li>
                 <li><strong>Tax:</strong> No deduction until claim is paid (future year)</li>
@@ -124,7 +153,7 @@
 
             <h2 id="dta-dtl">Deferred Tax Assets vs Liabilities</h2>
 
-            <h3>Deferred Tax Liability (DTL)</h3>
+            <h3 id="deferred-tax-liability-dtl">Deferred Tax Liability (DTL)</h3>
             <p>When book value > tax base. Tax will increase when the difference reverses.</p>
             <ul>
                 <li>Accelerated tax depreciation (tax deducted faster than book)</li>
@@ -132,7 +161,7 @@
                 <li>Goodwill (tax non-deductible, book carries forward)</li>
             </ul>
 
-            <h3>Deferred Tax Asset (DTA)</h3>
+            <h3 id="deferred-tax-asset-dta">Deferred Tax Asset (DTA)</h3>
             <p>When book value < tax base. Tax will decrease (or loss is deducted) when the difference reverses.</p>
             <ul>
                 <li>Provisions recognized (book) but deducted at payment (tax)</li>
@@ -142,34 +171,34 @@
 
             <h2 id="calculation">Deferred Tax Calculation Step-by-Step</h2>
 
-            <h3>Step 1: Identify All Temporary Differences</h3>
+            <h3 id="step-1-identify-all-temporary-differences">Step 1: Identify All Temporary Differences</h3>
             <p>Compare book values to tax bases across the balance sheet.</p>
 
-            <h3>Step 2: Calculate Net Deferred Tax Position</h3>
+            <h3 id="step-2-calculate-net-deferred-tax-position">Step 2: Calculate Net Deferred Tax Position</h3>
             <div class="formula">
                 Net Deferred Tax = (DTL Temporary Differences −’ DTA Temporary Differences) × Tax Rate
             </div>
 
-            <h3>Step 3: Assess DTA Realizability</h3>
+            <h3 id="step-3-assess-dta-realizability">Step 3: Assess DTA Realizability</h3>
             <p>Will the company generate sufficient future taxable income to utilize DTA? If not, record a valuation allowance.</p>
 
-            <h3>Step 4: Measure at Expected Tax Rate</h3>
+            <h3 id="step-4-measure-at-expected-tax-rate">Step 4: Measure at Expected Tax Rate</h3>
             <p>Use the tax rate expected to apply when the difference reverses (often the current enacted rate for near-term reversals).</p>
 
             <h2 id="recognition">Recognition and Valuation Allowances</h2>
 
-            <h3>When to Recognize a DTA</h3>
+            <h3 id="when-to-recognize-a-dta">When to Recognize a DTA</h3>
             <p>Recognize a DTA for deductible temporary differences and unused tax losses <strong>if it is probable that taxable income will be available to utilize the DTA.</strong></p>
 
             <p class="callout"><strong>"Probable" test:</strong> Is there <strong>convincing evidence</strong> the company will have taxable profit to use the losses? If loss-making for multiple years with no recovery plan, DTA recognition is uncertain.</p>
 
-            <h3>Valuation Allowance (Contra-Asset)</h3>
+            <h3 id="valuation-allowance-contraasset">Valuation Allowance (Contra-Asset)</h3>
             <p>If recognition is uncertain, offset the DTA with a valuation allowance:</p>
             <div class="formula">
                 Reported DTA = Gross DTA −’ Valuation Allowance
             </div>
 
-            <h3>Example: Loss-Making Subsidiary</h3>
+            <h3 id="example-lossmaking-subsidiary">Example: Loss-Making Subsidiary</h3>
             <ul>
                 <li><strong>Unused tax losses:</strong> £10m (potentially deductible in future years)</li>
                 <li><strong>Gross DTA:</strong> £10m × 20% tax rate = £2m</li>
@@ -182,7 +211,7 @@
 
             <p>When the government changes the tax rate, <strong>remeasure</strong> all deferred tax balances at the new rate and recognize the adjustment in P&L or OCI (depending on whether the item was a P&L or OCI transaction).</p>
 
-            <h3>Worked Example: Rate Increase</h3>
+            <h3 id="worked-example-rate-increase">Worked Example: Rate Increase</h3>
             <ul>
                 <li><strong>Existing DTL (at 19%):</strong> £10m</li>
                 <li><strong>Tax rate enacted to change to 25%:</strong> New rate applies to future reversals</li>
@@ -192,7 +221,7 @@
 
             <h2 id="worked-example">Worked Example: Manufacturing Company Deferred Tax</h2>
 
-            <h3>Balance Sheet as at 31 Dec 2025</h3>
+            <h3 id="balance-sheet-as-at-31-dec-2025">Balance Sheet as at 31 Dec 2025</h3>
             <table>
                 <tr>
                     <th>Item</th>
@@ -229,17 +258,17 @@
                 </tr>
             </table>
 
-            <h3>Deferred Tax Calculation (Tax Rate 19%)</h3>
+            <h3 id="deferred-tax-calculation-tax-rate-19">Deferred Tax Calculation (Tax Rate 19%)</h3>
             <ul>
                 <li><strong>Gross DTL:</strong> £30m × 19% = £5.7m</li>
                 <li><strong>Gross DTA (warranty + loss):</strong> £35m × 19% = £6.65m</li>
                 <li><strong>Net DTA before valuation:</strong> £6.65m −’ £5.7m = £0.95m</li>
             </ul>
 
-            <h3>Valuation Assessment</h3>
+            <h3 id="valuation-assessment">Valuation Assessment</h3>
             <p>Company is profitable and profitable in future is likely (5-year plan shows profit). Valuation allowance not needed.</p>
 
-            <h3>Balance Sheet Presentation</h3>
+            <h3 id="balance-sheet-presentation">Balance Sheet Presentation</h3>
             <ul>
                 <li><strong>Deferred tax asset (non-current):</strong> £0.95m</li>
                 <li><strong>Deferred tax liability (non-current):</strong> £0 (netted)</li>
@@ -259,23 +288,23 @@
 
             <h2 id="audit">Audit Red Flags and Common Errors</h2>
 
-            <h3>Red Flag 1: Unrecognized DTA</h3>
+            <h3 id="red-flag-1-unrecognized-dta">Red Flag 1: Unrecognized DTA</h3>
             <p><strong>Finding:</strong> Company has £20m in unused tax losses, all fully valuation-allowed, but 5-year plan shows clear path to profitability.</p>
             <p><strong>Auditor action:</strong> Challenge valuation allowance; likely partial or full reversal required, increasing reported DTA and reducing tax expense.</p>
 
-            <h3>Red Flag 2: DTL Not Remeasured After Tax Rate Change</h3>
+            <h3 id="red-flag-2-dtl-not-remeasured-after-tax-rate-change">Red Flag 2: DTL Not Remeasured After Tax Rate Change</h3>
             <p><strong>Finding:</strong> Tax rate increases from 19% to 25% effective next year; DTL not remeasured.</p>
             <p><strong>Auditor action:</strong> Require remeasurement; P&L impact of 6%+ rate increase is significant.</p>
 
-            <h3>Red Flag 3: Tax Loss Carryforward Not Assessed</h3>
+            <h3 id="red-flag-3-tax-loss-carryforward-not-assessed">Red Flag 3: Tax Loss Carryforward Not Assessed</h3>
             <p><strong>Finding:</strong> £50m tax loss carryforward not evaluated for DTA recognition due to ownership change restrictions (Section 382 in the US, or similar rules in other jurisdictions).</p>
             <p><strong>Auditor action:</strong> Assess whether loss is available; if restricted, no DTA (or partial).</p>
 
-            <h3>Red Flag 4: SORIE (Statement of Other Comprehensive Income) Not Tracked</h3>
+            <h3 id="red-flag-4-sorie-statement-of-other-comprehensive-income-not-tracked">Red Flag 4: SORIE (Statement of Other Comprehensive Income) Not Tracked</h3>
             <p><strong>Finding:</strong> Revaluation of PP&E increases equity via OCI, but deferred tax on revaluation goes to P&L (incorrect).</p>
             <p><strong>Auditor action:</strong> Deferred tax on OCI items must go to OCI (matching principle). Reclassify from P&L to OCI.</p>
 
-            <h3>Red Flag 5: Acquisition Not Deferred Taxed</h3>
+            <h3 id="red-flag-5-acquisition-not-deferred-taxed">Red Flag 5: Acquisition Not Deferred Taxed</h3>
             <p><strong>Finding:</strong> Acquisition creates £50m of identifiable intangibles (non-deductible for tax). No DTL recognized on the fair value step-up.</p>
             <p><strong>Auditor action:</strong> Recognize DTL on intangible fair value adjustments; affects goodwill calculation and future tax expense.</p>
 

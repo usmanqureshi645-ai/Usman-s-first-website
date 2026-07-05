@@ -69,6 +69,45 @@
         .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
         .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; padding: 8px; border: 1px solid #e4e9f0; border-radius: 4px; display: block; }
         .disclaimer { font-size: 0.82em; color: #8593a8; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; font-style: italic; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -89,31 +128,22 @@
 
         <p class="lead">A quick reference for every IFRS 16 journal entry you'll encounter: lease recognition, annual depreciation and interest, variable payments, lease modifications, and early termination. Copy-paste templates with worked examples.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#recognition">Lease recognition (Day 1)</a></li>
-                <li><a href="#annual">Annual depreciation</a></li>
-                <li><a href="#interest">Annual interest expense</a></li>
-                <li><a href="#payment">Lease payments</a></li>
-                <li><a href="#variable">Variable payments</a></li>
-                <li><a href="#modification">Lease modifications</a></li>
-                <li><a href="#termination">Early termination</a></li>
-                <li><a href="#summary">Summary table</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#recognition">1. Lease Recognition (At Commencement)</a><ul><li class="toc-l2"><a href="#template">Template</a></li><li class="toc-l2"><a href="#worked-example">Worked Example</a></li></ul></li><li class="toc-l1"><a href="#annual">2. Annual Depreciation of ROU Asset</a><ul><li class="toc-l2"><a href="#template-2">Template</a></li><li class="toc-l2"><a href="#calculation">Calculation</a></li><li class="toc-l2"><a href="#worked-example-2">Worked Example</a></li></ul></li><li class="toc-l1"><a href="#interest">3. Annual Interest Expense on Lease Liability</a><ul><li class="toc-l2"><a href="#template-3">Template</a></li><li class="toc-l2"><a href="#calculation-2">Calculation</a></li><li class="toc-l2"><a href="#worked-example-3">Worked Example</a></li></ul></li><li class="toc-l1"><a href="#payment">4. Lease Payment (Principal + Interest)</a><ul><li class="toc-l2"><a href="#template-4">Template</a></li><li class="toc-l2"><a href="#worked-example-4">Worked Example</a></li></ul></li><li class="toc-l1"><a href="#variable">5. Variable Lease Payments</a><ul><li class="toc-l2"><a href="#template-5">Template</a></li></ul></li><li class="toc-l1"><a href="#modification">6. Lease Modification (Increase in Scope) Template Date of Modification Dr ROU Asset &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [increase in liability] &nbsp;&nbsp;&nbsp;&nbsp;Cr Lease Liability &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [increase in liability] 7. Early Lease Termination</a><ul><li class="toc-l2"><a href="#template-6">Template</a></li></ul></li><li class="toc-l1"><a href="#summary">Quick Reference: IFRS 16 Journal Entry Summary</a><ul><li class="toc-l3"><a href="#usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</a></li></ul></li></ul>
         </div>
 
         <article>
             <h2 id="recognition">1. Lease Recognition (At Commencement)</h2>
 
-            <h3>Template</h3>
+            <h3 id="template">Template</h3>
             <div class="journal">
                 <div class="journal-title">Date of Lease Commencement</div>
                 Dr Right-of-Use Asset &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [amount]<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;Cr Lease Liability &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [amount]
             </div>
 
-            <h3>Worked Example</h3>
+            <h3 id="worked-example">Worked Example</h3>
             <p><strong>Scenario:</strong> 1 Jan 2026, Company leases equipment. ROU asset = £421,240. Lease liability = £421,240.</p>
             <div class="journal">
                 <div class="journal-title">1 January 2026 — Lease Recognition</div>
@@ -123,18 +153,18 @@
 
             <h2 id="annual">2. Annual Depreciation of ROU Asset</h2>
 
-            <h3>Template</h3>
+            <h3 id="template-2">Template</h3>
             <div class="journal">
                 <div class="journal-title">Each Year-End</div>
                 Dr Depreciation Expense — ROU Asset &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [annual amount]<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;Cr Accumulated Depreciation — ROU Asset &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [annual amount]
             </div>
 
-            <h3>Calculation</h3>
+            <h3 id="calculation">Calculation</h3>
             <p><strong>Depreciation = ROU Asset Ã· Lease Term (in years)</strong></p>
             <p>Depreciate on a straight-line basis over the lease term (not the asset's useful life, unless the asset transfers to you at the end).</p>
 
-            <h3>Worked Example</h3>
+            <h3 id="worked-example-2">Worked Example</h3>
             <p><strong>Lease term:</strong> 5 years. ROU asset: £421,240. Annual depreciation: £421,240 Ã· 5 = £84,248</p>
             <div class="journal">
                 <div class="journal-title">31 December 2026 — Year 1 Depreciation</div>
@@ -144,17 +174,17 @@
 
             <h2 id="interest">3. Annual Interest Expense on Lease Liability</h2>
 
-            <h3>Template</h3>
+            <h3 id="template-3">Template</h3>
             <div class="journal">
                 <div class="journal-title">Each Year-End</div>
                 Dr Interest Expense &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [amount]<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;Cr Lease Liability &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [amount]
             </div>
 
-            <h3>Calculation</h3>
+            <h3 id="calculation-2">Calculation</h3>
             <p><strong>Interest Expense = Opening Lease Liability × IBR</strong></p>
 
-            <h3>Worked Example</h3>
+            <h3 id="worked-example-3">Worked Example</h3>
             <p><strong>Opening liability:</strong> £421,240. IBR: 6%. Interest: £421,240 × 6% = £25,274</p>
             <div class="journal">
                 <div class="journal-title">31 December 2026 — Year 1 Interest</div>
@@ -164,7 +194,7 @@
 
             <h2 id="payment">4. Lease Payment (Principal + Interest)</h2>
 
-            <h3>Template</h3>
+            <h3 id="template-4">Template</h3>
             <div class="journal">
                 <div class="journal-title">On Payment Date</div>
                 Dr Lease Liability (principal portion) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [principal]<br>
@@ -172,7 +202,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;Cr Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [total payment]
             </div>
 
-            <h3>Worked Example</h3>
+            <h3 id="worked-example-4">Worked Example</h3>
             <p><strong>Annual payment:</strong> £100,000. Interest (as above): £25,274. Principal: £100,000 −’ £25,274 = £74,726</p>
             <div class="journal">
                 <div class="journal-title">31 December 2026 — Lease Payment</div>
@@ -183,7 +213,7 @@
 
             <h2 id="variable">5. Variable Lease Payments</h2>
 
-            <h3>Template</h3>
+            <h3 id="template-5">Template</h3>
             <p>Variable payments (e.g., rent indexed to RPI, usage-based charges) are expensed as incurred, not part of the lease liability.</p>
             <div class="journal">
                 <div class="journal-title">When Incurred</div>
@@ -202,7 +232,7 @@
 
             <h2 id="termination">7. Early Lease Termination</h2>
 
-            <h3>Template</h3>
+            <h3 id="template-6">Template</h3>
             <p>When you exit a lease early, remove the remaining ROU asset and lease liability. Any difference is a gain or loss.</p>
             <div class="journal">
                 <div class="journal-title">Date of Termination</div>
@@ -269,7 +299,7 @@
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
-                    <h4>Usman Qureshi (ACCA, ACA)</h4>
+                    <h4 id="usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</h4>
                     <p>This is a working reference guide I use in audits. I keep a version of this table in my papers to validate journal entries quickly.</p>
                 </div>
             </div>

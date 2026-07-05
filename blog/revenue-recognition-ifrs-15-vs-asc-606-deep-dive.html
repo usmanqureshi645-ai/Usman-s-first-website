@@ -257,6 +257,45 @@
             .toc ul { columns: 1; }
             .comparison { grid-template-columns: 1fr; }
         }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -276,22 +315,9 @@
 
         <p class="lead">IFRS 15 and ASC 606 look identical on the surface — both use the same five-step model and were jointly developed. But in practice, they diverge on contract modifications, licensing, and subsequent judgments. This guide walks through the differences with worked examples so you understand where auditors challenge revenue treatment and where IFRS and US GAAP companies report different numbers.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#overview">Are they really converged?</a></li>
-                <li><a href="#five-step">The five-step model</a></li>
-                <li><a href="#modifications">Contract modifications (the biggest difference)</a></li>
-                <li><a href="#modifications-example">Worked example: modification treatment</a></li>
-                <li><a href="#licensing">Licensing and right-to-use vs right-to-access</a></li>
-                <li><a href="#licensing-example">Worked example: software license</a></li>
-                <li><a href="#variable">Variable consideration</a></li>
-                <li><a href="#transaction-price">Transaction price allocation</a></li>
-                <li><a href="#contract-costs">Contract costs and asset capitalization</a></li>
-                <li><a href="#principal-agent">Principal vs agent assessment</a></li>
-                <li><a href="#implications">Audit implications and red flags</a></li>
-                <li><a href="#faq">FAQs</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#overview">Are They Really Converged?</a></li><li class="toc-l1"><a href="#five-step">The Five-Step Model (Identical)</a></li><li class="toc-l1"><a href="#modifications">Contract Modifications: The Biggest Difference</a><ul><li class="toc-l2"><a href="#ifrs-15-approach-stricter">IFRS 15 Approach (Stricter)</a></li><li class="toc-l2"><a href="#asc-606-approach-more-liberal">ASC 606 Approach (More Liberal)</a></li></ul></li><li class="toc-l1"><a href="#modifications-example">Worked Example: Contract Modification</a><ul><li class="toc-l3"><a href="#scenario-software-licence-with-support-services">Scenario: Software Licence with Support Services</a></li></ul></li><li class="toc-l1"><a href="#licensing">Licensing and Right-to-Use vs Right-to-Access</a><ul><li class="toc-l3"><a href="#righttouse">Right-to-Use</a></li><li class="toc-l3"><a href="#righttoaccess">Right-to-Access</a></li></ul></li><li class="toc-l1"><a href="#licensing-example">Worked Example: Software Licence Classification</a><ul><li class="toc-l3"><a href="#scenario-enterprise-software-deal">Scenario: Enterprise Software Deal</a></li></ul></li><li class="toc-l1"><a href="#variable">Variable Consideration: Expected Value vs Most Likely</a></li><li class="toc-l1"><a href="#transaction-price">Transaction Price Allocation</a></li><li class="toc-l1"><a href="#contract-costs">Contract Costs and Asset Capitalization</a></li><li class="toc-l1"><a href="#principal-agent">Principal vs Agent Assessment</a></li><li class="toc-l1"><a href="#implications">Audit Implications and Red Flags</a><ul><li class="toc-l2"><a href="#for-auditors">For auditors:</a></li><li class="toc-l2"><a href="#for-controllers-and-cfos">For controllers and CFOs:</a></li><li class="toc-l2"><a href="#need-a-quick-revenue-comparison-for-your-specific-contract">Need a quick revenue comparison for your specific contract?</a></li></ul></li><li class="toc-l1"><a href="#faq">Frequently Asked Questions</a><ul><li class="toc-l2"><a href="#are-ifrs-15-and-asc-606-identical">Are IFRS 15 and ASC 606 identical?</a></li><li class="toc-l2"><a href="#what-is-the-main-difference-in-contract-modifications-between-ifrs-15-and-asc-606">What is the main difference in contract modifications between IFRS 15 and ASC 606?</a></li><li class="toc-l2"><a href="#how-do-ifrs-15-and-asc-606-differ-on-licensing">How do IFRS 15 and ASC 606 differ on licensing?</a></li><li class="toc-l2"><a href="#can-revenue-timing-differ-between-ifrs-15-and-asc-606-for-the-same-contract">Can revenue timing differ between IFRS 15 and ASC 606 for the same contract?</a></li><li class="toc-l2"><a href="#how-are-variable-amounts-estimated-under-both-standards">How are variable amounts estimated under both standards?</a></li><li class="toc-l2"><a href="#what-is-the-difference-in-principal-vs-agent-assessment">What is the difference in principal vs agent assessment?</a><ul><li class="toc-l3"><a href="#about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</a></li></ul></li><li class="toc-l2"><a href="#related-resources">Related resources</a></li></ul></li></ul>
         </div>
 
         <article>
@@ -320,7 +346,7 @@
 
             <h2 id="modifications">Contract Modifications: The Biggest Difference</h2>
             <p>This is where IFRS 15 and ASC 606 diverge most. A <strong>contract modification</strong> is a change to the scope, price, or terms that was not in the original contract.</p>
-            <h3>IFRS 15 Approach (Stricter)</h3>
+            <h3 id="ifrs-15-approach-stricter">IFRS 15 Approach (Stricter)</h3>
             <p>IFRS 15 requires you to account for a modification as either:</p>
             <ul>
                 <li><strong>A separate contract</strong> (if the promised goods/services are distinct and the price reflects the entity's standalone selling price)</li>
@@ -328,13 +354,13 @@
                 <li><strong>A modification of existing obligation</strong> (if goods/services are not distinct; adjusts the original obligation retroactively — can even require reversal of prior revenue)</li>
             </ul>
             <p>The key: if the modification adds <em>distinct</em> goods/services at <em>standalone selling price</em>, it is a new contract. Otherwise, it changes the original contract.</p>
-            <h3>ASC 606 Approach (More Liberal)</h3>
+            <h3 id="asc-606-approach-more-liberal">ASC 606 Approach (More Liberal)</h3>
             <p>ASC 606 has similar rules but applies the "distinct goods/services" and "standalone selling price" tests with different application guidance. In practice, ASC 606 is more likely to treat a modification as a contract change (adjusting the existing contract) rather than a separate contract.</p>
             <p><strong>Audit implication:</strong> IFRS auditors will ask: Is this really a separate contract? Prove it has distinct goods and standalone price. US GAAP auditors are slightly more flexible — a contract change is acceptable even if the conditions are not quite met.</p>
 
             <h2 id="modifications-example">Worked Example: Contract Modification</h2>
             <div class="example-box">
-                <h4>Scenario: Software Licence with Support Services</h4>
+                <h4 id="scenario-software-licence-with-support-services">Scenario: Software Licence with Support Services</h4>
                 <p><strong>Original contract (Jan 2026):</strong> XYZ Ltd sells a software licence to Customer A for £100,000/year. Includes 24/7 support. 3-year contract.</p>
                 <p><strong>Modification (Jul 2026):</strong> Customer wants to add a second licence for a different module. XYZ agrees to add it for an additional £50,000/year for the remaining 2.5 years.</p>
                 <p><strong>Standalone selling price check:</strong> XYZ's standard price for that module is £60,000/year (standalone). But XYZ agrees to £50,000 because of the customer's existing relationship (volume discount).</p>
@@ -360,7 +386,7 @@
             <p>Both standards require you to distinguish:</p>
             <div class="comparison">
                 <div class="comp-col">
-                    <h4>Right-to-Use</h4>
+                    <h4 id="righttouse">Right-to-Use</h4>
                     <ul>
                         <li>Customer receives a licence to intellectual property at a point in time</li>
                         <li>Revenue recognised when licence is granted</li>
@@ -368,7 +394,7 @@
                     </ul>
                 </div>
                 <div class="comp-col">
-                    <h4>Right-to-Access</h4>
+                    <h4 id="righttoaccess">Right-to-Access</h4>
                     <ul>
                         <li>Customer has access to IP for a period; entity controls changes</li>
                         <li>Revenue recognised over time as customer has access</li>
@@ -381,7 +407,7 @@
 
             <h2 id="licensing-example">Worked Example: Software Licence Classification</h2>
             <div class="example-box">
-                <h4>Scenario: Enterprise Software Deal</h4>
+                <h4 id="scenario-enterprise-software-deal">Scenario: Enterprise Software Deal</h4>
                 <p><strong>Contract terms:</strong></p>
                 <ul>
                     <li>Customer buys a perpetual licence to CRM software for £200,000 (one-time payment)</li>
@@ -431,7 +457,7 @@
             <p>No divergence here — both standards reach the same conclusion in most cases.</p>
 
             <h2 id="implications">Audit Implications and Red Flags</h2>
-            <h3>For auditors:</h3>
+            <h3 id="for-auditors">For auditors:</h3>
             <ul>
                 <li><strong>Contract modifications:</strong> Challenge whether a modification is truly separate or a contract change. Request analysis of whether distinct goods/services are at standalone selling price. IFRS is stricter.</li>
                 <li><strong>Licensing:</strong> Verify right-to-use vs right-to-access classification. This drives timing — point-in-time vs over-time revenue. Software companies frequently misclassify.</li>
@@ -439,7 +465,7 @@
                 <li><strong>Standalone selling prices:</strong> Request evidence. Don't accept management estimates without benchmarking. This is a high-risk area.</li>
                 <li><strong>Contract costs:</strong> Verify capitalization is justified and amortization is over the correct period. Watch for over-amortization (IFRS stricter).</li>
             </ul>
-            <h3>For controllers and CFOs:</h3>
+            <h3 id="for-controllers-and-cfos">For controllers and CFOs:</h3>
             <ul>
                 <li>Document contract modifications carefully. Define whether the added items are distinct and at standalone price.</li>
                 <li>Maintain pricing lists for standalone selling prices. Auditors will ask to see them.</li>
@@ -448,47 +474,47 @@
             </ul>
 
             <div class="cta-box">
-                <h3>Need a quick revenue comparison for your specific contract?</h3>
+                <h3 id="need-a-quick-revenue-comparison-for-your-specific-contract">Need a quick revenue comparison for your specific contract?</h3>
                 <p>Use our free GAAP Compare tool to research IFRS 15 vs ASC 606, or bring your contract to the Meeting Room and walk through it with an expert. No consulting fees, no credit card.</p>
                 <a href="https://uqconsulting.org/gaap-compare.html" class="cta-button">Try GAAP Compare Free →</a>
             </div>
 
             <h2 id="faq">Frequently Asked Questions</h2>
             <div class="faq-item">
-                <h3>Are IFRS 15 and ASC 606 identical?</h3>
+                <h3 id="are-ifrs-15-and-asc-606-identical">Are IFRS 15 and ASC 606 identical?</h3>
                 <p>Substantially yes — they use the same five-step model. But they diverge on contract modifications, licensing, and application guidance in edge cases. Most transactions are identical; complex contracts may differ.</p>
             </div>
             <div class="faq-item">
-                <h3>What is the main difference in contract modifications between IFRS 15 and ASC 606?</h3>
+                <h3 id="what-is-the-main-difference-in-contract-modifications-between-ifrs-15-and-asc-606">What is the main difference in contract modifications between IFRS 15 and ASC 606?</h3>
                 <p>IFRS 15 is stricter on when a modification is a separate contract (requires distinct goods/services AND standalone selling price). ASC 606 has more flexibility — a contract change is acceptable even if conditions are not met. Result: IFRS may defer revenue longer.</p>
             </div>
             <div class="faq-item">
-                <h3>How do IFRS 15 and ASC 606 differ on licensing?</h3>
+                <h3 id="how-do-ifrs-15-and-asc-606-differ-on-licensing">How do IFRS 15 and ASC 606 differ on licensing?</h3>
                 <p>Both distinguish right-to-use (point-in-time) from right-to-access (over-time). IFRS emphasises entity control; ASC 606 emphasises customer benefit. Same result in most cases, but hybrid contracts (licence + support) may diverge.</p>
             </div>
             <div class="faq-item">
-                <h3>Can revenue timing differ between IFRS 15 and ASC 606 for the same contract?</h3>
+                <h3 id="can-revenue-timing-differ-between-ifrs-15-and-asc-606-for-the-same-contract">Can revenue timing differ between IFRS 15 and ASC 606 for the same contract?</h3>
                 <p>Yes, primarily due to contract modification treatment and licensing classification. A £100k modification might be recognised immediately under ASC 606 but deferred under IFRS if it fails the distinct + standalone price test.</p>
             </div>
             <div class="faq-item">
-                <h3>How are variable amounts estimated under both standards?</h3>
+                <h3 id="how-are-variable-amounts-estimated-under-both-standards">How are variable amounts estimated under both standards?</h3>
                 <p>Both allow expected value or most likely amount — whichever is more predictive. Both also require amounts to be probable of not reversing (IFRS) or resolved within 12 months (ASC 606). Same method, same estimates.</p>
             </div>
             <div class="faq-item">
-                <h3>What is the difference in principal vs agent assessment?</h3>
+                <h3 id="what-is-the-difference-in-principal-vs-agent-assessment">What is the difference in principal vs agent assessment?</h3>
                 <p>No difference. Both IFRS 15 and ASC 606 use the same control test: do you control goods/services before transfer? If yes, you are principal (gross revenue). If no, you are agent (net revenue).</p>
             </div>
 
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
-                    <h4>About the author — Usman Qureshi (ACCA, ACA)</h4>
+                    <h4 id="about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</h4>
                     <p>Usman is a chartered accountant with Big Four audit experience auditing complex revenue contracts under both IFRS 15 and ASC 606. He has managed revenue audit programmes for software, SaaS, and manufacturing clients across multiple jurisdictions.</p>
                 </div>
             </div>
 
             <div class="related">
-                <h3>Related resources</h3>
+                <h3 id="related-resources">Related resources</h3>
                 <a href="https://uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">→ Back to IFRS vs US GAAP Comparison</a>
                 <a href="https://uqconsulting.org/gaap-compare.html">→ GAAP Compare Tool (free)</a>
                 <a href="https://uqconsulting.org/meeting-room.html">→ Ask an expert in the Meeting Room (free)</a>

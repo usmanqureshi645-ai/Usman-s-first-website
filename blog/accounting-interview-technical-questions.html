@@ -61,6 +61,45 @@
         .related { margin-top: 32px; padding-top: 20px; border-top: 2px solid #e4e9f0; }
         .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; display: block; margin-bottom: 6px; }
         .disclaimer { font-size: 0.8em; color: #8593a8; margin-top: 32px; padding-top: 16px; font-style: italic; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -74,18 +113,9 @@
 
         <p class="lead">Preparing for an accounting job interview? Most candidates prepare for technical questions (goodwill impairment, lease accounting) but neglect behavioral questions. This guide covers both: technical accounting scenarios (the harder part) AND behavioral questions (the differentiator). Learn how to use the STAR method to turn your work experience into compelling stories. Real questions from Big 4 audit, corporate finance, and FP&A interviews — with model answers that show how to communicate technical depth AND soft skills (teamwork, problem-solving, integrity).</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#overview">Interview format: what to expect</a></li>
-                <li><a href="#technical">Technical accounting questions</a></li>
-                <li><a href="#behavioral">Behavioral questions & STAR method</a></li>
-                <li><a href="#conflict">Conflict & judgment scenarios</a></li>
-                <li><a href="#team">Teamwork & leadership questions</a></li>
-                <li><a href="#preparation">Pre-interview preparation</a></li>
-                <li><a href="#tips">Interview tips & dos/don'ts</a></li>
-                <li><a href="#faq">FAQs</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#overview">Interview Format: What to Expect</a></li><li class="toc-l1"><a href="#technical">Technical Accounting Questions</a></li><li class="toc-l1"><a href="#behavioral">Behavioral Questions & STAR Method</a></li><li class="toc-l1"><a href="#conflict">Conflict & Judgment Scenarios</a></li><li class="toc-l1"><a href="#team">Teamwork & Leadership Questions</a></li><li class="toc-l1"><a href="#preparation">Pre-Interview Preparation</a></li><li class="toc-l1"><a href="#tips">Interview Tips & Dos/Don'ts</a><ul><li class="toc-l2"><a href="#want-to-practice-more-scenarios">Want to practice more scenarios?</a></li></ul></li><li class="toc-l1"><a href="#faq">FAQs</a><ul><li class="toc-l2"><a href="#should-i-tell-them-im-nervous">Should I tell them I'm nervous?</a></li><li class="toc-l2"><a href="#what-if-i-dont-know-the-answer">What if I don't know the answer?</a></li><li class="toc-l2"><a href="#how-much-should-i-talk">How much should I talk?</a><ul><li class="toc-l3"><a href="#about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</a></li></ul></li><li class="toc-l2"><a href="#related-resources">Related resources</a></li></ul></li></ul>
         </div>
 
         <article>
@@ -195,35 +225,35 @@
             </ul>
 
             <div class="cta-box">
-                <h3>Want to practice more scenarios?</h3>
+                <h3 id="want-to-practice-more-scenarios">Want to practice more scenarios?</h3>
                 <p>Use our Knowledge Test tool to drill interview-style technical questions and get feedback.</p>
                 <a href="https://uqconsulting.org/quiz.html" class="cta-button">Practice With Knowledge Test →</a>
             </div>
 
             <h2 id="faq">FAQs</h2>
             <div class="callout">
-                <h3>Should I tell them I'm nervous?</h3>
+                <h3 id="should-i-tell-them-im-nervous">Should I tell them I'm nervous?</h3>
                 <p>No. A light "I'm a bit nervous, but excited to be here" at the start is fine. But don't dwell on it. Just be professional and answer their questions.</p>
             </div>
             <div class="callout">
-                <h3>What if I don't know the answer?</h3>
+                <h3 id="what-if-i-dont-know-the-answer">What if I don't know the answer?</h3>
                 <p>Say: "That's a good question. I haven't worked directly with [topic], but I'd approach it by... [show your thinking]." Honesty + problem-solving beats silence.</p>
             </div>
             <div class="callout">
-                <h3>How much should I talk?</h3>
+                <h3 id="how-much-should-i-talk">How much should I talk?</h3>
                 <p>Aim for 40% you talking, 60% them talking (over the interview). For each question, speak for 2— minutes, then pause and let them follow up or move to the next question.</p>
             </div>
 
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
-                    <h4>About the author — Usman Qureshi (ACCA, ACA)</h4>
+                    <h4 id="about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</h4>
                     <p>Usman has conducted 100+ accounting job interviews for Big 4 and mid-tier firms. He also coaches candidates on interview technique and technical content.</p>
                 </div>
             </div>
 
             <div class="related">
-                <h3>Related resources</h3>
+                <h3 id="related-resources">Related resources</h3>
                 <a href="https://uqconsulting.org/blog/acca-interview-questions-answers.html">→ ACCA Interview Questions</a>
                 <a href="https://uqconsulting.org/blog/accountant-cv-writing-guide.html">→ Accountant CV Writing Guide</a>
                 <a href="https://uqconsulting.org/quiz.html">→ Practice technical questions with Knowledge Test</a>

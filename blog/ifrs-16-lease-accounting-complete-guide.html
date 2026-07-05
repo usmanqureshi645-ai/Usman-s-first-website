@@ -262,6 +262,45 @@
             .two-col { grid-template-columns: 1fr; }
             .related-grid { grid-template-columns: 1fr; }
         }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -281,24 +320,9 @@
 
         <p class="lead">If you've wrestled with a lease agreement and wondered how on earth to get it onto the balance sheet, this is the guide you've been looking for. We'll walk through complete IFRS 16 examples — step-by-step calculations, journal entries, discount rate guidance, financial statement impact, and the mistakes auditors most often catch — all explained in plain English.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#what-is">What is IFRS 16?</a></li>
-                <li><a href="#why-introduced">Why was it introduced?</a></li>
-                <li><a href="#key-concepts">Key concepts (ROU asset, lease liability)</a></li>
-                <li><a href="#worked-example">Worked example 1: Simple lease</a></li>
-                <li><a href="#worked-example-2">Worked example 2: Complex lease</a></li>
-                <li><a href="#journal-entries">Journal entries</a></li>
-                <li><a href="#discount-rate">Discount rate determination</a></li>
-                <li><a href="#financial-statement">Financial statement impact</a></li>
-                <li><a href="#ratios">Impact on financial ratios</a></li>
-                <li><a href="#exemptions">Recognition exemptions</a></li>
-                <li><a href="#real-company">Real company example</a></li>
-                <li><a href="#audit">What auditors look for</a></li>
-                <li><a href="#common-mistakes">Common mistakes</a></li>
-                <li><a href="#faq">FAQs</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#what-is">What is IFRS 16?</a></li><li class="toc-l1"><a href="#why-introduced">Why Was IFRS 16 Introduced?</a></li><li class="toc-l1"><a href="#key-concepts">Key Concepts Under IFRS 16</a><ul><li class="toc-l2"><a href="#what-is-a-lease">What is a Lease?</a></li><li class="toc-l2"><a href="#lease-liability">Lease Liability</a></li><li class="toc-l2"><a href="#rightofuse-rou-asset">Right-of-Use (ROU) Asset</a></li><li class="toc-l2"><a href="#discount-rate-the-interest-rate-implicit-in-the-lease">Discount Rate (The Interest Rate Implicit in the Lease)</a></li></ul></li><li class="toc-l1"><a href="#worked-example">Worked Example 1: Simple Equipment Lease</a><ul><li class="toc-l2"><a href="#scenario">Scenario</a></li><li class="toc-l2"><a href="#step-1-calculate-the-lease-liability">Step 1: Calculate the Lease Liability</a></li><li class="toc-l2"><a href="#step-2-calculate-the-rou-asset">Step 2: Calculate the ROU Asset</a></li><li class="toc-l2"><a href="#step-3-initial-recognition-journal-entry-1-january-2026">Step 3: Initial Recognition Journal Entry (1 January 2026)</a></li><li class="toc-l2"><a href="#step-4-year-1-lease-payment-31-december-2026">Step 4: Year 1 Lease Payment (31 December 2026)</a></li><li class="toc-l2"><a href="#step-5-year-1-depreciation">Step 5: Year 1 Depreciation</a></li><li class="toc-l2"><a href="#balance-sheet-at-31-december-2026">Balance Sheet at 31 December 2026</a></li></ul></li><li class="toc-l1"><a href="#worked-example-2">Worked Example 2: Retail Store Lease (More Complex)</a><ul><li class="toc-l2"><a href="#scenario-2">Scenario</a></li><li class="toc-l2"><a href="#step-1-determine-the-lease-term">Step 1: Determine the Lease Term</a></li><li class="toc-l2"><a href="#step-2-identify-lease-payments-to-include">Step 2: Identify Lease Payments to Include</a></li><li class="toc-l2"><a href="#step-3-calculate-the-lease-liability-simplified">Step 3: Calculate the Lease Liability (Simplified)</a></li><li class="toc-l2"><a href="#step-4-calculate-the-rou-asset">Step 4: Calculate the ROU Asset</a></li><li class="toc-l2"><a href="#step-5-initial-recognition-1-april-2026">Step 5: Initial Recognition (1 April 2026)</a></li><li class="toc-l2"><a href="#key-differences-from-example-1">Key Differences from Example 1</a></li></ul></li><li class="toc-l1"><a href="#discount-rate">Discount Rate Determination (In Depth)</a><ul><li class="toc-l2"><a href="#why-this-matters">Why This Matters</a></li><li class="toc-l2"><a href="#the-standard-hierarchy">The Standard Hierarchy</a></li><li class="toc-l2"><a href="#how-to-calculate-or-estimate-your-ibr">How to Calculate or Estimate Your IBR</a></li></ul></li><li class="toc-l1"><a href="#financial-statement">Financial Statement Impact</a><ul><li class="toc-l2"><a href="#income-statement">Income Statement</a></li><li class="toc-l2"><a href="#balance-sheet">Balance Sheet</a></li><li class="toc-l2"><a href="#cash-flow-statement">Cash Flow Statement</a></li></ul></li><li class="toc-l1"><a href="#ratios">Impact on Financial Ratios</a><ul><li class="toc-l2"><a href="#before-ifrs-16-operating-lease-ias-17">Before IFRS 16 (Operating Lease, IAS 17)</a></li><li class="toc-l2"><a href="#after-ifrs-16-all-leases-on-balance-sheet">After IFRS 16 (All Leases on Balance Sheet)</a></li></ul></li><li class="toc-l1"><a href="#exemptions">Recognition Exemptions</a><ul><li class="toc-l2"><a href="#shortterm-leases">Short-Term Leases</a></li><li class="toc-l2"><a href="#lowvalue-asset-leases">Low-Value Asset Leases</a></li></ul></li><li class="toc-l1"><a href="#real-company">Real Company Example: Unilever's Lease Disclosures</a></li><li class="toc-l1"><a href="#audit">What Auditors Look For (IFRS 16 Testing)</a><ul><li class="toc-l2"><a href="#lease-identification">Lease Identification</a></li><li class="toc-l2"><a href="#completeness">Completeness</a></li><li class="toc-l2"><a href="#discount-rate-challenge">Discount Rate Challenge</a></li><li class="toc-l2"><a href="#lease-term-assessment">Lease Term Assessment</a></li><li class="toc-l2"><a href="#rou-asset-and-liability-calculation">ROU Asset and Liability Calculation</a></li><li class="toc-l2"><a href="#subsequent-measurement">Subsequent Measurement</a></li><li class="toc-l2"><a href="#disclosure-completeness">Disclosure Completeness</a></li></ul></li><li class="toc-l1"><a href="#common-mistakes">Common IFRS 16 Mistakes (What Auditors Catch)</a><ul><li class="toc-l2"><a href="#1-forgetting-to-include-variable-lease-payments">1. Forgetting to Include Variable Lease Payments</a></li><li class="toc-l2"><a href="#2-incorrect-discount-rate">2. Incorrect Discount Rate</a></li><li class="toc-l2"><a href="#3-misidentifying-the-lease-term">3. Misidentifying the Lease Term</a></li><li class="toc-l2"><a href="#4-capitalizing-lease-incentives-incorrectly">4. Capitalizing Lease Incentives Incorrectly</a></li><li class="toc-l2"><a href="#5-forgetting-initial-direct-costs">5. Forgetting Initial Direct Costs</a></li><li class="toc-l2"><a href="#6-not-updating-lease-modifications">6. Not Updating Lease Modifications</a></li><li class="toc-l2"><a href="#7-presentation-and-disclosure-gaps">7. Presentation and Disclosure Gaps</a></li></ul></li><li class="toc-l1"><a href="#faq">Frequently Asked Questions</a><ul><li class="toc-l2"><a href="#do-shortterm-leases-always-qualify-for-exemption">Do short-term leases always qualify for exemption?</a></li><li class="toc-l2"><a href="#can-we-estimate-the-ibr-or-must-we-obtain-a-bank-quote">Can we estimate the IBR, or must we obtain a bank quote?</a></li><li class="toc-l2"><a href="#if-we-sublease-the-asset-to-another-party-does-ifrs-16-still-apply">If we sublease the asset to another party, does IFRS 16 still apply?</a></li><li class="toc-l2"><a href="#how-do-we-account-for-a-lease-where-the-purchase-price-increases-if-we-buy-the-asset-later">How do we account for a lease where the purchase price increases if we buy the asset later?</a></li><li class="toc-l2"><a href="#are-leases-of-intangible-assets-eg-software-licenses-in-scope-for-ifrs-16">Are leases of intangible assets (e.g., software licenses) in scope for IFRS 16?</a></li><li class="toc-l2"><a href="#if-we-own-the-building-but-lease-equipment-inside-it-how-do-we-present-that">If we own the building but lease equipment inside it, how do we present that?</a></li><li class="toc-l2"><a href="#does-ifrs-16-apply-to-lease-agreements-that-are-already-offbalancesheet-under-ifrs-17">Does IFRS 16 apply to lease agreements that are already off-balance-sheet under IFRS 17?</a></li><li class="toc-l2"><a href="#can-we-use-different-discount-rates-for-different-leases">Can we use different discount rates for different leases?</a></li><li class="toc-l2"><a href="#ready-to-dive-deeper">Ready to Dive Deeper?</a></li></ul></li></ul>
         </div>
 
         <article>
@@ -322,7 +346,7 @@
 
             <h2 id="key-concepts">Key Concepts Under IFRS 16</h2>
 
-            <h3>What is a Lease?</h3>
+            <h3 id="what-is-a-lease">What is a Lease?</h3>
             <p>IFRS 16.9 defines a lease as "a contract, or part of a contract, that conveys the right to control the use of an identified asset for a period of time in exchange for consideration."</p>
             <p>Three key tests:</p>
             <ul>
@@ -332,7 +356,7 @@
             </ul>
             <p>A contract to lease a specific delivery truck = lease. A contract for a logistics supplier to deliver packages using their fleet = not a lease (they control which vehicles).</p>
 
-            <h3>Lease Liability</h3>
+            <h3 id="lease-liability">Lease Liability</h3>
             <p>The lease liability is the <strong>present value of lease payments the lessee is expected to make over the lease term.</strong> It includes:</p>
             <ul>
                 <li>Fixed lease payments (adjusted for inflation if specified)</li>
@@ -344,19 +368,19 @@
             </ul>
             <p class="ref">IFRS 16.26— 27 details which payments to include and how to estimate "reasonably certain" judgments.</p>
 
-            <h3>Right-of-Use (ROU) Asset</h3>
+            <h3 id="rightofuse-rou-asset">Right-of-Use (ROU) Asset</h3>
             <p>The ROU asset represents your right to use the leased asset. It's initially measured at:</p>
             <p><strong>Lease Liability + Lease Payments Made at/Before Commencement + Initial Direct Costs + Estimated Restoration Costs −’ Lease Incentives Received</strong></p>
             <p>After initial recognition, you depreciate the ROU asset on a straight-line basis over the lease term (unless the asset will transfer to you at the end, in which case depreciate over its useful life).</p>
 
-            <h3>Discount Rate (The Interest Rate Implicit in the Lease)</h3>
+            <h3 id="discount-rate-the-interest-rate-implicit-in-the-lease">Discount Rate (The Interest Rate Implicit in the Lease)</h3>
             <p>To calculate the present value of lease payments, you need a discount rate. IFRS 16.26 requires the <strong>interest rate implicit in the lease</strong> — the discount rate that makes the present value of lease payments equal to the fair value of the underlying asset.</p>
             <p>In practice, the implicit rate is almost never readily available to a lessee. So you use your <strong>incremental borrowing rate (IBR)</strong> instead. This is the rate you would pay to borrow funds to obtain a similar asset over a similar term with similar collateral.</p>
             <p class="callout"><strong>Audit insight:</strong> The IBR is a judgment call. Auditors will scrutinize whether your rate is realistic. A tech startup claiming a 2% IBR when UK banks would lend at 7% would raise red flags. We discuss this in detail in our dedicated <a href="#discount-rate">discount rate section</a> and in our separate guide on <a href="https://uqconsulting.org/blog/ifrs-16-discount-rate-ibr.html">IFRS 16 discount rate determination</a>.</p>
 
             <h2 id="worked-example">Worked Example 1: Simple Equipment Lease</h2>
 
-            <h3>Scenario</h3>
+            <h3 id="scenario">Scenario</h3>
             <p>On 1 January 2026, Acme Manufacturing enters into a 5-year lease for industrial machinery. Key terms:</p>
             <ul>
                 <li><strong>Annual lease payment:</strong> £100,000 (paid at the end of each year)</li>
@@ -365,7 +389,7 @@
                 <li><strong>Acme's IBR:</strong> 6% per annum</li>
             </ul>
 
-            <h3>Step 1: Calculate the Lease Liability</h3>
+            <h3 id="step-1-calculate-the-lease-liability">Step 1: Calculate the Lease Liability</h3>
             <p>The lease liability is the present value of five annual £100,000 payments at 6%:</p>
             <table>
                 <tr>
@@ -410,17 +434,17 @@
                 </tr>
             </table>
 
-            <h3>Step 2: Calculate the ROU Asset</h3>
+            <h3 id="step-2-calculate-the-rou-asset">Step 2: Calculate the ROU Asset</h3>
             <p>Assuming no payments made before commencement, no initial direct costs, and no incentives:</p>
             <p><strong>ROU Asset = Lease Liability = £421,240</strong></p>
 
-            <h3>Step 3: Initial Recognition Journal Entry (1 January 2026)</h3>
+            <h3 id="step-3-initial-recognition-journal-entry-1-january-2026">Step 3: Initial Recognition Journal Entry (1 January 2026)</h3>
             <div class="journal">
                 Dr ROU Asset &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 421,240<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cr Lease Liability &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 421,240
             </div>
 
-            <h3>Step 4: Year 1 Lease Payment (31 December 2026)</h3>
+            <h3 id="step-4-year-1-lease-payment-31-december-2026">Step 4: Year 1 Lease Payment (31 December 2026)</h3>
             <p>At the end of year 1, Acme pays £100,000. This payment reduces the lease liability, but also includes an interest expense component.</p>
             <p><strong>Interest expense for Year 1 = Opening liability × IBR = £421,240 × 6% = £25,274</strong></p>
             <p><strong>Principal reduction = Payment −’ Interest = £100,000 −’ £25,274 = £74,726</strong></p>
@@ -430,14 +454,14 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cr Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 100,000
             </div>
 
-            <h3>Step 5: Year 1 Depreciation</h3>
+            <h3 id="step-5-year-1-depreciation">Step 5: Year 1 Depreciation</h3>
             <p><strong>Depreciation = ROU Asset Ã· Lease Term = £421,240 Ã· 5 = £84,248 per year</strong></p>
             <div class="journal">
                 Dr Depreciation Expense &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 84,248<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cr Accumulated Depreciation — ROU Asset &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 84,248
             </div>
 
-            <h3>Balance Sheet at 31 December 2026</h3>
+            <h3 id="balance-sheet-at-31-december-2026">Balance Sheet at 31 December 2026</h3>
             <table>
                 <tr>
                     <th>Item</th>
@@ -457,7 +481,7 @@
 
             <h2 id="worked-example-2">Worked Example 2: Retail Store Lease (More Complex)</h2>
 
-            <h3>Scenario</h3>
+            <h3 id="scenario-2">Scenario</h3>
             <p>On 1 April 2026, Retail Co. enters a 10-year lease for a flagship store. Terms:</p>
             <ul>
                 <li><strong>Annual rent:</strong> £500,000 (paid quarterly in advance: £125,000)</li>
@@ -469,10 +493,10 @@
                 <li><strong>IBR:</strong> 5% per annum</li>
             </ul>
 
-            <h3>Step 1: Determine the Lease Term</h3>
+            <h3 id="step-1-determine-the-lease-term">Step 1: Determine the Lease Term</h3>
             <p>Because Retail Co. is reasonably certain to exercise the extension option, the lease term for accounting purposes is 10 + 5 = <strong>15 years.</strong></p>
 
-            <h3>Step 2: Identify Lease Payments to Include</h3>
+            <h3 id="step-2-identify-lease-payments-to-include">Step 2: Identify Lease Payments to Include</h3>
             <p>Lease payments are:</p>
             <ul>
                 <li>Fixed rent: £500,000 × 10 years + £450,000 × 5 years = £7,250,000</li>
@@ -480,21 +504,21 @@
                 <li><strong>Total undiscounted lease payments: £7,330,000</strong></li>
             </ul>
 
-            <h3>Step 3: Calculate the Lease Liability (Simplified)</h3>
+            <h3 id="step-3-calculate-the-lease-liability-simplified">Step 3: Calculate the Lease Liability (Simplified)</h3>
             <p>Present value of lease payments at 5% over 15 years = approximately <strong>£5,240,000</strong></p>
             <p>(Full calculation requires annuity tables or Excel, but the principle is the same as Example 1: discount each payment back to present value.)</p>
 
-            <h3>Step 4: Calculate the ROU Asset</h3>
+            <h3 id="step-4-calculate-the-rou-asset">Step 4: Calculate the ROU Asset</h3>
             <p>ROU Asset = Lease Liability + Initial Direct Costs + Refurbishment −’ Lease Incentive</p>
             <p>= £5,240,000 + £20,000 + £80,000 −’ £100,000 = <strong>£5,240,000</strong></p>
 
-            <h3>Step 5: Initial Recognition (1 April 2026)</h3>
+            <h3 id="step-5-initial-recognition-1-april-2026">Step 5: Initial Recognition (1 April 2026)</h3>
             <div class="journal">
                 Dr ROU Asset &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5,240,000<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cr Lease Liability &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5,240,000
             </div>
 
-            <h3>Key Differences from Example 1</h3>
+            <h3 id="key-differences-from-example-1">Key Differences from Example 1</h3>
             <ul>
                 <li><strong>Lease term judgment:</strong> Must assess whether extension/termination options are "reasonably certain"</li>
                 <li><strong>Multiple payment streams:</strong> Different payment amounts in different years require careful calculation</li>
@@ -505,16 +529,16 @@
 
             <h2 id="discount-rate">Discount Rate Determination (In Depth)</h2>
 
-            <h3>Why This Matters</h3>
+            <h3 id="why-this-matters">Why This Matters</h3>
             <p>The discount rate is the single biggest driver of the lease liability. A 4% rate vs. a 6% rate can create a £100,000+ difference in a mid-sized lease. Auditors scrutinize this ruthlessly.</p>
 
-            <h3>The Standard Hierarchy</h3>
+            <h3 id="the-standard-hierarchy">The Standard Hierarchy</h3>
             <p><strong>Step 1:</strong> Use the interest rate implicit in the lease (if readily determinable)</p>
             <p>This is the discount rate that makes the present value of lease payments equal to the fair value of the underlying asset. Most lessees don't have this information.</p>
             <p><strong>Step 2:</strong> If not, use your incremental borrowing rate (IBR)</p>
             <p>This is the rate you would pay to borrow funds for a similar term, amount, and collateral.</p>
 
-            <h3>How to Calculate or Estimate Your IBR</h3>
+            <h3 id="how-to-calculate-or-estimate-your-ibr">How to Calculate or Estimate Your IBR</h3>
             <ul>
                 <li><strong>From your lender:</strong> Ask your bank for the rate they'd charge you to borrow £X for 5 years secured by equipment</li>
                 <li><strong>Observe comparable borrowing:</strong> Look at your existing loan terms. If you borrowed £5m at 6% for 7 years, your IBR for a 5-year lease might be 5.8%</li>
@@ -527,7 +551,7 @@
 
             <h2 id="financial-statement">Financial Statement Impact</h2>
 
-            <h3>Income Statement</h3>
+            <h3 id="income-statement">Income Statement</h3>
             <p>Each year, you recognize two expenses:</p>
             <ul>
                 <li><strong>Depreciation:</strong> ROU asset / lease term (straight-line, unless asset transfers to you)</li>
@@ -535,14 +559,14 @@
             </ul>
             <p>Combined, these typically exceed the old operating lease rent expense in early years (because of the interest component), but total P&L impact is usually neutral or slightly negative for operating leases (lessees pay more total "expense" on IFRS 16).</p>
 
-            <h3>Balance Sheet</h3>
+            <h3 id="balance-sheet">Balance Sheet</h3>
             <ul>
                 <li><strong>Assets:</strong> ROU asset reported separately (or in property, plant & equipment with disclosure)</li>
                 <li><strong>Liabilities:</strong> Lease liability split into current and non-current portions</li>
                 <li><strong>Equity:</strong> Cumulative effect recognized in retained earnings (or in opening equity if IFRS 16 adoption)</li>
             </ul>
 
-            <h3>Cash Flow Statement</h3>
+            <h3 id="cash-flow-statement">Cash Flow Statement</h3>
             <p>This is crucial. Lease payments are now split between operating and financing cash flows:</p>
             <ul>
                 <li><strong>Operating activities:</strong> Interest portion (under IAS 7, entities choose to classify interest as operating or financing; most choose operating)</li>
@@ -552,7 +576,7 @@
 
             <h2 id="ratios">Impact on Financial Ratios</h2>
 
-            <h3>Before IFRS 16 (Operating Lease, IAS 17)</h3>
+            <h3 id="before-ifrs-16-operating-lease-ias-17">Before IFRS 16 (Operating Lease, IAS 17)</h3>
             <table>
                 <tr>
                     <th>Metric</th>
@@ -580,7 +604,7 @@
                 </tr>
             </table>
 
-            <h3>After IFRS 16 (All Leases on Balance Sheet)</h3>
+            <h3 id="after-ifrs-16-all-leases-on-balance-sheet">After IFRS 16 (All Leases on Balance Sheet)</h3>
             <table>
                 <tr>
                     <th>Metric</th>
@@ -612,10 +636,10 @@
 
             <h2 id="exemptions">Recognition Exemptions</h2>
 
-            <h3>Short-Term Leases</h3>
+            <h3 id="shortterm-leases">Short-Term Leases</h3>
             <p>A lessee may elect not to recognize a lease liability and ROU asset if the lease term is 12 months or less and contains no purchase option. The lease payment is expensed directly (like the old operating lease treatment).</p>
 
-            <h3>Low-Value Asset Leases</h3>
+            <h3 id="lowvalue-asset-leases">Low-Value Asset Leases</h3>
             <p>A lessee may elect not to recognize a lease liability and ROU asset if the underlying asset is of low value. In practice, "low value" means roughly <strong>$5,000 USD or less</strong> (e.g., office equipment, small tools, laptops).</p>
 
             <p class="callout"><strong>Practical note:</strong> Many entities elect these exemptions to reduce accounting and auditing complexity. However, the exemption is optional — entities can apply IFRS 16 to all leases if they prefer.</p>
@@ -635,42 +659,42 @@
 
             <h2 id="audit">What Auditors Look For (IFRS 16 Testing)</h2>
 
-            <h3>Lease Identification</h3>
+            <h3 id="lease-identification">Lease Identification</h3>
             <ul>
                 <li>Walk through contracts with "lease", "rental", or "hire" language</li>
                 <li>Identify non-obvious leases (e.g., service contracts that include asset use, equipment financing arrangements)</li>
                 <li>Challenge management's assessment of whether a contract is a lease (common area of disagreement)</li>
             </ul>
 
-            <h3>Completeness</h3>
+            <h3 id="completeness">Completeness</h3>
             <ul>
                 <li>Examine capital expenditure budgets and minutes for discussion of new leases</li>
                 <li>Review property, plant & equipment schedules for evidence of leased assets</li>
                 <li>Search for lease commitments in notes to prior-year accounts</li>
             </ul>
 
-            <h3>Discount Rate Challenge</h3>
+            <h3 id="discount-rate-challenge">Discount Rate Challenge</h3>
             <ul>
                 <li>Obtain management's IBR calculation and supporting evidence (bank quotes, bond yields, credit spreads)</li>
                 <li>Compare IBR to company's actual borrowing rates; challenge any material deviation</li>
                 <li>Recalculate PV of lease payments using the IBR and verify accuracy</li>
             </ul>
 
-            <h3>Lease Term Assessment</h3>
+            <h3 id="lease-term-assessment">Lease Term Assessment</h3>
             <ul>
                 <li>Review lease agreements for extension/termination options</li>
                 <li>Challenge management on "reasonably certain" judgments (e.g., why is the company certain to exercise a renewal?)</li>
                 <li>Test this judgment against historical patterns (did the company renew similar leases in the past?)</li>
             </ul>
 
-            <h3>ROU Asset and Liability Calculation</h3>
+            <h3 id="rou-asset-and-liability-calculation">ROU Asset and Liability Calculation</h3>
             <ul>
                 <li>Recalculate the lease liability for a sample of leases</li>
                 <li>Verify ROU asset = liability + initial costs −’ incentives</li>
                 <li>Check that payment dates, payment amounts, and amounts included in liability are accurate</li>
             </ul>
 
-            <h3>Subsequent Measurement</h3>
+            <h3 id="subsequent-measurement">Subsequent Measurement</h3>
             <ul>
                 <li>Test depreciation calculations and ensure straight-line method is applied correctly</li>
                 <li>Test interest expense (should equal prior-period liability × IBR)</li>
@@ -678,7 +702,7 @@
                 <li>Identify and challenge any unusual items (e.g., lease modifications, early terminations)</li>
             </ul>
 
-            <h3>Disclosure Completeness</h3>
+            <h3 id="disclosure-completeness">Disclosure Completeness</h3>
             <ul>
                 <li>Obtain management's disclosure checklist (IFRS 16.53— 60 requires extensive disclosures)</li>
                 <li>Verify that required amounts are disclosed: payments, ROU assets, liabilities, maturity, depreciation, interest</li>
@@ -687,71 +711,71 @@
 
             <h2 id="common-mistakes">Common IFRS 16 Mistakes (What Auditors Catch)</h2>
 
-            <h3>1. Forgetting to Include Variable Lease Payments</h3>
+            <h3 id="1-forgetting-to-include-variable-lease-payments">1. Forgetting to Include Variable Lease Payments</h3>
             <p>Many entities forget that variable lease payments linked to an index (e.g., rent indexed to RPI) must be included in the liability on day one if the index is "in-substance fixed" (i.e., knowable with high certainty).</p>
 
-            <h3>2. Incorrect Discount Rate</h3>
+            <h3 id="2-incorrect-discount-rate">2. Incorrect Discount Rate</h3>
             <p>Using a rate that's too low (thereby overstating the liability) or too high (understating it) is one of the most common errors. Auditors will always challenge.</p>
 
-            <h3>3. Misidentifying the Lease Term</h3>
+            <h3 id="3-misidentifying-the-lease-term">3. Misidentifying the Lease Term</h3>
             <p>Management often forgets to include extension options, leading to a liability that's understated. The question "Is the company reasonably certain to extend?" is judgment-based and disputed often in audits.</p>
 
-            <h3>4. Capitalizing Lease Incentives Incorrectly</h3>
+            <h3 id="4-capitalizing-lease-incentives-incorrectly">4. Capitalizing Lease Incentives Incorrectly</h3>
             <p>Some entities forget to reduce the ROU asset by lease incentives received, overstating the asset and the initial P&L impact.</p>
 
-            <h3>5. Forgetting Initial Direct Costs</h3>
+            <h3 id="5-forgetting-initial-direct-costs">5. Forgetting Initial Direct Costs</h3>
             <p>Legal fees, surveyor costs, and broker fees related to lease negotiation must be capitalized into the ROU asset. Many entities expense these directly.</p>
 
-            <h3>6. Not Updating Lease Modifications</h3>
+            <h3 id="6-not-updating-lease-modifications">6. Not Updating Lease Modifications</h3>
             <p>When a lease is modified (e.g., rent increased, term extended), the liability and ROU asset must be remeasured. Some entities fail to record this, keeping the old liability and asset balances.</p>
 
-            <h3>7. Presentation and Disclosure Gaps</h3>
+            <h3 id="7-presentation-and-disclosure-gaps">7. Presentation and Disclosure Gaps</h3>
             <p>Many audits fail because disclosures are incomplete. IFRS 16 requires extensive schedule showing maturity of lease liabilities, lease expense reconciliation, and assumptions used.</p>
 
             <h2 id="faq">Frequently Asked Questions</h2>
 
             <div class="faq-item">
-                <h3>Do short-term leases always qualify for exemption?</h3>
+                <h3 id="do-shortterm-leases-always-qualify-for-exemption">Do short-term leases always qualify for exemption?</h3>
                 <p>No. A lease qualifies for the short-term exemption only if (1) the term is 12 months or less, AND (2) there is no purchase option. A 13-month lease doesn't qualify, even if it's only slightly over 12 months.</p>
             </div>
 
             <div class="faq-item">
-                <h3>Can we estimate the IBR, or must we obtain a bank quote?</h3>
+                <h3 id="can-we-estimate-the-ibr-or-must-we-obtain-a-bank-quote">Can we estimate the IBR, or must we obtain a bank quote?</h3>
                 <p>IFRS 16 doesn't require a bank quote. You can estimate the IBR using comparable borrowing rates, credit spreads, and the risk-free rate. However, your estimate must be defensible. An auditor will challenge an IBR that's inconsistent with how your company actually borrows.</p>
             </div>
 
             <div class="faq-item">
-                <h3>If we sublease the asset to another party, does IFRS 16 still apply?</h3>
+                <h3 id="if-we-sublease-the-asset-to-another-party-does-ifrs-16-still-apply">If we sublease the asset to another party, does IFRS 16 still apply?</h3>
                 <p>Yes, IFRS 16 applies to the original lease between you and the lessor. You also account for the sublease separately as a lease, applying IFRS 16 as the lessor (if the sublease is a finance lease) or as an operating lease lessor (if the sublease is operating).</p>
             </div>
 
             <div class="faq-item">
-                <h3>How do we account for a lease where the purchase price increases if we buy the asset later?</h3>
+                <h3 id="how-do-we-account-for-a-lease-where-the-purchase-price-increases-if-we-buy-the-asset-later">How do we account for a lease where the purchase price increases if we buy the asset later?</h3>
                 <p>The purchase option price is included in the lease liability only if you are "reasonably certain" to exercise it. If you're unsure, don't include it initially, but reassess each reporting period. If circumstances later make it reasonably certain, you remeasure the lease.</p>
             </div>
 
             <div class="faq-item">
-                <h3>Are leases of intangible assets (e.g., software licenses) in scope for IFRS 16?</h3>
+                <h3 id="are-leases-of-intangible-assets-eg-software-licenses-in-scope-for-ifrs-16">Are leases of intangible assets (e.g., software licenses) in scope for IFRS 16?</h3>
                 <p>IFRS 16 applies to leases of tangible and intangible assets if they meet the definition of a lease (identified asset, control test). Software licenses that give you the right to use (vs. a right to access) are in scope. However, some software arrangements are service contracts, not leases.</p>
             </div>
 
             <div class="faq-item">
-                <h3>If we own the building but lease equipment inside it, how do we present that?</h3>
+                <h3 id="if-we-own-the-building-but-lease-equipment-inside-it-how-do-we-present-that">If we own the building but lease equipment inside it, how do we present that?</h3>
                 <p>The owned building is property, plant & equipment. The leased equipment is a right-of-use asset. Both appear in the balance sheet, but in different line items. IAS 1 requires separate presentation or clear labeling in notes.</p>
             </div>
 
             <div class="faq-item">
-                <h3>Does IFRS 16 apply to lease agreements that are already off-balance-sheet under IFRS 17?</h3>
+                <h3 id="does-ifrs-16-apply-to-lease-agreements-that-are-already-offbalancesheet-under-ifrs-17">Does IFRS 16 apply to lease agreements that are already off-balance-sheet under IFRS 17?</h3>
                 <p>Yes. IFRS 16 became effective on 1 January 2019 and applies to all leases existing at that date. On transition, entities recognized right-of-use assets and lease liabilities for most existing operating leases (with practical expedients available). There was no "grandfathering."</p>
             </div>
 
             <div class="faq-item">
-                <h3>Can we use different discount rates for different leases?</h3>
+                <h3 id="can-we-use-different-discount-rates-for-different-leases">Can we use different discount rates for different leases?</h3>
                 <p>Yes, but your IBR should be consistent across leases of similar term, currency, and risk. Using a 3% rate for one lease and 6% for a nearly identical lease will trigger audit questions. You should have a documented IBR policy.</p>
             </div>
 
             <div class="cta-box">
-                <h3>Ready to Dive Deeper?</h3>
+                <h3 id="ready-to-dive-deeper">Ready to Dive Deeper?</h3>
                 <p>This guide covers the fundamentals. For specialized topics, explore our related cluster articles on discount rates, lease modifications, and journal entry templates.</p>
                 <a href="https://uqconsulting.org/blog/ifrs-16-discount-rate-ibr.html" class="cta-button">→’ IFRS 16 Discount Rate Guide</a>
             </div>

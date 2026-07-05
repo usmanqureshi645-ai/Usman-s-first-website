@@ -68,6 +68,45 @@
         .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
         .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; padding: 8px; border: 1px solid #e4e9f0; border-radius: 4px; display: block; }
         .disclaimer { font-size: 0.82em; color: #8593a8; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; font-style: italic; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -88,18 +127,9 @@
 
         <p class="lead">Sale and leaseback (SLB) transactions are common: a company sells an asset (building, equipment) to a buyer and immediately leases it back. The accounting is tricky. You must defer gains, recognize ROU assets, and think like both the seller and the buyer. This guide covers both sides with full journal entries and real-world examples.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#definition">What is sale and leaseback?</a></li>
-                <li><a href="#seller">Seller-lessee accounting</a></li>
-                <li><a href="#buyer">Buyer-lessor accounting</a></li>
-                <li><a href="#gain">Gain/loss recognition</a></li>
-                <li><a href="#worked">Worked example</a></li>
-                <li><a href="#common">Common traps</a></li>
-                <li><a href="#auditor">Auditor focus areas</a></li>
-                <li><a href="#faq">FAQs</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#definition">What is Sale and Leaseback?</a></li><li class="toc-l1"><a href="#seller">Seller-Lessee Accounting (The Company Using the Asset)</a><ul><li class="toc-l2"><a href="#the-key-principle">The Key Principle</a></li><li class="toc-l2"><a href="#step-1-assess-whether-the-sale-is-a-true-sale">Step 1: Assess Whether the Sale is a "True Sale"</a></li><li class="toc-l2"><a href="#step-2-recognize-the-lease-liability-and-rou-asset">Step 2: Recognize the Lease Liability and ROU Asset</a></li><li class="toc-l2"><a href="#step-3-defer-the-gain">Step 3: Defer the Gain</a></li><li class="toc-l2"><a href="#journal-entries-for-sellerlessee">Journal Entries for Seller-Lessee</a></li></ul></li><li class="toc-l1"><a href="#buyer">Buyer-Lessor Accounting (The Entity Purchasing and Leasing Out)</a><ul><li class="toc-l2"><a href="#the-key-principle-2">The Key Principle</a></li><li class="toc-l2"><a href="#classification">Classification</a></li><li class="toc-l2"><a href="#journal-entries-for-buyerlessor-finance-lease">Journal Entries for Buyer-Lessor (Finance Lease)</a></li></ul></li><li class="toc-l1"><a href="#gain">Gain/Loss Recognition: The Full Picture</a></li><li class="toc-l1"><a href="#worked">Worked Example: Building Sale and Leaseback</a><ul><li class="toc-l2"><a href="#scenario">Scenario</a></li><li class="toc-l2"><a href="#step-1-calculate-lease-liability">Step 1: Calculate Lease Liability</a></li><li class="toc-l2"><a href="#step-2-journal-entries-sellerlessee">Step 2: Journal Entries (Seller-Lessee)</a></li></ul></li><li class="toc-l1"><a href="#common">Common Traps and Auditor Red Flags</a><ul><li class="toc-l2"><a href="#trap-1-recognizing-the-entire-gain-at-sale-date">Trap 1: Recognizing the Entire Gain at Sale Date</a></li><li class="toc-l2"><a href="#trap-2-underestimating-the-rou-asset">Trap 2: Underestimating the ROU Asset</a></li><li class="toc-l2"><a href="#trap-3-forgetting-about-operating-lease-leasebacks">Trap 3: Forgetting About Operating Lease Leasebacks</a></li></ul></li><li class="toc-l1"><a href="#auditor">What Auditors Focus On</a><ul><li class="toc-l2"><a href="#1-is-the-sale-real">1. Is the Sale "Real"?</a></li><li class="toc-l2"><a href="#2-is-the-gain-deferred">2. Is the Gain Deferred?</a></li><li class="toc-l2"><a href="#3-is-the-lease-correctly-classified">3. Is the Lease Correctly Classified?</a></li></ul></li><li class="toc-l1"><a href="#faq">FAQs</a><ul><li class="toc-l2"><a href="#if-i-recognize-a-loss-on-the-sale-do-i-defer-it">If I recognize a loss on the sale, do I defer it?</a></li><li class="toc-l2"><a href="#what-if-the-sale-price-is-below-fair-value">What if the sale price is below fair value?</a></li><li class="toc-l2"><a href="#is-the-rou-asset-the-same-as-the-deferred-gain">Is the ROU asset the same as the deferred gain?</a><ul><li class="toc-l3"><a href="#usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</a></li></ul></li></ul></li></ul>
         </div>
 
         <article>
@@ -115,23 +145,23 @@
 
             <h2 id="seller">Seller-Lessee Accounting (The Company Using the Asset)</h2>
 
-            <h3>The Key Principle</h3>
+            <h3 id="the-key-principle">The Key Principle</h3>
             <p>Under IFRS 16, if the leaseback is classified as a lease, you account for it as you would any other lease: recognize a right-of-use (ROU) asset and lease liability. However, you must also defer any gain on the sale.</p>
 
-            <h3>Step 1: Assess Whether the Sale is a "True Sale"</h3>
+            <h3 id="step-1-assess-whether-the-sale-is-a-true-sale">Step 1: Assess Whether the Sale is a "True Sale"</h3>
             <p>IFRS 15 (Revenue) requires that the transfer of the asset be a "performance obligation" and that you have no ongoing control. For SLB transactions, the question is: did you really transfer the asset, or is this just a secured borrowing?</p>
             <p>If the leaseback is a finance lease (the buyer has retained risks), the "sale" might not qualify for revenue recognition, and you keep the asset on the balance sheet.</p>
             <p>If the leaseback is an operating lease (the buyer has transferred most risks), the sale is "true" and you derecognize the asset.</p>
 
-            <h3>Step 2: Recognize the Lease Liability and ROU Asset</h3>
+            <h3 id="step-2-recognize-the-lease-liability-and-rou-asset">Step 2: Recognize the Lease Liability and ROU Asset</h3>
             <p>You recognize the lease liability and ROU asset just as you would with any leaseback. Calculate the PV of lease payments using your IBR.</p>
 
-            <h3>Step 3: Defer the Gain</h3>
+            <h3 id="step-3-defer-the-gain">Step 3: Defer the Gain</h3>
             <p>Any gain on the sale of the asset is NOT recognized immediately in P&L. Instead, you defer it and recognize it over the lease term (typically straight-line).</p>
 
             <p class="callout"><strong>Audit trap:</strong> Many companies recognize the sale gain immediately, forgetting that IFRS 16.100 requires deferral. Auditors will challenge this.</p>
 
-            <h3>Journal Entries for Seller-Lessee</h3>
+            <h3 id="journal-entries-for-sellerlessee">Journal Entries for Seller-Lessee</h3>
 
             <p><strong>Step A: Record the Sale (simplified)</strong></p>
             <div class="journal">
@@ -154,16 +184,16 @@
 
             <h2 id="buyer">Buyer-Lessor Accounting (The Entity Purchasing and Leasing Out)</h2>
 
-            <h3>The Key Principle</h3>
+            <h3 id="the-key-principle-2">The Key Principle</h3>
             <p>From the buyer's perspective, this is a simple lease transaction. The buyer is the lessor. Account for the lease as an operating or finance lease under IFRS 16 (lessor accounting), depending on the terms.</p>
 
-            <h3>Classification</h3>
+            <h3 id="classification">Classification</h3>
             <ul>
                 <li><strong>Finance lease:</strong> If the risks/rewards transfer to the seller-lessee (typical for long-term SLBs)</li>
                 <li><strong>Operating lease:</strong> If the buyer retains significant risks (less common for SLBs)</li>
             </ul>
 
-            <h3>Journal Entries for Buyer-Lessor (Finance Lease)</h3>
+            <h3 id="journal-entries-for-buyerlessor-finance-lease">Journal Entries for Buyer-Lessor (Finance Lease)</h3>
 
             <p><strong>Step A: Record the Purchase</strong></p>
             <div class="journal">
@@ -211,7 +241,7 @@
 
             <h2 id="worked">Worked Example: Building Sale and Leaseback</h2>
 
-            <h3>Scenario</h3>
+            <h3 id="scenario">Scenario</h3>
             <p><strong>Seller-Lessee (Retail Chain):</strong></p>
             <ul>
                 <li>Book value of building: £8m (no accumulated depreciation for simplicity)</li>
@@ -221,10 +251,10 @@
                 <li>IBR: 4.5%</li>
             </ul>
 
-            <h3>Step 1: Calculate Lease Liability</h3>
+            <h3 id="step-1-calculate-lease-liability">Step 1: Calculate Lease Liability</h3>
             <p>PV of £600k annual payments over 20 years at 4.5% ‰ˆ £9.13m</p>
 
-            <h3>Step 2: Journal Entries (Seller-Lessee)</h3>
+            <h3 id="step-2-journal-entries-sellerlessee">Step 2: Journal Entries (Seller-Lessee)</h3>
 
             <p><strong>Entry 1: Record the Sale</strong></p>
             <div class="journal">
@@ -248,49 +278,49 @@
 
             <h2 id="common">Common Traps and Auditor Red Flags</h2>
 
-            <h3>Trap 1: Recognizing the Entire Gain at Sale Date</h3>
+            <h3 id="trap-1-recognizing-the-entire-gain-at-sale-date">Trap 1: Recognizing the Entire Gain at Sale Date</h3>
             <p><strong>❌ Wrong:</strong> Record £2m gain immediately in P&L when the asset is sold</p>
             <p><strong>✓ Correct:</strong> Defer £2m and recognize £100k/year over the 20-year lease term</p>
 
-            <h3>Trap 2: Underestimating the ROU Asset</h3>
+            <h3 id="trap-2-underestimating-the-rou-asset">Trap 2: Underestimating the ROU Asset</h3>
             <p><strong>❌ Wrong:</strong> ROU asset = sale price −’ lease liability (£10m −’ £9.13m = £0.87m)</p>
             <p><strong>✓ Correct:</strong> ROU asset = PV of lease payments = £9.13m (same as liability at inception)</p>
 
-            <h3>Trap 3: Forgetting About Operating Lease Leasebacks</h3>
+            <h3 id="trap-3-forgetting-about-operating-lease-leasebacks">Trap 3: Forgetting About Operating Lease Leasebacks</h3>
             <p>If the leaseback is an operating lease (not a finance lease), the seller-lessee does NOT recognize an ROU asset/liability. Instead, they rent the asset as before. The deferred gain treatment still applies.</p>
 
             <h2 id="auditor">What Auditors Focus On</h2>
 
-            <h3>1. Is the Sale "Real"?</h3>
+            <h3 id="1-is-the-sale-real">1. Is the Sale "Real"?</h3>
             <p>Auditors ask: "Did you genuinely transfer risks and rewards?" If it's merely collateralized borrowing disguised as a sale, the sale should not be recorded.</p>
 
-            <h3>2. Is the Gain Deferred?</h3>
+            <h3 id="2-is-the-gain-deferred">2. Is the Gain Deferred?</h3>
             <p>Auditors recalculate the gain and verify it's being recognized straight-line over the lease term, not at the sale date.</p>
 
-            <h3>3. Is the Lease Correctly Classified?</h3>
+            <h3 id="3-is-the-lease-correctly-classified">3. Is the Lease Correctly Classified?</h3>
             <p>Auditors assess whether the leaseback is a finance or operating lease, and verify it's accounted for accordingly.</p>
 
             <h2 id="faq">FAQs</h2>
 
             <div class="faq-item">
-                <h3>If I recognize a loss on the sale, do I defer it?</h3>
+                <h3 id="if-i-recognize-a-loss-on-the-sale-do-i-defer-it">If I recognize a loss on the sale, do I defer it?</h3>
                 <p>No. Losses are recognized immediately in P&L. Only gains are deferred.</p>
             </div>
 
             <div class="faq-item">
-                <h3>What if the sale price is below fair value?</h3>
+                <h3 id="what-if-the-sale-price-is-below-fair-value">What if the sale price is below fair value?</h3>
                 <p>If you sell below fair value, only defer the gain up to fair value. The excess below fair value is recognized immediately (it's an economic loss, not deferred).</p>
             </div>
 
             <div class="faq-item">
-                <h3>Is the ROU asset the same as the deferred gain?</h3>
+                <h3 id="is-the-rou-asset-the-same-as-the-deferred-gain">Is the ROU asset the same as the deferred gain?</h3>
                 <p>No. The ROU asset is the PV of lease payments. The deferred gain is the difference between sale price and book value. They're separate items.</p>
             </div>
 
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
-                    <h4>Usman Qureshi (ACCA, ACA)</h4>
+                    <h4 id="usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</h4>
                     <p>Sale and leasebacks are common in audit, especially for real estate. The biggest mistake I see: companies immediately recognizing the entire gain instead of deferring it. This guide reflects real audit findings.</p>
                 </div>
             </div>

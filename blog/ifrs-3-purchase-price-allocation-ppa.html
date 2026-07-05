@@ -28,6 +28,45 @@
         th { background: #1a2f5a; color: #fff; font-weight: 600; }
         .formula { background: #1a2f5a; color: #e8eef7; padding: 12px; border-radius: 6px; margin: 14px 0; text-align: center; }
         .disclaimer { font-size: 0.81em; color: #8593a8; margin-top: 36px; padding-top: 16px; border-top: 1px solid #e4e9f0; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -44,29 +83,9 @@
 </div>
         <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 12 min read</div>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#what-is-a-ppa">What is a PPA?</a></li>
-                <li><a href="#ppa-step-1-measure-consideration">PPA Step 1: Measure Consideration</a></li>
-                <li><a href="#ppa-step-2-list-identifiable-assets-tangible-amp-intangible">PPA Step 2: List Identifiable Assets (Tangible &amp; Intangible)</a></li>
-                  <li><a href="#tangible-assets">Tangible Assets</a></li>
-                  <li><a href="#intangible-assets-separately-identifiable">Intangible Assets (Separately Identifiable)</a></li>
-                <li><a href="#ppa-step-3-list-liabilities-assumed">PPA Step 3: List Liabilities Assumed</a></li>
-                <li><a href="#ppa-step-4-calculate-deferred-tax">PPA Step 4: Calculate Deferred Tax</a></li>
-                <li><a href="#ppa-step-5-calculate-goodwill">PPA Step 5: Calculate Goodwill</a></li>
-                <li><a href="#worked-example-engineering-services-acquisition">Worked Example: Engineering Services Acquisition</a></li>
-                  <li><a href="#deal-overview">Deal Overview</a></li>
-                  <li><a href="#consideration-paid">Consideration Paid</a></li>
-                  <li><a href="#fair-value-of-identifiable-assets-amp-liabilities">Fair Value of Identifiable Assets &amp; Liabilities</a></li>
-                  <li><a href="#goodwill-calculation">Goodwill Calculation</a></li>
-                  <li><a href="#goodwill-sanity-check">Goodwill Sanity Check</a></li>
-                  <li><a href="#ppa-schedule-summary">PPA Schedule (Summary)</a></li>
-                <li><a href="#ppa-audit-red-flags">PPA Audit Red Flags</a></li>
-                  <li><a href="#red-flag-1-incomplete-intangible-asset-identification">Red Flag 1: Incomplete Intangible Asset Identification</a></li>
-                  <li><a href="#red-flag-2-overstated-fair-values">Red Flag 2: Overstated Fair Values</a></li>
-                  <li><a href="#red-flag-3-deferred-tax-not-calculated">Red Flag 3: Deferred Tax Not Calculated</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#what-is-a-ppa">What is a PPA?</a></li><li class="toc-l1"><a href="#ppa-step-1-measure-consideration">PPA Step 1: Measure Consideration</a></li><li class="toc-l1"><a href="#ppa-step-2-list-identifiable-assets-tangible-amp-intangible">PPA Step 2: List Identifiable Assets (Tangible &amp; Intangible)</a><ul><li class="toc-l2"><a href="#tangible-assets">Tangible Assets</a></li><li class="toc-l2"><a href="#intangible-assets-separately-identifiable">Intangible Assets (Separately Identifiable)</a></li></ul></li><li class="toc-l1"><a href="#ppa-step-3-list-liabilities-assumed">PPA Step 3: List Liabilities Assumed</a></li><li class="toc-l1"><a href="#ppa-step-4-calculate-deferred-tax">PPA Step 4: Calculate Deferred Tax</a></li><li class="toc-l1"><a href="#ppa-step-5-calculate-goodwill">PPA Step 5: Calculate Goodwill</a></li><li class="toc-l1"><a href="#worked-example-engineering-services-acquisition">Worked Example: Engineering Services Acquisition</a><ul><li class="toc-l2"><a href="#deal-overview">Deal Overview</a></li><li class="toc-l2"><a href="#consideration-paid">Consideration Paid</a></li><li class="toc-l2"><a href="#fair-value-of-identifiable-assets-amp-liabilities">Fair Value of Identifiable Assets &amp; Liabilities</a></li><li class="toc-l2"><a href="#goodwill-calculation">Goodwill Calculation</a></li><li class="toc-l2"><a href="#goodwill-sanity-check">Goodwill Sanity Check</a></li><li class="toc-l2"><a href="#ppa-schedule-summary">PPA Schedule (Summary)</a></li></ul></li><li class="toc-l1"><a href="#ppa-audit-red-flags">PPA Audit Red Flags</a><ul><li class="toc-l2"><a href="#red-flag-1-incomplete-intangible-asset-identification">Red Flag 1: Incomplete Intangible Asset Identification</a></li><li class="toc-l2"><a href="#red-flag-2-overstated-fair-values">Red Flag 2: Overstated Fair Values</a></li><li class="toc-l2"><a href="#red-flag-3-deferred-tax-not-calculated">Red Flag 3: Deferred Tax Not Calculated</a></li></ul></li></ul>
         </div>
 
 

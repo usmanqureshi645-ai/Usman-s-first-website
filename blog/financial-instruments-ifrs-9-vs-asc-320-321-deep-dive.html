@@ -62,6 +62,45 @@
         .related { margin-top: 32px; padding-top: 20px; border-top: 2px solid #e4e9f0; }
         .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; display: block; margin-bottom: 6px; }
         .disclaimer { font-size: 0.8em; color: #8593a8; margin-top: 32px; padding-top: 16px; font-style: italic; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -75,18 +114,9 @@
 
         <p class="lead">IFRS 9 and US GAAP (ASC 320/321) both classifyfinancial instruments as amortised cost, fair value through OCI, or fair value through P&amp;L. They largely converged, but differences exist in held-to-maturity classification, reclassification, impairment (expected credit losses vs current expected credit losses), and debt modification accounting. For banks and insurers, these differences materially affect balance sheet and profitability. This guide explains both standards with examples.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#overview">The headline: substantial convergence, small gaps</a></li>
-                <li><a href="#classification">Classification: business model and cash flows</a></li>
-                <li><a href="#htm">Held-to-maturity (HTM): the strictest category</a></li>
-                <li><a href="#impairment">Impairment: ECL vs CECL</a></li>
-                <li><a href="#reclassification">Reclassification: when and how</a></li>
-                <li><a href="#modification">Debt modification accounting</a></li>
-                <li><a href="#audit">Audit implications</a></li>
-                <li><a href="#faq">FAQs</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#overview">The Headline: Substantial Convergence, Small Gaps</a></li><li class="toc-l1"><a href="#classification">Classification: Business Model and Cash Flows</a></li><li class="toc-l1"><a href="#htm">Held-to-Maturity (HTM): The Strictest Category</a></li><li class="toc-l1"><a href="#impairment">Impairment: ECL vs CECL</a></li><li class="toc-l1"><a href="#reclassification">Reclassification: When and How</a></li><li class="toc-l1"><a href="#modification">Debt Modification Accounting</a></li><li class="toc-l1"><a href="#audit">Audit Implications</a><ul><li class="toc-l2"><a href="#need-help-with-financial-instrument-classification">Need help with financial instrument classification?</a></li></ul></li><li class="toc-l1"><a href="#faq">FAQs</a><ul><li class="toc-l2"><a href="#are-ifrs-9-and-asc-320321-the-same">Are IFRS 9 and ASC 320/321 the same?</a></li><li class="toc-l2"><a href="#what-is-heldtomaturity-accounting">What is held-to-maturity accounting?</a></li><li class="toc-l2"><a href="#what-is-the-difference-between-ecl-and-cecl">What is the difference between ECL and CECL?</a><ul><li class="toc-l3"><a href="#about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</a></li></ul></li><li class="toc-l2"><a href="#related-resources">Related resources</a></li></ul></li></ul>
         </div>
 
         <article>
@@ -152,35 +182,35 @@
             </ul>
 
             <div class="cta-box">
-                <h3>Need help with financial instrument classification?</h3>
+                <h3 id="need-help-with-financial-instrument-classification">Need help with financial instrument classification?</h3>
                 <p>Use GAAP Compare to research IFRS 9 vs ASC 320/321, or ask an expert.</p>
                 <a href="https://uqconsulting.org/gaap-compare.html" class="cta-button">Compare Standards →</a>
             </div>
 
             <h2 id="faq">FAQs</h2>
             <div class="faq-item">
-                <h3>Are IFRS 9 and ASC 320/321 the same?</h3>
+                <h3 id="are-ifrs-9-and-asc-320321-the-same">Are IFRS 9 and ASC 320/321 the same?</h3>
                 <p>Largely yes. Both use business model + cash flow classification. But differences exist in HTM strictness, ECL vs CECL timing, reclassification rules, and debt modification.</p>
             </div>
             <div class="faq-item">
-                <h3>What is held-to-maturity accounting?</h3>
+                <h3 id="what-is-heldtomaturity-accounting">What is held-to-maturity accounting?</h3>
                 <p>ASC 320: formal HTM category with strict reclassification rules. IFRS 9: amortised cost applies if business model is hold-to-collect (more flexible).</p>
             </div>
             <div class="faq-item">
-                <h3>What is the difference between ECL and CECL?</h3>
+                <h3 id="what-is-the-difference-between-ecl-and-cecl">What is the difference between ECL and CECL?</h3>
                 <p>IFRS ECL: 12-month losses initially (Stage 1), lifetime on upgrade. ASC CECL: lifetime losses from day one. IFRS is lower initially; ASC is immediate.</p>
             </div>
 
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
-                    <h4>About the author — Usman Qureshi (ACCA, ACA)</h4>
+                    <h4 id="about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</h4>
                     <p>Usman has audited investment portfolios and debt securities for banks and insurers. He specialises in IFRS 9 and ASC 320/321 classification and impairment.</p>
                 </div>
             </div>
 
             <div class="related">
-                <h3>Related resources</h3>
+                <h3 id="related-resources">Related resources</h3>
                 <a href="https://uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">→ Back to IFRS vs US GAAP Comparison</a>
             </div>
 

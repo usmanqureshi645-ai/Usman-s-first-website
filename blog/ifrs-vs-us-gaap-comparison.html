@@ -253,6 +253,45 @@
             .toc ul { columns: 1; }
             .comparison { grid-template-columns: 1fr; }
         }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -272,22 +311,9 @@
 
         <p class="lead">If you audit a US-listed group with UK subsidiaries, work in a global Big 4 firm, or move between IFRS and GAAP jurisdictions, this comparison is essential. We cover the seven biggest accounting differences — with examples — so you understand not just <em>what</em> changed, but <em>why</em> and how it affects the numbers.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#overview">What's the difference between IFRS and US GAAP?</a></li>
-                <li><a href="#philosophy">Philosophy: principles vs rules</a></li>
-                <li><a href="#revenue">Revenue recognition (IFRS 15 vs ASC 606)</a></li>
-                <li><a href="#leases">Lease accounting (IFRS 16 vs ASC 842)</a></li>
-                <li><a href="#goodwill">Goodwill impairment</a></li>
-                <li><a href="#inventory">Inventory valuation</a></li>
-                <li><a href="#provisions">Provisions and contingencies</a></li>
-                <li><a href="#instruments">Financial instruments</a></li>
-                <li><a href="#presentation">Presentation and display</a></li>
-                <li><a href="#convergence">Are they converging?</a></li>
-                <li><a href="#implications">Practical implications for auditors &amp; CFOs</a></li>
-                <li><a href="#faq">FAQs</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#overview">What's the Difference Between IFRS and US GAAP?</a></li><li class="toc-l1"><a href="#philosophy">Philosophy: Principles-Based vs Rules-Based</a></li><li class="toc-l1"><a href="#revenue">Revenue Recognition: IFRS 15 vs ASC 606</a></li><li class="toc-l1"><a href="#leases">Lease Accounting: IFRS 16 vs ASC 842</a></li><li class="toc-l1"><a href="#goodwill">Goodwill Impairment</a><ul><li class="toc-l2"><a href="#ifrs-onestep-test">IFRS: One-Step Test</a></li><li class="toc-l2"><a href="#us-gaap-twostep-test">US GAAP: Two-Step Test</a></li></ul></li><li class="toc-l1"><a href="#inventory">Inventory Valuation</a><ul><li class="toc-l3"><a href="#ifrs">IFRS</a></li><li class="toc-l3"><a href="#us-gaap">US GAAP</a></li></ul></li><li class="toc-l1"><a href="#provisions">Provisions and Contingencies</a></li><li class="toc-l1"><a href="#instruments">Financial Instruments</a></li><li class="toc-l1"><a href="#presentation">Presentation and Display</a></li><li class="toc-l1"><a href="#convergence">Are IFRS and US GAAP Converging?</a></li><li class="toc-l1"><a href="#implications">Practical Implications for Auditors &amp; CFOs</a><ul><li class="toc-l2"><a href="#for-auditors">For auditors:</a></li><li class="toc-l2"><a href="#for-cfos-and-controllers">For CFOs and controllers:</a></li><li class="toc-l2"><a href="#need-to-compare-your-specific-scenario">Need to compare your specific scenario?</a></li></ul></li><li class="toc-l1"><a href="#faq">Frequently Asked Questions</a><ul><li class="toc-l2"><a href="#what-are-the-main-differences-between-ifrs-and-us-gaap">What are the main differences between IFRS and US GAAP?</a></li><li class="toc-l2"><a href="#is-ifrs-or-us-gaap-more-strict">Is IFRS or US GAAP more strict?</a></li><li class="toc-l2"><a href="#what-is-the-difference-between-ifrs-15-and-asc-606">What is the difference between IFRS 15 and ASC 606?</a></li><li class="toc-l2"><a href="#why-doesnt-the-us-use-ifrs">Why doesn't the US use IFRS?</a></li><li class="toc-l2"><a href="#how-do-ifrs-16-and-asc-842-differ-on-lease-accounting">How do IFRS 16 and ASC 842 differ on lease accounting?</a></li><li class="toc-l2"><a href="#what-is-ifrs-goodwill-impairment-vs-us-gaap">What is IFRS goodwill impairment vs US GAAP?</a></li><li class="toc-l2"><a href="#can-a-company-use-ifrs-if-it-is-uslisted">Can a company use IFRS if it is US-listed?</a></li><li class="toc-l2"><a href="#are-ifrs-and-us-gaap-converging">Are IFRS and US GAAP converging?</a><ul><li class="toc-l3"><a href="#about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</a></li></ul></li><li class="toc-l2"><a href="#related-free-tools-guides">Related free tools &amp; guides</a></li></ul></li></ul>
         </div>
 
         <article>
@@ -341,12 +367,12 @@
 
             <h2 id="goodwill">Goodwill Impairment</h2>
             <p>Here's a material difference: <strong>IFRS and US GAAP test goodwill impairment in different ways.</strong></p>
-            <h3>IFRS: One-Step Test</h3>
+            <h3 id="ifrs-onestep-test">IFRS: One-Step Test</h3>
             <p>Compare the <strong>carrying amount</strong> to the <strong>recoverable amount</strong> (the higher of fair value less costs to sell, and value-in-use). If carrying exceeds recoverable, impair the difference.</p>
             <div class="callout">
                 <strong>Value-in-use</strong> = present value of future cash flows the asset is expected to generate. This is a present-value calculation using the lessee's own discount rate (reflecting the risks specific to the asset). It is often higher than fair value, allowing a goodwill impairment test based on internal projections.
             </div>
-            <h3>US GAAP: Two-Step Test</h3>
+            <h3 id="us-gaap-twostep-test">US GAAP: Two-Step Test</h3>
             <p>Step 1: Compare <strong>fair value</strong> (of the reporting unit) to <strong>carrying amount</strong> (including goodwill). If fair value exceeds carrying, no impairment.</p>
             <p>Step 2: If fair value is <em>less</em> than carrying, calculate the <strong>implied fair value of goodwill</strong> by subtracting the fair values of identified net assets from the fair value of the reporting unit. If the carrying amount of goodwill exceeds this implied amount, impair the difference.</p>
             <p><strong>Practical impact:</strong> IFRS often produces a lower impairment (because value-in-use is based on internal cash flow projections, not market fair value). US GAAP is stricter, using fair value directly. In down markets, US GAAP goodwill write-downs can be larger.</p>
@@ -357,7 +383,7 @@
             <p>Both standards require inventory to be valued at the lower of cost and net realisable value (IFRS) or lower of cost and market (US GAAP). These sound identical but have a subtle difference:</p>
             <div class="comparison">
                 <div class="comp-col">
-                    <h4>IFRS</h4>
+                    <h4 id="ifrs">IFRS</h4>
                     <ul>
                         <li><strong>Net realisable value (NRV)</strong> = selling price less costs to complete and sell</li>
                         <li>No LIFO method allowed; FIFO or weighted average</li>
@@ -365,7 +391,7 @@
                     </ul>
                 </div>
                 <div class="comp-col">
-                    <h4>US GAAP</h4>
+                    <h4 id="us-gaap">US GAAP</h4>
                     <ul>
                         <li><strong>Market value</strong> = replacement cost, bounded by selling price and NRV</li>
                         <li>LIFO, FIFO, and weighted average all permitted</li>
@@ -428,14 +454,14 @@
             <p>The SEC has not mandated IFRS for US public companies, despite years of discussion. The political and regulatory barriers remain high. <strong>Near-term full convergence is unlikely.</strong></p>
 
             <h2 id="implications">Practical Implications for Auditors &amp; CFOs</h2>
-            <h3>For auditors:</h3>
+            <h3 id="for-auditors">For auditors:</h3>
             <ul>
                 <li><strong>Double-check assumptions:</strong> When auditing a group with mixed IFRS and GAAP entities, verify that management has applied the correct standard to each. Misapplication is a frequent audit finding.</li>
                 <li><strong>Watch goodwill:</strong> Goodwill impairment testing is a high-risk area. Ensure the company knows which standard it is applying and whether fair value or value-in-use is being used.</li>
                 <li><strong>Lease and revenue edge cases:</strong> Most leases and revenue contracts will be similar, but audit the judgments. IFRS principles-based approach allows more latitude — push back on aggressive interpretations.</li>
                 <li><strong>Consolidation scope:</strong> IFRS and US GAAP differ on control assessment for non-voting shares and special-purpose entities. Ensure consolidation is correct.</li>
             </ul>
-            <h3>For CFOs and controllers:</h3>
+            <h3 id="for-cfos-and-controllers">For CFOs and controllers:</h3>
             <ul>
                 <li><strong>Know which standard applies:</strong> If you have US-listed parent and IFRS subsidiaries, know the reporting requirement for each.</li>
                 <li><strong>Provision timing:</strong> If you are restructuring, IFRS recognises provisions earlier than US GAAP. Plan for P&amp;L impact timing.</li>
@@ -444,55 +470,55 @@
             </ul>
 
             <div class="cta-box">
-                <h3>Need to compare your specific scenario?</h3>
+                <h3 id="need-to-compare-your-specific-scenario">Need to compare your specific scenario?</h3>
                 <p>Use our free GAAP Compare tool to research IFRS vs US GAAP treatments for your transaction. Or talk through it with an expert in the Meeting Room — no consulting fees, no credit card.</p>
                 <a href="https://uqconsulting.org/gaap-compare.html" class="cta-button">Try GAAP Compare Free →</a>
             </div>
 
             <h2 id="faq">Frequently Asked Questions</h2>
             <div class="faq-item">
-                <h3>What are the main differences between IFRS and US GAAP?</h3>
+                <h3 id="what-are-the-main-differences-between-ifrs-and-us-gaap">What are the main differences between IFRS and US GAAP?</h3>
                 <p>IFRS is principles-based and used globally; US GAAP is rules-based for US companies. Key differences: revenue recognition (converged), lease accounting (converged), goodwill impairment (different), provisions (different), inventory (different), and presentation. Revenue and leases are largely aligned now, but structural differences remain.</p>
             </div>
             <div class="faq-item">
-                <h3>Is IFRS or US GAAP more strict?</h3>
+                <h3 id="is-ifrs-or-us-gaap-more-strict">Is IFRS or US GAAP more strict?</h3>
                 <p>Neither is universally stricter. US GAAP is more prescriptive (rules-based), which can be stricter in some areas. IFRS is more flexible (principles-based), which can be stricter in others depending on the transaction and judgment applied. It depends on the specific topic.</p>
             </div>
             <div class="faq-item">
-                <h3>What is the difference between IFRS 15 and ASC 606?</h3>
+                <h3 id="what-is-the-difference-between-ifrs-15-and-asc-606">What is the difference between IFRS 15 and ASC 606?</h3>
                 <p>Both use the same five-step revenue recognition model and were jointly developed. They are substantially converged. Minor differences exist in contract modifications, licensing, and transition guidance, but the core recognition model and principles are identical.</p>
             </div>
             <div class="faq-item">
-                <h3>Why doesn't the US use IFRS?</h3>
+                <h3 id="why-doesnt-the-us-use-ifrs">Why doesn't the US use IFRS?</h3>
                 <p>The SEC has not mandated IFRS for US public companies. Cited reasons: US regulatory control, investor protection, cost of transition, and market stability concerns. Some US-listed foreign companies do use IFRS; privately-held US companies may adopt IFRS voluntarily.</p>
             </div>
             <div class="faq-item">
-                <h3>How do IFRS 16 and ASC 842 differ on lease accounting?</h3>
+                <h3 id="how-do-ifrs-16-and-asc-842-differ-on-lease-accounting">How do IFRS 16 and ASC 842 differ on lease accounting?</h3>
                 <p>Both require lessees to recognise a right-of-use asset and lease liability for most leases. Minor differences exist in initial measurement, practical expedients, and reassessment triggers, but the core lessee impact and balance-sheet effect are nearly identical.</p>
             </div>
             <div class="faq-item">
-                <h3>What is IFRS goodwill impairment vs US GAAP?</h3>
+                <h3 id="what-is-ifrs-goodwill-impairment-vs-us-gaap">What is IFRS goodwill impairment vs US GAAP?</h3>
                 <p>IFRS uses a one-step test: compare carrying value to recoverable amount (fair value less costs or value-in-use). US GAAP uses a two-step test: compare fair value to carrying; if less, test implied goodwill value. IFRS often produces lower impairments (value-in-use is often higher than fair value).</p>
             </div>
             <div class="faq-item">
-                <h3>Can a company use IFRS if it is US-listed?</h3>
+                <h3 id="can-a-company-use-ifrs-if-it-is-uslisted">Can a company use IFRS if it is US-listed?</h3>
                 <p>No, US public companies must use US GAAP per SEC rules. Foreign private issuers listed on US exchanges (ADRs) may use IFRS. Some privately-held US companies adopt IFRS voluntarily, but SEC-regulated entities must use US GAAP.</p>
             </div>
             <div class="faq-item">
-                <h3>Are IFRS and US GAAP converging?</h3>
+                <h3 id="are-ifrs-and-us-gaap-converging">Are IFRS and US GAAP converging?</h3>
                 <p>The IASB and FASB have a convergence project. Revenue and lease standards are substantially aligned. However, fundamental differences remain in goodwill impairment, provisions, and inventory. Full convergence is unlikely in the near term without SEC mandate.</p>
             </div>
 
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
-                    <h4>About the author — Usman Qureshi (ACCA, ACA)</h4>
+                    <h4 id="about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</h4>
                     <p>Usman is a chartered accountant with Big Four audit and advisory experience spanning IFRS and US GAAP audits. He has audited global groups with mixed IFRS/GAAP reporting requirements and specialises in the practical reconciliation of these standards.</p>
                 </div>
             </div>
 
             <div class="related">
-                <h3>Related free tools &amp; guides</h3>
+                <h3 id="related-free-tools-guides">Related free tools &amp; guides</h3>
                 <a href="https://uqconsulting.org/gaap-compare.html">→ IFRS vs GAAP Comparison Tool (free)</a>
                 <a href="https://uqconsulting.org/blog/ifrs-16-lease-accounting-example.html">→ IFRS 16 Lease Accounting Worked Example</a>
                 <a href="https://uqconsulting.org/meeting-room.html">→ Ask an expert in the Meeting Room (free)</a>

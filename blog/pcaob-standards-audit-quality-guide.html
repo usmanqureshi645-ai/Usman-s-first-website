@@ -62,6 +62,45 @@
         .related { margin-top: 32px; padding-top: 20px; border-top: 2px solid #e4e9f0; }
         .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; display: block; margin-bottom: 6px; }
         .disclaimer { font-size: 0.8em; color: #8593a8; margin-top: 32px; padding-top: 16px; font-style: italic; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -75,20 +114,9 @@
 
         <p class="lead">If you audit a US public company, you follow PCAOB standards (Auditing Standards — "AS"). The PCAOB is the US regulator for audit quality, set up under Sarbanes-Oxley 2002. PCAOB standards differ from ISA (International Standards on Auditing) in philosophy, risk assessment approach, and fraud detection requirements. This guide covers the key PCAOB standards, quality control, and how they compare to ISA — essential reading for auditors transitioning from IFRS/ISA to GAAP/PCAOB audits.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#overview">What is PCAOB?</a></li>
-                <li><a href="#standards">PCAOB Auditing Standards overview</a></li>
-                <li><a href="#as1200">AS 1200: Risk assessment</a></li>
-                <li><a href="#as1210">AS 1210: Audit planning & procedures</a></li>
-                <li><a href="#fraud">Fraud detection & AS 2401</a></li>
-                <li><a href="#quality">Quality control (AS 1200, PCAOB QC)</a></li>
-                <li><a href="#isa-vs">PCAOB vs ISA: key differences</a></li>
-                <li><a href="#worked">Worked example: fraud risk assessment</a></li>
-                <li><a href="#audit">Audit implications</a></li>
-                <li><a href="#faq">FAQs</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#overview">What is PCAOB?</a></li><li class="toc-l1"><a href="#standards">PCAOB Auditing Standards Overview</a></li><li class="toc-l1"><a href="#as1200">AS 1200: Risk Assessment</a></li><li class="toc-l1"><a href="#as1210">AS 1210: Audit Planning & Procedures</a></li><li class="toc-l1"><a href="#fraud">Fraud Detection & AS 2401</a></li><li class="toc-l1"><a href="#quality">Quality Control (AS 1200, PCAOB QC)</a></li><li class="toc-l1"><a href="#isa-vs">PCAOB vs ISA: Key Differences</a></li><li class="toc-l1"><a href="#worked">Worked Example: Fraud Risk Assessment</a></li><li class="toc-l1"><a href="#audit">Audit Implications</a><ul><li class="toc-l2"><a href="#need-help-with-pcaob-compliance">Need help with PCAOB compliance?</a></li></ul></li><li class="toc-l1"><a href="#faq">FAQs</a><ul><li class="toc-l2"><a href="#what-is-the-pcaob">What is the PCAOB?</a></li><li class="toc-l2"><a href="#what-is-the-difference-between-pcaob-and-isa">What is the difference between PCAOB and ISA?</a></li><li class="toc-l2"><a href="#what-is-as-2401">What is AS 2401?</a></li><li class="toc-l2"><a href="#do-i-need-to-audit-internal-controls-under-pcaob">Do I need to audit internal controls under PCAOB?</a><ul><li class="toc-l3"><a href="#about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</a></li></ul></li><li class="toc-l2"><a href="#related-resources">Related resources</a></li></ul></li></ul>
         </div>
 
         <article>
@@ -216,39 +244,39 @@
             </ul>
 
             <div class="cta-box">
-                <h3>Need help with PCAOB compliance?</h3>
+                <h3 id="need-help-with-pcaob-compliance">Need help with PCAOB compliance?</h3>
                 <p>Ask an expert in the Meeting Room — free guidance on PCAOB standards and audit procedures.</p>
                 <a href="https://uqconsulting.org/meeting-room.html" class="cta-button">Ask an Expert →</a>
             </div>
 
             <h2 id="faq">FAQs</h2>
             <div class="faq-item">
-                <h3>What is the PCAOB?</h3>
+                <h3 id="what-is-the-pcaob">What is the PCAOB?</h3>
                 <p>The Public Company Accounting Oversight Board. A US regulator that sets audit standards (AS) and inspects audit firms for compliance. Mandatory for US public company audits.</p>
             </div>
             <div class="faq-item">
-                <h3>What is the difference between PCAOB and ISA?</h3>
+                <h3 id="what-is-the-difference-between-pcaob-and-isa">What is the difference between PCAOB and ISA?</h3>
                 <p>PCAOB is more prescriptive: mandatory control design testing, explicit fraud procedures, and required independent EQRP review. ISA is more principles-based and less prescriptive.</p>
             </div>
             <div class="faq-item">
-                <h3>What is AS 2401?</h3>
+                <h3 id="what-is-as-2401">What is AS 2401?</h3>
                 <p>PCAOB Auditing Standard 2401 on fraud detection. Requires auditors to design specific procedures to detect fraudulent financial reporting and misappropriation of assets.</p>
             </div>
             <div class="faq-item">
-                <h3>Do I need to audit internal controls under PCAOB?</h3>
+                <h3 id="do-i-need-to-audit-internal-controls-under-pcaob">Do I need to audit internal controls under PCAOB?</h3>
                 <p>For US public companies (accelerated filers), yes — AS 2201 requires an opinion on the effectiveness of internal controls over financial reporting (ICFR). For smaller companies, audit may be limited to financial statements.</p>
             </div>
 
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
-                    <h4>About the author — Usman Qureshi (ACCA, ACA)</h4>
+                    <h4 id="about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</h4>
                     <p>Usman has audited US public companies under PCAOB standards in a Big 4 firm. He specialises in fraud risk assessment and quality control compliance.</p>
                 </div>
             </div>
 
             <div class="related">
-                <h3>Related resources</h3>
+                <h3 id="related-resources">Related resources</h3>
                 <a href="https://uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">→ IFRS vs US GAAP Comparison</a>
                 <a href="https://uqconsulting.org/meeting-room.html">→ Ask an expert in the Meeting Room</a>
             </div>

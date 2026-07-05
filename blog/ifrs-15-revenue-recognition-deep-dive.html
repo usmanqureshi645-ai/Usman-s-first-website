@@ -62,6 +62,45 @@
         .related { margin-top: 32px; padding-top: 20px; border-top: 2px solid #e4e9f0; }
         .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; display: block; margin-bottom: 6px; }
         .disclaimer { font-size: 0.8em; color: #8593a8; margin-top: 32px; padding-top: 16px; font-style: italic; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -75,18 +114,9 @@
 
         <p class="lead">IFRS 15 (Revenue from Contracts with Customers) simplified revenue accounting by introducing a single five-step model. But the standard's application to complex contracts (SaaS, software, contracts with multiple performance obligations, variable consideration) is where auditor risk is highest. This deep dive covers the trickiest scenarios: multi-year SaaS contracts with discounts, performance bonuses tied to customer outcomes, licensing rights-of-use vs rights-of-access, and contract modifications. Real examples from tech, professional services, and manufacturing sectors.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#overview">IFRS 15 five-step model recap</a></li>
-                <li><a href="#performance">Identifying performance obligations</a></li>
-                <li><a href="#variable">Variable consideration & price adjustments</a></li>
-                <li><a href="#licensing">Licensing contracts: right-to-use vs right-to-access</a></li>
-                <li><a href="#modification">Contract modifications & amendments</a></li>
-                <li><a href="#saas">SaaS multi-year contracts: worked example</a></li>
-                <li><a href="#audit">Audit procedures & high-risk areas</a></li>
-                <li><a href="#faq">FAQs</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#overview">IFRS 15 Five-Step Model Recap</a></li><li class="toc-l1"><a href="#performance">Identifying Performance Obligations</a></li><li class="toc-l1"><a href="#variable">Variable Consideration & Price Adjustments</a></li><li class="toc-l1"><a href="#licensing">Licensing Contracts: Right-to-Use vs Right-to-Access</a></li><li class="toc-l1"><a href="#modification">Contract Modifications & Amendments</a></li><li class="toc-l1"><a href="#saas">SaaS Multi-Year Contract: Worked Example</a><ul><li class="toc-l3"><a href="#scenario-cloud-accounting-software-subscription">Scenario: Cloud Accounting Software Subscription</a></li></ul></li><li class="toc-l1"><a href="#audit">Audit Procedures & High-Risk Areas</a><ul><li class="toc-l2"><a href="#need-help-with-complex-revenue-scenarios">Need help with complex revenue scenarios?</a></li></ul></li><li class="toc-l1"><a href="#faq">FAQs</a><ul><li class="toc-l2"><a href="#is-ifrs-15-the-same-as-asc-606">Is IFRS 15 the same as ASC 606?</a></li><li class="toc-l2"><a href="#how-do-i-know-if-a-license-is-righttouse-or-righttoaccess">How do I know if a license is "right-to-use" or "right-to-access"?</a></li><li class="toc-l2"><a href="#can-i-allocate-transaction-price-to-obligations-using-cost">Can I allocate transaction price to obligations using cost?</a><ul><li class="toc-l3"><a href="#about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</a></li></ul></li><li class="toc-l2"><a href="#related-resources">Related resources</a></li></ul></li></ul>
         </div>
 
         <article>
@@ -145,7 +175,7 @@
 
             <h2 id="saas">SaaS Multi-Year Contract: Worked Example</h2>
             <div class="example-box">
-                <h4>Scenario: Cloud Accounting Software Subscription</h4>
+                <h4 id="scenario-cloud-accounting-software-subscription">Scenario: Cloud Accounting Software Subscription</h4>
                 <p><strong>Contract terms:</strong></p>
                 <ul>
                     <li>3-year subscription: £100k per annum (total £300k)</li>
@@ -187,35 +217,35 @@
             </ul>
 
             <div class="cta-box">
-                <h3>Need help with complex revenue scenarios?</h3>
+                <h3 id="need-help-with-complex-revenue-scenarios">Need help with complex revenue scenarios?</h3>
                 <p>Use GAAP Compare to research IFRS 15 guidance, or ask an expert in the Meeting Room.</p>
                 <a href="https://uqconsulting.org/gaap-compare.html" class="cta-button">Compare Standards →</a>
             </div>
 
             <h2 id="faq">FAQs</h2>
             <div class="callout">
-                <h3>Is IFRS 15 the same as ASC 606?</h3>
+                <h3 id="is-ifrs-15-the-same-as-asc-606">Is IFRS 15 the same as ASC 606?</h3>
                 <p>Substantially yes. Both use the five-step model. Minor differences exist in contract modifications and transition guidance, but 95% of scenarios are treated identically.</p>
             </div>
             <div class="callout">
-                <h3>How do I know if a license is "right-to-use" or "right-to-access"?</h3>
+                <h3 id="how-do-i-know-if-a-license-is-righttouse-or-righttoaccess">How do I know if a license is "right-to-use" or "right-to-access"?</h3>
                 <p>Look at whether the customer gets a fixed version (right-to-use, point-in-time) or continuously benefits from vendor updates (right-to-access, over-time). SaaS is typically right-to-access. Perpetual software licenses are typically right-to-use.</p>
             </div>
             <div class="callout">
-                <h3>Can I allocate transaction price to obligations using cost?</h3>
+                <h3 id="can-i-allocate-transaction-price-to-obligations-using-cost">Can I allocate transaction price to obligations using cost?</h3>
                 <p>No. Allocation must be based on standalone selling prices, not cost. If a standalone price isn't directly observable, estimate it using cost-plus or other techniques, but cost ≠ allocation percentage.</p>
             </div>
 
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
-                    <h4>About the author — Usman Qureshi (ACCA, ACA)</h4>
+                    <h4 id="about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</h4>
                     <p>Usman has audited IFRS 15 implementations for SaaS, software, and professional services firms. He specialises in complex performance obligation and licensing scenarios.</p>
                 </div>
             </div>
 
             <div class="related">
-                <h3>Related resources</h3>
+                <h3 id="related-resources">Related resources</h3>
                 <a href="https://uqconsulting.org/blog/revenue-recognition-ifrs-15-vs-asc-606-deep-dive.html">→ IFRS 15 vs ASC 606 Comparison</a>
                 <a href="https://uqconsulting.org/gaap-compare.html">→ GAAP Compare Tool</a>
             </div>

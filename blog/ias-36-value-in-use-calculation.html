@@ -26,6 +26,45 @@
         th, td { padding: 8px 10px; border-bottom: 1px solid #e4e9f0; }
         th { background: #1a2f5a; color: #fff; font-weight: 600; }
         .disclaimer { font-size: 0.76em; color: #8593a8; margin-top: 24px; padding-top: 10px; border-top: 1px solid #e4e9f0; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -39,15 +78,9 @@
 </div>
         <div class="meta">By Usman Qureshi · July 2026 · 8 min read</div>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#wacc-components">WACC Components</a></li>
-                <li><a href="#cost-of-equity-via-capm">Cost of Equity via CAPM</a></li>
-                <li><a href="#worked-example-wacc-calculation">Worked Example: WACC Calculation</a></li>
-                <li><a href="#terminal-value-perpetuity">Terminal Value (Perpetuity)</a></li>
-                <li><a href="#audit-red-flags-wacc-amp-terminal-value">Audit Red Flags: WACC &amp; Terminal Value</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#wacc-components">WACC Components</a></li><li class="toc-l1"><a href="#cost-of-equity-via-capm">Cost of Equity via CAPM</a></li><li class="toc-l1"><a href="#worked-example-wacc-calculation">Worked Example: WACC Calculation</a></li><li class="toc-l1"><a href="#terminal-value-perpetuity">Terminal Value (Perpetuity)</a></li><li class="toc-l1"><a href="#audit-red-flags-wacc-amp-terminal-value">Audit Red Flags: WACC &amp; Terminal Value</a></li></ul>
         </div>
 
 

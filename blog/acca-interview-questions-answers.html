@@ -61,6 +61,45 @@
         .related { margin-top: 32px; padding-top: 20px; border-top: 2px solid #e4e9f0; }
         .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; display: block; margin-bottom: 6px; }
         .disclaimer { font-size: 0.8em; color: #8593a8; margin-top: 32px; padding-top: 16px; font-style: italic; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -74,18 +113,9 @@
 
         <p class="lead">Preparing for your ACCA qualification interview? This guide covers the real questions interviewers ask — on technical accounting, audit, ethics, and professional judgment — with model answers that show how to think like a chartered accountant. Whether you're pursuing ACCA for career progression or credibility, understanding what interviewers want (technical depth, real-world application, and ethical reasoning) will help you pass. We've included worked scenarios from Big 4 audit and corporate finance.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#overview">What interviewers look for</a></li>
-                <li><a href="#technical">Technical accounting questions</a></li>
-                <li><a href="#audit">Audit & professional scepticism</a></li>
-                <li><a href="#ethics">Ethics & professional judgment</a></li>
-                <li><a href="#scenario">Real-world scenarios</a></li>
-                <li><a href="#role">Role-specific questions</a></li>
-                <li><a href="#prep">Interview prep tips</a></li>
-                <li><a href="#faq">FAQs</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#overview">What Interviewers Look For</a></li><li class="toc-l1"><a href="#technical">Technical Accounting Questions</a></li><li class="toc-l1"><a href="#audit">Audit & Professional Scepticism</a></li><li class="toc-l1"><a href="#ethics">Ethics & Professional Judgment</a></li><li class="toc-l1"><a href="#scenario">Real-World Scenarios</a></li><li class="toc-l1"><a href="#role">Role-Specific Questions</a></li><li class="toc-l1"><a href="#prep">Interview Prep Tips</a><ul><li class="toc-l2"><a href="#need-interview-coaching">Need interview coaching?</a></li></ul></li><li class="toc-l1"><a href="#faq">FAQs</a><ul><li class="toc-l3"><a href="#about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</a></li><li class="toc-l2"><a href="#related-resources">Related resources</a></li></ul></li></ul>
         </div>
 
         <article>
@@ -195,7 +225,7 @@
             </ul>
 
             <div class="cta-box">
-                <h3>Need interview coaching?</h3>
+                <h3 id="need-interview-coaching">Need interview coaching?</h3>
                 <p>Use the Knowledge Test tool to practice technical questions, or ask an expert in the Meeting Room for interview guidance.</p>
                 <a href="https://uqconsulting.org/quiz.html" class="cta-button">Practice With Knowledge Test →</a>
             </div>
@@ -213,13 +243,13 @@
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
-                    <h4>About the author — Usman Qureshi (ACCA, ACA)</h4>
+                    <h4 id="about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</h4>
                     <p>Usman passed his ACCA interview with distinction. He has conducted ACCA interview coaching for candidates in Big 4 audit and corporate finance roles.</p>
                 </div>
             </div>
 
             <div class="related">
-                <h3>Related resources</h3>
+                <h3 id="related-resources">Related resources</h3>
                 <a href="https://uqconsulting.org/quiz.html">→ Knowledge Test: practice interview-style questions</a>
                 <a href="https://uqconsulting.org/meeting-room.html">→ Ask an expert in the Meeting Room</a>
             </div>

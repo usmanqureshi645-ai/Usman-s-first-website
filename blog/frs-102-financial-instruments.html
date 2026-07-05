@@ -28,6 +28,45 @@
         th { background: #1a2f5a; color: #fff; font-weight: 600; }
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
         .disclaimer { font-size: 0.81em; color: #8593a8; margin-top: 36px; padding-top: 16px; border-top: 1px solid #e4e9f0; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -44,35 +83,9 @@
 </div>
         <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 10 min read</div>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#frs-102-financial-instrument-classification">FRS 102 Financial Instrument Classification</a></li>
-                  <li><a href="#three-categories-not-ifrs-9s-four">Three Categories (Not IFRS 9's Four)</a></li>
-                <li><a href="#classification-guidance-simpler-than-ifrs-9">Classification Guidance (Simpler than IFRS 9)</a></li>
-                  <li><a href="#availableforsale-default">Available-for-Sale (Default)</a></li>
-                  <li><a href="#loans-receivables">Loans & Receivables</a></li>
-                  <li><a href="#fvpl-wider-availability-in-frs-102">FVPL (Wider Availability in FRS 102)</a></li>
-                <li><a href="#measurement">Measurement</a></li>
-                  <li><a href="#afs-measurement">AFS Measurement</a></li>
-                  <li><a href="#lr-measurement">L&R Measurement</a></li>
-                <li><a href="#impairment-incurred-loss-model-simpler-than-ifrs-9-ecl">Impairment: Incurred Loss Model (Simpler than IFRS 9 ECL)</a></li>
-                  <li><a href="#recognition-criterion">Recognition Criterion</a></li>
-                  <li><a href="#measurement">Measurement</a></li>
-                  <li><a href="#frs-102-vs-ifrs-9-impairment">FRS 102 vs IFRS 9 Impairment</a></li>
-                <li><a href="#derivatives-and-hedging">Derivatives and Hedging</a></li>
-                  <li><a href="#derivatives">Derivatives</a></li>
-                  <li><a href="#hedge-accounting">Hedge Accounting</a></li>
-                <li><a href="#worked-example-frs-102-vs-ifrs-9-comparison">Worked Example: FRS 102 vs IFRS 9 Comparison</a></li>
-                  <li><a href="#scenario-held-debt-securities">Scenario: Held Debt Securities</a></li>
-                  <li><a href="#ifrs-9-classification">IFRS 9 Classification</a></li>
-                  <li><a href="#frs-102-classification">FRS 102 Classification</a></li>
-                  <li><a href="#impairment-assessment-year-2">Impairment Assessment (Year 2)</a></li>
-                <li><a href="#audit-red-flags-frs-102-financial-instruments">Audit Red Flags: FRS 102 Financial Instruments</a></li>
-                  <li><a href="#red-flag-1-misclassification-fvpl-vs-afs">Red Flag 1: Misclassification (FVPL vs AFS)</a></li>
-                  <li><a href="#red-flag-2-impairment-not-recognized">Red Flag 2: Impairment Not Recognized</a></li>
-                  <li><a href="#red-flag-3-effective-interest-not-calculated">Red Flag 3: Effective Interest Not Calculated</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#frs-102-financial-instrument-classification">FRS 102 Financial Instrument Classification</a><ul><li class="toc-l2"><a href="#three-categories-not-ifrs-9s-four">Three Categories (Not IFRS 9's Four)</a></li></ul></li><li class="toc-l1"><a href="#classification-guidance-simpler-than-ifrs-9">Classification Guidance (Simpler than IFRS 9)</a><ul><li class="toc-l2"><a href="#availableforsale-default">Available-for-Sale (Default)</a></li><li class="toc-l2"><a href="#loans-receivables">Loans & Receivables</a></li><li class="toc-l2"><a href="#fvpl-wider-availability-in-frs-102">FVPL (Wider Availability in FRS 102)</a></li></ul></li><li class="toc-l1"><a href="#measurement">Measurement</a><ul><li class="toc-l2"><a href="#afs-measurement">AFS Measurement</a></li><li class="toc-l2"><a href="#lr-measurement">L&R Measurement</a></li></ul></li><li class="toc-l1"><a href="#impairment-incurred-loss-model-simpler-than-ifrs-9-ecl">Impairment: Incurred Loss Model (Simpler than IFRS 9 ECL)</a><ul><li class="toc-l2"><a href="#recognition-criterion">Recognition Criterion</a></li><li class="toc-l2"><a href="#measurement">Measurement</a></li><li class="toc-l2"><a href="#frs-102-vs-ifrs-9-impairment">FRS 102 vs IFRS 9 Impairment</a></li></ul></li><li class="toc-l1"><a href="#derivatives-and-hedging">Derivatives and Hedging</a><ul><li class="toc-l2"><a href="#derivatives">Derivatives</a></li><li class="toc-l2"><a href="#hedge-accounting">Hedge Accounting</a></li></ul></li><li class="toc-l1"><a href="#worked-example-frs-102-vs-ifrs-9-comparison">Worked Example: FRS 102 vs IFRS 9 Comparison</a><ul><li class="toc-l2"><a href="#scenario-held-debt-securities">Scenario: Held Debt Securities</a></li><li class="toc-l2"><a href="#ifrs-9-classification">IFRS 9 Classification</a></li><li class="toc-l2"><a href="#frs-102-classification">FRS 102 Classification</a></li><li class="toc-l2"><a href="#impairment-assessment-year-2">Impairment Assessment (Year 2)</a><ul><li class="toc-l3"><a href="#ifrs-9-ecl-model">IFRS 9 (ECL Model)</a></li><li class="toc-l3"><a href="#frs-102-incurred-loss">FRS 102 (Incurred Loss)</a></li></ul></li></ul></li><li class="toc-l1"><a href="#audit-red-flags-frs-102-financial-instruments">Audit Red Flags: FRS 102 Financial Instruments</a><ul><li class="toc-l2"><a href="#red-flag-1-misclassification-fvpl-vs-afs">Red Flag 1: Misclassification (FVPL vs AFS)</a></li><li class="toc-l2"><a href="#red-flag-2-impairment-not-recognized">Red Flag 2: Impairment Not Recognized</a></li><li class="toc-l2"><a href="#red-flag-3-effective-interest-not-calculated">Red Flag 3: Effective Interest Not Calculated</a></li></ul></li></ul>
         </div>
 
 
@@ -232,14 +245,14 @@
             <h3 id="impairment-assessment-year-2">Impairment Assessment (Year 2)</h3>
             <p><strong>Scenario:</strong> Bond issuer's credit deteriorates; market value drops to £800k.</p>
 
-            <h4>IFRS 9 (ECL Model)</h4>
+            <h4 id="ifrs-9-ecl-model">IFRS 9 (ECL Model)</h4>
             <ul>
                 <li>SICR assessment: Credit rating downgraded →’ Stage 2</li>
                 <li>Lifetime ECL: 2% × £1m = £20k provision</li>
                 <li>P&L: Impairment loss £20k (recognized early)</li>
             </ul>
 
-            <h4>FRS 102 (Incurred Loss)</h4>
+            <h4 id="frs-102-incurred-loss">FRS 102 (Incurred Loss)</h4>
             <ul>
                 <li>Objective evidence test: Price decline + credit downgrade →’ objective evidence</li>
                 <li>PV of future cash flows: £850k (discounted at original rate)</li>

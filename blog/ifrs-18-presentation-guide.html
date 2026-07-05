@@ -61,6 +61,45 @@
         .related { margin-top: 32px; padding-top: 20px; border-top: 2px solid #e4e9f0; }
         .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; display: block; margin-bottom: 6px; }
         .disclaimer { font-size: 0.8em; color: #8593a8; margin-top: 32px; padding-top: 16px; font-style: italic; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -74,18 +113,9 @@
 
         <p class="lead">IFRS 18 (Presentation of Financial Statements) replaced IAS 1 in January 2025. The new standard gives companies more flexibility in income statement presentation: you can now define "operating" activities based on management's judgment, not prescriptive rules. This creates both opportunity (clearer business communication) and risk (aggressive reclassification of financing items). This guide covers the key changes, worked examples, and audit implications — essential reading for companies transitioning from IAS 1 and auditors assessing compliance.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#overview">What's new in IFRS 18?</a></li>
-                <li><a href="#operating">Operating vs financing: new definition</a></li>
-                <li><a href="#non-gaap">Non-GAAP metrics & management items</a></li>
-                <li><a href="#balance-sheet">Balance sheet changes</a></li>
-                <li><a href="#worked">Worked example: reclassification</a></li>
-                <li><a href="#transition">Transition from IAS 1</a></li>
-                <li><a href="#audit">Audit implications</a></li>
-                <li><a href="#faq">FAQs</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#overview">What's New in IFRS 18?</a></li><li class="toc-l1"><a href="#operating">Operating vs Financing: New Definition</a></li><li class="toc-l1"><a href="#non-gaap">Non-GAAP Metrics & Management Items</a></li><li class="toc-l1"><a href="#balance-sheet">Balance Sheet Changes</a></li><li class="toc-l1"><a href="#worked">Worked Example: Reclassification</a></li><li class="toc-l1"><a href="#transition">Transition from IAS 1</a></li><li class="toc-l1"><a href="#audit">Audit Implications</a><ul><li class="toc-l2"><a href="#need-help-with-ifrs-18-implementation">Need help with IFRS 18 implementation?</a></li></ul></li><li class="toc-l1"><a href="#faq">FAQs</a><ul><li class="toc-l2"><a href="#when-did-ifrs-18-become-effective">When did IFRS 18 become effective?</a></li><li class="toc-l2"><a href="#can-i-continue-using-ias-1">Can I continue using IAS 1?</a></li><li class="toc-l2"><a href="#is-us-gaap-changing-too">Is US GAAP changing too?</a><ul><li class="toc-l3"><a href="#about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</a></li></ul></li><li class="toc-l2"><a href="#related-resources">Related resources</a></li></ul></li></ul>
         </div>
 
         <article>
@@ -174,35 +204,35 @@
             </ul>
 
             <div class="cta-box">
-                <h3>Need help with IFRS 18 implementation?</h3>
+                <h3 id="need-help-with-ifrs-18-implementation">Need help with IFRS 18 implementation?</h3>
                 <p>Ask an expert in the Meeting Room for guidance on transition and presentation choices.</p>
                 <a href="https://uqconsulting.org/meeting-room.html" class="cta-button">Ask an Expert →</a>
             </div>
 
             <h2 id="faq">FAQs</h2>
             <div class="callout">
-                <h3>When did IFRS 18 become effective?</h3>
+                <h3 id="when-did-ifrs-18-become-effective">When did IFRS 18 become effective?</h3>
                 <p>1 January 2025. Companies could adopt early from 1 January 2024. If early adopted, prior years' comparatives must also be restated.</p>
             </div>
             <div class="callout">
-                <h3>Can I continue using IAS 1?</h3>
+                <h3 id="can-i-continue-using-ias-1">Can I continue using IAS 1?</h3>
                 <p>No. IAS 1 is replaced by IFRS 18. All IFRS reporters must transition by 1 January 2025 at the latest.</p>
             </div>
             <div class="callout">
-                <h3>Is US GAAP changing too?</h3>
+                <h3 id="is-us-gaap-changing-too">Is US GAAP changing too?</h3>
                 <p>The FASB has its own presentation project. ASC rules on operating vs non-operating remain unchanged (operating = revenues and direct costs; non-operating = financing, investments, unusual items).</p>
             </div>
 
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
-                    <h4>About the author — Usman Qureshi (ACCA, ACA)</h4>
+                    <h4 id="about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</h4>
                     <p>Usman has audited IFRS 18 implementations in 2025 and specialises in presentation and disclosure compliance.</p>
                 </div>
             </div>
 
             <div class="related">
-                <h3>Related resources</h3>
+                <h3 id="related-resources">Related resources</h3>
                 <a href="https://uqconsulting.org/blog/presentation-display-ifrs-vs-us-gaap-deep-dive.html">→ IFRS vs US GAAP Presentation Guide</a>
                 <a href="https://uqconsulting.org/gaap-compare.html">→ GAAP Compare Tool</a>
             </div>

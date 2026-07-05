@@ -34,6 +34,45 @@
         th { background: #1a2f5a; color: #fff; font-weight: 600; }
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
         .disclaimer { font-size: 0.81em; color: #8593a8; margin-top: 36px; padding-top: 16px; border-top: 1px solid #e4e9f0; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -52,20 +91,9 @@
 
         <p class="lead">IFRS 18 (effective 2024, mandatory 2025) replaced IAS 1 and fundamentally restructured the income statement. Key innovation: classification by management function (operating, investing, financing) rather than nature. This guide covers the new structure, subtotal requirements, significant line items, and the transition challenges companies face.</p>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#ifrs18-overview">IFRS 18 scope and effective date</a></li>
-                <li><a href="#new-structure">New income statement structure: OIF model</a></li>
-                <li><a href="#operating">Operating activities classification</a></li>
-                <li><a href="#investing">Investing activities classification</a></li>
-                <li><a href="#financing">Financing activities classification</a></li>
-                <li><a href="#subtotals">Required subtotals and line items</a></li>
-                <li><a href="#significant">Significant line items disclosure</a></li>
-                <li><a href="#worked">Worked example: Restructured income statement</a></li>
-                <li><a href="#transition">Transition challenges</a></li>
-                <li><a href="#vs-ias1">IFRS 18 vs IAS 1 comparison</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#ifrs18-overview">IFRS 18 Scope and Effective Date</a></li><li class="toc-l1"><a href="#new-structure">New Income Statement Structure: OIF Model</a></li><li class="toc-l1"><a href="#operating">Operating Activities</a></li><li class="toc-l1"><a href="#investing">Investing Activities</a></li><li class="toc-l1"><a href="#financing">Financing Activities</a></li><li class="toc-l1"><a href="#subtotals">Required Subtotals and Line Items</a></li><li class="toc-l1"><a href="#significant">Significant Line Items</a></li><li class="toc-l1"><a href="#worked">Worked Example: Restructured Income Statement</a><ul><li class="toc-l2"><a href="#abc-manufacturing-plc-income-statement-for-year-ended-31-dec-2025">ABC Manufacturing plc — Income Statement for year ended 31 Dec 2025</a></li></ul></li><li class="toc-l1"><a href="#transition">Transition Challenges</a></li><li class="toc-l1"><a href="#vs-ias1">IFRS 18 vs IAS 1: Key Differences</a></li></ul>
         </div>
 
         <article>
@@ -144,7 +172,7 @@
 
             <h2 id="worked">Worked Example: Restructured Income Statement</h2>
 
-            <h3>ABC Manufacturing plc — Income Statement for year ended 31 Dec 2025</h3>
+            <h3 id="abc-manufacturing-plc-income-statement-for-year-ended-31-dec-2025">ABC Manufacturing plc — Income Statement for year ended 31 Dec 2025</h3>
             <div style="margin: 20px 0; font-family: 'Courier New', monospace; font-size: 0.9em; background: #f9f5f0; padding: 16px; border-radius: 4px;">
                 <strong>OPERATING ACTIVITIES</strong><br>
                 Revenue £500m<br>

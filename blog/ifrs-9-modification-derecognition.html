@@ -35,6 +35,45 @@
         th { background: #1a2f5a; color: #fff; font-weight: 600; }
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; }
         .disclaimer { font-size: 0.82em; color: #8593a8; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; font-style: italic; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -53,17 +92,9 @@
 
         <p class="lead">When loans are restructured, forgiven, or sold, IFRS 9 requires careful accounting: is the modification "substantial" (derecognize and recognize a new loan)? Or immaterial (calculate a modification gain/loss and recalculate the effective interest rate)? This guide covers both paths, the substantial modification test, and the audit challenges around forgiveness and loan sales.</p>
 
-        <div class="toc">
-            <strong>Quick navigation</strong>
-            <ul>
-                <li><a href="#modification-intro">Loan modifications: When and why</a></li>
-                <li><a href="#substantial-test">Substantial modification test</a></li>
-                <li><a href="#immaterial-mod">Immaterial modification (gain/loss)</a></li>
-                <li><a href="#substantial-mod">Substantial modification (derecognize)</a></li>
-                <li><a href="#worked">Worked examples: Restructuring scenarios</a></li>
-                <li><a href="#derecognition">Derecognition on sale</a></li>
-                <li><a href="#forgiveness">Loan forgiveness</a></li>
-            </ul>
+                <div class="toc">
+            <strong>In this guide</strong>
+            <ul><li class="toc-l1"><a href="#modification-intro">Loan Modifications: When and Why</a></li><li class="toc-l1"><a href="#substantial-test">Substantial Modification Test</a></li><li class="toc-l1"><a href="#immaterial-mod">Immaterial Modification: Gain/Loss Approach</a><ul><li class="toc-l2"><a href="#journal-entry-for-immaterial-modification-loss">Journal Entry for Immaterial Modification Loss</a></li></ul></li><li class="toc-l1"><a href="#substantial-mod">Substantial Modification: Derecognize & Rerecognize</a><ul><li class="toc-l2"><a href="#journal-entries">Journal Entries</a></li></ul></li><li class="toc-l1"><a href="#worked">Worked Examples: Restructuring Scenarios</a><ul><li class="toc-l2"><a href="#scenario-1-immaterial-modification-covenant-waiver">Scenario 1: Immaterial Modification (Covenant Waiver)</a></li><li class="toc-l2"><a href="#scenario-2-substantial-modification-principal-forgiveness">Scenario 2: Substantial Modification (Principal Forgiveness)</a></li></ul></li><li class="toc-l1"><a href="#derecognition">Derecognition on Sale</a></li><li class="toc-l1"><a href="#forgiveness">Loan Forgiveness</a></li></ul>
         </div>
 
         <article>
@@ -99,7 +130,7 @@
                 <li><strong>Modification loss:</strong> New PV < Old PV (common; lender reduces rate or forgives principal)</li>
             </ul>
 
-            <h3>Journal Entry for Immaterial Modification Loss</h3>
+            <h3 id="journal-entry-for-immaterial-modification-loss">Journal Entry for Immaterial Modification Loss</h3>
             <div style="background: #1a2f5a; color: #e8eef7; padding: 14px; border-radius: 4px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
                 Dr Impairment Loss (or Loan Loss Allowance) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 80,000<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;Cr Loans Receivable &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 80,000
@@ -110,7 +141,7 @@
             <h2 id="substantial-mod">Substantial Modification: Derecognize & Rerecognize</h2>
             <p>If the modification exceeds 10%, derecognize the old loan and recognize a new one:</p>
 
-            <h3>Journal Entries</h3>
+            <h3 id="journal-entries">Journal Entries</h3>
             <div style="background: #1a2f5a; color: #e8eef7; padding: 14px; border-radius: 4px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
                 <strong>Step 1: Derecognize old loan</strong><br>
                 Dr Loss on Loan Derecognition &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 150,000<br>
@@ -122,7 +153,7 @@
 
             <h2 id="worked">Worked Examples: Restructuring Scenarios</h2>
 
-            <h3>Scenario 1: Immaterial Modification (Covenant Waiver)</h3>
+            <h3 id="scenario-1-immaterial-modification-covenant-waiver">Scenario 1: Immaterial Modification (Covenant Waiver)</h3>
             <ul>
                 <li>Original loan: £2m, 5-year, 5% fixed, Stage 2 (covenant breach)</li>
                 <li>Modification: Covenant waived; rate reduced to 4% as concession</li>
@@ -139,7 +170,7 @@
 
             <p>Then recalculate the EIR using the new 4% rate and adjust future interest income accordingly.</p>
 
-            <h3>Scenario 2: Substantial Modification (Principal Forgiveness)</h3>
+            <h3 id="scenario-2-substantial-modification-principal-forgiveness">Scenario 2: Substantial Modification (Principal Forgiveness)</h3>
             <ul>
                 <li>Original loan: £1m, 3-year, 6% fixed, Stage 3 (defaulted)</li>
                 <li>Modification: Principal forgiven to £600k; rate reduced to 3%; extended to 5 years</li>

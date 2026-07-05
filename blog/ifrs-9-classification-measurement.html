@@ -36,6 +36,45 @@
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; }
         .author-bio { background: #fff; border-radius: 10px; padding: 24px; margin: 44px 0 30px; }
         .disclaimer { font-size: 0.82em; color: #8593a8; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; font-style: italic; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -54,16 +93,9 @@
 
         <p class="lead">IFRS 9 classification determines whether a financial asset is measured at amortised cost, fair value through OCI, or fair value through P&L. The decision hinges on two gates: the business model test (what does management intend?) and the SPPI test (do cash flows consist solely of principal + interest?). This guide walks you through both tests with decision trees and real examples.</p>
 
-        <div class="toc">
-            <strong>Quick navigation</strong>
-            <ul>
-                <li><a href="#classification-gateway">Classification: The gateway decision</a></li>
-                <li><a href="#business-model-test">Business model test (three models explained)</a></li>
-                <li><a href="#sppi-test">SPPI test (principal + interest only?)</a></li>
-                <li><a href="#measurement-outcomes">Measurement outcomes by combination</a></li>
-                <li><a href="#worked">Worked examples by asset type</a></li>
-                <li><a href="#audit-challenges">Audit challenges in classification</a></li>
-            </ul>
+                <div class="toc">
+            <strong>In this guide</strong>
+            <ul><li class="toc-l1"><a href="#classification-gateway">Classification: The Gateway Decision</a></li><li class="toc-l1"><a href="#business-model-test">Business Model Test: What's Management's Intention?</a><ul><li class="toc-l2"><a href="#model-1-hold-to-collect-htc">Model 1: Hold to Collect (HTC)</a></li><li class="toc-l2"><a href="#model-2-hold-to-collect-and-sell-htcs">Model 2: Hold to Collect and Sell (HTCS)</a></li><li class="toc-l2"><a href="#model-3-other-active-trading">Model 3: Other (Active Trading)</a></li></ul></li><li class="toc-l1"><a href="#sppi-test">SPPI Test: Solely Payments of Principal and Interest?</a><ul><li class="toc-l2"><a href="#what-passes-sppi">What Passes SPPI</a></li><li class="toc-l2"><a href="#what-fails-sppi">What Fails SPPI</a></li></ul></li><li class="toc-l1"><a href="#measurement-outcomes">Measurement Outcomes: Test Combinations</a></li><li class="toc-l1"><a href="#worked">Worked Examples by Asset Type</a><ul><li class="toc-l2"><a href="#example-1-corporate-bond-amortised-cost">Example 1: Corporate Bond (Amortised Cost)</a></li><li class="toc-l2"><a href="#example-2-bond-portfolio-with-sales-fvoci">Example 2: Bond Portfolio with Sales (FVOCI)</a></li><li class="toc-l2"><a href="#example-3-convertible-bond-fvpl">Example 3: Convertible Bond (FVPL)</a></li></ul></li><li class="toc-l1"><a href="#audit-challenges">Audit Challenges in Classification</a><ul><li class="toc-l2"><a href="#challenge-1-business-model-misclassification">Challenge 1: Business Model Misclassification</a></li><li class="toc-l2"><a href="#challenge-2-undocumented-business-model">Challenge 2: Undocumented Business Model</a></li><li class="toc-l2"><a href="#challenge-3-sppi-edge-cases">Challenge 3: SPPI Edge Cases</a><ul><li class="toc-l3"><a href="#usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</a></li></ul></li></ul></li></ul>
         </div>
 
         <article>
@@ -95,7 +127,7 @@
             <h2 id="business-model-test">Business Model Test: What's Management's Intention?</h2>
             <p>IFRS 9 recognizes three business models for holding financial assets:</p>
 
-            <h3>Model 1: Hold to Collect (HTC)</h3>
+            <h3 id="model-1-hold-to-collect-htc">Model 1: Hold to Collect (HTC)</h3>
             <p><strong>Objective:</strong> Hold the asset to maturity to collect contractual cash flows</p>
             <p><strong>Key indicators:</strong></p>
             <ul>
@@ -105,7 +137,7 @@
             </ul>
             <p><strong>Measurement potential:</strong> Amortised Cost (if SPPI passes)</p>
 
-            <h3>Model 2: Hold to Collect and Sell (HTCS)</h3>
+            <h3 id="model-2-hold-to-collect-and-sell-htcs">Model 2: Hold to Collect and Sell (HTCS)</h3>
             <p><strong>Objective:</strong> Collect contractual cash flows AND manage the portfolio by selling assets as needed</p>
             <p><strong>Key indicators:</strong></p>
             <ul>
@@ -115,7 +147,7 @@
             </ul>
             <p><strong>Measurement potential:</strong> FVOCI (if SPPI passes)</p>
 
-            <h3>Model 3: Other (Active Trading)</h3>
+            <h3 id="model-3-other-active-trading">Model 3: Other (Active Trading)</h3>
             <p><strong>Objective:</strong> Manage the portfolio for trading profits, not primarily for cash flows</p>
             <p><strong>Key indicators:</strong></p>
             <ul>
@@ -130,7 +162,7 @@
             <p>If YES →’ can be classified AC or FVOCI (depending on business model)</p>
             <p>If NO →’ must be classified FVPL</p>
 
-            <h3>What Passes SPPI</h3>
+            <h3 id="what-passes-sppi">What Passes SPPI</h3>
             <ul>
                 <li>Fixed-rate bonds ✓</li>
                 <li>Variable-rate loans (interest resets per market rates) ✓</li>
@@ -138,7 +170,7 @@
                 <li>Trade receivables (with normal credit terms) ✓</li>
             </ul>
 
-            <h3>What Fails SPPI</h3>
+            <h3 id="what-fails-sppi">What Fails SPPI</h3>
             <ul>
                 <li>Equities (no principal repayment) ✗</li>
                 <li>Convertible bonds (embedded equity option changes the cash flows) ✗</li>
@@ -183,7 +215,7 @@
 
             <h2 id="worked">Worked Examples by Asset Type</h2>
 
-            <h3>Example 1: Corporate Bond (Amortised Cost)</h3>
+            <h3 id="example-1-corporate-bond-amortised-cost">Example 1: Corporate Bond (Amortised Cost)</h3>
             <p><strong>Scenario:</strong> Bank purchases a 5-year £10m corporate bond at par, 4% fixed coupon, held to maturity</p>
             <ul>
                 <li><strong>Business model:</strong> HTC (held to maturity)</li>
@@ -192,7 +224,7 @@
                 <li><strong>Measurement:</strong> £10m on balance sheet (adjusted for amortization and any impairment). Interest income £400k/year. Fair value changes are not recognized.</li>
             </ul>
 
-            <h3>Example 2: Bond Portfolio with Sales (FVOCI)</h3>
+            <h3 id="example-2-bond-portfolio-with-sales-fvoci">Example 2: Bond Portfolio with Sales (FVOCI)</h3>
             <p><strong>Scenario:</strong> Insurance company holds a £50m bond portfolio. Usually holds to maturity, but sells ~15% annually to rebalance</p>
             <ul>
                 <li><strong>Business model:</strong> HTCS (hold to collect and sell)</li>
@@ -201,7 +233,7 @@
                 <li><strong>Measurement:</strong> Fair value on balance sheet (updated each period). Gains/losses sit in OCI. When sold, OCI is reclassified to P&L (reclassification adjustment).</li>
             </ul>
 
-            <h3>Example 3: Convertible Bond (FVPL)</h3>
+            <h3 id="example-3-convertible-bond-fvpl">Example 3: Convertible Bond (FVPL)</h3>
             <p><strong>Scenario:</strong> Company purchases a convertible bond with coupon + embedded call option</p>
             <ul>
                 <li><strong>Business model:</strong> Assume HTC</li>
@@ -214,20 +246,20 @@
 
             <h2 id="audit-challenges">Audit Challenges in Classification</h2>
 
-            <h3>Challenge 1: Business Model Misclassification</h3>
+            <h3 id="challenge-1-business-model-misclassification">Challenge 1: Business Model Misclassification</h3>
             <p><strong>Situation:</strong> Bank classifies a loan portfolio as HTC, but auditors find that 20% of the portfolio is sold each year for profit.</p>
             <p><strong>Auditor action:</strong> Reclassify to HTCS (FVOCI). This can increase fair value volatility in OCI by £5— 10m+.</p>
 
-            <h3>Challenge 2: Undocumented Business Model</h3>
+            <h3 id="challenge-2-undocumented-business-model">Challenge 2: Undocumented Business Model</h3>
             <p><strong>Situation:</strong> No written policy on business model determination; classification appears arbitrary.</p>
             <p><strong>Auditor action:</strong> Require documented policy and retroactive support for classifications.</p>
 
-            <h3>Challenge 3: SPPI Edge Cases</h3>
+            <h3 id="challenge-3-sppi-edge-cases">Challenge 3: SPPI Edge Cases</h3>
             <p><strong>Situation:</strong> Company claims a structured product with partial capital protection (e.g., "100% principal guaranteed, but upside capped at 5%") passes SPPI.</p>
             <p><strong>Auditor challenge:</strong> "The cap is not an interest rate component; it's a contingent payment feature. SPPI fails." Result: must be FVPL.</p>
 
             <div class="author-bio">
-                <h4>Usman Qureshi (ACCA, ACA)</h4>
+                <h4 id="usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</h4>
                 <p>Classification is the foundation of IFRS 9 accounting. Get it wrong, and everything downstream is wrong. I've seen misclassifications move entire portfolios to FVPL, creating 10-figure OCI volatility swings during audit.</p>
             </div>
 

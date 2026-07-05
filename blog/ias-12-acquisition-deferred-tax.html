@@ -29,6 +29,45 @@
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
         .formula { background: #1a2f5a; color: #e8eef7; padding: 12px; border-radius: 6px; margin: 14px 0; text-align: center; }
         .disclaimer { font-size: 0.81em; color: #8593a8; margin-top: 36px; padding-top: 16px; border-top: 1px solid #e4e9f0; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -45,33 +84,9 @@
 </div>
         <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 11 min read</div>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#why-acquisition-deferred-tax-matters">Why Acquisition Deferred Tax Matters</a></li>
-                <li><a href="#deductible-vs-nondeductible-stepups">Deductible vs Non-Deductible Step-Ups</a></li>
-                  <li><a href="#deductible-create-dta-not-dtl">Deductible (Create DTA, not DTL)</a></li>
-                  <li><a href="#nondeductible-create-dtl">Non-Deductible (Create DTL)</a></li>
-                <li><a href="#calculation-of-acquisition-dtl">Calculation of Acquisition DTL</a></li>
-                  <li><a href="#step-1-identify-fair-value-adjustments">Step 1: Identify Fair Value Adjustments</a></li>
-                  <li><a href="#step-2-determine-tax-deductibility">Step 2: Determine Tax Deductibility</a></li>
-                  <li><a href="#step-3-apply-tax-rate">Step 3: Apply Tax Rate</a></li>
-                  <li><a href="#step-4-offset-against-goodwill">Step 4: Offset Against Goodwill</a></li>
-                <li><a href="#worked-example-acquisition-with-deferred-tax-stepup">Worked Example: Acquisition with Deferred Tax Step-Up</a></li>
-                  <li><a href="#deal-overview">Deal Overview</a></li>
-                  <li><a href="#fair-value-adjustments-ppa">Fair Value Adjustments (PPA)</a></li>
-                  <li><a href="#deferred-tax-impact">Deferred Tax Impact</a></li>
-                  <li><a href="#net-deferred-tax-position">Net Deferred Tax Position</a></li>
-                  <li><a href="#ppa-goodwill-calculation-impact-of-dtl">PPA Goodwill Calculation (Impact of DTL)</a></li>
-                <li><a href="#future-reversal-of-acquisition-dtl">Future Reversal of Acquisition DTL</a></li>
-                  <li><a href="#depreciation-reversal">Depreciation Reversal</a></li>
-                  <li><a href="#impairmentsale-reversal">Impairment/Sale Reversal</a></li>
-                <li><a href="#audit-red-flags-acquisition-dtl">Audit Red Flags: Acquisition DTL</a></li>
-                  <li><a href="#red-flag-1-dtl-not-recognized">Red Flag 1: DTL Not Recognized</a></li>
-                  <li><a href="#red-flag-2-incorrect-tax-deductibility-assessment">Red Flag 2: Incorrect Tax Deductibility Assessment</a></li>
-                  <li><a href="#red-flag-3-dtl-not-remeasured-for-rate-change">Red Flag 3: DTL Not Remeasured for Rate Change</a></li>
-                  <li><a href="#red-flag-4-goodwill-calculation-omits-dtl">Red Flag 4: Goodwill Calculation Omits DTL</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#why-acquisition-deferred-tax-matters">Why Acquisition Deferred Tax Matters</a></li><li class="toc-l1"><a href="#deductible-vs-nondeductible-stepups">Deductible vs Non-Deductible Step-Ups</a><ul><li class="toc-l2"><a href="#deductible-create-dta-not-dtl">Deductible (Create DTA, not DTL)</a></li><li class="toc-l2"><a href="#nondeductible-create-dtl">Non-Deductible (Create DTL)</a></li></ul></li><li class="toc-l1"><a href="#calculation-of-acquisition-dtl">Calculation of Acquisition DTL</a><ul><li class="toc-l2"><a href="#step-1-identify-fair-value-adjustments">Step 1: Identify Fair Value Adjustments</a></li><li class="toc-l2"><a href="#step-2-determine-tax-deductibility">Step 2: Determine Tax Deductibility</a></li><li class="toc-l2"><a href="#step-3-apply-tax-rate">Step 3: Apply Tax Rate</a></li><li class="toc-l2"><a href="#step-4-offset-against-goodwill">Step 4: Offset Against Goodwill</a></li></ul></li><li class="toc-l1"><a href="#worked-example-acquisition-with-deferred-tax-stepup">Worked Example: Acquisition with Deferred Tax Step-Up</a><ul><li class="toc-l2"><a href="#deal-overview">Deal Overview</a></li><li class="toc-l2"><a href="#fair-value-adjustments-ppa">Fair Value Adjustments (PPA)</a></li><li class="toc-l2"><a href="#deferred-tax-impact">Deferred Tax Impact</a><ul><li class="toc-l3"><a href="#nondeductible-adjustments-create-dtl">Non-Deductible Adjustments (Create DTL)</a></li><li class="toc-l3"><a href="#deductible-adjustments-create-dta">Deductible Adjustments (Create DTA)</a></li><li class="toc-l3"><a href="#ppe-partial-deduction">PP&E Partial Deduction</a></li></ul></li><li class="toc-l2"><a href="#net-deferred-tax-position">Net Deferred Tax Position</a></li><li class="toc-l2"><a href="#ppa-goodwill-calculation-impact-of-dtl">PPA Goodwill Calculation (Impact of DTL)</a></li></ul></li><li class="toc-l1"><a href="#future-reversal-of-acquisition-dtl">Future Reversal of Acquisition DTL</a><ul><li class="toc-l2"><a href="#depreciation-reversal">Depreciation Reversal</a></li><li class="toc-l2"><a href="#impairmentsale-reversal">Impairment/Sale Reversal</a></li></ul></li><li class="toc-l1"><a href="#audit-red-flags-acquisition-dtl">Audit Red Flags: Acquisition DTL</a><ul><li class="toc-l2"><a href="#red-flag-1-dtl-not-recognized">Red Flag 1: DTL Not Recognized</a></li><li class="toc-l2"><a href="#red-flag-2-incorrect-tax-deductibility-assessment">Red Flag 2: Incorrect Tax Deductibility Assessment</a></li><li class="toc-l2"><a href="#red-flag-3-dtl-not-remeasured-for-rate-change">Red Flag 3: DTL Not Remeasured for Rate Change</a></li><li class="toc-l2"><a href="#red-flag-4-goodwill-calculation-omits-dtl">Red Flag 4: Goodwill Calculation Omits DTL</a></li></ul></li></ul>
         </div>
 
 
@@ -172,20 +187,20 @@
 
             <h3 id="deferred-tax-impact">Deferred Tax Impact</h3>
 
-            <h4>Non-Deductible Adjustments (Create DTL)</h4>
+            <h4 id="nondeductible-adjustments-create-dtl">Non-Deductible Adjustments (Create DTL)</h4>
             <ul>
                 <li>Intangible: Software — £20m × 19% = £3.8m DTL</li>
                 <li>Intangible: Customer List — £15m × 19% = £2.85m DTL</li>
                 <li><strong>Total non-deductible DTL: £6.65m</strong></li>
             </ul>
 
-            <h4>Deductible Adjustments (Create DTA)</h4>
+            <h4 id="deductible-adjustments-create-dta">Deductible Adjustments (Create DTA)</h4>
             <ul>
                 <li>Warranty provision — (£8m) × 19% = (£1.52m) DTA</li>
                 <li><strong>Total deductible DTA: (£1.52m)</strong></li>
             </ul>
 
-            <h4>PP&E Partial Deduction</h4>
+            <h4 id="ppe-partial-deduction">PP&E Partial Deduction</h4>
             <ul>
                 <li>PP&E fair value increase: £15m</li>
                 <li>Estimated useful life: 10 years</li>

@@ -36,6 +36,45 @@
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; }
         .author-bio { background: #fff; border-radius: 10px; padding: 24px; margin: 44px 0; }
         .disclaimer { font-size: 0.82em; color: #8593a8; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; font-style: italic; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -54,41 +93,34 @@
 
         <p class="lead">IFRS 9's impairment model hinges on a simple but powerful distinction: Stage 1 assets use 12-month ECL (optimistic), while Stage 2/3 assets use lifetime ECL (conservative). This guide covers stage movements, when to reclassify assets, low-credit-risk exemptions, reversal of allowances, and the audit challenges around borderline determinations.</p>
 
-        <div class="toc">
-            <strong>Quick navigation</strong>
-            <ul>
-                <li><a href="#12m-vs-lifetime">12-Month ECL vs Lifetime ECL: The difference</a></li>
-                <li><a href="#stage-movements">Stage movements and reclassification</a></li>
-                <li><a href="#low-credit-risk">Low credit risk exemption</a></li>
-                <li><a href="#reversals">Reversal of impairment losses</a></li>
-                <li><a href="#practical-example">Practical example: Loan portfolio changes</a></li>
-                <li><a href="#audit-challenges">Audit challenges</a></li>
-            </ul>
+                <div class="toc">
+            <strong>In this guide</strong>
+            <ul><li class="toc-l1"><a href="#12m-vs-lifetime">12-Month ECL vs Lifetime ECL: The Difference</a><ul><li class="toc-l2"><a href="#stage-1-12month-ecl-performing-assets">Stage 1: 12-Month ECL (Performing Assets)</a></li><li class="toc-l2"><a href="#stage-2-3-lifetime-ecl-underperforming-or-defaulted">Stage 2 & 3: Lifetime ECL (Underperforming or Defaulted)</a></li><li class="toc-l2"><a href="#why-the-jump">Why the Jump?</a></li></ul></li><li class="toc-l1"><a href="#stage-movements">Stage Movements and Reclassification</a><ul><li class="toc-l2"><a href="#forward-movements-stage-1-2-3">Forward Movements (Stage 1 →’ 2 →’ 3)</a></li><li class="toc-l2"><a href="#backward-movements-reversal">Backward Movements (Reversal)</a></li></ul></li><li class="toc-l1"><a href="#low-credit-risk">Low Credit Risk Exemption</a><ul><li class="toc-l2"><a href="#what-qualifies-as-low-credit-risk">What Qualifies as Low Credit Risk?</a></li></ul></li><li class="toc-l1"><a href="#reversals">Reversal of Impairment Losses</a><ul><li class="toc-l2"><a href="#journal-entry-for-reversal">Journal Entry for Reversal</a></li><li class="toc-l2"><a href="#reversal-limits">Reversal Limits</a></li></ul></li><li class="toc-l1"><a href="#practical-example">Practical Example: Loan Portfolio Stage Movements</a><ul><li class="toc-l2"><a href="#q1-2025-initial-portfolio">Q1 2025: Initial Portfolio</a></li><li class="toc-l2"><a href="#q2-2025-sicr-occurs-on-loan-a">Q2 2025: SICR Occurs on Loan A</a></li><li class="toc-l2"><a href="#q3-2025-loan-b-default-recovery">Q3 2025: Loan B Default & Recovery</a></li><li class="toc-l2"><a href="#q4-2025-loan-c-recovery">Q4 2025: Loan C Recovery</a></li></ul></li><li class="toc-l1"><a href="#audit-challenges">Audit Challenges in Impairment Accounting</a><ul><li class="toc-l2"><a href="#challenge-1-borderline-sicr-assessments">Challenge 1: Borderline SICR Assessments</a></li><li class="toc-l2"><a href="#challenge-2-forgotten-reversals">Challenge 2: Forgotten Reversals</a></li><li class="toc-l2"><a href="#challenge-3-low-credit-risk-abuse">Challenge 3: Low Credit Risk Abuse</a><ul><li class="toc-l3"><a href="#usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</a></li></ul></li></ul></li></ul>
         </div>
 
         <article>
             <h2 id="12m-vs-lifetime">12-Month ECL vs Lifetime ECL: The Difference</h2>
 
-            <h3>Stage 1: 12-Month ECL (Performing Assets)</h3>
+            <h3 id="stage-1-12month-ecl-performing-assets">Stage 1: 12-Month ECL (Performing Assets)</h3>
             <p><strong>Assumption:</strong> Asset is in good health; no SICR since recognition.</p>
             <p><strong>ECL scope:</strong> Only losses expected in the next 12 months</p>
             <p><strong>Formula:</strong> ECL = PD (12-month) × LGD × EAD</p>
             <p><strong>Impact:</strong> Most assets are Stage 1; lower impairment allowance overall</p>
             <p><strong>Example:</strong> New mortgage (month 3, borrower paying on time): 12-month PD = 0.15%, ECL = £1,200 on £500k mortgage</p>
 
-            <h3>Stage 2 & 3: Lifetime ECL (Underperforming or Defaulted)</h3>
+            <h3 id="stage-2-3-lifetime-ecl-underperforming-or-defaulted">Stage 2 & 3: Lifetime ECL (Underperforming or Defaulted)</h3>
             <p><strong>Assumption:</strong> Asset is deteriorating or in default; recognize full lifetime losses</p>
             <p><strong>ECL scope:</strong> All losses expected over the remaining life of the asset</p>
             <p><strong>Formula:</strong> ECL = PD (lifetime) × LGD × EAD</p>
             <p><strong>Impact:</strong> Significantly higher allowance; can be 5— 10× Stage 1 ECL</p>
             <p><strong>Example:</strong> Mortgage with 30-day arrears (moves to Stage 2): lifetime PD = 3%, ECL = £15,000 on same £500k mortgage</p>
 
-            <h3>Why the Jump?</h3>
+            <h3 id="why-the-jump">Why the Jump?</h3>
             <p>The move to lifetime ECL reflects the SICR trigger: credit risk has increased significantly, so it's no longer reasonable to assume the asset will perform over the remaining 27 years. Instead, you must plan for higher probability of eventual default.</p>
 
             <h2 id="stage-movements">Stage Movements and Reclassification</h2>
 
-            <h3>Forward Movements (Stage 1 →’ 2 →’ 3)</h3>
+            <h3 id="forward-movements-stage-1-2-3">Forward Movements (Stage 1 →’ 2 →’ 3)</h3>
             <table>
                 <tr>
                     <th>From Stage</th>
@@ -116,7 +148,7 @@
                 </tr>
             </table>
 
-            <h3>Backward Movements (Reversal)</h3>
+            <h3 id="backward-movements-reversal">Backward Movements (Reversal)</h3>
             <p>Assets can move backward if the credit condition improves:</p>
             <ul>
                 <li><strong>Stage 2 →’ Stage 1:</strong> Arrears cured; credit rating restored</li>
@@ -128,7 +160,7 @@
             <h2 id="low-credit-risk">Low Credit Risk Exemption</h2>
             <p>IFRS 9 allows an optional exemption: if a financial asset is in "low credit risk" at the balance sheet date, you can continue to use 12-month ECL even if it would otherwise be in Stage 2.</p>
 
-            <h3>What Qualifies as Low Credit Risk?</h3>
+            <h3 id="what-qualifies-as-low-credit-risk">What Qualifies as Low Credit Risk?</h3>
             <ul>
                 <li><strong>Investment-grade debt:</strong> Credit rating BBB−’ or higher (S&P/Moody's)</li>
                 <li><strong>Sovereign debt:</strong> Low default probability (e.g., UK, US, Germany government bonds)</li>
@@ -145,7 +177,7 @@
             <h2 id="reversals">Reversal of Impairment Losses</h2>
             <p>When an asset's credit condition improves, the impairment allowance should be reduced (reversed).</p>
 
-            <h3>Journal Entry for Reversal</h3>
+            <h3 id="journal-entry-for-reversal">Journal Entry for Reversal</h3>
             <div style="background: #1a2f5a; color: #e8eef7; padding: 14px; border-radius: 4px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
                 Dr Loss Allowance on Loans &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5,000,000<br>
                 &nbsp;&nbsp;&nbsp;&nbsp;Cr Impairment Gain (P&L) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5,000,000
@@ -153,12 +185,12 @@
 
             <p>(The loss allowance decreases; the gain flows to P&L.)</p>
 
-            <h3>Reversal Limits</h3>
+            <h3 id="reversal-limits">Reversal Limits</h3>
             <p>You can reverse an allowance, but <strong>not beyond zero</strong>. The revised allowance cannot be lower than the balance at the start of the period minus any write-offs during the period.</p>
 
             <h2 id="practical-example">Practical Example: Loan Portfolio Stage Movements</h2>
 
-            <h3>Q1 2025: Initial Portfolio</h3>
+            <h3 id="q1-2025-initial-portfolio">Q1 2025: Initial Portfolio</h3>
             <table>
                 <tr>
                     <th>Loan</th>
@@ -192,7 +224,7 @@
                 </tr>
             </table>
 
-            <h3>Q2 2025: SICR Occurs on Loan A</h3>
+            <h3 id="q2-2025-sicr-occurs-on-loan-a">Q2 2025: SICR Occurs on Loan A</h3>
             <p><strong>Event:</strong> Borrower's employer downsizes; income drops 20%; SICR triggered</p>
             <p><strong>Reclassification:</strong> Loan A moves Stage 1 →’ Stage 2</p>
             <p><strong>New ECL (Lifetime, 2.8%):</strong> ‚¬5m × 2.8% = ‚¬140k</p>
@@ -202,7 +234,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;Cr Loss Allowance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 130,000
             </div>
 
-            <h3>Q3 2025: Loan B Default & Recovery</h3>
+            <h3 id="q3-2025-loan-b-default-recovery">Q3 2025: Loan B Default & Recovery</h3>
             <p><strong>Event:</strong> Business fails; loan defaults (>90 days arrears)</p>
             <p><strong>Reclassification:</strong> Loan B moves Stage 1 →’ Stage 3</p>
             <p><strong>New ECL (Lifetime, 40% loss):</strong> ‚¬3m × 40% = ‚¬1,200k</p>
@@ -212,7 +244,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;Cr Loss Allowance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,194,000
             </div>
 
-            <h3>Q4 2025: Loan C Recovery</h3>
+            <h3 id="q4-2025-loan-c-recovery">Q4 2025: Loan C Recovery</h3>
             <p><strong>Event:</strong> Loan C's borrower reorganizes; covenant breach resolved; credit rating restored</p>
             <p><strong>Reclassification:</strong> Loan C moves Stage 2 →’ Stage 1</p>
             <p><strong>New ECL (12M, 0.5%):</strong> ‚¬2m × 0.5% = ‚¬10k</p>
@@ -224,20 +256,20 @@
 
             <h2 id="audit-challenges">Audit Challenges in Impairment Accounting</h2>
 
-            <h3>Challenge 1: Borderline SICR Assessments</h3>
+            <h3 id="challenge-1-borderline-sicr-assessments">Challenge 1: Borderline SICR Assessments</h3>
             <p><strong>Situation:</strong> Asset is 31 days overdue (just past the 30-day SICR threshold). Bank argues it's still Stage 1; auditor pushes for Stage 2.</p>
             <p><strong>Impact:</strong> Difference of £500k+ in ECL allowance</p>
 
-            <h3>Challenge 2: Forgotten Reversals</h3>
+            <h3 id="challenge-2-forgotten-reversals">Challenge 2: Forgotten Reversals</h3>
             <p><strong>Situation:</strong> Asset in Stage 2 with £100k allowance was cured 6 months ago but never moved back to Stage 1.</p>
             <p><strong>Impact:</strong> ECL overstated by £90k (should be £10k at Stage 1)</p>
 
-            <h3>Challenge 3: Low Credit Risk Abuse</h3>
+            <h3 id="challenge-3-low-credit-risk-abuse">Challenge 3: Low Credit Risk Abuse</h3>
             <p><strong>Situation:</strong> Bank applies low-credit-risk exemption to an asset with technical SICR indicators to avoid Stage 2 movement.</p>
             <p><strong>Auditor action:</strong> Challenge the exemption; require proof that credit risk is genuinely low (e.g., credit rating upgrade or economic improvement)</p>
 
             <div class="author-bio">
-                <h4>Usman Qureshi (ACCA, ACA)</h4>
+                <h4 id="usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</h4>
                 <p>The 12-month vs lifetime ECL distinction is elegant in theory but brutal in practice. A single SICR judgment call can swing ECL by millions. I've seen 6-figure audit adjustments result from a 10-day reclassification disagreement.</p>
             </div>
 

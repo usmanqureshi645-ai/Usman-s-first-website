@@ -29,6 +29,45 @@
         .formula { background: #1a2f5a; color: #e8eef7; padding: 12px; border-radius: 6px; margin: 14px 0; text-align: center; }
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
         .disclaimer { font-size: 0.81em; color: #8593a8; margin-top: 36px; padding-top: 16px; border-top: 1px solid #e4e9f0; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -45,31 +84,9 @@
 </div>
         <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 10 min read</div>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#what-is-contingent-consideration">What is Contingent Consideration?</a></li>
-                <li><a href="#initial-recognition-acquisition-date">Initial Recognition (Acquisition Date)</a></li>
-                  <li><a href="#probabilityweighted-approach">Probability-Weighted Approach</a></li>
-                  <li><a href="#most-likely-amount-approach">Most Likely Amount Approach</a></li>
-                <li><a href="#time-value-of-money">Time Value of Money</a></li>
-                  <li><a href="#discount-rate-selection">Discount Rate Selection</a></li>
-                <li><a href="#remeasurement-after-acquisition-subsequent-reporting-periods">Remeasurement After Acquisition (Subsequent Reporting Periods)</a></li>
-                  <li><a href="#key-rule-not-goodwill">Key Rule: Not Goodwill</a></li>
-                  <li><a href="#remeasurement-timing">Remeasurement Timing</a></li>
-                <li><a href="#worked-example-software-acquisition-earnout-accounting">Worked Example: Software Acquisition Earnout Accounting</a></li>
-                  <li><a href="#deal-details">Deal Details</a></li>
-                  <li><a href="#initial-recognition-1-jan-2025">Initial Recognition (1 Jan 2025)</a></li>
-                  <li><a href="#midyear-reassessment-30-june-2025">Mid-Year Reassessment (30 June 2025)</a></li>
-                  <li><a href="#yearend-31-dec-2025">Year-End (31 Dec 2025)</a></li>
-                  <li><a href="#payment-january-2026">Payment (January 2026)</a></li>
-                <li><a href="#audit-red-flags-contingent-consideration">Audit Red Flags: Contingent Consideration</a></li>
-                  <li><a href="#red-flag-1-unrealistic-probability-estimates">Red Flag 1: Unrealistic Probability Estimates</a></li>
-                  <li><a href="#red-flag-2-contingent-liability-not-remeasured">Red Flag 2: Contingent Liability Not Remeasured</a></li>
-                  <li><a href="#red-flag-3-time-value-not-considered">Red Flag 3: Time Value Not Considered</a></li>
-                  <li><a href="#red-flag-4-measurement-period-confusion">Red Flag 4: Measurement Period Confusion</a></li>
-                <li><a href="#earnout-accounting-summary">Earnout Accounting Summary</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#what-is-contingent-consideration">What is Contingent Consideration?</a></li><li class="toc-l1"><a href="#initial-recognition-acquisition-date">Initial Recognition (Acquisition Date)</a><ul><li class="toc-l2"><a href="#probabilityweighted-approach">Probability-Weighted Approach</a></li><li class="toc-l2"><a href="#most-likely-amount-approach">Most Likely Amount Approach</a></li></ul></li><li class="toc-l1"><a href="#time-value-of-money">Time Value of Money</a><ul><li class="toc-l2"><a href="#discount-rate-selection">Discount Rate Selection</a></li></ul></li><li class="toc-l1"><a href="#remeasurement-after-acquisition-subsequent-reporting-periods">Remeasurement After Acquisition (Subsequent Reporting Periods)</a><ul><li class="toc-l2"><a href="#key-rule-not-goodwill">Key Rule: Not Goodwill</a></li><li class="toc-l2"><a href="#remeasurement-timing">Remeasurement Timing</a></li></ul></li><li class="toc-l1"><a href="#worked-example-software-acquisition-earnout-accounting">Worked Example: Software Acquisition Earnout Accounting</a><ul><li class="toc-l2"><a href="#deal-details">Deal Details</a></li><li class="toc-l2"><a href="#initial-recognition-1-jan-2025">Initial Recognition (1 Jan 2025)</a></li><li class="toc-l2"><a href="#midyear-reassessment-30-june-2025">Mid-Year Reassessment (30 June 2025)</a></li><li class="toc-l2"><a href="#yearend-31-dec-2025">Year-End (31 Dec 2025)</a></li><li class="toc-l2"><a href="#payment-january-2026">Payment (January 2026)</a></li></ul></li><li class="toc-l1"><a href="#audit-red-flags-contingent-consideration">Audit Red Flags: Contingent Consideration</a><ul><li class="toc-l2"><a href="#red-flag-1-unrealistic-probability-estimates">Red Flag 1: Unrealistic Probability Estimates</a></li><li class="toc-l2"><a href="#red-flag-2-contingent-liability-not-remeasured">Red Flag 2: Contingent Liability Not Remeasured</a></li><li class="toc-l2"><a href="#red-flag-3-time-value-not-considered">Red Flag 3: Time Value Not Considered</a></li><li class="toc-l2"><a href="#red-flag-4-measurement-period-confusion">Red Flag 4: Measurement Period Confusion</a></li></ul></li><li class="toc-l1"><a href="#earnout-accounting-summary">Earnout Accounting Summary</a></li></ul>
         </div>
 
 

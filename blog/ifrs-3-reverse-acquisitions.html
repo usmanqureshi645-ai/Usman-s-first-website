@@ -28,6 +28,45 @@
         th { background: #1a2f5a; color: #fff; font-weight: 600; }
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
         .disclaimer { font-size: 0.81em; color: #8593a8; margin-top: 36px; padding-top: 16px; border-top: 1px solid #e4e9f0; }
+    
+/*TOC_SIDEBAR_START*/
+.toc {
+    background: #fff;
+    border: 1px solid #e4e9f0;
+    border-left: 3px solid #d4af37;
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin-bottom: 36px;
+}
+.toc strong {
+    color: #1a2f5a; display: block; margin-bottom: 12px;
+    font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.08em;
+}
+.toc ul { list-style: none; margin: 0; padding: 0; column-count: 1; }
+.toc ul ul {
+    margin: 5px 0 8px 10px; padding-left: 12px;
+    border-left: 1px solid #e8ecf3;
+}
+.toc li { margin-bottom: 6px; line-height: 1.4; }
+.toc a { color: #2a4a7a; text-decoration: none; transition: color 0.18s; }
+.toc a:hover { color: #d4af37; }
+.toc .toc-l1 > a { font-weight: 600; color: #1a2f5a; font-size: 0.93em; }
+.toc .toc-l2 > a { color: #3a527a; font-size: 0.88em; }
+.toc .toc-l3 > a { color: #5a6b88; font-size: 0.83em; }
+@media (min-width: 1240px) {
+    .toc {
+        position: fixed;
+        top: 92px;
+        right: calc(50% + 392px);
+        width: min(300px, calc((100vw - 800px) / 2));
+        max-height: calc(100vh - 130px);
+        overflow-y: auto;
+        margin-bottom: 0;
+        z-index: 5;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+}
+/*TOC_SIDEBAR_END*/
     </style>
 </head>
 <body>
@@ -44,32 +83,9 @@
 </div>
         <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 10 min read</div>
 
-        <div class="toc">
+                <div class="toc">
             <strong>In this guide</strong>
-            <ul>
-                <li><a href="#what-is-a-reverse-acquisition">What is a Reverse Acquisition?</a></li>
-                  <li><a href="#classic-scenario">Classic Scenario</a></li>
-                <li><a href="#control-assessment-under-ifrs-10">Control Assessment Under IFRS 10</a></li>
-                  <li><a href="#voting-analysis">Voting Analysis</a></li>
-                <li><a href="#identifying-the-acquirer-in-a-reverse-acquisition">Identifying the Acquirer in a Reverse Acquisition</a></li>
-                  <li><a href="#red-flags-suggesting-a-reverse-not-forward-acquisition">Red Flags Suggesting a Reverse (Not Forward) Acquisition</a></li>
-                <li><a href="#accounting-treatment-reverse-acquisition">Accounting Treatment: Reverse Acquisition</a></li>
-                  <li><a href="#step-1-identify-the-acquirer">Step 1: Identify the Acquirer</a></li>
-                  <li><a href="#step-2-consolidated-financial-statements">Step 2: Consolidated Financial Statements</a></li>
-                  <li><a href="#step-3-goodwill-calculation">Step 3: Goodwill Calculation</a></li>
-                  <li><a href="#step-4-consolidation">Step 4: Consolidation</a></li>
-                <li><a href="#worked-example-technology-reverse-merger">Worked Example: Technology Reverse Merger</a></li>
-                  <li><a href="#deal-structure">Deal Structure</a></li>
-                  <li><a href="#control-analysis">Control Analysis</a></li>
-                  <li><a href="#fair-value-of-consideration">Fair Value of Consideration</a></li>
-                  <li><a href="#fair-value-of-techshells-identifiable-assets">Fair Value of TechShell's Identifiable Assets</a></li>
-                  <li><a href="#goodwill-calculation">Goodwill Calculation</a></li>
-                  <li><a href="#consolidated-balance-sheet-acquisition-date">Consolidated Balance Sheet (Acquisition Date)</a></li>
-                <li><a href="#audit-red-flags-reverse-acquisitions">Audit Red Flags: Reverse Acquisitions</a></li>
-                  <li><a href="#red-flag-1-misidentified-acquirer">Red Flag 1: Misidentified Acquirer</a></li>
-                  <li><a href="#red-flag-2-omitted-goodwill">Red Flag 2: Omitted Goodwill</a></li>
-                  <li><a href="#red-flag-3-comparatives-not-restated">Red Flag 3: Comparatives Not Restated</a></li>
-            </ul>
+            <ul><li class="toc-l1"><a href="#what-is-a-reverse-acquisition">What is a Reverse Acquisition?</a><ul><li class="toc-l2"><a href="#classic-scenario">Classic Scenario</a></li></ul></li><li class="toc-l1"><a href="#control-assessment-under-ifrs-10">Control Assessment Under IFRS 10</a><ul><li class="toc-l2"><a href="#voting-analysis">Voting Analysis</a></li></ul></li><li class="toc-l1"><a href="#identifying-the-acquirer-in-a-reverse-acquisition">Identifying the Acquirer in a Reverse Acquisition</a><ul><li class="toc-l2"><a href="#red-flags-suggesting-a-reverse-not-forward-acquisition">Red Flags Suggesting a Reverse (Not Forward) Acquisition</a></li></ul></li><li class="toc-l1"><a href="#accounting-treatment-reverse-acquisition">Accounting Treatment: Reverse Acquisition</a><ul><li class="toc-l2"><a href="#step-1-identify-the-acquirer">Step 1: Identify the Acquirer</a></li><li class="toc-l2"><a href="#step-2-consolidated-financial-statements">Step 2: Consolidated Financial Statements</a></li><li class="toc-l2"><a href="#step-3-goodwill-calculation">Step 3: Goodwill Calculation</a></li><li class="toc-l2"><a href="#step-4-consolidation">Step 4: Consolidation</a></li></ul></li><li class="toc-l1"><a href="#worked-example-technology-reverse-merger">Worked Example: Technology Reverse Merger</a><ul><li class="toc-l2"><a href="#deal-structure">Deal Structure</a></li><li class="toc-l2"><a href="#control-analysis">Control Analysis</a></li><li class="toc-l2"><a href="#fair-value-of-consideration">Fair Value of Consideration</a></li><li class="toc-l2"><a href="#fair-value-of-techshells-identifiable-assets">Fair Value of TechShell's Identifiable Assets</a></li><li class="toc-l2"><a href="#goodwill-calculation">Goodwill Calculation</a></li><li class="toc-l2"><a href="#consolidated-balance-sheet-acquisition-date">Consolidated Balance Sheet (Acquisition Date)</a></li></ul></li><li class="toc-l1"><a href="#audit-red-flags-reverse-acquisitions">Audit Red Flags: Reverse Acquisitions</a><ul><li class="toc-l2"><a href="#red-flag-1-misidentified-acquirer">Red Flag 1: Misidentified Acquirer</a></li><li class="toc-l2"><a href="#red-flag-2-omitted-goodwill">Red Flag 2: Omitted Goodwill</a></li><li class="toc-l2"><a href="#red-flag-3-comparatives-not-restated">Red Flag 3: Comparatives Not Restated</a></li></ul></li></ul>
         </div>
 
 

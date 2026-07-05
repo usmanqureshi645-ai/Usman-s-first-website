@@ -34,15 +34,12 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { email, transcript, kind, agents, coParticipant, resumed } = req.body || {};
+  const { email, transcript, kind, agents, resumed } = req.body || {};
   if (!email || !Array.isArray(transcript) || transcript.length === 0) {
     res.status(400).json({ error: 'Missing email or transcript' });
     return;
   }
   const cfg = KIND_CONFIG[kind] || KIND_CONFIG.meeting;
-  // coParticipant = { email, name } — set when this was a live, two-person Meeting Room
-  // session (see lib/meetingSession.js); both people get the summary + a workspace save.
-  const hasCoParticipant = coParticipant && coParticipant.email && coParticipant.email !== email;
 
   const conversationText = transcript
     .filter(m => m.role === 'user' || m.role === 'assistant')
@@ -107,26 +104,17 @@ Output format — this is critical: respond with ONLY the raw HTML body itself, 
       }
     }
 
-    const jointNoteFor = otherName => hasCoParticipant
-      ? `<p style="margin-top:24px;padding-top:16px;border-top:1px solid #ddd;color:#555">You attended this consultation together with <strong>${otherName}</strong> and the panel.</p>`
-      : '';
-
-    const sendOne = async (toEmail, otherName) => sendEmail(resendKey, {
+    const emailResp = await sendEmail(resendKey, {
         from: `${cfg.fromName} <${cfg.fromAddr}>`,
-        to: [toEmail],
+        to: [email],
         ...(replyTo ? { reply_to: replyTo } : {}),
         subject: cfg.subject,
-        html: htmlBody + jointNoteFor(otherName),
+        html: htmlBody,
     }, { kvUrl, kvToken });
-
-    const emailResp = await sendOne(email, coParticipant?.name || 'your colleague');
     const emailData = await emailResp.json();
     if (!emailResp.ok) {
       res.status(emailResp.status).json({ error: emailData?.message || 'Email send failed' });
       return;
-    }
-    if (hasCoParticipant) {
-      await sendOne(coParticipant.email, 'your colleague').catch(() => {});
     }
 
     const loggedInUser = getUserFromRequest(req);
@@ -158,7 +146,7 @@ Output format — this is critical: respond with ONLY the raw HTML body itself, 
           tool: 'meeting',
           title: firstUserMsg.slice(0, 80),
           transcript,
-          summaryHtml: htmlBody + (hasCoParticipant ? jointNoteFor(coParticipant.name || 'your colleague') : ''),
+          summaryHtml: htmlBody,
           agents: Array.isArray(agents) ? agents : [],
         });
         if (replyTo) {
@@ -173,25 +161,6 @@ Output format — this is critical: respond with ONLY the raw HTML body itself, 
         }
       } catch {
         // non-fatal — the summary email already sent successfully
-      }
-    }
-
-    // Co-participant gets their own workspace save too, even though this request's
-    // session cookie belongs to the host, not them
-    if (kind === 'meeting' && hasCoParticipant && kvUrl && kvToken) {
-      try {
-        const firstUserMsg = transcript.find(m => m.role === 'user')?.content || 'Meeting Room consultation';
-        await saveConsultation({
-          kvUrl, kvToken,
-          email: coParticipant.email,
-          tool: 'meeting',
-          title: firstUserMsg.slice(0, 80),
-          transcript,
-          summaryHtml: htmlBody + jointNoteFor(loggedInUser?.name || 'your colleague'),
-          agents: Array.isArray(agents) ? agents : [],
-        });
-      } catch {
-        // non-fatal
       }
     }
 

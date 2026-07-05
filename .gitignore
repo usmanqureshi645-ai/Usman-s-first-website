@@ -10,3 +10,12 @@ Previous feedbacks/
 *api key*
 *.env
 Avatars/
+
+# Marketing / ad production source files — not part of the deployed site, must not be served publicly by Vercel
+ADVERTISEMENT_PROMPT_EXPANDED.md
+DETAILED_POSTER_MIDJOURNEY_PROMPT.md
+ENERGETIC_60s_VIDEO_SCRIPT.md
+GOOGLE_AI_STUDIO_IMAGE_GENERATION_GUIDE.md
+LINKEDIN_POSTER_AI_PROMPTS.md
+LinkedIn-Ad-Production-Package.md
+ad-scenes.html

@@ -1574,11 +1574,10 @@
         typing.innerHTML=`<div class="wb-bubble"><span class="mr-typing"><span></span><span></span><span></span></span></div>`;
         wrap.appendChild(typing); wrap.scrollTop=wrap.scrollHeight;
         try{
-          const u=window.workspaceUser;
           const r=await fetch('/api/ask',{
             method:'POST',
             headers:{'content-type':'application/json'},
-            body:JSON.stringify({history:askHistory, userName:u?.name})
+            body:JSON.stringify({history:askHistory})
           });
           const data=await r.json();
           document.getElementById('askTyping')?.remove();

@@ -3,13 +3,11 @@
 // file via ?action=, instead of one file per action.
 import { hashPassword, verifyPassword, setSessionCookie, clearSessionCookie, getUserFromRequest, normalizeEmail, verifyAdminKey } from '../lib/auth.js';
 import { saveConsultation, scheduleFollowup } from '../lib/consultations.js';
-import { createMeetingSession, getMeetingSession, saveMeetingSession } from '../lib/meetingSession.js';
 import { getProfile, saveProfile } from '../lib/profile.js';
 import { sendEmail } from '../lib/email.js';
 import { recordVisit, recordPresence, recordSignup, getDashboardData, getVisitorTrend30, pipe } from '../lib/metrics.js';
 import { logAndCheckUsage } from '../lib/ipUsage.js';
 import { buildWorkbook } from '../lib/exportData.js';
-import { appendUserToSheet } from '../lib/googleSheets.js';
 import { getUsageAggregates, getMostUsedToolToday } from '../lib/featureLog.js';
 import { getAnthropicCostReport } from '../lib/anthropicCost.js';
 import { getPollyCostTrend } from '../lib/pollyCost.js';
@@ -111,19 +109,6 @@ async function handleSignup(req, res, { resendKey, kvUrl, kvToken }) {
       subject: `New website signup: ${name}`,
       html: `<p>New signup on the website:</p><p><strong>Name:</strong> ${name}<br><strong>Email:</strong> ${normalizedEmail}</p>`,
   }, { kvUrl, kvToken });
-
-  // Auto-sync to Google Sheets (non-blocking)
-  const signupIp = String(req.headers?.['x-forwarded-for'] || '').split(',')[0].trim() || req.socket?.remoteAddress || '';
-  appendUserToSheet({
-    email: normalizedEmail,
-    name,
-    company: cleanCompany,
-    department: cleanDepartment === 'Other' ? cleanDepartmentOther : cleanDepartment,
-    designation: cleanDesignation === 'Other' ? cleanDesignationOther : cleanDesignation,
-    country: cleanCountry,
-    city: cleanCity,
-    ip: signupIp,
-  }).catch(err => console.error('[Signup] Google Sheets sync error:', err));
 
   res.status(200).json({ ok: true, name, email: normalizedEmail });
 }
@@ -371,135 +356,6 @@ async function handlePersonalizedJobs(req, res, { kvUrl, kvToken, apiKey }) {
   }
 }
 
-// Experimental: invite a real person into a live, two-browser Meeting Room session.
-// Both browsers poll ?action=meeting-session for new messages every few seconds —
-// see lib/meetingSession.js for why (no websocket infra on this stack).
-async function handleMeetingInvite(req, res, { kvUrl, kvToken, resendKey }) {
-  if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Service not configured yet' }); return; }
-  const user = getUserFromRequest(req);
-  if (!user) { res.status(401).json({ error: 'Sign up free to invite someone to the meeting' }); return; }
-
-  const { sessionId, agents, inviteeEmail, existingHistory } = req.body || {};
-  const normalizedInvitee = normalizeEmail(inviteeEmail);
-  if (!normalizedInvitee || !normalizedInvitee.includes('@')) { res.status(400).json({ error: 'Please provide a valid email address' }); return; }
-  if (normalizedInvitee === normalizeEmail(user.email)) { res.status(400).json({ error: "That's your own email — invite someone else to join you." }); return; }
-
-  let session = sessionId ? await getMeetingSession({ kvUrl, kvToken, id: sessionId }) : null;
-  if (!session) {
-    session = await createMeetingSession({ kvUrl, kvToken, hostEmail: user.email, hostName: user.name, agents });
-    if (Array.isArray(existingHistory) && existingHistory.length) {
-      session.history = existingHistory
-        .filter(m => (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string' && !m.content.startsWith('['))
-        .map(m => ({
-          role: m.role,
-          content: m.content,
-          speakerEmail: m.role === 'assistant' ? null : user.email,
-          speakerName: m.role === 'assistant' ? null : user.name,
-        }));
-    }
-  }
-  session.invitee = { email: normalizedInvitee, name: null, joined: false };
-  await saveMeetingSession({ kvUrl, kvToken, session });
-
-  const existingResp = await fetch(`${kvUrl}/get/user:${normalizedInvitee}`, { headers: { authorization: `Bearer ${kvToken}` } });
-  const existingData = await existingResp.json();
-  const alreadyMember = !!existingData?.result;
-
-  const proto = req.headers['x-forwarded-proto'] || 'https';
-  const joinUrl = `${proto}://${req.headers.host}/index.html?meetingjoin=${session.id}`;
-
-  if (resendKey) {
-    await sendEmail(resendKey, {
-        from: 'Meeting Room <meetingroom@uqconsulting.org>',
-        to: [normalizedInvitee],
-        subject: `${user.name} has invited you to a live Meeting Room session`,
-        html: alreadyMember
-          ? `<p>Hi,</p><p><strong>${user.name}</strong> is in a live Meeting Room session right now on Usman Qureshi's website, talking with an AI panel of finance specialists, and would like you to join.</p><p><a href="${joinUrl}">Click here to join now</a> — you're already a member, so you'll drop straight in.</p>`
-          : `<p>Hi,</p><p><strong>${user.name}</strong> is in a live Meeting Room session right now on Usman Qureshi's website and would like you to join — a live conversation with an AI panel of finance specialists.</p><p>You'll just need a free account first (takes a minute) — <a href="${joinUrl}">click here to sign up and join the session</a>.</p>`,
-    }, { kvUrl, kvToken });
-  }
-
-  res.status(200).json({ ok: true, sessionId: session.id, alreadyMember, totalCount: session.history.length });
-}
-
-async function handleMeetingSessionGet(req, res, { kvUrl, kvToken }) {
-  if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Service not configured yet' }); return; }
-  const id = req.query?.id;
-  if (!id) { res.status(400).json({ error: 'Missing id' }); return; }
-  const session = await getMeetingSession({ kvUrl, kvToken, id });
-  if (!session) { res.status(404).json({ error: 'Session not found or expired' }); return; }
-  const since = Math.max(0, parseInt(req.query?.since, 10) || 0);
-  res.status(200).json({
-    ok: true,
-    hostName: session.hostName,
-    agents: session.agents,
-    invitee: session.invitee,
-    ended: session.ended,
-    history: session.history.slice(since),
-    totalCount: session.history.length,
-  });
-}
-
-async function handleMeetingJoin(req, res, { kvUrl, kvToken }) {
-  if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Service not configured yet' }); return; }
-  const user = getUserFromRequest(req);
-  if (!user) { res.status(401).json({ error: 'Please sign up or log in to join this session' }); return; }
-  const { id } = req.body || {};
-  if (!id) { res.status(400).json({ error: 'Missing id' }); return; }
-  const session = await getMeetingSession({ kvUrl, kvToken, id });
-  if (!session) { res.status(404).json({ error: 'That meeting invite could not be found — it may have expired.' }); return; }
-
-  if (session.invitee && normalizeEmail(session.invitee.email) === normalizeEmail(user.email)) {
-    session.invitee.joined = true;
-    session.invitee.name = user.name;
-    await saveMeetingSession({ kvUrl, kvToken, session });
-  }
-
-  res.status(200).json({ ok: true, hostName: session.hostName, hostEmail: session.hostEmail, agents: session.agents, history: session.history, ended: session.ended });
-}
-
-async function handleMeetingPost(req, res, { kvUrl, kvToken }) {
-  if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Service not configured yet' }); return; }
-  const user = getUserFromRequest(req);
-  if (!user) { res.status(401).json({ error: 'Please log in to post to this session' }); return; }
-
-  const { id, message } = req.body || {};
-  if (!id || !message || typeof message.content !== 'string') { res.status(400).json({ error: 'Missing id or message' }); return; }
-
-  const session = await getMeetingSession({ kvUrl, kvToken, id });
-  if (!session) { res.status(404).json({ error: 'Session not found or expired' }); return; }
-
-  if (message.role !== 'assistant' && session.invitee && normalizeEmail(session.invitee.email) === normalizeEmail(user.email) && !session.invitee.joined) {
-    session.invitee.joined = true;
-    session.invitee.name = user.name;
-  }
-
-  // Tag the poster's email on EVERY message (including the AI panel replies they
-  // relay), so each client can skip the messages it authored when polling and
-  // only render the other party's. Without this, a client would re-render the
-  // panel replies it posted itself. `authorName` keeps the human display name
-  // for user turns; assistant turns still render as the panel, not the poster.
-  session.history.push({
-    role: message.role === 'assistant' ? 'assistant' : 'user',
-    content: message.content,
-    speakerEmail: user.email,
-    speakerName: message.role === 'assistant' ? null : user.name,
-  });
-  await saveMeetingSession({ kvUrl, kvToken, session });
-  res.status(200).json({ ok: true, totalCount: session.history.length, invitee: session.invitee });
-}
-
-async function handleMeetingEnd(req, res, { kvUrl, kvToken }) {
-  if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Service not configured yet' }); return; }
-  const { id } = req.body || {};
-  if (!id) { res.status(400).json({ error: 'Missing id' }); return; }
-  const session = await getMeetingSession({ kvUrl, kvToken, id });
-  if (!session) { res.status(404).json({ error: 'Session not found or expired' }); return; }
-  session.ended = true;
-  await saveMeetingSession({ kvUrl, kvToken, session });
-  res.status(200).json({ ok: true, hostEmail: session.hostEmail, hostName: session.hostName, invitee: session.invitee });
-}
-
 async function handleCronFollowups(req, res, { kvUrl, kvToken, resendKey }) {
   const cronSecret = process.env.CRON_SECRET;
   if (cronSecret && req.headers['authorization'] !== `Bearer ${cronSecret}`) { res.status(401).json({ error: 'Unauthorized' }); return; }
@@ -741,11 +597,6 @@ export default async function handler(req, res) {
       case 'personalized-jobs': return req.method === 'POST' ? await handlePersonalizedJobs(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       case 'profile-get': return await handleProfileGet(req, res, ctx);
       case 'profile-save': return req.method === 'POST' ? await handleProfileSave(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
-      case 'meeting-invite': return req.method === 'POST' ? await handleMeetingInvite(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
-      case 'meeting-session': return req.method === 'GET' ? await handleMeetingSessionGet(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
-      case 'meeting-join': return req.method === 'POST' ? await handleMeetingJoin(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
-      case 'meeting-post': return req.method === 'POST' ? await handleMeetingPost(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
-      case 'meeting-end': return req.method === 'POST' ? await handleMeetingEnd(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       case 'track': return await handleTrack(req, res, ctx);
       case 'dashboard': return req.method === 'GET' ? await handleDashboard(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       case 'dashboard-set-balance': return (req.method === 'GET' || req.method === 'POST') ? await handleDashboardSetBalance(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });

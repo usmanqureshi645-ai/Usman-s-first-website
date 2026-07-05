@@ -1945,7 +1945,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 </div>
 <div class="tool-tile-visual">
 <div class="tool-tile-avatars">
-<div class="tool-tile-avatar mr-avatar av-pn" title="Priya Nair"></div>
+<div class="tool-tile-avatar mr-avatar av-pn" title="Charlotte Sinclair"></div>
 </div>
 <div class="tool-tile-bubbles">
 <div class="tool-tile-bubble q">Find me IFRS technical accounting roles that don't require relocation.</div>
@@ -2024,9 +2024,6 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 </ol>
 </div>
 <div class="tool-tile-visual">
-<div class="tool-tile-avatars">
-<div class="tool-tile-avatar mr-avatar av-gen-m" title="Usman Qureshi"></div>
-</div>
 <div class="tool-tile-bubbles">
 <div class="tool-tile-bubble q">Who built this entire platform?</div>
 <div class="tool-tile-bubble a">One person — Usman, ACCA/ACA — wrote every prompt, agent and line of code.</div>
@@ -2062,7 +2059,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
     <div id="mrCustomList"></div>
     <button class="mr-chip" id="mrAddCustomBtn" onclick="mrToggleCustomForm()" type="button" style="width:100%;margin-top:.6rem;border-color:var(--gold);color:var(--gold-light)">+ Add your own specialist</button>
     <div id="mrCustomForm" style="display:none;margin-top:.6rem;padding:.8rem;border:1px solid var(--steel);border-radius:8px">
-      <input type="text" id="mrCustomName" placeholder="Name (e.g. Priya Nair)" style="width:100%;margin-bottom:.4rem">
+      <input type="text" id="mrCustomName" placeholder="Name (e.g. Jordan Blake)" style="width:100%;margin-bottom:.4rem">
       <input type="text" id="mrCustomRole" placeholder="Their role / expertise (e.g. Treasury &amp; FX risk specialist)" style="width:100%;margin-bottom:.4rem">
       <div style="display:flex;gap:1rem;margin-bottom:.6rem">
         <label style="font-size:.85rem"><input type="radio" name="mrCustomGender" value="female" checked> Female</label>
@@ -2073,17 +2070,6 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
         <button class="pub-btn" type="button" onclick="mrAddCustomPersona()" style="flex:1;margin-top:0;height:42px;padding:0 1.2rem;box-sizing:border-box">Add to room</button>
         <button class="mr-chip" type="button" onclick="mrToggleCustomForm(false)" style="height:42px;padding:0 .85rem;box-sizing:border-box">Cancel</button>
       </div>
-    </div>
-    <button class="mr-chip" id="mrInviteBtn" onclick="mrToggleInviteForm()" type="button" style="width:100%;margin-top:.4rem;border-color:var(--gold);color:var(--gold-light)">+ Invite a real person</button>
-    <div id="mrInviteForm" style="display:none;margin-top:.6rem;padding:.8rem;border:1px solid var(--steel);border-radius:8px">
-      <p style="font-size:.82rem;color:var(--steel-light);margin-bottom:.5rem">Bring a real colleague into this meeting live with you and the panel. They'll need a free account — we'll email them a join link either way. <em>(Experimental — polls every few seconds rather than truly instant.)</em></p>
-      <input type="email" id="mrInviteEmail" placeholder="their@email.com" style="width:100%;margin-bottom:.5rem">
-      <div id="mrInviteWarning" style="display:none;font-size:.85rem;color:var(--gold-light);margin-bottom:.5rem"></div>
-      <div style="display:flex;gap:.5rem">
-        <button class="pub-btn" type="button" id="mrSendInviteBtn" onclick="mrSendInvite()" style="flex:1;margin-top:0;height:42px;padding:0 1.2rem;box-sizing:border-box">Send invite</button>
-        <button class="mr-chip" type="button" onclick="mrToggleInviteForm(false)" style="height:42px;padding:0 .85rem;box-sizing:border-box">Cancel</button>
-      </div>
-      <p id="mrInviteStatus" style="display:none;font-size:.82rem;color:var(--gold-light);margin-top:.5rem"></p>
     </div>
     <button class="pub-btn" id="mrStartBtn" onclick="mrStartMeeting()" style="width:100%;margin-top:1rem">Start the Meeting</button>
   </div>
@@ -4020,7 +4006,6 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
           try{ const pr=await fetch('/api/account?action=profile-get'); const pd=await pr.json(); if(pd.ok) window._siteProfile=pd.profile||{}; }catch(e){}
           window.applySavedProfileToTools?.();
         })();
-        if(window.pendingMeetingJoinId){ const joinId=window.pendingMeetingJoinId; window.pendingMeetingJoinId=null; window.toggleSignup?.(false); window.mrTryJoinSession?.(joinId); }
       }catch(e){
         alert('Connection issue — please try again.');
       }finally{
@@ -4231,7 +4216,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
   // re-eligible every 60 minutes (tracked via localStorage so the cooldown survives
   // reloads/tab changes within the hour, unlike the USP toast's session-only cap above).
   (function(){
-    const FEATURES=['Meeting Room','Knowledge Test','GAAP Compare','CV Scoring','CV Reasoning (Eleanor)','Financial Statement Review'];
+    const FEATURES=['Meeting Room','Interview Preparation','GAAP Compare','CV Scoring','CV Reasoning (Eleanor)','Financial Statement Review'];
     const LAST_SHOWN_KEY='rating_popup_last_shown'; // localStorage timestamp (ms)
     const DISMISSED_KEY='rating_popup_dismissed'; // sessionStorage — "Not now" blocks for the rest of this tab's session
     const INITIAL_DELAY_MS=20*60*1000; // 20 minutes on site
@@ -4873,7 +4858,6 @@ async function mrCallApi(userText){
     }
     mrHistory.push({role:'assistant', content:replyText});
     await mrRenderPanelReply(replyText, false, data.audioUrl, data.segments);
-    if(mrSessionId) await mrPostToSession({role:'assistant', content:replyText});
   }catch(e){
     mrHideTyping();
     mrAppendMessage('agent','Meeting Room','Connection issue — please try again.');
@@ -4948,10 +4932,6 @@ async function mrSendMessage(){
   // End meeting / Download transcript chips visible (mrChips wrapper stays shown)
   const topicChips=document.getElementById('mrTopicChips');
   if(topicChips) topicChips.style.display='none';
-  if(mrSessionId){
-    await mrPostToSession({role:'user', content:text});
-    await mrPollSession(); // pick up anything the other party sent just before this
-  }
   // If the user directly gave an email and asked for it to be sent/emailed,
   // act on it immediately instead of claiming we can't help
   const emailMatch=text.match(MR_EMAIL_RE);
@@ -5149,122 +5129,6 @@ function mrRemoveCustomPersona(id){
     mrHistory.push({role:'user', content:`[${p.name} has just left the meeting room. Current specialists present: ${mrPresentNames().join(', ')}. Briefly acknowledge this change in one short sentence from any present member, then continue the discussion naturally — do not restart the conversation or re-greet the user.]`});
     mrCallApi();
   }
-}
-// ── Live two-person session (experimental) — see lib/meetingSession.js for the polling rationale ──
-let mrSessionId=null, mrSessionSeen=0, mrPollTimer=null, mrInviteeInfo=null, mrOtherParticipant=null, mrInviteeAnnounced=false, mrIsHost=false;
-function mrToggleInviteForm(force){
-  const form=document.getElementById('mrInviteForm');
-  const show = typeof force==='boolean' ? force : form.style.display==='none';
-  form.style.display = show ? 'block' : 'none';
-  document.getElementById('mrInviteWarning').style.display='none';
-  if(show) document.getElementById('mrInviteEmail').value='';
-}
-async function mrSendInvite(){
-  const emailInput=document.getElementById('mrInviteEmail');
-  const email=emailInput.value.trim();
-  const warnEl=document.getElementById('mrInviteWarning');
-  if(!email || !email.includes('@')){ warnEl.textContent='Please enter a valid email address.'; warnEl.style.display='block'; return; }
-  const siteUser=window.getSiteUser?.();
-  if(!siteUser){
-    warnEl.textContent='Please sign up or log in first — this needs an account so we know who to credit in the workspace.';
-    warnEl.style.display='block';
-    window.toggleSignup?.(true);
-    return;
-  }
-  const btn=document.getElementById('mrSendInviteBtn');
-  btn.disabled=true; btn.textContent='Sending…';
-  // Keep the network call in its own try so a genuine connection failure is the
-  // ONLY thing that surfaces "Connection issue". Previously any exception in the
-  // post-success UI updates below (e.g. a missing element) fell into the same
-  // catch and showed a false "connection issue" even though the invite + email
-  // had actually gone through.
-  let data;
-  try{
-    const existingHistory=mrMeetingStarted ? mrHistory.filter(m=>!(typeof m.content==='string' && m.content.startsWith('['))) : [];
-    const r=await fetch('/api/account?action=meeting-invite',{
-      method:'POST', headers:{'content-type':'application/json'},
-      body:JSON.stringify({ sessionId:mrSessionId, agents:mrAgentsPayload(), inviteeEmail:email, existingHistory })
-    });
-    data=await r.json();
-    if(!r.ok){ warnEl.textContent=data.error||'Could not send the invite.'; warnEl.style.display='block'; return; }
-  }catch(e){
-    warnEl.textContent='Connection issue — please try again.'; warnEl.style.display='block';
-    return;
-  }finally{
-    btn.disabled=false; btn.textContent='Send invite';
-  }
-  // From here the invite has been accepted server-side; never show a connection error.
-  try{
-    mrSessionId=data.sessionId;
-    mrSessionSeen=data.totalCount||0;
-    mrInviteeAnnounced=false;
-    mrIsHost=true;
-    mrStartPolling();
-    document.getElementById('mrInviteForm').querySelectorAll('input,button').forEach(el=>el.style.display='none');
-    const statusEl=document.getElementById('mrInviteStatus');
-    if(statusEl){
-      statusEl.style.display='block';
-      statusEl.textContent = data.alreadyMember
-        ? `Invite sent to ${email} — they already have an account, so they'll join shortly.`
-        : `Invite sent to ${email} — they'll get a link to sign up and join you.`;
-    }
-    if(mrMeetingStarted){
-      mrAppendMessage('agent','Meeting Room', `An invite has been sent to ${email} to join us live.`);
-    }
-  }catch(e){ /* UI-only glitch after a successful invite — don't alarm the user */ }
-}
-function mrStartPolling(){
-  if(mrPollTimer) return;
-  mrPollTimer=setInterval(mrPollSession, 5000);
-}
-function mrStopPolling(){
-  if(mrPollTimer){ clearInterval(mrPollTimer); mrPollTimer=null; }
-}
-async function mrPostToSession(message){
-  if(!mrSessionId) return;
-  try{
-    const r=await fetch('/api/account?action=meeting-post',{
-      method:'POST', headers:{'content-type':'application/json'},
-      body:JSON.stringify({ id:mrSessionId, message })
-    });
-    const data=await r.json();
-    // Deliberately DON'T advance mrSessionSeen here. Jumping it to the server's
-    // full length would skip over any messages the other party posted but we
-    // haven't polled yet, so we'd never render them. The poll loop owns
-    // mrSessionSeen; it skips our own messages by speakerEmail, so posting
-    // without advancing the pointer is safe and never double-renders.
-    if(r.ok && data.invitee) mrInviteeInfo=data.invitee;
-  }catch(e){ /* the next poll will eventually resync */ }
-}
-async function mrPollSession(){
-  if(!mrSessionId) return;
-  const siteUser=window.getSiteUser?.();
-  try{
-    const r=await fetch(`/api/account?action=meeting-session&id=${mrSessionId}&since=${mrSessionSeen}`);
-    if(!r.ok) return;
-    const data=await r.json();
-    mrInviteeInfo=data.invitee;
-    if(data.invitee && data.invitee.joined){
-      mrOtherParticipant = mrOtherParticipant || { email:data.invitee.email, name:data.invitee.name };
-      // Let the host actually see that their guest has arrived (announce once).
-      // Host-only: to the guest, data.invitee is themselves, so this would be confusing.
-      if(mrIsHost && !mrInviteeAnnounced){
-        mrInviteeAnnounced=true;
-        mrAppendMessage('agent','Meeting Room', `**${data.invitee.name||'Your guest'}** has joined the meeting. You'll both see each other's messages live from here.`);
-      }
-    }
-    const myEmail = siteUser && siteUser.email ? siteUser.email.toLowerCase() : null;
-    if(Array.isArray(data.history) && data.history.length){
-      for(const m of data.history){
-        if(m.speakerEmail && myEmail && m.speakerEmail.toLowerCase()===myEmail) continue; // already rendered locally when we sent it
-        mrHistory.push({role:m.role, content:m.content});
-        if(m.role==='assistant'){ await mrRenderPanelReply(m.content); }
-        else { mrAppendMessage('user', m.speakerName||'Guest', m.content); }
-      }
-    }
-    mrSessionSeen=data.totalCount;
-    if(data.ended && mrPollTimer){ mrStopPolling(); mrAppendMessage('agent','Meeting Room', 'This shared session has ended.'); }
-  }catch(e){ /* ignore — retried on next interval */ }
 }
 function mrStartMeeting(){
   if(!window.getSiteUser?.()){ window.toggleSignup?.(true); return; }
@@ -5564,20 +5428,14 @@ function mrSendSummaryTo(email, {skipUserBubble=false, loggedIn=false}={}){
   const btn=document.getElementById('mrEndBtn');
   btn.disabled=true;
   btn.textContent='Sending summary…';
-  const coParticipant = (mrSessionId && mrOtherParticipant && mrOtherParticipant.email !== email)
-    ? mrOtherParticipant
-    : null;
-  if(mrSessionId) fetch('/api/account?action=meeting-end',{ method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({id:mrSessionId}) }).catch(()=>{});
-  mrStopPolling();
   fetch('/api/send-summary',{
     method:'POST',
     headers:{'content-type':'application/json'},
-    body:JSON.stringify({email, transcript:mrHistory, kind:'meeting', agents:mrAgentsPayload(), coParticipant, resumed: !!mrResumedSession})
+    body:JSON.stringify({email, transcript:mrHistory, kind:'meeting', agents:mrAgentsPayload(), resumed: !!mrResumedSession})
   }).then(r=>r.json()).then(data=>{
     if(data.error){ mrAppendMessage('agent','Meeting Room', `Sorry — I couldn't send that summary right now (${data.error}). Please try again shortly.`); }
     else{
-      const jointNote = coParticipant ? ` A copy has also gone to **${coParticipant.name||coParticipant.email}**, and it's saved in both your workspaces.` : '';
-      mrAppendMessage('agent','Meeting Room', `Thank you — I'm sending the consultation to your email now, and it'll also be saved in your **My Workspace** dashboard for quick reference any time.${jointNote} It was a pleasure working through this with you.`);
+      mrAppendMessage('agent','Meeting Room', `Thank you — I'm sending the consultation to your email now, and it'll also be saved in your **My Workspace** dashboard for quick reference any time. It was a pleasure working through this with you.`);
     }
   }).catch(()=>{
     mrAppendMessage('agent','Meeting Room', "Sorry — I couldn't send that summary right now. Please try again shortly.");
@@ -6187,59 +6045,6 @@ document.getElementById('qzInput').addEventListener('keydown', e=>{
   if(e.key==='Enter') qzSendMessage();
 });
 wireMic('qzMic','qzInput', qzSendMessage);
-
-// Join a live, two-person Meeting Room session via an invite link (?meetingjoin=<id>)
-window.mrTryJoinSession=async function(joinId){
-  try{
-    document.getElementById('meetingroom').scrollIntoView();
-    const r=await fetch('/api/account?action=meeting-join',{ method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({id:joinId}) });
-    const data=await r.json();
-    if(r.status===401){
-      window.pendingMeetingJoinId=joinId;
-      window.toggleSignup?.(true);
-      const introEl=document.getElementById('signupIntroBubble');
-      if(introEl) introEl.textContent="Sign up or log in to join the live Meeting Room session you were invited to — you'll drop straight in once you do.";
-      return;
-    }
-    if(!r.ok){ alert(data.error||'That meeting invite could not be found — it may have expired.'); return; }
-
-    mrSessionId=joinId;
-    mrIsHost=false;
-    mrOtherParticipant={ email:data.hostEmail, name:data.hostName };
-    mrMeetingStarted=true;
-    document.getElementById('mrStartBtn').textContent='Meeting in progress — tick/untick anyone above to add or remove them';
-    document.getElementById('mrStartBtn').disabled=true;
-    document.getElementById('mrChips').style.display='flex';
-    document.getElementById('mrInputBar').style.display='flex';
-    const topicChips=document.getElementById('mrTopicChips');
-    if(topicChips) topicChips.style.display='none';
-
-    const builtInAgents=(Array.isArray(data.agents)?data.agents:[]).filter(a=>typeof a==='string');
-    document.querySelectorAll('.mr-agent-check').forEach(cb=>{ cb.checked=builtInAgents.includes(cb.value); });
-    mrSelectedAgents=Array.from(document.querySelectorAll('.mr-agent-check:checked')).map(c=>c.value);
-    mrCustomPersonas=(Array.isArray(data.agents)?data.agents:[]).filter(a=>a && typeof a==='object' && a.name && a.role)
-      .map(a=>({id:'custom-'+Date.now()+'-'+Math.random().toString(36).slice(2,7), name:a.name, role:a.role, gender:'female', active:true}));
-    mrCustomPersonas.forEach(p=>{ mrRoles[p.name]=p.role; });
-    mrRenderCustomPersonas();
-
-    mrAppendMessage('agent','Meeting Room', `You've joined **${data.hostName}**'s live session — welcome in.`);
-    if(Array.isArray(data.history)){
-      for(const m of data.history){
-        mrHistory.push({role:m.role, content:m.content});
-        if(m.role==='assistant'){ await mrRenderPanelReply(m.content, true); }
-        else { mrAppendMessage('user', m.speakerName||'Guest', m.content); }
-      }
-    }
-    mrSessionSeen=Array.isArray(data.history) ? data.history.length : 0;
-    if(!data.ended) mrStartPolling();
-  }catch(e){
-    alert('Could not join the session — please try again.');
-  }
-};
-(function(){
-  const joinId=new URLSearchParams(location.search).get('meetingjoin');
-  if(joinId) window.mrTryJoinSession(joinId);
-})();
 
 // Resume a saved consultation from the workspace ("Continue this conversation")
 (async function handleResume(){

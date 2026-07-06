@@ -5160,8 +5160,21 @@ document.getElementById('mrFileInput').addEventListener('change', e=>{
   if(!validTypes.includes(file.type)){ alert('Please upload a Word document (.docx), PDF, or text file (.txt).'); return; }
   mrHandleFileUpload(file);
 });
+function isCVOrResume(fileName, fileText) {
+  // Check filename patterns
+  const namePatterns = /cv|resume|résumé|c\.v\.|r\.e\.s\./i;
+  if(namePatterns.test(fileName)) return true;
+
+  // Check content keywords typical of CVs/resumes
+  if(!fileText) return false;
+  const cvKeywords = /employment\s+history|work\s+experience|education|skills|professional\s+summary|objective|core\s+competencies|certifications?|key\s+achievements?/i;
+  const matchCount = (fileText.match(/(employment|experience|education|skills|summary|objective|competencies|certifications|achievements)/gi) || []).length;
+  return cvKeywords.test(fileText) || matchCount >= 3;
+}
+
 async function mrHandleFileUpload(file){
   let block;
+  let fileText = null;
   try{
     if(file.type==='application/pdf'){
       const base64=await new Promise((resolve,reject)=>{
@@ -5180,20 +5193,32 @@ async function mrHandleFileUpload(file){
       });
       block={type:'image', source:{type:'base64', media_type:file.type, data:base64}};
     } else {
-      const text=await extractFileText(file);
-      block={type:'text', text:`[Uploaded file: ${file.name}]\n\n${text.slice(0,20000)}`};
+      fileText=await extractFileText(file);
+      block={type:'text', text:`[Uploaded file: ${file.name}]\n\n${fileText.slice(0,20000)}`};
     }
   }catch(e){
     mrAppendMessage('agent','Meeting Room', `Sorry — I couldn't read "${file.name}". Please try a different file.`);
     return;
   }
+
+  // Check if file is likely a CV/resume and redirect to the correct service
+  if(file.type!=='application/pdf' && fileText){
+    if(isCVOrResume(file.name, fileText)){
+      mrAppendMessage('agent','Meeting Room', `I see you've uploaded a CV or resume — that's not quite what the Meeting Room is for. The Meeting Room is for discussing audit, accounting, tax, and standards with a panel of specialists.\n\nFor CV review, feedback, and scoring, head over to <strong>Score My Resume</strong> (the dedicated CV & cover letter tool) — it'll give you detailed feedback from three perspectives (HR screener, ATS system, and hiring manager). You can even chat with Eleanor, our recruitment specialist, to discuss how to improve it.`);
+      return;
+    }
+  } else if(block.type==='document'){
+    // For PDFs, we can't easily extract text client-side, so the panel will tell us if it's a CV
+    // The system prompt instructs the panel to detect and redirect CV uploads
+  }
+
   mrAppendMessage('user','You', `📎 Uploaded: ${file.name} — please review this.`);
   mrHistory.push({role:'user', content:[block, {type:'text', text:`I've uploaded a document called "${file.name}" for the panel to review. Please read its actual contents and give your analysis.`}]});
   if(file.type.startsWith('image/')){
     mrLastSharedDoc = { name:file.name, text:'', quality:'unsupported' };
   } else {
     try{
-      const sharedText = await extractFileText(file);
+      const sharedText = fileText || await extractFileText(file);
       mrLastSharedDoc = { name:file.name, text:sharedText, quality: mrAssessDocQuality(sharedText) };
     }catch(e){
       mrLastSharedDoc = { name:file.name, text:'', quality:'unsupported' };

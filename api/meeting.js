@@ -36,8 +36,21 @@ export default async function handler(req, res) {
   // again until they reload. Drop empty turns and any leading assistant turns so
   // the first message is always a user turn.
   let messages = history
-    .filter(m => (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string' && m.content.trim().length > 0)
-    .map(m => ({ role: m.role, content: m.content }));
+    .filter(m => {
+      if (m.role !== 'user' && m.role !== 'assistant') return false;
+      // Support both string content and content blocks (arrays with text/document/image)
+      if (typeof m.content === 'string') {
+        return m.content.trim().length > 0;
+      } else if (Array.isArray(m.content)) {
+        // Keep content-block messages even if they don't have text, since they may have documents/images
+        return m.content.length > 0;
+      }
+      return false;
+    })
+    .map(m => {
+      // Anthropic API expects content to be either a string or an array of content blocks
+      return { role: m.role, content: m.content };
+    });
   while (messages.length && messages[0].role === 'assistant') messages.shift();
   if (messages.length === 0) {
     res.status(400).json({ error: 'Missing conversation history' });

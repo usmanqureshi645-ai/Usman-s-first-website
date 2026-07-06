@@ -5150,29 +5150,37 @@ function mrStartMeeting(){
   mrCallApi();
 }
 
-const MR_FILE_MAX_BYTES=15*1024*1024;
+const MR_FILE_MAX_BYTES=2*1024*1024; // 2MB max
 document.getElementById('mrFileInput').addEventListener('change', e=>{
   const file=e.target.files[0];
   e.target.value='';
   if(!file) return;
-  if(file.size>MR_FILE_MAX_BYTES){ alert('That file is too large (max 15MB).'); return; }
+  if(file.size>MR_FILE_MAX_BYTES){ alert('That file is too large (max 2MB). Please upload a smaller file.'); return; }
+  const validTypes=['application/pdf','application/vnd.openxmlformats-officedocument.wordprocessingml.document','text/plain'];
+  if(!validTypes.includes(file.type)){ alert('Please upload a Word document (.docx), PDF, or text file (.txt).'); return; }
   mrHandleFileUpload(file);
 });
 async function mrHandleFileUpload(file){
   let block;
   try{
-    if(file.type==='application/pdf' || file.type.startsWith('image/')){
+    if(file.type==='application/pdf'){
       const base64=await new Promise((resolve,reject)=>{
         const r=new FileReader();
         r.onload=()=>resolve(r.result.split(',')[1]);
         r.onerror=reject;
         r.readAsDataURL(file);
       });
-      block = file.type==='application/pdf'
-        ? {type:'document', source:{type:'base64', media_type:'application/pdf', data:base64}}
-        : {type:'image', source:{type:'base64', media_type:file.type, data:base64}};
+      block={type:'document', source:{type:'base64', media_type:'application/pdf', data:base64}};
+    } else if(file.type.startsWith('image/')){
+      const base64=await new Promise((resolve,reject)=>{
+        const r=new FileReader();
+        r.onload=()=>resolve(r.result.split(',')[1]);
+        r.onerror=reject;
+        r.readAsDataURL(file);
+      });
+      block={type:'image', source:{type:'base64', media_type:file.type, data:base64}};
     } else {
-      const text=await file.text();
+      const text=await extractFileText(file);
       block={type:'text', text:`[Uploaded file: ${file.name}]\n\n${text.slice(0,20000)}`};
     }
   }catch(e){

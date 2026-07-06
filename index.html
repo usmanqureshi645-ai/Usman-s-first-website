@@ -4866,6 +4866,23 @@ async function mrCallApi(userText){
   }
 }
 function mrWait(ms){ return new Promise(r=>setTimeout(r, ms)); }
+// The panel's name is already shown as the bubble header, so a message that ALSO opens with
+// "Hi, I'm Sarah Bennett" reads as broken/redundant. The system prompt tells the model not to
+// self-introduce, but that isn't 100% reliable, so we strip a leading self-introduction here as
+// a guaranteed backstop (mirrors the regexes in lib/tts.js cleanText). Only strips when the
+// intro names the SAME speaker as the bubble header — cross-references to others stay intact.
+function mrStripSelfIntro(name, msg){
+  if(!name||!msg) return msg;
+  const first=String(name).trim().split(/\s+/)[0].replace(/[^A-Za-z'-]/g,'');
+  const full=String(name).trim().replace(/[^A-Za-z'\- ]/g,'');
+  const who=`(?:${[full,first].filter(Boolean).map(s=>s.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')).join('|')})`;
+  return msg
+    // "Hi, I'm Sarah Bennett," / "Hello I am Sarah," / "This is Sarah Bennett -" etc.
+    .replace(new RegExp(`^(?:Hi|Hello|Hey)?[,!.]?\\s*(?:I'?m|I am|This is|My name is)\\s+${who}(?:\\s+\\w+)?\\s*[,.!:—-]?\\s*`, 'i'),'')
+    // "Sarah Bennett here," / "Sarah here -"
+    .replace(new RegExp(`^${who}(?:\\s+\\w+)?\\s+here\\s*[,.!:—-]?\\s*`, 'i'),'')
+    .trimStart();
+}
 // Renders each panel member's contribution one at a time, with a realistic
 // typing pause beforehand, instead of dumping every speaker's bubble at once —
 // the latter reads as obviously AI-generated rather than a real back-and-forth.
@@ -4897,11 +4914,12 @@ async function mrRenderPanelReply(text, instant, audioUrl, segments){
     }
     // Per-speaker audio: each bubble triggers its own Polly voice (mrPlayAudio auto-cancels previous)
     const seg=hasSegments ? segments.find(s=>s.speaker===name.trim()) : null;
+    const body=mrStripSelfIntro(name.trim(), msg.trim());
     if(seg?.audioUrl){
-      mrAppendMessage('agent',name.trim(),msg.trim(),true);
+      mrAppendMessage('agent',name.trim(),body,true);
       mrPlayAudio(seg.audioUrl);
     } else {
-      mrAppendMessage('agent',name.trim(),msg.trim(),hasAudio);
+      mrAppendMessage('agent',name.trim(),body,hasAudio);
     }
   }
 }

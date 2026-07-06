@@ -1,4 +1,4 @@
-import { buildMeetingSystemPrompt } from '../lib/meetingPersonas.js';
+import { buildMeetingSystemPrompt, normalizeSpeakerLabels } from '../lib/meetingPersonas.js';
 import { logAndCheckUsage } from '../lib/ipUsage.js';
 import { getUserFromRequest } from '../lib/auth.js';
 import { synthesize } from '../lib/tts.js';
@@ -80,7 +80,11 @@ export default async function handler(req, res) {
       return;
     }
 
-    const text = data?.content?.[0]?.text || '';
+    // Normalize plain / first-name-only speaker prefixes ("Sarah:", "Sarah Bennett:") into the
+    // canonical "**Sarah Bennett**: " form BEFORE splitting, so each segment maps to the right
+    // per-persona Polly voice and the name label is never read aloud. Also fixes the frontend
+    // bubble parser, which splits on the same bold pattern.
+    const text = normalizeSpeakerLabels(data?.content?.[0]?.text || '', agents);
     const kvOpts = { kv: { url: process.env.UPSTASH_REDIS_REST_URL, token: process.env.UPSTASH_REDIS_REST_TOKEN } };
 
     // Parse "**Name**: message" speaker segments and synthesize each with their own voice

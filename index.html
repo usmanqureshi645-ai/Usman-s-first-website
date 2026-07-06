@@ -135,6 +135,57 @@
 
   .nav-links a:hover { color: var(--gold); }
 
+  /* Hover dropdown menus (AI Tools, Hot Market Topics) */
+  .nav-links > li.has-dropdown { position: relative; }
+  .nav-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 230px;
+    max-height: 70vh;
+    overflow-y: auto;
+    list-style: none;
+    margin: 0;
+    padding: 0.4rem 0;
+    background: #0e1622;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px;
+    box-shadow: 0 12px 34px rgba(0,0,0,0.45);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity 0.16s ease, transform 0.16s ease, visibility 0.16s;
+    z-index: 120;
+  }
+  /* A small hover bridge so the menu doesn't vanish while the cursor crosses the gap */
+  .nav-links > li.has-dropdown::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: 10px;
+  }
+  .nav-links > li.has-dropdown:hover .nav-dropdown,
+  .nav-links > li.has-dropdown:focus-within .nav-dropdown {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .nav-dropdown li { display: block; }
+  .nav-dropdown a {
+    display: block;
+    padding: 0.5rem 1rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.03em;
+    text-transform: none;
+    white-space: normal;
+    color: var(--steel-light);
+    transition: background 0.15s, color 0.15s;
+  }
+  .nav-dropdown a:hover { background: rgba(255,255,255,0.06); color: var(--gold); }
+  @media (max-width: 1300px) { .nav-dropdown { display: none; } }
+
   /* ── HERO ── */
   .hero {
     min-height: 100vh;
@@ -1803,8 +1854,22 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
   <a href="home.html" class="nav-logo" style="text-decoration:none;color:inherit;cursor:pointer">Usman Qureshi, ACCA, ACA</a>
 
 <ul class="nav-links" id="navLinks">
-<li><a href="#aitools" class="nav-meetingroom">AI Tools <span class="live-dot"></span></a></li>
-<li><a href="#hottopics">Hot Market Topics</a></li>
+<li class="has-dropdown"><a href="#aitools" class="nav-meetingroom">AI Tools <span class="live-dot"></span></a>
+  <ul class="nav-dropdown">
+    <li><a href="#meetingroom">The Meeting Room</a></li>
+    <li><a href="#knowledgetest">Interview Preparation</a></li>
+    <li><a href="#jobhub">Score My Resume</a></li>
+    <li><a href="#gaapcompare">GAAP Compare</a></li>
+    <li><a href="#fsreview">Financial Statement Review</a></li>
+    <li><a href="#jobsearch">Personalized Job Search</a></li>
+    <li><a href="#hottopics">Hot Market Topics</a></li>
+  </ul>
+</li>
+<li class="has-dropdown"><a href="#hottopics">Hot Market Topics</a>
+  <ul class="nav-dropdown" id="hotTopicsDropdown">
+    <li><a href="#hottopics">View all topics</a></li>
+  </ul>
+</li>
 <li><a href="knowledge-hub.html" target="_blank">Knowledge Hub</a></li>
 <li id="navWorkspaceLink" style="display:none"><a href="workspace.html">My Workspace</a></li>
 <li><a href="#whoami">Who am I</a></li>
@@ -2122,6 +2187,23 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 <p class="section-sub">Not a test — a friend who helps you prepare for the real interview ahead of you. Share the job description (and a link, if you have one) so the questions are specific to that company and role, not generic. Pick a level, and get asked real, role-specific accounting, audit, tax and interpersonal/leadership questions one at a time, with feedback and the "why this matters for interviews" context after every answer.</p>
 </div>
 
+<div id="qzPrep" style="max-width:900px;margin:0 auto 1.75rem">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
+    <div>
+      <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.5rem">Optional: upload your CV so the questions fit your real background</label>
+      <div class="job-upload-box" id="qzCvUploadBox" onclick="document.getElementById('qzCvFile').click()">
+        <input type="file" id="qzCvFile" accept=".pdf,.docx,.txt" style="display:none" onchange="qzHandleCv(this)">
+        <span id="qzCvUploadLabel">📄 Click to upload your CV (optional)</span>
+      </div>
+    </div>
+    <div>
+      <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.5rem">Optional: paste the job description, or a link to the posting</label>
+      <textarea id="qzJdInput" placeholder="Paste the JD text here, or a link to the job posting…" style="width:100%;min-height:120px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
+    </div>
+  </div>
+  <p class="mr-note" style="text-align:center;margin-top:1rem">Now pick a difficulty to begin — you can change it any time during the session.</p>
+</div>
+
 <div id="qzLevels" class="train-grid">
   <div class="knowledge-card" style="text-align:center;cursor:pointer" onclick="qzStart('Beginner')">
     <span class="sector-icon">🌱</span>
@@ -2144,7 +2226,13 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
   <div style="display:flex;align-items:center;gap:.6rem;padding:.85rem 1rem;border-bottom:1px solid rgba(255,255,255,.08)">
     <div class="mr-avatar photo av-ic" style="width:34px;height:34px;border-radius:8px">IC</div>
     <span style="font-size:.85rem;font-weight:700;color:var(--gold)">Interview Coach</span>
-    <button class="mr-maximize-btn" type="button" onclick="mrToggleMaximize('qzChatWrap')" title="Maximize" style="margin-left:auto">⛶</button>
+    <label for="qzLevelSelect" style="margin-left:auto;font-size:.7rem;color:var(--steel-light);letter-spacing:.04em">Difficulty</label>
+    <select id="qzLevelSelect" onchange="qzChangeLevel(this.value)" title="Change difficulty level" style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.15);border-radius:8px;color:var(--cream);font-family:inherit;font-size:.78rem;padding:.3rem .5rem;cursor:pointer">
+      <option value="Beginner">Beginner</option>
+      <option value="Intermediate">Intermediate</option>
+      <option value="Expert">Expert</option>
+    </select>
+    <button class="mr-maximize-btn" type="button" onclick="mrToggleMaximize('qzChatWrap')" title="Maximize" style="margin-left:.4rem">⛶</button>
   </div>
   <div class="mr-messages" id="qzMessages"></div>
   <div class="mr-chips">
@@ -3425,8 +3513,35 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
         </div>`).join('');
     }).catch(()=>{
       grid.innerHTML=`<div class="knowledge-card"><p class="mr-note">Couldn't load the latest news right now — see the curated briefings below instead.</p></div>`;
-    });
+    }).finally(buildHotTopicsDropdown);
   })();
+
+  // Populate the "Hot Market Topics" nav dropdown from whatever articles are actually live in
+  // the #hottopics section (dynamic industry news + static curated briefings), so the menu always
+  // stays in sync. Each item links to the article's external "Read more" URL where one exists,
+  // otherwise it scrolls to the card in the section.
+  function buildHotTopicsDropdown(){
+    const menu=document.getElementById('hotTopicsDropdown');
+    const section=document.getElementById('hottopics');
+    if(!menu||!section) return;
+    const cards=[...section.querySelectorAll('.knowledge-card')];
+    const items=cards.map((card,i)=>{
+      const title=(card.querySelector('h3')?.textContent||'').trim();
+      if(!title) return '';
+      const link=card.querySelector('a[href]');
+      const href=link?.getAttribute('href')||'#hottopics';
+      const external=href && !href.startsWith('#');
+      if(!card.id) card.id=`hottopic-card-${i}`;
+      const target=external ? href : `#${card.id}`;
+      const attrs=external ? ' target="_blank" rel="noopener"' : '';
+      return `<li><a href="${target}"${attrs}>${title}</a></li>`;
+    }).filter(Boolean);
+    menu.innerHTML=`<li><a href="#hottopics">View all topics</a></li>`+items.join('');
+  }
+  // Build once for the static briefings as soon as the DOM is ready; the news fetch rebuilds it
+  // again (via .finally above) once async items land.
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded', buildHotTopicsDropdown);
+  else buildHotTopicsDropdown();
 
   // Boutique office parallax background — fixed across the entire site, moves with the cursor, depth-layered
   (function(){
@@ -5952,6 +6067,9 @@ document.getElementById('gaapMic')?.addEventListener('click', gaapDuckOnce);
 /* ── Test Your Knowledge (interview prep coach) ── */
 const qzHistory=[];
 let qzResumedSession=false; // set true by handleResume()
+let qzLevel='Intermediate'; // current difficulty; set by qzStart / qzChangeLevel
+let qzCvText=''; // optional CV text supplied on the prep screen
+let qzJdText=''; // optional job description / link supplied on the prep screen
 let qzVoiceEnabled=true; // voice always on
 let qzLastAudioUrl=null;
 // Interview Coach is always a female voice — no selector, fixed character.
@@ -6028,16 +6146,58 @@ async function qzCallApi(){
     document.getElementById('qzSend').disabled=false;
   }
 }
+// Optional CV upload on the interview-prep screen. Reuses the shared extractFileText helper and,
+// for logged-in users, the saved profile CV so they never have to re-upload across tools.
+async function qzHandleCv(input){
+  const file=input.files[0];
+  if(!file) return;
+  const label=document.getElementById('qzCvUploadLabel');
+  const box=document.getElementById('qzCvUploadBox');
+  label.textContent=`Extracting text from ${file.name}…`;
+  try{
+    const text=await extractFileText(file);
+    qzCvText=text;
+    box.classList.add('has-file');
+    label.textContent=`✓ ${file.name} — ${text.trim().split(/\s+/).length} words extracted`;
+    if(window.getSiteUser?.()) window.saveSiteProfile?.({ cv:text, cvFilename:file.name });
+  }catch(e){
+    qzCvText='';
+    box.classList.remove('has-file');
+    label.textContent=`Couldn't read ${file.name} — try a .txt, .pdf or .docx file`;
+  }
+}
 function qzStart(level){
   if(!window.getSiteUser?.()){ window.toggleSignup?.(true); return; }
   console.log('Interview prep started, ducking music');
   window.MusicDuck?.duck('interview-prep', 2500); // slow, graceful fade-out
+  qzLevel=level;
+  const sel=document.getElementById('qzLevelSelect'); if(sel) sel.value=level;
+  // Fall back to the saved-profile CV if nothing was uploaded on the prep screen.
+  if(!qzCvText){ const p=window.getSiteProfile?.(); if(p?.cv) qzCvText=p.cv; }
+  const jd=(document.getElementById('qzJdInput')?.value||'').trim();
+  if(jd) qzJdText=jd;
+  document.getElementById('qzPrep').style.display='none';
   document.getElementById('qzLevels').style.display='none';
   document.getElementById('qzChatWrap').style.display='flex';
   document.getElementById('qzNote').style.display='block'; document.getElementById('qzTtsNote').style.display='block';
   document.getElementById('qzMessages').innerHTML='';
   qzHistory.length=0;
-  qzHistory.push({role:'user', content:`[Start a new interview-prep session at ${level} level. Follow your onboarding flow: introduce yourself as a friend helping with interview prep, ask what role they're applying for, then ask about their experience — do not start interview questions yet.]`});
+  let kickoff=`[Start a new interview-prep session at ${level} level. Follow your onboarding flow: introduce yourself as a friend helping with interview prep`;
+  if(qzJdText) kickoff+=`. The candidate has ALREADY provided this job description (or a link to it), so do NOT ask them to paste it — read it and build the session around it: <<<${qzJdText.slice(0,8000)}>>>`;
+  else kickoff+=`, ask what role they're applying for`;
+  if(qzCvText) kickoff+=`. The candidate has ALSO provided their CV, so use it to tailor questions to their real background rather than asking them to summarise it: <<<${qzCvText.slice(0,12000)}>>>`;
+  else kickoff+=`, then ask about their experience`;
+  kickoff+=`. Do not start interview questions yet — greet, confirm what you're seeing, then begin when ready.]`;
+  qzHistory.push({role:'user', content:kickoff});
+  qzCallApi();
+}
+// Let the user change difficulty mid-session. The coach must audibly acknowledge the new level.
+function qzChangeLevel(newLevel){
+  if(!newLevel || newLevel===qzLevel) return;
+  if(!qzHistory.length){ qzLevel=newLevel; return; } // session not started yet — just remember it
+  qzLevel=newLevel;
+  qzAppendMessage('user', `Let's switch to ${newLevel} level.`);
+  qzHistory.push({role:'user', content:`[The user has changed the difficulty to ${newLevel}. Clearly announce out loud that the difficulty is now ${newLevel}, then calibrate all further questions to the ${newLevel} level.]`});
   qzCallApi();
 }
 function qzEndSession(){
@@ -6140,6 +6300,7 @@ wireMic('qzMic','qzInput', qzSendMessage);
       document.getElementById('mrTopicChips').style.display='none';
     } else if(tool==='quiz'){
       qzResumedSession=true;
+      document.getElementById('qzPrep').style.display='none';
       document.getElementById('qzLevels').style.display='none';
       document.getElementById('qzChatWrap').style.display='flex';
       document.getElementById('qzNote').style.display='block'; document.getElementById('qzTtsNote').style.display='block';

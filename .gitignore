@@ -11,6 +11,12 @@ Previous feedbacks/
 *.env
 Avatars/
 
+# Playwright (local dev-only test tooling — browser binaries live outside git)
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
 # Marketing / ad production source files — not part of the deployed site, must not be served publicly by Vercel
 ADVERTISEMENT_PROMPT_EXPANDED.md
 DETAILED_POSTER_MIDJOURNEY_PROMPT.md

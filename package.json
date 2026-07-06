@@ -2,12 +2,21 @@
   "name": "usman-website",
   "private": true,
   "type": "module",
+  "scripts": {
+    "test": "playwright test --project=local-chromium --project=local-webkit --project=meta",
+    "test:live": "playwright test --project=live-chromium --project=live-webkit",
+    "test:firefox": "playwright test --project=local-firefox",
+    "test:ui": "playwright test --ui"
+  },
   "dependencies": {
-    "jszip": "^3.10.1",
+    "@aws-sdk/client-polly": "^3.600.0",
     "exceljs": "^4.4.0",
-    "@aws-sdk/client-polly": "^3.600.0"
+    "jszip": "^3.10.1"
   },
   "overrides": {
     "uuid": "11.1.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1"
   }
 }

@@ -1196,8 +1196,13 @@
         if (!r.ok) { cvSetAssistant(thinking, data.error || 'Something went wrong — please try again.'); return; }
         cvSetAssistant(thinking, data.reply || '');
         cvChatMessages.push({ role: 'assistant', content: data.reply || '' });
-        if (data.audioUrl) await cvPlayAudio(data.audioUrl);
-        else cvSpeak(data.reply || '');
+        // Eleanor always uses AWS Polly Salli voice — never browser TTS.
+        // Audio URL must be present; server returns error if voice synthesis fails.
+        if (data.audioUrl) {
+          await cvPlayAudio(data.audioUrl);
+        } else {
+          console.error('[Eleanor] Missing audio URL — voice synthesis may have failed');
+        }
       } catch (e) { cvSetAssistant(thinking, 'Connection issue — please try again.'); }
       finally { btn.disabled = false; btn.textContent = 'Send'; }
     }

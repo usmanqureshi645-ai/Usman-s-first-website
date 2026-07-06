@@ -123,7 +123,14 @@ ${context ? `For reference, here is the material they are working on:\n\n${conte
       const { ok, status, data } = await callClaude(apiKey, { system, messages: cleanMessages, max_tokens: 1200 });
       if (!ok) { res.status(status).json({ error: data?.error?.message || 'Upstream error' }); return; }
       const reply = data?.content?.[0]?.text || '';
+
+      // Eleanor always uses AWS Polly Salli (professional female voice).
+      // Never fallback to browser TTS; voice synthesis is required.
       const audioUrl = await synthesize(reply, 'Eleanor Hughes', { kv: { url: kvUrl, token: kvToken } });
+      if (!audioUrl) {
+        res.status(500).json({ error: 'Voice synthesis failed — please check server configuration (AWS credentials required for Eleanor voice)' });
+        return;
+      }
 
       // Genuine-use signal for CV Reasoning (Part 2 of the requirements doc): the frontend
       // always resends the full, never-truncated history, so this fires exactly once per
@@ -133,7 +140,7 @@ ${context ? `For reference, here is the material they are working on:\n\n${conte
         await logFeatureUse({ kvUrl, kvToken }, { tool: 'cv-review-chat', email: user.email, detail: { messageCount: userMessageCount } });
       }
 
-      res.status(200).json({ reply, audioUrl: audioUrl || null, usage });
+      res.status(200).json({ reply, audioUrl, usage });
       return;
     }
 

@@ -494,7 +494,7 @@
                   </button>
                 </div>
                 <div style="display:flex;gap:.5rem">
-                  <textarea id="cvChatInput" placeholder="Tell Eleanor what you changed, or paste your updated text…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="true" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" data-form-type="other" name="cv-msg-field-z2m5" style="flex:1;min-height:56px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.65rem;color:var(--cream);font-family:inherit;font-size:.83rem;resize:vertical"></textarea>
+                  <textarea id="cvChatInput" rows="1" placeholder="Tell Eleanor what you changed, or paste your updated text…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="true" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" data-form-type="other" name="cv-msg-field-z2m5" style="flex:1;min-height:56px;max-height:160px;background:rgba(255,255,255,.05);border:1px solid rgba(200,169,110,.2);border-radius:10px;padding:.65rem;color:var(--cream);font-family:inherit;font-size:.83rem;resize:none;overflow-y:hidden;line-height:1.45"></textarea>
                   <button class="btn-gold" id="cvChatSendBtn" onclick="cvChatSend()" style="align-self:flex-end">Send</button>
                 </div>
               </div>
@@ -1009,7 +1009,14 @@
         for (let i = 0; i < e.results.length; i++) { transcript += e.results[i][0].transcript; if (e.results[i].isFinal) isFinal = true; }
         const input = document.getElementById(inputId);
         input.value = transcript.trim();
-        if (isFinal && transcript.trim()) { input.placeholder = ''; sendFn(); }
+        input.dispatchEvent(new Event('input', { bubbles: true }));
+        if (isFinal) {
+          input.placeholder = '';
+          // Release the mic (onend resets the button) and leave the text in the box
+          // for the user to review and send — dictation must never auto-send.
+          recognition.stop();
+          input.focus();
+        }
       };
     }
 
@@ -1106,6 +1113,8 @@
     // safely: escape HTML, turn **x** into <strong>, drop any stray markdown symbols.
     function cvFormatReply(text) {
       let s = escapeHtml(String(text || ''));
+      // Markdown links (e.g. blog citations) → real clickable hyperlinks.
+      s = s.replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
       s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
       s = s.replace(/^\s{0,3}#{1,6}\s*/gm, '');     // stray headings
       s = s.replace(/^\s*[-*•]\s+/gm, '');           // stray bullet characters
@@ -1162,7 +1171,7 @@
       const input = document.getElementById('cvChatInput');
       const text = input.value.trim();
       if (!text) return;
-      input.value = '';
+      input.value = ''; input._resetGrow?.();
       cvAppendChat('user', text);
       cvChatMessages.push({ role: 'user', content: text });
       // Debounce bursts of rapid messages: wait briefly for the burst to settle, then
@@ -1196,6 +1205,7 @@
         if (!r.ok) { cvSetAssistant(thinking, data.error || 'Something went wrong — please try again.'); return; }
         cvSetAssistant(thinking, data.reply || '');
         cvChatMessages.push({ role: 'assistant', content: data.reply || '' });
+        wsCvSyncSave();
         // Eleanor always uses AWS Polly Salli voice — never browser TTS.
         // Audio URL must be present; server returns error if voice synthesis fails.
         if (data.audioUrl) {
@@ -1223,6 +1233,47 @@
     document.getElementById('cvChatInput')?.addEventListener('keydown', e => {
       if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); cvChatSend(); }
     });
+    // Auto-grow the chat box with typed text up to its max-height, then scroll.
+    (function(){
+      const el = document.getElementById('cvChatInput');
+      if (!el) return;
+      const cap = () => parseInt(getComputedStyle(el).maxHeight) || 160;
+      el._grow = () => { el.style.height = 'auto'; el.style.height = Math.min(el.scrollHeight, cap()) + 'px'; el.style.overflowY = el.scrollHeight > cap() ? 'auto' : 'hidden'; };
+      el._resetGrow = () => { el.style.height = 'auto'; el.style.overflowY = 'hidden'; };
+      el.addEventListener('input', el._grow);
+      el._grow();
+    })();
+
+    // ── Cross-device sync for the Eleanor chat (tool 'cv-chat') — mirrors index.html's SyncEngine.
+    // Auto-saves after each reply and pulls a newer revision from the user's other devices.
+    let wsCvRev = 0;
+    async function wsCvSyncSave() {
+      if (!Array.isArray(cvChatMessages) || cvChatMessages.length === 0) return;
+      try {
+        const r = await fetch('/api/account?action=session-save', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ tool: 'cv-chat', history: cvChatMessages }) });
+        const d = await r.json().catch(() => ({}));
+        if (r.ok && typeof d.rev === 'number') wsCvRev = d.rev;
+      } catch (e) {}
+    }
+    function wsCvRehydrate(hist) {
+      const log = document.getElementById('cvChatLog'); if (log) log.innerHTML = '';
+      cvChatMessages.length = 0;
+      hist.forEach(m => { cvChatMessages.push(m); cvAppendChat(m.role === 'user' ? 'user' : 'assistant', m.content); });
+    }
+    async function wsCvSyncPull() {
+      const el = document.getElementById('cvChatInput');
+      if (el && document.activeElement === el) return; // don't clobber mid-typing
+      try {
+        const r = await fetch('/api/account?action=session-get&tool=cv-chat');
+        if (!r.ok) return;
+        const d = await r.json(); const s = d.session;
+        if (s && typeof s.rev === 'number' && s.rev > wsCvRev && Array.isArray(s.history) && s.history.length >= cvChatMessages.length) {
+          wsCvRehydrate(s.history); wsCvRev = s.rev;
+        }
+      } catch (e) {}
+    }
+    setTimeout(wsCvSyncPull, 1500);
+    setInterval(() => { if (!document.hidden) wsCvSyncPull(); }, 7000);
 
     async function init() {
       try {
@@ -1531,6 +1582,7 @@
       }
       closeList();
       return html
+        .replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
         .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
         .replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g, '<em>$1</em>');
     }

@@ -184,7 +184,17 @@
     transition: background 0.15s, color 0.15s;
   }
   .nav-dropdown a:hover { background: rgba(255,255,255,0.06); color: var(--gold); }
-  @media (max-width: 1300px) { .nav-dropdown { display: none; } }
+  @media (max-width: 1300px) {
+    /* On touch/mobile there's no hover, so collapse each hover menu into a static
+       nested list that appears inside the open hamburger menu instead of vanishing. */
+    .nav-dropdown { display: none; }
+    .nav-links.open .nav-dropdown {
+      display: block; position: static; opacity: 1; visibility: visible; transform: none;
+      min-width: 0; max-height: none; background: transparent; border: none; box-shadow: none;
+      padding: 0 0 0.4rem;
+    }
+    .nav-links.open .nav-dropdown a { padding: 0.7rem 1.75rem 0.7rem 3rem; font-size: 0.64rem; opacity: 0.9; }
+  }
 
   /* ── HERO ── */
   .hero {
@@ -1666,6 +1676,8 @@ animation:pulseRing 2.4s ease-out infinite;
 .mr-layout{display:grid;grid-template-columns:280px 1fr;gap:2rem;margin-top:2rem}
 @media (max-width:900px){.mr-layout{grid-template-columns:1fr}}
 @media (max-width:768px){.job-tailor-grid{grid-template-columns:1fr !important}}
+/* Interview-coach prep: stack the CV upload and JD boxes on phones instead of two cramped columns. */
+@media (max-width:760px){ #qzPrep > div{ grid-template-columns:1fr !important; } }
 .mr-panel{background:rgba(255,255,255,.04);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:1.5rem}
 .mr-agent{display:flex;align-items:center;gap:.85rem;padding:.7rem;border-radius:10px;margin-bottom:.4rem;transition:background .3s}
 .mr-agent:hover{background:rgba(200,169,110,.07)}
@@ -1741,6 +1753,8 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 .mr-inputbar{display:flex;gap:.75rem;padding:1rem 1.25rem;border-top:1px solid rgba(255,255,255,.08)}
 .mr-inputbar input{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.75rem 1rem;color:var(--cream);font-family:inherit;font-size:.88rem}
 .mr-inputbar input:focus{outline:none;border-color:var(--gold)}
+.mr-inputbar textarea{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.75rem 1rem;color:var(--cream);font-family:inherit;font-size:.88rem;resize:none;overflow-y:hidden;max-height:140px;line-height:1.45}
+.mr-inputbar textarea:focus{outline:none;border-color:var(--gold)}
 .mr-inputbar button{background:var(--gold);color:var(--navy);border:none;border-radius:10px;padding:.75rem 1.5rem;font-weight:700;cursor:pointer;transition:background .3s,transform .2s}
 .mr-inputbar button:hover{background:var(--gold-light);transform:translateY(-1px)}
 .mr-inputbar button:disabled{opacity:.5;cursor:default;transform:none}
@@ -2167,7 +2181,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
         <svg class="mr-icon-stop" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" style="display:none"><rect x="4" y="4" width="7" height="16" rx="1"/><rect x="13" y="4" width="7" height="16" rx="1"/></svg>
         <span class="mr-mic-label">Play</span>
       </button>
-      <input type="text" id="mrInput" placeholder="Ask the panel a technical accounting question…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="true" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" data-form-type="other" name="mr-msg-field-w9p1" />
+      <textarea id="mrInput" rows="1" placeholder="Ask the panel a technical accounting question…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="true" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" data-form-type="other" name="mr-msg-field-w9p1"></textarea>
       <button id="mrSend" onclick="mrSendMessage()">Send</button>
     </div>
   </div>
@@ -2197,8 +2211,12 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
       </div>
     </div>
     <div>
-      <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.5rem">Optional: paste the job description, or a link to the posting</label>
-      <textarea id="qzJdInput" placeholder="Paste the JD text here, or a link to the job posting…" style="width:100%;min-height:120px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
+      <label style="font-size:.78rem;color:var(--steel-light);display:block;margin-bottom:.5rem">Optional: paste the job description, upload a file, or paste a link to the posting</label>
+      <textarea id="qzJdInput" placeholder="Paste the JD text here, upload a file below, or paste a link to the job posting…" style="width:100%;min-height:120px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:1rem;color:var(--cream);font-family:inherit;font-size:.85rem;resize:vertical"></textarea>
+      <div class="job-upload-box" id="qzJdUploadBox" onclick="document.getElementById('qzJdFile').click()" style="margin-top:.6rem">
+        <input type="file" id="qzJdFile" accept=".pdf,.docx,.txt" style="display:none" onchange="qzHandleJd(this)">
+        <span id="qzJdUploadLabel">📎 Or upload the job description (PDF, Word or text)</span>
+      </div>
     </div>
   </div>
   <p class="mr-note" style="text-align:center;margin-top:1rem">Now pick a difficulty to begin — you can change it any time during the session.</p>
@@ -2249,7 +2267,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
       <svg class="mr-icon-stop" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" style="display:none"><rect x="4" y="4" width="7" height="16" rx="1"/><rect x="13" y="4" width="7" height="16" rx="1"/></svg>
       <span class="mr-mic-label">Play</span>
     </button>
-    <input type="text" id="qzInput" placeholder="Type your answer…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="true" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" data-form-type="other" name="qz-msg-field-x7k2" />
+    <textarea id="qzInput" rows="1" placeholder="Type your answer…" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="true" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" data-form-type="other" name="qz-msg-field-x7k2"></textarea>
     <button id="qzSend" onclick="qzSendMessage()">Send</button>
   </div>
 </div>
@@ -2443,7 +2461,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
       <svg class="mr-icon-stop" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1.7" style="display:none"><rect x="4" y="4" width="7" height="16" rx="1"/><rect x="13" y="4" width="7" height="16" rx="1"/></svg>
       <span class="mr-mic-label">Play</span>
     </button>
-    <input type="text" id="gaapInput" placeholder="Ask in plain language — e.g. 'How does goodwill differ under IFRS vs US GAAP?'" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="true" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" data-form-type="other" name="gaap-msg-field-q4n8" />
+    <textarea id="gaapInput" rows="1" placeholder="Ask in plain language — e.g. 'How does goodwill differ under IFRS vs US GAAP?'" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="true" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" data-form-type="other" name="gaap-msg-field-q4n8"></textarea>
     <button id="gaapSend" onclick="gaapSendMessage()">Ask</button>
   </div>
 </div>
@@ -3294,7 +3312,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
     </div>
     <div class="welcome-bot-messages" id="askMessages"></div>
     <div style="padding:.75rem;border-top:1px solid rgba(255,255,255,.08);display:flex;gap:.5rem">
-      <input type="text" id="askInput" placeholder="Ask me anything…" style="flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.5rem .75rem;color:var(--cream);font-family:inherit;font-size:.78rem">
+      <textarea id="askInput" rows="1" placeholder="Ask me anything…" style="flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:.5rem .75rem;color:var(--cream);font-family:inherit;font-size:.78rem;resize:none;overflow-y:hidden;max-height:120px;line-height:1.45"></textarea>
       <button class="wb-option-btn" onclick="sendAsk()">Send</button>
     </div>
   </div>
@@ -3452,6 +3470,8 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     }
     closeList();
     return html
+      // Markdown links (e.g. blog citations) → real clickable hyperlinks.
+      .replace(/\[([^\]]+)\]\(((?:https?:\/\/|\/)[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/(?<!\*)\*([^*]+?)\*(?!\*)/g, '<em>$1</em>');
   }
@@ -4142,6 +4162,17 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
     };
     updateAskBranding();
 
+    // Cross-device sync hook: replace the AskAI transcript with a version pulled from another device.
+    window.askRehydrate=function(history){
+      if(!Array.isArray(history)) return;
+      wrap.innerHTML=''; askHistory.length=0;
+      history.forEach(m=>{
+        askHistory.push(m);
+        addAskMsg(m.role==='user'?'user':'bot', m.role==='user'?escapeHtml(m.content):renderMarkdown(m.content));
+      });
+      wrap.scrollTop=wrap.scrollHeight;
+    };
+
     function addAskMsg(role, html){
       const div=document.createElement('div');
       div.className='wb-msg '+(role==='user'?'user':'bot');
@@ -4168,7 +4199,7 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
       if(!text) return;
       addAskMsg('user', escapeHtml(text));
       askHistory.push({role:'user', content:text});
-      input.value='';
+      input.value=''; input._resetGrow?.();
       const typing=document.createElement('div');
       typing.className='wb-msg bot'; typing.id='askTyping';
       typing.innerHTML=`<div class="wb-bubble"><span class="mr-typing"><span></span><span></span><span></span></span></div>`;
@@ -4185,14 +4216,13 @@ document.querySelectorAll('.pub-modal').forEach(m=>{
         if(!r.ok){ addAskMsg('bot', "Sorry, I'm temporarily unavailable — please try again shortly."); return; }
         askHistory.push({role:'assistant', content:data.text});
         addAskMsg('bot', renderMarkdown(data.text));
+        window.SyncEngine?.save('ask', askHistory);
       }catch(e){
         document.getElementById('askTyping')?.remove();
         addAskMsg('bot', 'Connection issue — please try again.');
       }
     };
-    document.getElementById('askInput').addEventListener('keydown', e=>{
-      if(e.key==='Enter') window.sendAsk();
-    });
+    document.getElementById('askInput').addEventListener('keydown', e=>submitTextarea(e, ()=>window.sendAsk()));
   })();
 
   // "Personalized Job Search For You" USP tile — takes the visitor straight to the
@@ -4811,6 +4841,9 @@ const VoiceEngine=(function(){
     // Strip markdown, then strip emojis/pictographs (and common symbols) so the voice
     // doesn't read out "waving hand", "smiling face", etc. — those are purely visual.
     const clean=text
+      // Speak a markdown link's label only, never the URL, then drop any bare address.
+      .replace(/\[([^\]]+)\]\((?:[^)]+)\)/g,'$1')
+      .replace(/\b(?:https?:\/\/|www\.)\S+/gi,'')
       .replace(/[*_#>`]/g,'')
       .replace(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}\u{2190}-\u{21FF}\u{2B00}-\u{2BFF}\u{FE00}-\u{FE0F}\u{1F1E6}-\u{1F1FF}\u{200D}\u{2300}-\u{23FF}]/gu,'')
       .replace(/\n+/g,'. ')
@@ -4973,6 +5006,7 @@ async function mrCallApi(userText){
     }
     mrHistory.push({role:'assistant', content:replyText});
     await mrRenderPanelReply(replyText, false, data.audioUrl, data.segments);
+    window.SyncEngine?.save('meeting', mrHistory, { agents: (typeof mrAgentsPayload==='function' ? mrAgentsPayload() : undefined) });
   }catch(e){
     mrHideTyping();
     mrAppendMessage('agent','Meeting Room','Connection issue — please try again.');
@@ -5052,13 +5086,28 @@ async function mrProcessQueue(){
   }
   mrIsProcessing=false;
 }
+/* Auto-growing chat inputs: the message boxes are textareas that expand with the
+   typed text up to a max height, then scroll (Gemini/WhatsApp behaviour). Enter sends,
+   Shift+Enter inserts a newline. */
+function autoGrowInput(el){
+  if(!el) return;
+  const cap=()=>parseInt(getComputedStyle(el).maxHeight)||140;
+  el._grow=()=>{ el.style.height='auto'; const h=Math.min(el.scrollHeight, cap()); el.style.height=h+'px'; el.style.overflowY = el.scrollHeight>cap() ? 'auto' : 'hidden'; };
+  el._resetGrow=()=>{ el.style.height='auto'; el.style.overflowY='hidden'; };
+  el.addEventListener('input', el._grow);
+  el._grow();
+}
+function submitTextarea(e, sendFn){
+  if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendFn(); }
+}
+['mrInput','qzInput','gaapInput','askInput'].forEach(id=>autoGrowInput(document.getElementById(id)));
 async function mrSendMessage(){
   const input=document.getElementById('mrInput');
   const text=input.value.trim();
   if(!text) return;
   mrAppendMessage('user','You', text);
   mrHistory.push({role:'user', content:text});
-  input.value='';
+  input.value=''; input._resetGrow?.();
   mrRealUserMessages++;
   // The generic topic-suggestion chips stop being relevant the moment a real
   // discussion is underway — hide just the topic suggestions, keep the
@@ -5080,9 +5129,7 @@ async function mrSendMessage(){
     mrProcessQueue();
   }, 700);
 }
-document.getElementById('mrInput').addEventListener('keydown', e=>{
-  if(e.key==='Enter') mrSendMessage();
-});
+document.getElementById('mrInput').addEventListener('keydown', e=>submitTextarea(e, mrSendMessage));
 function mrAsk(question){
   document.getElementById('mrInput').value=question;
   mrSendMessage();
@@ -5165,12 +5212,18 @@ function wireMic(micBtnId, inputId, sendFn, duck){
       transcript+=e.results[i][0].transcript;
       if(e.results[i].isFinal) isFinal=true;
     }
-    console.log('Speech result:', transcript, '| isFinal:', isFinal);
     const input=document.getElementById(inputId);
     input.value=transcript.trim();
+    // Keep the auto-growing textarea sized to the dictated text.
+    input.dispatchEvent(new Event('input',{bubbles:true}));
     if(isFinal){
       input.placeholder='';
-      if(transcript.trim()) sendFn();
+      // Release the microphone: onend flips the button back to its off state.
+      // Mobile browsers otherwise keep the mic warm if we never call stop().
+      recognition.stop();
+      // The transcript stays in the box for the user to review, edit and send
+      // themselves — dictation must never auto-send.
+      input.focus();
     } else if(!transcript){
       input.placeholder='Listening… speak now';
     }
@@ -5587,6 +5640,7 @@ function mrEndMeeting(){
   console.log('Meeting ended, resuming music');
   window.MusicDuck?.unduck('meeting-room');
   mrMeetingStarted=false;
+  window.SyncEngine?.clear('meeting');
   mrSendSummaryTo(window.getSiteUser().email, {skipUserBubble:false, loggedIn:true});
 }
 function mrSendSummaryTo(email, {skipUserBubble=false, loggedIn=false}={}){
@@ -5972,6 +6026,7 @@ async function gaapCallApi(){
     if(!r.ok){ await gaapAppendMessage('agent','Sorry — the assistant is temporarily unavailable. Please try again shortly.'); return; }
     gaapHistory.push({role:'assistant', content:data.text});
     await gaapAppendMessage('agent', data.text, data.audioUrl);
+    window.SyncEngine?.save('gaap', gaapHistory, { jurisdiction: document.getElementById('gaapJurisdiction')?.value });
   }catch(e){
     gaapHideTyping();
     await gaapAppendMessage('agent','Connection issue — please try again.');
@@ -6002,6 +6057,7 @@ function gaapEndSession(){
   console.log('GAAP session ended, resuming music');
   window.MusicDuck?.unduck('gaap');
   if(gaapHistory.length===0){ alert('Ask a question first, then end the session.'); return; }
+  window.SyncEngine?.clear('gaap');
   const siteUser=window.getSiteUser();
   const email=siteUser.email;
   gaapAppendMessage('user', 'Please end the session and email me a summary.');
@@ -6044,7 +6100,7 @@ function gaapSendMessage(){
   gaapDuckOnce(); // typing a question counts as engaging with GAAP — fade the music
   gaapAppendMessage('user', text);
   gaapHistory.push({role:'user', content:text});
-  input.value='';
+  input.value=''; input._resetGrow?.();
   // Debounce bursts of rapid messages into a single API call covering all of them.
   if(gaapFlushTimer) clearTimeout(gaapFlushTimer);
   gaapFlushTimer=setTimeout(()=>{
@@ -6057,9 +6113,7 @@ function gaapAsk(question){
   document.getElementById('gaapInput').value=question;
   gaapSendMessage();
 }
-document.getElementById('gaapInput').addEventListener('keydown', e=>{
-  if(e.key==='Enter') gaapSendMessage();
-});
+document.getElementById('gaapInput').addEventListener('keydown', e=>submitTextarea(e, gaapSendMessage));
 wireMic('gaapMic','gaapInput', gaapSendMessage, false);
 // Clicking "Speak" in GAAP should fade the music too, the moment it's pressed.
 document.getElementById('gaapMic')?.addEventListener('click', gaapDuckOnce);
@@ -6139,6 +6193,7 @@ async function qzCallApi(){
     if(!r.ok){ await qzAppendMessage('agent','Sorry — the coach is temporarily unavailable. Please try again shortly.'); return; }
     qzHistory.push({role:'assistant', content:data.text});
     await qzAppendMessage('agent', data.text, data.audioUrl);
+    window.SyncEngine?.save('quiz', qzHistory, { level: qzLevel });
   }catch(e){
     qzHideTyping();
     await qzAppendMessage('agent','Connection issue — please try again.');
@@ -6166,7 +6221,25 @@ async function qzHandleCv(input){
     label.textContent=`Couldn't read ${file.name} — try a .txt, .pdf or .docx file`;
   }
 }
-function qzStart(level){
+// Optional JD upload on the interview-prep screen — any document type is fine as a job description,
+// so (unlike the CV box) there's no document-type validation here.
+async function qzHandleJd(input){
+  const file=input.files[0];
+  if(!file) return;
+  const label=document.getElementById('qzJdUploadLabel');
+  const box=document.getElementById('qzJdUploadBox');
+  label.textContent=`Extracting text from ${file.name}…`;
+  try{
+    const text=await extractFileText(file);
+    qzJdText=text;
+    const ta=document.getElementById('qzJdInput'); if(ta) ta.value=text;
+    box.classList.add('has-file');
+    label.textContent=`✓ ${file.name} — ${text.trim().split(/\s+/).length} words extracted`;
+  }catch(e){
+    label.textContent=`Couldn't read ${file.name} — try a .txt, .pdf or .docx file`;
+  }
+}
+async function qzStart(level){
   if(!window.getSiteUser?.()){ window.toggleSignup?.(true); return; }
   console.log('Interview prep started, ducking music');
   window.MusicDuck?.duck('interview-prep', 2500); // slow, graceful fade-out
@@ -6175,7 +6248,18 @@ function qzStart(level){
   // Fall back to the saved-profile CV if nothing was uploaded on the prep screen.
   if(!qzCvText){ const p=window.getSiteProfile?.(); if(p?.cv) qzCvText=p.cv; }
   const jd=(document.getElementById('qzJdInput')?.value||'').trim();
-  if(jd) qzJdText=jd;
+  let jdUnreadableLink=false;
+  if(/^https?:\/\/\S+$/i.test(jd)){
+    // The user pasted only a link to the posting — read it server-side (SSRF-guarded) first.
+    const lbl=document.getElementById('qzJdUploadLabel');
+    if(lbl) lbl.textContent='Reading the job posting…';
+    try{
+      const r=await fetch('/api/account?action=fetch-url',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({url:jd})});
+      const d=await r.json().catch(()=>({}));
+      if(r.ok && d.text && d.text.trim()){ qzJdText=d.text.trim(); if(lbl) lbl.textContent='✓ Read the job posting from your link'; }
+      else { qzJdText=jd; jdUnreadableLink=true; if(lbl) lbl.textContent="Couldn't open that link — the coach will ask you for the details"; }
+    }catch(e){ qzJdText=jd; jdUnreadableLink=true; }
+  } else if(jd){ qzJdText=jd; }
   document.getElementById('qzPrep').style.display='none';
   document.getElementById('qzLevels').style.display='none';
   document.getElementById('qzChatWrap').style.display='flex';
@@ -6183,7 +6267,8 @@ function qzStart(level){
   document.getElementById('qzMessages').innerHTML='';
   qzHistory.length=0;
   let kickoff=`[Start a new interview-prep session at ${level} level. Follow your onboarding flow: introduce yourself as a friend helping with interview prep`;
-  if(qzJdText) kickoff+=`. The candidate has ALREADY provided this job description (or a link to it), so do NOT ask them to paste it — read it and build the session around it: <<<${qzJdText.slice(0,8000)}>>>`;
+  if(qzJdText && jdUnreadableLink) kickoff+=`. The candidate gave a LINK to the job posting but it could not be opened automatically — briefly ask them to paste the key details from it, and meanwhile infer what you reasonably can from the URL itself: <<<${qzJdText.slice(0,8000)}>>>`;
+  else if(qzJdText) kickoff+=`. The candidate has ALREADY provided this job description (or a link to it), so do NOT ask them to paste it — read it and build the session around it: <<<${qzJdText.slice(0,8000)}>>>`;
   else kickoff+=`, ask what role they're applying for`;
   if(qzCvText) kickoff+=`. The candidate has ALSO provided their CV, so use it to tailor questions to their real background rather than asking them to summarise it: <<<${qzCvText.slice(0,12000)}>>>`;
   else kickoff+=`, then ask about their experience`;
@@ -6203,6 +6288,7 @@ function qzChangeLevel(newLevel){
 function qzEndSession(){
   console.log('Interview prep ended, resuming music');
   window.MusicDuck?.unduck('interview-prep');
+  window.SyncEngine?.clear('quiz');
   const email=window.getSiteUser().email;
   qzAppendMessage('user', `I'd like to wrap up — please email my feedback to ${email}.`);
   const btn=document.getElementById('qzEndBtn');
@@ -6241,7 +6327,7 @@ function qzSendMessage(){
   if(!text) return;
   qzAppendMessage('user', text);
   qzHistory.push({role:'user', content:text});
-  input.value='';
+  input.value=''; input._resetGrow?.();
   // Debounce: if the user fires off several messages in quick succession, don't make
   // one API call per message — wait briefly for the burst to settle, then send a single
   // request that covers everything queued so far (qzHistory already has every line).
@@ -6252,9 +6338,7 @@ function qzSendMessage(){
     qzProcessQueue();
   }, 700);
 }
-document.getElementById('qzInput').addEventListener('keydown', e=>{
-  if(e.key==='Enter') qzSendMessage();
-});
+document.getElementById('qzInput').addEventListener('keydown', e=>submitTextarea(e, qzSendMessage));
 wireMic('qzMic','qzInput', qzSendMessage);
 
 // Resume a saved consultation from the workspace ("Continue this conversation")
@@ -6320,6 +6404,111 @@ wireMic('qzMic','qzInput', qzSendMessage);
   }catch(e){
     // non-fatal — the tool just opens fresh instead of resuming
   }
+})();
+
+/* ── Cross-device live sync ──────────────────────────────────────────────────
+   Mirror each tool's in-progress conversation to the logged-in user's account so
+   their other devices stay in step. Auto-save fires after each exchange (wired into
+   the *CallApi functions); a light poll pulls a newer revision from another device.
+   Last-write-wins — a tiny race exists only if two devices reply the same instant. */
+window.SyncEngine=(function(){
+  const POLL_MS=7000;
+  const TOOLS=['meeting','quiz','gaap','ask'];
+  const local={};       // tool -> last revision we've already applied locally
+  let pollTimer=null;
+  const busy=t=>(t==='meeting'&&typeof mrIsProcessing!=='undefined'&&mrIsProcessing)
+              ||(t==='gaap'&&typeof gaapIsProcessing!=='undefined'&&gaapIsProcessing)
+              ||(t==='quiz'&&typeof qzIsProcessing!=='undefined'&&qzIsProcessing);
+  const inputFocused=t=>{ const m={meeting:'mrInput',gaap:'gaapInput',quiz:'qzInput',ask:'askInput'}; return document.activeElement && document.activeElement.id===m[t]; };
+  const localLen=t=>({meeting:()=>mrHistory.length,gaap:()=>gaapHistory.length,quiz:()=>qzHistory.length,ask:()=>0}[t]||(()=>0))();
+
+  async function save(tool, history, meta){
+    if(!window.getSiteUser?.()) return;
+    if(!Array.isArray(history) || history.length===0) return;
+    try{
+      const r=await fetch('/api/account?action=session-save',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool,history,meta:meta||{}})});
+      const d=await r.json().catch(()=>({}));
+      if(r.ok && typeof d.rev==='number') local[tool]=d.rev; // our own write — never re-pull it back in
+    }catch(e){}
+    ensurePolling();
+  }
+
+  // Silent replay of a meeting transcript (no TTS): mrRenderPanelReply would speak, so we
+  // split speaker segments ourselves and force skipBrowserTts=true.
+  function renderMeeting(list){
+    list.forEach(m=>{
+      if(m.role==='user'){ mrAppendMessage('user','You', m.content, true); return; }
+      const parts=String(m.content).split(/\*\*([^*]+)\*\*:\s*/).filter(Boolean);
+      if(parts.length<=1){ mrAppendMessage('agent','Panel', String(m.content).trim(), true); return; }
+      for(let i=0;i<parts.length;i+=2){ const nm=parts[i], msg=parts[i+1]; if(nm&&msg) mrAppendMessage('agent', nm.trim(), msg.trim(), true); }
+    });
+  }
+
+  function rehydrate(tool, session){
+    const hist=Array.isArray(session.history)?session.history:[];
+    const visible=hist.filter(m=>!(typeof m.content==='string' && m.content.startsWith('[')));
+    if(tool==='quiz'){
+      document.getElementById('qzPrep').style.display='none';
+      document.getElementById('qzLevels').style.display='none';
+      document.getElementById('qzChatWrap').style.display='flex';
+      document.getElementById('qzNote').style.display='block'; document.getElementById('qzTtsNote').style.display='block';
+      document.getElementById('qzMessages').innerHTML='';
+      qzHistory.length=0; qzHistory.push(...hist);
+      if(session.meta?.level) qzLevel=session.meta.level;
+      visible.forEach(m=>qzAppendMessage(m.role==='user'?'user':'agent', m.content, null, true));
+    } else if(tool==='gaap'){
+      document.getElementById('gaapMessages').innerHTML='';
+      gaapHistory.length=0; gaapHistory.push(...hist);
+      visible.forEach(m=>gaapAppendMessage(m.role==='user'?'user':'agent', m.content, null, true));
+    } else if(tool==='meeting'){
+      document.getElementById('mrMessages').innerHTML='';
+      mrHistory.length=0; mrHistory.push(...hist);
+      mrMeetingStarted=true;
+      const sb=document.getElementById('mrStartBtn'); if(sb){ sb.textContent='Meeting in progress — tick/untick anyone above to add or remove them'; sb.disabled=true; }
+      const chips=document.getElementById('mrChips'); if(chips) chips.style.display='flex';
+      const bar=document.getElementById('mrInputBar'); if(bar) bar.style.display='flex';
+      const tc=document.getElementById('mrTopicChips'); if(tc) tc.style.display='none';
+      renderMeeting(visible);
+    } else if(tool==='ask'){
+      window.askRehydrate?.(hist);
+    }
+    local[tool]=session.rev;
+  }
+
+  async function pull(tool){
+    if(!window.getSiteUser?.()) return;
+    if(busy(tool) || inputFocused(tool)) return;
+    try{
+      const r=await fetch('/api/account?action=session-get&tool='+encodeURIComponent(tool));
+      if(!r.ok) return;
+      const d=await r.json();
+      const s=d.session;
+      if(!s || typeof s.rev!=='number') return;
+      if(s.rev>(local[tool]||0) && Array.isArray(s.history) && s.history.length>=localLen(tool)){
+        rehydrate(tool, s);
+      }
+    }catch(e){}
+  }
+
+  function pollAll(){ if(!document.hidden && window.getSiteUser?.()) TOOLS.forEach(pull); }
+  function ensurePolling(){ if(!pollTimer && window.getSiteUser?.()) pollTimer=setInterval(pollAll, POLL_MS); }
+  function stopPolling(){ if(pollTimer){ clearInterval(pollTimer); pollTimer=null; } }
+
+  function clear(tool){
+    local[tool]=0;
+    if(!window.getSiteUser?.()) return;
+    try{ fetch('/api/account?action=session-clear',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({tool})}); }catch(e){}
+  }
+
+  async function init(){
+    if(!window.getSiteUser?.()) return;
+    await Promise.all(TOOLS.map(pull)); // pull any in-progress conversation from another device
+    ensurePolling();
+  }
+
+  document.addEventListener('visibilitychange', ()=>{ if(document.hidden) stopPolling(); else { ensurePolling(); pollAll(); } });
+  setTimeout(()=>{ try{ init(); }catch(e){} }, 1500); // let the session/user state settle first
+  return { save, clear, init };
 })();
 
 /* ── Job hub: file upload, ATS review, tailoring, templates ── */

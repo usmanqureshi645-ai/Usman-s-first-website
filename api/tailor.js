@@ -1,33 +1,12 @@
 import { logAndCheckUsage } from '../lib/ipUsage.js';
 import { getUserFromRequest } from '../lib/auth.js';
 import { synthesize } from '../lib/tts.js';
+import { fetchUrlText } from '../lib/safeFetch.js';
 
 // Fetch a company web page and reduce it to plain text we can feed the model.
 // Best-effort only: a failure or timeout just means we fall back to model knowledge.
-async function fetchCompanyText(url) {
-  try {
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 8000);
-    const resp = await fetch(url, {
-      signal: controller.signal,
-      headers: { 'user-agent': 'Mozilla/5.0 (compatible; UQConsultingBot/1.0)' },
-    });
-    clearTimeout(timer);
-    if (!resp.ok) return '';
-    const html = await resp.text();
-    const text = html
-      .replace(/<script[\s\S]*?<\/script>/gi, ' ')
-      .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-      .replace(/<[^>]+>/g, ' ')
-      .replace(/&nbsp;/g, ' ')
-      .replace(/&amp;/g, '&')
-      .replace(/\s+/g, ' ')
-      .trim();
-    return text.slice(0, 6000);
-  } catch {
-    return '';
-  }
-}
+// SSRF-guarded via lib/safeFetch.js.
+const fetchCompanyText = (url) => fetchUrlText(url);
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {

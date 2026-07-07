@@ -37,13 +37,35 @@ test.describe('anonymous preparatory actions', () => {
     expect(await controls.count()).toBeGreaterThan(0);
   });
 
-  test('Interview coach exposes optional CV upload, JD input and a difficulty toggle', async ({ page }) => {
+  test('Interview coach exposes optional CV upload, JD input/upload and a difficulty toggle', async ({ page }) => {
     const section = page.locator('#knowledgetest');
     await expect(section.locator('#qzCvFile')).toHaveCount(1);
     await expect(section.locator('#qzJdInput')).toHaveCount(1);
+    // The JD can now also be uploaded as a document (PDF/Word/text).
+    await expect(section.locator('#qzJdUploadBox')).toHaveCount(1);
+    await expect(section.locator('#qzJdFile')).toHaveAttribute('accept', /pdf/);
     // The mid-session difficulty selector offers all three levels.
     const values = await section.locator('#qzLevelSelect option').evaluateAll((opts) => opts.map((o) => o.value));
     expect(values).toEqual(['Beginner', 'Intermediate', 'Expert']);
+  });
+
+  test('chat message inputs are auto-growing textareas (Enter-to-send, Shift+Enter newline)', async ({ page }) => {
+    for (const id of ['mrInput', 'qzInput', 'gaapInput']) {
+      const el = page.locator('#' + id);
+      await expect(el).toHaveCount(1);
+      expect(await el.evaluate((n) => n.tagName)).toBe('TEXTAREA');
+    }
+  });
+
+  test('nav dropdown sub-links become reachable inside the open mobile menu', async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 812 });
+    await page.goto('/index.html');
+    const firstSubLink = page.locator('.nav-links li.has-dropdown').first().locator('.nav-dropdown a').first();
+    // Hidden while the hamburger menu is closed…
+    await expect(firstSubLink).toBeHidden();
+    await page.locator('#navToggle').click();
+    // …and revealed once it's open, so touch users can still reach every tool.
+    await expect(firstSubLink).toBeVisible();
   });
 
   test('AI Tools nav dropdown links to real in-page tool sections', async ({ page }) => {

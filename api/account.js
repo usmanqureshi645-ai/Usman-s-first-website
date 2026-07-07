@@ -11,6 +11,8 @@ import { buildWorkbook } from '../lib/exportData.js';
 import { getUsageAggregates, getMostUsedToolToday } from '../lib/featureLog.js';
 import { getAnthropicCostReport } from '../lib/anthropicCost.js';
 import { getPollyCostTrend } from '../lib/pollyCost.js';
+import { fetchUrlText } from '../lib/safeFetch.js';
+import { getLiveSession, saveLiveSession, clearLiveSession, LIVE_TOOLS } from '../lib/liveSession.js';
 
 const TOOL_LABELS = { meeting: 'Meeting Room consultation', quiz: 'Interview Prep session' };
 const SIGNUP_LINE = "If you haven't already, signing up is free and unlocks your personal workspace — every consultation saved, and you can resume any conversation right where you left off. It stays free after signing up too.";
@@ -290,6 +292,53 @@ async function handleWorkspaceGet(req, res, { kvUrl, kvToken }) {
 }
 
 // Shared CV / cover-letter / contact profile, reused across every tool for logged-in users.
+// Safely read a user-supplied link (e.g. a job posting) server-side and return its text.
+// SSRF-guarded in lib/safeFetch.js; login-required like every other AI-adjacent action.
+async function handleFetchUrl(req, res) {
+  const user = getUserFromRequest(req);
+  if (!user) { res.status(401).json({ error: 'Not logged in' }); return; }
+  const { url } = req.body || {};
+  if (!url || typeof url !== 'string' || !/^https?:\/\//i.test(url.trim())) {
+    res.status(400).json({ error: 'Provide a valid http(s) link' }); return;
+  }
+  const text = await fetchUrlText(url.trim());
+  if (!text) { res.status(422).json({ error: "Couldn't read that link", text: '' }); return; }
+  res.status(200).json({ ok: true, text });
+}
+
+// ── Cross-device live-session sync ────────────────────────────────────────────
+// Each logged-in user's in-progress conversation per tool is mirrored to Redis so
+// their other devices can pull it. See lib/liveSession.js.
+async function handleSessionGet(req, res, { kvUrl, kvToken }) {
+  const user = getUserFromRequest(req);
+  if (!user) { res.status(401).json({ error: 'Not logged in' }); return; }
+  const tool = String(req.query?.tool || '');
+  if (!LIVE_TOOLS.includes(tool)) { res.status(400).json({ error: 'Unknown tool' }); return; }
+  const session = await getLiveSession({ kvUrl, kvToken, email: user.email, tool });
+  res.status(200).json({ ok: true, session: session || null });
+}
+
+async function handleSessionSave(req, res, { kvUrl, kvToken }) {
+  const user = getUserFromRequest(req);
+  if (!user) { res.status(401).json({ error: 'Not logged in' }); return; }
+  const { tool, history, meta } = req.body || {};
+  if (!LIVE_TOOLS.includes(tool)) { res.status(400).json({ error: 'Unknown tool' }); return; }
+  if (!Array.isArray(history)) { res.status(400).json({ error: 'history must be an array' }); return; }
+  // Guard against an oversized blob taking down the write.
+  if (JSON.stringify(history).length > 400000) { res.status(413).json({ error: 'Conversation too large to sync' }); return; }
+  const rec = await saveLiveSession({ kvUrl, kvToken, email: user.email, tool, history, meta });
+  res.status(200).json({ ok: true, rev: rec?.rev || 0, updatedAt: rec?.updatedAt || null });
+}
+
+async function handleSessionClear(req, res, { kvUrl, kvToken }) {
+  const user = getUserFromRequest(req);
+  if (!user) { res.status(401).json({ error: 'Not logged in' }); return; }
+  const { tool } = req.body || {};
+  if (!LIVE_TOOLS.includes(tool)) { res.status(400).json({ error: 'Unknown tool' }); return; }
+  await clearLiveSession({ kvUrl, kvToken, email: user.email, tool });
+  res.status(200).json({ ok: true });
+}
+
 async function handleProfileGet(req, res, { kvUrl, kvToken }) {
   if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Profile service not configured yet' }); return; }
   const user = getUserFromRequest(req);
@@ -618,6 +667,10 @@ export default async function handler(req, res) {
       case 'workspace-get': return await handleWorkspaceGet(req, res, ctx);
       case 'cron-followups': return await handleCronFollowups(req, res, ctx);
       case 'personalized-jobs': return req.method === 'POST' ? await handlePersonalizedJobs(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
+      case 'fetch-url': return req.method === 'POST' ? await handleFetchUrl(req, res) : res.status(405).json({ error: 'Method not allowed' });
+      case 'session-get': return req.method === 'GET' ? await handleSessionGet(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
+      case 'session-save': return req.method === 'POST' ? await handleSessionSave(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
+      case 'session-clear': return req.method === 'POST' ? await handleSessionClear(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       case 'profile-get': return await handleProfileGet(req, res, ctx);
       case 'profile-save': return req.method === 'POST' ? await handleProfileSave(req, res, ctx) : res.status(405).json({ error: 'Method not allowed' });
       case 'track': return await handleTrack(req, res, ctx);

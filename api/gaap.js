@@ -1,6 +1,7 @@
 import { logAndCheckUsage } from '../lib/ipUsage.js';
 import { getUserFromRequest } from '../lib/auth.js';
 import { synthesize } from '../lib/tts.js';
+import { blogCatalogPrompt } from '../lib/blogCatalog.js';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -58,7 +59,9 @@ Reference accuracy (critical — AI models commonly get this wrong):
 - Before citing ANY standard number, paragraph reference, or section (e.g. "IFRS 16.22", "ASC 842-10-25-1", "FRS 102.20"), pause and verify in your own reasoning that the standard and topic actually match — wrong-numbered or mismatched references are a common and embarrassing AI failure mode, and this site cannot afford to repeat it.
 - If you are not highly confident in the EXACT paragraph or sub-section number, cite only the standard name/number you ARE confident in (e.g. "IFRS 16" or "ASC 842") rather than inventing a precise-sounding paragraph that may be wrong. An accurate general reference beats a confident but incorrect specific one.
 - Never fabricate a standard number, title, or paragraph that you have not reasoned through — if genuinely unsure whether a standard applies at all, say so plainly instead of guessing.
-- Double-check that the standard you cite belongs to the framework you say it belongs to (e.g. don't cite an IAS number while discussing US GAAP, don't cite an ASC topic while discussing IFRS).`;
+- Double-check that the standard you cite belongs to the framework you say it belongs to (e.g. don't cite an IAS number while discussing US GAAP, don't cite an ASC topic while discussing IFRS).
+
+${blogCatalogPrompt()}`;
 
   const messages = history.map(m => ({ role: m.role, content: m.content }));
 

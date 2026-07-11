@@ -3,8 +3,58 @@ import { getUserFromRequest } from '../lib/auth.js';
 import { saveConsultation, scheduleFollowup } from '../lib/consultations.js';
 import { sendEmail } from '../lib/email.js';
 import { isMeaningfulSession, logFeatureUse } from '../lib/featureLog.js';
+import { buildConsultationMemoDocx } from '../lib/consultationMemo.js';
 
 const CONVERSATION_TTL_SECONDS = 30 * 24 * 60 * 60; // 30 days
+
+const SHARED_RULES = `You write warm, encouraging, kind feedback on behalf of an "Interview Prep Coach" feature on a personal website. You are given a transcript of an interview-prep conversation between the coach and a candidate practising for a real job interview.
+
+Your feedback must be:
+- KIND and FLATTERING in tone throughout — never brutal, never harsh, never disappointing. The goal is to make the candidate feel good about practising and motivated to keep improving, never discouraged.
+- SPECIFIC to this exact candidate and their actual answers in the transcript — never generic advice. Quote or reference specific things they said.
+- Genuinely useful and constructive, just delivered softly — frame every development point as "something to sharpen further" or "an easy win" rather than a flaw.
+Never use harsh words like "weak", "bad", "failed", "poor". Use "developing", "an opportunity", "worth strengthening" instead.
+
+Cover, in this order: an opening thank-you and congratulations on taking prep seriously; how they came across (energy, confidence, tone — specific, referencing actual phrasing); what they did well (at least 3 specific genuine strengths); a few things to sharpen (2-4 softly-framed development points — clarity, use of specific examples/metrics via the STAR method, technical accuracy, confidence signals); and a warm, motivating final encouragement.`;
+
+const SYSTEM_EMAIL = `${SHARED_RULES}
+
+OUTPUT FORMAT: respond with ONLY the raw HTML email body (simple inline-styled HTML: <h2>, <p>, <ul>, <li>, no external CSS), starting directly with the opening <p>. No markdown fences, no preamble.`;
+
+const SYSTEM_MEMO = `${SHARED_RULES}
+
+OUTPUT FORMAT — this is critical: respond with ONLY valid JSON (no markdown fences, no commentary), in this exact shape:
+{
+  "title": "Interview Preparation Feedback Report",
+  "sections": [
+    { "heading": "<one of: How You Came Across / What You Did Well / A Few Things to Sharpen / Final Encouragement>", "bodyHtml": "<simple HTML: <p>, <ul>, <li>, <strong> only>" }
+  ],
+  "relevantResources": { "technicalStandards": [], "uqResources": [] }
+}`;
+
+function parseJsonReport(raw) {
+  const text = String(raw || '').trim();
+  try { return JSON.parse(text); } catch {}
+  const fenced = text.replace(/^```json\s*|```\s*$/gi, '').trim();
+  try { return JSON.parse(fenced); } catch {}
+  const first = text.indexOf('{');
+  const last = text.lastIndexOf('}');
+  if (first >= 0 && last > first) {
+    try { return JSON.parse(text.slice(first, last + 1)); } catch {}
+  }
+  return null;
+}
+
+function renderReportJsonToHtml(report) {
+  const esc = s => String(s ?? '');
+  const sections = Array.isArray(report?.sections) ? report.sections : [];
+  let html = `<h2>${esc(report?.title || 'Interview Preparation Feedback Report')}</h2>`;
+  for (const s of sections) {
+    if (!s?.heading) continue;
+    html += `<h3>${esc(s.heading)}</h3>${s.bodyHtml || ''}`;
+  }
+  return html;
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -25,32 +75,19 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { email, transcript, resumed } = req.body || {};
+  const { email, transcript, resumed, format } = req.body || {};
   if (!email || !Array.isArray(transcript) || transcript.length === 0) {
     res.status(400).json({ error: 'Missing email or transcript' });
     return;
   }
+  const wantsMemo = format === 'memo';
 
   const conversationText = transcript
     .filter(m => m.role === 'user' || m.role === 'assistant')
     .map(m => `${m.role === 'user' ? 'Candidate' : 'Coach'}: ${m.content}`)
     .join('\n\n');
 
-  const system = `You write warm, encouraging, kind feedback emails on behalf of an "Interview Prep Coach" feature on a personal website. You are given a transcript of an interview-prep conversation between the coach and a candidate practising for a real job interview.
-
-Your job is to write a personalised feedback report as an HTML email body (simple inline-styled HTML: <h2>, <p>, <ul>, <li>, no external CSS). This must be:
-- KIND and FLATTERING in tone throughout — never brutal, never harsh, never disappointing. The goal is to make the candidate feel good about practising and motivated to keep improving, never discouraged.
-- SPECIFIC to this exact candidate and their actual answers in the transcript — never generic advice. Quote or reference specific things they said.
-- Genuinely useful and constructive, just delivered softly — frame every development point as "something to sharpen further" or "an easy win" rather than a flaw.
-
-Structure the email exactly like this:
-1. A warm opening paragraph thanking them for practising and congratulating them on taking the prep seriously.
-2. "## How You Came Across" — comments on their apparent energy, confidence and tone based on how they wrote their answers (word choice, hedging language, length/conciseness, enthusiasm) — be specific, reference actual phrasing they used.
-3. "## What You Did Well" — at least 3 specific genuine strengths, quoting or referencing their actual answers.
-4. "## A Few Things to Sharpen" — 2-4 SOFTLY-FRAMED development points (e.g. "one easy win would be...", "you could make this even stronger by..."), covering things like: crispness/clarity of answers, use of specific examples/metrics (STAR method), technical accuracy, and confidence signals — always specific to what they actually said, never generic.
-5. "## Final Encouragement" — a warm, motivating closing paragraph.
-
-Never use harsh words like "weak", "bad", "failed", "poor". Use "developing", "an opportunity", "worth strengthening" instead.`;
+  const system = wantsMemo ? SYSTEM_MEMO : SYSTEM_EMAIL;
 
   try {
     const summaryResp = await fetch('https://api.anthropic.com/v1/messages', {
@@ -62,7 +99,7 @@ Never use harsh words like "weak", "bad", "failed", "poor". Use "developing", "a
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: 1500,
+        max_tokens: 2500,
         system,
         messages: [{ role: 'user', content: `Interview prep transcript:\n\n${conversationText}` }],
       }),
@@ -73,8 +110,7 @@ Never use harsh words like "weak", "bad", "failed", "poor". Use "developing", "a
       res.status(summaryResp.status).json({ error: summaryData?.error?.message || 'Summary generation failed' });
       return;
     }
-
-    let htmlBody = summaryData?.content?.[0]?.text || '<p>No feedback available.</p>';
+    const rawText = summaryData?.content?.[0]?.text || '';
 
     // Persist the conversation so a reply to this email can resume coaching (mirrors Meeting Room)
     let replyTo;
@@ -86,18 +122,30 @@ Never use harsh words like "weak", "bad", "failed", "poor". Use "developing", "a
           headers: { authorization: `Bearer ${kvToken}` },
         });
         replyTo = `quiz+${conversationId}@uqconsulting.org`;
-        htmlBody += `<p style="margin-top:24px;padding-top:16px;border-top:1px solid #ddd;color:#555">Have another question, or want to keep practising? Just reply to this email.</p>`;
       } catch {
         // non-fatal — feedback email still sends without reply capability
       }
     }
 
+    let htmlBody, attachments;
+    if (wantsMemo) {
+      const report = parseJsonReport(rawText);
+      if (!report) { res.status(500).json({ error: 'Report generation failed — please try again' }); return; }
+      htmlBody = renderReportJsonToHtml(report);
+      const docxBuffer = await buildConsultationMemoDocx({ ...report, recipientName: email });
+      attachments = [{ filename: 'Interview-Feedback-Memo.docx', content: docxBuffer.toString('base64') }];
+    } else {
+      htmlBody = rawText || '<p>No feedback available.</p>';
+      if (replyTo) htmlBody += `<p style="margin-top:24px;padding-top:16px;border-top:1px solid #ddd;color:#555">Have another question, or want to keep practising? Just reply to this email.</p>`;
+    }
+
     const emailResp = await sendEmail(resendKey, {
         from: 'Interview Prep Coach <coach@uqconsulting.org>',
         to: [email],
-        ...(replyTo ? { reply_to: replyTo } : {}),
-        subject: 'Your Interview Prep Feedback — Great Work!',
-        html: htmlBody,
+        ...(replyTo && !wantsMemo ? { reply_to: replyTo } : {}),
+        subject: wantsMemo ? 'Your Interview Prep Feedback Memo — Great Work!' : 'Your Interview Prep Feedback — Great Work!',
+        html: wantsMemo ? `<p>Please find your feedback report attached.</p>` : htmlBody,
+        ...(attachments ? { attachments } : {}),
     }, { kvUrl, kvToken });
 
     const emailData = await emailResp.json();
@@ -131,7 +179,7 @@ Never use harsh words like "weak", "bad", "failed", "poor". Use "developing", "a
           transcript,
           summaryHtml: htmlBody,
         });
-        if (replyTo) {
+        if (replyTo && !wantsMemo) {
           await scheduleFollowup({
             kvUrl, kvToken,
             email: loggedInUser.email,

@@ -3,17 +3,31 @@ import { getUserFromRequest } from '../lib/auth.js';
 import { saveConsultation, scheduleFollowup } from '../lib/consultations.js';
 import { sendEmail } from '../lib/email.js';
 import { isMeaningfulSession, logFeatureUse } from '../lib/featureLog.js';
+import { buildReportEmailPrompt, buildReportMemoPrompt, renderReportJsonToHtml } from '../lib/consultationReport.js';
+import { buildConsultationMemoDocx } from '../lib/consultationMemo.js';
 
 const CONVERSATION_TTL_SECONDS = 30 * 24 * 60 * 60; // 30 days
 
 // Email framing varies by kind — this endpoint now serves both Meeting Room's "End
 // meeting" button and GAAP Compare's "End session" button (kept on one function to
-// respect the Vercel Hobby 12-function cap). The summary prompt's overall structure
-// (Discussion Summary / References / Conclusion) works fine for both unchanged.
+// respect the Vercel Hobby 12-function cap).
 const KIND_CONFIG = {
-  meeting: { label: "Usman Qureshi's Meeting Room", speakerLabel: 'Panel', fromName: 'Meeting Room', fromAddr: 'meetingroom@uqconsulting.org', subject: 'Your Meeting Room Consultation Summary' },
-  gaap: { label: "Usman Qureshi's GAAP Compare", speakerLabel: 'GAAP Champion', fromName: 'GAAP Compare', fromAddr: 'gaap@uqconsulting.org', subject: 'Your GAAP Compare Session Summary' },
+  meeting: { label: "Usman Qureshi's Meeting Room", speakerLabel: 'Panel', fromName: 'Meeting Room', fromAddr: 'meetingroom@uqconsulting.org', subject: 'Your Meeting Room Consultation Report' },
+  gaap: { label: "Usman Qureshi's GAAP Compare", speakerLabel: 'GAAP Champion', fromName: 'GAAP Compare', fromAddr: 'gaap@uqconsulting.org', subject: 'Your GAAP Compare Consultation Report' },
 };
+
+function parseJsonReport(raw) {
+  const text = String(raw || '').trim();
+  try { return JSON.parse(text); } catch {}
+  const fenced = text.replace(/^```json\s*|```\s*$/gi, '').trim();
+  try { return JSON.parse(fenced); } catch {}
+  const first = text.indexOf('{');
+  const last = text.lastIndexOf('}');
+  if (first >= 0 && last > first) {
+    try { return JSON.parse(text.slice(first, last + 1)); } catch {}
+  }
+  return null;
+}
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -34,29 +48,23 @@ export default async function handler(req, res) {
     return;
   }
 
-  const { email, transcript, kind, agents, resumed } = req.body || {};
+  const { email, transcript, kind, agents, resumed, coParticipant, format } = req.body || {};
   if (!email || !Array.isArray(transcript) || transcript.length === 0) {
     res.status(400).json({ error: 'Missing email or transcript' });
     return;
   }
   const cfg = KIND_CONFIG[kind] || KIND_CONFIG.meeting;
+  const wantsMemo = format === 'memo';
+  // coParticipant = { email, name } — set when this was a live, two-person Meeting Room
+  // session (see lib/meetingSession.js); both people get the summary + a workspace save.
+  const hasCoParticipant = kind === 'meeting' && coParticipant && coParticipant.email && coParticipant.email !== email;
 
   const conversationText = transcript
     .filter(m => m.role === 'user' || m.role === 'assistant')
     .map(m => `${m.role === 'user' ? 'User' : cfg.speakerLabel}: ${m.content}`)
     .join('\n\n');
 
-  const system = `You write professional consultation summary emails on behalf of "${cfg.label}" — a virtual panel of finance specialists on a personal website. Given a raw conversation transcript, produce a polished HTML email body (use simple inline-styled HTML: <h2>, <p>, <ul>, <li>, <a>, no external CSS) with this exact structure:
-
-1. A warm opening paragraph thanking the user for using ${cfg.label}.
-2. A heading "Discussion Summary" followed by a clear, well-organised excerpt/summary of what was actually discussed (the user's question(s), the key points raised by each specialist, any risks flagged).
-3. A heading "References & Further Reading" with a bullet list of any real source links mentioned during the discussion (IFRS Foundation, Big 4, FRC, PCAOB etc.) — only include real, plausible URLs that were actually referenced; if none were given, link to https://www.ifrs.org/ and https://pcaobus.org/ as general resources.
-4. A heading "Other Resources You Might Find Useful" with 2-3 additional relevant links based on the topic discussed.
-5. A heading "Conclusion" with a brief, professional closing summary and an invitation to return to the Meeting Room any time.
-
-Tone: professional, warm, clearly human-written consultation style — not robotic. Do not mention that this was AI-generated.
-
-Output format — this is critical: respond with ONLY the raw HTML body itself, starting directly with the opening paragraph's <p> tag. No markdown code fences (no \`\`\`html or \`\`\`), no preamble, no commentary about the transcript or its quality, no notes to the reader before or after the HTML. Even if the transcript is short, incomplete, or seems to cut off mid-conversation, just write the best honest summary you can directly in the HTML — never comment on the transcript's quality or completeness outside of the HTML itself.`;
+  const system = wantsMemo ? buildReportMemoPrompt({ label: cfg.label }) : buildReportEmailPrompt({ label: cfg.label });
 
   try {
     const summaryResp = await fetch('https://api.anthropic.com/v1/messages', {
@@ -68,7 +76,7 @@ Output format — this is critical: respond with ONLY the raw HTML body itself, 
       },
       body: JSON.stringify({
         model: 'claude-sonnet-4-6',
-        max_tokens: 1500,
+        max_tokens: 6000,
         system,
         messages: [{ role: 'user', content: `Conversation transcript:\n\n${conversationText}` }],
       }),
@@ -76,17 +84,10 @@ Output format — this is critical: respond with ONLY the raw HTML body itself, 
 
     const summaryData = await summaryResp.json();
     if (!summaryResp.ok) {
-      res.status(summaryResp.status).json({ error: summaryData?.error?.message || 'Summary generation failed' });
+      res.status(summaryResp.status).json({ error: summaryData?.error?.message || 'Report generation failed' });
       return;
     }
-
-    let htmlBody = summaryData?.content?.[0]?.text || '<p>No summary available.</p>';
-    // Defensive cleanup — the model occasionally adds a markdown code fence or commentary
-    // before/after the HTML despite the prompt forbidding it; strip those if present.
-    htmlBody = htmlBody.replace(/^```html\s*|```\s*$/gi, '');
-    const firstTagIndex = htmlBody.search(/<(p|h[1-6]|ul|div)[\s>]/i);
-    if (firstTagIndex > 0) htmlBody = htmlBody.slice(firstTagIndex);
-    htmlBody = htmlBody.trim();
+    const rawText = summaryData?.content?.[0]?.text || '';
 
     // Persist the conversation so a reply to this email can resume it (Meeting Room itself is stateless)
     let replyTo;
@@ -98,23 +99,51 @@ Output format — this is critical: respond with ONLY the raw HTML body itself, 
           headers: { authorization: `Bearer ${kvToken}` },
         });
         replyTo = `meetingroom+${conversationId}@uqconsulting.org`;
-        htmlBody += `<p style="margin-top:24px;padding-top:16px;border-top:1px solid #ddd;color:#555">Have a follow-up question? Just reply to this email and the panel will pick the discussion back up.</p>`;
       } catch {
         // non-fatal — summary email still sends without reply capability
       }
     }
 
+    const jointNoteFor = otherName => hasCoParticipant
+      ? `<p style="margin-top:24px;padding-top:16px;border-top:1px solid #ddd;color:#555">You attended this consultation together with <strong>${otherName}</strong> and the panel.</p>`
+      : '';
+
+    let htmlBody, attachments;
+    if (wantsMemo) {
+      const report = parseJsonReport(rawText);
+      if (!report) { res.status(500).json({ error: 'Report generation failed — please try again' }); return; }
+      htmlBody = renderReportJsonToHtml(report);
+      const docxBuffer = await buildConsultationMemoDocx({ ...report, recipientName: email });
+      attachments = [{ filename: 'Consultation-Memo.docx', content: docxBuffer.toString('base64') }];
+    } else {
+      htmlBody = rawText.replace(/^```html\s*|```\s*$/gi, '');
+      const firstTagIndex = htmlBody.search(/<(p|h[1-6]|ul|div)[\s>]/i);
+      if (firstTagIndex > 0) htmlBody = htmlBody.slice(firstTagIndex);
+      htmlBody = htmlBody.trim();
+      if (replyTo) htmlBody += `<p style="margin-top:24px;padding-top:16px;border-top:1px solid #ddd;color:#555">Have a follow-up question? Just reply to this email and the panel will pick the discussion back up.</p>`;
+    }
+
     const emailResp = await sendEmail(resendKey, {
         from: `${cfg.fromName} <${cfg.fromAddr}>`,
         to: [email],
-        ...(replyTo ? { reply_to: replyTo } : {}),
-        subject: cfg.subject,
-        html: htmlBody,
+        ...(replyTo && !wantsMemo ? { reply_to: replyTo } : {}),
+        subject: wantsMemo ? `${cfg.subject} (Memo)` : cfg.subject,
+        html: (wantsMemo ? `<p>Please find your consultation memo attached.</p>` : htmlBody) + jointNoteFor(coParticipant?.name || 'your colleague'),
+        ...(attachments ? { attachments } : {}),
     }, { kvUrl, kvToken });
     const emailData = await emailResp.json();
     if (!emailResp.ok) {
       res.status(emailResp.status).json({ error: emailData?.message || 'Email send failed' });
       return;
+    }
+    if (hasCoParticipant) {
+      await sendEmail(resendKey, {
+        from: `${cfg.fromName} <${cfg.fromAddr}>`,
+        to: [coParticipant.email],
+        subject: wantsMemo ? `${cfg.subject} (Memo)` : cfg.subject,
+        html: (wantsMemo ? `<p>Please find your consultation memo attached.</p>` : htmlBody) + jointNoteFor('your colleague'),
+        ...(attachments ? { attachments } : {}),
+      }, { kvUrl, kvToken }).catch(() => {});
     }
 
     const loggedInUser = getUserFromRequest(req);
@@ -149,7 +178,7 @@ Output format — this is critical: respond with ONLY the raw HTML body itself, 
           summaryHtml: htmlBody,
           agents: Array.isArray(agents) ? agents : [],
         });
-        if (replyTo) {
+        if (replyTo && !wantsMemo) {
           await scheduleFollowup({
             kvUrl, kvToken,
             email: loggedInUser.email,
@@ -161,6 +190,25 @@ Output format — this is critical: respond with ONLY the raw HTML body itself, 
         }
       } catch {
         // non-fatal — the summary email already sent successfully
+      }
+    }
+
+    // Co-participant gets their own workspace save too, even though this request's
+    // session cookie belongs to the host, not them
+    if (hasCoParticipant && kvUrl && kvToken) {
+      try {
+        const firstUserMsg = transcript.find(m => m.role === 'user')?.content || 'Meeting Room consultation';
+        await saveConsultation({
+          kvUrl, kvToken,
+          email: coParticipant.email,
+          tool: 'meeting',
+          title: firstUserMsg.slice(0, 80),
+          transcript,
+          summaryHtml: htmlBody + jointNoteFor(loggedInUser?.name || 'your colleague'),
+          agents: Array.isArray(agents) ? agents : [],
+        });
+      } catch {
+        // non-fatal
       }
     }
 

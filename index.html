@@ -5209,6 +5209,13 @@ function wireMic(micBtnId, inputId, sendFn, duck){
       if(!input.value) input.placeholder='Ask a question…';
       if(shouldDuck) window.MusicDuck?.unduck('mic-'+micBtnId);
       recognition=build();
+      // iOS Safari's SpeechRecognition.abort()/stop() doesn't reliably deactivate the
+      // underlying AVAudioSession right away, so mic can stay hot (heard as ducked/quiet
+      // TTS) even after onend fires. Acquiring then instantly releasing a raw stream kicks
+      // the browser into actually tearing down the OS audio session. Fire-and-forget.
+      navigator.mediaDevices?.getUserMedia?.({audio:true})
+        .then(s=>s.getTracks().forEach(t=>t.stop()))
+        .catch(()=>{});
     };
 
     r.onerror=(e)=>{

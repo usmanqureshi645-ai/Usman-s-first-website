@@ -1001,7 +1001,17 @@
         window.recognitionInstances[inputId] = r;
         r.lang = 'en-GB'; r.continuous = true; r.interimResults = true; r.maxAlternatives = 5;
         r.onstart = () => { listening = true; micBtn.classList.add('listening'); micBtn.innerHTML = speakIcon + '<span class="mr-mic-label">Stop</span>'; document.getElementById(inputId).placeholder = 'Listening… speak now'; };
-        r.onend = () => { listening = false; micBtn.classList.remove('listening'); micBtn.innerHTML = speakIcon + '<span class="mr-mic-label">Speak</span>'; recognition = build(); };
+        r.onend = () => {
+          listening = false; micBtn.classList.remove('listening'); micBtn.innerHTML = speakIcon + '<span class="mr-mic-label">Speak</span>';
+          recognition = build();
+          // iOS Safari's SpeechRecognition.abort()/stop() doesn't reliably deactivate the
+          // underlying AVAudioSession right away, so mic can stay hot (heard as ducked/quiet
+          // TTS) even after onend fires. Acquiring then instantly releasing a raw stream kicks
+          // the browser into actually tearing down the OS audio session. Fire-and-forget.
+          navigator.mediaDevices?.getUserMedia?.({audio:true})
+            .then(s=>s.getTracks().forEach(t=>t.stop()))
+            .catch(()=>{});
+        };
         r.onerror = (e) => {
           listening = false; micBtn.classList.remove('listening'); micBtn.innerHTML = speakIcon + '<span class="mr-mic-label">Speak</span>';
           const input = document.getElementById(inputId);

@@ -160,12 +160,11 @@
 </nav>
 
 <main>
-  <!-- Key gate -->
+  <!-- Login gate -->
   <div id="gate" class="gate" style="display:none">
     <h1>Admin Dashboard</h1>
-    <p>This is a private dashboard. Enter your admin access key to continue. It's stored only in this browser.</p>
-    <input id="keyInput" type="password" placeholder="Access key" autocomplete="off">
-    <button class="btn-gold" id="keyBtn">Open dashboard</button>
+    <p id="gateMsg">This is a private dashboard. Please log in with your admin account on the main site, then come back here.</p>
+    <a class="btn-gold" href="index.html" style="display:inline-block;text-decoration:none">Go to login</a>
     <div class="err" id="keyErr"></div>
   </div>
 
@@ -180,7 +179,7 @@
       <button class="tab-btn" data-tab="costs">Costs</button>
       <button class="tab-btn" data-tab="usage">Usage</button>
       <button class="tab-btn" data-tab="database">Database</button>
-      <button id="logoutBtn">Forget key</button>
+      <button id="logoutBtn">Log out</button>
     </nav>
 
     <!-- ============================ OVERVIEW TAB ============================ -->
@@ -439,7 +438,6 @@
 </main>
 
 <script>
-  const KEY_STORE = 'uq_dash_key';
   const TOOL_LABELS = { meeting:'Meeting Room', quiz:'Interview Prep', gaap:'GAAP Compare', tailor:'CV Tailor', 'cv-review':'CV Review', ask:'AskAI', fsreview:'FS Review', 'resume-session':'Resume Session' };
   const SERVICE_COLORS = { Anthropic:'var(--gold)', 'AWS Polly':'var(--teal)', Vercel:'var(--steel)' };
   // Endpoints pinged client-side for health. GET on a POST-only function returns a fast 405 = alive.
@@ -457,7 +455,7 @@
     { label:'Interview Summary', url:'/api/qz-summary' },
   ];
 
-  let dashKey = null, timer = null;
+  let timer = null;
   let lastDashboard = null;   // most recent ?action=dashboard payload (reused by Usage tab)
   let lastCosts = null;       // most recent ?action=dashboard-costs payload (reused by Overview)
 
@@ -737,7 +735,7 @@
   async function loadCostsTab(){
     $('costsStamp').textContent = 'Loading…';
     try {
-      const r = await fetch('/api/account?action=dashboard-costs&key='+encodeURIComponent(dashKey));
+      const r = await fetch('/api/account?action=dashboard-costs');
       if(r.status===401){ handleUnauthorized(); return; }
       const d = await r.json();
       if(!d.ok){ $('costsStamp').textContent=''; $('costsBanner').innerHTML = `<div class="banner warn">${esc(d.error||'Could not load costs.')}</div>`; return; }
@@ -799,7 +797,7 @@
   async function loadUsageTab(){
     $('usageStamp').textContent = 'Loading…';
     try {
-      const r = await fetch('/api/account?action=dashboard-usage&key='+encodeURIComponent(dashKey));
+      const r = await fetch('/api/account?action=dashboard-usage');
       if(r.status===401){ handleUnauthorized(); return; }
       const d = await r.json();
       if(!d.ok){ $('usageStamp').textContent = d.error||'Could not load usage.'; return; }
@@ -880,7 +878,7 @@
   async function loadDatabaseTab(){
     $('usersStamp').textContent = 'Loading…';
     try {
-      const r = await fetch('/api/account?action=dashboard-users&key='+encodeURIComponent(dashKey));
+      const r = await fetch('/api/account?action=dashboard-users');
       if(r.status===401){ handleUnauthorized(); return; }
       const d = await r.json();
       if(!d.ok){ $('usersStamp').textContent = d.error||'Could not load signups.'; return; }
@@ -991,13 +989,12 @@
 
   // ===== Core load / health (Overview poll) =====
   function handleUnauthorized(){
-    const n=(dashKey||'').length; localStorage.removeItem(KEY_STORE); dashKey=null;
-    showGate('That key was rejected (you entered '+n+' characters). Check the admin key you were given.');
+    showGate('You are not logged in as an admin account. Please log in on the main site.');
   }
 
   async function load(){
     try{
-      const r = await fetch('/api/account?action=dashboard&key='+encodeURIComponent(dashKey));
+      const r = await fetch('/api/account?action=dashboard');
       if(r.status===401){ handleUnauthorized(); return; }
       const d = await r.json();
       if(!d.ok){ showGate(d.error||'Could not load dashboard.'); return; }
@@ -1039,7 +1036,7 @@
     if(!Number.isFinite(balance) || balance < 0){ $('balanceErr').textContent='Enter a valid balance.'; return; }
     $('balanceErr').textContent=''; $('balanceSaveBtn').disabled=true; $('balanceSaveBtn').textContent='Saving…';
     try{
-      const r = await fetch('/api/account?action=dashboard-set-balance&key='+encodeURIComponent(dashKey), {
+      const r = await fetch('/api/account?action=dashboard-set-balance', {
         method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({ balance, lowThreshold: Number.isFinite(lowThreshold)?lowThreshold:undefined }),
       });
@@ -1060,19 +1057,12 @@
     setInterval(()=>{ pingHealth(); }, 30000);
   }
 
-  // Strip whitespace and any surrounding quotes the user may have copied with the token.
-  function cleanKey(s){ return String(s||'').trim().replace(/^["'\s]+|["'\s]+$/g,''); }
-
   // --- boot ---
-  $('keyBtn').addEventListener('click', ()=>{
-    const v = cleanKey($('keyInput').value);
-    if(!v){ $('keyErr').textContent='Please enter your key.'; return; }
-    dashKey = v; localStorage.setItem(KEY_STORE, v); $('keyErr').textContent='';
-    start();
-  });
-  $('keyInput').addEventListener('keydown', e=>{ if(e.key==='Enter') $('keyBtn').click(); });
   $('refreshBtn').addEventListener('click', ()=>{ load(); pingHealth(); });
-  $('logoutBtn').addEventListener('click', ()=>{ localStorage.removeItem(KEY_STORE); dashKey=null; showGate('Key forgotten.'); });
+  $('logoutBtn').addEventListener('click', async ()=>{
+    await fetch('/api/account?action=logout', { method:'POST' });
+    showGate('Logged out.');
+  });
   document.querySelectorAll('.tab-btn').forEach(b => b.addEventListener('click', ()=>switchTab(b.dataset.tab)));
   $('refreshCostsBtn').addEventListener('click', loadCostsTab);
   $('refreshUsageBtn').addEventListener('click', loadUsageTab);
@@ -1084,8 +1074,15 @@
   $('dbPrev').addEventListener('click', ()=>{ dbPage--; renderDbPage(); });
   $('dbNext').addEventListener('click', ()=>{ dbPage++; renderDbPage(); });
 
-  dashKey = cleanKey(localStorage.getItem(KEY_STORE));
-  if(dashKey){ localStorage.setItem(KEY_STORE, dashKey); start(); } else { showGate(); }
+  // Gate is now the visitor's own site login (site_session cookie), not a key. ?action=me
+  // tells us who's logged in; only the admin email(s) in lib/auth.js ADMIN_EMAILS get in.
+  (async ()=>{
+    try{
+      const r = await fetch('/api/account?action=me');
+      const d = await r.json();
+      if(d.loggedIn){ start(); } else { showGate(); }
+    } catch { showGate('Could not verify login. Please try again.'); }
+  })();
 </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 // Consolidated accounts + workspace endpoint — Vercel's Hobby plan caps a deployment at
 // 12 Serverless Functions, so every account/workspace action is routed through this one
 // file via ?action=, instead of one file per action.
-import { hashPassword, verifyPassword, setSessionCookie, clearSessionCookie, getUserFromRequest, normalizeEmail, verifyAdminKey, checkLoginAttempts, recordFailedLogin, clearLoginAttempts } from '../lib/auth.js';
+import { hashPassword, verifyPassword, setSessionCookie, clearSessionCookie, getUserFromRequest, normalizeEmail, verifyAdminKey, isAdminRequest, checkLoginAttempts, recordFailedLogin, clearLoginAttempts } from '../lib/auth.js';
 import { saveConsultation, scheduleFollowup } from '../lib/consultations.js';
 import { getProfile, saveProfile } from '../lib/profile.js';
 import { sendEmail } from '../lib/email.js';
@@ -503,7 +503,7 @@ async function handleCronExportData(req, res, { kvUrl, kvToken, resendKey }) {
 async function handleExportData(req, res, { kvUrl, kvToken }) {
   if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Storage not configured yet' }); return; }
   const provided = req.query?.key || req.headers['x-dashboard-key'];
-  if (!verifyAdminKey(provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
+  if (!isAdminRequest(req, provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
 
   try {
     const buffer = await buildWorkbook({ kvUrl, kvToken });
@@ -532,7 +532,7 @@ async function handleTrack(req, res, { kvUrl, kvToken }) {
 async function handleDashboard(req, res, { kvUrl, kvToken }) {
   if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Storage not configured yet' }); return; }
   const provided = req.query?.key || req.headers['x-dashboard-key'];
-  if (!verifyAdminKey(provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
+  if (!isAdminRequest(req, provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
   const data = await getDashboardData({ kvUrl, kvToken });
 
   // Most-used-tool-today — best-effort; a feature_usage_log read failure must not break Overview.
@@ -550,7 +550,7 @@ async function handleDashboard(req, res, { kvUrl, kvToken }) {
 async function handleDashboardSetBalance(req, res, { kvUrl, kvToken }) {
   if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Storage not configured yet' }); return; }
   const provided = req.query?.key || req.headers['x-dashboard-key'];
-  if (!verifyAdminKey(provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
+  if (!isAdminRequest(req, provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
 
   if (req.method === 'GET') {
     const [raw] = await pipe({ kvUrl, kvToken }, [['GET', 'dashboard:anthropic_balance']]);
@@ -581,7 +581,7 @@ async function handleDashboardSetBalance(req, res, { kvUrl, kvToken }) {
 async function handleDashboardCosts(req, res, { kvUrl, kvToken }) {
   if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Storage not configured yet' }); return; }
   const provided = req.query?.key || req.headers['x-dashboard-key'];
-  if (!verifyAdminKey(provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
+  if (!isAdminRequest(req, provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
 
   const adminApiKey = process.env.ANTHROPIC_ADMIN_API_KEY;
   const [anthropic, polly] = await Promise.all([
@@ -604,7 +604,7 @@ async function handleDashboardCosts(req, res, { kvUrl, kvToken }) {
 async function handleDashboardUsage(req, res, { kvUrl, kvToken }) {
   if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Storage not configured yet' }); return; }
   const provided = req.query?.key || req.headers['x-dashboard-key'];
-  if (!verifyAdminKey(provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
+  if (!isAdminRequest(req, provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
 
   const [aggregates, visitorTrend30] = await Promise.all([
     getUsageAggregates({ kvUrl, kvToken }),
@@ -618,7 +618,7 @@ async function handleDashboardUsage(req, res, { kvUrl, kvToken }) {
 async function handleDashboardUsers(req, res, { kvUrl, kvToken }) {
   if (!kvUrl || !kvToken) { res.status(500).json({ error: 'Storage not configured yet' }); return; }
   const provided = req.query?.key || req.headers['x-dashboard-key'];
-  if (!verifyAdminKey(provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
+  if (!isAdminRequest(req, provided)) { res.status(401).json({ error: 'Unauthorized' }); return; }
 
   const [raw] = await pipe({ kvUrl, kvToken }, [['LRANGE', 'signups_log', '0', '-1']]);
   const signups = (Array.isArray(raw) ? raw : [])

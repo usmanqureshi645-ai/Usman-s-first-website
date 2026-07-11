@@ -5132,7 +5132,7 @@ async function mrSendMessage(){
   const input=document.getElementById('mrInput');
   const text=input.value.trim();
   if(!text) return;
-  window.recognitionInstances['mrInput']?.stop();
+  window.recognitionInstances['mrInput']?.abort();
   mrAppendMessage('user','You', text);
   mrHistory.push({role:'user', content:text});
   input.value=''; input._resetGrow?.();
@@ -6128,7 +6128,7 @@ function gaapSendMessage(){
   const input=document.getElementById('gaapInput');
   const text=input.value.trim();
   if(!text) return;
-  window.recognitionInstances['gaapInput']?.stop();
+  window.recognitionInstances['gaapInput']?.abort();
   gaapDuckOnce(); // typing a question counts as engaging with GAAP — fade the music
   gaapAppendMessage('user', text);
   gaapHistory.push({role:'user', content:text});
@@ -6363,7 +6363,7 @@ function qzSendMessage(){
   const input=document.getElementById('qzInput');
   const text=input.value.trim();
   if(!text) return;
-  window.recognitionInstances['qzInput']?.stop();
+  window.recognitionInstances['qzInput']?.abort();
   qzAppendMessage('user', text);
   qzHistory.push({role:'user', content:text});
   input.value=''; input._resetGrow?.();

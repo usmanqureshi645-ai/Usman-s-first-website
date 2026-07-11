@@ -1193,7 +1193,7 @@
       const input = document.getElementById('cvChatInput');
       const text = input.value.trim();
       if (!text) return;
-      window.recognitionInstances['cvChatInput']?.stop();
+      window.recognitionInstances['cvChatInput']?.abort();
       input.value = ''; input._resetGrow?.();
       cvAppendChat('user', text);
       cvChatMessages.push({ role: 'user', content: text });

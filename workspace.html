@@ -1109,7 +1109,8 @@
     /* ── Iterative review chat with Eleanor Hughes ── */
     const cvChatMessages = [];
     // Typewriter effect: gradually fill element with HTML text.
-    function cvTypewriterEffect(element, html, speed=30){
+    function cvTypewriterEffect(element, html, speed=30, instant=false){
+      if(instant){ element.innerHTML=html; return Promise.resolve(); }
       return new Promise(resolve=>{
         let htmlIdx=0;
         function nextChar(){
@@ -1135,7 +1136,7 @@
       s = s.replace(/^\s*[-*•]\s+/gm, '');           // stray bullet characters
       return s.replace(/\n/g, '<br>');
     }
-    function cvAppendChat(role, text) {
+    function cvAppendChat(role, text, instant) {
       const log = document.getElementById('cvChatLog');
       const wrap = document.createElement('div');
       const isUser = role === 'user';
@@ -1143,15 +1144,15 @@
       if (isUser) { wrap.style.whiteSpace = 'pre-wrap'; wrap.textContent = text; }
       else {
         const htmlContent = cvFormatReply(text);
-        cvTypewriterEffect(wrap, htmlContent, 15); // Fast typewriter: 15ms per char
+        cvTypewriterEffect(wrap, htmlContent, 15, instant); // Fast typewriter: 15ms per char
       }
       log.appendChild(wrap);
       log.scrollTop = log.scrollHeight;
       return wrap;
     }
-    function cvSetAssistant(el, text) {
+    function cvSetAssistant(el, text, instant) {
       const htmlContent = cvFormatReply(text);
-      cvTypewriterEffect(el, htmlContent, 15);
+      cvTypewriterEffect(el, htmlContent, 15, instant);
       document.getElementById('cvChatLog').scrollTop = 1e9;
     }
 
@@ -1281,7 +1282,7 @@
     function wsCvRehydrate(hist) {
       const log = document.getElementById('cvChatLog'); if (log) log.innerHTML = '';
       cvChatMessages.length = 0;
-      hist.forEach(m => { cvChatMessages.push(m); cvAppendChat(m.role === 'user' ? 'user' : 'assistant', m.content); });
+      hist.forEach(m => { cvChatMessages.push(m); cvAppendChat(m.role === 'user' ? 'user' : 'assistant', m.content, true); });
     }
     async function wsCvSyncPull() {
       const el = document.getElementById('cvChatInput');

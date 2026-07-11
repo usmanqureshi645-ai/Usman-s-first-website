@@ -4944,7 +4944,7 @@ function mrPlayToggle(){
   if(GlobalSpeechManager.currentFeature==='mr'){ GlobalSpeechManager.stop(); return; }
   if(mrLastAudioUrl) mrPlayAudio(mrLastAudioUrl);
 }
-function mrAppendMessage(role, name, text, skipBrowserTts){
+function mrAppendMessage(role, name, text, skipBrowserTts, instant){
   const wrap=document.getElementById('mrMessages');
   const div=document.createElement('div');
   div.className='mr-msg '+(role==='user'?'user':'agent');
@@ -4960,7 +4960,7 @@ function mrAppendMessage(role, name, text, skipBrowserTts){
     wrap.appendChild(div);
     const bubble=div.querySelector('.mr-bubble');
     const htmlContent=renderMarkdown(text);
-    typewriterEffect(bubble, htmlContent, 15); // Fast typewriter: 15ms per char
+    typewriterEffect(bubble, htmlContent, 15, instant); // Fast typewriter: 15ms per char
   }
   wrap.scrollTop=wrap.scrollHeight;
   // skipBrowserTts is true when real Polly audio is already queued for this reply —
@@ -4976,9 +4976,10 @@ try{
   }
 }catch(e){}
 function mrPersistHistory(){ try{ localStorage.setItem('mr_history', JSON.stringify(mrHistory)); }catch(e){} }
-function typewriterEffect(element, html, speed=30){
+function typewriterEffect(element, html, speed=30, instant=false){
   // Gradually fill element with text, one character at a time.
   // Preserves HTML structure by parsing and streaming visible text only.
+  if(instant){ element.innerHTML=html; return Promise.resolve(); }
   return new Promise(resolve=>{
     let htmlIdx=0, displayedHtml='';
     const container=document.createElement('div');
@@ -5070,10 +5071,10 @@ async function mrRenderPanelReply(text, instant, audioUrl, segments){
   const hasSegments=!!(segments && segments.length>0 && mrVoiceEnabled);
   const hasAudio=!!(audioUrl && mrVoiceEnabled);
   // Legacy single-audio path: play the whole clip upfront
-  if(!hasSegments && hasAudio) mrPlayAudio(audioUrl);
+  if(!hasSegments && hasAudio && !instant) mrPlayAudio(audioUrl);
   if(parts.length<=1){
-    mrAppendMessage('agent','Panel',text.trim(),hasSegments||hasAudio);
-    if(hasSegments && segments[0]?.audioUrl) mrPlayAudio(segments[0].audioUrl);
+    mrAppendMessage('agent','Panel',text.trim(),instant||hasSegments||hasAudio,instant);
+    if(hasSegments && segments[0]?.audioUrl && !instant) mrPlayAudio(segments[0].audioUrl);
     return;
   }
   for(let i=0;i<parts.length;i+=2){
@@ -5091,10 +5092,10 @@ async function mrRenderPanelReply(text, instant, audioUrl, segments){
     const seg=hasSegments ? segments.find(s=>s.speaker===name.trim()) : null;
     const body=mrStripSelfIntro(name.trim(), msg.trim());
     if(seg?.audioUrl){
-      mrAppendMessage('agent',name.trim(),body,true);
-      mrPlayAudio(seg.audioUrl);
+      mrAppendMessage('agent',name.trim(),body,true,instant);
+      if(!instant) mrPlayAudio(seg.audioUrl);
     } else {
-      mrAppendMessage('agent',name.trim(),body,hasAudio);
+      mrAppendMessage('agent',name.trim(),body,instant||hasAudio,instant);
     }
   }
 }
@@ -6001,7 +6002,7 @@ function gaapPlayToggle(){
   if(GlobalSpeechManager.currentFeature==='gaap'){ GlobalSpeechManager.stop(); return; }
   if(gaapLastAudioUrl) gaapPlayAudio(gaapLastAudioUrl);
 }
-async function gaapAppendMessage(role, text, audioUrl, skipAudio){
+async function gaapAppendMessage(role, text, audioUrl, skipAudio, instant){
   const wrap=document.getElementById('gaapMessages');
   const div=document.createElement('div');
   div.className='mr-msg '+(role==='user'?'user':'agent');
@@ -6013,7 +6014,7 @@ async function gaapAppendMessage(role, text, audioUrl, skipAudio){
     wrap.appendChild(div);
     const bubble=div.querySelector('.mr-bubble');
     const htmlContent=renderMarkdown(text);
-    await typewriterEffect(bubble, htmlContent, 15);
+    typewriterEffect(bubble, htmlContent, 15, instant); // fire-and-forget so audio starts as the bubble appears
   }
   wrap.scrollTop=wrap.scrollHeight;
   if(role!=='user' && !skipAudio){
@@ -6027,7 +6028,7 @@ try{
   const savedGaap=JSON.parse(localStorage.getItem('gaap_history')||'null');
   if(savedGaap && savedGaap.length && !gaapResumedSession){
     gaapHistory.push(...savedGaap);
-    setTimeout(()=>{ savedGaap.forEach(m=>gaapAppendMessage(m.role, m.content, null, true)); }, 0);
+    setTimeout(async ()=>{ for(const m of savedGaap){ await gaapAppendMessage(m.role, m.content, null, true, true); } }, 0);
   }
 }catch(e){}
 function gaapShowTyping(){
@@ -6171,7 +6172,7 @@ function qzPlayToggle(){
   if(GlobalSpeechManager.currentFeature==='qz'){ GlobalSpeechManager.stop(); return; }
   if(qzLastAudioUrl) qzPlayAudio(qzLastAudioUrl);
 }
-async function qzAppendMessage(role, text, audioUrl, skipAudio){
+async function qzAppendMessage(role, text, audioUrl, skipAudio, instant){
   const wrap=document.getElementById('qzMessages');
   const div=document.createElement('div');
   div.className='mr-msg '+(role==='user'?'user':'agent');
@@ -6183,7 +6184,7 @@ async function qzAppendMessage(role, text, audioUrl, skipAudio){
     wrap.appendChild(div);
     const bubble=div.querySelector('.mr-bubble');
     const htmlContent=renderMarkdown(text);
-    await typewriterEffect(bubble, htmlContent, 15);
+    typewriterEffect(bubble, htmlContent, 15, instant); // fire-and-forget so audio starts as the bubble appears
   }
   wrap.scrollTop=wrap.scrollHeight;
   if(role!=='user' && !skipAudio){
@@ -6197,11 +6198,11 @@ try{
   const savedQz=JSON.parse(localStorage.getItem('qz_history')||'null');
   if(savedQz && savedQz.length && !qzResumedSession){
     qzHistory.push(...savedQz);
-    setTimeout(()=>{
+    setTimeout(async ()=>{
       document.getElementById('qzChatWrap').style.display='flex';
       document.getElementById('qzLevels').style.display='none';
       document.getElementById('qzNote').style.display='block'; document.getElementById('qzTtsNote').style.display='block';
-      savedQz.forEach(m=>qzAppendMessage(m.role, m.content, null, true));
+      for(const m of savedQz){ await qzAppendMessage(m.role, m.content, null, true, true); }
     }, 0);
   }
 }catch(e){}
@@ -6410,11 +6411,11 @@ wireMic('qzMic','qzInput', qzSendMessage);
       }
       mrSelectedAgents=Array.from(document.querySelectorAll('.mr-agent-check:checked')).map(c=>c.value);
       mrHistory.push(...transcript);
-      transcript.forEach(m=>{
-        if(typeof m.content==='string' && m.content.startsWith('[')) return;
-        if(m.role==='user') mrAppendMessage('user','You', m.content);
-        else mrRenderPanelReply(m.content);
-      });
+      for(const m of transcript){
+        if(typeof m.content==='string' && m.content.startsWith('[')) continue;
+        if(m.role==='user') mrAppendMessage('user','You', m.content, true, true);
+        else await mrRenderPanelReply(m.content, true);
+      }
       mrMeetingStarted=true;
       document.getElementById('mrStartBtn').textContent='Meeting in progress — tick/untick anyone above to add or remove them';
       document.getElementById('mrStartBtn').disabled=true;
@@ -6428,17 +6429,17 @@ wireMic('qzMic','qzInput', qzSendMessage);
       document.getElementById('qzChatWrap').style.display='flex';
       document.getElementById('qzNote').style.display='block'; document.getElementById('qzTtsNote').style.display='block';
       qzHistory.push(...transcript);
-      transcript.forEach(m=>{
-        if(typeof m.content==='string' && m.content.startsWith('[')) return;
-        qzAppendMessage(m.role==='user' ? 'user' : 'agent', m.content);
-      });
+      for(const m of transcript){
+        if(typeof m.content==='string' && m.content.startsWith('[')) continue;
+        await qzAppendMessage(m.role==='user' ? 'user' : 'agent', m.content, null, true, true);
+      }
     } else if(tool==='gaap'){
       gaapResumedSession=true;
       gaapHistory.push(...transcript);
-      transcript.forEach(m=>{
-        if(typeof m.content==='string' && m.content.startsWith('[')) return;
-        gaapAppendMessage(m.role==='user' ? 'user' : 'agent', m.content);
-      });
+      for(const m of transcript){
+        if(typeof m.content==='string' && m.content.startsWith('[')) continue;
+        await gaapAppendMessage(m.role==='user' ? 'user' : 'agent', m.content, null, true, true);
+      }
     }
   }catch(e){
     // non-fatal — the tool just opens fresh instead of resuming
@@ -6476,10 +6477,10 @@ window.SyncEngine=(function(){
   // split speaker segments ourselves and force skipBrowserTts=true.
   function renderMeeting(list){
     list.forEach(m=>{
-      if(m.role==='user'){ mrAppendMessage('user','You', m.content, true); return; }
+      if(m.role==='user'){ mrAppendMessage('user','You', m.content, true, true); return; }
       const parts=String(m.content).split(/\*\*([^*]+)\*\*:\s*/).filter(Boolean);
-      if(parts.length<=1){ mrAppendMessage('agent','Panel', String(m.content).trim(), true); return; }
-      for(let i=0;i<parts.length;i+=2){ const nm=parts[i], msg=parts[i+1]; if(nm&&msg) mrAppendMessage('agent', nm.trim(), msg.trim(), true); }
+      if(parts.length<=1){ mrAppendMessage('agent','Panel', String(m.content).trim(), true, true); return; }
+      for(let i=0;i<parts.length;i+=2){ const nm=parts[i], msg=parts[i+1]; if(nm&&msg) mrAppendMessage('agent', nm.trim(), msg.trim(), true, true); }
     });
   }
 
@@ -6494,11 +6495,11 @@ window.SyncEngine=(function(){
       document.getElementById('qzMessages').innerHTML='';
       qzHistory.length=0; qzHistory.push(...hist);
       if(session.meta?.level) qzLevel=session.meta.level;
-      visible.forEach(m=>qzAppendMessage(m.role==='user'?'user':'agent', m.content, null, true));
+      (async ()=>{ for(const m of visible){ await qzAppendMessage(m.role==='user'?'user':'agent', m.content, null, true, true); } })();
     } else if(tool==='gaap'){
       document.getElementById('gaapMessages').innerHTML='';
       gaapHistory.length=0; gaapHistory.push(...hist);
-      visible.forEach(m=>gaapAppendMessage(m.role==='user'?'user':'agent', m.content, null, true));
+      (async ()=>{ for(const m of visible){ await gaapAppendMessage(m.role==='user'?'user':'agent', m.content, null, true, true); } })();
     } else if(tool==='meeting'){
       document.getElementById('mrMessages').innerHTML='';
       mrHistory.length=0; mrHistory.push(...hist);

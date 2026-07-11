@@ -1753,7 +1753,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
 .mr-inputbar{display:flex;gap:.75rem;padding:1rem 1.25rem;border-top:1px solid rgba(255,255,255,.08)}
 .mr-inputbar input{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.75rem 1rem;color:var(--cream);font-family:inherit;font-size:.88rem}
 .mr-inputbar input:focus{outline:none;border-color:var(--gold)}
-.mr-inputbar textarea{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.75rem 1rem;color:var(--cream);font-family:inherit;font-size:.88rem;resize:none;overflow-y:hidden;max-height:140px;line-height:1.45}
+.mr-inputbar textarea{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:10px;padding:.75rem 1rem;color:var(--cream);font-family:inherit;font-size:.88rem;resize:none;overflow-y:hidden;max-height:140px;min-height:44px;line-height:1.45}
 .mr-inputbar textarea:focus{outline:none;border-color:var(--gold)}
 .mr-inputbar button{background:var(--gold);color:var(--navy);border:none;border-radius:10px;padding:.75rem 1.5rem;font-weight:700;cursor:pointer;transition:background .3s,transform .2s}
 .mr-inputbar button:hover{background:var(--gold-light);transform:translateY(-1px)}
@@ -5101,6 +5101,7 @@ function submitTextarea(e, sendFn){
   if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendFn(); }
 }
 ['mrInput','qzInput','gaapInput','askInput'].forEach(id=>autoGrowInput(document.getElementById(id)));
+if(document.fonts && document.fonts.ready){ document.fonts.ready.then(()=>{ ['mrInput','qzInput','gaapInput','askInput'].forEach(id=>{ const el=document.getElementById(id); if(el && el._grow) el._grow(); }); }); }
 async function mrSendMessage(){
   const input=document.getElementById('mrInput');
   const text=input.value.trim();

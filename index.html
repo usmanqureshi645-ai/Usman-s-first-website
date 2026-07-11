@@ -5101,6 +5101,7 @@ async function mrRenderPanelReply(text, instant, audioUrl, segments){
   // not just a length-based guess — so the next bubble/voice never starts until the last
   // one has genuinely finished talking.
   let prevSpeechPromise=Promise.resolve();
+  let segIdx=0;
   for(let i=0;i<parts.length;i+=2){
     const name=parts[i]; const msg=parts[i+1];
     if(!name||!msg) continue;
@@ -5113,8 +5114,12 @@ async function mrRenderPanelReply(text, instant, audioUrl, segments){
       await mrWait(600+Math.random()*400);
       mrHideTyping();
     }
-    // Per-speaker audio: each bubble triggers its own Polly voice (mrPlayAudio auto-cancels previous)
-    const seg=hasSegments ? segments.find(s=>s.speaker===name.trim()) : null;
+    // Per-speaker audio: matched by POSITION, not by speaker-name lookup. Both this split and the
+    // backend's segment split (api/meeting.js) run the identical regex over the identical text, so
+    // segment k always corresponds to the k-th speaker turn here — a name-based .find() could
+    // silently grab an earlier speaker's segment (e.g. on a duplicate name) and replay their audio.
+    const seg=hasSegments ? (segments[segIdx]||null) : null;
+    segIdx++;
     const body=mrStripSelfIntro(name.trim(), msg.trim());
     if(seg?.audioUrl){
       mrAppendMessage('agent',name.trim(),body,true,instant);

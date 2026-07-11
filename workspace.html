@@ -982,12 +982,14 @@
     })();
 
     /* ── Speech-to-text mic wiring — mirrors the main site's wireMic() ── */
+    window.recognitionInstances = window.recognitionInstances || {};
     function wireMic(micBtnId, inputId, sendFn) {
       const micBtn = document.getElementById(micBtnId);
       if (!micBtn) return;
       const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SR) { micBtn.style.display = 'none'; return; }
       const recognition = new SR();
+      window.recognitionInstances[inputId] = recognition;
       recognition.lang = 'en-GB'; recognition.continuous = true; recognition.interimResults = true; recognition.maxAlternatives = 5;
       let listening = false;
       const speakIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>';
@@ -1191,6 +1193,7 @@
       const input = document.getElementById('cvChatInput');
       const text = input.value.trim();
       if (!text) return;
+      window.recognitionInstances['cvChatInput']?.stop();
       input.value = ''; input._resetGrow?.();
       cvAppendChat('user', text);
       cvChatMessages.push({ role: 'user', content: text });

@@ -4952,10 +4952,16 @@ function mrAppendMessage(role, name, text, skipBrowserTts){
   // A "user" bubble from someone other than this browser's own visitor (the live co-participant) still
   // gets a name tag, so it's clear who said what in a shared session — unlike the local visitor's own "You" bubbles
   const guestNameTag = (role==='user' && name && name!=='You') ? `<div class="mr-msg-name">${escapeHtml(name)}</div>` : '';
-  div.innerHTML = role==='user'
-    ? `${guestNameTag}<div class="mr-bubble">${escapeHtml(text)}</div>`
-    : `<div class="mr-msg-name">${name}</div>${role_label}<div class="mr-bubble">${renderMarkdown(text)}</div>`;
-  wrap.appendChild(div);
+  if(role==='user'){
+    div.innerHTML = `${guestNameTag}<div class="mr-bubble">${escapeHtml(text)}</div>`;
+    wrap.appendChild(div);
+  } else {
+    div.innerHTML = `<div class="mr-msg-name">${name}</div>${role_label}<div class="mr-bubble"></div>`;
+    wrap.appendChild(div);
+    const bubble=div.querySelector('.mr-bubble');
+    const htmlContent=renderMarkdown(text);
+    typewriterEffect(bubble, htmlContent, 15); // Fast typewriter: 15ms per char
+  }
   wrap.scrollTop=wrap.scrollHeight;
   // skipBrowserTts is true when real Polly audio is already queued for this reply —
   // calling the old browser speechSynthesis voice too would talk over/before it.
@@ -4970,6 +4976,26 @@ try{
   }
 }catch(e){}
 function mrPersistHistory(){ try{ localStorage.setItem('mr_history', JSON.stringify(mrHistory)); }catch(e){} }
+function typewriterEffect(element, html, speed=30){
+  // Gradually fill element with text, one character at a time.
+  // Preserves HTML structure by parsing and streaming visible text only.
+  return new Promise(resolve=>{
+    let htmlIdx=0, displayedHtml='';
+    const container=document.createElement('div');
+    function nextChar(){
+      if(htmlIdx>=html.length){
+        element.innerHTML=html;
+        resolve();
+        return;
+      }
+      displayedHtml=html.slice(0, ++htmlIdx);
+      container.innerHTML=displayedHtml;
+      element.innerHTML=displayedHtml;
+      setTimeout(nextChar, speed);
+    }
+    nextChar();
+  });
+}
 function mrShowTyping(){
   const wrap=document.getElementById('mrMessages');
   const div=document.createElement('div');
@@ -5148,7 +5174,7 @@ function wireMic(micBtnId, inputId, sendFn, duck){
 
   const recognition=new SR();
   recognition.lang='en-GB';
-  recognition.continuous=false;
+  recognition.continuous=true;
   recognition.interimResults=true;
   recognition.maxAlternatives=5;
   let listening=false;
@@ -5208,26 +5234,21 @@ function wireMic(micBtnId, inputId, sendFn, duck){
     // every alternative, so picking "highest confidence" never advances past the empty
     // default and nothing ever gets sent even though the mic captured speech correctly.
     let transcript='';
-    let isFinal=false;
     for(let i=0;i<e.results.length;i++){
       transcript+=e.results[i][0].transcript;
-      if(e.results[i].isFinal) isFinal=true;
     }
     const input=document.getElementById(inputId);
     input.value=transcript.trim();
     // Keep the auto-growing textarea sized to the dictated text.
     input.dispatchEvent(new Event('input',{bubbles:true}));
-    if(isFinal){
-      input.placeholder='';
-      // Release the microphone: onend flips the button back to its off state.
-      // Mobile browsers otherwise keep the mic warm if we never call stop().
-      recognition.stop();
-      // The transcript stays in the box for the user to review, edit and send
-      // themselves — dictation must never auto-send.
-      input.focus();
-    } else if(!transcript){
+    if(!transcript){
       input.placeholder='Listening… speak now';
+    } else {
+      input.placeholder='';
     }
+    // With continuous=true, the mic stays on until user manually clicks the stop button.
+    // The transcript stays in the box for the user to review, edit and send themselves.
+    input.focus();
   };
 }
 wireMic('mrMic','mrInput', mrSendMessage);
@@ -5981,10 +6002,16 @@ async function gaapAppendMessage(role, text, audioUrl, skipAudio){
   const wrap=document.getElementById('gaapMessages');
   const div=document.createElement('div');
   div.className='mr-msg '+(role==='user'?'user':'agent');
-  div.innerHTML = role==='user'
-    ? `<div class="mr-bubble">${escapeHtml(text)}</div>`
-    : `<div class="mr-msg-name">GAAP Champion</div><div class="mr-bubble">${renderMarkdown(text)}</div>`;
-  wrap.appendChild(div);
+  if(role==='user'){
+    div.innerHTML = `<div class="mr-bubble">${escapeHtml(text)}</div>`;
+    wrap.appendChild(div);
+  } else {
+    div.innerHTML = `<div class="mr-msg-name">GAAP Champion</div><div class="mr-bubble"></div>`;
+    wrap.appendChild(div);
+    const bubble=div.querySelector('.mr-bubble');
+    const htmlContent=renderMarkdown(text);
+    await typewriterEffect(bubble, htmlContent, 15);
+  }
   wrap.scrollTop=wrap.scrollHeight;
   if(role!=='user' && !skipAudio){
     if(audioUrl && gaapVoiceEnabled) await gaapPlayAudio(audioUrl);
@@ -6144,10 +6171,16 @@ async function qzAppendMessage(role, text, audioUrl, skipAudio){
   const wrap=document.getElementById('qzMessages');
   const div=document.createElement('div');
   div.className='mr-msg '+(role==='user'?'user':'agent');
-  div.innerHTML = role==='user'
-    ? `<div class="mr-bubble">${escapeHtml(text)}</div>`
-    : `<div class="mr-msg-name">Interview Coach</div><div class="mr-bubble">${renderMarkdown(text)}</div>`;
-  wrap.appendChild(div);
+  if(role==='user'){
+    div.innerHTML = `<div class="mr-bubble">${escapeHtml(text)}</div>`;
+    wrap.appendChild(div);
+  } else {
+    div.innerHTML = `<div class="mr-msg-name">Interview Coach</div><div class="mr-bubble"></div>`;
+    wrap.appendChild(div);
+    const bubble=div.querySelector('.mr-bubble');
+    const htmlContent=renderMarkdown(text);
+    await typewriterEffect(bubble, htmlContent, 15);
+  }
   wrap.scrollTop=wrap.scrollHeight;
   if(role!=='user' && !skipAudio){
     if(audioUrl && qzVoiceEnabled) await qzPlayAudio(audioUrl);

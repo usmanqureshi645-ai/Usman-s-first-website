@@ -988,7 +988,7 @@
       const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SR) { micBtn.style.display = 'none'; return; }
       const recognition = new SR();
-      recognition.lang = 'en-GB'; recognition.continuous = false; recognition.interimResults = true; recognition.maxAlternatives = 5;
+      recognition.lang = 'en-GB'; recognition.continuous = true; recognition.interimResults = true; recognition.maxAlternatives = 5;
       let listening = false;
       const speakIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>';
       micBtn.addEventListener('click', () => {
@@ -1005,18 +1005,15 @@
         else if (e.error === 'audio-capture') input.placeholder = 'No microphone found';
       };
       recognition.onresult = (e) => {
-        let transcript = '', isFinal = false;
-        for (let i = 0; i < e.results.length; i++) { transcript += e.results[i][0].transcript; if (e.results[i].isFinal) isFinal = true; }
+        let transcript = '';
+        for (let i = 0; i < e.results.length; i++) { transcript += e.results[i][0].transcript; }
         const input = document.getElementById(inputId);
         input.value = transcript.trim();
         input.dispatchEvent(new Event('input', { bubbles: true }));
-        if (isFinal) {
-          input.placeholder = '';
-          // Release the mic (onend resets the button) and leave the text in the box
-          // for the user to review and send — dictation must never auto-send.
-          recognition.stop();
-          input.focus();
-        }
+        if (transcript) input.placeholder = ''; else input.placeholder = 'Listening… speak now';
+        // With continuous=true, mic stays on until user manually stops. Text stays in box
+        // for review and send — dictation must never auto-send.
+        input.focus();
       };
     }
 
@@ -1109,6 +1106,22 @@
 
     /* ── Iterative review chat with Eleanor Hughes ── */
     const cvChatMessages = [];
+    // Typewriter effect: gradually fill element with HTML text.
+    function cvTypewriterEffect(element, html, speed=30){
+      return new Promise(resolve=>{
+        let htmlIdx=0;
+        function nextChar(){
+          if(htmlIdx>=html.length){
+            element.innerHTML=html;
+            resolve();
+            return;
+          }
+          element.innerHTML=html.slice(0, ++htmlIdx);
+          setTimeout(nextChar, speed);
+        }
+        nextChar();
+      });
+    }
     // Eleanor replies in clean business English with only **bold** for emphasis. Render that
     // safely: escape HTML, turn **x** into <strong>, drop any stray markdown symbols.
     function cvFormatReply(text) {
@@ -1126,12 +1139,19 @@
       const isUser = role === 'user';
       wrap.style.cssText = `align-self:${isUser ? 'flex-end' : 'flex-start'};max-width:85%;background:${isUser ? 'rgba(200,169,110,.15)' : 'rgba(255,255,255,.05)'};border:1px solid rgba(200,169,110,.15);border-radius:12px;padding:.65rem .9rem;font-size:.85rem;line-height:1.6;color:var(--cream)`;
       if (isUser) { wrap.style.whiteSpace = 'pre-wrap'; wrap.textContent = text; }
-      else { wrap.innerHTML = cvFormatReply(text); }
+      else {
+        const htmlContent = cvFormatReply(text);
+        cvTypewriterEffect(wrap, htmlContent, 15); // Fast typewriter: 15ms per char
+      }
       log.appendChild(wrap);
       log.scrollTop = log.scrollHeight;
       return wrap;
     }
-    function cvSetAssistant(el, text) { el.innerHTML = cvFormatReply(text); document.getElementById('cvChatLog').scrollTop = 1e9; }
+    function cvSetAssistant(el, text) {
+      const htmlContent = cvFormatReply(text);
+      cvTypewriterEffect(el, htmlContent, 15);
+      document.getElementById('cvChatLog').scrollTop = 1e9;
+    }
 
     // Upload in the chat: read the document in the background (no text dumped into the box),
     // check it really is a CV or cover letter, then ask Eleanor to review it. A document that

@@ -5175,13 +5175,84 @@ function wireMic(micBtnId, inputId, sendFn, duck){
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   if(!SR){ micBtn.style.display='none'; console.log('Speech Recognition not supported'); return; }
 
-  const recognition=new SR();
-  window.recognitionInstances[inputId] = recognition;
-  recognition.lang='en-GB';
-  recognition.continuous=true;
-  recognition.interimResults=true;
-  recognition.maxAlternatives=5;
   let listening=false;
+  let recognition;
+
+  // Mobile browsers (iOS Safari/some Android Chrome) don't reliably release the native
+  // audio-capture session on abort()/stop() when the same SpeechRecognition object is
+  // reused across many sessions. Rebuilding a fresh instance after every session end
+  // forces the old native session to be torn down/GC'd instead of lingering hot.
+  function build(){
+    const r=new SR();
+    window.recognitionInstances[inputId] = r;
+    r.lang='en-GB';
+    r.continuous=true;
+    r.interimResults=true;
+    r.maxAlternatives=5;
+
+    r.onstart=()=>{
+      console.log('Recognition started');
+      listening=true;
+      micBtn.classList.add('listening');
+      micBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg><span class="mr-mic-label">Stop</span>';
+      const input=document.getElementById(inputId);
+      input.placeholder='Listening… speak now';
+      if(shouldDuck) window.MusicDuck?.duck('mic-'+micBtnId);
+    };
+
+    r.onend=()=>{
+      console.log('Recognition ended, listening =', listening);
+      listening=false;
+      micBtn.classList.remove('listening');
+      micBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg><span class="mr-mic-label">Speak</span>';
+      const input=document.getElementById(inputId);
+      if(!input.value) input.placeholder='Ask a question…';
+      if(shouldDuck) window.MusicDuck?.unduck('mic-'+micBtnId);
+      recognition=build();
+    };
+
+    r.onerror=(e)=>{
+      console.error('Recognition error:', e.error);
+      listening=false;
+      micBtn.classList.remove('listening');
+      micBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg><span class="mr-mic-label">Speak</span>';
+      if(shouldDuck) window.MusicDuck?.unduck('mic-'+micBtnId);
+      const input=document.getElementById(inputId);
+      if(e.error==='no-speech') input.placeholder='No speech — speak again (louder if needed)';
+      else if(e.error==='network') input.placeholder='Network error — check connection';
+      else if(e.error==='not-allowed') input.placeholder='Mic permission denied — check browser settings';
+      else if(e.error==='audio-capture') input.placeholder='No microphone found';
+      else input.placeholder='Mic error: '+e.error+' — try again';
+      // onend always fires after onerror per spec, so the rebuild above already covers it —
+      // avoid rebuilding twice here.
+    };
+
+    r.onresult=(e)=>{
+      // Build the full transcript by concatenating every result slot (final + interim),
+      // taking each slot's top alternative — Edge desktop always reports confidence:0 for
+      // every alternative, so picking "highest confidence" never advances past the empty
+      // default and nothing ever gets sent even though the mic captured speech correctly.
+      let transcript='';
+      for(let i=0;i<e.results.length;i++){
+        transcript+=e.results[i][0].transcript;
+      }
+      const input=document.getElementById(inputId);
+      input.value=transcript.trim();
+      // Keep the auto-growing textarea sized to the dictated text.
+      input.dispatchEvent(new Event('input',{bubbles:true}));
+      if(!transcript){
+        input.placeholder='Listening… speak now';
+      } else {
+        input.placeholder='';
+      }
+      // With continuous=true, the mic stays on until user manually clicks the stop button.
+      // The transcript stays in the box for the user to review, edit and send themselves.
+      input.focus();
+    };
+
+    return r;
+  }
+  recognition=build();
 
   micBtn.addEventListener('click', ()=>{
     if(listening){
@@ -5197,63 +5268,6 @@ function wireMic(micBtnId, inputId, sendFn, duck){
       document.getElementById(inputId).placeholder='Microphone error — try refreshing the page';
     }
   });
-
-  recognition.onstart=()=>{
-    console.log('Recognition started');
-    listening=true;
-    micBtn.classList.add('listening');
-    micBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg><span class="mr-mic-label">Stop</span>';
-    const input=document.getElementById(inputId);
-    input.placeholder='Listening… speak now';
-    if(shouldDuck) window.MusicDuck?.duck('mic-'+micBtnId);
-  };
-
-  recognition.onend=()=>{
-    console.log('Recognition ended, listening =', listening);
-    listening=false;
-    micBtn.classList.remove('listening');
-    micBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg><span class="mr-mic-label">Speak</span>';
-    const input=document.getElementById(inputId);
-    if(!input.value) input.placeholder='Ask a question…';
-    if(shouldDuck) window.MusicDuck?.unduck('mic-'+micBtnId);
-  };
-
-  recognition.onerror=(e)=>{
-    console.error('Recognition error:', e.error);
-    listening=false;
-    micBtn.classList.remove('listening');
-    micBtn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg><span class="mr-mic-label">Speak</span>';
-    if(shouldDuck) window.MusicDuck?.unduck('mic-'+micBtnId);
-    const input=document.getElementById(inputId);
-    if(e.error==='no-speech') input.placeholder='No speech — speak again (louder if needed)';
-    else if(e.error==='network') input.placeholder='Network error — check connection';
-    else if(e.error==='not-allowed') input.placeholder='Mic permission denied — check browser settings';
-    else if(e.error==='audio-capture') input.placeholder='No microphone found';
-    else input.placeholder='Mic error: '+e.error+' — try again';
-  };
-
-  recognition.onresult=(e)=>{
-    // Build the full transcript by concatenating every result slot (final + interim),
-    // taking each slot's top alternative — Edge desktop always reports confidence:0 for
-    // every alternative, so picking "highest confidence" never advances past the empty
-    // default and nothing ever gets sent even though the mic captured speech correctly.
-    let transcript='';
-    for(let i=0;i<e.results.length;i++){
-      transcript+=e.results[i][0].transcript;
-    }
-    const input=document.getElementById(inputId);
-    input.value=transcript.trim();
-    // Keep the auto-growing textarea sized to the dictated text.
-    input.dispatchEvent(new Event('input',{bubbles:true}));
-    if(!transcript){
-      input.placeholder='Listening… speak now';
-    } else {
-      input.placeholder='';
-    }
-    // With continuous=true, the mic stays on until user manually clicks the stop button.
-    // The transcript stays in the box for the user to review, edit and send themselves.
-    input.focus();
-  };
 }
 wireMic('mrMic','mrInput', mrSendMessage);
 

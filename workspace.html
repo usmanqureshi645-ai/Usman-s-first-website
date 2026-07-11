@@ -988,35 +988,48 @@
       if (!micBtn) return;
       const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
       if (!SR) { micBtn.style.display = 'none'; return; }
-      const recognition = new SR();
-      window.recognitionInstances[inputId] = recognition;
-      recognition.lang = 'en-GB'; recognition.continuous = true; recognition.interimResults = true; recognition.maxAlternatives = 5;
       let listening = false;
+      let recognition;
       const speakIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 1a4 4 0 00-4 4v6a4 4 0 008 0V5a4 4 0 00-4-4z"/><path d="M19 10v1a7 7 0 01-14 0v-1M12 18v4M8 22h8" stroke-linecap="round"/></svg>';
+
+      // Mobile browsers (iOS Safari/some Android Chrome) don't reliably release the native
+      // audio-capture session on abort()/stop() when the same SpeechRecognition object is
+      // reused across many sessions. Rebuilding a fresh instance after every session end
+      // forces the old native session to be torn down/GC'd instead of lingering hot.
+      function build() {
+        const r = new SR();
+        window.recognitionInstances[inputId] = r;
+        r.lang = 'en-GB'; r.continuous = true; r.interimResults = true; r.maxAlternatives = 5;
+        r.onstart = () => { listening = true; micBtn.classList.add('listening'); micBtn.innerHTML = speakIcon + '<span class="mr-mic-label">Stop</span>'; document.getElementById(inputId).placeholder = 'Listening… speak now'; };
+        r.onend = () => { listening = false; micBtn.classList.remove('listening'); micBtn.innerHTML = speakIcon + '<span class="mr-mic-label">Speak</span>'; recognition = build(); };
+        r.onerror = (e) => {
+          listening = false; micBtn.classList.remove('listening'); micBtn.innerHTML = speakIcon + '<span class="mr-mic-label">Speak</span>';
+          const input = document.getElementById(inputId);
+          if (e.error === 'no-speech') input.placeholder = 'No speech — speak again (louder if needed)';
+          else if (e.error === 'not-allowed') input.placeholder = 'Mic permission denied — check browser settings';
+          else if (e.error === 'audio-capture') input.placeholder = 'No microphone found';
+          // onend always fires after onerror per spec, so the rebuild there already covers it —
+          // avoid rebuilding twice here.
+        };
+        r.onresult = (e) => {
+          let transcript = '';
+          for (let i = 0; i < e.results.length; i++) { transcript += e.results[i][0].transcript; }
+          const input = document.getElementById(inputId);
+          input.value = transcript.trim();
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+          if (transcript) input.placeholder = ''; else input.placeholder = 'Listening… speak now';
+          // With continuous=true, mic stays on until user manually stops. Text stays in box
+          // for review and send — dictation must never auto-send.
+          input.focus();
+        };
+        return r;
+      }
+      recognition = build();
+
       micBtn.addEventListener('click', () => {
         if (listening) { recognition.stop(); return; }
         try { recognition.start(); } catch (e) { document.getElementById(inputId).placeholder = 'Microphone error — try refreshing the page'; }
       });
-      recognition.onstart = () => { listening = true; micBtn.classList.add('listening'); micBtn.innerHTML = speakIcon + '<span class="mr-mic-label">Stop</span>'; document.getElementById(inputId).placeholder = 'Listening… speak now'; };
-      recognition.onend = () => { listening = false; micBtn.classList.remove('listening'); micBtn.innerHTML = speakIcon + '<span class="mr-mic-label">Speak</span>'; };
-      recognition.onerror = (e) => {
-        listening = false; micBtn.classList.remove('listening'); micBtn.innerHTML = speakIcon + '<span class="mr-mic-label">Speak</span>';
-        const input = document.getElementById(inputId);
-        if (e.error === 'no-speech') input.placeholder = 'No speech — speak again (louder if needed)';
-        else if (e.error === 'not-allowed') input.placeholder = 'Mic permission denied — check browser settings';
-        else if (e.error === 'audio-capture') input.placeholder = 'No microphone found';
-      };
-      recognition.onresult = (e) => {
-        let transcript = '';
-        for (let i = 0; i < e.results.length; i++) { transcript += e.results[i][0].transcript; }
-        const input = document.getElementById(inputId);
-        input.value = transcript.trim();
-        input.dispatchEvent(new Event('input', { bubbles: true }));
-        if (transcript) input.placeholder = ''; else input.placeholder = 'Listening… speak now';
-        // With continuous=true, mic stays on until user manually stops. Text stays in box
-        // for review and send — dictation must never auto-send.
-        input.focus();
-      };
     }
 
     let cvVoiceEnabled = true; // voice always on

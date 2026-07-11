@@ -4856,9 +4856,11 @@ const VoiceEngine=(function(){
     utter.rate=1.25; // slightly faster than default, but not rushed
     utter.volume=0.9;
     if(shouldDuck) window.MusicDuck?.duck('tts');
-    utter.onend=()=>{ if(shouldDuck) window.MusicDuck?.unduck('tts'); };
-    utter.onerror=()=>{ if(shouldDuck) window.MusicDuck?.unduck('tts'); };
-    speechSynthesis.speak(utter);
+    return new Promise(resolve=>{
+      utter.onend=()=>{ if(shouldDuck) window.MusicDuck?.unduck('tts'); resolve(); };
+      utter.onerror=()=>{ if(shouldDuck) window.MusicDuck?.unduck('tts'); resolve(); };
+      speechSynthesis.speak(utter);
+    });
   }
   function cancel(){ if('speechSynthesis' in window) speechSynthesis.cancel(); window.MusicDuck?.unduck('tts'); }
   return { setGender, speak, cancel };
@@ -4928,10 +4930,10 @@ const GlobalSpeechManager = {
 window.GlobalSpeechManager = GlobalSpeechManager;
 window.globalStopAudio = () => GlobalSpeechManager.stop(); // legacy alias for any remaining onclick="globalStopAudio()" markup
 function mrSpeak(name, text){
-  if(!mrVoiceEnabled) return;
+  if(!mrVoiceEnabled) return Promise.resolve();
   const customMatch=mrCustomPersonas.find(p=>p.name===name);
   const speakerGender=customMatch?.gender || mrGenders[name] || 'female';
-  VoiceEngine.speak(text, mrPitches[name]||1, true, speakerGender);
+  return Promise.resolve(VoiceEngine.speak(text, mrPitches[name]||1, true, speakerGender));
 }
 async function mrPlayAudio(audioUrl){
   if(!audioUrl || typeof audioUrl !== 'string') return;
@@ -4965,9 +4967,10 @@ function mrAppendMessage(role, name, text, skipBrowserTts, instant){
   wrap.scrollTop=wrap.scrollHeight;
   // skipBrowserTts is true when real Polly audio is already queued for this reply —
   // calling the old browser speechSynthesis voice too would talk over/before it.
-  if(role!=='user' && !skipBrowserTts) mrSpeak(name, text);
+  const speakPromise=(role!=='user' && !skipBrowserTts) ? mrSpeak(name, text) : Promise.resolve();
   if(typeof mrLiveStageRefresh==='function') mrLiveStageRefresh();
   mrPersistHistory();
+  return speakPromise;
 }
 try{
   const savedMr=JSON.parse(localStorage.getItem('mr_history')||'null');
@@ -5077,15 +5080,20 @@ async function mrRenderPanelReply(text, instant, audioUrl, segments){
     if(hasSegments && segments[0]?.audioUrl && !instant) mrPlayAudio(segments[0].audioUrl);
     return;
   }
+  // Tracks the previous speaker's actual speech completion (Polly audio or browser TTS),
+  // not just a length-based guess — so the next bubble/voice never starts until the last
+  // one has genuinely finished talking.
+  let prevSpeechPromise=Promise.resolve();
   for(let i=0;i<parts.length;i+=2){
     const name=parts[i]; const msg=parts[i+1];
     if(!name||!msg) continue;
     if(i>0 && !instant){
-      // brief pause before the next speaker "picks up", as if they were listening
+      // wait for the previous speaker to actually finish before the next one "picks up"
+      await prevSpeechPromise;
+      // brief pause + typing indicator, as if they were listening then composing a reply
       await mrWait(500+Math.random()*400);
       mrShowTyping();
-      const typingDelay=Math.min(2600,Math.max(900,msg.trim().length*22));
-      await mrWait(typingDelay);
+      await mrWait(600+Math.random()*400);
       mrHideTyping();
     }
     // Per-speaker audio: each bubble triggers its own Polly voice (mrPlayAudio auto-cancels previous)
@@ -5093,9 +5101,10 @@ async function mrRenderPanelReply(text, instant, audioUrl, segments){
     const body=mrStripSelfIntro(name.trim(), msg.trim());
     if(seg?.audioUrl){
       mrAppendMessage('agent',name.trim(),body,true,instant);
-      if(!instant) mrPlayAudio(seg.audioUrl);
+      prevSpeechPromise=instant ? Promise.resolve() : mrPlayAudio(seg.audioUrl);
     } else {
-      mrAppendMessage('agent',name.trim(),body,instant||hasAudio,instant);
+      const speakPromise=mrAppendMessage('agent',name.trim(),body,instant||hasAudio,instant);
+      prevSpeechPromise=instant ? Promise.resolve() : speakPromise;
     }
   }
 }

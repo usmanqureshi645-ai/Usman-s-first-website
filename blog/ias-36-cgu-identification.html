@@ -6,10 +6,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IAS 36 Cash-Generating Unit (CGU) Identification: Allocation & Testing</title>
-    <meta name="description" content="IAS 36 CGU: identifying cash-generating units, goodwill allocation, CGU boundaries, audit procedures.">
-    <meta name="keywords" content="IAS 36 CGU, cash-generating unit, goodwill allocation, impairment testing">
+    <meta name="description" content="How to identify a cash-generating unit under IAS 36, allocate goodwill to CGUs, run the impairment test with worked journals, and survive the audit. Cited to IAS 36 paragraphs.">
+    <meta name="keywords" content="IAS 36 CGU, cash-generating unit, goodwill allocation, impairment testing, IAS 36.66, IAS 36.80, IAS 36.104">
     <meta name="author" content="Usman Qureshi">
     <link rel="canonical" href="https://www.uqconsulting.org/blog/ias-36-cgu-identification.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "IAS 36 Cash-Generating Unit (CGU) Identification: Allocation & Testing",
+      "description": "How to identify a cash-generating unit under IAS 36, allocate goodwill to CGUs, run the impairment allocation with worked journals, and survive the audit.",
+      "datePublished": "2026-07-01",
+      "dateModified": "2026-07-13",
+      "author": {
+        "@type": "Person",
+        "name": "Usman Qureshi",
+        "jobTitle": "Chartered Accountant (ACA, ACCA) - Big 4 Audit & Advisory",
+        "image": "https://www.uqconsulting.org/images/team/usman-qureshi.png"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "UQ Consulting",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.uqconsulting.org/images/team/usman-qureshi.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.uqconsulting.org/blog/ias-36-cgu-identification.html"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is it IAS 36 or IFRS 36?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It is IAS 36 Impairment of Assets. There is no IFRS 36. Cash-generating units, goodwill allocation and the impairment test all sit within IAS 36, an International Accounting Standard carried forward into the IFRS body of standards."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a cash-generating unit under IAS 36?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Per IAS 36.6, a cash-generating unit is the smallest identifiable group of assets that generates cash inflows largely independent of the cash inflows from other assets or groups of assets. The decisive test is independence of cash inflows, not the entity's management or reporting structure."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is goodwill allocated to cash-generating units?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Under IAS 36.80, goodwill acquired in a business combination is allocated to each CGU (or group of CGUs) expected to benefit from the synergies of the combination. Each such unit must not be larger than an operating segment before aggregation under IFRS 8, and the allocation is done at acquisition or, at the latest, before the end of the first annual period after the acquisition date."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "In what order is an impairment loss allocated within a CGU?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "IAS 36.104 requires the loss to reduce goodwill allocated to the CGU first, and then the other assets of the unit pro rata on the basis of their carrying amounts. No individual asset may be written below the highest of its fair value less costs of disposal, its value in use, or zero (IAS 36.105)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How often must a CGU containing goodwill be tested for impairment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "IAS 36.90 requires a CGU to which goodwill has been allocated to be tested for impairment at least annually, and whenever there is an indicator of impairment. The annual test can be performed at any consistent time in the year, and different CGUs may be tested at different times (IAS 36.96)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can a previously recognised goodwill impairment be reversed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. IAS 36.124 prohibits the reversal of an impairment loss recognised for goodwill in any subsequent period, because any later increase in recoverable amount is treated as internally generated goodwill, which cannot be capitalised. Impairment losses on other CGU assets may be reversed subject to the depreciated-cost ceiling."
+          }
+        }
+      ]
+    }
+    </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
@@ -84,76 +168,96 @@
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#threestep-cgu-process">Three-Step CGU Process</a></li><li class="toc-l1"><a href="#cgu-examples-by-industry">CGU Examples by Industry</a></li><li class="toc-l1"><a href="#worked-example-retail-acquisition">Worked Example: Retail Acquisition</a></li><li class="toc-l1"><a href="#audit-challenge-cgu-boundaries">Audit Challenge: CGU Boundaries</a></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Where Does the CGU Boundary Sit?</a></li></ul>
+            <ul><li class="toc-l1"><a href="#identify-cgu">How do you identify a CGU?</a></li><li class="toc-l1"><a href="#allocate-goodwill">How is goodwill allocated to CGUs?</a></li><li class="toc-l1"><a href="#allocate-loss">How is an impairment loss allocated within a CGU?</a></li><li class="toc-l1"><a href="#audit-red-flags">What do auditors challenge on CGUs?</a></li><li class="toc-l1"><a href="#real-life-case-study">Case study: Vodafone country CGUs</a></li><li class="toc-l1"><a href="#faq">FAQ</a></li></ul>
         </div>
 
 
         <article>
-            <p>A Cash-Generating Unit (CGU) is the smallest identifiable group of assets that generates cash flows largely independent of other assets. Correct CGU identification determines goodwill allocation and impairment testing scope. Get it wrong, and impairments are missed or overstated.</p>
+            <p>The cash-generating unit is the single most consequential judgement in IAS 36 <em>Impairment of Assets</em>. It sets the level at which recoverable amount is measured, the level at which goodwill is tested, and ultimately whether an impairment is recognised at all. Draw the boundary too widely and loss-making operations shelter behind profitable neighbours; draw it too narrowly and you may allocate goodwill you cannot support. (For readers arriving on terminology: the standard is <strong>IAS 36</strong>, an International Accounting Standard. There is no IFRS 36 &mdash; the number is sometimes miscited, but the impairment rules on CGUs, goodwill and recoverable amount all live in IAS 36.) This guide walks the full chain, from identifying a unit through to allocating an impairment loss with real journals, and shows exactly where the audit challenges land. For the wider mechanics of the test itself, start with our <a href="ias-36-impairment-of-assets-complete-guide.html">IAS 36 impairment hub</a> and the sister note on <a href="ias-36-value-in-use-calculation.html">value-in-use, WACC and terminal value</a>.</p>
 
-            <h2 id="threestep-cgu-process">Three-Step CGU Process</h2>
-            <ol>
-                <li><strong>Identify separate cash flows:</strong> Which assets generate distinct, independent cash flows?</li>
-                <li><strong>Determine unit boundaries:</strong> Are they a single CGU or multiple?</li>
-                <li><strong>Allocate goodwill:</strong> Which CGU(s) benefited from the acquisition?</li>
-            </ol>
+            <h2 id="identify-cgu">How do you identify a cash-generating unit under IAS 36?</h2>
+            <p>A cash-generating unit is the smallest identifiable group of assets that generates cash inflows largely independent of the cash inflows from other assets or groups of assets (IAS 36.6). The decisive test is <em>independence of cash inflows</em> &mdash; not how management organises reporting lines, cost centres or legal entities. You identify a CGU by asking, for the asset or group under review, whether there is an active market for its output and whether the cash it brings in stands on its own; if it does, that is the boundary (IAS 36.68&ndash;70).</p>
+            <p>IAS 36.66 requires an entity that cannot estimate the recoverable amount of an individual asset to fall back to the CGU to which the asset belongs, because most assets do not generate cash on their own. Two anchoring rules keep the exercise disciplined. First, if an active market exists for the output of an asset or group of assets, that asset or group is a CGU even where the output is used internally (IAS 36.70) &mdash; for example an in-house power station selling notionally to the rest of the group. Second, CGUs must be identified consistently from period to period for the same asset or type of asset, unless a change is justified (IAS 36.72). A quiet re-drawing of unit boundaries the year a loss would otherwise crystallise is exactly what auditors hunt for.</p>
+            <p>How assets are used and monitored is persuasive but not determinative. IAS 36.69 directs preparers to consider, among other things, how management monitors the entity's operations (by product line, business, location) and how it makes decisions about continuing or disposing of assets. A retail chain typically has a CGU at the individual store level, because each store attracts its own customers and takes its own till receipts independently of the store down the road; a telecoms operator often has a CGU at national-network level, because the network's interconnected infrastructure generates cash jointly and no single mast produces independent inflows. The table shows how the same principle resolves differently across industries.</p>
 
-            <h2 id="cgu-examples-by-industry">CGU Examples by Industry</h2>
             <table>
-                <tr>
-                    <th>Business Type</th>
-                    <th>CGU Level</th>
-                    <th>Why</th>
-                </tr>
-                <tr>
-                    <td>Retail chain (Tesco)</td>
-                    <td>Individual stores or regions</td>
-                    <td>Each store has independent P&L, customers, supply chain</td>
-                </tr>
-                <tr>
-                    <td>Software (SaaS)</td>
-                    <td>Product line</td>
-                    <td>Each product has distinct revenue, churn, pricing</td>
-                </tr>
-                <tr>
-                    <td>Bank</td>
-                    <td>Retail, commercial, investment banking</td>
-                    <td>Different customer bases, risk profiles, cash flows</td>
-                </tr>
-                <tr>
-                    <td>Manufacturing</td>
-                    <td>Production facility or division</td>
-                    <td>Each facility serves distinct markets/customers</td>
-                </tr>
+                <tr><th>Business</th><th>Typical CGU level</th><th>Why the cash inflows are (in)dependent</th></tr>
+                <tr><td>Retail chain</td><td>Individual store</td><td>Each store draws its own footfall and receipts; closing one barely affects the next (IAS 36.68)</td></tr>
+                <tr><td>Mobile network operator</td><td>National network</td><td>Masts, spectrum and core generate cash jointly; a single cell has no independent inflow (IAS 36.67)</td></tr>
+                <tr><td>Hotel group</td><td>Individual hotel</td><td>Location-specific demand; largely independent occupancy and rate</td></tr>
+                <tr><td>Integrated manufacturer</td><td>Plant or product line with an external market</td><td>Where output has an active market, the unit is a CGU even if sold internally (IAS 36.70)</td></tr>
+                <tr><td>SaaS software vendor</td><td>Product line</td><td>Distinct subscription revenue, churn and pricing per product</td></tr>
             </table>
 
-            <h2 id="worked-example-retail-acquisition">Worked Example: Retail Acquisition</h2>
-            <p><strong>Scenario:</strong> Company acquires a retail chain with 50 stores for £100m. Goodwill: £30m.</p>
-            <ul>
-                <li><strong>CGU definition:</strong> Each store (or region) is a separate CGU</li>
-                <li><strong>Goodwill allocation:</strong> £30m allocated across the 50 stores proportionally</li>
-                <li><strong>Impairment testing:</strong> Each store's recoverable amount is tested separately</li>
-                <li><strong>Example:</strong> If Store A's recoverable amount < carrying amount (including allocated goodwill), Store A is impaired; goodwill attached to Store A is written down</li>
-            </ul>
+            <h2 id="allocate-goodwill">How is goodwill allocated to CGUs, and at what level is it tested?</h2>
+            <p>Goodwill acquired in a business combination is allocated, from the acquisition date, to each of the acquirer's CGUs or groups of CGUs expected to benefit from the synergies of the combination (IAS 36.80). Goodwill does not generate cash flows independently and is often not recoverable at the level of a single asset, so IAS 36 never tests it in isolation &mdash; it is tested as part of the unit or group of units it was allocated to. This is the structural reason a CGU containing goodwill can be impaired even when every tangible asset within it would individually pass.</p>
+            <p>IAS 36.80 caps the size of the allocation unit: each unit or group of units to which goodwill is allocated must represent the lowest level within the entity at which goodwill is monitored for internal management purposes, and must not be larger than an operating segment as defined by IFRS 8 before aggregation. Where the initial allocation cannot be completed before the end of the annual period in which the combination occurred, it must be completed before the end of the first annual period beginning after the acquisition date (IAS 36.84). If goodwill relates to a CGU but has not been allocated to that unit, the unit is tested for impairment, when there is an indicator, by comparing its carrying amount (excluding goodwill) with its recoverable amount (IAS 36.88).</p>
+            <p>Two mechanical points routinely trip preparers up. When an entity disposes of an operation within a CGU to which goodwill has been allocated, the goodwill associated with that operation is included in the carrying amount of the operation on disposal and measured on a relative-value basis unless a better method exists (IAS 36.86). And when an entity reorganises its reporting structure in a way that changes the composition of CGUs to which goodwill has been allocated, the goodwill is reallocated to the affected units using a relative-value approach (IAS 36.87). Both events are red flags for auditors because they move goodwill across the impairment perimeter.</p>
+            <p>IAS 36.90 then sets the frequency: a CGU to which goodwill has been allocated must be tested for impairment at least annually, and whenever there is an indication that the unit may be impaired, by comparing the carrying amount of the unit (including the goodwill) with its recoverable amount. The annual test may be performed at any time during the year provided it is performed at the same time each year, and different CGUs may be tested at different times (IAS 36.96). Recoverable amount is the higher of fair value less costs of disposal and value in use (IAS 36.18) &mdash; the same measurement covered in our <a href="ias-36-value-in-use-calculation.html">value-in-use guide</a>.</p>
 
-            <h2 id="audit-challenge-cgu-boundaries">Audit Challenge: CGU Boundaries</h2>
-            <p>Auditors often challenge whether management has identified CGUs too broadly. For example:</p>
-            <p><strong>Company position:</strong> "All our software products are interdependent; one CGU."</p>
-            <p><strong>Auditor challenge:</strong> "Product A is declining 20% YoY, Product B is growing 5%. They have separate revenue streams. Shouldn't they be separate CGUs?"</p>
-            <p>Result: CGU split, separate impairment tests, potential additional impairments on Product A.</p>
+            <h2 id="allocate-loss">How is an impairment loss allocated across the assets of a CGU?</h2>
+            <p>An impairment loss is recognised for a CGU only when its recoverable amount is less than its carrying amount, and the loss is allocated in a fixed order (IAS 36.104): first to reduce the carrying amount of any goodwill allocated to the unit, and then to the other assets of the unit pro rata on the basis of their carrying amounts. Goodwill absorbs the first blow in full before any other asset is touched. This ordering, combined with the ban on reversing goodwill impairments (IAS 36.124), is what makes goodwill the most fragile line on the balance sheet.</p>
+            <p>There is a floor. IAS 36.105 prohibits reducing the carrying amount of any individual asset below the highest of its fair value less costs of disposal (if measurable), its value in use (if determinable), and zero. Any loss that would otherwise fall on such an asset is reallocated pro rata to the other assets of the unit. The worked example below runs the full allocation for a single CGU that fails its annual goodwill test.</p>
 
             <div class="example-box">
-                <strong>Red flag:</strong> Company aggressively combines multiple businesses into one CGU to avoid segment-level impairment testing. Auditors push back hard on overly broad CGU definitions.
+              <strong>Worked example &mdash; allocating an impairment loss within a CGU.</strong> A group acquired a specialist manufacturing business, now a single CGU. At the year-end test, the carrying amounts are: goodwill CU30m, brand (finite-life intangible) CU20m, plant CU40m, other net operating assets CU10m &mdash; total carrying amount CU100m. The recoverable amount (higher of value in use and fair value less costs of disposal) is CU72m. The impairment loss is CU28m.
             </div>
+            <table>
+                <tr><th>Asset</th><th>Carrying amount (CUm)</th><th>Step 1: goodwill first (IAS 36.104(a))</th><th>Step 2: pro rata to other assets (IAS 36.104(b))</th><th>Revised carrying amount (CUm)</th></tr>
+                <tr><td>Goodwill</td><td>30</td><td>(28)</td><td>&mdash;</td><td>2</td></tr>
+                <tr><td>Brand</td><td>20</td><td>&mdash;</td><td>&mdash;</td><td>20</td></tr>
+                <tr><td>Plant</td><td>40</td><td>&mdash;</td><td>&mdash;</td><td>40</td></tr>
+                <tr><td>Other net assets</td><td>10</td><td>&mdash;</td><td>&mdash;</td><td>10</td></tr>
+                <tr><td><strong>Total</strong></td><td><strong>100</strong></td><td><strong>(28)</strong></td><td><strong>&mdash;</strong></td><td><strong>72</strong></td></tr>
+            </table>
+            <p>Here the CU28m loss is fully absorbed by goodwill, so step 2 never triggers and no other asset is written down. The journal entry is straightforward:</p>
+            <table>
+                <tr><th>Date</th><th>Account</th><th>Dr (CUm)</th><th>Cr (CUm)</th></tr>
+                <tr><td>Year-end</td><td>Impairment loss (profit or loss)</td><td>28</td><td></td></tr>
+                <tr><td></td><td>&nbsp;&nbsp;&nbsp;Goodwill (accumulated impairment)</td><td></td><td>28</td></tr>
+            </table>
+            <p>Now vary the facts: suppose recoverable amount were CU55m, giving a CU45m loss. Goodwill absorbs its full CU30m first, leaving CU15m to spread pro rata across the brand, plant and other assets in proportion to their carrying amounts (20:40:10, i.e. CU70m total), subject to the IAS 36.105 floor. That allocates CU4.29m to the brand, CU8.57m to the plant and CU2.14m to other assets. If, say, the plant's own fair value less costs of disposal were CU34m, it could not be written below that figure and the CU2.57m excess would be reallocated to the brand and other assets. The journal becomes:</p>
+            <table>
+                <tr><th>Date</th><th>Account</th><th>Dr (CUm)</th><th>Cr (CUm)</th></tr>
+                <tr><td>Year-end</td><td>Impairment loss (profit or loss)</td><td>45.00</td><td></td></tr>
+                <tr><td></td><td>&nbsp;&nbsp;&nbsp;Goodwill (accumulated impairment)</td><td></td><td>30.00</td></tr>
+                <tr><td></td><td>&nbsp;&nbsp;&nbsp;Brand &mdash; accumulated impairment</td><td></td><td>4.29</td></tr>
+                <tr><td></td><td>&nbsp;&nbsp;&nbsp;Plant &mdash; accumulated impairment</td><td></td><td>8.57</td></tr>
+                <tr><td></td><td>&nbsp;&nbsp;&nbsp;Other net assets &mdash; accumulated impairment</td><td></td><td>2.14</td></tr>
+            </table>
+            <p>The goodwill portion can never be reversed in a later period (IAS 36.124); the amounts allocated to the brand, plant and other assets may be reversed if recoverable amount recovers, but only up to the depreciated carrying amount that would have existed had no impairment been recognised (IAS 36.117).</p>
 
-            
-<h2 id="real-life-case-study">Real-Life Case Study: Where Does the CGU Boundary Sit?</h2>
+            <h2 id="audit-red-flags">What do auditors challenge on CGU identification and goodwill allocation?</h2>
+            <p>Auditors treat CGU identification and the goodwill impairment test as a significant risk, almost always involving significant judgements and accounting estimates. That routes the work through ISA 540 (Revised) <em>Auditing Accounting Estimates and Related Disclosures</em> and ISA 500 <em>Audit Evidence</em>, supported by the auditor's obligation under ISA 315 (Revised 2019) to understand how management identifies units and monitors goodwill. Three findings recur.</p>
+            <div class="example-box">
+              <strong>Red flag 1 &mdash; CGUs aggregated to bury a loss.</strong> Management combines a declining operation with a profitable one into a single CGU, so headroom in the profitable business masks impairment in the weak one. Under ISA 540.13 and .15 the auditor tests how management identified the unit against IAS 36.68&ndash;72, focusing on independence of cash inflows, and re-performs the test at a disaggregated level. Where the "one CGU" assertion collapses under a product-by-product or location-by-location analysis, the auditor concludes the estimate is misstated.
+            </div>
+            <div class="example-box">
+              <strong>Red flag 2 &mdash; goodwill monitored below the tested level.</strong> Internal board packs monitor goodwill by product line, but the annual test is run at a higher segment level that carries more headroom. IAS 36.80 caps the test unit at the lowest level goodwill is internally monitored. Applying ISA 500.6 (relevance and reliability of evidence), the auditor obtains the actual management-information used to monitor goodwill and reconciles the tested unit to it; a mismatch is a control and measurement deficiency.
+            </div>
+            <div class="example-box">
+              <strong>Red flag 3 &mdash; boundaries or allocations quietly re-drawn.</strong> Following a reorganisation or disposal, goodwill is reallocated in a way that shifts it from a unit under stress to one with headroom, with no relative-value support. IAS 36.86&ndash;87 require a relative-value basis. Under ISA 540.18 the auditor evaluates whether the change is justified by a genuine change in how the business is run (IAS 36.72) or is opportunistic, and inspects the arithmetic of the reallocation. An unexplained mid-year change of CGU composition is a hallmark of estimate management.
+            </div>
+            <p>In each case the auditor also stress-tests the cash-flow assumptions feeding value in use &mdash; growth rates, margins and discount rate &mdash; and performs the retrospective review of prior estimates required by ISA 540.9, comparing last year's forecasts with actual outcomes. Persistent optimism (forecasts that never materialise) is strong evidence of management bias and drives an expanded, more sceptical impairment audit.</p>
+
+
+<h2 id="real-life-case-study">Case study: Vodafone's country-level CGUs and the FY2019 write-down</h2>
+<p>Vodafone Group Plc is a clean illustration of how a telecoms group draws CGU boundaries and how goodwill impairment then flows through profit or loss. In its Annual Report for the year ended 31 March 2019, Vodafone tested goodwill at the level of groups of CGUs corresponding to its country operations, consistent with IAS 36.80&mdash;country operations were the lowest level at which goodwill was monitored internally and were no larger than its operating segments. Following weaker performance in certain markets, the Group recognised impairment losses of approximately &euro;3.5 billion for the year, principally against the goodwill and assets of its Spain and Romania operations.</p>
 <div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A retail chain wonders whether to test each store individually or the region as a whole. Some stores are loss-making but sit in a profitable region.</p>
- <p><strong>Analysis.</strong> A CGU is the smallest group of assets generating largely independent cash inflows. Because each store attracts its own customers and takes its own till receipts, each store is a separate CGU, so the loss-making ones must be tested individually and cannot hide behind regional profits.</p>
- <p><strong>Takeaway.</strong> Drawing the CGU boundary too widely is a classic way impairment gets missed. The test is <em>independence of cash inflows</em>, not management's reporting structure. If a store's revenue does not depend on the one next door, it stands alone.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
+ <p><strong>Why country-level.</strong> A single mobile mast produces no independent cash inflow; the national network of spectrum, core and access infrastructure generates cash jointly (IAS 36.67&ndash;68). So the CGU sits at the national operation, not the tower, and goodwill is monitored and tested at that country grouping.</p>
+ <p><strong>The mechanics.</strong> For Spain, the carrying amount of the country CGU (including allocated goodwill) exceeded its recoverable amount, so a loss was recognised. Consistent with IAS 36.104, the write-down reduced allocated goodwill first before touching other assets, and, per IAS 36.124, that goodwill impairment can never be reversed in a later year even if Spanish trading recovers.</p>
+ <p><strong>Contrast &mdash; US GAAP.</strong> Kraft Heinz recorded a comparable-looking event in the same era (a Q4 2018 charge of roughly US$7.1bn of goodwill on its US Refrigerated and Canada Retail <em>reporting units</em>, plus US$8.3bn of intangibles). But that test is run under ASC 350 at the <em>reporting-unit</em> level, which is not identical to an IAS 36 CGU &mdash; a distinction we unpack in the impairment hub.</p>
+<p style="font-size:0.82em;color:#8593a8;margin-top:12px;">Figures sourced from Vodafone Group Plc Annual Report 2019 (year ended 31 March 2019) and Kraft Heinz Company Form 10-K / Q4 2018 results (year ended 29 December 2018). The ~&euro;3.5bn is the Group's disclosed total impairment for the period; the precise CGU-by-CGU split is set out in the respective filings. Referenced for education, not reproduced from any proprietary guide.</p>
 </div>
+
+<h2 id="faq">Frequently asked questions</h2>
+<p><strong>Is it IAS 36 or IFRS 36?</strong> It is IAS 36 <em>Impairment of Assets</em>. There is no IFRS 36. Cash-generating units, goodwill allocation and the impairment test all sit within IAS 36, an International Accounting Standard carried into the IFRS body of standards.</p>
+<p><strong>What is a cash-generating unit?</strong> The smallest identifiable group of assets that generates cash inflows largely independent of the cash inflows from other assets or groups (IAS 36.6). Independence of cash inflows &mdash; not reporting structure &mdash; is the test.</p>
+<p><strong>How is goodwill allocated to CGUs?</strong> To each CGU or group of CGUs expected to benefit from the synergies of the combination, at the lowest level goodwill is internally monitored and no larger than an operating segment (IAS 36.80), completed by the end of the first annual period after acquisition (IAS 36.84).</p>
+<p><strong>In what order is an impairment loss allocated within a CGU?</strong> Goodwill first, then the other assets pro rata on carrying amount (IAS 36.104), with no asset written below the higher of its fair value less costs of disposal, value in use, or zero (IAS 36.105).</p>
+<p><strong>How often is a goodwill CGU tested?</strong> At least annually, at a consistent point in the year, and whenever an impairment indicator exists (IAS 36.90, 96).</p>
+<p><strong>Can a goodwill impairment be reversed?</strong> No &mdash; IAS 36.124 prohibits it. Impairments of other CGU assets may be reversed up to the depreciated-cost ceiling (IAS 36.117).</p>
+<p><strong>Can a CGU be larger than an operating segment?</strong> No. The unit or group of units to which goodwill is allocated for testing must not be larger than an operating segment before aggregation under IFRS 8 (IAS 36.80).</p>
 
 <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>

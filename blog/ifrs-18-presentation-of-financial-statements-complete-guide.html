@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9LKFW8QCC8"></script>
@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IFRS 18 Presentation of Financial Statements: Complete Guide with Restructuring Requirements</title>
-    <meta name="description" content="IFRS 18 presentation: income statement structure (operating/investing/financing), liquidity vs solvency, subtotals, significant line items, management commentary.">
-    <meta name="keywords" content="IFRS 18 presentation, income statement, operating investing financing, subtotals, significant line items, disclosure">
+    <meta name="description" content="IFRS 18 (effective 1 Jan 2027, replaces IAS 1): the three categories (operating, investing, financing), the two new subtotals, management-performance measures (MPMs), aggregation, and the IAS 7 cash-flow change. Worked examples, auditor red flags, case studies.">
+    <meta name="keywords" content="IFRS 18, operating investing financing, operating profit subtotal, profit before financing and income tax, management-defined performance measures, MPM, aggregation disaggregation, IAS 1 replaced, IAS 7 cash flow">
     <meta name="author" content="Usman Qureshi">
     <link rel="canonical" href="https://www.uqconsulting.org/blog/ifrs-18-presentation-of-financial-statements-complete-guide.html">
 
@@ -34,9 +34,9 @@
         th { background: #1a2f5a; color: #fff; font-weight: 600; }
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
         .disclaimer { font-size: 0.81em; color: #8593a8; margin-top: 36px; padding-top: 16px; border-top: 1px solid #e4e9f0; }
-    
 
-    
+
+
 /*TOC_SIDEBAR_START*/
 .toc {
     background: #fff;
@@ -79,178 +79,301 @@
 </head>
 <body>
     <div class="topbar">
-        <a href="https://www.uqconsulting.org/home.html">→ Usman Qureshi — Audit &amp; CFO Advisory</a>
+        <a href="https://www.uqconsulting.org/home.html">→ Usman Qureshi — Audit &amp; CFO Advisory</a>
     </div>
 
     <div class="article-container">
         <h1>IFRS 18 Presentation of Financial Statements: Complete Guide</h1>
 <div class="breadcrumb" style="color: #8593a8; font-size: 0.9em; margin-bottom: 20px;">
-    <a href="index.html" style="color: #2a4a7a; text-decoration: none;">Blog</a> 
-    &gt; <a href="ifrs-18-presentation-of-financial-statements-complete-guide.html" style="color: #2a4a7a; text-decoration: none;">IFRS 18 Presentation</a> 
-    &gt; <span style="color: #1a2f5a;">IFRS 18 Presentation of Financial Statements: Complete Guide</span>
+    <a href="index.html" style="color: #2a4a7a; text-decoration: none;">Blog</a>
+    &gt; <span style="color: #1a2f5a;">IFRS 18 Presentation and Disclosure in Financial Statements</span>
 </div>
-        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed July 2026 · 13 min read</div>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed 13 July 2026 · 18 min read</div>
 
-        <p class="lead">IFRS 18 (effective 2024, mandatory 2025) replaced IAS 1 and fundamentally restructured the income statement. Key innovation: classification by management function (operating, investing, financing) rather than nature. This guide covers the new structure, subtotal requirements, significant line items, and the transition challenges companies face.</p>
+        <p class="lead">IFRS 18 <em>Presentation and Disclosure in Financial Statements</em> is effective for annual reporting periods beginning on or after 1 January 2027 and replaces IAS 1. It keeps profit or loss unchanged in amount but re-engineers how it is told: three defined categories (operating, investing, financing), two newly mandated subtotals (operating profit, and profit before financing and income taxes), first-time audit of management-defined performance measures (MPMs), a sharper aggregation and disaggregation discipline, and a consequential change to IAS 7 that makes operating profit the single starting point of the indirect cash-flow reconciliation. This guide works through each mechanism with the exact paragraph references, restructured face-of-P&L worked examples, auditor red flags mapped to specific ISAs, and case studies drawn from real filers' existing non-GAAP measures.</p>
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#ifrs18-overview">IFRS 18 Scope and Effective Date</a></li><li class="toc-l1"><a href="#new-structure">New Income Statement Structure: OIF Model</a></li><li class="toc-l1"><a href="#operating">Operating Activities</a></li><li class="toc-l1"><a href="#investing">Investing Activities</a></li><li class="toc-l1"><a href="#financing">Financing Activities</a></li><li class="toc-l1"><a href="#subtotals">Required Subtotals and Line Items</a></li><li class="toc-l1"><a href="#significant">Significant Line Items</a></li><li class="toc-l1"><a href="#worked">Worked Example: Restructured Income Statement</a><ul><li class="toc-l2"><a href="#abc-manufacturing-plc-income-statement-for-year-ended-31-dec-2025">ABC Manufacturing plc — Income Statement for year ended 31 Dec 2025</a></li></ul></li><li class="toc-l1"><a href="#transition">Transition Challenges</a></li><li class="toc-l1"><a href="#vs-ias1">IFRS 18 vs IAS 1: Key Differences</a></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Restructuring the Income Statement Under IFRS 18</a></li></ul>
+            <ul>
+                <li class="toc-l1"><a href="#what-is-ifrs18">What is IFRS 18 and when is it effective?</a></li>
+                <li class="toc-l1"><a href="#why-replace-ias1">Why did the IASB replace IAS 1?</a></li>
+                <li class="toc-l1"><a href="#three-categories">How do the three categories (operating, investing, financing) work?</a></li>
+                <li class="toc-l1"><a href="#main-business">How do the "main business activity" exceptions change classification?</a></li>
+                <li class="toc-l1"><a href="#subtotals">What are the new required subtotals?</a></li>
+                <li class="toc-l1"><a href="#mpms">What are management-defined performance measures (MPMs) and how are they disclosed?</a></li>
+                <li class="toc-l1"><a href="#aggregation">How do the aggregation and disaggregation principles work?</a></li>
+                <li class="toc-l1"><a href="#cash-flow">How does IFRS 18 change the cash flow statement (IAS 7)?</a></li>
+                <li class="toc-l1"><a href="#worked-examples">Worked examples: restructured face of the P&amp;L</a>
+                    <ul>
+                        <li class="toc-l2"><a href="#example-manufacturer">Example 1 — manufacturer (investing/financing not a main activity)</a></li>
+                        <li class="toc-l2"><a href="#example-mpm">Example 2 — MPM reconciliation</a></li>
+                    </ul>
+                </li>
+                <li class="toc-l1"><a href="#red-flags">Auditor red flags and the ISA procedures that catch them</a></li>
+                <li class="toc-l1"><a href="#case-studies">Case studies: real filers whose measures become MPMs</a></li>
+                <li class="toc-l1"><a href="#ias1-vs-ifrs18">IFRS 18 vs IAS 1: what actually changed?</a></li>
+                <li class="toc-l1"><a href="#faq">Frequently asked questions</a></li>
+            </ul>
         </div>
 
         <article>
-            <h2 id="ifrs18-overview">IFRS 18 Scope and Effective Date</h2>
-            <p>IFRS 18 applies to all entities reporting under IFRS. Mandatory effective date: 1 January 2025. Early adoption permitted.</p>
-            <p>Key improvement: <strong>Three sections</strong> in the income statement (Operating, Investing, Financing) provide better visibility into different sources of profit and aid financial analysis.</p>
+            <h2 id="what-is-ifrs18">What is IFRS 18 and when is it effective?</h2>
+            <p>IFRS 18 <em>Presentation and Disclosure in Financial Statements</em> is the IASB standard, issued in April 2024, that replaces IAS 1 and governs how income, expenses, assets, liabilities and equity are presented and disclosed. It is mandatory for annual reporting periods beginning on or after 1 January 2027, including for interim financial statements within those periods, with earlier application permitted and disclosed (IFRS 18.C1–C2).</p>
+            <p>The critical point to grasp early is what IFRS 18 does <em>not</em> do: it does not change recognition or measurement, so the bottom-line profit for the period is identical to what it would have been under IAS 1. What changes is structure and transparency. IFRS 18 carries forward much of IAS 1 unchanged, moves some content to IAS 8 and IFRS 7, and adds three genuinely new mechanisms — the category-and-subtotal architecture of the statement of profit or loss (IFRS 18.47–48, 69), mandatory disclosure of management-defined performance measures (IFRS 18.117–125), and enhanced principles of aggregation and disaggregation (IFRS 18.41–44). Do not confuse this standard with the long-withdrawn "IFRS 18 Revenue" project name; the number was reassigned, and the current IFRS 18 is a presentation standard.</p>
+            <p>Transition is retrospective under IAS 8, so an entity presents restated comparatives on the new basis and discloses, in the first annual financial statements applying IFRS 18, a reconciliation for each line item restated from the IAS 1 presentation (IFRS 18.C3–C10). Because the categories cut across the familiar income-statement geography, most groups will find restatement is a data-mapping exercise touching the general ledger, consolidation system and disclosure tooling, not a light-touch relabelling.</p>
 
-            <h2 id="new-structure">New Income Statement Structure: OIF Model</h2>
+            <h2 id="why-replace-ias1">Why did the IASB replace IAS 1?</h2>
+            <p>The IASB replaced IAS 1 because investors could not compare "operating profit" across companies and because the most-watched performance figures — adjusted EBITDA, underlying operating profit and the like — sat entirely outside the audited financial statements. IAS 1 neither defined operating profit nor required it, so two economically identical companies could present very different subtotals, and analysts were left reconstructing comparability by hand.</p>
+            <p>Research the IASB cited in its 2024 effect analysis found more than sixty different descriptions of "operating profit" in practice, and that management's preferred "adjusted" measures frequently drove share-price reaction despite being unaudited and inconsistently reconciled. IFRS 18 responds on three fronts: it defines and mandates subtotals so operating profit means the same thing everywhere (IFRS 18.69, 71); it drags the most material non-GAAP measures into the audited notes as MPMs with a required reconciliation (IFRS 18.117–125); and it tightens the discipline around how line items are grouped so that a single "other expenses" line can no longer bury material, dissimilar items (IFRS 18.41–44, B24–B29). The design intent is comparability without dictating a single rigid template — the categories are defined, but the line items within them still reflect the entity's own business.</p>
+
+            <h2 id="three-categories">How do the three categories (operating, investing, financing) work?</h2>
+            <p>IFRS 18 requires every entity to classify income and expenses in the statement of profit or loss into one of five buckets: the three main categories — operating, investing and financing — plus income taxes and discontinued operations (IFRS 18.47). The operating category is defined as a residual: it captures all income and expenses not classified in the other four categories (IFRS 18.52), which means it is not limited to "core" trading and will include items such as restructuring charges, impairments of operating assets and gains or losses on the routine sale of property, plant and equipment.</p>
+            <p>The <strong>investing</strong> category (IFRS 18.53–54) contains income and expenses from assets that generate a return individually and largely independently of the entity's other resources — for example returns on investments in associates and joint ventures accounted for under the equity method, income from cash and cash equivalents, and returns on other standalone investments. Equity-method results are always presented in the investing category, regardless of whether investing is a main business activity (IFRS 18.54). The <strong>financing</strong> category (IFRS 18.59–63) contains income and expenses from liabilities that arise solely from raising finance — interest on borrowings, bonds and lease liabilities — and interest expense (and unwinding of discount) on liabilities that do not themselves arise from financing, such as pension and provision balances.</p>
+            <p>The practical effect is that the familiar single "finance costs" line splits. Interest on borrowings sits in financing; interest earned on surplus cash sits in investing; and the interest component of a customer-financing receivable, for a company whose main business is not lending, is assessed against these definitions rather than netted reflexively against interest paid. Getting the boundary right between the residual operating category and the investing/financing categories is the single largest classification judgement IFRS 18 introduces, and it is where the standard's "main business activity" overlays (below) do most of their work.</p>
+
+            <h2 id="main-business">How do the "main business activity" exceptions change classification?</h2>
+            <p>For entities whose main business activity is investing in assets or providing financing to customers, IFRS 18 reclassifies certain income and expenses <em>into</em> the operating category that would otherwise sit in investing or financing (IFRS 18.55–58 and 63–64). The purpose is to keep operating profit meaningful: for a bank, interest income and interest expense are the core of the business, so forcing them out of operating would empty the subtotal of content.</p>
+            <p>An entity assesses whether it has a "specified main business activity" of investing in particular assets or of providing financing to customers (IFRS 18.B30–B40); this is a facts-and-circumstances judgement, not a free choice, and it can result in a mixed presentation. A property group whose main business is investing in real estate presents rental income and property fair-value movements in operating (IFRS 18.56); a bank presents interest income and expense on customer lending in operating (IFRS 18.63–64). A manufacturer that merely holds surplus cash and has ordinary borrowings has no such main business activity, so its interest income stays in investing and its interest expense stays in financing. Because the classification hinges on how the entity is actually run, auditors will expect the judgement to be documented and consistent with the business model narrative elsewhere in the annual report and with segment disclosures under IFRS 8.</p>
+
+            <h2 id="subtotals">What are the new required subtotals?</h2>
+            <p>IFRS 18 mandates two brand-new defined subtotals on the face of the statement of profit or loss — <strong>operating profit or loss</strong> and <strong>profit or loss before financing and income taxes</strong> — in addition to profit or loss for the period (IFRS 18.69). These are required, defined and consistently positioned, which is the change from IAS 1, where no operating-profit subtotal was defined or required at all.</p>
+            <p><strong>Operating profit or loss</strong> is the total of all income and expenses classified in the operating category (IFRS 18.71). Because operating is the residual category, this subtotal now captures items management often prefers to describe as "one-off" — restructuring, impairments, legal settlements — inside operating profit, unless the entity chooses to disclose them as an MPM. <strong>Profit before financing and income taxes</strong> adds the investing category to operating profit, isolating the results of the business and its investments before the effect of how the business is financed (IFRS 18.69). Adding the financing category and then income taxes produces profit before tax and profit for the period respectively. The standard also constrains the use of the labels "operating" and "unusual" to prevent an entity re-defining the subtotals it does not like, and additional entity-specific subtotals remain permitted only if they are clearly labelled, understandable, consistent period to period and reconciled where required (IFRS 18.42, 74–76).</p>
             <table>
-                <tr>
-                    <th>Section</th>
-                    <th>Includes</th>
-                    <th>Example</th>
-                </tr>
-                <tr>
-                    <td><strong>Operating</strong></td>
-                    <td>Core business activities (revenue, COGS, SG&A)</td>
-                    <td>Sales, Cost of sales, R&D, Admin</td>
-                </tr>
-                <tr>
-                    <td><strong>Investing</strong></td>
-                    <td>Returns on investments, gains/losses on asset sales</td>
-                    <td>Dividend income, Interest income, Gains on asset sales</td>
-                </tr>
-                <tr>
-                    <td><strong>Financing</strong></td>
-                    <td>Returns to providers of capital (interest on debt, dividends)</td>
-                    <td>Interest expense, Finance costs</td>
-                </tr>
+                <tr><th>Subtotal</th><th>Composition</th><th>IFRS 18 reference</th></tr>
+                <tr><td>Operating profit or loss</td><td>All income/expenses in the operating category (residual)</td><td>18.69, 18.71</td></tr>
+                <tr><td>Profit before financing and income taxes</td><td>Operating profit + investing category</td><td>18.69</td></tr>
+                <tr><td>Profit before tax</td><td>Above + financing category</td><td>18.69 (derived)</td></tr>
+                <tr><td>Profit or loss for the period</td><td>Above − income taxes (and ± discontinued operations)</td><td>18.47, 18.69</td></tr>
             </table>
 
-            <p class="callout"><strong>Key shift from IAS 1:</strong> IAS 1 allowed "by nature" or "by function." IFRS 18 mandates "by function" with this three-section structure.</p>
+            <h2 id="mpms">What are management-defined performance measures (MPMs) and how are they disclosed?</h2>
+            <p>A management-defined performance measure is a subtotal of income and expenses that an entity uses in public communications outside the financial statements to convey management's view of financial performance and that is not specified by IFRS Accounting Standards (IFRS 18.117). Typical examples are "adjusted operating profit", "underlying profit", "adjusted EBITDA" and "organic profit" — measures that today live in the front half of the annual report and in results presentations, and that IFRS 18 now brings inside the audited notes for the first time.</p>
+            <p>For each MPM, IFRS 18 requires a single note that discloses: a description of what the measure communicates and why management believes it provides useful information; how the measure is calculated; a reconciliation between the MPM and the most directly comparable subtotal specified by IFRS (usually operating profit or profit before tax); and, for each reconciling item, the income-tax effect and the effect attributable to non-controlling interests, together with an explanation of how those tax effects were determined (IFRS 18.118–123). If an entity changes how it calculates an MPM, adds a new one or removes one, it must explain the change and restate comparatives (IFRS 18.124–125). Crucially, because the disclosures sit in the notes, they fall within the scope of the audit — the auditor must obtain evidence over the reconciliation, the consistency of the calculation and the completeness of MPMs disclosed. That is the single biggest behavioural change for many groups: the "adjusted" number that moves the share price is no longer outside the audit boundary.</p>
+            <p class="callout"><strong>Scope trap:</strong> MPMs are subtotals of <em>income and expenses</em>. Ratios and per-unit metrics that are not themselves income/expense subtotals — return on capital employed, net debt, free cash flow, underlying sales growth — are outside the MPM definition (IFRS 18.117), even though they remain alternative performance measures subject to regulator scrutiny (for example under ESMA's APM guidelines). Do not over-scope the MPM note, and do not use "it's not an MPM" to avoid disclosing a subtotal that plainly is one.</p>
 
-            <h2 id="operating">Operating Activities</h2>
-            <p>All activities related to the entity's core business. Includes:</p>
-            <ul>
-                <li>Revenue</li>
-                <li>Cost of sales (COGS)</li>
-                <li>Distribution, administrative, and other operating expenses</li>
-                <li>Impairments on operating assets</li>
-                <li>Operating profit/(loss) subtotal</li>
-            </ul>
+            <h2 id="aggregation">How do the aggregation and disaggregation principles work?</h2>
+            <p>IFRS 18 requires an entity to aggregate items that share characteristics and to disaggregate items that do not, so that the primary financial statements provide a useful structured summary while the notes give the detail (IFRS 18.41–44). Items are classified and aggregated by their nature or function, and material items with dissimilar characteristics must not be combined into a residual "other" line without further information (IFRS 18.B24–B29).</p>
+            <p>Two consequences follow. First, "other operating expenses" and similar catch-all lines come under pressure: if the residual amount is material and made up of items with different characteristics, the entity must label it to convey its composition and, where material, disaggregate it in the notes (IFRS 18.B27–B29). Second, IFRS 18 requires that operating expenses be presented using the nature of expense method, the function of expense method, or a mix, based on which provides the most useful structured summary — and where the function method is used on the face, an entity must disclose specified amounts by nature (for example depreciation, amortisation and employee benefits) in the notes (IFRS 18.78–83). This closes the old gap where a function-of-expense presenter under IAS 1 could obscure the nature-based building blocks that analysts rebuild. The discipline is principles-based, so judgement about materiality and "shared characteristics" is central, and it is judgement the auditor will test.</p>
 
-            <h2 id="investing">Investing Activities</h2>
-            <p>Returns on investments and gains/losses from asset disposals:</p>
-            <ul>
-                <li>Interest income (on cash, loans to others)</li>
-                <li>Dividend income</li>
-                <li>Gains/losses on sale of investments or fixed assets</li>
-                <li>Fair value gains/losses on investment property</li>
-                <li>Investing profit/(loss) subtotal</li>
-            </ul>
+            <h2 id="cash-flow">How does IFRS 18 change the cash flow statement (IAS 7)?</h2>
+            <p>The most important consequential amendment is to IAS 7: the indirect-method reconciliation of operating cash flows now starts from the <strong>operating profit</strong> subtotal rather than from profit before tax (amended IAS 7.18–20). This aligns the cash flow statement with the new IFRS 18 subtotal and removes some of the free choice IAS 7 previously allowed over the starting point.</p>
+            <p>Because the starting point is operating profit, non-cash adjustments are only those relating to items already inside the operating category; interest and dividends no longer need to be added back out of a profit-before-tax figure that included them. IFRS 18 also amends IAS 7 to remove the previous options for classifying interest and dividends paid and received, requiring more consistent classification, and IAS 7's label "cash generated from operations" is replaced by "cash flows from operating activities before income taxes". The net effect is a cash flow statement that ties directly to the new face of the P&amp;L: operating profit is the visible bridge between performance and cash, which is exactly the comparability the IASB was seeking. Preparers should expect their cash-flow templates, covenant definitions that reference "cash generated from operations", and any earnings-to-cash reconciliations in the front half to need updating in step.</p>
 
-            <h2 id="financing">Financing Activities</h2>
-            <p>Returns to providers of capital (debt and equity):</p>
-            <ul>
-                <li>Interest expense (on debt)</li>
-                <li>Costs of raising capital (share issuance costs)</li>
-                <li>Lease finance costs</li>
-                <li>Finance profit/(loss) subtotal</li>
-            </ul>
+            <h2 id="worked-examples">Worked examples: restructured face of the P&amp;L</h2>
 
-            <h2 id="subtotals">Required Subtotals and Line Items</h2>
-            <p>IFRS 18 mandates presentation of three subtotals:</p>
-            <ol>
-                <li><strong>Operating Profit:</strong> All operating section items</li>
-                <li><strong>Profit Before Finance &amp; Tax:</strong> Operating + Investing profit</li>
-                <li><strong>Profit Before Tax:</strong> Operating + Investing + Financing profit</li>
-            </ol>
-            <p>Then: minus taxes →’ <strong>Profit for the period</strong></p>
-
-            <h2 id="significant">Significant Line Items</h2>
-            <p>If line items are material (>5% of operating profit), they must be separately disclosed with supporting management commentary explaining the nature and amount.</p>
-
-            <p class="example-box"><strong>Example:</strong> Restructuring costs of £10m (5% of operating profit). Must be separately presented with a note explaining the reason for restructuring, expected timeline, and impact on future performance.</p>
-
-            <h2 id="worked">Worked Example: Restructured Income Statement</h2>
-
-            <h3 id="abc-manufacturing-plc-income-statement-for-year-ended-31-dec-2025">ABC Manufacturing plc — Income Statement for year ended 31 Dec 2025</h3>
+            <h3 id="example-manufacturer">Example 1 — manufacturer (investing and financing are not main business activities)</h3>
+            <p>Consider a manufacturer with no main business activity of investing or financing. Under IAS 1 it presented a single "finance costs" line and no defined operating-profit subtotal. Under IFRS 18 the same income and expenses re-map into the three categories, interest income and interest expense separate, and the two new subtotals appear. Amounts are illustrative and do not represent any real company.</p>
             <div style="margin: 20px 0; font-family: 'Courier New', monospace; font-size: 0.9em; background: #f9f5f0; padding: 16px; border-radius: 4px;">
-                <strong>OPERATING ACTIVITIES</strong><br>
-                Revenue £500m<br>
-                Cost of sales (£300m)<br>
-                <strong>Gross profit 200m</strong><br>
-                Distribution costs (£40m)<br>
-                Admin expenses (£35m)<br>
-                Impairment — equipment (£5m)<br>
-                <strong>OPERATING PROFIT 120m</strong><br><br>
+                <strong>OPERATING CATEGORY</strong><br>
+                Revenue&nbsp;&nbsp;500<br>
+                Cost of sales&nbsp;&nbsp;(300)<br>
+                Gross profit&nbsp;&nbsp;200<br>
+                Distribution costs&nbsp;&nbsp;(40)<br>
+                Administrative expenses&nbsp;&nbsp;(35)<br>
+                Restructuring charge&nbsp;&nbsp;(10)<br>
+                Impairment — equipment&nbsp;&nbsp;(5)<br>
+                <strong>OPERATING PROFIT&nbsp;&nbsp;110</strong><br><br>
 
-                <strong>INVESTING ACTIVITIES</strong><br>
-                Interest income £2m<br>
-                Gain on sale of investment £8m<br>
-                <strong>INVESTING PROFIT 10m</strong><br><br>
+                <strong>INVESTING CATEGORY</strong><br>
+                Interest income on cash&nbsp;&nbsp;2<br>
+                Share of profit of associates (equity method)&nbsp;&nbsp;6<br>
+                Gain on disposal of investment&nbsp;&nbsp;2<br>
+                <strong>PROFIT BEFORE FINANCING AND INCOME TAXES&nbsp;&nbsp;120</strong><br><br>
 
-                <strong>PROFIT BEFORE FINANCING &amp; TAX 130m</strong><br><br>
+                <strong>FINANCING CATEGORY</strong><br>
+                Interest expense on borrowings&nbsp;&nbsp;(14)<br>
+                Interest on lease liabilities&nbsp;&nbsp;(1)<br>
+                <strong>PROFIT BEFORE TAX&nbsp;&nbsp;105</strong><br>
+                Income tax expense&nbsp;&nbsp;(21)<br>
+                <strong>PROFIT FOR THE PERIOD&nbsp;&nbsp;84</strong>
+            </div>
+            <p>Three points to note. The £10 restructuring charge and £5 impairment sit <em>inside</em> operating profit (IFRS 18.52, 71), because operating is the residual category — the company cannot push them below the line simply because it considers them one-off. The £6 equity-method result appears in the investing category even if this manufacturer had a main business activity, because equity-method results are always investing (IFRS 18.54). And interest income (£2, investing) is now presented gross of interest expense (£15 total, financing), rather than being netted into a single "finance costs" line as it commonly was under IAS 1.</p>
 
-                <strong>FINANCING ACTIVITIES</strong><br>
-                Interest expense (£15m)<br>
-                <strong>FINANCE COST (15m)</strong><br><br>
+            <h3 id="example-mpm">Example 2 — MPM reconciliation</h3>
+            <p>Suppose the same manufacturer publishes "adjusted operating profit" in its results announcement, defined as operating profit before restructuring and impairment. Under IFRS 18 this is an MPM and requires a reconciliation to the most directly comparable IFRS subtotal — operating profit — showing the tax and non-controlling-interest effect of each reconciling item (IFRS 18.118–123). Illustrative figures:</p>
+            <table>
+                <tr><th>Reconciling line</th><th>Pre-tax</th><th>Tax effect</th><th>Attributable to NCI</th></tr>
+                <tr><td>Operating profit (IFRS 18 subtotal)</td><td>110</td><td>—</td><td>—</td></tr>
+                <tr><td>Add back: restructuring charge</td><td>10</td><td>(2)</td><td>(1)</td></tr>
+                <tr><td>Add back: equipment impairment</td><td>5</td><td>(1)</td><td>—</td></tr>
+                <tr><td><strong>Adjusted operating profit (MPM)</strong></td><td><strong>125</strong></td><td><strong>(3)</strong></td><td><strong>(1)</strong></td></tr>
+            </table>
+            <p>The note must also describe why management uses adjusted operating profit and why it is useful, and explain how the disclosed tax effects were calculated (IFRS 18.118–123). The reconciliation is auditable evidence: the auditor will test that £125 reconciles to the audited £110, that each add-back is complete and consistently defined period to period, and that the same "adjusted" figure quoted in the results presentation matches the one in the note (IFRS 18.124). If the entity quietly changes the definition of "adjusted" — for example by adding acquisition amortisation as a new add-back — it must disclose and explain the change and restate the comparative MPM (IFRS 18.124–125).</p>
 
-                <strong>PROFIT BEFORE TAX 115m</strong><br>
-                Tax expense (£23m)<br>
-                <strong>PROFIT FOR THE PERIOD 92m</strong>
+            <h2 id="red-flags">Auditor red flags and the ISA procedures that catch them</h2>
+            <p>IFRS 18 is a presentation standard, but its judgements create real audit risk, principally around classification and around the newly audited MPM disclosures. The following red flags each map to a specific ISA procedure.</p>
+            <ul>
+                <li><strong>Category classification that flatters operating profit.</strong> Watch for a non-financial entity classifying ordinary interest expense outside financing, or reclassifying recurring operating costs into investing, to lift operating profit. Under <strong>ISA 315 (Revised 2019)</strong>, the auditor identifies and assesses the risk of material misstatement in presentation, including obtaining an understanding of how management applied the IFRS 18 categories and the "main business activity" judgement, and evaluating whether that judgement is consistent with the business model and segment disclosures. A category choice that is inconsistent with how the entity describes itself elsewhere is an indicator of a presentation misstatement risk.</li>
+                <li><strong>MPM add-backs that are opportunistic or incompletely disclosed.</strong> A classic manipulation is treating recurring costs as "non-underlying" so that adjusted profit rises, or omitting an unfavourable measure that is used externally. <strong>ISA 330</strong> requires the auditor to design responses to the assessed risks: substantively test the MPM reconciliation, agree each reconciling item to underlying records, confirm the tax and NCI effects, and vouch that every subtotal used in investor communications is captured in the MPM note (completeness). Recurring items repeatedly labelled "one-off" year after year are a documented indicator to challenge.</li>
+                <li><strong>Judgemental estimates buried inside a reclassified line.</strong> Where a reclassification interacts with an accounting estimate — an impairment now sitting in operating, a fair-value movement moving between categories under a main-business assessment — <strong>ISA 540 (Revised)</strong> requires the auditor to evaluate the estimate's method, assumptions and data, and to be alert to management bias in how the estimate is classified and disclosed. Selective classification of favourable fair-value gains into operating and unfavourable movements elsewhere is a bias indicator.</li>
+                <li><strong>Aggregation that hides dissimilar material items.</strong> A large, growing "other operating expenses" residual with no disaggregation can conceal misstatement. Under <strong>ISA 315</strong> and the auditor's overall evaluation of presentation and disclosure at completion (ISA 700), test whether material items with different characteristics have been improperly combined contrary to IFRS 18.41–44 and B24–B29, and whether the required by-nature disclosures accompany a function-of-expense presentation.</li>
+            </ul>
+
+            <h2 id="case-studies">Case studies: real filers whose measures become MPMs</h2>
+            <p>IFRS 18 is not yet mandatorily adopted, so the following use publicly disclosed, existing non-GAAP measures from real filers to illustrate what will fall inside the MPM regime from 2027. The framing is forward-looking and illustrative; no filing figures are reproduced or invented here.</p>
+
+            <div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
+            <p><strong>Case study 1 — Unilever's "underlying operating profit".</strong> Unilever reports a family of non-GAAP measures in its results, including underlying sales growth and, most relevantly, <em>underlying operating profit</em> and <em>underlying operating margin</em>, which strip out disclosed "non-underlying items" such as restructuring, acquisition and disposal effects and impairments. Under IFRS 18, underlying operating profit is a subtotal of income and expenses used in public communications to convey management's view of performance — squarely an MPM (IFRS 18.117). From 2027 Unilever would present it in a single audited MPM note, reconciled to the IFRS 18 operating-profit subtotal with the tax and NCI effect of each non-underlying add-back (IFRS 18.118–123). Underlying <em>sales growth</em>, by contrast, is a growth ratio rather than an income/expense subtotal, so it stays outside the MPM definition while remaining an alternative performance measure under regulator guidance. Source: Unilever 2025 results announcements and Annual Report and Accounts (unilever.com/investors).</p>
             </div>
 
-            <h2 id="transition">Transition Challenges</h2>
-            <ul>
-                <li><strong>System reclassification:</strong> Income statement lines must be reclassified into operating/investing/financing buckets</li>
-                <li><strong>Segment reporting alignment:</strong> Management commentary must explain how segment profit reconciles to OIF structure</li>
-                <li><strong>Comparatives:</strong> 2024 comparatives must be restated under IFRS 18 (no exemption for opening balances)</li>
-                <li><strong>Bank-specific nuances:</strong> Interest income (core business for banks) stays operating; non-banks' interest income goes to investing</li>
-            </ul>
+            <div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
+            <p><strong>Case study 2 — Diageo's "organic" and adjusted measures.</strong> Diageo runs its strategic planning and, in part, its incentive arrangements on non-GAAP measures, including <em>organic operating profit</em> movement and adjusted operating profit that exclude exceptional items and the effect of acquisitions, disposals and foreign exchange. The organic and adjusted operating-profit subtotals meet the IFRS 18 MPM definition and would move into the audited notes from 2027, with a reconciliation to reported operating profit and disclosure of why each measure is used and how tax effects are derived (IFRS 18.118–123). Because some of these measures feed remuneration, the audit focus on completeness and consistent definition (IFRS 18.124) is heightened — a change in what counts as "exceptional" directly affects both the reported MPM and, potentially, variable pay. Source: Diageo Annual Report and preliminary results, non-GAAP/APM sections (diageo.com/investors).</p>
+            </div>
 
-            <h2 id="vs-ias1">IFRS 18 vs IAS 1: Key Differences</h2>
+            <h2 id="ias1-vs-ifrs18">IFRS 18 vs IAS 1: what actually changed?</h2>
             <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>IAS 1</th>
-                    <th>IFRS 18</th>
-                </tr>
-                <tr>
-                    <td><strong>Format</strong></td>
-                    <td>By nature OR by function (entity choice)</td>
-                    <td>By function ONLY (Operating/Investing/Financing)</td>
-                </tr>
-                <tr>
-                    <td><strong>Subtotals</strong></td>
-                    <td>Not mandated</td>
-                    <td>Three mandatory subtotals</td>
-                </tr>
-                <tr>
-                    <td><strong>Significant items</strong></td>
-                    <td>Encouraged disclosure</td>
-                    <td>REQUIRED if >5% of operating profit</td>
-                </tr>
-                <tr>
-                    <td><strong>OCI presentation</strong></td>
-                    <td>Can be one or two statements</td>
-                    <td>Still flexible (one or two statements)</td>
-                </tr>
+                <tr><th>Aspect</th><th>IAS 1 (superseded)</th><th>IFRS 18 (effective 2027)</th></tr>
+                <tr><td>Operating-profit subtotal</td><td>Not defined, not required</td><td>Defined and required (18.69, 18.71)</td></tr>
+                <tr><td>Statement structure</td><td>No defined categories</td><td>Operating / investing / financing + tax + discontinued (18.47)</td></tr>
+                <tr><td>Second new subtotal</td><td>None</td><td>Profit before financing and income taxes (18.69)</td></tr>
+                <tr><td>Expense analysis</td><td>By nature or by function (free choice)</td><td>Most useful method; by-nature note required if function used on face (18.78–83)</td></tr>
+                <tr><td>Non-GAAP / "adjusted" measures</td><td>Outside financial statements, unaudited</td><td>MPMs disclosed and audited in the notes (18.117–125)</td></tr>
+                <tr><td>Aggregation</td><td>Limited guidance</td><td>Explicit aggregate/disaggregate by shared characteristics (18.41–44)</td></tr>
+                <tr><td>Cash flow (IAS 7) starting point</td><td>Profit before tax (with choices)</td><td>Operating profit; interest/dividend classification tightened (IAS 7.18–20 amended)</td></tr>
             </table>
+            <p>For a deeper treatment of the mechanics that feed these categories, see our companion guides on <a href="goodwill-impairment-ias-36-vs-asc-350-deep-dive.html">goodwill impairment under IAS 36</a> (impairments now land inside operating profit) and <a href="ias-37-provisions-contingencies-complete-guide.html">provisions and contingencies under IAS 37</a> (restructuring charges and their unwinding-of-discount split between operating and financing). You can also pressure-test your own restructured face of the P&amp;L against a specialist panel using the <a href="../index.html">interactive IFRS tools on the main site</a>, or read the full <a href="index.html">UQ Consulting technical blog</a>.</p>
 
-            
-<h2 id="real-life-case-study">Real-Life Case Study: Restructuring the Income Statement Under IFRS 18</h2>
-<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A group prepares for IFRS 18, which replaces IAS 1 and introduces defined categories (operating, investing, financing) and required subtotals in the income statement.</p>
- <p><strong>What changes.</strong> The company must now present an "operating profit" subtotal and classify income and expenses into the new categories, and disclose management-defined performance measures (MPMs, e.g. "adjusted EBITDA") with a reconciliation. Its previous freely-defined "underlying profit" now needs formal disclosure and reconciliation.</p>
- <p><strong>Takeaway.</strong> IFRS 18 does not change what profit <em>is</em>, it standardises how the story is told, forcing consistent subtotals and dragging non-GAAP "adjusted" measures into the audited notes for the first time.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
-</div>
+            <h2 id="faq">Frequently asked questions</h2>
+            <h3>Does IFRS 18 change how much profit a company reports?</h3>
+            <p>No. IFRS 18 does not amend recognition or measurement, so profit or loss for the period is unchanged in amount. It changes how income and expenses are categorised and subtotalled, adds MPM disclosure, and amends the cash flow starting point (IFRS 18.47–48, 69).</p>
 
-<div class="disclaimer">
-                <strong>Disclaimer:</strong> This is educational content on IFRS 18 as of 2026. The standard is new; implementation guidance is still evolving. Consult your auditors and IFRS interpretations for specific questions. The three-section structure (OIF) will take time for analysts and systems to adapt to.
+            <h3>When must IFRS 18 be applied, and can it be adopted early?</h3>
+            <p>IFRS 18 is mandatory for annual reporting periods beginning on or after 1 January 2027, including interim periods within those years. Early application is permitted and must be disclosed (IFRS 18.C1–C2).</p>
+
+            <h3>Is operating profit under IFRS 18 the same as EBIT?</h3>
+            <p>Not exactly. Operating profit is the total of the operating category (a residual of everything not in investing, financing, tax or discontinued operations, per IFRS 18.52, 71). "Profit before financing and income taxes" (IFRS 18.69) is closer to a defined EBIT-style measure, but neither is management's freely-defined EBIT — that would typically be an MPM.</p>
+
+            <h3>What is the difference between an MPM and an alternative performance measure (APM)?</h3>
+            <p>An MPM is specifically a subtotal of income and expenses used in public communications to convey management's view of performance and not defined by IFRS (IFRS 18.117). APMs, as used by securities regulators, are broader and include ratios and non-subtotal metrics such as net debt or free cash flow. All MPMs are APMs, but not all APMs are MPMs.</p>
+
+            <h3>Where do restructuring costs and impairments go under IFRS 18?</h3>
+            <p>Inside operating profit, in the operating category, because that category is the residual (IFRS 18.52, 71). A company cannot present them below operating profit merely by labelling them "non-underlying"; if it wants to show performance excluding them, it discloses an MPM with a reconciliation (IFRS 18.117–123).</p>
+
+            <h3>How does IFRS 18 affect banks and insurers?</h3>
+            <p>Entities with a specified main business activity of investing or providing financing reclassify certain investing/financing income and expenses into operating so that operating profit remains meaningful (IFRS 18.55–58, 63–64, B30–B40). For a bank, interest income and expense on customer lending are presented in operating rather than investing/financing.</p>
+
+            <h3>Do MPMs have to be audited?</h3>
+            <p>Yes. Because MPM disclosures sit within the notes to the financial statements, they fall within the scope of the audit. The auditor obtains evidence over the reconciliation, the consistency of the calculation and the completeness of MPMs disclosed (IFRS 18.117–125), typically under ISA 330 substantive procedures.</p>
+
+            <h3>What happens to the cash flow statement?</h3>
+            <p>The indirect-method operating cash flow reconciliation now starts from operating profit rather than profit before tax, and the classification options for interest and dividends are tightened (amended IAS 7.18–20). The term "cash generated from operations" is replaced with "cash flows from operating activities before income taxes".</p>
+
+            <h3>Is this the same IFRS 18 that dealt with revenue?</h3>
+            <p>No. An earlier project once carried the "IFRS 18" number in relation to revenue, but that was withdrawn; revenue is governed by IFRS 15. The current IFRS 18 is exclusively a presentation and disclosure standard replacing IAS 1.</p>
+
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> This is educational content on IFRS 18 <em>Presentation and Disclosure in Financial Statements</em>, effective for annual periods beginning on or after 1 January 2027, prepared as of July 2026. Paragraph references are to IFRS 18 and to consequentially amended IAS 7. Case-study commentary is illustrative and forward-looking, based on publicly disclosed non-GAAP measures; no filing figures are reproduced. Always consult the standard itself and your auditors for entity-specific application.
             </div>
         </article>
     </div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "IFRS 18 Presentation of Financial Statements: Complete Guide",
+  "description": "IFRS 18 (effective 1 January 2027, replaces IAS 1): the three categories, the two new subtotals, management-defined performance measures (MPMs), aggregation, and the IAS 7 cash-flow change, with worked examples, auditor red flags and case studies.",
+  "datePublished": "2026-07-01",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "name": "Usman Qureshi",
+    "jobTitle": "Audit & CFO Advisory (ACCA, ACA)",
+    "image": "https://www.uqconsulting.org/images/team/usman-qureshi.png"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "UQ Consulting",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.uqconsulting.org/images/logo.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.uqconsulting.org/blog/ifrs-18-presentation-of-financial-statements-complete-guide.html"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does IFRS 18 change how much profit a company reports?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. IFRS 18 does not amend recognition or measurement, so profit or loss for the period is unchanged in amount. It changes how income and expenses are categorised and subtotalled, adds MPM disclosure, and amends the cash flow starting point (IFRS 18.47-48, 69)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When must IFRS 18 be applied, and can it be adopted early?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IFRS 18 is mandatory for annual reporting periods beginning on or after 1 January 2027, including interim periods within those years. Early application is permitted and must be disclosed (IFRS 18.C1-C2)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is operating profit under IFRS 18 the same as EBIT?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Not exactly. Operating profit is the total of the operating category, a residual of everything not in investing, financing, tax or discontinued operations (IFRS 18.52, 71). Profit before financing and income taxes (IFRS 18.69) is closer to a defined EBIT-style measure, but neither is management's freely-defined EBIT, which would typically be an MPM."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between an MPM and an alternative performance measure (APM)?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An MPM is specifically a subtotal of income and expenses used in public communications to convey management's view of performance and not defined by IFRS (IFRS 18.117). APMs, as used by securities regulators, are broader and include ratios and non-subtotal metrics such as net debt or free cash flow. All MPMs are APMs, but not all APMs are MPMs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where do restructuring costs and impairments go under IFRS 18?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Inside operating profit, in the operating category, because that category is the residual (IFRS 18.52, 71). A company cannot present them below operating profit merely by labelling them non-underlying; to show performance excluding them, it discloses an MPM with a reconciliation (IFRS 18.117-123)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does IFRS 18 affect banks and insurers?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Entities with a specified main business activity of investing or providing financing reclassify certain investing/financing income and expenses into operating so that operating profit remains meaningful (IFRS 18.55-58, 63-64, B30-B40). For a bank, interest income and expense on customer lending are presented in operating rather than investing or financing."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do MPMs have to be audited?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Because MPM disclosures sit within the notes to the financial statements, they fall within the scope of the audit. The auditor obtains evidence over the reconciliation, the consistency of the calculation and the completeness of MPMs disclosed (IFRS 18.117-125), typically under ISA 330 substantive procedures."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to the cash flow statement under IFRS 18?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The indirect-method operating cash flow reconciliation now starts from operating profit rather than profit before tax, and the classification options for interest and dividends are tightened (amended IAS 7.18-20). The term cash generated from operations is replaced with cash flows from operating activities before income taxes."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is this the same IFRS 18 that dealt with revenue?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. An earlier project once carried the IFRS 18 number in relation to revenue, but that was withdrawn; revenue is governed by IFRS 15. The current IFRS 18 is exclusively a presentation and disclosure standard replacing IAS 1."
+      }
+    }
+  ]
+}
+</script>
 </body>
 </html>

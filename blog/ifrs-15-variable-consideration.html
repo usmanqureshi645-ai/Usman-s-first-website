@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9LKFW8QCC8"></script>
@@ -6,8 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IFRS 15 Variable Consideration: Discounts, Bonuses & Constraint Application</title>
-    <meta name="description" content="IFRS 15 variable consideration: expected value vs most likely amount, constraint test, highly probable threshold, discounts and bonuses.">
-    <meta name="keywords" content="IFRS 15 variable consideration, constraint, highly probable, expected value, bonus discount">
+    <meta name="description" content="IFRS 15 variable consideration: expected value vs most likely amount, the constraint, refund liabilities, rebates and penalties, and reassessment, with journals and auditor red flags.">
+    <meta name="keywords" content="IFRS 15 variable consideration, constraint, highly probable, expected value, most likely amount, refund liability, rebate discount penalty, reassessment">
     <meta name="author" content="Usman Qureshi">
     <link rel="canonical" href="https://www.uqconsulting.org/blog/ifrs-15-variable-consideration.html">
     <style>
@@ -19,6 +19,7 @@
         h1 { font-size: 2em; color: #1a2f5a; margin-bottom: 12px; }
         .meta { color: #8593a8; font-size: 0.85em; margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid #e4e9f0; }
         article h2 { font-size: 1.4em; color: #1a2f5a; margin: 32px 0 12px; }
+        article h3 { font-size: 1.12em; color: #2a4a7a; margin: 22px 0 10px; }
         article p { margin-bottom: 14px; font-size: 0.95em; }
         article ul { margin: 0 0 14px 24px; font-size: 0.95em; }
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 14px 16px; margin: 18px 0; border-radius: 4px; font-size: 0.9em; }
@@ -26,9 +27,9 @@
         th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid #e4e9f0; }
         th { background: #1a2f5a; color: #fff; font-weight: 600; }
         .disclaimer { font-size: 0.78em; color: #8593a8; margin-top: 28px; padding-top: 12px; border-top: 1px solid #e4e9f0; }
-    
 
-    
+
+
 /*TOC_SIDEBAR_START*/
 .toc {
     background: #fff;
@@ -71,79 +72,129 @@
 </head>
 <body>
     <div class="topbar">
-        <a href="https://www.uqconsulting.org/home.html">→ Home</a>
+        <a href="https://www.uqconsulting.org/home.html">→ Home</a>
     </div>
     <div class="article-container">
         <h1>IFRS 15 Variable Consideration: Discounts, Bonuses & Constraint Application</h1>
 <div class="breadcrumb" style="color: #8593a8; font-size: 0.9em; margin-bottom: 20px;">
-    <a href="index.html" style="color: #2a4a7a; text-decoration: none;">Blog</a> 
-    &gt; <a href="ifrs-15-revenue-recognition-complete-guide.html" style="color: #2a4a7a; text-decoration: none;">IFRS 15 Revenue</a> 
+    <a href="index.html" style="color: #2a4a7a; text-decoration: none;">Blog</a>
+    &gt; <a href="ifrs-15-revenue-recognition-complete-guide.html" style="color: #2a4a7a; text-decoration: none;">IFRS 15 Revenue</a>
     &gt; <span style="color: #1a2f5a;">IFRS 15 Variable Consideration: Discounts, Bonuses & Constraint Application</span>
 </div>
-        <div class="meta">By Usman Qureshi · July 2026 · 8 min read</div>
+        <div class="meta">By Usman Qureshi · July 2026 · 12 min read</div>
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#two-estimation-methods">Two Estimation Methods</a></li><li class="toc-l1"><a href="#the-constraint-highly-probable-test">The Constraint: Highly Probable Test</a></li><li class="toc-l1"><a href="#worked-example-performance-bonus">Worked Example: Performance Bonus</a></li><li class="toc-l1"><a href="#audit-red-flags">Audit Red Flags</a></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: A Volume Rebate That Constrains Revenue</a></li></ul>
+            <ul><li class="toc-l1"><a href="#what-is-variable-consideration">What is variable consideration under IFRS 15?</a></li><li class="toc-l1"><a href="#expected-value-vs-most-likely">Expected value or most likely amount: which method applies?</a></li><li class="toc-l1"><a href="#the-constraint">How does the constraint on variable consideration work?</a></li><li class="toc-l1"><a href="#refund-liabilities-rebates">How are refund liabilities, rebates and penalties recognised?</a></li><li class="toc-l1"><a href="#reassessment">How is variable consideration reassessed at each reporting date?</a></li><li class="toc-l1"><a href="#worked-example-performance-bonus">Worked example: performance bonus</a></li><li class="toc-l1"><a href="#audit-red-flags">Audit red flags</a></li><li class="toc-l1"><a href="#real-life-case-study">Case study: a volume rebate that constrains revenue</a></li><li class="toc-l1"><a href="#faq">Frequently asked questions</a></li></ul>
         </div>
 
 
         <article>
-            <p>Variable consideration (bonuses, discounts, penalties) adds complexity to IFRS 15 revenue. This guide covers the two estimation methods, the critical "highly probable" constraint test, and the audit pushback you'll face.</p>
+            <p>Variable consideration is the part of the transaction price that is uncertain: bonuses, discounts, rebates, refunds, price concessions, penalties and performance credits. It sits inside Step 3 of the IFRS 15 model (determining the transaction price) and is one of the highest-judgement, most frequently restated areas of revenue accounting. This guide walks through the two estimation methods, the "highly probable" constraint that keeps optimism in check, the mechanics of refund liabilities and rebates, the reassessment discipline at each period end, and the specific audit procedures you should expect. Every paragraph is anchored to the exact IFRS 15 paragraph that drives the answer.</p>
 
-            <h2 id="two-estimation-methods">Two Estimation Methods</h2>
+            <h2 id="what-is-variable-consideration">What is variable consideration under IFRS 15?</h2>
+            <p>Variable consideration is any promised amount in a contract that can change because of discounts, rebates, refunds, credits, price concessions, incentives, performance bonuses or penalties (IFRS 15.51). The amount is variable if it is contingent on the occurrence or non-occurrence of a future event, and it must be estimated and, where necessary, constrained before it enters the transaction price (IFRS 15.50). Consideration can be variable even when the contract states a fixed price, because a valid expectation arising from customary business practice, published policies or specific statements can create an implied price concession (IFRS 15.52).</p>
+            <p>Getting this identification step right matters because variable consideration is not optional to estimate: IFRS 15.50 requires an entity to estimate the amount it expects to be entitled to in exchange for transferring the promised goods or services. The estimate then feeds every downstream step, including allocation across performance obligations and the pattern of revenue recognition. If you would like the full five-step context, our <a href="ifrs-15-revenue-recognition-complete-guide.html">IFRS 15 revenue recognition hub</a> covers how Step 3 links to identifying <a href="ifrs-15-performance-obligations.html">performance obligations</a> and to the <a href="ifrs-15-over-time-vs-point-in-time.html">timing of recognition</a>.</p>
+
+            <h2 id="expected-value-vs-most-likely">Expected value or most likely amount: which method applies?</h2>
+            <p><strong>You choose the method that better predicts the amount you will be entitled to, and you apply it consistently to similar contracts (IFRS 15.53).</strong> Expected value, the probability-weighted sum of possible outcomes, is generally the better predictor when there is a large number of contracts with similar characteristics or a wide range of possible outcomes (IFRS 15.53(a)). Most likely amount, the single most likely figure in the range, is generally better when the contract has only two possible outcomes, such as a bonus that either is earned in full or not at all (IFRS 15.53(b)).</p>
+            <p>The method is not a free policy choice made once and forgotten; IFRS 15.54 requires the same method to be applied consistently throughout the life of the contract and to all consideration of a similar type, so the estimate reflects a single set of assumptions rather than a mix chosen to flatter the result. Expected value does not have to be a value that can actually occur: a probability-weighted volume rebate might produce £14,000 even though the only possible outcomes are £0 or £20,000, and that is acceptable because expected value is a predictor, not a settlement figure (IFRS 15.53(a)).</p>
             <table>
                 <tr>
                     <th>Method</th>
-                    <th>When to Use</th>
-                    <th>Example</th>
+                    <th>When it is the better predictor</th>
+                    <th>Typical example</th>
                 </tr>
                 <tr>
-                    <td><strong>Expected Value</strong></td>
-                    <td>Many possible outcomes; high variability</td>
-                    <td>Discount applies if customer orders hit targets: 5 scenarios, prob-weighted</td>
+                    <td><strong>Expected value</strong> (IFRS 15.53(a))</td>
+                    <td>Large number of similar contracts; wide range of possible outcomes</td>
+                    <td>Tiered volume rebate across thousands of orders; probability-weighted across scenarios</td>
                 </tr>
                 <tr>
-                    <td><strong>Most Likely Amount</strong></td>
-                    <td>Two outcomes; low uncertainty</td>
-                    <td>Either hit target (bonus applies) or don't (no bonus); 80% probability of hit</td>
+                    <td><strong>Most likely amount</strong> (IFRS 15.53(b))</td>
+                    <td>Binary outcome; a single amount dominates the range</td>
+                    <td>All-or-nothing completion bonus: either the £20k is earned or it is not</td>
                 </tr>
             </table>
 
-            <h2 id="the-constraint-highly-probable-test">The Constraint: Highly Probable Test</h2>
-            <p><strong>Rule:</strong> Include variable consideration in revenue ONLY if it's "highly probable" it won't be reversed later.</p>
-            <p><strong>Highly probable = 85%+ confidence</strong> (guidance indicator; not a hard rule)</p>
+            <h2 id="the-constraint">How does the constraint on variable consideration work?</h2>
+            <p><strong>You include an estimate of variable consideration in the transaction price only to the extent that it is highly probable a significant reversal of cumulative revenue will not occur when the uncertainty is later resolved (IFRS 15.56).</strong> This is the constraint: it caps the estimate at the amount that is not at risk of a significant reversal, so revenue is not front-loaded on optimistic assumptions. The assessment considers both the likelihood and the magnitude of a potential reversal (IFRS 15.57).</p>
+            <p>IFRS 15.57 lists the factors that increase the likelihood or magnitude of a reversal: the amount is highly susceptible to factors outside the entity's influence (such as market volatility, third-party actions or weather), the uncertainty is not expected to resolve for a long period, the entity's experience with similar contracts is limited or has little predictive value, the entity has a practice of offering broad price concessions, and the contract has a large number and wide range of possible consideration amounts. The more of these factors are present, the more the estimate must be constrained. Importantly, the constraint applies to the total estimate, and a portion may be included even where the full amount cannot be: an entity might conclude that £8,000 of a £20,000 bonus is highly probable and recognise only that portion (IFRS 15.56).</p>
+            <p>"Highly probable" is a higher hurdle than "probable" (more likely than not) but is not quantified in the standard; the widely used working indicator of roughly 85% or more confidence is a practical proxy, not a bright line in IFRS 15. A specific and useful sub-rule sits in IFRS 15.58: for a sales-based or usage-based royalty on a licence of intellectual property, none of the royalty is recognised until the later of the customer's subsequent sale or usage occurring and the related performance obligation being satisfied, so the general estimate-and-constrain approach is overridden for that fact pattern.</p>
 
-            <h2 id="worked-example-performance-bonus">Worked Example: Performance Bonus</h2>
-            <p><strong>Scenario:</strong> Company contracts to deliver services for £100k + performance bonus up to £20k.</p>
-            <ul>
-                <li><strong>Bonus trigger:</strong> Hit service delivery KPIs</li>
-                <li><strong>Historical hit rate:</strong> 70%</li>
-                <li><strong>Expected value:</strong> (70% × £20k) + (30% × £0) = £14k</li>
-                <li><strong>Highly probable test:</strong> Is £14k highly probable? NO. 70% is below 85% threshold.</li>
-                <li><strong>Constrained revenue:</strong> £100k + £0 = £100k (exclude the bonus)</li>
-                <li><strong>Reversal risk:</strong> Too high. At year-end, if KPIs are met, adjust revenue up to £114k.</li>
-            </ul>
-
-            <h2 id="audit-red-flags">Audit Red Flags</h2>
-            <ul>
-                <li><strong>Overestimated bonuses:</strong> Company includes £20k bonus without proper constraint analysis</li>
-                <li><strong>No evidence of "highly probable":</strong> No documentation of hit rate or risk assessment</li>
-                <li><strong>Bonus reversal at year-end:</strong> Audit adjusts revenue downward when targets aren't met</li>
-            </ul>
+            <h2 id="refund-liabilities-rebates">How are refund liabilities, rebates and penalties recognised?</h2>
+            <p><strong>When an entity receives, or expects to receive, consideration it does not expect to keep, it recognises a refund liability rather than revenue for that amount (IFRS 15.55).</strong> The refund liability is measured at the amount the entity does not expect to be entitled to, and it is updated at the end of each reporting period for changes in circumstances (IFRS 15.55). In substance, the credit that would otherwise be revenue is redirected to a liability because the entity is holding cash it may have to hand back.</p>
+            <p>Rebates and volume discounts are the everyday form of this: a retrospective rebate means the entity expects to refund part of amounts already billed, so revenue is recognised net of the expected rebate and the difference is carried as a refund liability updated each period (IFRS 15.55, 15.51). Penalties work through the same estimation lens. Where a contractual penalty for late delivery reduces the price the entity is entitled to, it is treated as variable consideration that lowers the transaction price (IFRS 15.51); where the penalty is, in substance, a separate obligation or a fixed reduction, it may instead be a straightforward reduction of the price. The distinction is driven by the economic substance of the clause, not its label.</p>
+            <p>Rights of return are a closely related mechanic. For sales with a right of return, the entity recognises revenue only for the products it expects not to be returned, a refund liability for the consideration it expects to repay, and an asset (with a corresponding adjustment to cost of sales) for its right to recover the returned goods (IFRS 15.B21–B27). The refund liability under a right of return is therefore variable consideration measured and constrained using the same expected-value or most-likely-amount discipline (IFRS 15.B21). For the balance-sheet presentation of these balances, see our note on <a href="ifrs-15-contract-assets-liabilities.html">contract assets and liabilities</a>, which explains how a refund liability differs from a contract liability.</p>
 
             <div class="example-box">
-                <strong>Common auditor challenge:</strong> "You included £5m in variable consideration, but your historical hit rate is only 60%. Reduce revenue by £2m and record a contract liability for the refund risk." Results in major year-end adjustments.
+                <strong>Journal — booking a rebate as a refund liability.</strong> A supplier bills a customer £100,000 for goods delivered but expects to refund a £5,000 volume rebate. Revenue is recognised net of the constrained rebate estimate (IFRS 15.55).
+            </div>
+            <table>
+                <tr><th>Account</th><th>Dr (£)</th><th>Cr (£)</th></tr>
+                <tr><td>Trade receivable</td><td>100,000</td><td></td></tr>
+                <tr><td>Revenue</td><td></td><td>95,000</td></tr>
+                <tr><td>Refund liability (expected rebate)</td><td></td><td>5,000</td></tr>
+            </table>
+
+            <h2 id="reassessment">How is variable consideration reassessed at each reporting date?</h2>
+            <p><strong>At the end of every reporting period an entity updates its estimate of the transaction price, including any constrained amount, to reflect the current facts and the resolution of uncertainty (IFRS 15.59).</strong> This is a continuous discipline, not a set-and-forget assumption. As new information becomes available (higher order volumes, a bonus target now within reach, a return trend reversing) the estimate and the constraint are both revisited so that the transaction price faithfully represents the circumstances at the reporting date (IFRS 15.59).</p>
+            <p>Changes in the estimated transaction price are allocated to the performance obligations on the same basis used at contract inception, and amounts allocated to a satisfied obligation are recognised as revenue, or as a reduction of revenue, in the period of change (IFRS 15.87–88). A change relating solely to one performance obligation may be allocated entirely to that obligation where the criteria in IFRS 15.89 are met. Because these are changes in estimate rather than errors, they are accounted for prospectively under IAS 8, not by restating prior periods, unless a genuine error is identified. Robust reassessment is what turns the constraint into a living control instead of a one-off inception calculation.</p>
+
+            <h2 id="worked-example-performance-bonus">Worked example: performance bonus</h2>
+            <p><strong>Scenario.</strong> A firm contracts to deliver services for a fixed fee of £100,000 plus a performance bonus of up to £20,000 if service-delivery KPIs are met. Because the bonus is binary (earned in full or not at all), the most likely amount method is the better predictor (IFRS 15.53(b)). Historical evidence shows the KPIs are met on around 70% of similar engagements.</p>
+            <ul>
+                <li><strong>Estimate:</strong> most likely amount points to earning the bonus (70% is the more likely single outcome), so the point estimate is £20,000 (IFRS 15.53(b)).</li>
+                <li><strong>Constraint test:</strong> is it highly probable that including £20,000 will not lead to a significant reversal? At a 70% hit rate, no. The amount is susceptible to factors and the experience, while relevant, does not support "highly probable" (IFRS 15.56–57).</li>
+                <li><strong>Constrained transaction price:</strong> £100,000, with the £20,000 bonus excluded until the uncertainty resolves (IFRS 15.56).</li>
+                <li><strong>Reassessment:</strong> once the KPIs are actually achieved (or achievement becomes highly probable near period end), the £20,000 is added to the transaction price and recognised (IFRS 15.59).</li>
+            </ul>
+            <p>The journal at inception and after resolution:</p>
+            <table>
+                <tr><th>Stage</th><th>Account</th><th>Dr (£)</th><th>Cr (£)</th></tr>
+                <tr><td>On delivery (constrained)</td><td>Receivable</td><td>100,000</td><td></td></tr>
+                <tr><td></td><td>Revenue</td><td></td><td>100,000</td></tr>
+                <tr><td>KPIs met (reassessment)</td><td>Receivable / contract asset</td><td>20,000</td><td></td></tr>
+                <tr><td></td><td>Revenue</td><td></td><td>20,000</td></tr>
+            </table>
+            <p>Note the contrast with expected value: had this been a portfolio of thousands of similar bonus contracts, an expected-value estimate of 70% × £20,000 = £14,000 might have been supportable, with the constraint then applied to test how much of that £14,000 is highly probable (IFRS 15.53(a), 15.56). Method choice and constraint are separate decisions and both must be documented.</p>
+
+            <h2 id="audit-red-flags">Audit red flags</h2>
+            <p>Variable consideration is a classic accounting estimate, so it falls squarely within ISA 540 (Revised), <em>Auditing Accounting Estimates and Related Disclosures</em>. The following are the recurring issues and the specific procedures that address them.</p>
+            <ul>
+                <li><strong>Bonuses or rebates recognised gross with no constraint analysis.</strong> The entity includes the full variable amount without documenting the highly-probable assessment. Under ISA 540.13, the auditor evaluates the method, assumptions and data used, and challenges management to demonstrate the constraint was applied (IFRS 15.56). Absence of a written estimate-and-constrain memo is itself a red flag.</li>
+                <li><strong>Estimates that ignore contradictory evidence (management bias).</strong> A hit rate assumed at 90% when historical achievement is 60%, or a return rate consistently below actuals. ISA 540.32 requires the auditor to review the judgements and decisions of management for indicators of possible bias, and ISA 240.32(b) treats revenue recognition as a presumed fraud risk, directing specific procedures over the assumptions underlying variable consideration.</li>
+                <li><strong>Estimates not updated at period end.</strong> The transaction price is left at its inception figure despite new order data or resolved uncertainty (breaching IFRS 15.59). Substantive procedures under ISA 330.6 test whether the reassessment actually happened, and a look-back comparing prior estimates to actual outcomes (ISA 540.14, retrospective review) exposes systematically optimistic or stale estimates.</li>
+            </ul>
+            <div class="example-box">
+                <strong>Common auditor challenge.</strong> "You recognised £5m of variable consideration, but your historical realisation rate on this rebate scheme is 60%. Constrain the estimate, reduce revenue by roughly £2m and recognise a refund liability for the amounts you expect to repay." Left unaddressed at planning, this becomes a material year-end adjustment and a candidate for a key audit matter.
             </div>
 
-            
-<h2 id="real-life-case-study">Real-Life Case Study: A Volume Rebate That Constrains Revenue</h2>
+
+<h2 id="real-life-case-study">Case study: a volume rebate that constrains revenue</h2>
 <div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A supplier sells goods at &pound;100/unit but gives a 5% retrospective rebate on all units if the customer buys over 10,000 in the year. Based on history, hitting the threshold is highly probable.</p>
- <p><strong>Treatment.</strong> Variable consideration is estimated and constrained so that a significant reversal is not likely. The supplier books revenue at &pound;95/unit from the outset and recognises a refund liability for the expected rebate, rather than &pound;100 now and a big reversal later.</p>
- <p><strong>Takeaway.</strong> The constraint is the safety valve: estimate the discount you expect to give and record revenue net of it from day one. Recognising gross and "sorting it out at year end" overstates revenue and invites a restatement.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
+<p><strong>Real-world context.</strong> Retrospective volume rebates are one of the most disclosed variable-consideration judgements in practice. Consumer-goods and pharmaceutical groups routinely describe how they recognise revenue net of expected rebates, chargebacks and returns, and carry the difference as a refund liability that is remeasured each period (IFRS 15.55, 15.59). This is exactly the "gross-to-net" adjustment that dominates pharmaceutical revenue disclosure and the trade-spend accruals in FMCG accounts.</p>
+<p><strong>Illustrative scenario (figures indicative, not a specific filing).</strong> A supplier sells goods at £100 per unit and offers a 5% retrospective rebate on all units purchased in the year if the customer buys more than 10,000 units. History shows the threshold is met on almost every account, so hitting it is highly probable and the rebate estimate is not fully constrained away (IFRS 15.56).</p>
+<p><strong>Treatment.</strong> The supplier estimates the rebate using expected value across its account portfolio (IFRS 15.53(a)), concludes a significant reversal is not likely, and recognises revenue at £95 per unit from the first sale, carrying the £5 per unit as a refund liability updated each reporting date (IFRS 15.55, 15.59). Recognising £100 gross and "sorting it out at year end" would overstate revenue and invite a reversal or restatement.</p>
+<p><strong>Takeaway.</strong> The constraint is the safety valve: estimate the discount you expect to give, recognise revenue net of it from day one, and remeasure the refund liability as the year progresses.</p>
+<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company's filed accounts.</p>
 </div>
+
+<h2 id="faq">Frequently asked questions</h2>
+<h3>Is variable consideration only about discounts and rebates?</h3>
+<p>No. IFRS 15.51 lists discounts, rebates, refunds, credits, price concessions, incentives, performance bonuses and penalties, and the definition also captures any amount contingent on a future event. Even a stated fixed price can contain variable consideration if the entity has created a valid expectation of a price concession (IFRS 15.52).</p>
+<h3>What is the difference between "highly probable" and "probable"?</h3>
+<p>"Probable" means more likely than not (over 50%), the threshold used elsewhere in IFRS. "Highly probable" in IFRS 15.56 is a higher hurdle used specifically for the constraint; a common working proxy is around 85% confidence, but the standard does not put a number on it, so the assessment is judgemental and must be documented.</p>
+<h3>Can I recognise part of a variable amount rather than all or nothing?</h3>
+<p>Yes. IFRS 15.56 requires you to include the amount for which a significant reversal is highly probable not to occur, which can be a portion of the total. A £20,000 bonus might be partly recognised if, say, £8,000 of it is highly probable, even though the remainder is constrained.</p>
+<h3>Does a refund liability go in contract liabilities?</h3>
+<p>No. A refund liability (IFRS 15.55) represents amounts you expect to repay the customer and is presented separately from a contract liability, which represents a performance obligation you still owe. They arise from different mechanics even though both sit on the credit side; see our <a href="ifrs-15-contract-assets-liabilities.html">contract assets and liabilities</a> guide.</p>
+<h3>How is a sales-based royalty different?</h3>
+<p>IFRS 15.58 overrides the general estimate-and-constrain approach for sales-based or usage-based royalties on licences of intellectual property: revenue is recognised only at the later of the customer's subsequent sale or usage and satisfaction of the performance obligation, so you do not estimate future royalties in advance.</p>
+<h3>Do I ever restate prior periods when an estimate changes?</h3>
+<p>Generally no. A change in the estimate of variable consideration is a change in accounting estimate accounted for prospectively (IFRS 15.59, IFRS 15.87–88, IAS 8), not a prior-period error. Restatement is only required if the original estimate was an error rather than a good-faith estimate that later moved.</p>
+<h3>Where does variable consideration sit in the five-step model?</h3>
+<p>Step 3, determining the transaction price. It is estimated (IFRS 15.50, 15.53), constrained (IFRS 15.56), then allocated across performance obligations in Step 4. The <a href="ifrs-15-revenue-recognition-complete-guide.html">complete IFRS 15 guide</a> walks through all five steps in order.</p>
 
 <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>
@@ -154,9 +205,98 @@
 </div>
 
 <div class="disclaimer">
-                Educational content. Variable consideration estimates are professional judgments subject to audit challenge. Consult a qualified accountant.
+                Educational content. Variable consideration estimates are professional judgments subject to audit challenge and depend on entity-specific facts. Consult a qualified accountant before applying to a specific contract.
             </div>
         </article>
     </div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "IFRS 15 Variable Consideration: Discounts, Bonuses & Constraint Application",
+  "description": "IFRS 15 variable consideration explained: expected value vs most likely amount, the highly-probable constraint, refund liabilities, rebates and penalties, reassessment, worked journals and auditor red flags.",
+  "datePublished": "2026-07-01",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "name": "Usman Qureshi",
+    "jobTitle": "ACCA, ACA - IFRS & Audit Specialist",
+    "image": "https://www.uqconsulting.org/images/team/usman-qureshi.png"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "UQ Consulting",
+    "url": "https://www.uqconsulting.org"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.uqconsulting.org/blog/ifrs-15-variable-consideration.html"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is variable consideration only about discounts and rebates?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. IFRS 15.51 lists discounts, rebates, refunds, credits, price concessions, incentives, performance bonuses and penalties, and the definition also captures any amount contingent on a future event. Even a stated fixed price can contain variable consideration if the entity has created a valid expectation of a price concession (IFRS 15.52)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the difference between highly probable and probable?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Probable means more likely than not (over 50%), the threshold used elsewhere in IFRS. Highly probable in IFRS 15.56 is a higher hurdle used specifically for the constraint; a common working proxy is around 85% confidence, but the standard does not quantify it, so the assessment is judgemental and must be documented."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I recognise part of a variable amount rather than all or nothing?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. IFRS 15.56 requires you to include the amount for which a significant reversal is highly probable not to occur, which can be a portion of the total. A 20,000 bonus might be partly recognised if, for example, 8,000 of it is highly probable, even though the remainder is constrained."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a refund liability go in contract liabilities?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. A refund liability under IFRS 15.55 represents amounts you expect to repay the customer and is presented separately from a contract liability, which represents a performance obligation you still owe. They arise from different mechanics even though both are credit balances."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is a sales-based royalty different?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IFRS 15.58 overrides the general estimate-and-constrain approach for sales-based or usage-based royalties on licences of intellectual property: revenue is recognised only at the later of the customer's subsequent sale or usage and satisfaction of the performance obligation, so future royalties are not estimated in advance."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I ever restate prior periods when an estimate changes?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Generally no. A change in the estimate of variable consideration is a change in accounting estimate accounted for prospectively under IFRS 15.59, IFRS 15.87-88 and IAS 8, not a prior-period error. Restatement is only required if the original estimate was an error rather than a good-faith estimate that later moved."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where does variable consideration sit in the five-step model?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Step 3, determining the transaction price. It is estimated under IFRS 15.50 and 15.53, constrained under IFRS 15.56, then allocated across performance obligations in Step 4."
+      }
+    }
+  ]
+}
+</script>
 </body>
 </html>

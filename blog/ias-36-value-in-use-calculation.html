@@ -78,97 +78,106 @@
     &gt; <a href="ias-36-impairment-of-assets-complete-guide.html" style="color: #2a4a7a; text-decoration: none;">IAS 36 Impairment</a> 
     &gt; <span style="color: #1a2f5a;">IAS 36 Value-in-Use: Calculating WACC, Terminal Value & Discount Rate</span>
 </div>
-        <div class="meta">By Usman Qureshi · July 2026 · 8 min read</div>
+        <div class="meta">By Usman Qureshi · July 2026 · 14 min read</div>
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#wacc-components">WACC Components</a></li><li class="toc-l1"><a href="#cost-of-equity-via-capm">Cost of Equity via CAPM</a></li><li class="toc-l1"><a href="#worked-example-wacc-calculation">Worked Example: WACC Calculation</a></li><li class="toc-l1"><a href="#terminal-value-perpetuity">Terminal Value (Perpetuity)</a></li><li class="toc-l1"><a href="#audit-red-flags-wacc-amp-terminal-value">Audit Red Flags: WACC &amp; Terminal Value</a></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Building a Value-in-Use Model</a></li></ul>
+            <ul><li class="toc-l1"><a href="#what-is-viu">What is value in use and how is it calculated?</a></li><li class="toc-l1"><a href="#which-cash-flows">Which cash flows are included and excluded?</a></li><li class="toc-l1"><a href="#discount-rate-wacc">How is the pre-tax discount rate (WACC) determined?</a></li><li class="toc-l1"><a href="#terminal-value">How do you calculate terminal value in a VIU model?</a></li><li class="toc-l1"><a href="#worked-example">Worked example: full VIU DCF and impairment journal</a></li><li class="toc-l1"><a href="#sensitivity">What sensitivity disclosures does IAS 36 require?</a></li><li class="toc-l1"><a href="#audit-red-flags">Auditor red flags</a></li><li class="toc-l1"><a href="#case-study">Case study: Vodafone Germany</a></li><li class="toc-l1"><a href="#faq">FAQ</a></li></ul>
         </div>
 
 
         <article>
-            <p>Value-in-use (VIU) is where the technical work happens in impairment testing: cash flow projections, discount rate (WACC), terminal value. This guide walks through WACC calculation, cost of equity (CAPM), terminal growth, and the sensitivity analysis auditors demand.</p>
+            <p>Value in use (VIU) is where impairment testing stops being a compliance exercise and becomes a valuation. It is the discounted present value of the future cash flows an entity expects to derive from an asset or cash-generating unit (CGU), and under IAS 36 it is one of the two measures of recoverable amount, the other being fair value less costs of disposal (IAS 36.6, 36.18). Note the standard is <strong>IAS 36</strong>, an International Accounting Standard issued by the IASB. There is no "IFRS 36"; if a working paper or memo refers to one, it is simply a mislabel of IAS 36. This guide walks through the cash flows the standard forces you to include and exclude, how to build the pre-tax discount rate, terminal value, a full worked DCF with the impairment journal, and the sensitivity disclosure auditors and IAS 36.134(f) both demand.</p>
 
-            <h2 id="wacc-components">WACC Components</h2>
+            <h2 id="what-is-viu">What is value in use and how is it calculated?</h2>
+            <p>Value in use is the present value of the future cash flows expected from continuing to use an asset or CGU and from its ultimate disposal (IAS 36.6). You calculate it by projecting pre-tax operating cash flows over an explicit forecast period, adding a terminal value for cash flows beyond that period, and discounting the whole stream at a pre-tax rate that reflects the time value of money and the risks specific to the asset (IAS 36.30–31, 36.55).</p>
+            <p>IAS 36.30 breaks the estimate into two elements: (a) an estimate of the future cash flows, and (b) the discount rate. The mechanics matter because impairment is a comparison, not a valuation for its own sake: recoverable amount (the higher of VIU and fair value less costs of disposal) is compared with the carrying amount, and any shortfall is the impairment loss (IAS 36.8, 36.59). VIU is entity-specific by design, so unlike a fair value measurement it may legitimately reflect management's own plans and synergies, provided those plans respect the exclusions below.</p>
+            <p>The forecast horizon is not open-ended. Cash flow projections should be based on the most recent budgets and forecasts approved by management, covering a maximum period of five years unless a longer period can be justified (IAS 36.33(b)). Beyond the budgeted period, cash flows are extrapolated using a steady or declining growth rate that must not exceed the long-term average growth rate for the products, industries or country in which the entity operates, unless a higher rate can be justified (IAS 36.33(c), 36.36). In practice that ceiling is long-term nominal GDP growth, and auditors treat anything above it as a red flag on sight.</p>
+
+            <h2 id="which-cash-flows">Which cash flows are included and excluded?</h2>
+            <p>Include the cash inflows and outflows from continuing use of the asset in its current condition, plus the net disposal proceeds at the end of its useful life (IAS 36.39). Exclude cash flows from financing activities, income tax receipts or payments, and — critically — any cash flows from a future restructuring to which the entity is not yet committed or from improving or enhancing the asset's performance (IAS 36.44, 36.50).</p>
+            <p>The exclusions in IAS 36.44 are the single most common way VIU models get inflated. Projections must reflect the asset in its <em>current</em> condition, so you strip out capex that would enhance or upgrade the asset above its originally assessed standard of performance, together with the incremental cash inflows that capex would generate (IAS 36.44(b), 36.48). Maintenance and "keep it running" capex stays in; expansionary capex comes out until the entity is actually committed. Likewise, a restructuring only enters the model once the entity has a present obligation for it under IAS 37; a board's intention is not enough (IAS 36.44(a), 36.47).</p>
+            <p>IAS 36.50 is equally load-bearing and routinely mishandled: estimated future cash flows exclude cash flows relating to financing and income tax. This is because the discount rate is a pre-tax rate and financing return is already captured in it — double-counting interest in the cash flows and the rate understates VIU. The cash flows also exclude inflows and outflows expected from a future restructuring not yet committed and from asset enhancements. Foreign currency cash flows are estimated in the currency in which they are generated and discounted using a rate appropriate for that currency, then translated at the spot rate at the measurement date (IAS 36.54). Projections should also be reasonable and supportable, giving greater weight to external evidence, and management must assess the reasonableness of its assumptions by examining the causes of differences between past cash flow forecasts and actual results (IAS 36.33(a), 36.34).</p>
+
+            <h2 id="discount-rate-wacc">How is the pre-tax discount rate (WACC) determined?</h2>
+            <p>The discount rate is a pre-tax rate that reflects current market assessments of the time value of money and the risks specific to the asset for which the future cash flow estimates have not been adjusted (IAS 36.55). In practice entities start from a post-tax weighted average cost of capital (WACC) as a proxy for the market rate, then gross it up to a pre-tax equivalent — because IAS 36.55 and 36.A20 require a pre-tax rate applied to pre-tax cash flows (IAS 36.56, Appendix A.15–A.21).</p>
+            <p>WACC blends the cost of equity and the after-tax cost of debt, weighted by the target capital structure of a market participant, not necessarily the entity's own gearing (IAS 36.A17, A19). The cost of equity is normally derived from the Capital Asset Pricing Model: risk-free rate + (beta × equity risk premium). The risk-free rate is a long-dated government bond yield, beta is the asset's systematic risk relative to the market (an unlevered/relevered asset beta for the CGU's sector), and the equity risk premium is the excess return demanded over the risk-free rate. IAS 36.A18 lists the market rate as the starting point, with the entity's incremental borrowing rate and other market borrowing rates as fallbacks where a CGU-specific market rate is not directly observable.</p>
             <table>
-                <tr>
-                    <th>Component</th>
-                    <th>Definition</th>
-                    <th>Example</th>
-                </tr>
-                <tr>
-                    <td><strong>Cost of Equity</strong></td>
-                    <td>Return shareholders expect (CAPM)</td>
-                    <td>8— 12% (higher for risky businesses)</td>
-                </tr>
-                <tr>
-                    <td><strong>Cost of Debt</strong></td>
-                    <td>Interest rate on borrowings</td>
-                    <td>3— 6% (lower for stable, investment-grade firms)</td>
-                </tr>
-                <tr>
-                    <td><strong>Tax Shield</strong></td>
-                    <td>Debt provides tax deduction</td>
-                    <td>Cost of debt × (1 −’ tax rate)</td>
-                </tr>
-                <tr>
-                    <td><strong>Capital Structure</strong></td>
-                    <td>E/V (equity %) and D/V (debt %)</td>
-                    <td>60% equity, 40% debt</td>
-                </tr>
+                <tr><th>Component</th><th>Source / basis</th><th>Illustrative input</th></tr>
+                <tr><td>Risk-free rate</td><td>10–20yr government bond yield</td><td>4.0%</td></tr>
+                <tr><td>Beta (relevered)</td><td>Sector asset beta, relevered to target gearing</td><td>1.10</td></tr>
+                <tr><td>Equity risk premium</td><td>Long-run market excess return</td><td>5.5%</td></tr>
+                <tr><td>Cost of equity (CAPM)</td><td>4.0% + 1.10 × 5.5%</td><td>10.05%</td></tr>
+                <tr><td>Pre-tax cost of debt</td><td>Risk-free + credit spread for the rating</td><td>6.0%</td></tr>
+                <tr><td>Target structure (E/V : D/V)</td><td>Market-participant gearing</td><td>70% : 30%</td></tr>
+                <tr><td>After-tax WACC</td><td>(70% × 10.05%) + (30% × 6.0% × (1−25%))</td><td>8.39%</td></tr>
+                <tr><td><strong>Pre-tax rate (iterated)</strong></td><td>Gross-up so pre-tax rate on pre-tax flows = post-tax VIU</td><td><strong>≈ 11.0%</strong></td></tr>
             </table>
+            <p>The final line matters: IAS 36.BCZ85 accepts that the theoretically correct pre-tax rate is found by an iterative computation that produces the same VIU as a post-tax calculation would. Auditors will accept a robust post-tax model with a disclosed pre-tax equivalent, but they will not accept simply dividing the post-tax rate by (1 − tax rate) — that shortcut only holds in trivial single-period cases and typically overstates the pre-tax rate. The rate must also be independent of the entity's capital structure and of how the asset was financed (IAS 36.A19), so a company cannot lower its WACC by loading a CGU with cheap intra-group debt.</p>
 
-            <h2 id="cost-of-equity-via-capm">Cost of Equity via CAPM</h2>
-            <p><strong>Formula:</strong> Cost of Equity = Risk-Free Rate + Beta × Equity Risk Premium</p>
-            <ul>
-                <li><strong>Risk-free rate:</strong> Government bond yield (e.g., 10-year UK gilt: ~4%)</li>
-                <li><strong>Beta:</strong> Stock volatility vs market (1.0 = market, >1.0 = riskier)</li>
-                <li><strong>Equity risk premium:</strong> Market return −’ risk-free rate (historically ~5— 6%)</li>
-            </ul>
+            <h2 id="terminal-value">How do you calculate terminal value in a VIU model?</h2>
+            <p>Terminal value captures cash flows beyond the explicit forecast period as a growing perpetuity: Terminal Value = Final-Year Cash Flow × (1 + g) ÷ (r − g), where r is the pre-tax discount rate and g is the long-term growth rate. That undiscounted perpetuity is then discounted back to present value using the same rate, and g is capped at the long-term average growth rate for the industry or country under IAS 36.33(c) and 36.36 — in most models 0–3%.</p>
+            <p>Terminal value routinely represents 60–80% of total VIU, so the growth-rate assumption does more work than any explicit-year forecast. Because g sits in the denominator, the calculation is acutely sensitive: as g approaches r, the perpetuity explodes. A CGU with a 2% growth rate and an 11% rate divides by 9%; nudge growth to 4% and you divide by 7%, lifting terminal value by roughly 29% off a single assumption. This is exactly why IAS 36.36 hard-caps the extrapolation growth rate and why IAS 36.134(d)(iv) requires the rate to be disclosed and justified where headroom is sensitive to it.</p>
 
-            <h2 id="worked-example-wacc-calculation">Worked Example: WACC Calculation</h2>
-            <p><strong>Company: Mid-cap retailer with acquisition</strong></p>
-            <ul>
-                <li>Capital structure: 70% equity, 30% debt</li>
-                <li>Cost of equity: 4% (risk-free) + 1.2 (Beta) × 5% (ERP) = 10%</li>
-                <li>Cost of debt: 4.5%, tax rate 20%</li>
-                <li>After-tax cost of debt: 4.5% × (1 −’ 20%) = 3.6%</li>
-                <li><strong>WACC = (70% × 10%) + (30% × 3.6%) = 7% + 1.08% = 8.08%</strong></li>
-            </ul>
-
-            <h2 id="terminal-value-perpetuity">Terminal Value (Perpetuity)</h2>
-            <p>Projects beyond explicit forecast period assume perpetual growth:</p>
-            <p><strong>Terminal Value = Final Year Cash Flow × (1 + g) / (WACC −’ g)</strong></p>
-            <p><strong>Where g =</strong> long-term growth rate (typically 2— 3%, capped at GDP growth)</p>
-
-            <h2 id="audit-red-flags-wacc-amp-terminal-value">Audit Red Flags: WACC &amp; Terminal Value</h2>
-            <ul>
-                <li><strong>WACC too low:</strong> Company uses 5% WACC when market data suggests 7— 8%. Auditor recalculates and increases WACC, reducing VIU and triggering impairment.</li>
-                <li><strong>Terminal growth too high:</strong> Assumes 5% perpetual growth in flat industry. Auditor reduces to 2%; impacts terminal value significantly.</li>
-                <li><strong>No sensitivity analysis:</strong> Impairment is borderline; changing WACC by 0.5% flips the result. Auditor requires sensitivity table.</li>
-            </ul>
-
+            <h2 id="worked-example">Worked example: full VIU DCF and impairment journal</h2>
+            <p>A manufacturing CGU carries assets (including allocated goodwill) of £22.0m. Management's board-approved five-year plan projects the pre-tax operating cash flows below, extrapolated at a 2% terminal growth rate. Enhancement capex for a planned new production line — to which the entity is not yet committed — has been stripped out per IAS 36.44(b). The pre-tax discount rate is 11.0%.</p>
+            <table>
+                <tr><th>Year</th><th>Pre-tax cash flow (£m)</th><th>Discount factor @ 11%</th><th>Present value (£m)</th></tr>
+                <tr><td>1</td><td>2.00</td><td>0.9009</td><td>1.80</td></tr>
+                <tr><td>2</td><td>2.10</td><td>0.8116</td><td>1.70</td></tr>
+                <tr><td>3</td><td>2.20</td><td>0.7312</td><td>1.61</td></tr>
+                <tr><td>4</td><td>2.30</td><td>0.6587</td><td>1.51</td></tr>
+                <tr><td>5</td><td>2.40</td><td>0.5935</td><td>1.42</td></tr>
+                <tr><td colspan="3"><strong>PV of explicit period</strong></td><td><strong>8.04</strong></td></tr>
+                <tr><td>Terminal</td><td>2.40 × 1.02 ÷ (0.11 − 0.02) = 27.20</td><td>0.5935</td><td>16.14</td></tr>
+                <tr><td colspan="3"><strong>Value in use</strong></td><td><strong>24.18</strong></td></tr>
+            </table>
+            <p>VIU of £24.18m exceeds the £22.0m carrying amount, so on these assumptions there is headroom of £2.18m and no impairment. Note the terminal value alone (£16.14m) is 67% of total VIU — the model's fate is decided by g and r, not by year one. Now suppose the auditor challenges the growth rate down to the long-term GDP proxy of 0% and lifts the pre-tax rate to 12% to reflect a sub-investment-grade credit spread. Terminal value falls to 2.40 ÷ 0.12 = £20.0m, discounted at 12% (factor 0.5674) = £11.35m; the explicit period reprices to about £7.83m; VIU drops to roughly £19.2m. Recoverable amount is now below the £22.0m carrying amount and a £2.8m impairment arises.</p>
             <div class="example-box">
-                <strong>Common audit adjustment:</strong> "Your WACC is 6%, but your debt is speculative-grade (rating BB). Credit spreads suggest 7.5% cost of debt. WACC should be 8.2%, not 6%." Result: VIU drops 15— 20%; impairment required.
+                <strong>Impairment journal (IAS 36.60, 36.104).</strong> The loss is recognised immediately in profit or loss for an asset carried at cost, and allocated first to goodwill in the CGU, then pro rata to other assets (IAS 36.104):<br><br>
+                <strong>Dr</strong> Impairment loss (P&amp;L) &nbsp; £2.8m<br>
+                <strong>Cr</strong> Goodwill / CGU assets (accumulated impairment) &nbsp; £2.8m<br><br>
+                No asset may be written below the highest of its own fair value less costs of disposal, its VIU, and zero (IAS 36.105). Goodwill impairments are never reversed (IAS 36.124); other assets may be reversed only if the estimates used to determine recoverable amount have changed (IAS 36.114, 36.117).
             </div>
 
-            
-<h2 id="real-life-case-study">Real-Life Case Study: Building a Value-in-Use Model</h2>
-<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A CGU is expected to generate cash flows of &pound;2m per year for five years, then a terminal value. The pre-tax discount rate is 11%.</p>
- <ul>
-   <li>PV of five years at 11%: &pound;2m &times; 3.696 = &pound;7.39m</li>
-   <li>Terminal value (2% growth): &pound;2.04m &divide; (0.11 &minus; 0.02) = &pound;22.7m, discounted five years &asymp; &pound;13.5m</li>
-   <li>Value in use &asymp; &pound;20.9m</li>
- </ul>
- <p><strong>Takeaway.</strong> Value in use is dominated by two inputs, the discount rate and the terminal growth rate, and small moves in either swing the answer by millions. IAS 36 also bars future restructurings and enhancing capex from the cash flows, a common way models get inflated.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
-</div>
+            <h2 id="sensitivity">What sensitivity disclosures does IAS 36 require?</h2>
+            <p>Where a reasonably possible change in a key assumption would cause the CGU's carrying amount to exceed its recoverable amount, IAS 36.134(f) requires the entity to disclose the amount of headroom, the value of the key assumption, and the amount by which that assumption would have to change to eliminate the headroom. This is the disclosure most often under-done, and it is precisely what auditors and regulators zero in on.</p>
+            <p>Alongside the sensitivity, IAS 36.134 requires disclosure of the recoverable amount basis (VIU or fair value less costs of disposal), each key assumption and management's approach to setting it, the period over which cash flows are projected, and the growth rate and discount rate used (IAS 36.134(d)(i)–(v)). For goodwill and indefinite-life intangibles the carrying amount allocated to each CGU must also be disclosed (IAS 36.134(a), 36.135). Regulators such as the UK FRC repeatedly criticise boilerplate here: a sensitivity note that says headroom is "not sensitive to reasonably possible changes" without quantifying anything is a standard review finding.</p>
+
+            <h2 id="audit-red-flags">Auditor red flags</h2>
+            <p>VIU models are the archetypal accounting estimate, so the audit runs on ISA 540 (Revised) <em>Auditing Accounting Estimates and Related Disclosures</em>, supported by ISA 500 on audit evidence and ISA 620 where a valuation specialist is used. The three findings below recur across engagements.</p>
+            <ul>
+                <li><strong>Discount rate too low / self-serving WACC (ISA 540.13, 540.23).</strong> Management picks a rate that conveniently clears the carrying amount — CGU-specific risk ignored, or the entity's own cheap gearing baked in against IAS 36.A19. The auditor's own point estimate or range under ISA 540 recomputes WACC from independent market data (risk-free, sector beta, credit spread) and often lands 100–200bps higher, erasing the headroom.</li>
+                <li><strong>Terminal growth above the GDP cap (ISA 540.18, IAS 36.36).</strong> A 4–5% perpetual growth rate in a flat or declining market. Because terminal value is the bulk of VIU, this alone can flip the answer; the auditor challenges it back to the long-term country/industry rate and requires evidence for anything higher.</li>
+                <li><strong>Optimism bias and hockey-stick forecasts (ISA 540.18, 540.A11 on management bias; ISA 500.7).</strong> Budgets that have missed for years yet still show a sharp turnaround, or enhancement capex left in the cash flows contrary to IAS 36.44. The auditor performs retrospective review of prior forecasts versus actuals (a specific ISA 540 procedure) and tests that excluded/included cash flows respect IAS 36.44 and 36.50.</li>
+            </ul>
+            <div class="example-box">
+                <strong>Common audit adjustment.</strong> "Your pre-tax rate is 8%, but the CGU's debt is sub-investment grade and the sector beta relevers to your gearing at ~1.3. Independent inputs give a pre-tax rate closer to 11%. On that rate VIU falls below carrying amount and a material impairment is required — and your 134(f) note must now quantify the assumption change, not state 'no reasonably possible change'."
+            </div>
+
+            <h2 id="case-study">Case study: Vodafone Germany (FY2025)</h2>
+            <div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
+            <p><strong>What happened.</strong> In the year ended 31 March 2025 Vodafone Group Plc recognised a <strong>€4,350m</strong> impairment against its <strong>Germany</strong> CGU, with a further €165m against Romania, as disclosed in Note 4 to the consolidated financial statements. Germany goodwill fell from <strong>€20,335m to €15,985m</strong> year on year. Vodafone states recoverable amount was determined on a <strong>value in use</strong> basis using a <strong>pre-tax discount rate</strong> and a long-term growth rate capped at the lower of nominal GDP growth and the CGU's long-term CAGR.</p>
+            <p><strong>Why VIU practitioners should study it.</strong> The impairment did not come from nowhere — the sensitivity disclosures foreshadowed it. For Germany, the FY2023 report disclosed a 7.8% pre-tax discount rate and 0.6% long-term growth rate, with recoverable amount exceeding carrying value by €3.2bn and a note that only a <strong>0.6 percentage point</strong> rise in the discount rate would eliminate that headroom. By FY2024 the disclosed headroom had thinned to €2.3bn, wiped out by a <strong>0.5 percentage point</strong> rate rise. In FY2025 weaker EBITDAaL and lower medium-term growth expectations pushed recoverable amount below carrying amount and the loss crystallised. This is IAS 36.134(f) working exactly as intended: a shrinking, quantified headroom told readers a year in advance how little slack remained.</p>
+            <p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Figures taken from Vodafone Group Plc Annual Report 2025 (Note 4, Impairment losses) and the 2023/2024 comparatives disclosed therein. Publicly filed figures; no estimates added.</p>
+            </div>
+
+            <h2 id="faq">Frequently asked questions</h2>
+            <p><strong>Is it IAS 36 or IFRS 36?</strong> It is IAS 36. Impairment of Assets is an International Accounting Standard carried forward and amended by the IASB; there is no standard called IFRS 36, so any reference to "IFRS 36" is a mislabel of IAS 36.</p>
+            <p><strong>Why must the discount rate be pre-tax?</strong> IAS 36.55 requires a pre-tax rate applied to pre-tax cash flows so that tax is not double-counted — once in the cash flows and again in a post-tax rate. Entities usually build a post-tax WACC and iterate to the pre-tax equivalent that gives the same VIU (IAS 36.BCZ85), rather than grossing up by (1 − tax rate).</p>
+            <p><strong>Can I include capex for a new product line in VIU?</strong> Only maintenance and "current condition" capex. Enhancement or expansionary capex, and the extra cash inflows it would generate, are excluded until the entity is committed (IAS 36.44(b), 36.48). The same applies to restructurings not yet committed under IAS 37 (IAS 36.44(a)).</p>
+            <p><strong>What is the maximum terminal growth rate?</strong> The extrapolation growth rate must not exceed the long-term average growth rate for the products, industries or country of operation — long-term nominal GDP is the usual ceiling — unless a higher rate can be justified (IAS 36.33(c), 36.36).</p>
+            <p><strong>How long can the explicit forecast period be?</strong> Cash flow projections use the most recent management-approved budgets over a maximum of five years, unless a longer period is justified; beyond that, cash flows are extrapolated (IAS 36.33(b), 36.35).</p>
+            <p><strong>What sensitivity must I disclose?</strong> Where a reasonably possible change in a key assumption would remove all headroom, disclose the headroom, the assumption's value, and the change that would eliminate the headroom (IAS 36.134(f)).</p>
+            <p><strong>Does VIU or fair value less costs of disposal win?</strong> Recoverable amount is the higher of the two (IAS 36.18). You only need to estimate both if one is below carrying amount; if either exceeds carrying amount, the asset is not impaired (IAS 36.19).</p>
 
 <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>
     <p style="margin-bottom: 12px; color: #4a5568;"><a href="ias-36-impairment-of-assets-complete-guide.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">→ IAS 36 Impairment Hub</a></p>
-    <p style="margin-bottom: 8px; color: #4a5568;"><a href="ias-36-cgu-identification.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• IAS 36 CGU Identification: Allocation & Testing</a></p>
+    <p style="margin-bottom: 8px; color: #4a5568;"><a href="ias-36-cgu-identification.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• IAS 36 CGU Identification: Allocation &amp; Testing</a></p>
+    <p style="margin-bottom: 8px; color: #4a5568;"><a href="goodwill-impairment-ias-36-vs-asc-350-deep-dive.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• Goodwill Impairment: IAS 36 vs ASC 350</a></p>
+    <p style="margin-bottom: 8px; color: #4a5568;"><a href="ias-37-provisions-contingencies-complete-guide.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• IAS 37 Provisions &amp; Restructuring (VIU exclusions)</a></p>
+    <p style="margin-bottom: 0; color: #4a5568;"><a href="../index.html#gaap" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• Tool: GAAP Compare &amp; Meeting Room</a></p>
 </div>
 
 <div class="disclaimer">
@@ -176,5 +185,97 @@
             </div>
         </article>
     </div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "IAS 36 Value-in-Use: Calculating WACC, Terminal Value & Discount Rate",
+  "description": "IAS 36 value-in-use: cash-flow projections, pre-tax WACC, terminal value, IAS 36.44/36.50 exclusions, a full DCF worked example with impairment journal, and IAS 36.134(f) sensitivity disclosure.",
+  "datePublished": "2026-05-01",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "name": "Usman Qureshi",
+    "jobTitle": "ACCA, ACA Chartered Accountant (Big 4 Audit & Advisory)",
+    "image": "https://www.uqconsulting.org/images/usman.jpg"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "UQ Consulting",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.uqconsulting.org/images/usman.jpg"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.uqconsulting.org/blog/ias-36-value-in-use-calculation.html"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is it IAS 36 or IFRS 36?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It is IAS 36. Impairment of Assets is an International Accounting Standard carried forward and amended by the IASB; there is no standard called IFRS 36, so any reference to IFRS 36 is a mislabel of IAS 36."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why must the IAS 36 value-in-use discount rate be pre-tax?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IAS 36.55 requires a pre-tax rate applied to pre-tax cash flows so tax is not double-counted. Entities usually build a post-tax WACC and iterate to the pre-tax equivalent that gives the same value in use (IAS 36.BCZ85), rather than grossing up by (1 minus tax rate)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I include capex for a new product line in value in use?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only maintenance and current-condition capex. Enhancement or expansionary capex, and the extra cash inflows it would generate, are excluded until the entity is committed (IAS 36.44(b), 36.48). The same applies to restructurings not yet committed under IAS 37 (IAS 36.44(a))."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the maximum terminal growth rate under IAS 36?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The extrapolation growth rate must not exceed the long-term average growth rate for the products, industries or country of operation, with long-term nominal GDP the usual ceiling, unless a higher rate can be justified (IAS 36.33(c), 36.36)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How long can the explicit forecast period be?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Cash flow projections use the most recent management-approved budgets over a maximum of five years, unless a longer period is justified; beyond that, cash flows are extrapolated (IAS 36.33(b), 36.35)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What sensitivity does IAS 36 require me to disclose?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Where a reasonably possible change in a key assumption would remove all headroom, disclose the headroom, the assumption's value, and the change that would eliminate the headroom (IAS 36.134(f))."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does value in use or fair value less costs of disposal win?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Recoverable amount is the higher of the two (IAS 36.18). You only need both if one is below carrying amount; if either exceeds carrying amount, the asset is not impaired (IAS 36.19)."
+      }
+    }
+  ]
+}
+</script>
 </body>
 </html>

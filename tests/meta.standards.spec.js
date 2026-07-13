@@ -37,6 +37,11 @@ function rel(p) {
   return p.slice(root.length + 1).replace(/\\/g, '/');
 }
 
+// Legit pedagogical use: articles correctly say "there is no IFRS 37".
+// A match is exempt only when its surrounding window carries an explicit
+// negation/clarification cue, so accidental mislabels are still caught.
+const NEGATION_CUE = /no such|there is no|not a real|no standard called|is not a|never renumbered|no "IFRS|credibility flag|IAS\s+\d{1,2}\s+or\s+IFRS/i;
+
 test('no non-existent IFRS standard numbers are referenced', () => {
   const violations = [];
   const re = /\bIFRS\s+(\d{1,2})\b/g;
@@ -45,9 +50,10 @@ test('no non-existent IFRS standard numbers are referenced', () => {
     let m;
     while ((m = re.exec(text)) !== null) {
       const n = Number(m[1]);
-      if (!REAL_IFRS.has(n)) {
-        violations.push(`${rel(file)}: "IFRS ${n}" is not a real IFRS standard (did you mean IAS ${n}?)`);
-      }
+      if (REAL_IFRS.has(n)) continue;
+      const window = text.slice(Math.max(0, m.index - 120), m.index + 120);
+      if (NEGATION_CUE.test(window)) continue;
+      violations.push(`${rel(file)}: "IFRS ${n}" is not a real IFRS standard (did you mean IAS ${n}?)`);
     }
   }
   expect(

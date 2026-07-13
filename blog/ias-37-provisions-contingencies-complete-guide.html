@@ -1,15 +1,80 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9LKFW8QCC8"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9LKFW8QCC8');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IAS 37 Provisions & Contingencies: Complete Guide with Worked Examples</title>
+    <title>IAS 37 Provisions &amp; Contingencies: Complete Guide</title>
     <meta name="description" content="IAS 37 provisions: definition, recognition criteria, measurement, contingent liabilities, present value, warranty obligations, legal claims.">
     <meta name="keywords" content="IAS 37 provisions, contingent liability, warranty provision, legal claims, measurement, present value">
     <meta name="author" content="Usman Qureshi">
     <link rel="canonical" href="https://www.uqconsulting.org/blog/ias-37-provisions-contingencies-complete-guide.html">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="IAS 37 Provisions &amp; Contingencies: Complete Guide">
+    <meta property="og:description" content="The complete IAS 37 guide: recognition tree, legal vs constructive obligations, measurement and discounting, onerous contracts, restructuring, decommissioning, contingencies, worked examples with journals, and auditor red flags.">
+    <meta property="og:url" content="https://www.uqconsulting.org/blog/ias-37-provisions-contingencies-complete-guide.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "IAS 37 Provisions & Contingencies: Complete Guide with Worked Examples",
+      "description": "A complete, citation-heavy guide to IAS 37: recognition, measurement and discounting, onerous contracts, restructuring, decommissioning (IFRIC 1), levies (IFRIC 21), contingent liabilities and assets, worked examples with journal entries, disclosure and auditor red flags.",
+      "author": { "@type": "Person", "name": "Usman Qureshi" },
+      "publisher": { "@type": "Organization", "name": "UQ Consulting" },
+      "datePublished": "2026-07-01",
+      "dateModified": "2026-07-13",
+      "mainEntityOfPage": "https://www.uqconsulting.org/blog/ias-37-provisions-contingencies-complete-guide.html"
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the difference between a provision and an accrual under IAS 37?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A provision is a liability of uncertain timing or amount (IAS 37 para 10), such as a warranty or decommissioning obligation. An accrual is a liability to pay for goods or services already received that are not yet invoiced; its timing and amount are far more certain, so accruals sit within IAS 1 / trade payables rather than IAS 37. The greater the measurement uncertainty, the more likely it is a provision." }
+        },
+        {
+          "@type": "Question",
+          "name": "When is an item a contingent liability rather than a provision?",
+          "acceptedAnswer": { "@type": "Answer", "text": "It is a contingent liability, disclosed but not recognised (IAS 37 para 27 and 86), when it is only a possible obligation confirmed by future events, or a present obligation where an outflow is not probable, or where the amount cannot be measured reliably. A provision is recognised only when all three of para 14's criteria are met." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can you recognise a contingent asset?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. A contingent asset is never recognised (IAS 37 para 31-33). It is disclosed where an inflow of economic benefits is probable (para 89). Once realisation becomes virtually certain the asset is no longer contingent and is recognised in the normal way (para 35)." }
+        },
+        {
+          "@type": "Question",
+          "name": "What discount rate should be used for a provision?",
+          "acceptedAnswer": { "@type": "Answer", "text": "IAS 37 para 47 requires a pre-tax rate that reflects current market assessments of the time value of money and the risks specific to the liability (where those risks have not already been built into the cash flow estimate). Risk must not be double counted. The unwinding of the discount is presented as a finance cost (para 60)." }
+        },
+        {
+          "@type": "Question",
+          "name": "Are future operating losses provided for under IAS 37?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Provisions are not recognised for future operating losses (IAS 37 para 63) because there is no present obligation from a past event. An expectation of future losses may instead indicate that assets are impaired under IAS 36. Only where a contract has become onerous is a provision required (para 66)." }
+        },
+        {
+          "@type": "Question",
+          "name": "What can and cannot be included in a restructuring provision?",
+          "acceptedAnswer": { "@type": "Answer", "text": "A restructuring provision includes only the direct expenditures necessarily entailed by the restructuring and not associated with ongoing activities (IAS 37 para 80). It excludes retraining or relocating continuing staff, marketing, and investment in new systems and distribution networks (para 81), and it excludes future operating losses and gains on expected asset disposals (para 82-83)." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the seriously prejudicial exemption in IAS 37?",
+          "acceptedAnswer": { "@type": "Answer", "text": "In extremely rare cases, disclosing some or all of the information about a provision, contingent liability or contingent asset can be expected to seriously prejudice the entity's position in a dispute (IAS 37 para 92). The entity need not disclose that specific information, but must disclose the general nature of the dispute, the fact that the information has not been disclosed, and the reason why." }
+        },
+        {
+          "@type": "Question",
+          "name": "How does IAS 37 differ from US GAAP ASC 450?",
+          "acceptedAnswer": { "@type": "Answer", "text": "IAS 37 recognises a provision when an outflow is 'probable', meaning more likely than not (over 50%), and requires discounting of long-dated provisions. US GAAP ASC 450 uses a higher 'probable' threshold (interpreted as around 75% or more) and generally records the low end of a range where no single amount is better, and does not require discounting in the same way. See the dedicated comparison guide for a full walkthrough." }
+        }
+      ]
+    }
+    </script>
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,9 +99,9 @@
         th { background: #1a2f5a; color: #fff; font-weight: 600; }
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 18px 20px; margin: 20px 0; border-radius: 4px; }
         .disclaimer { font-size: 0.81em; color: #8593a8; margin-top: 36px; padding-top: 16px; border-top: 1px solid #e4e9f0; }
-    
 
-    
+
+
 /*TOC_SIDEBAR_START*/
 .toc {
     background: #fff;
@@ -79,138 +144,258 @@
 </head>
 <body>
     <div class="topbar">
-        <a href="https://www.uqconsulting.org/home.html">→ Usman Qureshi — Audit &amp; CFO Advisory</a>
+        <a href="https://www.uqconsulting.org/home.html">→ Usman Qureshi — Audit &amp; CFO Advisory</a>
     </div>
 
     <div class="article-container">
-        <h1>IAS 37 Provisions & Contingencies: Complete Guide with Worked Examples</h1>
+        <h1>IAS 37 Provisions &amp; Contingencies: Complete Guide with Worked Examples</h1>
 <div class="breadcrumb" style="color: #8593a8; font-size: 0.9em; margin-bottom: 20px;">
-    <a href="index.html" style="color: #2a4a7a; text-decoration: none;">Blog</a> 
-    &gt; <a href="ias-37-provisions-contingencies-complete-guide.html" style="color: #2a4a7a; text-decoration: none;">IAS 37 Provisions</a> 
-    &gt; <span style="color: #1a2f5a;">IAS 37 Provisions & Contingencies: Complete Guide with Worked Examples</span>
+    <a href="index.html" style="color: #2a4a7a; text-decoration: none;">Blog</a>
+    &gt; <a href="ias-37-provisions-contingencies-complete-guide.html" style="color: #2a4a7a; text-decoration: none;">IAS 37 Provisions</a>
+    &gt; <span style="color: #1a2f5a;">IAS 37 Provisions &amp; Contingencies: Complete Guide with Worked Examples</span>
 </div>
-        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed July 2026 · 14 min read</div>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed 13 July 2026 · 18 min read</div>
 
-        <p class="lead">IAS 37 (Provisions, Contingent Liabilities and Contingent Assets) governs when to recognize a liability for future obligations (warranties, legal claims, environmental cleanup). The key question: is it probable you'll need to pay? This guide walks through the recognition criteria, measurement, warranty obligations, legal claims, and the audit red flags around over/under-provisioning.</p>
+        <p class="lead">IAS 37 <em>Provisions, Contingent Liabilities and Contingent Assets</em> is the standard that decides when an uncertain future outflow becomes a liability on your balance sheet, when it is only a footnote, and when it is nothing at all. This guide works through the recognition decision tree, the measurement rules and discounting, onerous contracts, restructuring, decommissioning and levies, the contingent liability versus contingent asset split, two fully worked examples with journal entries, the disclosure requirements, and the red flags an auditor looks for. It focuses on IAS 37 mechanics under IFRS; for the head-to-head with US GAAP, see our <a href="https://www.uqconsulting.org/blog/provisions-contingencies-ias-37-vs-asc-450-deep-dive.html">IAS 37 vs ASC 450 deep dive</a>.</p>
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#definition">What is a Provision?</a></li><li class="toc-l1"><a href="#recognition">Three Recognition Criteria (All Must Be Met)</a></li><li class="toc-l1"><a href="#probable-test">The "Probable" Test: Key Judgment</a><ul><li class="toc-l2"><a href="#examples-probable-vs-not-probable">Examples: Probable vs Not Probable</a></li></ul></li><li class="toc-l1"><a href="#measurement">Measurement: Present Value & Expected Value</a><ul><li class="toc-l2"><a href="#two-methods-use-whichever-better-predicts-the-outcome">Two Methods (Use Whichever Better Predicts the Outcome)</a></li><li class="toc-l2"><a href="#present-value-adjustment-if-settlement-is-1-year-away-discount-the-provision-using-a-pretax-rate-that-reflects-the-time-value-of-money-and-specific-risks-measurement-example-warranty-provision-sold-10000-products-with-2year-warranty-cost-to-fix-per-unit-50-historical-claim-rate-year-1-20-year-2-10-total-30-expected-claims-3000-units-50-150000-timing-of-payouts-year-1-2000-units-50-100000-no-discounting-needed-year-2-1000-units-50-50000-discount-at-5-47619-total-provision-100000-47619-147619-warranty-obligations-a-provision-is-typically-required-for-warranty-claims-measured-as-the-expected-cost-based-on-historical-claim-rates-legal-claims-contingent-liabilities-if-a-lawsuit-is-unlikely-to-succeed-50-recognize-a-provision-at-estimated-settlement-amount-worked-example-environmental-cleanup-scenario-manufacturing-plant-contaminated-soil-regulator-requires-cleanup-by-2028-estimated-cost-2m-present-obligation-yes-regulation-imposed-company-responsible-probable-outflow-yes-obligation-is-certain-reliable-estimate-yes-external-contractors-quoted-2m-discount-to-present-value-2m-due-3-years-from-now-discount-at-4-1776970-provision-balance-31-dec-2025-1776970-unwinding-of-discount-31-dec-2026-add-interest-back-1776970-4-71079-expense-audit-red-flags-red-flag-1-underprovisioning">Present Value Adjustment If settlement is >1 year away, discount the provision using a pre-tax rate that reflects the time value of money and specific risks. Measurement Example: Warranty Provision Sold 10,000 products with 2-year warranty (cost to fix per unit = £50). Historical claim rate: Year 1 = 20%, Year 2 = 10% (total 30%) Expected claims: 3,000 units × £50 = £150,000 Timing of payouts: — Year 1: 2,000 units × £50 = £100,000 (no discounting needed) — Year 2: 1,000 units × £50 = £50,000 (discount at 5% = £47,619) Total provision: £100,000 + £47,619 = £147,619 Warranty Obligations A provision is typically required for warranty claims, measured as the expected cost based on historical claim rates. Legal Claims & Contingent Liabilities If a lawsuit is unlikely to succeed (50%), recognize a provision at estimated settlement amount. Worked Example: Environmental Cleanup Scenario: Manufacturing plant contaminated soil. Regulator requires cleanup by 2028. Estimated cost: £2m. Present obligation? YES (regulation imposed, company responsible) Probable outflow? YES (obligation is certain) Reliable estimate? YES (external contractors quoted £2m) Discount to present value: £2m due 3 years from now; discount at 4% = £1,776,970 Provision balance (31 Dec 2025): £1,776,970 Unwinding of discount (31 Dec 2026): Add interest back: £1,776,970 × 4% = £71,079 (expense) Audit Red Flags Red Flag 1: Under-Provisioning</a></li><li class="toc-l2"><a href="#red-flag-2-overprovisioning">Red Flag 2: Over-Provisioning</a></li><li class="toc-l2"><a href="#red-flag-3-absent-discount">Red Flag 3: Absent Discount</a></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Provision, Contingent Liability, or Nothing?</a></li></ul>
+            <ul>
+                <li class="toc-l1"><a href="#what-is-provision">What is a provision and when is it recognised?</a></li>
+                <li class="toc-l1"><a href="#legal-vs-constructive">Legal vs constructive obligations</a></li>
+                <li class="toc-l1"><a href="#measurement">How is a provision measured?</a></li>
+                <li class="toc-l1"><a href="#reimbursements-changes-use">Reimbursements, changes and use of provisions</a></li>
+                <li class="toc-l1"><a href="#onerous-contracts">Onerous contracts</a></li>
+                <li class="toc-l1"><a href="#restructuring">Restructuring provisions — what qualifies</a></li>
+                <li class="toc-l1"><a href="#decommissioning-levies">Decommissioning and levies (IFRIC 1 / IFRIC 21)</a></li>
+                <li class="toc-l1"><a href="#contingent-liabilities-assets">Contingent liabilities vs contingent assets</a></li>
+                <li class="toc-l1"><a href="#worked-example-warranty">Worked example 1: warranty provision (expected value, discounting, unwinding)</a></li>
+                <li class="toc-l1"><a href="#worked-example-decommissioning">Worked example 2: decommissioning provision (IFRIC 1)</a></li>
+                <li class="toc-l1"><a href="#disclosure">Disclosure requirements (para 84-92)</a></li>
+                <li class="toc-l1"><a href="#red-flags">Red flags for auditors</a></li>
+                <li class="toc-l1"><a href="#case-studies">Real-life case studies (Shell, Volkswagen)</a></li>
+                <li class="toc-l1"><a href="#faq">Frequently asked questions</a></li>
+            </ul>
         </div>
 
         <article>
-            <h2 id="definition">What is a Provision?</h2>
-            <p>A provision is a <strong>liability of uncertain timing or amount</strong>. It's recognized on the balance sheet when three criteria are met.</p>
+            <h2 id="what-is-provision">What is a provision and when is it recognised?</h2>
+            <p>A provision is a liability of uncertain timing or amount (IAS 37 para 10), and it is recognised only when three tests in para 14 are all met: the entity has a <strong>present obligation</strong> (legal or constructive) as a result of a past event; it is <strong>probable</strong> that an outflow of economic benefits will be required to settle it; and a <strong>reliable estimate</strong> can be made of the amount. Fail any one of the three and no provision goes on the balance sheet. That single sentence carries most of the standard, so it is worth taking each limb slowly.</p>
 
-            <h2 id="recognition">Three Recognition Criteria (All Must Be Met)</h2>
-            <ol>
-                <li><strong>Present obligation:</strong> The entity has a legal or constructive obligation as a result of a past event</li>
-                <li><strong>Probable outflow:</strong> Probable that resources will flow out to settle the obligation</li>
-                <li><strong>Reliable estimate:</strong> A reliable estimate can be made of the amount</li>
-            </ol>
+            <p>The <strong>present obligation from a past event</strong> is the hardest gate to pass, and the one auditors challenge most. IAS 37 para 17 introduces the idea of an <em>obligating event</em>: a past event that leaves the entity no realistic alternative to settling. If management could avoid the outflow by changing its future conduct — for example, by choosing not to operate in a certain way — then no obligation exists yet and no provision is recognised. This is why the standard is so firm that provisions attach to obligations, not to intentions.</p>
 
-            <p class="callout"><strong>Key difference:</strong> If any criterion is NOT met, the item is a contingent liability (disclosed in notes, not recognized).</p>
+            <p>The word <strong>probable</strong> has a precise meaning here. IAS 37 para 23 defines it as "more likely than not", i.e. a probability of more than 50%. This is a lower threshold than a layperson would assume from the word, and importantly it is lower than the US GAAP ASC 450 notion of probable (widely read as around 75% or higher). Where there are a number of similar obligations, such as product warranties, para 24 tells you to assess probability across the population as a whole; even if any individual item is unlikely to result in an outflow, an outflow is probable for the group and a provision is recognised.</p>
 
-            <h2 id="probable-test">The "Probable" Test: Key Judgment</h2>
-            <p>IAS 37 defines "probable" as <strong>more likely than not</strong> (>50%). This is a judgment call auditors heavily challenge.</p>
+            <p>The <strong>reliable estimate</strong> limb rarely blocks recognition. IAS 37 para 25-26 states that except in extremely rare cases an entity can determine a range of possible outcomes and so make an estimate that is reliable enough to use. If genuinely no reliable estimate can be made, the item becomes a contingent liability and is disclosed instead (para 26).</p>
 
-            <h3 id="examples-probable-vs-not-probable">Examples: Probable vs Not Probable</h3>
+            <div class="callout"><strong>The recognition decision tree (IAS 37 para 14, Appendix B).</strong> Ask in order: (1) Is there a present obligation as a result of a past event? If only possible, it is a contingent liability. (2) Is an outflow probable? If not, contingent liability (disclose) unless remote (ignore). (3) Can you measure it reliably? If not, contingent liability. Only if all three are "yes" do you recognise a provision.</div>
+
+            <h2 id="legal-vs-constructive">Legal vs constructive obligations</h2>
+            <p>A present obligation can be either legal or constructive, and both count for recognition (IAS 37 para 10). A <strong>legal obligation</strong> derives from a contract, legislation, or other operation of law — a warranty clause in a sale contract, an environmental statute, a court order. A <strong>constructive obligation</strong> is subtler: it arises where an entity's established pattern of past practice, published policies, or a sufficiently specific current statement has created a valid expectation in other parties that it will discharge certain responsibilities, and as a result the entity has no realistic alternative to settling.</p>
+
+            <p>The classic constructive-obligation example in IAS 37 para 17 is a retailer with a long-standing, publicised policy of refunding dissatisfied customers even though it is under no legal duty to do so. The published policy plus the established practice create the valid expectation, so a provision for expected refunds is recognised. Contrast that with a board decision taken privately before the year end: a management decision alone does not create a constructive obligation, because it has not yet raised a valid expectation in third parties (para 20). The obligation crystallises only when the decision is communicated to those affected in a way that leaves the entity no realistic alternative — a distinction that matters enormously for restructuring, discussed below.</p>
+
+            <p>A useful discipline is to write down, for every candidate provision, the specific past event and the specific party who now expects settlement. If you cannot name a counterparty with a valid expectation, you probably do not have a constructive obligation, and you may not have a provision at all.</p>
+
+            <h2 id="measurement">How is a provision measured?</h2>
+            <p>A provision is measured at the <strong>best estimate</strong> of the expenditure required to settle the present obligation at the reporting date (IAS 37 para 36) — the amount an entity would rationally pay to settle the obligation, or to transfer it to a third party, at that date (para 37). How you arrive at the best estimate depends on the nature of the obligation.</p>
+
+            <ul>
+                <li><strong>Expected value</strong> (para 39): where the provision covers a <em>large population</em> of items, the obligation is estimated by weighting all possible outcomes by their probabilities. Warranties across thousands of units are the textbook case.</li>
+                <li><strong>Most likely outcome</strong> (para 40): where a <em>single</em> obligation is being measured, the individual most likely outcome may be the best estimate — but management must still consider other outcomes, and where they are mostly higher or lower than the most likely amount, adjust accordingly. A single lawsuit is measured this way, not by a naive probability weighting.</li>
+            </ul>
+
+            <p>Several adjustments then refine the estimate. <strong>Risks and uncertainties</strong> must be taken into account (para 42), but with care: caution does not justify creating excessive provisions or deliberately overstating liabilities (para 43). Where the effect of the time value of money is material, the provision is the <strong>present value</strong> of the expected settlement outflows, discounted at a <strong>pre-tax rate</strong> that reflects current market assessments of the time value of money and the risks specific to the liability, without double counting risk already built into the cash flows (para 45-47). <strong>Future events</strong> that may affect the amount — new legislation, or expected technological advances in a clean-up method — are reflected where there is sufficient objective evidence that they will occur (para 48-50). Finally, <strong>gains on the expected disposal of assets</strong> are not taken into account in measuring a provision, even if the disposal is closely linked to the event giving rise to it (para 51-52); the disposal gain is recognised separately when it occurs.</p>
+
+            <div class="callout"><strong>Discounting is not optional for long-dated provisions.</strong> A material decommissioning or environmental liability that will be settled years out must be discounted (IAS 37 para 45-47). The provision then grows each year as the discount unwinds, and that unwind is a finance cost (para 60), not an operating expense. Auditors routinely challenge both the omission of discounting and the choice of rate.</p>
+
+            <h2 id="reimbursements-changes-use">Reimbursements, changes and use of provisions</h2>
+            <p>Where some or all of the expenditure to settle a provision is expected to be <strong>reimbursed</strong> by another party — an insurer, an indemnifying counterparty — the reimbursement is recognised as a separate asset only when it is <em>virtually certain</em> that it will be received if the entity settles the obligation, and the asset must not exceed the provision (IAS 37 para 53). The provision is shown gross on the balance sheet; in the income statement the expense may be presented net of the reimbursement (para 54). This gross-on-the-balance-sheet, net-in-P&amp;L treatment is a frequent presentation error.</p>
+
+            <p>Provisions are <strong>reviewed at each reporting date</strong> and adjusted to reflect the current best estimate (IAS 37 para 59). If it is no longer probable that an outflow will be required, the provision is reversed. Where a provision is discounted, its carrying amount increases each period as the discount unwinds; that increase is recognised as a borrowing/finance cost (para 60). Critically, a provision may be <strong>used only for the expenditure for which it was originally recognised</strong> (para 61-62). You cannot set new, unrelated costs against an existing provision, because doing so would conceal the impact of two different events. If a warranty provision is used to absorb, say, a restructuring cost, both the warranty position and the restructuring position are misstated.</p>
+
+            <h2 id="onerous-contracts">Onerous contracts</h2>
+            <p>An onerous contract is one in which the unavoidable costs of meeting the obligations under the contract exceed the economic benefits expected to be received under it, and IAS 37 para 66 requires the present obligation under such a contract to be recognised and measured as a provision. The unavoidable cost is the <strong>least net cost of exiting</strong> the contract, which para 68 defines as the lower of the cost of fulfilling it and any compensation or penalties arising from failing to fulfil it.</p>
+
+            <p>Before recognising an onerous-contract provision, an entity first recognises any impairment loss that has occurred on assets dedicated to the contract (para 69) — you impair the asset before you provide for the loss. A 2020 amendment to IAS 37 clarified that the "cost of fulfilling" a contract comprises the costs that relate directly to the contract, being both the incremental costs (such as direct labour and materials) and an allocation of other costs that relate directly to contract activities (such as depreciation of equipment used on that and other contracts). This closed a diversity in practice where some entities used only incremental costs and so under-provided.</p>
+
+            <div class="example-box"><strong>Mini-example — onerous purchase contract.</strong> A manufacturer is contractually committed to buy 10,000 components at £12 each (£120,000). Demand has collapsed and the finished goods made from them can now be sold for net proceeds of only £100,000. The contract carries a cancellation penalty of £15,000.<br><br>
+            Net cost of fulfilling = £120,000 cost − £100,000 benefit = <strong>£20,000</strong> loss.<br>
+            Cost of exiting (penalty) = <strong>£15,000</strong>.<br>
+            Provision = lower of the two = <strong>£15,000</strong> (IAS 37 para 68).<br><br>
+            <em>Journal:</em> Dr Onerous contract expense £15,000 / Cr Provision £15,000. Any impairment of components already held is booked first, under IAS 2/IAS 36.</div>
+
+            <p>Note that IAS 37 does <em>not</em> apply to executory contracts unless they are onerous (para 1-3), and that leases are dealt with under IFRS 16 rather than as onerous contracts.</p>
+
+            <h2 id="restructuring">Restructuring provisions — what qualifies</h2>
+            <p>Restructuring is where IAS 37 is most often abused, so the standard sets a high, specific bar. A restructuring provision is recognised only when the general recognition criteria in para 14 are met, and IAS 37 para 72 explains that a <strong>constructive obligation to restructure</strong> arises only when the entity has both a <em>detailed formal plan</em> identifying at least the business concerned, the principal locations affected, the location, function and approximate number of employees to be compensated for termination, the expenditures to be undertaken, and when the plan will be implemented; and has <strong>raised a valid expectation</strong> in those affected that it will carry out the restructuring, by starting to implement the plan or announcing its main features to those affected.</p>
+
+            <p>A board decision alone, taken before the reporting date, is <em>not</em> enough (para 75). If the plan is announced only after the year end, the constructive obligation did not exist at the reporting date and no provision may be recognised — though it may be a non-adjusting event to disclose. Even where a valid restructuring obligation exists, the amount is tightly constrained. A restructuring provision includes <strong>only the direct expenditures</strong> necessarily entailed by the restructuring that are not associated with the ongoing activities of the entity (para 80). Specifically excluded are:</p>
+
+            <ul>
+                <li>Retraining or relocating continuing staff (para 81);</li>
+                <li>Marketing (para 81);</li>
+                <li>Investment in new systems and distribution networks (para 81);</li>
+                <li>Future operating losses up to the date of the restructuring (para 82);</li>
+                <li>Gains on the expected disposal of assets, even if the sale is envisaged as part of the restructuring (para 83).</li>
+            </ul>
+
+            <p>The practical effect is that a genuine restructuring provision is usually much smaller than the headline "restructuring charge" a company would like to book. The costs that qualify are essentially termination benefits for staff being made redundant (measured under IAS 19 where relevant) and onerous-contract or exit costs directly caused by the restructuring. Everything that keeps the ongoing business running is expensed as incurred, not provided in advance.</p>
+
+            <h2 id="decommissioning-levies">Decommissioning and levies (IFRIC 1 / IFRIC 21)</h2>
+            <p>Two interpretations sharpen IAS 37 for common fact patterns. <strong>IFRIC 1</strong> <em>Changes in Existing Decommissioning, Restoration and Similar Liabilities</em> deals with how to account for changes in a decommissioning provision that was capitalised as part of an asset's cost under IAS 16. When the estimate of the outflow, the timing, or the discount rate changes, IFRIC 1 para 5 requires that (under the cost model) the change is added to or deducted from the cost of the related asset and depreciated prospectively over its remaining life; the periodic unwinding of the discount is always recognised in profit or loss as a finance cost. A downward revision that would reduce the asset below zero is taken to profit or loss instead. This mechanism is why decommissioning provisions can move materially year to year purely because a discount rate moved, without any cash changing hands — a point the Shell case study below illustrates with real figures.</p>
+
+            <p><strong>IFRIC 21</strong> <em>Levies</em> addresses when to recognise a liability for a levy imposed by a government. The obligating event that gives rise to the liability is the activity that <em>triggers</em> the payment of the levy as identified by the legislation (IFRIC 21 para 8). Crucially, the liability is recognised progressively only if the triggering activity occurs over a period; if the levy is triggered by reaching a threshold or operating on a specific date, the whole liability is recognised at that point in time and not accrued gradually. This was the outcome that surprised many banks and levy-paying entities, because it can create a "cliff-edge" liability recognised in full on a single day rather than smoothed across the year.</p>
+
+            <h2 id="contingent-liabilities-assets">Contingent liabilities vs contingent assets</h2>
+            <p>Where the recognition tests are not met, IAS 37 draws a firm line and — importantly — treats the liability and asset sides asymmetrically, reflecting prudence. A <strong>contingent liability</strong> is either a possible obligation whose existence will be confirmed only by uncertain future events not wholly within the entity's control, or a present obligation that fails the "probable outflow" or "reliable estimate" test (IAS 37 para 27-28). Contingent liabilities are <em>not recognised</em>; they are <em>disclosed</em> (para 86) unless the possibility of any outflow is remote, in which case even disclosure is not required.</p>
+
+            <p>A <strong>contingent asset</strong> is a possible asset arising from past events whose existence will be confirmed only by uncertain future events not wholly within the entity's control — for example, a claim the entity is pursuing through legal action where the outcome is uncertain (para 31-32). Contingent assets are <em>never recognised</em> (para 33), because doing so might recognise income that may never be realised. They are <em>disclosed</em> only where an inflow of economic benefits is <strong>probable</strong> (para 89). When the realisation of income becomes <em>virtually certain</em>, the item is no longer a contingent asset and is recognised as an asset (para 35).</p>
+
             <table>
                 <tr>
-                    <th>Scenario</th>
-                    <th>Probable?</th>
-                    <th>Accounting</th>
+                    <th>Likelihood</th>
+                    <th>Liability side</th>
+                    <th>Asset side</th>
                 </tr>
                 <tr>
-                    <td>Product warranty: 60% of customers claim warranty</td>
-                    <td>Yes (>50%)</td>
-                    <td>Recognize provision</td>
+                    <td>Virtually certain</td>
+                    <td>Recognise a liability (not a provision — little uncertainty)</td>
+                    <td>Recognise an asset (para 35)</td>
                 </tr>
                 <tr>
-                    <td>Legal lawsuit: 40% chance of loss based on precedent</td>
-                    <td>No (<50%)</td>
-                    <td>Disclose as contingent liability</td>
+                    <td>Probable (&gt;50%)</td>
+                    <td>Recognise a provision (para 14)</td>
+                    <td>Disclose contingent asset only (para 89)</td>
                 </tr>
                 <tr>
-                    <td>Environmental cleanup: Regulation now requires remediation</td>
-                    <td>Yes (obligation exists)</td>
-                    <td>Recognize provision</td>
+                    <td>Possible (&le;50%)</td>
+                    <td>Disclose contingent liability (para 86)</td>
+                    <td>No disclosure</td>
                 </tr>
                 <tr>
-                    <td>Possible patent claim: Legal team unsure of merit</td>
-                    <td>Unclear (judgment)</td>
-                    <td>Disclose as contingent; auditors push to clarify likelihood</td>
+                    <td>Remote</td>
+                    <td>Nothing (no disclosure)</td>
+                    <td>No disclosure</td>
                 </tr>
             </table>
 
-            <h2 id="measurement">Measurement: Present Value & Expected Value</h2>
-            <p>Measure a provision at the <strong>expected value</strong> of the obligation, discounted to present value.</p>
+            <p>The asymmetry is deliberate: an obligation that is probable is booked, but a probable inflow is only footnoted. This is the prudence principle operating inside a single standard, and it explains why litigation you expect to lose hits the balance sheet while litigation you expect to win generally does not.</p>
 
-            <h3 id="two-methods-use-whichever-better-predicts-the-outcome">Two Methods (Use Whichever Better Predicts the Outcome)</h3>
-            <ul>
-                <li><strong>Expected value:</strong> Probability-weighted average of all possible outcomes</li>
-                <li><strong>Most likely amount:</strong> If only two outcomes and one is much more likely</li>
-            </ul>
+            <h2 id="worked-example-warranty">Worked example 1: warranty provision (expected value, discounting, unwinding)</h2>
+            <p>Warranties are the archetypal expected-value provision (IAS 37 para 24, 39). Here is a full multi-year worked example with journal entries.</p>
 
-            <h3 id="present-value-adjustment-if-settlement-is-1-year-away-discount-the-provision-using-a-pretax-rate-that-reflects-the-time-value-of-money-and-specific-risks-measurement-example-warranty-provision-sold-10000-products-with-2year-warranty-cost-to-fix-per-unit-50-historical-claim-rate-year-1-20-year-2-10-total-30-expected-claims-3000-units-50-150000-timing-of-payouts-year-1-2000-units-50-100000-no-discounting-needed-year-2-1000-units-50-50000-discount-at-5-47619-total-provision-100000-47619-147619-warranty-obligations-a-provision-is-typically-required-for-warranty-claims-measured-as-the-expected-cost-based-on-historical-claim-rates-legal-claims-contingent-liabilities-if-a-lawsuit-is-unlikely-to-succeed-50-recognize-a-provision-at-estimated-settlement-amount-worked-example-environmental-cleanup-scenario-manufacturing-plant-contaminated-soil-regulator-requires-cleanup-by-2028-estimated-cost-2m-present-obligation-yes-regulation-imposed-company-responsible-probable-outflow-yes-obligation-is-certain-reliable-estimate-yes-external-contractors-quoted-2m-discount-to-present-value-2m-due-3-years-from-now-discount-at-4-1776970-provision-balance-31-dec-2025-1776970-unwinding-of-discount-31-dec-2026-add-interest-back-1776970-4-71079-expense-audit-red-flags-red-flag-1-underprovisioning">Present Value Adjustment</h2>
-            <p>If settlement is >1 year away, discount the provision using a pre-tax rate that reflects the time value of money and specific risks.</p>
+            <div class="example-box"><strong>Facts.</strong> On 1 January 20X5, Meridian Appliances sells 50,000 units, each carrying a two-year warranty. Based on several years of claims history, management estimates the outcome per unit sold as:<br><br>
+            — 85% of units: no defect, cost £0<br>
+            — 12% of units: minor defect, repair cost £40<br>
+            — 3% of units: major defect, repair cost £180<br><br>
+            <strong>Expected cost per unit</strong> = (0.85 × £0) + (0.12 × £40) + (0.03 × £180) = £4.80 + £5.40 = <strong>£10.20</strong>.<br>
+            <strong>Total expected warranty cost</strong> = 50,000 × £10.20 = <strong>£510,000</strong>.<br><br>
+            Timing: management expects 60% of claims to be settled in 20X5 (£306,000) and 40% in 20X6 (£204,000). The pre-tax risk-adjusted discount rate is 6% (IAS 37 para 47). The Year 2 tranche is discounted one year: £204,000 ÷ 1.06 = <strong>£192,453</strong>.<br><br>
+            <strong>Provision at 1 January 20X5</strong> = £306,000 + £192,453 = <strong>£498,453</strong>.</div>
 
-            <p class="example-box"><strong>Measurement Example: Warranty Provision</strong><br>
-            Sold 10,000 products with 2-year warranty (cost to fix per unit = £50).<br>
-            Historical claim rate: Year 1 = 20%, Year 2 = 10% (total 30%)<br>
-            Expected claims: 3,000 units × £50 = £150,000<br><br>
-            Timing of payouts:<br>
-            — Year 1: 2,000 units × £50 = £100,000 (no discounting needed)<br>
-            — Year 2: 1,000 units × £50 = £50,000 (discount at 5% = £47,619)<br><br>
-            <strong>Total provision: £100,000 + £47,619 = £147,619</strong>
-            </p>
+            <p>The provision is recognised in full when the units are sold, because the sale is the past obligating event and, across the population, an outflow is probable (para 14, 24).</p>
 
-            <h2 id="warranties">Warranty Obligations</h2>
-            <p>A provision is typically required for warranty claims, measured as the expected cost based on historical claim rates.</p>
+            <table>
+                <tr><th>Date / event</th><th>Debit</th><th>Credit</th><th>£</th></tr>
+                <tr><td>1 Jan 20X5 — recognise provision</td><td>Warranty expense (P&amp;L)</td><td></td><td>498,453</td></tr>
+                <tr><td></td><td></td><td>Warranty provision</td><td>498,453</td></tr>
+                <tr><td>During 20X5 — actual claims settled (£300,000)</td><td>Warranty provision</td><td></td><td>300,000</td></tr>
+                <tr><td></td><td></td><td>Cash / inventory / payroll</td><td>300,000</td></tr>
+                <tr><td>31 Dec 20X5 — unwind discount on Year 2 tranche (£192,453 × 6%)</td><td>Finance cost (P&amp;L)</td><td></td><td>11,547</td></tr>
+                <tr><td></td><td></td><td>Warranty provision</td><td>11,547</td></tr>
+            </table>
 
-            <h2 id="legal">Legal Claims & Contingent Liabilities</h2>
-            <p>If a lawsuit is unlikely to succeed (<50% probability), it's a contingent liability (disclosed in notes, not recognized). If probable (>50%), recognize a provision at estimated settlement amount.</p>
+            <p>After the 20X5 movements the provision stands at £498,453 − £300,000 + £11,547 = <strong>£209,999</strong> (i.e. ~£204,000, the now-undiscounted Year 2 tranche, plus rounding), which is exactly the expected remaining outflow. Note two disciplines from the standard: the actual claims are charged <em>against the provision</em>, not to a fresh expense (para 61), and the unwind is a <em>finance cost</em>, not a warranty cost (para 60). At 31 December 20X5 management re-estimates the provision under para 59; if the claims experience changes, the provision is trued up through profit or loss (a change in estimate, not a prior-period error). In 20X6, as the remaining claims are settled, the balance is drawn down against the provision until it reaches nil.</p>
 
-            <h2 id="worked">Worked Example: Environmental Cleanup</h2>
-            <p><strong>Scenario:</strong> Manufacturing plant contaminated soil. Regulator requires cleanup by 2028. Estimated cost: £2m.</p>
-            <ul>
-                <li><strong>Present obligation?</strong> YES (regulation imposed, company responsible)</li>
-                <li><strong>Probable outflow?</strong> YES (obligation is certain)</li>
-                <li><strong>Reliable estimate?</strong> YES (external contractors quoted £2m)</li>
-                <li><strong>Discount to present value:</strong> £2m due 3 years from now; discount at 4% = £1,776,970</li>
-                <li><strong>Provision balance (31 Dec 2025):</strong> £1,776,970</li>
-                <li><strong>Unwinding of discount (31 Dec 2026):</strong> Add interest back: £1,776,970 × 4% = £71,079 (expense)</li>
-            </ul>
+            <h2 id="worked-example-decommissioning">Worked example 2: decommissioning provision (IFRIC 1)</h2>
+            <p>Decommissioning is the archetypal <em>single-obligation, long-dated, discounted</em> provision, and it interacts with IAS 16 and IFRIC 1. Here is the full lifecycle with journals.</p>
 
-            <h2 id="audit">Audit Red Flags</h2>
+            <div class="example-box"><strong>Facts.</strong> On 1 January 20X1, Northsea Energy brings an offshore platform into use. Legislation and the production licence require the platform to be dismantled and the seabed restored at the end of its 20-year life. The best estimate of the restoration cost in 20 years is <strong>£50,000,000</strong>. The appropriate pre-tax risk-adjusted discount rate is 5% (IAS 37 para 47).<br><br>
+            <strong>Present value of the obligation</strong> = £50,000,000 ÷ (1.05)<sup>20</sup> = £50,000,000 ÷ 2.6533 = <strong>£18,844,700</strong> (rounded).</div>
 
-            <h3>Red Flag 1: Under-Provisioning</h3>
-            <p><strong>Finding:</strong> Company has pending litigation with 60% probability of £5m loss, but made no provision (claiming "unlikely").</p>
-            <p><strong>Auditor action:</strong> At 60% probability (>50%), recognize provision of £5m × 60% = £3m.</p>
+            <p>The obligating event is the <em>construction / installation</em> of the platform, which is what creates the legal obligation to restore (IAS 37 para 14, 17). Under IFRIC 1 and IAS 16 para 16(c), the discounted restoration cost is capitalised as part of the cost of the platform and depreciated over its life, with a matching provision.</p>
 
-            <h3 id="red-flag-2-overprovisioning">Red Flag 2: Over-Provisioning</h3>
-            <p><strong>Finding:</strong> Warranty provision assumes 50% claim rate, but actual historical rate is 15%.</p>
-            <p><strong>Auditor action:</strong> Reduce provision to actual expected rate; release the excess to profit.</p>
+            <table>
+                <tr><th>Date / event</th><th>Debit</th><th>Credit</th><th>£</th></tr>
+                <tr><td>1 Jan 20X1 — recognise obligation &amp; capitalise cost</td><td>PP&amp;E — platform (decommissioning component)</td><td></td><td>18,844,700</td></tr>
+                <tr><td></td><td></td><td>Decommissioning provision</td><td>18,844,700</td></tr>
+                <tr><td>31 Dec 20X1 — depreciate the decommissioning asset (£18,844,700 ÷ 20)</td><td>Depreciation (P&amp;L)</td><td></td><td>942,235</td></tr>
+                <tr><td></td><td></td><td>Accumulated depreciation</td><td>942,235</td></tr>
+                <tr><td>31 Dec 20X1 — unwind discount (£18,844,700 × 5%)</td><td>Finance cost (P&amp;L)</td><td></td><td>942,235</td></tr>
+                <tr><td></td><td></td><td>Decommissioning provision</td><td>942,235</td></tr>
+            </table>
 
-            <h3 id="red-flag-3-absent-discount">Red Flag 3: Absent Discount</h3>
-            <p><strong>Finding:</strong> £10m environmental provision, due in 5 years, but not discounted.</p>
-            <p><strong>Auditor action:</strong> Apply present value discount (5% = £7.8m); adjust provision and finance cost.</p>
+            <p>At 31 December 20X1 the provision has grown to £18,844,700 + £942,235 = <strong>£19,786,935</strong>, and it will keep compounding at 5% each year until it reaches £50,000,000 at the end of Year 20 — the point at which the cash is actually spent and the provision is used against the restoration expenditure (IAS 37 para 61-62). The annual charge to profit or loss splits neatly into a <em>depreciation</em> element (operating) and a <em>discount unwind</em> element (finance), which is exactly how these appear in an oil and gas income statement.</p>
 
-            
-<h2 id="real-life-case-study">Real-Life Case Study: Provision, Contingent Liability, or Nothing?</h2>
-<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A company faces three matters at year end: (1) a warranty on products sold, (2) a lawsuit it will probably lose (est. &pound;600k), and (3) a lawsuit it will probably win.</p>
- <ul>
-   <li>Warranty: present obligation, probable outflow, reliably estimable &rarr; <strong>provision</strong>.</li>
-   <li>Likely-lose lawsuit: probable outflow &rarr; <strong>provision &pound;600k</strong>.</li>
-   <li>Likely-win lawsuit: possible only &rarr; <strong>contingent liability, disclose only</strong>.</li>
- </ul>
- <p><strong>Takeaway.</strong> The dividing line is "probable" (recognise) vs "possible" (disclose) vs "remote" (ignore). A present obligation from a past event plus a probable, measurable outflow is what turns a risk into a booked provision, mere existence of a claim is not enough.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
-</div>
+            <p><strong>Change in estimate under IFRIC 1.</strong> Suppose at 31 December 20X4 the discount rate falls to 4% and the cost estimate rises. IFRIC 1 para 5 requires the resulting change in the provision to be added to (or deducted from) the carrying amount of the platform under the cost model, then depreciated prospectively over the remaining 16 years — it is <em>not</em> a current-year expense. A rate cut increases the provision (future cash is discounted less), so both the asset and the liability step up. This is precisely the mechanism behind the large, cash-free movements you see in extractive-sector accounts when market discount rates shift.</p>
+
+            <h2 id="disclosure">Disclosure requirements (para 84-92)</h2>
+            <p>IAS 37 pairs its recognition rigour with detailed disclosure. For <strong>each class of provision</strong>, para 84 requires a reconciliation showing the carrying amount at the beginning and end of the period; additional provisions made, including increases to existing provisions; amounts used (charged against the provision); unused amounts reversed; and the increase during the period in the discounted amount from the passage of time (the unwind) and the effect of any change in the discount rate. Comparative information is not required for this reconciliation (para 84), a small but frequently-missed relief.</p>
+
+            <p>Para 85 then requires, for each class, a brief description of the nature of the obligation and the expected timing of the outflows; an indication of the uncertainties about amount or timing (and, where necessary, the major assumptions about future events reflected under para 48); and the amount of any expected reimbursement, stating the asset recognised for it. For <strong>contingent liabilities</strong>, para 86 requires — unless an outflow is remote — a brief description of the nature of the contingency and, where practicable, an estimate of its financial effect, an indication of the uncertainties, and the possibility of any reimbursement. For <strong>contingent assets</strong>, para 89 requires a description and, where practicable, an estimate of the financial effect, but only where an inflow is probable.</p>
+
+            <p>Finally, the <strong>seriously prejudicial exemption</strong> in para 92: in extremely rare cases, disclosure of some or all of the para 84-89 information can be expected to prejudice seriously the entity's position in a dispute over the subject matter of the provision or contingency. In those cases the entity need not disclose that specific information, but it <em>must</em> disclose the general nature of the dispute, together with the fact that, and reason why, the information has not been disclosed. This is the narrow relief that lets a company avoid tipping off a litigation opponent to its own reserve, without going entirely silent.</p>
+
+            <h2 id="red-flags">Red flags for auditors</h2>
+            <p>Provisions are among the most judgemental balances in the accounts, which makes them a magnet for both error and manipulation. Four red flags recur, each with a specific audit response.</p>
+
+            <h3>1. Understated or omitted litigation provisions (completeness)</h3>
+            <p><strong>Finding:</strong> management asserts that pending claims are "unlikely" and records nothing, even where internal counsel's own assessment puts the probability above 50%. Completeness of provisions is the classic understatement risk. <strong>Procedure (ISA 501 para 9-12):</strong> design procedures to identify litigation and claims that may give rise to a risk of material misstatement — inquire of management and in-house counsel, review board and committee minutes, and inspect legal expense accounts. Where a material risk is identified, communicate directly with the entity's external legal counsel via a letter of audit inquiry (ISA 501 para 10) and, if refused access, consider the implications for the audit opinion. Cross-check the para 23 "more likely than not" threshold against counsel's actual language.</p>
+
+            <h3>2. Biased estimates and discount-rate manipulation (ISA 540)</h3>
+            <p><strong>Finding:</strong> claim rates, settlement estimates or discount rates that consistently flatter the result — an inflated discount rate to shrink a decommissioning liability, or optimistic warranty ratios. <strong>Procedure (ISA 540 para 13-15):</strong> evaluate the method, assumptions and data used; test how management made the estimate; and perform a <em>retrospective review</em> of prior-period provisions against actual outturn (ISA 540 para 15(a)) to detect systematic bias. Independently benchmark the discount rate to observable market data, and challenge any rate that is not clearly pre-tax and risk-consistent per IAS 37 para 47. ISA 540 para 32 requires an overall evaluation of whether the estimates are reasonable or indicate possible management bias.</p>
+
+            <h3>3. "Big bath" restructuring provisions</h3>
+            <p><strong>Finding:</strong> a large restructuring charge booked when there is no detailed formal plan or announcement at the reporting date (so no constructive obligation), or a provision padded with prohibited costs — retraining, relocation, new systems, or future operating losses. <strong>Procedure:</strong> obtain the detailed formal plan and evidence of the announcement date (press release, staff communication, works-council notification), and confirm both existed at year end (IAS 37 para 72, 75). Recompute the provision excluding para 81-83 items — retraining/relocation of continuing staff, marketing, new systems, future operating losses and expected disposal gains. A provision that shrinks sharply on this test signals earnings management, typically to depress a "kitchen-sink" year so future years look stronger.</p>
+
+            <h3>4. Missing discount / provision used for the wrong purpose</h3>
+            <p><strong>Finding:</strong> a long-dated environmental or decommissioning liability carried undiscounted, overstating the liability and understating finance cost; or an existing provision quietly absorbing unrelated new costs. <strong>Procedure:</strong> recompute the present value using an independently supported rate and confirm the unwind is presented as a finance cost (IAS 37 para 60). Vouch amounts charged against each provision to confirm they relate to the original obligation only (para 61-62); a warranty provision absorbing restructuring costs, or vice versa, misstates both. Test the para 59 remeasurement for evidence that stale provisions are being kept alive as a "cookie jar" reserve to smooth future earnings.</p>
+
+            <h2 id="case-studies">Real-life case studies (Shell, Volkswagen)</h2>
+            <p>Two real disclosures show IAS 37 operating at scale.</p>
+
+            <h3>Shell plc — decommissioning and restoration (FY2023)</h3>
+            <p>Shell's largest provision is its decommissioning and restoration obligation for oil and gas infrastructure. In its 2023 Annual Report and Form 20-F (Note 24, Decommissioning and other provisions), Shell recognised total decommissioning and other provisions of <strong>US$26,572 million</strong>, split between US$22,531 million non-current and US$4,041 million current, of which the decommissioning and restoration element was carried at approximately <strong>US$19 billion on a discounted basis</strong> against roughly US$33 billion undiscounted. Shell applied a discount rate of <strong>4.5% at 31 December 2023 (2022: 3.25%)</strong>. The rate rise drove a decrease of about US$2.9 billion in total provisions from the discount-rate change alone — a cash-free movement of exactly the IFRIC 1 type described above. Shell also disclosed a sensitivity: a 0.5% movement in the rate would change the decommissioning provision by roughly US$0.9 billion to US$1 billion. This is IAS 37 measurement (para 45-47) and IFRIC 1 change-in-estimate accounting playing out on a balance sheet where the discount rate, not the cash, moves the number.</p>
+            <p style="font-size:0.85em;color:#8593a8;">Source: Shell plc Annual Report and Accounts / Form 20-F 2023, Note 24 "Decommissioning and other provisions" and the consolidated balance sheet.</p>
+
+            <h3>Volkswagen Group — warranty provisions (FY2023)</h3>
+            <p>Volkswagen illustrates the expected-value warranty model at industrial scale. In its 2023 Annual Report (Note 30, Noncurrent and current other provisions), the Group reported "obligations arising from sales" of <strong>€27,764 million (2022: €26,046 million)</strong> — a category that, as VW states, primarily comprises warranty obligations, "calculated on the basis of losses to date and estimated future losses", alongside discounts, bonuses and end-of-life vehicle disposal costs. Total other provisions were <strong>€45,517 million (2022: €45,878 million)</strong>. The warranty methodology VW describes is precisely IAS 37 para 24 and 39: a large population of similar obligations, measured at expected value from historical claims experience plus expected future losses, recognised when the vehicles are sold (the obligating event). VW separately discloses substantial <em>contingent</em> liabilities and litigation (para 86) that are not provided for where an outflow is not probable or not reliably estimable — the recognise-versus-disclose line in action.</p>
+            <p style="font-size:0.85em;color:#8593a8;">Source: Volkswagen Group Annual Report 2023, Note 30 "Noncurrent and current other provisions". The €27,764m figure is the aggregate "obligations arising from sales" line, which VW states is primarily but not exclusively warranty.</p>
+
+            <div class="callout"><strong>Want to pressure-test your own provisions?</strong> Compare treatments across frameworks with our <a href="https://www.uqconsulting.org/gaap-compare.html">GAAP Compare tool</a>, walk a judgement through the <a href="https://www.uqconsulting.org/meeting-room.html">virtual technical panel</a>, or have a draft note reviewed in the <a href="https://www.uqconsulting.org/fs-review.html">Financial Statement Review tool</a>. For the cross-framework picture, see the <a href="https://www.uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">IFRS vs US GAAP comparison</a>.</div>
+
+            <h2 id="faq">Frequently asked questions</h2>
+
+            <h3>What is the difference between a provision and an accrual?</h3>
+            <p>A provision is a liability of uncertain timing or amount (IAS 37 para 10) — a warranty, a decommissioning cost, a probable lawsuit. An accrual is a liability to pay for goods or services already received but not yet billed, where timing and amount are much more certain; accruals sit within trade and other payables under IAS 1, not IAS 37. The more uncertain the estimate, the more likely you are dealing with a provision.</p>
+
+            <h3>When is something a contingent liability rather than a provision?</h3>
+            <p>When it fails the para 14 tests: it is only a possible obligation confirmed by future events, or a present obligation whose outflow is not probable, or one that cannot be measured reliably (para 27-28). Contingent liabilities are disclosed (para 86), not recognised — unless an outflow is remote, in which case nothing is disclosed.</p>
+
+            <h3>Can you recognise a contingent asset?</h3>
+            <p>No. Contingent assets are never recognised (IAS 37 para 33). They are disclosed only where an inflow is probable (para 89). Once realisation becomes virtually certain, the item is no longer contingent and is recognised as a normal asset (para 35). This asymmetry with liabilities is deliberate prudence.</p>
+
+            <h3>What discount rate should I use for a provision?</h3>
+            <p>A pre-tax rate reflecting current market assessments of the time value of money and the risks specific to the liability, without double counting risks already built into the cash flows (IAS 37 para 47). The annual unwind of the discount is a finance cost (para 60), not an operating expense.</p>
+
+            <h3>Are future operating losses provided for?</h3>
+            <p>No. IAS 37 para 63 prohibits provisions for future operating losses because there is no present obligation from a past event. An expectation of future losses may instead point to asset impairment under IAS 36. Only where a contract has become onerous is a provision required (para 66).</p>
+
+            <h3>How do restructuring provisions differ from ordinary provisions?</h3>
+            <p>They carry an extra hurdle: a constructive obligation exists only with a detailed formal plan and either implementation or announcement to those affected before the reporting date (para 72, 75). And the amount is limited to direct restructuring costs, excluding retraining, relocation, marketing, new systems, future operating losses and disposal gains (para 80-83).</p>
+
+            <h3>What is the seriously prejudicial exemption?</h3>
+            <p>In extremely rare cases, disclosing details of a provision or contingency would seriously prejudice the entity's position in a dispute (IAS 37 para 92). The entity may then omit the specific detail but must still disclose the general nature of the dispute and the fact and reason for non-disclosure.</p>
+
+            <h3>Do warranty provisions have to be discounted?</h3>
+            <p>Only where the time value of money is material (IAS 37 para 45). Warranties usually settle within one to three years, so the discounting effect is often small — but where a warranty runs several years, the later tranches should be discounted, as in Worked Example 1 above, and unwound as a finance cost each period.</p>
+
+            <h3>How does IAS 37 differ from US GAAP ASC 450?</h3>
+            <p>IAS 37 recognises a provision at "more likely than not" (over 50%) and requires discounting of material long-dated liabilities; ASC 450 uses a higher probable threshold (commonly read as ~75%+), tends to record the low end of a range where no amount is better than another, and does not mandate discounting in the same way. See our full <a href="https://www.uqconsulting.org/blog/provisions-contingencies-ias-37-vs-asc-450-deep-dive.html">IAS 37 vs ASC 450 deep dive</a> for a side-by-side treatment.</p>
 
 <div class="disclaimer">
-                <strong>Disclaimer:</strong> This is educational content. Provision recognition requires professional judgment (especially the "probable" test) that is heavily audited. Consult a qualified accountant for your specific circumstances. Provisions for legal claims are particularly contentious and subject to large audit adjustments.
+                <strong>Disclaimer:</strong> This is educational content and not a substitute for professional advice. Provision recognition and measurement require significant judgment (especially the para 14 "probable" test and the choice of discount rate) that is heavily audited. The Shell and Volkswagen figures are drawn from those companies' published 2023 annual reports and are used for illustration; always refer to the primary financial statements. The Meridian Appliances, Northsea Energy and onerous-contract examples are illustrative and do not represent any specific company. Consult a qualified accountant for your specific circumstances.
             </div>
         </article>
     </div>

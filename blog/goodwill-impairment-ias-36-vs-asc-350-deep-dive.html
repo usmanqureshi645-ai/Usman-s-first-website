@@ -30,7 +30,7 @@
       "description": "Comprehensive comparison of IAS 36 and ASC 350 goodwill impairment standards with worked examples of one-step vs two-step testing, value-in-use, fair value, and recoverable amount calculations.",
       "image": "https://www.uqconsulting.org/images/og-image.png",
       "datePublished": "2026-07-04",
-      "dateModified": "2026-07-04",
+      "dateModified": "2026-07-13",
       "author": { "@type": "Person", "name": "Usman Qureshi", "jobTitle": "Chartered Accountant (ACCA, ACA)" },
       "publisher": { "@type": "Person", "name": "Usman Qureshi" },
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.uqconsulting.org/blog/goodwill-impairment-ias-36-vs-asc-350-deep-dive.html" }
@@ -45,22 +45,42 @@
         {
           "@type": "Question",
           "name": "What is the main difference between IAS 36 and ASC 350 goodwill impairment?",
-          "acceptedAnswer": { "@type": "Answer", "text": "IAS 36 uses a one-step test: compare carrying amount to recoverable amount (fair value less costs, or value-in-use). ASC 350 uses a two-step test: compare fair value to carrying; if less, test implied goodwill value. Result: IFRS often produces lower impairments." }
+          "acceptedAnswer": { "@type": "Answer", "text": "IAS 36 compares a cash-generating unit's carrying amount to its recoverable amount, which is the higher of fair value less costs of disposal and value in use (IAS 36 para 18). ASC 350, since ASU 2017-04, compares a reporting unit's carrying amount to its fair value in a single step and books the shortfall, capped at the goodwill balance. IAS 36 allows value in use (management's own cash flows), which can be higher than market fair value, so IFRS sometimes reports a smaller loss." }
         },
         {
           "@type": "Question",
-          "name": "What is value-in-use in IAS 36?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Present value of future cash flows the asset is expected to generate, using the entity's own discount rate reflecting asset-specific risks. Often higher than market fair value because it reflects management's internal projections." }
+          "name": "What is value in use under IAS 36?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Value in use is the present value of the future cash flows an asset or cash-generating unit is expected to generate from continuing use and eventual disposal (IAS 36 para 6, 30-31), discounted at a pre-tax rate reflecting asset-specific risk (IAS 36 para 55). Because it uses the entity's own budgeted cash flows, it can exceed a market-based fair value." }
         },
         {
           "@type": "Question",
-          "name": "Can IAS 36 and ASC 350 produce different goodwill impairment amounts for the same asset?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Yes. IAS 36 can use value-in-use (often higher), while ASC 350 must use market fair value (often lower). In down markets, ASC 350 goodwill write-downs are typically larger." }
+          "name": "Can IAS 36 and ASC 350 produce different goodwill impairment amounts for the same business?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. IAS 36 can measure recoverable amount using value in use, which is often higher than the market fair value that ASC 350 requires, and IAS 36 also deducts costs of disposal from fair value while ASC 350 does not. The unit of account differs too (CGU vs reporting unit). In a downturn ASC 350 write-downs are frequently larger." }
         },
         {
           "@type": "Question",
-          "name": "What is the two-step test under ASC 350?",
-          "acceptedAnswer": { "@type": "Answer", "text": "Step 1: Compare fair value of reporting unit to carrying amount (including goodwill). If fair value exceeds carrying, no impairment. Step 2: If fair value is less, calculate implied goodwill value by subtracting fair values of identifiable net assets from fair value of unit. Impair if carrying exceeds implied value." }
+          "name": "Did ASC 350 eliminate the two-step goodwill impairment test?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. ASU 2017-04 removed the old Step 2 (computing implied goodwill via a hypothetical purchase price allocation). Public SEC filers apply the single-step model for fiscal years beginning after 15 December 2019. The loss now equals the excess of a reporting unit's carrying amount over its fair value, limited to the goodwill allocated to that unit (ASC 350-20-35-8B)." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can a goodwill impairment loss be reversed later?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No, under neither framework. IAS 36 para 124 explicitly prohibits reversing an impairment loss recognised for goodwill, and ASC 350-20-35-13 prohibits reinstating goodwill once written down. This is because any apparent recovery is treated as internally generated goodwill, which cannot be capitalised." }
+        },
+        {
+          "@type": "Question",
+          "name": "How often must goodwill be tested for impairment?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Under IAS 36 para 10, goodwill and indefinite-life intangibles must be tested at least annually, and additionally whenever an impairment indicator exists (IAS 36 para 9, 12). Under ASC 350 the annual test can be supported by an optional qualitative Step 0 (ASC 350-20-35-3A), and a triggering event can require an interim test. Eligible private companies may instead amortise goodwill and test only on a triggering event (ASC 350-20 alternative)." }
+        },
+        {
+          "@type": "Question",
+          "name": "In what order is an IAS 36 impairment loss allocated within a CGU?",
+          "acceptedAnswer": { "@type": "Answer", "text": "IAS 36 para 104 requires the loss to reduce goodwill allocated to the CGU first, then the remaining loss is allocated pro rata to the other assets on a carrying-amount basis. Under para 105 no individual asset is written below the highest of its fair value less costs of disposal, its value in use, and zero." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does IAS 36 use a pre-tax or post-tax discount rate?",
+          "acceptedAnswer": { "@type": "Answer", "text": "IAS 36 para 55 requires a pre-tax discount rate that reflects current market assessments of the time value of money and the risks specific to the asset. In practice a post-tax WACC is often derived first and grossed up. ASC 350 fair value measurements typically use post-tax, market-participant cash flows and discount rates under ASC 820." }
         }
       ]
     }
@@ -154,147 +174,249 @@
         </div>
 
         <h1>Goodwill Impairment: IAS 36 vs ASC 350 Deep Dive</h1>
-        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed July 2026 · 10 min read</div>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed 13 July 2026 · 16 min read</div>
 
-        <p class="lead">Goodwill is the most audited line item in M&amp;A deals. IAS 36 and ASC 350 both require annual impairment testing, but they test differently. IFRS uses a one-step comparison to recoverable amount (fair value or value-in-use); US GAAP uses a two-step test (fair value → implied goodwill value). In down markets, these differences produce materially different write-downs. This guide walks through both methods with worked examples so you understand where auditors challenge and why a £10M acquisition might survive IFRS testing but fail ASC 350.</p>
+        <p class="lead">Goodwill is the single most scrutinised line item in any acquisitive group's balance sheet, and the two dominant frameworks test it in fundamentally different ways. Under <strong>IAS 36</strong> you compare a cash-generating unit's carrying amount to its <em>recoverable amount</em> — the higher of fair value less costs of disposal and value in use. Under <strong>ASC 350</strong>, since ASU 2017-04, you compare a reporting unit's carrying amount to its <em>fair value</em> in a single step and book the shortfall, capped at goodwill. Neither standard permits a goodwill impairment to be reversed. This deep dive works through both models with full journal entries, the IAS 36 loss-allocation order, disclosure and ratio impact, auditor red flags anchored to ISA 540, and two real write-downs — Vodafone (£23.5bn, IFRS) and Kraft Heinz ($15.4bn, US GAAP).</p>
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#overview">The Headline Difference</a></li><li class="toc-l1"><a href="#ifrs-method">IAS 36: The One-Step Test</a></li><li class="toc-l1"><a href="#asc-method">ASC 350: The Two-Step Test</a></li><li class="toc-l1"><a href="#value-in-use">Value-in-Use vs Fair Value: Why It Matters</a></li><li class="toc-l1"><a href="#worked-example">Worked Example: Acquisition Impairment</a><ul><li class="toc-l3"><a href="#scenario-software-company-acquired-for-50m">Scenario: Software Company Acquired for £50M</a></li></ul></li><li class="toc-l1"><a href="#cash-generating">Cash-Generating Units vs Reporting Units</a></li><li class="toc-l1"><a href="#discount-rate">Discount Rate Assumptions</a></li><li class="toc-l1"><a href="#audit-implications">Audit Implications and Red Flags</a><ul><li class="toc-l2"><a href="#for-auditors">For auditors:</a></li><li class="toc-l2"><a href="#for-controllers-and-cfos">For controllers and CFOs:</a></li><li class="toc-l2"><a href="#need-help-with-goodwill-impairment-testing">Need help with goodwill impairment testing?</a></li></ul></li><li class="toc-l1"><a href="#faq">Frequently Asked Questions</a><ul><li class="toc-l2"><a href="#what-is-the-main-difference-between-ifrs-36-and-asc-350-goodwill-impairment">What is the main difference between IAS 36 and ASC 350 goodwill impairment?</a></li><li class="toc-l2"><a href="#what-is-valueinuse">What is value-in-use?</a></li><li class="toc-l2"><a href="#can-ifrs-36-and-asc-350-produce-different-impairment-amounts">Can IAS 36 and ASC 350 produce different impairment amounts?</a><ul><li class="toc-l3"><a href="#about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</a></li></ul></li><li class="toc-l2"><a href="#related-resources">Related resources</a></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Testing Goodwill Under IAS 36 vs ASC 350</a></li></ul>
+            <ul>
+              <li class="toc-l1"><a href="#headline-difference">The core difference: recoverable amount vs fair value</a></li>
+              <li class="toc-l1"><a href="#cgu-reporting-unit">Identifying the CGU / reporting unit and allocating goodwill</a></li>
+              <li class="toc-l1"><a href="#when-tested">When is goodwill tested — annual test plus triggers</a></li>
+              <li class="toc-l1"><a href="#calculation">The calculation: VIU vs FVLCD (IAS 36) vs single-step (ASC 350)</a></li>
+              <li class="toc-l1"><a href="#worked-example-ias36">Worked example 1: IAS 36 CGU impairment with journals</a></li>
+              <li class="toc-l1"><a href="#worked-example-asc350">Worked example 2: same facts under ASC 350</a></li>
+              <li class="toc-l1"><a href="#no-reversal">Why goodwill impairment is never reversed</a></li>
+              <li class="toc-l1"><a href="#disclosure">Disclosure requirements (IAS 36 para 130, 134)</a></li>
+              <li class="toc-l1"><a href="#fs-impact">Financial-statement and ratio impact</a></li>
+              <li class="toc-l1"><a href="#red-flags">Red flags for auditors (ISA 540)</a></li>
+              <li class="toc-l1"><a href="#case-studies">Real-life case studies: Vodafone and Kraft Heinz</a></li>
+              <li class="toc-l1"><a href="#faq">Frequently asked questions</a></li>
+            </ul>
         </div>
 
         <article>
-            <h2 id="overview">The Headline Difference</h2>
-            <p><strong>IAS 36:</strong> Compare carrying amount to recoverable amount (the higher of fair value less costs and value-in-use). If carrying exceeds recoverable, impair the difference.</p>
-            <p><strong>ASC 350:</strong> Step 1: Compare fair value of reporting unit to carrying amount (including goodwill). If fair value exceeds carrying, no impairment. Step 2: If fair value is less, compare carrying amount of goodwill to implied fair value of goodwill. If carrying exceeds implied, impair.</p>
-            <p><strong>Key insight:</strong> IFRS allows value-in-use (management's internal projections, often higher). ASC requires market fair value (market-based, often lower, especially in down markets). Result: IFRS goodwill often survives; ASC goodwill gets written down.</p>
+            <h2 id="headline-difference">The core difference: recoverable amount vs fair value</h2>
+            <p>The headline difference is one of measurement base. <strong>IAS 36 measures against recoverable amount</strong> — the higher of fair value less costs of disposal (FVLCD) and value in use (VIU) — while <strong>ASC 350 measures against fair value</strong> of the reporting unit alone. Because value in use is built from the entity's own budgeted cash flows and can legitimately exceed a market price, and because IAS 36 also deducts costs of disposal from fair value while ASC 350 does not, the same business can generate a different loss under each framework.</p>
+            <p>Under IAS 36, goodwill acquired in a business combination is allocated to the cash-generating units (CGUs) expected to benefit from the synergies of the combination (IAS 36 para 80) and tested at least annually (IAS 36 para 90, 96). The test is a single comparison: if the carrying amount of a CGU exceeds its recoverable amount, the difference is an impairment loss (IAS 36 para 59). Recoverable amount is defined in IAS 36 para 6 as the higher of FVLCD and VIU, and para 18–19 confirm you only need to measure the second figure if the first is already below carrying amount.</p>
+            <p>Under ASC 350, goodwill is tested at the reporting unit level. Following ASU 2017-04, the two-step model was abolished for most entities: there is now a single quantitative comparison of the reporting unit's carrying amount (including goodwill) to its fair value, with the impairment loss equal to that excess but limited to the goodwill allocated to the unit (ASC 350-20-35-8B). Entities may first perform an optional qualitative assessment — the so-called "Step 0" — to decide whether the quantitative test is even necessary (ASC 350-20-35-3A).</p>
+            <div class="callout">
+                <p><strong>One-line summary.</strong> IAS 36 asks "can this CGU still recover its carrying amount, whether through use or sale?" ASC 350 asks the narrower market question "what is this reporting unit worth today?" The IAS 36 value-in-use option and its deduction of disposal costs are the two structural reasons the losses diverge.</p>
+            </div>
+            <p>A quick orientation before the mechanics:</p>
+            <table>
+                <tr><th>Feature</th><th>IAS 36 (IFRS)</th><th>ASC 350 (US GAAP)</th></tr>
+                <tr><td>Unit of account</td><td>Cash-generating unit / group of CGUs (para 80)</td><td>Reporting unit (operating segment or one level below)</td></tr>
+                <tr><td>Measurement base</td><td>Recoverable amount = higher of FVLCD and VIU (para 6)</td><td>Fair value of the reporting unit (ASC 820)</td></tr>
+                <tr><td>Management's own cash flows?</td><td>Yes — value in use is permitted (para 30–31)</td><td>No — market-participant fair value only</td></tr>
+                <tr><td>Number of steps</td><td>One (para 59)</td><td>One since ASU 2017-04 (previously two)</td></tr>
+                <tr><td>Loss cap</td><td>Loss can exceed goodwill and hit other CGU assets pro rata (para 104)</td><td>Loss capped at goodwill of the reporting unit (350-20-35-8B)</td></tr>
+                <tr><td>Costs of disposal</td><td>Deducted from fair value (FVLCD)</td><td>Not deducted</td></tr>
+                <tr><td>Reversal allowed?</td><td>Never for goodwill (para 124)</td><td>Never (350-20-35-13)</td></tr>
+                <tr><td>Amortisation alternative?</td><td>No</td><td>Yes for eligible private companies (350-20 alternative)</td></tr>
+            </table>
+            <p>For the underlying mechanics of IAS 36 in isolation, see our <a href="https://www.uqconsulting.org/blog/ias-36-impairment-of-assets-complete-guide.html">complete IAS 36 impairment guide</a>; for the broader framework picture, the <a href="https://www.uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">IFRS vs US GAAP comparison</a> puts goodwill alongside leases, revenue and financial instruments.</p>
 
-            <h2 id="ifrs-method">IAS 36: The One-Step Test</h2>
-            <p><strong>Step 1: Determine Recoverable Amount</strong></p>
-            <p>Recoverable amount = Higher of:</p>
-            <ul>
-                <li><strong>Fair value less costs of disposal (FVLCD):</strong> What a third party would pay for the unit, less costs to sell</li>
-                <li><strong>Value-in-use (VIU):</strong> PV of cash flows management expects to generate from continued use</li>
-            </ul>
-            <p><strong>Step 2: Compare and Impair</strong></p>
-            <p>If carrying amount &gt; recoverable amount, impair the difference to goodwill.</p>
-            <p class="ref">Reference: IAS 36 paragraphs 18— 5.</p>
-
-            <h2 id="asc-method">ASC 350: The Two-Step Test</h2>
-            <p><strong>Step 1: Compare Fair Value to Carrying Amount</strong></p>
-            <p>Fair value of reporting unit &gt; Carrying amount (including goodwill)? → No impairment.</p>
-            <p>Fair value of reporting unit &lt; Carrying amount? → Proceed to Step 2.</p>
-            <p><strong>Step 2: Calculate Implied Goodwill Value</strong></p>
-            <p>Implied goodwill = Fair value of reporting unit − Fair value of identifiable net assets.</p>
-            <p>If carrying amount of goodwill &gt; implied goodwill value, impair the difference.</p>
-            <p class="ref">Reference: ASC 350-20-35-3 onwards.</p>
-
-            <h2 id="value-in-use">Value-in-Use vs Fair Value: Why It Matters</h2>
-            <p><strong>Value-in-use (IFRS):</strong> Uses entity-specific assumptions (growth rates, margins, terminal values based on management's budget). Often reflects optimistic internal views. Can be higher than market fair value.</p>
-            <p><strong>Fair value (ASC):</strong> Market-based (what a willing buyer would pay). Reflects current market conditions, not management's view. Often conservative.</p>
-            <p><strong>In a down market:</strong> Fair value drops 20— 0%; VIU may drop only 10% (because management believes a recovery is coming). This divergence creates audit risk.</p>
-
-            <h2 id="worked-example">Worked Example: Acquisition Impairment</h2>
-            <div class="example-box">
-                <h4 id="scenario-software-company-acquired-for-50m">Scenario: Software Company Acquired for £50M</h4>
-                <p><strong>Acquisition details (Jan 2024):</strong></p>
-                <ul>
-                    <li>Purchase price: £50M</li>
-                    <li>Fair value of identifiable net assets: £30M</li>
-                    <li>Goodwill recognised: £20M</li>
-                </ul>
-                <p><strong>Impairment testing (Dec 2025, Year 2 of ownership):</strong> Market downturn; software spending falling. Carrying amount of reporting unit: £50M (assume no depreciation for simplicity).</p>
-                <p><strong>Fair value estimate:</strong> £40M (market comparables, likely buyer interest).</p>
-                <p><strong>Fair value of identifiable net assets:</strong> £32M (updated valuations).</p>
-                <p><strong>IAS 36 Analysis:</strong></p>
-                <ul>
-                    <li>FVLCD = £40M − £1M (disposal costs) = £39M</li>
-                    <li>VIU = PV of cash flows (5-year forecast + terminal): £38M (management assumes 8% growth, 3-year recovery)</li>
-                    <li>Recoverable amount = Higher of £39M and £38M = £39M</li>
-                    <li>Carrying amount of unit: £50M</li>
-                    <li><strong>Impairment: £50M − £39M = £11M goodwill write-down</strong></li>
-                </ul>
-                <p><strong>ASC 350 Analysis:</strong></p>
-                <ul>
-                    <li>Step 1: Fair value (£40M) &lt; Carrying amount (£50M) → Proceed to Step 2</li>
-                    <li>Step 2: Implied goodwill = £40M − £32M = £8M</li>
-                    <li>Carrying goodwill: £20M</li>
-                    <li><strong>Impairment: £20M − £8M = £12M goodwill write-down</strong></li>
-                </ul>
-                <p><strong>Outcome:</strong> Both standards result in significant write-downs (£11M vs £12M), but IFRS is marginally more lenient because VIU is £38M (management's view) vs fair value £40M (market). If management is really optimistic (VIU £42M), IFRS impairment drops to £9M, while ASC stays at £12M.</p>
+            <h2 id="cgu-reporting-unit">Identifying the CGU / reporting unit and allocating goodwill</h2>
+            <p>Because goodwill generates no cash flows of its own, both frameworks force it down into a larger unit for testing. The identification of that unit is the single most consequential judgement in the whole exercise — a wider unit lets a strong business absorb a weak one and hide a loss, while a narrow unit exposes it.</p>
+            <h3>Cash-generating units under IAS 36</h3>
+            <p>A CGU is the smallest identifiable group of assets that generates cash inflows largely independent of the cash inflows from other assets (IAS 36 para 6, 66). Independence of cash <em>inflows</em> is the test — the existence of an active market for the output is strong evidence a CGU exists even where output is used internally (para 70). CGUs must be identified consistently from period to period (para 72).</p>
+            <p>Goodwill itself cannot be tested at CGU level unless it can be allocated to that CGU on a reasonable and consistent basis. IAS 36 para 80 requires goodwill to be allocated to each CGU (or group of CGUs) that is expected to benefit from the synergies of the combination, and para 80(b) caps that grouping at the operating-segment level (per IFRS 8) — this is the largest unit at which goodwill may be monitored internally. Para 81–82 deal with the practicalities where the initial allocation cannot be completed before the first year-end.</p>
+            <h3>Reporting units under ASC 350</h3>
+            <p>A reporting unit is an operating segment (as defined under ASC 280) or one level below it — a "component" — where discrete financial information is available and segment management regularly reviews it. Components with similar economic characteristics are aggregated. In practice reporting units are frequently <em>larger</em> than IAS 36 CGUs, which is one reason US GAAP goodwill can survive where IFRS goodwill would not: a bigger unit carries more "headroom" (the excess of recoverable amount or fair value over carrying amount) to absorb a decline before goodwill is touched.</p>
+            <div class="callout">
+                <p><strong>Audit focus.</strong> Reallocating goodwill to a larger unit, or merging CGUs / reporting units between periods, is a classic way to conceal an emerging impairment. IAS 36 para 87 and 90 require goodwill to be reallocated on a relative-value basis when a business within a CGU is disposed of or the entity reorganises its reporting structure — auditors should trace those movements carefully.</p>
             </div>
 
-            <h2 id="cash-generating">Cash-Generating Units vs Reporting Units</h2>
-            <p><strong>IAS 36:</strong> Tests goodwill at the cash-generating unit (CGU) level — the smallest group of assets generating independent cash inflows.</p>
-            <p><strong>ASC 350:</strong> Tests at the reporting unit level — typically aligns with operating segments.</p>
-            <p><strong>Audit implication:</strong> IFRS may result in more granular impairment testing (more CGUs = more write-downs if individual units underperform). ASC is more lenient (larger reporting units can offset underperformers).</p>
+            <h2 id="when-tested">When is goodwill tested — annual test plus triggers</h2>
+            <p>Both frameworks require goodwill to be tested at least once a year, and again whenever events suggest it may be impaired. The annual test is a floor, not a ceiling.</p>
+            <p>IAS 36 para 10(b) requires goodwill acquired in a business combination — and any indefinite-life intangible — to be tested for impairment annually, irrespective of whether any indicator exists, and additionally whenever there is an indicator of impairment (para 9). The annual test may be performed at any time in the year provided it is done at the same time each year (para 96). At each reporting date the entity must assess the external and internal indicators listed in para 12 — a significant decline in market capitalisation below net assets, adverse market or technological change, rising discount rates, evidence of obsolescence or physical damage, and worse-than-budgeted economic performance.</p>
+            <p>ASC 350 similarly mandates an annual test at the same date each year, but adds a screening layer: under the optional qualitative Step 0 (ASC 350-20-35-3A), an entity assesses whether it is "more likely than not" that fair value is less than carrying amount; if not, no quantitative test is required that year. A triggering event between annual dates — a lost major customer, a regulatory change, a sustained share-price fall — forces an interim quantitative test regardless. Eligible private companies electing the ASC 350-20 amortisation alternative amortise goodwill (generally over ten years or less) and test only when a triggering event occurs, which dramatically reduces the testing burden.</p>
 
-            <h2 id="discount-rate">Discount Rate Assumptions</h2>
-            <p><strong>IAS 36:</strong> Uses a pre-tax discount rate reflecting the asset-specific risks (WACC adjusted for risk).</p>
-            <p><strong>ASC 350:</strong> Uses post-tax discount rate (or pre-tax, but adjusted differently).</p>
-            <p>Small differences in discount rate produce large differences in VIU/impairment amounts. A 1% difference in discount rate can move impairment by £1— M for a £20M goodwill balance.</p>
+            <h2 id="calculation">The calculation: VIU vs FVLCD (IAS 36) vs single-step (ASC 350)</h2>
+            <p>The calculation is where the two models physically diverge. IAS 36 gives you two roads to recoverable amount and lets you take the higher; ASC 350 gives you one.</p>
+            <h3>IAS 36 — fair value less costs of disposal</h3>
+            <p>FVLCD is the price that would be received to sell the CGU in an orderly transaction between market participants (aligned to IFRS 13), less the incremental costs directly attributable to the disposal — legal fees, stamp duty, transaction costs (IAS 36 para 28). It is a market-based figure and, crucially, is stated <em>net</em> of those disposal costs.</p>
+            <h3>IAS 36 — value in use</h3>
+            <p>VIU is the present value of the future cash flows expected to be derived from the CGU (IAS 36 para 6, 30). Para 33 requires cash-flow projections based on reasonable and supportable assumptions, on the most recent budgets/forecasts approved by management (normally a maximum of five years, para 33(b)), extrapolated beyond that using a steady or declining growth rate that does not exceed the long-term average growth rate for the products, industries or country (para 33(c)). Para 50 excludes cash flows from future restructurings to which the entity is not yet committed and from improving or enhancing the asset's performance, and excludes financing cash flows and tax. The discount rate is a <strong>pre-tax</strong> rate reflecting current market assessments of the time value of money and the risks specific to the asset (para 55–56). Getting from a post-tax WACC to a defensible pre-tax rate is itself a frequent audit battleground — see our dedicated <a href="https://www.uqconsulting.org/blog/ias-36-value-in-use-calculation.html">value-in-use calculation walkthrough</a>.</p>
+            <h3>ASC 350 — single-step fair value</h3>
+            <p>ASC 350 measures the reporting unit's fair value under ASC 820 — an exit price reflecting market-participant assumptions, typically derived from an income approach (discounted post-tax cash flows), a market approach (guideline company or transaction multiples), or a blend. There is no "value in use" concept and no deduction for disposal costs. The impairment loss is simply the excess of carrying amount over fair value, floored at zero and capped at the unit's goodwill (ASC 350-20-35-8B). Any residual decline beyond goodwill is <em>not</em> recognised — the other assets of the reporting unit are left alone, which is the mirror image of the IAS 36 pro-rata cascade below.</p>
 
-            <h2 id="audit-implications">Audit Implications and Red Flags</h2>
-            <h3 id="for-auditors">For auditors:</h3>
+            <h2 id="worked-example-ias36">Worked example 1: IAS 36 CGU impairment with journals</h2>
+            <div class="example-box">
+                <h4>Facts — Northwind Group, "Meridian" CGU, year ended 31 December 2025</h4>
+                <p>Northwind acquired the Meridian business in 2023 and allocated <strong>£20.0m of goodwill</strong> to the Meridian CGU under IAS 36 para 80. After a demand shock in 2025, management runs the annual test. Carrying amounts of the CGU at 31 December 2025:</p>
+                <table>
+                    <tr><th>CGU asset</th><th>Carrying amount</th></tr>
+                    <tr><td>Goodwill</td><td>£20.0m</td></tr>
+                    <tr><td>Brand and customer intangibles (finite life)</td><td>£15.0m</td></tr>
+                    <tr><td>Property, plant &amp; equipment</td><td>£25.0m</td></tr>
+                    <tr><td>Net working capital and other</td><td>£10.0m</td></tr>
+                    <tr><td><strong>Total carrying amount of CGU</strong></td><td><strong>£70.0m</strong></td></tr>
+                </table>
+                <p><strong>Recoverable amount (IAS 36 para 6, 18):</strong></p>
+                <ul>
+                    <li>Fair value £54.0m, less costs of disposal £2.0m → <strong>FVLCD = £52.0m</strong></li>
+                    <li>Value in use (5-year board-approved forecast, 2.0% terminal growth, 12.0% pre-tax discount rate per para 55) → <strong>VIU = £55.0m</strong></li>
+                    <li>Recoverable amount = higher of £52.0m and £55.0m = <strong>£55.0m</strong></li>
+                </ul>
+                <p><strong>Impairment (para 59, 104):</strong> Carrying £70.0m − recoverable £55.0m = <strong>£15.0m loss</strong>.</p>
+                <p><strong>Allocation order (para 104):</strong> the loss is applied to the goodwill of the CGU first. Goodwill is £20.0m, so the whole £15.0m is absorbed by goodwill; the brand, PP&amp;E and working capital are untouched. Goodwill falls from £20.0m to £5.0m.</p>
+                <p><strong>Journal entry:</strong></p>
+                <table>
+                    <tr><th>Account</th><th>Dr</th><th>Cr</th></tr>
+                    <tr><td>Impairment loss (profit or loss)</td><td>£15.0m</td><td></td></tr>
+                    <tr><td>Goodwill (accumulated impairment)</td><td></td><td>£15.0m</td></tr>
+                </table>
+                <p><strong>Variation — when the loss exceeds goodwill.</strong> Suppose recoverable amount were only £46.0m, giving a £24.0m loss. Para 104 eliminates goodwill in full first (£20.0m), leaving £4.0m to allocate pro rata across the other CGU assets on a carrying-amount basis — but para 105 forbids writing any asset below the highest of its own FVLCD, its VIU, and zero. Remaining assets total £50.0m (intangibles £15.0m + PP&amp;E £25.0m + working capital £10.0m). Assuming none breaches its para 105 floor, the £4.0m is spread:</p>
+                <table>
+                    <tr><th>Asset</th><th>Basis</th><th>Pro-rata share of £4.0m</th></tr>
+                    <tr><td>Intangibles</td><td>15.0 / 50.0</td><td>£1.2m</td></tr>
+                    <tr><td>PP&amp;E</td><td>25.0 / 50.0</td><td>£2.0m</td></tr>
+                    <tr><td>Working capital*</td><td>10.0 / 50.0</td><td>£0.8m</td></tr>
+                    <tr><td><strong>Total</strong></td><td></td><td><strong>£4.0m</strong></td></tr>
+                </table>
+                <p style="font-size:0.85em;color:#8593a8;">*In practice monetary working-capital items are usually already carried at recoverable value and excluded, pushing more of the loss onto PP&amp;E and intangibles; shown here purely to illustrate the pro-rata mechanic of para 104.</p>
+            </div>
+
+            <h2 id="worked-example-asc350">Worked example 2: same facts under ASC 350</h2>
+            <div class="example-box">
+                <h4>Same Meridian business, now a US GAAP reporting unit</h4>
+                <p>Take the identical numbers, but assume Meridian is a <strong>reporting unit</strong> under ASC 350 and Northwind files under US GAAP. The single-step test compares the reporting unit's carrying amount to its fair value.</p>
+                <ul>
+                    <li>Carrying amount of reporting unit (incl. goodwill) = <strong>£70.0m</strong></li>
+                    <li>Fair value of reporting unit (ASC 820, no deduction for disposal costs) = <strong>£54.0m</strong></li>
+                    <li>Excess of carrying over fair value = £70.0m − £54.0m = <strong>£16.0m</strong></li>
+                    <li>Goodwill allocated to the reporting unit = £20.0m → loss cap not breached (ASC 350-20-35-8B)</li>
+                    <li><strong>Impairment loss = £16.0m</strong>, all applied to goodwill; goodwill falls from £20.0m to £4.0m</li>
+                </ul>
+                <p><strong>Journal entry:</strong></p>
+                <table>
+                    <tr><th>Account</th><th>Dr</th><th>Cr</th></tr>
+                    <tr><td>Goodwill impairment loss (income statement)</td><td>£16.0m</td><td></td></tr>
+                    <tr><td>Goodwill</td><td></td><td>£16.0m</td></tr>
+                </table>
+                <p><strong>Why £16.0m under ASC 350 but £15.0m under IAS 36?</strong> Two reasons, and they compound:</p>
+                <ul>
+                    <li><strong>Value in use is unavailable under ASC 350.</strong> IAS 36 could use VIU of £55.0m, which was higher than the £54.0m market fair value. ASC 350 is stuck with the £54.0m fair value.</li>
+                    <li><strong>Disposal costs are not deducted under ASC 350.</strong> IAS 36's FVLCD (£52.0m) was net of the £2.0m disposal costs, but here fair value governs the IAS 36 answer only if it beats VIU — it did not. ASC 350 compares straight to the gross £54.0m fair value.</li>
+                </ul>
+                <p><strong>Net effect:</strong> ASC 350 records a £1.0m larger write-down (£16.0m vs £15.0m) on identical economics. Flip the facts — let VIU collapse to £50.0m so market fair value governs both — and IAS 36's answer would move to £70.0m − £52.0m FVLCD = £18.0m, now <em>larger</em> than ASC 350's £16.0m because of the disposal-cost deduction. The direction of the difference depends entirely on which measurement road wins.</p>
+            </div>
+            <p>Want to pressure-test a live fact pattern like this against both frameworks? Run it through <a href="https://www.uqconsulting.org/gaap-compare.html">GAAP Compare</a> or talk it through in the <a href="https://www.uqconsulting.org/meeting-room.html">Meeting Room</a>.</p>
+
+            <h2 id="no-reversal">Why goodwill impairment is never reversed</h2>
+            <p>Once written down, goodwill stays down — permanently — under both frameworks. IAS 36 para 124 states it plainly: an impairment loss recognised for goodwill shall not be reversed in a subsequent period. ASC 350-20-35-13 imposes the same prohibition. This is not an oversight; it is a deliberate anti-abuse rule.</p>
+            <p>The logic is that any apparent later recovery in the value of a CGU or reporting unit reflects <em>internally generated</em> goodwill rather than a rebound of the acquired goodwill. Internally generated goodwill fails the recognition criteria of IAS 38 para 48 (it is not an identifiable resource controlled by the entity that can be measured reliably at cost). Reinstating goodwill would therefore be capitalising exactly the kind of self-generated intangible that both frameworks forbid. It also removes an obvious earnings-management lever — writing goodwill down in a bad year and writing it back up in a good one.</p>
+            <div class="callout">
+                <p><strong>Contrast with other assets.</strong> IAS 36 para 114 <em>does</em> allow reversals of impairment on most other assets (PP&amp;E, finite-life intangibles) when the estimates used to determine recoverable amount change — but goodwill is carved out entirely. So in worked example 1's pro-rata variation, if conditions later improve, the PP&amp;E and intangible write-downs could reverse, but the £20.0m of goodwill eliminated never can.</p>
+            </div>
+
+            <h2 id="disclosure">Disclosure requirements (IAS 36 para 130, 134)</h2>
+            <p>IAS 36's disclosure regime is one of the most demanding in IFRS, precisely because the numbers rest on unobservable management assumptions. Two paragraphs carry most of the weight.</p>
+            <p><strong>Para 130 — for each material impairment recognised or reversed in the period:</strong> the events and circumstances that led to it; the amount recognised; for an individual asset, its nature and segment; for a CGU, a description of the unit, the amount by class of asset and by segment, and any change in the aggregation of assets; whether recoverable amount is FVLCD or VIU; if FVLCD, the valuation technique and key assumptions and the level in the IFRS 13 fair-value hierarchy; and if VIU, the discount rate(s) used in current and prior estimates.</p>
+            <p><strong>Para 134 — for every CGU carrying significant goodwill or indefinite-life intangibles:</strong> the carrying amount of goodwill and of indefinite-life intangibles allocated to the unit; the basis on which recoverable amount was determined; the key assumptions and management's approach to setting each; the period over which cash flows are projected; the growth rate used to extrapolate; and the discount rate applied. Para 134(f) then requires a <strong>sensitivity disclosure</strong> where a reasonably possible change in a key assumption would cause the carrying amount to exceed recoverable amount — the amount of headroom and the change that would erase it.</p>
+            <p>ASC 350 disclosures are lighter on assumption granularity but still require the facts and circumstances of any impairment, the amount, and the method of determining fair value; ASC 350-20-50 also requires disclosure of the reporting units and goodwill by segment, and where a quantitative test was performed on a unit with a positive-but-thin cushion, that fact and the amount of goodwill at risk. For a comparison of the two frameworks' broader disclosure philosophies, see the <a href="https://www.uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">IFRS vs US GAAP comparison</a>.</p>
+
+            <h2 id="fs-impact">Financial-statement and ratio impact</h2>
+            <p>A goodwill impairment is a non-cash charge, but its reporting footprint is large and immediate. It hits the income statement as an operating (or separately disclosed) expense, reducing operating profit, pre-tax profit and net income in the period; because goodwill amortisation is not deductible in most jurisdictions and impairment usually is not either, there is typically <strong>no offsetting tax credit</strong>, so the hit to net income is close to the gross figure.</p>
+            <p>On the balance sheet, total assets and equity both fall by the impairment amount. That has knock-on effects across the ratio suite that lenders and analysts watch:</p>
             <ul>
-                <li><strong>Challenge VIU assumptions:</strong> Growth rates, terminal values, margins. Are they backed by external data or just management optimism?</li>
-                <li><strong>Fair value benchmarking:</strong> If fair value is higher than VIU, question why. Market should reflect reality better than internal models.</li>
-                <li><strong>Discount rate:</strong> Build-up from scratch; don't accept management's rate without challenge. Small changes matter.</li>
-                <li><strong>IFRS vs ASC divergence:</strong> If testing under both standards, document why results differ. Market fair value should generally be stricter.</li>
-                <li><strong>Subsequent quarters:</strong> If impairment was avoided in Year 1 but conditions deteriorated, push harder in Year 2. Auditors often challenge deferred write-downs.</li>
+                <li><strong>Return on assets and return on equity</strong> fall in the year of the charge (lower numerator) but can look artificially <em>stronger</em> in later years because the asset and equity bases are now smaller.</li>
+                <li><strong>Gearing / debt-to-equity</strong> rises as equity shrinks — the most common covenant pressure point after a large write-down.</li>
+                <li><strong>Net asset / tangible net worth covenants</strong> can be breached directly; many facility agreements exclude goodwill from tangible net worth, in which case an impairment has no covenant effect but the underlying deterioration it signals usually does.</li>
+                <li><strong>EPS</strong> falls, though analysts routinely present an "adjusted" or "underlying" EPS that strips the charge out — which is itself a red flag if it becomes a recurring adjustment.</li>
             </ul>
-            <h3 id="for-controllers-and-cfos">For controllers and CFOs:</h3>
+            <p>Because the charge is non-cash, operating cash flow and EBITDA are unaffected, which is exactly why a goodwill impairment is often read less as a cash event and more as management publicly conceding that a past acquisition was overpriced or has underperformed. That signalling value is what makes it market-moving.</p>
+
+            <h2 id="red-flags">Red flags for auditors (ISA 540)</h2>
+            <p>Goodwill impairment is an accounting estimate with high estimation uncertainty, so it falls squarely within ISA 540 (Revised), <em>Auditing Accounting Estimates and Related Disclosures</em>. The standard requires the auditor to obtain evidence over the method, assumptions and data, and to evaluate whether the estimate is reasonable or misstated. Four recurring findings and the specific procedures that address them:</p>
             <ul>
-                <li>Document your impairment model thoroughly. Auditors will rebuild it from scratch.</li>
-                <li>If you are IFRS, don't rely solely on VIU. Benchmark to market fair value. Auditors will question if you ignore the market.</li>
-                <li>If underperforming post-acquisition, proactively consider impairment. Delaying a write-down signals weak controls to auditors.</li>
+                <li><strong>Red flag: cash-flow forecasts that management has consistently failed to hit.</strong> The VIU model assumes a sharp recovery that budgets in prior years never delivered. <em>Procedure (ISA 540 para 18, retrospective review):</em> compare prior-year board-approved forecasts to actual outcomes to assess management bias, and challenge whether the current hockey-stick is "reasonable and supportable" under IAS 36 para 33. Persistent optimism is evidence of bias.</li>
+                <li><strong>Red flag: a discount rate that looks too low for the risk.</strong> A modest pre-tax rate flatters VIU and eliminates the impairment. <em>Procedure:</em> independently build the rate — engage a valuation specialist under ISA 620, cross-check the implied WACC against market data and the entity's own borrowing cost, and confirm the pre-tax gross-up is arithmetically consistent (IAS 36 para 55–56). A 1% understatement of the discount rate can swing recoverable amount by a material amount on a long-duration forecast.</li>
+                <li><strong>Red flag: terminal growth or margin assumptions above the long-term market ceiling.</strong> A 4–5% perpetual growth rate in a low-growth economy, or margins well above the peer set. <em>Procedure:</em> benchmark the terminal growth rate to long-run GDP/industry data (para 33(c) caps it at the long-term average), and margin assumptions to external analyst and peer evidence; disaggregate the value of the model that sits in the terminal period.</li>
+                <li><strong>Red flag: thin headroom with no meaningful sensitivity disclosure.</strong> The model clears carrying amount by a whisker, yet the IAS 36 para 134(f) sensitivity note is boilerplate or absent. <em>Procedure:</em> recompute headroom, run your own sensitivities on the discount rate, growth and cash flows, and where a reasonably possible change would trigger an impairment, insist the para 134(f) disclosure quantifies it. Flat contradiction between a share price trading below net assets and a "no impairment" conclusion (IAS 36 para 12(d) indicator) should raise professional scepticism immediately.</li>
             </ul>
+            <div class="callout">
+                <p><strong>Documentation expectation.</strong> Under ISA 540 (Revised) the auditor must stand back and evaluate whether the estimate and its disclosures are reasonable, or a misstatement. Expect to rebuild management's model, not just review it — and to document the specific assumptions where your independent range differs from management's point estimate.</p>
+            </div>
+
+            <h2 id="case-studies">Real-life case studies: Vodafone and Kraft Heinz</h2>
+            <p>Two of the largest goodwill write-downs in corporate history sit neatly on either side of this IFRS/US GAAP divide.</p>
+            <h3>Vodafone — £23.5bn, IAS 36 (IFRS)</h3>
+            <p>For the year ended 31 March 2006, Vodafone Group plc recognised a goodwill impairment of approximately <strong>£23.5 billion</strong> (£23,515m), among the largest ever reported by a UK company. The charge, disclosed in Vodafone's FY2006 results announcement and Annual Report, was driven principally by a reassessment of the recoverable amount of the Group's German and Italian operations, reflecting a lower long-term growth outlook for European mobile than had underpinned the acquisition-era carrying values (the goodwill traced back largely to the 2000 Mannesmann acquisition). It is a textbook IAS 36 case: goodwill allocated to CGUs, tested annually under para 90, written down when recoverable amount fell below carrying amount, and — under para 124 — never reversible even as those operations later stabilised.</p>
+            <p style="font-size:0.9em;color:#5a6b88;"><strong>Source:</strong> Vodafone Group plc, preliminary results and Annual Report for the year ended 31 March 2006 (impairment of goodwill, ~£23.5bn, Germany and Italy).</p>
+            <h3>Kraft Heinz — $15.4bn, ASC 350 (US GAAP)</h3>
+            <p>In the fourth quarter of 2018, The Kraft Heinz Company recorded non-cash impairment charges of approximately <strong>$15.4 billion</strong>, comprising roughly <strong>$7.1 billion of goodwill impairment</strong> — primarily in its U.S. Refrigerated and Canada Retail reporting units — and about <strong>$8.3 billion of indefinite-life intangible-asset impairment</strong>, principally on the Kraft and Oscar Mayer brands. The charge, reported in Kraft Heinz's Form 10-K for fiscal 2018 (filed June 2019), followed the post-merger cost-cutting programme and reflected lower fair-value estimates for those reporting units and brands. It is a clean ASC 350 illustration: the goodwill portion measured by comparing each reporting unit's carrying amount to its fair value, capped at the goodwill allocated to that unit, with the brand write-downs handled as separate indefinite-life intangible impairments.</p>
+            <p style="font-size:0.9em;color:#5a6b88;"><strong>Source:</strong> The Kraft Heinz Company, Form 10-K for fiscal year 2018 (filed 2019); Q4 2018 non-cash impairment of ~$15.4bn (~$7.1bn goodwill + ~$8.3bn intangibles).</p>
+            <div class="callout">
+                <p><strong>The through-line.</strong> Both write-downs were the accounting system doing what it is designed to do — forcing a public admission that a large acquisition was worth less than its carrying value — and in both, the goodwill impairment was irreversible under para 124 / 350-20-35-13. The difference is purely mechanical: Vodafone tested CGUs against recoverable amount; Kraft Heinz tested reporting units against fair value.</p>
+            </div>
 
             <div class="cta-box">
-                <h3 id="need-help-with-goodwill-impairment-testing">Need help with goodwill impairment testing?</h3>
-                <p>Use GAAP Compare to research IAS 36 vs ASC 350 treatment, or bring your acquisition to the Meeting Room for an expert walkthrough.</p>
+                <h3>Need help with goodwill impairment testing?</h3>
+                <p>Use GAAP Compare to research IAS 36 vs ASC 350 treatment side by side, or bring your acquisition and impairment model to the Meeting Room for an expert walkthrough.</p>
                 <a href="https://www.uqconsulting.org/gaap-compare.html" class="cta-button">Try GAAP Compare Free →</a>
             </div>
 
-            <h2 id="faq">Frequently Asked Questions</h2>
+            <h2 id="faq">Frequently asked questions</h2>
             <div class="faq-item">
-                <h3 id="what-is-the-main-difference-between-ifrs-36-and-asc-350-goodwill-impairment">What is the main difference between IAS 36 and ASC 350 goodwill impairment?</h3>
-                <p>IAS 36 uses one-step test (fair value or value-in-use). ASC 350 uses two-step test (fair value → implied goodwill). IFRS allows value-in-use (often higher); ASC requires market fair value (often lower).</p>
+                <h3>What is the main difference between IAS 36 and ASC 350 goodwill impairment?</h3>
+                <p>IAS 36 compares a cash-generating unit's carrying amount to its recoverable amount — the higher of fair value less costs of disposal and value in use (IAS 36 para 18). ASC 350, since ASU 2017-04, compares a reporting unit's carrying amount to its fair value in a single step and books the shortfall, capped at the goodwill balance. Because IAS 36 permits value in use (management's own cash flows) and deducts disposal costs, IFRS can report a smaller loss on identical economics.</p>
             </div>
             <div class="faq-item">
-                <h3 id="what-is-valueinuse">What is value-in-use?</h3>
-                <p>PV of future cash flows the asset is expected to generate, using the entity's discount rate. Management-specific; often higher than market fair value.</p>
+                <h3>What is value in use under IAS 36?</h3>
+                <p>Value in use is the present value of the future cash flows a CGU is expected to generate from continuing use and eventual disposal (IAS 36 para 6, 30), discounted at a pre-tax rate reflecting asset-specific risk (para 55). It uses management's own budgeted cash flows (para 33), so it can be higher than a market-based fair value — which is precisely why it can produce a smaller impairment than ASC 350.</p>
             </div>
             <div class="faq-item">
-                <h3 id="can-ifrs-36-and-asc-350-produce-different-impairment-amounts">Can IAS 36 and ASC 350 produce different impairment amounts?</h3>
-                <p>Yes. IFRS can use value-in-use (higher); ASC uses fair value (lower). In down markets, ASC write-downs are typically larger.</p>
+                <h3>Did ASC 350 eliminate the old two-step goodwill impairment test?</h3>
+                <p>Yes. ASU 2017-04 removed Step 2 — the hypothetical purchase-price allocation used to compute "implied" goodwill. Public SEC filers apply the single-step model for fiscal years beginning after 15 December 2019 (later dates for other entities). The loss is now the excess of a reporting unit's carrying amount over its fair value, limited to the goodwill allocated to that unit (ASC 350-20-35-8B).</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can IAS 36 and ASC 350 produce different impairment amounts for the same business?</h3>
+                <p>Yes, and worked examples 1 and 2 above show it: identical facts gave £15.0m under IAS 36 but £16.0m under ASC 350. The drivers are that IAS 36 allows value in use (often higher than market fair value), deducts disposal costs, and tests at CGU rather than reporting-unit level. The direction of the difference depends on which measurement base wins.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can a goodwill impairment ever be reversed?</h3>
+                <p>No, under neither framework. IAS 36 para 124 expressly prohibits reversing an impairment recognised for goodwill, and ASC 350-20-35-13 does the same. Any later recovery is treated as internally generated goodwill, which cannot be recognised under IAS 38 para 48. Note that IAS 36 para 114 does allow reversals for most <em>other</em> assets — just not goodwill.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How often must goodwill be tested for impairment?</h3>
+                <p>At least annually under both frameworks (IAS 36 para 10; ASC 350 annual test), and additionally whenever an indicator or triggering event arises (IAS 36 para 9, 12). ASC 350 permits an optional qualitative "Step 0" (350-20-35-3A) to avoid the quantitative test where impairment is not more likely than not. Eligible private companies may instead amortise goodwill and test only on a triggering event (ASC 350-20 alternative).</p>
+            </div>
+            <div class="faq-item">
+                <h3>In what order is an IAS 36 impairment loss allocated within a CGU?</h3>
+                <p>Goodwill first, then the rest pro rata. IAS 36 para 104 reduces the goodwill allocated to the CGU to nil before any other asset is touched; the remaining loss is then allocated to the other assets on a carrying-amount basis. Para 105 prevents writing any individual asset below the highest of its fair value less costs of disposal, its value in use, and zero.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Does IAS 36 use a pre-tax or post-tax discount rate?</h3>
+                <p>IAS 36 para 55 requires a pre-tax rate reflecting the time value of money and asset-specific risk. In practice firms derive a post-tax WACC and gross it up to a pre-tax equivalent, which is a common audit challenge point. ASC 350 fair value is typically built on post-tax, market-participant cash flows and discount rates under ASC 820.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Why is a goodwill impairment considered market-moving if it is non-cash?</h3>
+                <p>Because it is a public admission. The charge does not affect operating cash flow or EBITDA, but it signals that management now believes a past acquisition is worth materially less than its carrying value. It also raises gearing (equity falls) and can pressure net-worth covenants, so lenders and analysts read it as a lead indicator of underlying deterioration.</p>
             </div>
 
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
-                    <h4 id="about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</h4>
-                    <p>Usman has audited goodwill impairment across mergers, acquisitions, and portfolio companies. He specialises in challenging management assumptions in VIU models and benchmarking against market fair values.</p>
+                    <h4>About the author — Usman Qureshi (ACCA, ACA)</h4>
+                    <p>Usman is a Big-4-trained chartered accountant who has audited goodwill impairment across mergers, acquisitions and portfolio companies under IFRS and US GAAP. He specialises in challenging management's value-in-use assumptions, rebuilding discount rates from first principles, and benchmarking VIU against market fair value.</p>
                 </div>
             </div>
 
             <div class="related">
-                <h3 id="related-resources">Related resources</h3>
-                <a href="https://www.uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">→ Back to IFRS vs US GAAP Comparison</a>
-                <a href="https://www.uqconsulting.org/meeting-room.html">→ Ask an expert (free)</a>
+                <h3>Related resources</h3>
+                <a href="https://www.uqconsulting.org/blog/ias-36-impairment-of-assets-complete-guide.html">→ IAS 36 Impairment of Assets — complete guide</a>
+                <a href="https://www.uqconsulting.org/blog/ias-36-value-in-use-calculation.html">→ IAS 36 value-in-use calculation walkthrough</a>
+                <a href="https://www.uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">→ IFRS vs US GAAP comparison</a>
+                <a href="https://www.uqconsulting.org/gaap-compare.html">→ GAAP Compare — research IAS 36 vs ASC 350 free</a>
+                <a href="https://www.uqconsulting.org/meeting-room.html">→ Meeting Room — ask an expert (free)</a>
             </div>
 
-            <p class="disclaimer">This guide is simplified for educational purposes. Goodwill impairment testing is complex; outcomes depend on specific facts, assumptions, and judgments. Consult IAS 36 and ASC 350 full text, and your own advisors, before finalising impairment treatment.</p>
-        
-<h2 id="real-life-case-study">Real-Life Case Study: Testing Goodwill Under IAS 36 vs ASC 350</h2>
-<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A dual reporter tests a reporting unit / CGU carrying &pound;50m of goodwill after a downturn.</p>
- <p><strong>The difference.</strong> IAS 36 tests at the CGU level using recoverable amount (higher of FVLCD and value in use), a one-step test. US GAAP (ASC 350, as simplified) compares the reporting unit's fair value to its carrying amount and books the shortfall directly. Because value in use (an entity-specific measure) can exceed fair value, the frameworks can produce a different impairment, or one may impair while the other does not.</p>
- <p><strong>Takeaway.</strong> The measurement base differs (recoverable amount vs fair value) and the unit of account differs (CGU vs reporting unit). Neither framework allows a goodwill-impairment reversal, but they can still disagree on the loss itself.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
-</div>
-
-</article>
+            <p class="disclaimer">This guide is a technical summary for educational purposes and is not a substitute for the full text of IAS 36 and ASC 350 or for professional advice. Goodwill impairment testing turns on specific facts, assumptions and judgements; company figures cited are drawn from public filings and press disclosures and are described as such. Worked examples are illustrative. Consult the standards and your own advisers before finalising any impairment treatment.</p>
+        </article>
     </div>
 </body>
 </html>

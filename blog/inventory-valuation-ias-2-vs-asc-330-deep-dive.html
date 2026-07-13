@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <!-- Google Analytics (GA4) -->
@@ -28,9 +28,63 @@
       "description": "Comprehensive comparison of IAS 2 and ASC 330 inventory accounting standards.",
       "image": "https://www.uqconsulting.org/images/og-image.png",
       "datePublished": "2026-07-04",
-      "dateModified": "2026-07-04",
+      "dateModified": "2026-07-13",
       "author": { "@type": "Person", "name": "Usman Qureshi", "jobTitle": "Chartered Accountant (ACCA, ACA)" },
       "publisher": { "@type": "Person", "name": "Usman Qureshi" }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is LIFO allowed under IFRS?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. IAS 2 paragraph 25 permits only first-in-first-out (FIFO) and weighted average cost for interchangeable items. LIFO was removed in the 2003 revision of IAS 2 because it does not faithfully represent the physical flow of most inventories and can distort the balance sheet. ASC 330 still permits LIFO, FIFO and weighted average, and many US filers use LIFO for the tax advantage it gives in periods of rising prices." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can inventory write-downs be reversed?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Under IAS 2 paragraphs 33 and 34, yes. If the circumstances that caused a write-down no longer exist, or net realisable value recovers, the write-down is reversed up to the original cost, with the reversal recognised as a reduction of the inventory expense. Under US GAAP (ASC 330-10-35-14) the write-down creates a new cost basis and reversal is prohibited, so any later recovery only flows through as lower cost of sales when the goods are sold." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is net realisable value?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Net realisable value (NRV) is the estimated selling price in the ordinary course of business, less the estimated costs of completion and the estimated costs necessary to make the sale (IAS 2 paragraph 6 and 28). It is an entity-specific value, not a market price, so it reflects the actual price the entity expects to achieve." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does ASC 330 still use lower of cost or market?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Only for LIFO and retail-method inventories. After ASU 2015-11, entities that measure inventory on any other basis (FIFO or average cost) use lower of cost and net realisable value, which aligns the measurement base with IAS 2. LIFO and retail-method inventories keep the older lower of cost or market test, where market is replacement cost bounded by a ceiling (NRV) and a floor (NRV less a normal profit margin)." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a LIFO reserve?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The LIFO reserve is the difference between the inventory carrying amount under LIFO and what it would be under FIFO or current replacement cost. US filers must disclose it. In periods of rising prices LIFO reports a lower inventory and lower profit than FIFO. To compare a US LIFO filer with an IFRS company, add the LIFO reserve back to inventory and equity. ExxonMobil, for example, disclosed in its 2023 Form 10-K that the replacement cost of its inventories exceeded their LIFO carrying value by roughly USD 14 billion." }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you account for abnormal waste and idle capacity in inventory?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Both frameworks exclude abnormal costs from inventory. IAS 2 paragraph 16 requires abnormal amounts of wasted materials, labour and overheads, and most storage, administrative and selling costs, to be expensed as incurred. IAS 2 paragraph 13 requires fixed production overheads to be allocated based on normal capacity, so unallocated overhead caused by idle plant or abnormally low production is expensed, not capitalised. ASC 330-10-30-3 to 30-8 reaches the same result." }
+        },
+        {
+          "@type": "Question",
+          "name": "Are borrowing costs included in inventory cost?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Generally no. Both IAS 2 (paragraph 17, referring to IAS 23) and ASC 330 exclude borrowing costs from ordinary inventory. The exception is a qualifying asset that necessarily takes a substantial period of time to get ready for sale, such as maturing whisky or long-cycle manufactured goods, where interest may be capitalised. A financing element in deferred settlement terms is treated as interest expense, not inventory cost." }
+        },
+        {
+          "@type": "Question",
+          "name": "Do IAS 2 and ASC 330 test NRV item by item or by group?",
+          "acceptedAnswer": { "@type": "Answer", "text": "IAS 2 paragraph 29 requires inventories to be written down item by item, though it may be appropriate to group similar or related items. It prohibits writing down a whole class, such as finished goods, or all inventory in a geography, on a blanket basis. ASC 330 permits item, category or total-inventory application depending on the character and composition of the inventory, so US practice can be slightly more aggregated." }
+        },
+        {
+          "@type": "Question",
+          "name": "How does the choice of cost formula affect financial ratios?",
+          "acceptedAnswer": { "@type": "Answer", "text": "In rising prices, LIFO produces a lower ending inventory, higher cost of sales, lower gross margin, lower current ratio and higher inventory turnover than FIFO. FIFO does the opposite. Because IAS 2 bans LIFO, an IFRS company and an otherwise identical US LIFO filer can report materially different gross margins, current ratios and inventory turnover, which is why analysts restate US LIFO filers to a FIFO basis using the disclosed LIFO reserve before comparing them." }
+        }
+      ]
     }
     </script>
 
@@ -66,9 +120,9 @@
         .related { margin-top: 32px; padding-top: 20px; border-top: 2px solid #e4e9f0; }
         .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; display: block; margin-bottom: 6px; }
         .disclaimer { font-size: 0.8em; color: #8593a8; margin-top: 32px; padding-top: 16px; border-top: 1px solid #e4e9f0; font-style: italic; }
-    
 
-    
+
+
 /*TOC_SIDEBAR_START*/
 .toc {
     background: #fff;
@@ -116,128 +170,310 @@
 
     <div class="article-container">
         <h1>Inventory Valuation: IAS 2 vs ASC 330 Deep Dive</h1>
-        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed July 2026 · 9 min read</div>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed July 2026 · reflects IAS 2 and ASC 330 effective as of July 2026 · 16 min read</div>
 
-        <p class="lead">Both IAS 2 and ASC 330 require inventory at the lower of cost and net realisable value (IFRS) or lower of cost and market (ASC). But they differ on method options (LIFO banned under IFRS), write-down reversals (allowed under IFRS, not ASC), and measurement. These differences matter most for manufacturing companies and those with significant obsolete inventory. This guide covers both with worked examples.</p>
+        <p class="lead">IAS 2 measures inventory at the lower of cost and net realisable value; ASC 330 measures most inventory the same way but keeps the older lower of cost or market test for LIFO and retail-method stock. The bigger divergences are that IAS 2 bans LIFO outright and permits write-downs to be reversed, while US GAAP allows LIFO and treats write-downs as permanent. For manufacturers, retailers and any business holding slow-moving or obsolete stock, those two rules can move reported inventory, gross margin and tax by material amounts. This deep dive works through the cost rules, the measurement tests, five full worked examples with journal entries, the auditor red flags, and two real listed-company disclosures (ExxonMobil and Intel).</p>
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#overview">The Core Difference</a></li><li class="toc-l1"><a href="#methods">Cost Methods: LIFO, FIFO, Weighted Average</a></li><li class="toc-l1"><a href="#nrv">Net Realisable Value vs Market Value</a></li><li class="toc-l1"><a href="#worked">Worked Example: Inventory Write-Down and Reversal</a><ul><li class="toc-l3"><a href="#scenario-electronics-inventory-obsolescence">Scenario: Electronics Inventory Obsolescence</a></li></ul></li><li class="toc-l1"><a href="#reversal">Write-Down Reversals: The Key Difference</a></li><li class="toc-l1"><a href="#obsolete">Obsolete Inventory</a></li><li class="toc-l1"><a href="#audit">Audit Implications</a><ul><li class="toc-l2"><a href="#need-help-with-inventory-accounting">Need help with inventory accounting?</a></li></ul></li><li class="toc-l1"><a href="#faq">Frequently Asked Questions</a><ul><li class="toc-l2"><a href="#is-lifo-allowed-under-ifrs">Is LIFO allowed under IFRS?</a></li><li class="toc-l2"><a href="#can-inventory-writedowns-be-reversed">Can inventory write-downs be reversed?</a></li><li class="toc-l2"><a href="#what-is-net-realisable-value">What is net realisable value?</a><ul><li class="toc-l3"><a href="#about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</a></li></ul></li><li class="toc-l2"><a href="#related-resources">Related resources</a></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Valuing Inventory Under IAS 2 vs ASC 330</a></li></ul>
+            <ul><li class="toc-l1"><a href="#core">The core difference</a></li><li class="toc-l1"><a href="#costs">What costs go into inventory?</a></li><li class="toc-l1"><a href="#formulas">Cost formulas: FIFO, weighted average and the LIFO ban</a></li><li class="toc-l1"><a href="#nrv">NRV vs market value</a></li><li class="toc-l1"><a href="#standard-retail">Standard costing and the retail method</a></li><li class="toc-l1"><a href="#worked1">Worked example 1: write-down and reversal</a></li><li class="toc-l1"><a href="#worked2">Worked example 2: overhead absorption and LIFO vs FIFO</a></li><li class="toc-l1"><a href="#reversal">Write-down reversals: the key divergence</a></li><li class="toc-l1"><a href="#disclosure">Disclosure requirements</a></li><li class="toc-l1"><a href="#ratios">Financial-statement and ratio impact</a></li><li class="toc-l1"><a href="#redflags">Red flags for auditors</a></li><li class="toc-l1"><a href="#casestudies">Real-life case studies: ExxonMobil and Intel</a></li><li class="toc-l1"><a href="#faq">Frequently asked questions</a></li></ul>
         </div>
 
         <article>
-            <h2 id="overview">The Core Difference</h2>
-            <p><strong>IAS 2:</strong> Inventory at lower of cost and net realisable value (NRV). NRV = selling price less costs to complete and sell.</p>
-            <p><strong>ASC 330:</strong> Inventory at lower of cost and market. Market = replacement cost, bounded by selling price and NRV.</p>
-            <p><strong>Key divergence:</strong> Write-downs under IFRS can be reversed if circumstances improve; ASC write-downs are permanent.</p>
-
-            <h2 id="methods">Cost Methods: LIFO, FIFO, Weighted Average</h2>
-            <p><strong>IAS 2:</strong> LIFO is <strong>not permitted</strong>. Only FIFO and weighted average.</p>
-            <p><strong>ASC 330:</strong> LIFO, FIFO, and weighted average all permitted.</p>
-            <p><strong>Practical impact:</strong> US companies using LIFO (common in inflationary periods) have a cost advantage under ASC but not under IFRS. Switching from LIFO to FIFO can increase reported profit and inventory value.</p>
-            <p class="ref">Reference: IAS 2 paragraph 25 (FIFO and weighted average cost formulas; LIFO removed in the 2003 revision); ASC 330-10-30.</p>
-
-            <h2 id="nrv">Net Realisable Value vs Market Value</h2>
-            <p><strong>IFRS NRV:</strong> Direct selling price less completion and disposal costs. Straightforward calculation.</p>
-            <p><strong>ASC Market value:</strong> Replacement cost (what it would cost to replace the inventory), bounded by:</p>
+            <h2 id="core">The core difference: lower of cost and NRV vs lower of cost or market</h2>
+            <p>The headline rule is almost the same in both frameworks, and the differences sit just underneath it. IAS 2 paragraph 9 requires inventory to be measured at the <strong>lower of cost and net realisable value (NRV)</strong>. ASC 330 requires the <strong>lower of cost and NRV</strong> for inventory measured on FIFO or average cost, but retains the older <strong>lower of cost or market (LCM)</strong> test for inventory measured under LIFO or the retail method. So the frameworks now converge on the measurement base for most companies, and diverge sharply on three specific mechanics.</p>
+            <p>The three divergences that actually matter in practice are:</p>
             <ul>
-                <li>Upper bound: NRV (not more than selling price less costs)</li>
-                <li>Lower bound: NRV less normal profit margin</li>
+                <li><strong>LIFO.</strong> Prohibited by IAS 2 paragraph 25; permitted by ASC 330-10-30. This is the single largest reconciling item for many US groups.</li>
+                <li><strong>Write-down reversals.</strong> Required by IAS 2 paragraphs 33–34 when NRV recovers; prohibited by ASC 330-10-35-14, which treats a write-down as a new, permanent cost basis.</li>
+                <li><strong>The write-down test itself.</strong> IFRS always uses NRV. US GAAP uses NRV for FIFO/average inventory but the replacement-cost-with-ceiling-and-floor "market" test for LIFO and retail inventory.</li>
             </ul>
-            <p><strong>Difference:</strong> ASC's use of replacement cost can produce a higher valuation than IFRS NRV in some cases.</p>
+            <div class="callout">
+                <strong>One-line summary.</strong> If you remember only three things: IFRS bans LIFO, IFRS reverses write-downs, and US GAAP still runs the ceiling/floor "market" test on its LIFO and retail-method inventory. Everything else in the two standards is broadly aligned.
+            </div>
+            <p class="ref">References: IAS 2 para 9; ASC 330-10-35-1B to 35-1C (measurement) and ASC 330-10-35-14 (new cost basis, no reversal); FASB ASU 2015-11 (which moved non-LIFO/non-retail inventory to lower of cost and NRV).</p>
 
-            <h2 id="worked">Worked Example: Inventory Write-Down and Reversal</h2>
+            <h2 id="costs">What costs go into inventory?</h2>
+            <p>Both standards define inventory cost as everything spent to bring the goods to their present location and condition, and both exclude the same categories of abnormal and period cost. IAS 2 paragraph 10 splits cost into purchase costs, conversion costs and other costs; ASC 330-10-30 uses the same building blocks. The practical work in an audit or a close is deciding what belongs in that number and what must be expensed.</p>
+            <h3>Costs that are capitalised</h3>
+            <ul>
+                <li><strong>Purchase costs</strong> (IAS 2 para 11): purchase price, non-recoverable import duties and taxes, transport, handling and other costs directly attributable to acquisition, <em>less</em> trade discounts, rebates and similar allowances.</li>
+                <li><strong>Conversion costs</strong> (IAS 2 para 12): direct labour, plus a systematic allocation of fixed and variable production overheads incurred in converting materials into finished goods.</li>
+                <li><strong>Fixed production overhead</strong> (IAS 2 para 13): allocated to units of production based on <strong>normal capacity</strong> — the production expected on average over a number of periods under normal conditions. In a low-production year you do <em>not</em> spread the whole fixed overhead over fewer units; the unallocated portion is expensed as a period cost. In an abnormally high-production year the per-unit allocation is reduced so inventory is not measured above cost.</li>
+                <li><strong>Other costs</strong> (IAS 2 para 15): only to the extent incurred in bringing inventory to its present location and condition, for example non-production overheads or design costs for a specific customer.</li>
+            </ul>
+            <h3>Costs that are excluded (expensed as incurred)</h3>
+            <p>IAS 2 paragraph 16 lists the exclusions, and ASC 330-10-30-3 to 30-8 reaches the same answers:</p>
+            <ul>
+                <li>Abnormal amounts of wasted materials, labour or other production costs;</li>
+                <li>Storage costs, unless necessary in the production process before a further production stage (so a wine or whisky maturing warehouse can capitalise, a finished-goods warehouse generally cannot);</li>
+                <li>Administrative overheads that do not contribute to bringing inventories to their present location and condition;</li>
+                <li>Selling costs.</li>
+            </ul>
+            <h3>Borrowing costs and financing</h3>
+            <p>Ordinary inventory does not carry interest. IAS 2 paragraph 17 points to IAS 23, under which borrowing costs are only capitalised for a <strong>qualifying asset</strong> that necessarily takes a substantial period of time to get ready for sale (long-maturing spirits, aged cheese, long-cycle manufacturing). ASC 330 and ASC 835-20 reach a similar position. Where inventory is bought on deferred settlement terms that contain a financing element, IAS 2 paragraph 18 requires the difference between the cash price and the amount paid to be recognised as interest expense over the financing period, not buried in inventory cost.</p>
+
+            <h2 id="formulas">Cost formulas: FIFO, weighted average and the LIFO ban</h2>
+            <p>IAS 2 permits only two cost formulas for interchangeable items — FIFO and weighted average — and requires specific identification for items that are not ordinarily interchangeable. ASC 330 permits FIFO, weighted average <em>and</em> LIFO. That is the single biggest structural difference between the two regimes.</p>
+            <p>For goods that are not ordinarily interchangeable, or are produced and segregated for specific projects, both standards require <strong>specific identification</strong> of their individual costs (IAS 2 para 23). For everything else, a cost formula is used:</p>
+            <ul>
+                <li><strong>FIFO</strong> assumes the oldest costs are charged to cost of sales first, leaving the most recent costs in ending inventory.</li>
+                <li><strong>Weighted average</strong> charges a blended cost, recalculated on each purchase (perpetual) or at period end (periodic).</li>
+                <li><strong>LIFO</strong> assumes the newest costs are charged to cost of sales first, leaving the oldest costs in ending inventory. <strong>Permitted under ASC 330, prohibited under IAS 2 paragraph 25</strong> (LIFO was removed in the 2003 revision because it rarely reflects the actual physical flow and can leave the balance sheet holding decades-old costs).</li>
+            </ul>
+            <div class="callout">
+                <strong>The LIFO reserve.</strong> US filers that use LIFO must disclose the difference between the LIFO carrying amount and current (FIFO or replacement) cost — the <em>LIFO reserve</em>. To compare a US LIFO filer with an IFRS company, an analyst adds the reserve back to inventory and to equity, and adjusts cost of sales, to restate onto a FIFO-equivalent basis. See the ExxonMobil case study below, where this reserve was around USD 14 billion.
+            </div>
+            <p>An entity must use the same cost formula for all inventories of a similar nature and use (IAS 2 para 25). It cannot cherry-pick FIFO for one warehouse and average cost for an identical one just to flatter a ratio.</p>
+            <p class="ref">References: IAS 2 para 23 (specific identification), para 25 (FIFO and weighted average; LIFO not permitted); ASC 330-10-30-9 to 30-14.</p>
+
+            <h2 id="nrv">NRV vs market value: how the two write-down tests differ</h2>
+            <p>Both frameworks write inventory down when it is worth less than cost, but they measure "worth less" differently. IFRS always uses net realisable value. US GAAP uses NRV for FIFO and average-cost inventory, and the older replacement-cost "market" test — bounded by a ceiling and a floor — for LIFO and retail-method inventory.</p>
+            <h3>IFRS net realisable value</h3>
+            <p>NRV is the estimated selling price in the ordinary course of business, less the estimated costs of completion and the estimated costs necessary to make the sale (IAS 2 para 6 and 28). It is entity-specific: the price <em>this</em> business expects to realise, not a general market price. IAS 2 paragraph 28 lists the usual triggers for a write-down — goods damaged, wholly or partly obsolete, selling prices declined, or the estimated costs of completion or sale increased.</p>
+            <h3>US GAAP "market" for LIFO and retail inventory</h3>
+            <p>For its remaining LCM inventory, US GAAP defines <strong>market</strong> as current replacement cost, but constrained by two bounds:</p>
+            <ul>
+                <li><strong>Ceiling:</strong> NRV (selling price less costs to complete and dispose). Market cannot exceed this.</li>
+                <li><strong>Floor:</strong> NRV less a normal profit margin. Market cannot fall below this.</li>
+            </ul>
+            <p>You take replacement cost, then push it up to the floor if it is below the floor, or down to the ceiling if it is above the ceiling. The result is compared with cost, and the lower figure is carried. The table below runs three items through both tests to show how, and when, the answers diverge.</p>
+            <table>
+                <tr><th>Per-unit input</th><th>Item A</th><th>Item B</th><th>Item C</th></tr>
+                <tr><td>Cost</td><td>£100</td><td>£100</td><td>£100</td></tr>
+                <tr><td>Replacement cost</td><td>£70</td><td>£90</td><td>£120</td></tr>
+                <tr><td>Ceiling = NRV (price £110 − costs £15)</td><td>£95</td><td>£95</td><td>£95</td></tr>
+                <tr><td>Floor = NRV − normal profit £20</td><td>£75</td><td>£75</td><td>£75</td></tr>
+                <tr><td><strong>US "market" (bounded RC)</strong></td><td>£75 (RC below floor)</td><td>£90 (RC within band)</td><td>£95 (RC above ceiling)</td></tr>
+                <tr><td><strong>US GAAP LCM carrying value</strong></td><td><strong>£75</strong></td><td><strong>£90</strong></td><td><strong>£95</strong></td></tr>
+                <tr><td><strong>IFRS / US NRV carrying value</strong></td><td><strong>£95</strong></td><td><strong>£95</strong></td><td><strong>£95</strong></td></tr>
+                <tr><td>Difference in write-down</td><td>£20 more under LCM</td><td>£5 more under LCM</td><td>Same</td></tr>
+            </table>
+            <p>The pattern is clear: for a US LIFO/retail filer the ceiling/floor mechanism can force a <em>deeper</em> write-down than IFRS NRV when replacement cost has fallen below the floor (Item A), can differ modestly when replacement cost sits inside the band (Item B), and collapses to the same answer when replacement cost is high (Item C). For every non-LIFO US company, and for all IFRS companies, only the NRV column applies, so the frameworks agree on the number even though only IFRS will later reverse it.</p>
+            <p>One more IFRS refinement: raw materials are not written below cost if the finished goods in which they will be incorporated are expected to sell at or above cost (IAS 2 para 32). And write-downs are assessed item by item, or by groups of similar items, never as a single blanket haircut across a whole class (IAS 2 para 29).</p>
+
+            <h2 id="standard-retail">Standard costing and the retail method</h2>
+            <p>IAS 2 paragraph 21 allows two practical measurement techniques as approximations of cost, provided the result is close to actual cost. Both are common in the real world and both are audit-sensitive.</p>
+            <ul>
+                <li><strong>Standard costing</strong> (IAS 2 para 21): inventory is recorded at predetermined standard costs that reflect normal levels of materials, labour, efficiency and capacity utilisation. Standards must be <em>regularly reviewed</em> and revised in light of current conditions. If standards have drifted away from actual cost, the accumulated variances must be re-analysed — favourable and unfavourable variances that relate to inventory still on hand cannot simply be dumped into cost of sales.</li>
+                <li><strong>Retail method</strong> (IAS 2 para 22): common in high-volume retail, this takes the retail selling value of inventory and reduces it by an average gross margin percentage to approximate cost. A separate average percentage is normally used for each department or homogeneous group, and the percentage must take account of marked-down goods.</li>
+            </ul>
+            <p>ASC 330 similarly accepts standard costs and the retail inventory method. The important US nuance is that retail-method inventory is one of the two populations that stay on the lower of cost or market test rather than moving to NRV, so a US retailer using the retail method keeps the ceiling/floor mechanics described above.</p>
+
+            <h2 id="worked1">Worked example 1: inventory write-down and reversal, both frameworks</h2>
+            <p>This example shows why the reversal rule is the divergence auditors care about most. The same facts produce a different profit profile under IFRS and US GAAP.</p>
             <div class="example-box">
-                <h4 id="scenario-electronics-inventory-obsolescence">Scenario: Electronics Inventory Obsolescence</h4>
-                <p><strong>Year 1 (Dec 2025):</strong> Inventory of electronic components.</p>
+                <h3 id="scenario-electronics">Scenario: electronics component obsolescence</h3>
+                <p>Kelvin Components Ltd holds a batch of electronic modules. Assume a FIFO/average-cost basis, so both IFRS and US GAAP apply the NRV test.</p>
+                <p><strong>Step 1 — 31 December 2025 (initial measurement).</strong></p>
                 <ul>
                     <li>Cost: £500,000</li>
-                    <li>Expected selling price (per customer orders): £650,000</li>
-                    <li>Estimated costs to sell: £50,000</li>
-                    <li>NRV: £650,000 − £50,000 = £600,000</li>
-                    <li>No write-down (cost £500k &lt; NRV £600k)</li>
+                    <li>Expected selling price (per firm customer orders): £650,000</li>
+                    <li>Estimated costs to complete and sell: £50,000</li>
+                    <li>NRV = £650,000 − £50,000 = £600,000</li>
+                    <li>Cost £500,000 &lt; NRV £600,000, so <strong>no write-down</strong>. Carried at £500,000.</li>
                 </ul>
-                <p><strong>Year 2 (Mar 2026, mid-quarter):</strong> Newer technology emerges. Customer demand drops 40%.</p>
+                <p><strong>Step 2 — 31 March 2026 (NRV falls below cost).</strong> A newer chipset launches; demand drops sharply.</p>
                 <ul>
-                    <li>Revised selling price: £350,000</li>
-                    <li>Costs to sell: £50,000 (unchanged)</li>
-                    <li>Revised NRV: £300,000</li>
-                    <li>Write-down required: £500,000 − £300,000 = £200,000</li>
+                    <li>Revised selling price: £350,000; costs to sell unchanged at £50,000</li>
+                    <li>Revised NRV = £350,000 − £50,000 = £300,000</li>
+                    <li>Write-down required = £500,000 − £300,000 = £200,000</li>
                 </ul>
-                <p><strong>IAS 2 entry:</strong> Dr Expense £200k / Cr Inventory £200k. Inventory now £300k on balance sheet.</p>
-                <p><strong>ASC 330 entry:</strong> Same. Inventory now £300k.</p>
-                <p><strong>Year 2 (Sep 2026):</strong> Surprise recovery. Customers return with large orders. Selling price rebounds to £550,000.</p>
+                <p style="margin-bottom:6px;"><strong>Journal entry — 31 March 2026 (identical under IAS 2 and ASC 330):</strong></p>
+                <table>
+                    <tr><th>Date</th><th>Account</th><th>Dr</th><th>Cr</th></tr>
+                    <tr><td>31 Mar 2026</td><td>Cost of sales — inventory write-down (P&amp;L)</td><td>£200,000</td><td></td></tr>
+                    <tr><td>31 Mar 2026</td><td>Inventory allowance / Inventory (SFP)</td><td></td><td>£200,000</td></tr>
+                </table>
+                <p>Balance sheet inventory is now £300,000. P&amp;L for the quarter carries a £200,000 charge. So far both frameworks are identical.</p>
+                <p><strong>Step 3 — 30 September 2026 (NRV recovers).</strong> A supply shortage elsewhere revives demand; the selling price rebounds to £550,000.</p>
                 <ul>
-                    <li>New NRV: £550,000 − £50,000 = £500,000</li>
-                    <li>Carrying amount: £300,000</li>
-                    <li>Write-down reversal available? £500,000 − £300,000 = £200,000</li>
+                    <li>Recovered NRV = £550,000 − £50,000 = £500,000</li>
+                    <li>Current carrying amount = £300,000</li>
+                    <li>Potential recovery = £500,000 − £300,000 = £200,000, capped at the original write-down of £200,000</li>
                 </ul>
-                <p><strong>IAS 2:</strong> <strong>Permitted to reverse</strong> the write-down up to original cost. Reverse £200k. Inventory back to £500k. P&amp;L benefit of £200k in Sep 2026.</p>
-                <p><strong>ASC 330:</strong> <strong>No reversal allowed</strong>. Inventory stays at £300k. The recovery is not recorded. If inventory later sells for £500k, the gain sits in gross profit (COGS line), not as an inventory reversal.</p>
-                <p><strong>Impact:</strong> IFRS company shows £200k inventory reversal income in Sep; ASC company does not record the reversal, so profit comes later via lower COGS when inventory is sold.</p>
+                <p style="margin-bottom:6px;"><strong>IAS 2 (paras 33–34) — reverse the write-down up to original cost:</strong></p>
+                <table>
+                    <tr><th>Date</th><th>Account</th><th>Dr</th><th>Cr</th></tr>
+                    <tr><td>30 Sep 2026</td><td>Inventory allowance / Inventory (SFP)</td><td>£200,000</td><td></td></tr>
+                    <tr><td>30 Sep 2026</td><td>Cost of sales — reversal of write-down (P&amp;L)</td><td></td><td>£200,000</td></tr>
+                </table>
+                <p>Inventory returns to £500,000 (its original cost, the cap). The £200,000 credit reduces the inventory expense in the September period.</p>
+                <p style="margin-bottom:6px;"><strong>ASC 330 (330-10-35-14) — no entry; the £300,000 is a new permanent cost basis:</strong></p>
+                <table>
+                    <tr><th>Date</th><th>Account</th><th>Dr</th><th>Cr</th></tr>
+                    <tr><td>30 Sep 2026</td><td colspan="3">No journal entry. Inventory stays at £300,000. Reversal prohibited.</td></tr>
+                </table>
+                <p><strong>Where the profit lands.</strong> Under IFRS, £200,000 of income is recognised in September 2026 when NRV recovers. Under US GAAP nothing is recognised in September; instead, when the goods eventually sell for £550,000, cost of sales is only £300,000, so the same £200,000 emerges as higher gross profit <em>at the point of sale</em> in a later period. Same lifetime profit, different timing — and a real difference in the interim balance sheet, where the IFRS company shows £500,000 of inventory and the US company shows £300,000.</p>
             </div>
 
-            <h2 id="reversal">Write-Down Reversals: The Key Difference</h2>
-            <p><strong>IAS 2:</strong> Write-downs must be reversed if circumstances improve, up to original cost. Reversals go through P&amp;L.</p>
-            <p><strong>ASC 330:</strong> Write-downs are <strong>permanent</strong> and cannot be reversed. If inventory later sells for more than the written-down value, the gain is recorded as lower COGS, not as a reversal.</p>
-            <p><strong>Audit implication:</strong> IFRS auditors will ask: Have you reassessed NRV each period and reversed any write-downs? ASC auditors do not expect reversals; they expect management to document why write-downs are permanent.</p>
+            <h2 id="worked2">Worked example 2: overhead absorption and LIFO vs FIFO</h2>
+            <p>This example has two parts. Part A shows the fixed-overhead absorption rule (IAS 2 para 13), where the two frameworks agree. Part B shows LIFO vs FIFO in rising prices, where they do not — and reproduces, in miniature, the ExxonMobil LIFO-reserve situation described later.</p>
+            <div class="example-box">
+                <h3 id="scenario-overhead">Part A — fixed overhead absorption in a low-production year</h3>
+                <p>Harlow Furniture Ltd manufactures a single product. Normal annual capacity is 10,000 units. In 2026, because of a demand slump, it produces only 6,000 units. Per-unit variable costs and the fixed-overhead pool are:</p>
+                <ul>
+                    <li>Direct materials £40, direct labour £50, variable production overhead £30 → £120 variable cost per unit</li>
+                    <li>Fixed production overhead pool for the year: £600,000</li>
+                    <li>Fixed overhead per unit <strong>at normal capacity</strong> = £600,000 ÷ 10,000 = £60</li>
+                </ul>
+                <p>Under IAS 2 paragraph 13, fixed overhead is absorbed at the normal-capacity rate of £60, <em>not</em> at £100 (£600,000 ÷ 6,000 actual units). So each unit is capitalised at £120 + £60 = <strong>£180</strong>. Only £360,000 of fixed overhead (6,000 × £60) attaches to inventory; the remaining <strong>£240,000 of unabsorbed fixed overhead is expensed immediately</strong>. Total costs incurred = £1,320,000 (£240,000 materials + £300,000 labour + £180,000 variable OH + £600,000 fixed OH).</p>
+                <p style="margin-bottom:6px;"><strong>Correct journal entry (identical under IAS 2 and ASC 330-10-30-3 to 30-8):</strong></p>
+                <table>
+                    <tr><th>Account</th><th>Dr</th><th>Cr</th></tr>
+                    <tr><td>Inventory — finished goods (6,000 × £180)</td><td>£1,080,000</td><td></td></tr>
+                    <tr><td>Cost of sales — unabsorbed fixed overhead</td><td>£240,000</td><td></td></tr>
+                    <tr><td>Materials, payroll and overhead payables/accruals</td><td></td><td>£1,320,000</td></tr>
+                </table>
+                <p><strong>The trap.</strong> Absorbing the whole £600,000 over 6,000 actual units (£100/unit) would capitalise inventory at £220/unit, overstating closing inventory by £40 × 6,000 = <strong>£240,000</strong> and understating the current-period expense by the same amount. That is one of the most common inventory misstatements in a downturn, and both frameworks prohibit it.</p>
+            </div>
+            <div class="example-box">
+                <h3 id="scenario-lifo">Part B — LIFO vs FIFO in rising prices, and the LIFO reserve</h3>
+                <p>Meridian Metals buys and resells a commodity. During a year of rising prices its purchases are:</p>
+                <ul>
+                    <li>Opening inventory: 1,000 units @ £10 = £10,000</li>
+                    <li>Purchase 1: 1,000 units @ £12 = £12,000</li>
+                    <li>Purchase 2: 1,000 units @ £14 = £14,000</li>
+                    <li>Goods available: 3,000 units, £36,000. It sells 2,000 units at £20 each (£40,000 revenue).</li>
+                </ul>
+                <table>
+                    <tr><th>Measure</th><th>FIFO (IFRS &amp; US GAAP)</th><th>LIFO (US GAAP only)</th></tr>
+                    <tr><td>Cost of sales</td><td>1,000×£10 + 1,000×£12 = <strong>£22,000</strong></td><td>1,000×£14 + 1,000×£12 = <strong>£26,000</strong></td></tr>
+                    <tr><td>Ending inventory (1,000 units)</td><td>1,000×£14 = <strong>£14,000</strong></td><td>1,000×£10 = <strong>£10,000</strong></td></tr>
+                    <tr><td>Gross profit</td><td>£40,000 − £22,000 = <strong>£18,000</strong></td><td>£40,000 − £26,000 = <strong>£14,000</strong></td></tr>
+                </table>
+                <p>The <strong>LIFO reserve</strong> = FIFO inventory − LIFO inventory = £14,000 − £10,000 = <strong>£4,000</strong>. LIFO reports £4,000 lower inventory, £4,000 higher cost of sales and £4,000 lower pre-tax profit — which is exactly why US filers elect it in inflationary periods (lower book profit, lower tax).</p>
+                <p style="margin-bottom:6px;"><strong>Journal entries for the sale:</strong></p>
+                <table>
+                    <tr><th>Account</th><th>FIFO Dr</th><th>FIFO Cr</th><th>LIFO Dr</th><th>LIFO Cr</th></tr>
+                    <tr><td>Cash / receivables</td><td>£40,000</td><td></td><td>£40,000</td><td></td></tr>
+                    <tr><td>Revenue</td><td></td><td>£40,000</td><td></td><td>£40,000</td></tr>
+                    <tr><td>Cost of sales</td><td>£22,000</td><td></td><td>£26,000</td><td></td></tr>
+                    <tr><td>Inventory</td><td></td><td>£22,000</td><td></td><td>£26,000</td></tr>
+                </table>
+                <p><strong>The IFRS consequence.</strong> An IFRS reporter cannot use the LIFO column at all (IAS 2 para 25). A US group that files on LIFO but also reports under IFRS for a foreign parent must restate to FIFO or weighted average, adding the £4,000 reserve back to inventory and equity. Scale that £4,000 up to a supermajor and you get the ExxonMobil disclosure below.</p>
+            </div>
 
-            <h2 id="obsolete">Obsolete Inventory</h2>
-            <p>Both standards require write-down of obsolete inventory. IFRS may reverse if the inventory becomes usable again; ASC will not. This creates timing differences in how profit is recognised.</p>
+            <h2 id="reversal">Write-down reversals: the key divergence</h2>
+            <p>This is the divergence that most often surprises people moving between the two frameworks. Under IAS 2 a write-down is not permanent; under US GAAP it is.</p>
+            <p><strong>IAS 2 (paras 33–34).</strong> When the circumstances that caused a write-down no longer exist, or there is clear evidence of an increase in NRV because of changed economic circumstances, the entity <em>reverses</em> the write-down. The reversal is limited to the amount of the original write-down, so inventory can never be carried above its original cost, and it is recognised as a reduction in the amount of inventory expensed in the period the reversal occurs. Reversal is not optional window-dressing — it is required when the evidence supports it.</p>
+            <p><strong>ASC 330 (330-10-35-14).</strong> A write-down to market (or NRV) establishes a <strong>new cost basis</strong>. That new basis is not marked back up in later periods for any recovery. Any benefit from a subsequent recovery is realised only through a lower cost of sales when the inventory is finally sold.</p>
+            <p><strong>Why it matters.</strong> For a commodity trader, a semiconductor maker, or any business whose selling prices swing, the reversal rule changes <em>when</em> profit appears and <em>what</em> the interim balance sheet shows, even though lifetime profit is identical. It also changes the audit conversation: an IFRS auditor must challenge whether a reversal has been correctly identified and not over-recognised, while a US auditor must be satisfied that a write-down was appropriately permanent and that management is not quietly reversing it through the cost-of-sales line.</p>
 
-            <h2 id="audit">Audit Implications</h2>
+            <h2 id="disclosure">Disclosure requirements</h2>
+            <p>IAS 2 paragraphs 36–39 set out the note disclosures. ASC 330-10-50 covers US requirements, supplemented by SEC rules for LIFO filers. The overlap is large; the differences are worth knowing.</p>
+            <table>
+                <tr><th>Disclosure</th><th>IAS 2 (paras 36–39)</th><th>ASC 330-10-50 (+ SEC)</th></tr>
+                <tr><td>Accounting policy and cost formula</td><td>Required (para 36(a))</td><td>Required</td></tr>
+                <tr><td>Total carrying amount and by classification (e.g. raw materials, WIP, finished goods)</td><td>Required (para 36(b))</td><td>Required</td></tr>
+                <tr><td>Amount of inventory recognised as an expense in the period</td><td>Required (para 36(d))</td><td>Cost of sales presented; detail varies</td></tr>
+                <tr><td>Write-downs recognised in the period</td><td>Required (para 36(e))</td><td>Required if material</td></tr>
+                <tr><td>Reversals and the circumstances that led to them</td><td>Required (para 36(f)–(g))</td><td>Not applicable — reversals prohibited</td></tr>
+                <tr><td>LIFO reserve (excess of FIFO/replacement cost over LIFO)</td><td>Not applicable — LIFO banned</td><td>Required for LIFO filers (SEC)</td></tr>
+                <tr><td>Inventory pledged as security for liabilities</td><td>Required (para 36(h))</td><td>Required</td></tr>
+            </table>
+            <p>The two IFRS-only lines (reversals and their circumstances) and the one US-only line (LIFO reserve) are direct consequences of the mechanical differences discussed above. If you are converting a set of financials, these are the disclosures that appear or disappear.</p>
+
+            <h2 id="ratios">Financial-statement and ratio impact</h2>
+            <p>Because the cost formula and the write-down rules feed straight into inventory and cost of sales, they move several of the ratios analysts rely on. The direction is predictable once you know whether prices are rising or falling.</p>
+            <table>
+                <tr><th>Ratio</th><th>LIFO in rising prices</th><th>FIFO in rising prices</th><th>Effect of a write-down</th></tr>
+                <tr><td>Gross margin</td><td>Lower (higher COGS)</td><td>Higher (lower COGS)</td><td>Falls in the period taken</td></tr>
+                <tr><td>Inventory turnover (COGS ÷ avg inventory)</td><td>Higher</td><td>Lower</td><td>Rises (lower inventory base)</td></tr>
+                <tr><td>Days inventory outstanding</td><td>Lower</td><td>Higher</td><td>Falls</td></tr>
+                <tr><td>Current ratio</td><td>Lower (lower inventory)</td><td>Higher (higher inventory)</td><td>Falls</td></tr>
+                <tr><td>Return on assets</td><td>Lower book profit, lower assets</td><td>Higher book profit, higher assets</td><td>Falls in the period</td></tr>
+            </table>
+            <p>Two practical consequences follow. First, you cannot compare a US LIFO filer with an IFRS peer without restating the LIFO filer to a FIFO basis using the disclosed LIFO reserve — otherwise every one of these ratios is being read on a different basis. Second, an inventory write-down is not just a P&amp;L event: it simultaneously lowers the current ratio and can trip working-capital or leverage covenants, which is why the timing and sizing of write-downs draws so much audit and analyst attention.</p>
+
+            <h2 id="redflags">Red flags for auditors</h2>
+            <p>Inventory is one of the highest-risk areas in an audit precisely because valuation is judgemental and the balance is often material. Each red flag below is paired with the specific procedure that addresses it, anchored to ISA 501 (<em>Audit Evidence — Specific Considerations for Selected Items</em>) and standard NRV, cut-off and existence testing.</p>
             <ul>
-                <li><strong>LIFO inventory:</strong> If ASC, ensure LIFO election is documented and consistent year-to-year. If IFRS, LIFO is not allowed.</li>
-                <li><strong>NRV testing:</strong> Challenge selling price assumptions. Are they based on actual orders, historical margins, or wishful thinking?</li>
-                <li><strong>Write-down reversals (IFRS only):</strong> Verify improvements in circumstances. Don't let management reverse too aggressively.</li>
-                <li><strong>Obsolete inventory:</strong> Request a list of slow-moving and obsolete items. NRV should be zero or near-zero for items with no foreseeable use.</li>
+                <li><strong>Red flag 1 — slowing inventory turnover with no write-down.</strong> Days-inventory-outstanding rising year on year while the obsolescence provision is flat is a classic indicator of unrecognised NRV impairment. <em>Procedure:</em> obtain the aged inventory listing, select the slowest-moving and highest-value SKUs, and test NRV against actual post-year-end sales invoices (subsequent-realisation testing) and firm customer orders. Challenge any selling price built on "expected recovery" rather than evidence, per IAS 2 para 31.</li>
+                <li><strong>Red flag 2 — a gross-margin spike in the final quarter.</strong> A sudden Q4 margin jump can hide over-capitalised overhead in a low-production period, or a cut-off error that pushed sales/dispatches into the wrong period. <em>Procedure:</em> recompute fixed-overhead absorption at normal capacity (IAS 2 para 13) and confirm unabsorbed overhead was expensed; perform cut-off testing on the last goods-received notes and dispatch notes either side of year-end. ISA 501 attendance at the count supports the cut-off conclusion.</li>
+                <li><strong>Red flag 3 — standard costs that have not been refreshed.</strong> Stale standards let material purchase-price or efficiency variances accumulate inside inventory instead of being expensed. <em>Procedure:</em> obtain the standard-cost build-up, compare standards to the most recent actual purchase invoices and payroll rates, recompute the variances, and confirm that variances relating to inventory still on hand are re-analysed rather than dumped wholesale into cost of sales (IAS 2 para 21).</li>
+                <li><strong>Red flag 4 — existence and third-party stock.</strong> Inventory that cannot be physically verified, or that sits at consignment locations or third-party warehouses, is an existence risk. <em>Procedure:</em> attend the physical inventory count (ISA 501 para 4), perform two-way test counts (floor-to-sheet for completeness, sheet-to-floor for existence), evaluate management's count instructions and controls, and obtain direct confirmation from third parties holding inventory (ISA 501 para 8).</li>
+                <li><strong>Red flag 5 — LIFO layer liquidation (US filers).</strong> A US LIFO filer whose inventory quantities fall can liquidate old, low-cost LIFO layers into cost of sales, inflating gross margin in a way that is unrelated to trading performance. <em>Procedure:</em> analyse the movement in the LIFO reserve, inquire about layer liquidations, and confirm the effect on income is disclosed where material.</li>
             </ul>
 
+            <h2 id="casestudies">Real-life case studies: ExxonMobil and Intel</h2>
+            <p>Two public disclosures show these rules operating at scale — one on the LIFO ban, one on the write-down test.</p>
+            <div class="example-box">
+                <h3 id="case-exxon">Case study 1 — ExxonMobil: the LIFO reserve (LIFO ban divergence)</h3>
+                <p>In its Form 10-K for the year ended 31 December 2023, ExxonMobil states that inventories of crude oil, products and merchandise are carried at the lower of current market value or cost, generally determined under the last-in, first-out (LIFO) method. The filing discloses that the <strong>aggregate replacement cost of those inventories exceeded their LIFO carrying value by approximately USD 14.0 billion at 31 December 2023</strong> (and roughly USD 14.9 billion at 31 December 2022). Crude oil, products and merchandise inventories were reported at around USD 20.5 billion.</p>
+                <p><strong>What it illustrates.</strong> That ~USD 14 billion is the LIFO reserve. Because IAS 2 paragraph 25 bans LIFO, an IFRS reporter with the same stock would carry inventory roughly USD 14 billion higher on a FIFO/replacement-cost basis, with a corresponding uplift to equity. It is the single clearest real-world example of why the LIFO ban is the largest inventory reconciling item between the two frameworks.</p>
+                <p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Source: ExxonMobil Corporation Form 10-K, fiscal year ended 31 December 2023 (filed February 2024), inventories note / miscellaneous financial information. Figures rounded as disclosed.</p>
+            </div>
+            <div class="example-box">
+                <h3 id="case-intel">Case study 2 — Intel: obsolescence write-down (the NRV test)</h3>
+                <p>In 2022 Intel began winding down its Intel Optane memory business. As a result, Intel recognised an <strong>inventory impairment of USD 723 million in cost of sales</strong> for full-year 2022 (an initial charge of about USD 559 million was recorded in the second quarter of 2022, with the balance later in the year), as disclosed in its Form 10-K. Total inventories fell from USD 13,224 million at the end of 2022 to USD 11,127 million at the end of 2023.</p>
+                <p><strong>What it illustrates.</strong> This is the write-down mechanism of IAS 2 paragraph 28 / ASC 330 in action: once a product line is discontinued, its net realisable value collapses and the carrying amount must be written down to that NRV through cost of sales. Because Intel is not a LIFO filer, both frameworks would apply the NRV test to reach the same charge. The divergence would only appear <em>afterwards</em>: under IAS 2 a later recovery in NRV could be reversed (paras 33–34), whereas under US GAAP the written-down amount is a permanent new cost basis (ASC 330-10-35-14). For a discontinued technology, of course, no recovery was expected — which is exactly why a permanent write-down was appropriate under both.</p>
+                <p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Source: Intel Corporation Form 10-K (fiscal 2023, covering the 2022 Optane charge) and Q2 2022 earnings release (Form 8-K). Figures as disclosed.</p>
+            </div>
+
             <div class="cta-box">
-                <h3 id="need-help-with-inventory-accounting">Need help with inventory accounting?</h3>
-                <p>Use our free tools to research IAS 2 vs ASC 330, or ask an expert in the Meeting Room.</p>
+                <h3 id="need-help">Need help with inventory accounting?</h3>
+                <p>Compare IAS 2 and ASC 330 side by side with our free research tool, run a financial-statement review, or put your question to an expert panel in the Meeting Room.</p>
                 <a href="https://www.uqconsulting.org/gaap-compare.html" class="cta-button">Compare Standards →</a>
             </div>
 
-            <h2 id="faq">Frequently Asked Questions</h2>
+            <h2 id="faq">Frequently asked questions</h2>
             <div class="faq-item">
-                <h3 id="is-lifo-allowed-under-ifrs">Is LIFO allowed under IFRS?</h3>
-                <p>No. IAS 2 prohibits LIFO. Only FIFO and weighted average are permitted. ASC 330 allows all three methods.</p>
+                <h3 id="faq-lifo">Is LIFO allowed under IFRS?</h3>
+                <p>No. IAS 2 paragraph 25 permits only FIFO and weighted average for interchangeable items; LIFO was removed in the 2003 revision. ASC 330 still permits LIFO, FIFO and weighted average, and many US filers use LIFO for its tax advantage when prices are rising.</p>
             </div>
             <div class="faq-item">
-                <h3 id="can-inventory-writedowns-be-reversed">Can inventory write-downs be reversed?</h3>
-                <p>Under IAS 2, yes — if circumstances improve, you reverse write-downs up to original cost. Under ASC 330, no — write-downs are permanent.</p>
+                <h3 id="faq-reversal">Can inventory write-downs be reversed?</h3>
+                <p>Under IAS 2 paragraphs 33–34, yes — if NRV recovers or the causing circumstances no longer exist, the write-down is reversed up to original cost as a reduction of the inventory expense. Under ASC 330-10-35-14, no — the write-down is a permanent new cost basis, so any recovery only shows up as lower cost of sales when the goods sell.</p>
             </div>
             <div class="faq-item">
-                <h3 id="what-is-net-realisable-value">What is net realisable value?</h3>
-                <p>Selling price less costs to complete and sell (IFRS). ASC uses a different "market" definition based on replacement cost.</p>
+                <h3 id="faq-nrv">What is net realisable value?</h3>
+                <p>NRV is the estimated selling price in the ordinary course of business less the estimated costs of completion and the estimated costs to make the sale (IAS 2 para 6 and 28). It is entity-specific — the price this business expects to achieve, not a general market price.</p>
+            </div>
+            <div class="faq-item">
+                <h3 id="faq-market">Does ASC 330 still use lower of cost or market?</h3>
+                <p>Only for LIFO and retail-method inventory. After ASU 2015-11, all other inventory (FIFO or average cost) uses lower of cost and NRV, aligning the measurement base with IAS 2. LIFO and retail inventory keep the market test, where market is replacement cost bounded by a ceiling (NRV) and a floor (NRV less a normal profit margin).</p>
+            </div>
+            <div class="faq-item">
+                <h3 id="faq-reserve">What is a LIFO reserve?</h3>
+                <p>The difference between inventory under LIFO and what it would be under FIFO or current replacement cost. US filers must disclose it. Add it back to inventory and equity to compare a US LIFO filer with an IFRS company. ExxonMobil's 2023 10-K put its reserve at roughly USD 14 billion.</p>
+            </div>
+            <div class="faq-item">
+                <h3 id="faq-waste">How do you treat abnormal waste and idle capacity?</h3>
+                <p>Both frameworks expense them. IAS 2 paragraph 16 excludes abnormal wasted materials, labour and overheads, plus most storage, administrative and selling costs. IAS 2 paragraph 13 allocates fixed overhead at normal capacity, so idle-capacity overhead is expensed, not capitalised. ASC 330-10-30-3 to 30-8 agrees.</p>
+            </div>
+            <div class="faq-item">
+                <h3 id="faq-borrowing">Are borrowing costs included in inventory cost?</h3>
+                <p>Generally no. Both standards exclude interest from ordinary inventory. The exception is a qualifying asset that takes a substantial period to get ready for sale (maturing spirits, long-cycle manufacturing), where IAS 23 / ASC 835-20 may allow capitalisation. A financing element in deferred payment terms is treated as interest (IAS 2 para 18).</p>
+            </div>
+            <div class="faq-item">
+                <h3 id="faq-itembyitem">Is NRV tested item by item or by group?</h3>
+                <p>IAS 2 paragraph 29 requires item-by-item testing, though grouping similar or related items is allowed; blanket write-downs across a whole class are not. ASC 330 permits item, category or total-inventory application depending on the inventory's character, so US practice can be a little more aggregated.</p>
+            </div>
+            <div class="faq-item">
+                <h3 id="faq-ratios">How does the cost formula affect financial ratios?</h3>
+                <p>In rising prices, LIFO gives lower ending inventory, higher cost of sales, lower gross margin, lower current ratio and higher inventory turnover than FIFO; FIFO is the reverse. Because IAS 2 bans LIFO, analysts restate US LIFO filers to a FIFO basis using the disclosed LIFO reserve before comparing them with IFRS peers.</p>
             </div>
 
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
-                    <h4 id="about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</h4>
-                    <p>Usman has audited manufacturing and retail companies with significant inventory populations. He specialises in NRV testing and write-down assessments.</p>
+                    <h4 id="about-author">About the author — Usman Qureshi (ACCA, ACA)</h4>
+                    <p>Usman is a chartered accountant with around a decade of Big 4 audit and advisory experience across IFRS, UK GAAP and US GAAP. He has audited manufacturing and retail companies with significant inventory populations, and specialises in NRV testing, overhead-absorption reviews and write-down assessments under both IAS 2 and ASC 330.</p>
                 </div>
             </div>
 
             <div class="related">
                 <h3 id="related-resources">Related resources</h3>
-                <a href="https://www.uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">→ Back to IFRS vs US GAAP Comparison</a>
-                <a href="https://www.uqconsulting.org/meeting-room.html">→ Ask an expert (free)</a>
+                <a href="https://www.uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">→ IFRS vs US GAAP: the full comparison</a>
+                <a href="https://www.uqconsulting.org/blog/ias-36-impairment-of-assets-complete-guide.html">→ IAS 36 Impairment of Assets: complete guide</a>
+                <a href="https://www.uqconsulting.org/gaap-compare.html">→ GAAP Compare: research IAS 2 vs ASC 330 interactively</a>
+                <a href="https://www.uqconsulting.org/fs-review.html">→ Financial Statement Review: check your inventory disclosures</a>
+                <a href="https://www.uqconsulting.org/meeting-room.html">→ Ask an expert panel (free)</a>
             </div>
 
-            <p class="disclaimer">This guide is simplified for educational purposes. Inventory accounting depends on specific facts and circumstances. Consult IAS 2 and ASC 330 full text, and your own advisors, before finalising treatment.</p>
-        
-<h2 id="real-life-case-study">Real-Life Case Study: Valuing Inventory Under IAS 2 vs ASC 330</h2>
-<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A US-parented manufacturer values raw-material inventory that has fallen in price, and uses LIFO in its US filings.</p>
- <p><strong>The differences.</strong> LIFO is permitted under ASC 330 but prohibited under IAS 2, so the group must restate to FIFO/weighted-average for IFRS. On write-downs, IAS 2 measures at the lower of cost and net realisable value <em>and allows reversals</em> if NRV recovers; US GAAP (for FIFO/average cost) uses lower of cost and NRV but <em>prohibits reversal</em>.</p>
- <p><strong>Takeaway.</strong> Two live differences on one balance, the LIFO ban and the reversal rule, mean the same warehouse can carry a materially different value under each framework.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
-</div>
-
-</article>
+            <p class="disclaimer">This guide is simplified for educational purposes and does not constitute accounting or audit advice. Inventory accounting depends on specific facts and circumstances. Company figures are drawn from publicly filed reports as cited and are rounded as disclosed; they are used to illustrate the standards, not to assess any company. Consult the full text of IAS 2 and ASC 330, and your own advisors, before finalising any treatment.</p>
+        </article>
     </div>
 </body>
 </html>

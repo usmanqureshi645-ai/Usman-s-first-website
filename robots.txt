@@ -9,5 +9,40 @@ Disallow: /api/
 Disallow: /dashboard.html
 Disallow: /workspace.html
 
+# AI-search crawlers — explicitly welcomed so this site's IFRS/audit content
+# is eligible to surface in ChatGPT, Claude, Perplexity and Google AI answers.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
 # Full list of pages we want indexed
-Sitemap: https://uqconsulting.org/sitemap.xml
+Sitemap: https://www.uqconsulting.org/sitemap.xml

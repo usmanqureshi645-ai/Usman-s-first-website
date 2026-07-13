@@ -6,10 +6,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IFRS 15 Performance Obligations: Identifying Distinct Goods & Services</title>
-    <meta name="description" content="IFRS 15 performance obligations: what is distinct, bundled products, standalone selling price, worked examples with real scenarios.">
-    <meta name="keywords" content="IFRS 15 performance obligations, distinct goods services, bundled products, standalone selling price">
+    <meta name="description" content="IFRS 15 performance obligations: identifying promises (15.22-24), the distinct test (15.27-30), series guidance, material rights (15.B40) and principal vs agent (15.B34-B38), with worked journal entries, auditor red flags and a Just Eat Takeaway case study.">
+    <meta name="keywords" content="IFRS 15 performance obligations, distinct goods services, bundled products, standalone selling price, principal vs agent, material right, IFRS 15.22, IFRS 15.27, IFRS 15.B34">
     <meta name="author" content="Usman Qureshi">
     <link rel="canonical" href="https://www.uqconsulting.org/blog/ifrs-15-performance-obligations.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "IFRS 15 Performance Obligations: Identifying Distinct Goods & Services",
+      "description": "How to identify performance obligations under IFRS 15 - promises in a contract (15.22-24), the distinct test (15.27-30), series of distinct goods, material rights (15.B40) and principal vs agent (15.B34-B38), with worked journal entries and an audit lens.",
+      "author": {
+        "@type": "Person",
+        "name": "Usman Qureshi",
+        "jobTitle": "Audit & CFO Advisory Consultant (ACCA, ACA)",
+        "image": "https://www.uqconsulting.org/images/usman-qureshi.jpg"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "UQ Consulting",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.uqconsulting.org/images/usman-qureshi.jpg"
+        }
+      },
+      "datePublished": "2026-05-01",
+      "dateModified": "2026-07-13",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.uqconsulting.org/blog/ifrs-15-performance-obligations.html"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is a performance obligation under IFRS 15?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A performance obligation is a promise in a contract to transfer to the customer either a distinct good or service, or a series of distinct goods or services that are substantially the same and have the same pattern of transfer (IFRS 15.22). At contract inception the entity identifies every such promise - explicit, implied by customary business practice, or created by a valid expectation - and treats each distinct one as a separate unit of account (IFRS 15.24)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you decide if a good or service is distinct under IFRS 15?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A good or service is distinct only if both criteria in IFRS 15.27 are met: (a) the customer can benefit from it on its own or with other readily available resources (capable of being distinct), and (b) the promise is separately identifiable from other promises in the contract (distinct within the context of the contract). IFRS 15.29 lists three factors that indicate promises are not separately identifiable: significant integration into a combined output, significant modification or customisation, or high interdependence and interrelation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between principal and agent under IFRS 15?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A principal controls a good or service before it is transferred to the customer and recognises revenue gross - the full amount billed. An agent arranges for another party to provide the good or service and recognises revenue net - only its fee or commission (IFRS 15.B34-B36). IFRS 15.B37 gives three indicators of control by the principal: primary responsibility for fulfilment, inventory risk, and discretion in setting prices."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is a material right under IFRS 15?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A material right is an option granted to a customer to acquire additional goods or services at a discount they would not have received without entering the current contract - for example loyalty points or a renewal discount. Under IFRS 15.B40 that option is a separate performance obligation, so part of the transaction price is allocated to it and deferred until the option is exercised or lapses."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is a series of distinct goods or services one performance obligation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Under IFRS 15.22(b) and 15.23 a series of distinct goods or services that are substantially the same and have the same pattern of transfer is accounted for as a single performance obligation. This applies where each distinct good or service is satisfied over time and the same method would be used to measure progress - common in cleaning, IT managed services, and monthly SaaS access."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does a standard warranty create a separate performance obligation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. An assurance-type warranty that only guarantees the product meets agreed specifications is accounted for under IAS 37 as a provision, not as a performance obligation. A service-type warranty that provides an additional service - or any warranty the customer can purchase separately - is a distinct performance obligation and part of the transaction price is allocated to it (IFRS 15.B28-B33)."
+          }
+        }
+      ]
+    }
+    </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
@@ -80,96 +164,123 @@
     &gt; <a href="ifrs-15-revenue-recognition-complete-guide.html" style="color: #2a4a7a; text-decoration: none;">IFRS 15 Revenue</a> 
     &gt; <span style="color: #1a2f5a;">IFRS 15 Performance Obligations: Identifying Distinct Goods & Services</span>
 </div>
-        <div class="meta">By Usman Qureshi · July 2026 · 9 min read</div>
+        <div class="meta">By Usman Qureshi · Updated 13 July 2026 · 13 min read</div>
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#what-makes-a-good-or-service-distinct">What Makes a Good or Service Distinct?</a></li><li class="toc-l1"><a href="#bundled-products-when-to-separate">Bundled Products: When to Separate</a></li><li class="toc-l1"><a href="#worked-example-mobile-phone-bundle">Worked Example: Mobile Phone Bundle</a></li><li class="toc-l1"><a href="#worked-example-software-customization">Worked Example: Software + Customization</a></li><li class="toc-l1"><a href="#audit-focus-the-integration-test">Audit Focus: The Integration Test</a></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Identifying Distinct Obligations in a Construction Contract</a></li></ul>
+            <ul><li class="toc-l1"><a href="#what-is-a-performance-obligation">What Is a Performance Obligation and How Do You Identify Promises?</a></li><li class="toc-l1"><a href="#what-makes-a-good-or-service-distinct">What Makes a Good or Service Distinct?</a></li><li class="toc-l1"><a href="#series-and-material-rights">When Is a Series One Obligation, and What Is a Material Right?</a></li><li class="toc-l1"><a href="#principal-vs-agent">Principal vs Agent: Gross or Net Revenue?</a></li><li class="toc-l1"><a href="#worked-example-bundle-allocation">Worked Example: Allocating Price Across a Bundle</a></li><li class="toc-l1"><a href="#worked-example-principal-agent">Worked Example: Principal vs Agent Journal Entries</a></li><li class="toc-l1"><a href="#audit-focus-red-flags">Audit Focus: Red Flags and ISA References</a></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Just Eat Takeaway.com</a></li><li class="toc-l1"><a href="#faq">Frequently Asked Questions</a></li></ul>
         </div>
 
 
         <article>
-            <p>Performance obligation identification is Step 2 of the IFRS 15 model. Get this wrong, and your entire revenue recognition timeline is wrong. This guide walks through the "distinct" test, bundled products, and the audit challenges around separating vs combining obligations.</p>
+            <p>Identifying performance obligations is Step 2 of the IFRS 15 five-step model, and it is where the largest number of restatements and audit adjustments originate. The unit of account you settle on here fixes everything downstream: how the transaction price is allocated (Step 4), when revenue is recognised (Step 5), and whether the income statement is grossed up or netted down. This guide covers identifying the promises (IFRS 15.22-24), the two-limb distinct test (IFRS 15.27-30), the series guidance, material rights (IFRS 15.B40) and the principal-versus-agent judgement (IFRS 15.B34-B38), with worked journal entries, auditor red flags anchored to specific ISAs, and a case study on publicly filed figures.</p>
+
+            <h2 id="what-is-a-performance-obligation">What Is a Performance Obligation and How Do You Identify Promises?</h2>
+            <p>A performance obligation is a promise to transfer to a customer a distinct good or service, or a series of distinct goods or services that are substantially the same with the same pattern of transfer (IFRS 15.22). At contract inception the entity assesses the goods and services promised and identifies as a performance obligation each promise that is distinct (IFRS 15.22(a)) or each series that meets the series criteria (IFRS 15.22(b)). This is the answer in two sentences; the difficulty is that "promise" is drawn far more widely than the price list.</p>
+            <p>Promises are not limited to the items explicitly stated in the contract. IFRS 15.24 requires the entity to include promises that are implied by its customary business practices, published policies or specific statements, if at contract inception those create a valid expectation that the entity will transfer a good or service. A free 30-day support line the vendor always provides, a "we will keep the app compatible with the next OS release" statement in marketing, or free shipping that is customary in the market are all promises even when the master agreement is silent. The counterweight is IFRS 15.25, which excludes activities an entity must undertake to fulfil the contract that do not transfer a good or service to the customer - internal set-up, mobilisation and administrative tasks are not performance obligations because the customer never receives anything from them.</p>
+            <p>The practical discipline is to build a complete promise inventory from the contract, the proposal, the customer correspondence and the entity's standard practices, and only then apply the distinct test to each item. Skipping the inventory step is the most common root cause of a missed obligation: entities identify the priced deliverables and overlook the implied ones, understating the number of obligations and often recognising revenue too early. IFRS 15.23 confirms that a good or service that is not distinct is combined with others until a distinct bundle is identified, so the inventory is the raw material for both separating and combining.</p>
 
             <h2 id="what-makes-a-good-or-service-distinct">What Makes a Good or Service Distinct?</h2>
-            <p>A good/service is distinct if:</p>
-            <ul>
-                <li><strong>The customer can benefit from it:</strong> On its own OR with other resources they can readily obtain (e.g., they already own the complementary item)</li>
-                <li><strong>The entity's promise is separately identifiable:</strong> The good/service is not so integrated with other promises that it's a single obligation</li>
-            </ul>
-
-            <h2 id="bundled-products-when-to-separate">Bundled Products: When to Separate</h2>
+            <p>A good or service is distinct only when it passes both limbs of IFRS 15.27: the customer can benefit from it on its own or together with resources that are readily available (capable of being distinct, IFRS 15.27(a)), and the promise to transfer it is separately identifiable from the other promises in the contract (distinct within the context of the contract, IFRS 15.27(b)). Failing either limb means the item is combined with others until the combined bundle is itself distinct. Most disputes are not about the first limb - almost everything can be used with readily available resources - but about the second.</p>
+            <p>The first limb, capability, is met if the good or service could be used, consumed, sold, or held in a way that generates economic benefits, either alone or with resources the customer already has or can buy separately (IFRS 15.28). Off-the-shelf software, a standard machine, or a monthly service each clears this limb easily because a competitor's complementary product or the customer's own resources make it usable. The fact that an entity regularly sells an item separately is strong evidence it is capable of being distinct.</p>
+            <p>The second limb, separability in context, is the real judgement and IFRS 15.29 provides three indicators that promises are <em>not</em> separately identifiable: (a) the entity provides a significant integration service that combines the goods or services into a combined output the customer contracted for; (b) one or more of the goods or services significantly modifies or customises another; or (c) the goods or services are highly interdependent or highly interrelated, so each significantly affects the others. IFRS 15.30 confirms that if a promised good or service is not distinct, it is combined with others until a distinct bundle emerges - in extreme cases the whole contract is a single performance obligation. The classic worked contrast is a construction contractor who designs, procures and builds an asset: the individual activities are capable of being distinct, but the integration service in IFRS 15.29(a) binds them into one combined output, so there is a single performance obligation satisfied over time. Compare that with a software vendor selling a licence plus optional installation the customer could obtain from any competent third party - no significant integration, no significant customisation, low interdependence, so two obligations.</p>
             <table>
                 <tr>
                     <th>Scenario</th>
                     <th>Distinct?</th>
-                    <th>Reason</th>
+                    <th>IFRS 15 reason</th>
                 </tr>
                 <tr>
-                    <td>Smartphone + protective case (sold together at discount)</td>
-                    <td>Separate</td>
-                    <td>Customer can use phone without case</td>
+                    <td>Smartphone + protective case sold together at a discount</td>
+                    <td>Two obligations</td>
+                    <td>Both capable of use alone; no integration or interdependence (15.27, 15.29)</td>
                 </tr>
                 <tr>
-                    <td>SaaS software + dedicated support team</td>
-                    <td>Separate</td>
-                    <td>Customer can use software with generic support</td>
+                    <td>Off-the-shelf licence + independently available installation</td>
+                    <td>Two obligations</td>
+                    <td>Installation neither customises nor is interdependent with the licence (15.29)</td>
                 </tr>
                 <tr>
-                    <td>Car + 3-year manufacturer warranty</td>
-                    <td>Separate</td>
-                    <td>Warranty is separately transferable; customer can use car without warranty</td>
+                    <td>Equipment + consumables that only work with that equipment</td>
+                    <td>Judgement</td>
+                    <td>Test interdependence in 15.29(c); often still distinct if consumables sold separately</td>
                 </tr>
                 <tr>
-                    <td>Construction + installation of machinery</td>
-                    <td>Single</td>
-                    <td>Customer cannot benefit until both are complete</td>
+                    <td>Design + procurement + build of a bespoke facility</td>
+                    <td>Single obligation</td>
+                    <td>Significant integration service into one combined output (15.29(a))</td>
                 </tr>
                 <tr>
-                    <td>Custom software development (fully integrated solution)</td>
-                    <td>Single</td>
-                    <td>Delivery and integration are inseparable</td>
+                    <td>Bespoke software heavily customised into the client's systems</td>
+                    <td>Single obligation</td>
+                    <td>Significant modification and high interdependence (15.29(b),(c))</td>
                 </tr>
             </table>
 
-            <h2 id="worked-example-mobile-phone-bundle">Worked Example: Mobile Phone Bundle</h2>
-            <p><strong>Scenario:</strong> Telecom company sells 2-year mobile plan with phone and service bundled for £600 total.</p>
-            <ul>
-                <li><strong>Phone hardware:</strong> Distinct. Customer can use it with another provider.</li>
-                <li><strong>2-year monthly service:</strong> Distinct. Transferable to another customer/phone.</li>
-                <li><strong>Number of obligations:</strong> 2 (hardware + service)</li>
-                <li><strong>Allocation:</strong> Hardware = £150 (point-in-time); Service = £450 (over-time, 24 months = £18.75/month)</li>
-            </ul>
+            <h2 id="series-and-material-rights">When Is a Series One Obligation, and What Is a Material Right?</h2>
+            <p>A series of distinct goods or services that are substantially the same and have the same pattern of transfer is treated as a single performance obligation under IFRS 15.22(b). IFRS 15.23 sets two conditions: each distinct good or service in the series is a performance obligation satisfied over time, and the same method would be used to measure progress towards complete satisfaction. A material right, separately, is a customer option to buy additional goods or services at a discount they would not otherwise get, and IFRS 15.B40 makes that option its own performance obligation. These are two different mechanisms that both change the number of obligations you carry.</p>
+            <p>The series guidance matters because it lets a repetitive, over-time arrangement - a two-year cleaning contract, a managed IT service, monthly SaaS access, transaction processing - be accounted for as one obligation rather than hundreds of daily or monthly ones, provided each increment is distinct and satisfied over time with a single measure of progress. The upside is a hugely simplified allocation and progress measurement; the trap is that the series treatment does not remove the need to reassess variable consideration and modifications across the series, and it does not apply where the pattern of transfer differs between increments. Many entities apply the series guidance by default to any recurring service - that is a shortcut IFRS 15.23 does not always support.</p>
+            <p>Material rights are the most frequently missed obligation on this list. A loyalty programme, a renewal at a discounted rate, a "next purchase 20% off" voucher, or tiered volume discounts on future orders can each give the customer an option that has value only because of the current transaction (IFRS 15.B39-B40). When it does, the entity allocates part of the transaction price to the option based on the discount the customer would obtain, adjusted for the likelihood the option is exercised, and defers that amount as a contract liability until the option is exercised or expires (IFRS 15.B42). The auditor's question is always the same: is the discount incremental to what any customer could get anyway? Only an incremental discount creates a material right; a discount available to everyone in the class does not (IFRS 15.B41).</p>
 
-            <h2 id="worked-example-software-customization">Worked Example: Software + Customization</h2>
-            <p><strong>Scenario:</strong> Enterprise software vendor contracts to deliver software + 6-month customization for £100,000.</p>
-            <ul>
-                <li><strong>Off-the-shelf software:</strong> Distinct. Other customers can use the same software.</li>
-                <li><strong>Customization services:</strong> Distinct. Services are separately identifiable (vendor could subcontract or customer could hire another firm).</li>
-                <li><strong>Number of obligations:</strong> 2</li>
-                <li><strong>Revenue pattern:</strong> Software recognized at delivery (point-in-time); customization over 6 months (over-time)</li>
-            </ul>
+            <h2 id="principal-vs-agent">Principal vs Agent: Gross or Net Revenue?</h2>
+            <p>A principal recognises revenue gross - the full amount the customer is billed - while an agent recognises revenue net, only the fee or commission it keeps for arranging the transaction (IFRS 15.B34-B36). The determining question under IFRS 15.B35 is control: does the entity control the specified good or service before it is transferred to the customer? If yes, the entity is a principal; if it merely arranges for another party to provide the good or service, it is an agent. This single judgement can swing reported revenue by an order of magnitude without changing profit by a penny, which is exactly why it is a fraud-risk area.</p>
+            <p>IFRS 15.B37 provides three indicators that an entity controls the specified good or service and is therefore a principal: it is primarily responsible for fulfilling the promise (acceptability, quality, and remediation sit with the entity); it has inventory risk before or after transfer (it holds the item, or is committed to buy it whether or not it on-sells); and it has discretion in establishing the price the customer pays. No single indicator is determinative and they are not a checklist to be tallied - IFRS 15.B37A stresses they support the control assessment in IFRS 15.B35, they do not replace it. The 2016 clarifications (IFRS 15.B34A) also require the entity to identify the specified good or service first, because an entity can be a principal for some promises in a contract and an agent for others.</p>
+            <p>Marketplace and platform businesses live inside this judgement. A food-delivery platform that only lists restaurants and passes orders through, taking no inventory risk and not setting the food price, is an agent for the food and recognises only its commission; the same platform that employs the riders, controls the delivery service, sets the delivery price and is responsible for fulfilment is a principal for the delivery service and recognises that gross. The two revenue models frequently sit in the same set of financial statements, which is why the accounting-policy note and the disaggregation disclosure (IFRS 15.114) are where auditors and analysts look first.</p>
 
-            <h2 id="audit-focus-the-integration-test">Audit Focus: The Integration Test</h2>
-            <p>Auditors challenge whether items are truly separate. Common pushback:</p>
-            <ul>
-                <li>"You separated hardware and service, but the contract says customer must use both together. Are they truly separate?"</li>
-                <li>"You have one PO for 'system delivery.' How did you justify two performance obligations?"</li>
-                <li>"You allocated based on standalone prices. Where's the evidence those prices are accurate?"</li>
-            </ul>
+            <h2 id="worked-example-bundle-allocation">Worked Example: Allocating Price Across a Bundle</h2>
+            <p>A telecoms operator sells a 24-month contract bundling a handset and airtime for a total of £600, payable as £50 upfront plus £22.92 per month. The handset and the airtime service each pass IFRS 15.27 - the customer can use the handset on another network and the airtime on another handset, and neither significantly modifies the other - so there are two performance obligations. Standalone selling prices are £300 for the handset (its retail price) and £360 for 24 months of airtime (£15 per month sold SIM-only), a total of £660. Because the £600 contract price is below the £660 sum of standalone prices, the £60 discount is allocated proportionately (IFRS 15.81): handset £600 x 300/660 = £272.73; airtime £600 x 360/660 = £327.27.</p>
+            <table>
+                <tr><th>Transaction</th><th>Account</th><th>Dr (£)</th><th>Cr (£)</th></tr>
+                <tr><td>Handset delivered at inception (point in time)</td><td>Contract asset / receivable</td><td>272.73</td><td></td></tr>
+                <tr><td></td><td>Revenue - handset</td><td></td><td>272.73</td></tr>
+                <tr><td>Cash received upfront</td><td>Cash</td><td>50.00</td><td></td></tr>
+                <tr><td></td><td>Contract asset / receivable</td><td></td><td>50.00</td></tr>
+                <tr><td>Each month, airtime delivered (over time, £327.27 / 24)</td><td>Receivable</td><td>13.64</td><td></td></tr>
+                <tr><td></td><td>Revenue - airtime service</td><td></td><td>13.64</td></tr>
+            </table>
+            <p>The point the journals expose is that revenue (£272.73 on the handset) is recognised well ahead of billing, creating a contract asset that unwinds as the customer pays each monthly instalment - the cash profile and the revenue profile deliberately diverge. A voucher for 50% off a future purchase would be tested as a material right under IFRS 15.B40, carving out a further slice of the £600. For how the resulting timing differences are presented, see the contract assets and liabilities article linked below.</p>
 
+            <h2 id="worked-example-principal-agent">Worked Example: Principal vs Agent Journal Entries</h2>
+            <p>A platform processes a £100 customer order. The food costs £80 and the platform keeps a £20 commission. If the platform is an <strong>agent</strong> for the food (no inventory risk, does not set the food price, not primarily responsible for the meal), it recognises revenue of £20. If it is the <strong>principal</strong> (controls the meal before transfer, sets the price, bears fulfilment risk), it recognises £100 revenue and £80 cost of sales. Gross profit is £20 either way - only the top line moves.</p>
+            <table>
+                <tr><th>Model</th><th>Account</th><th>Dr (£)</th><th>Cr (£)</th></tr>
+                <tr><td>Agent (net)</td><td>Cash</td><td>100</td><td></td></tr>
+                <tr><td></td><td>Revenue - commission</td><td></td><td>20</td></tr>
+                <tr><td></td><td>Payable to restaurant</td><td></td><td>80</td></tr>
+                <tr><td>Principal (gross)</td><td>Cash</td><td>100</td><td></td></tr>
+                <tr><td></td><td>Revenue - food sales</td><td></td><td>100</td></tr>
+                <tr><td></td><td>Cost of sales</td><td>80</td><td></td></tr>
+                <tr><td></td><td>Payable to restaurant</td><td></td><td>80</td></tr>
+            </table>
+            <p>On a million such orders the agent reports £20m revenue and the principal reports £100m - a fivefold difference driven entirely by the IFRS 15.B35 control conclusion. Because the gross figure flatters revenue growth and market-share narratives while leaving profit unchanged, IFRS 15.B37's indicators must be documented per specified good or service, not asserted at entity level.</p>
+
+            <h2 id="audit-focus-red-flags">Audit Focus: Red Flags and ISA References</h2>
+            <p>The performance-obligation and principal-agent judgements are, in audit terms, significant risks that usually attract a specific response. Three red flags recur:</p>
+            <ul>
+                <li><strong>Missed or under-counted obligations (ISA 315 Revised).</strong> When the entity has priced deliverables but no promise inventory covering implied promises, free services and material rights, the risk of a material misstatement in the number of obligations - and therefore in timing - is not properly identified. ISA 315 requires the auditor to understand the revenue process and identify risks at the assertion level; a policy that never mentions IFRS 15.24 implied promises or IFRS 15.B40 options is a signal the risk assessment is incomplete.</li>
+                <li><strong>Gross-versus-net manipulation (ISA 240).</strong> Presenting agent commission as gross principal revenue inflates the top line without touching profit, a textbook fraud-risk incentive when management is measured on revenue growth. ISA 240 presumes a fraud risk in revenue recognition; the auditor should challenge the IFRS 15.B35 control conclusion, test whether inventory risk and pricing discretion genuinely sit with the entity, and be alert to policies that flipped to gross in a fundraising or IPO year.</li>
+                <li><strong>Unsupported standalone selling prices (ISA 330).</strong> Allocation across obligations depends on standalone selling prices that are frequently estimated for customisation, support and material rights. ISA 330 requires responses to assessed risks; here that means testing the SSP evidence - observable prices, market data, or a defensible expected-cost-plus-margin - rather than accepting a residual that conveniently front-loads revenue to the point-in-time deliverable.</li>
+            </ul>
             <div class="example-box">
-                <strong>Red Flag:</strong> Company separates obligations without documented evidence (customer feedback, market data, or pricing). Auditors often challenge allocation methods, especially for customization services where standalone price is hard to defend.
+                <strong>Red flag:</strong> A policy note that combines everything into one obligation (deferring revenue) or splits everything apart (accelerating it) without documented IFRS 15.29 integration/interdependence analysis, or a marketplace that recognises gross revenue while disclaiming responsibility for the underlying goods in its terms of service. Both warrant a documented challenge and, under ISA 240, professional scepticism about management's incentive.
             </div>
 
-            
-<h2 id="real-life-case-study">Real-Life Case Study: Identifying Distinct Obligations in a Construction Contract</h2>
+<h2 id="real-life-case-study">Real-Life Case Study: Just Eat Takeaway.com</h2>
 <div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A contractor agrees to design, build, and fit out a bespoke facility for &pound;5m.</p>
- <p><strong>Judgement.</strong> Although design, build and fit-out could be separate services, here they are highly interdependent and the contractor integrates them into one combined output the customer controls as it is built. They are therefore <em>not distinct in the context of the contract</em>, so they form a single performance obligation satisfied over time.</p>
- <p><strong>Takeaway.</strong> "Could it be sold separately?" is only half the test. The second half, "is it separately identifiable in <em>this</em> contract, or is it an input to a combined item?", is what turns three activities into one performance obligation.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
+<p><strong>The filing.</strong> Just Eat Takeaway.com N.V., which reports under IFRS, disclosed total revenue of &euro;5,085 million for 2024 (2023: &euro;5,148 million). Its revenue is generated from two structurally different models that map directly onto the IFRS 15.B34-B38 principal-versus-agent judgement: a pure <em>marketplace</em> model, where the platform connects consumers with restaurants that fulfil and deliver the order themselves, and an <em>own-delivery</em> (logistics) model, where the group's own courier network delivers the food.</p>
+<p><strong>The judgement.</strong> In the marketplace model the platform arranges the transaction but does not control the food before it reaches the consumer, does not set the food price and does not carry inventory risk - the classic IFRS 15.B35/B37 agent profile - so revenue is the commission and fees, recognised net. In the own-delivery model the group controls and is primarily responsible for the delivery service it provides, giving it a principal position for that specified service (IFRS 15.B34A recognises an entity can be principal for one specified service and agent for another in the same arrangement). The consequence is that headline revenue is not a clean multiple of the value of food ordered (gross merchandise value); the two models sit side by side, which is why the group's disaggregation and accounting-policy notes are essential to interpreting the &euro;5,085m figure.</p>
+<p><strong>The takeaway.</strong> The same platform is an agent for one promise and a principal for another, decided per specified good or service under IFRS 15.B34A, not once for the whole entity. Any analyst comparing platform revenues, and any auditor testing the top line under ISA 240, must first read which model each revenue stream sits in before the number means anything.</p>
+<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Revenue figures are publicly filed (Just Eat Takeaway.com Full Year 2024 Results, 24 February 2025). The characterisation of the marketplace-versus-own-delivery models reflects the group's disclosed business model and general IFRS 15 principles; readers should consult the group's audited financial statements and accounting-policy notes for the precise policy applied.</p>
 </div>
+
+<h2 id="faq">Frequently Asked Questions</h2>
+<p><strong>What is a performance obligation under IFRS 15?</strong> A promise to transfer a distinct good or service, or a series of substantially-the-same distinct goods or services with the same pattern of transfer (IFRS 15.22). Every such promise identified at inception - explicit or implied by customary practice (IFRS 15.24) - is a separate unit of account.</p>
+<p><strong>How do you decide if a good or service is distinct?</strong> Both limbs of IFRS 15.27 must pass: the customer can benefit from it alone or with readily available resources, and the promise is separately identifiable from other promises. IFRS 15.29's three factors - integration, significant customisation, high interdependence - are what usually make items non-distinct.</p>
+<p><strong>What is the difference between principal and agent?</strong> A principal controls the good or service before transfer and recognises gross revenue; an agent arranges for another party to provide it and recognises only its fee net (IFRS 15.B34-B36). The IFRS 15.B37 indicators are fulfilment responsibility, inventory risk and pricing discretion.</p>
+<p><strong>What is a material right?</strong> A customer option to buy more at an incremental discount not otherwise available - loyalty points, a renewal discount (IFRS 15.B40). It is a separate performance obligation, so price is allocated to it and deferred until exercised or lapsed (IFRS 15.B42).</p>
+<p><strong>Is a series of distinct goods or services one performance obligation?</strong> Yes, where each increment is distinct, satisfied over time, and measured with the same progress method (IFRS 15.22(b), 15.23) - typical of cleaning, managed IT and monthly SaaS.</p>
+<p><strong>Does a standard warranty create a separate performance obligation?</strong> An assurance-type warranty is accounted for under IAS 37 as a provision; a service-type warranty (or one the customer can buy separately) is a distinct obligation with price allocated to it (IFRS 15.B28-B33).</p>
+<p><strong>How many performance obligations can one contract have?</strong> As many as there are distinct promises - from one (a fully integrated construction contract) to dozens - and the number is an outcome of the IFRS 15.27-30 analysis, not a target.</p>
 
 <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>

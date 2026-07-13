@@ -60,7 +60,7 @@ Once GA4 is wired, you'll see:
 
 | Keyword | Target Rank | Article/Page | Current Status |
 |---------|-------------|--------------|-----------------|
-| Goodwill impairment IFRS 36 vs ASC 350 | #15-30 | goodwill-impairment-ifrs-36-vs-asc-350-deep-dive.html | TBD |
+| Goodwill impairment IAS 36 vs ASC 350 | #15-30 | goodwill-impairment-ias-36-vs-asc-350-deep-dive.html | TBD |
 | Lease accounting IFRS 16 vs ASC 842 | #15-30 | lease-accounting-ifrs-16-vs-asc-842-deep-dive.html | TBD |
 | PCAOB audit standards | #20-30 | blog/pcaob-standards-audit-quality-guide.html | TBD |
 

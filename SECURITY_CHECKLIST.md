@@ -191,6 +191,35 @@
 
 ---
 
+## Code-Level Security Rules (DO NOT SKIP)
+
+### SSRF Guard (`lib/safeFetch.js`)
+- DNS-resolve host before fetch, block private ranges: 127/8, 10/8, 172.16/12, 192.168/16, 169.254/16 (AWS metadata)
+- Re-validate host on every redirect hop
+- Cap response body ~2MB
+- Strip `<script>` and `<style>` tags from fetched HTML
+- Used by Interview Coach JD resolution + `tailor.js` company-URL fetch
+
+### Text-Size Caps (Token-Bomb Prevention)
+- CV/cover-letter/JD/chat text: **100k chars max** in `cv-review.js` and `fsreview.js`
+- Reject with 413 if exceeded
+- Apply same cap to any new endpoint accepting bulk user text before Claude API call
+
+### CDN Versions (Pinned, Never Latest)
+- `pdf.js`: 3.11.174
+- `pdf.worker.js`: 3.11.174
+- `mammoth.js`: 1.6.0
+- `jspdf`: 2.5.1
+
+### XSS Prevention
+- ALL user-supplied data going into `.innerHTML` (names, emails, filenames, free text) MUST pass through `escapeHtml()` first
+- Examples: signup form data, consultation names, feedback text, custom persona names
+
+### Password Length (Already Fixed)
+- Enforce 6–128 chars on signup/login/reset (prevents CPU-DoS on `crypto.scrypt`)
+
+---
+
 ## Testing Before Launch
 
 ### 1. **Verify Core Features Work**

@@ -7,11 +7,63 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IFRS 9 Hedge Accounting: Cash Flow & Fair Value Hedges with Effectiveness Testing</title>
-    <meta name="description" content="IFRS 9 hedge accounting explained: cash flow hedges, fair value hedges, net investment hedges, effectiveness testing, hedge ineffectiveness, economic relationship.">
-    <meta name="keywords" content="IFRS 9 hedge accounting, cash flow hedge, fair value hedge, hedge effectiveness, hedged item, hedging instrument, net investment hedge">
+    <meta name="description" content="IFRS 9 hedge accounting explained: the three hedge types, qualifying criteria (economic relationship, hedge ratio, credit risk), inception documentation, prospective effectiveness, rebalancing, discontinuation, worked FX cash flow hedge and auditor red flags.">
+    <meta name="keywords" content="IFRS 9 hedge accounting, cash flow hedge, fair value hedge, hedge effectiveness, hedged item, hedging instrument, net investment hedge, economic relationship, hedge ratio, rebalancing">
     <meta name="author" content="Usman Qureshi">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.uqconsulting.org/blog/ifrs-9-hedge-accounting.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "IFRS 9 Hedge Accounting: Cash Flow & Fair Value Hedges with Effectiveness Testing",
+      "description": "IFRS 9 hedge accounting explained: the three hedge types, qualifying criteria, inception documentation, prospective effectiveness, rebalancing, discontinuation, a worked FX cash flow hedge and auditor red flags.",
+      "author": { "@type": "Person", "name": "Usman Qureshi", "jobTitle": "ACCA, ACA" },
+      "publisher": { "@type": "Organization", "name": "UQ Consulting", "url": "https://www.uqconsulting.org" },
+      "datePublished": "2026-07-01",
+      "dateModified": "2026-07-13",
+      "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.uqconsulting.org/blog/ifrs-9-hedge-accounting.html" },
+      "about": ["IFRS 9", "Hedge accounting", "Cash flow hedge", "Fair value hedge", "Net investment hedge"]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is hedge accounting mandatory under IFRS 9?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Hedge accounting is an accounting policy choice under IFRS 9.6.1.1. If a hedge is not designated, the derivative is still measured at fair value through profit or loss; hedge accounting only changes the timing and location of gains and losses so they match the hedged item." }
+        },
+        {
+          "@type": "Question",
+          "name": "Did IFRS 9 remove the 80-125% effectiveness test?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. IFRS 9.6.4.1(c) replaced the IAS 39 retrospective 80-125% bright line with three qualifying conditions assessed prospectively: an economic relationship exists, credit risk does not dominate value changes, and the hedge ratio reflects the actual quantities hedged." }
+        },
+        {
+          "@type": "Question",
+          "name": "Where does the effective portion of a cash flow hedge go?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Under IFRS 9.6.5.11 the effective portion of the gain or loss on the hedging instrument is recognised in other comprehensive income and accumulated in the cash flow hedge reserve, then reclassified to profit or loss (or basis-adjusted into a non-financial asset) when the hedged item affects profit or loss." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is hedge rebalancing under IFRS 9?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Rebalancing (IFRS 9.6.5.5) is adjusting the hedge ratio of an existing hedge relationship when the risk management objective stays the same but the ratio no longer reflects the economic relationship. It continues the hedge rather than discontinuing it." }
+        },
+        {
+          "@type": "Question",
+          "name": "When must a company discontinue hedge accounting?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Under IFRS 9.6.5.6-6.5.7 discontinuation is required when the qualifying criteria are no longer met, the hedging instrument expires or is sold, or the risk management objective changes. Voluntary de-designation is not permitted while the objective is unchanged." }
+        },
+        {
+          "@type": "Question",
+          "name": "What documentation is required at hedge inception?",
+          "acceptedAnswer": { "@type": "Answer", "text": "IFRS 9.6.4.1(b) requires formal documentation at inception of the risk management objective and strategy, the hedging instrument, the hedged item, the nature of the risk, and how effectiveness (including the hedge ratio) will be assessed. Documentation prepared after the fact does not qualify." }
+        }
+      ]
+    }
+    </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
@@ -91,196 +143,157 @@
     &gt; <a href="ifrs-9-financial-instruments-complete-guide.html" style="color: #2a4a7a; text-decoration: none;">IFRS 9 Financial Instruments</a> 
     &gt; <span style="color: #1a2f5a;">IFRS 9 Hedge Accounting: Cash Flow & Fair Value Hedges with Effectiveness Testing</span>
 </div>
-        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 12 min read</div>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Updated 13 July 2026 · 14 min read</div>
 
-        <p class="lead">Hedge accounting is the optional "relief" under IFRS 9 that allows a company to offset gains on a hedging instrument against losses on a hedged item, reducing P&L volatility. Without it, hedges create accounting noise. This guide covers cash flow hedges, fair value hedges, net investment hedges, effectiveness testing, and the common audit challenges.</p>
+        <p class="lead">Hedge accounting under IFRS 9 is an optional policy that aligns the timing of gains and losses on a hedging instrument with the hedged exposure, so the income statement reflects the economic offset rather than accounting noise. It replaced the IAS 39 80-125% bright line with a principles-based test built on an economic relationship, a hedge ratio and credit risk that does not dominate. This guide walks through the three hedge types, the qualifying criteria, inception documentation, prospective effectiveness, rebalancing and discontinuation, a fully worked FX cash flow hedge with journals, three auditor red flags, and a case study using easyJet's publicly filed figures.</p>
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#hedge-purpose">Purpose of Hedge Accounting</a></li><li class="toc-l1"><a href="#three-types">Three Types of Hedges</a><ul><li class="toc-l2"><a href="#1-cash-flow-hedge">1. Cash Flow Hedge</a></li><li class="toc-l2"><a href="#2-fair-value-hedge">2. Fair Value Hedge</a></li><li class="toc-l2"><a href="#3-net-investment-hedge">3. Net Investment Hedge</a></li></ul></li><li class="toc-l1"><a href="#cash-flow">Cash Flow Hedges: Variable Exposure</a><ul><li class="toc-l2"><a href="#structure">Structure</a></li><li class="toc-l2"><a href="#accounting-for-cash-flow-hedges">Accounting for Cash Flow Hedges</a></li></ul></li><li class="toc-l1"><a href="#fair-value">Fair Value Hedges: Fixed-Rate Asset Exposure</a><ul><li class="toc-l2"><a href="#structure-2">Structure</a></li><li class="toc-l2"><a href="#key-difference-from-cash-flow-hedge">Key Difference from Cash Flow Hedge</a></li></ul></li><li class="toc-l1"><a href="#net-investment">Net Investment Hedges: Foreign Currency Exposure</a><ul><li class="toc-l2"><a href="#hedging-strategy">Hedging Strategy</a></li></ul></li><li class="toc-l1"><a href="#effectiveness">Effectiveness Testing and Ineffectiveness</a><ul><li class="toc-l2"><a href="#whats-effective">What's "Effective"?</a></li><li class="toc-l2"><a href="#testing-ineffectiveness">Testing Ineffectiveness</a></li><li class="toc-l2"><a href="#accounting-for-ineffectiveness">Accounting for Ineffectiveness</a></li></ul></li><li class="toc-l1"><a href="#worked">Worked Example: Interest Rate Swap Hedge</a><ul><li class="toc-l2"><a href="#setup">Setup</a></li><li class="toc-l2"><a href="#year-1-journal-entries-libor-rises-from-45-to-55">Year 1 Journal Entries (LIBOR rises from 4.5% to 5.5%)</a></li></ul></li><li class="toc-l1"><a href="#audit-challenges">Audit Challenges in Hedge Accounting</a><ul><li class="toc-l2"><a href="#challenge-1-ineffective-hedges">Challenge 1: Ineffective Hedges</a></li><li class="toc-l2"><a href="#challenge-2-undocumented-hedge-intent">Challenge 2: Undocumented Hedge Intent</a></li><li class="toc-l2"><a href="#challenge-3-hedge-rebalancing">Challenge 3: Hedge Rebalancing</a><ul><li class="toc-l3"><a href="#usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</a></li></ul></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: A Cash Flow Hedge of Forecast USD Purchases</a></li></ul>
+            <ul>
+              <li class="toc-l1"><a href="#what-is">What is hedge accounting and why is it optional?</a></li>
+              <li class="toc-l1"><a href="#three-types">What are the three types of hedge?</a>
+                <ul>
+                  <li class="toc-l2"><a href="#fair-value-hedge">Fair value hedge</a></li>
+                  <li class="toc-l2"><a href="#cash-flow-hedge">Cash flow hedge</a></li>
+                  <li class="toc-l2"><a href="#net-investment-hedge">Net investment hedge</a></li>
+                </ul>
+              </li>
+              <li class="toc-l1"><a href="#qualifying">What must a hedge meet to qualify?</a>
+                <ul>
+                  <li class="toc-l2"><a href="#documentation">Inception documentation</a></li>
+                  <li class="toc-l2"><a href="#effectiveness">Prospective effectiveness</a></li>
+                </ul>
+              </li>
+              <li class="toc-l1"><a href="#worked">Worked example: cash flow hedge of forecast USD purchases</a>
+                <ul>
+                  <li class="toc-l2"><a href="#worked-setup">Setup</a></li>
+                  <li class="toc-l2"><a href="#worked-journals">Fair value movements and journals</a></li>
+                  <li class="toc-l2"><a href="#worked-basis">Basis adjustment on the hedged transaction</a></li>
+                </ul>
+              </li>
+              <li class="toc-l1"><a href="#rebalancing">How do rebalancing and discontinuation work?</a></li>
+              <li class="toc-l1"><a href="#red-flags">Auditor red flags</a></li>
+              <li class="toc-l1"><a href="#case-study">Case study: easyJet fuel and FX cash flow hedges</a></li>
+              <li class="toc-l1"><a href="#faq">Frequently asked questions</a></li>
+            </ul>
         </div>
 
         <article>
-            <h2 id="hedge-purpose">Purpose of Hedge Accounting</h2>
-            <p>Without hedge accounting, a company that hedges an exposure recognizes both:</p>
-            <ul>
-                <li>The loss on the hedged item (e.g., future cash flow declined due to interest rate rise)</li>
-                <li>The gain on the hedging instrument (e.g., swap gained value due to interest rate rise)</li>
-            </ul>
-            <p>This creates accounting noise: the gains/losses offset in economics, but not in the P&L.</p>
-            <p>Hedge accounting allows matching: gains on the hedge offset losses on the hedged item, so only the ineffective portion hits P&L.</p>
+            <h2 id="what-is">What is hedge accounting and why is it optional?</h2>
+            <p>Hedge accounting is an optional policy that lets a company recognise the gain or loss on a hedging instrument in the same period, and the same place in the financial statements, as the offsetting loss or gain on the item it is hedging. It is optional because IFRS 9.6.1.1 frames it as a permitted policy rather than a requirement: even where the hedge is not designated, a derivative is still measured at fair value through profit or loss under IFRS 9.5.2.1, so hedge accounting changes only the timing and location of recognition, not whether the instrument sits on balance sheet.</p>
+            <p>Without designation, an economically sound hedge can still produce reported volatility. The derivative is remeasured to fair value through profit or loss each period, while a forecast transaction or a foreign net investment is not yet recognised, so the offset that exists in cash terms never meets in the same reporting line. IFRS 9.6.1.1-6.1.3 lets a company correct that mismatch by designating a qualifying relationship, and it permits hedging of financial and non-financial items (for example forecast jet-fuel purchases) provided the risk is separately identifiable and reliably measurable per IFRS 9.6.3.1 and 6.3.7.</p>
+            <p>The trade-off is administrative rigour. To obtain the relief a company must satisfy the qualifying criteria in IFRS 9.6.4.1, prepare formal documentation at inception, and assess effectiveness on an ongoing prospective basis. Auditors treat the policy as an assertion to be evidenced, not a label to be accepted, which is why documentation completeness and effectiveness judgement drive most of the audit effort discussed below.</p>
 
-            <h2 id="three-types">Three Types of Hedges</h2>
-
-            <h3 id="1-cash-flow-hedge">1. Cash Flow Hedge</h3>
-            <p><strong>Exposure:</strong> Variability in future cash flows</p>
-            <p><strong>Example:</strong> Company has a variable-rate loan maturing in 2 years. Wants to lock in the interest rate. Enters an interest rate swap to convert variable to fixed.</p>
-            <p><strong>Accounting:</strong> Effective portion of the swap's gain/loss goes to OCI; ineffective portion goes to P&L.</p>
-
-            <h3 id="2-fair-value-hedge">2. Fair Value Hedge</h3>
-            <p><strong>Exposure:</strong> Changes in fair value of a recognized asset or liability</p>
-            <p><strong>Example:</strong> Company holds a fixed-rate bond. Interest rates rise, so the bond's fair value falls. Company enters a swap to hedge the FV decline.</p>
-            <p><strong>Accounting:</strong> Gains/losses on both the hedged item and the hedge go to P&L (matching).</p>
-
-            <h3 id="3-net-investment-hedge">3. Net Investment Hedge</h3>
-            <p><strong>Exposure:</strong> Foreign currency exposure in a foreign subsidiary's net asset value</p>
-            <p><strong>Example:</strong> US parent has a £100m investment in a UK subsidiary. Wants to hedge the £/$ exchange risk. Borrows £50m (foreign currency debt) to partially hedge the exposure.</p>
-            <p><strong>Accounting:</strong> Effective portion of the hedge's gain/loss goes to OCI (within equity); ineffective portion goes to P&L.</p>
-
-            <h2 id="cash-flow">Cash Flow Hedges: Variable Exposure</h2>
-
-            <h3 id="structure">Structure</h3>
-            <ul>
-                <li><strong>Hedged item:</strong> A variable-rate loan, future purchase, or forecast transaction</li>
-                <li><strong>Hedging instrument:</strong> A swap, forward, or option that locks in the rate</li>
-                <li><strong>Expected impact:</strong> If rates move against the company, the swap gains to offset cash flow loss</li>
-            </ul>
-
-            <h3 id="accounting-for-cash-flow-hedges">Accounting for Cash Flow Hedges</h3>
+            <h2 id="three-types">What are the three types of hedge?</h2>
+            <p>IFRS 9.6.5.2 permits three hedge relationships: a fair value hedge, a cash flow hedge, and a hedge of a net investment in a foreign operation. The category is dictated by the exposure being hedged, and it drives whether the effective portion of the instrument's fair value change is recognised in profit or loss or in other comprehensive income (OCI). The table summarises the mechanics under IFRS 9.6.5.8, 6.5.11 and 6.5.13.</p>
             <table>
-                <tr>
-                    <th>Item</th>
-                    <th>Accounting Treatment</th>
-                </tr>
-                <tr>
-                    <td>Effective portion of hedge gain/loss</td>
-                    <td>Other Comprehensive Income (OCI) — deferred</td>
-                </tr>
-                <tr>
-                    <td>Ineffective portion</td>
-                    <td>P&L immediately</td>
-                </tr>
-                <tr>
-                    <td>When hedged item affects P&L</td>
-                    <td>Accumulated OCI is reclassified to P&L (reclassification adjustment)</td>
-                </tr>
+                <tr><th>Hedge type</th><th>Exposure (IFRS 9.6.5.2)</th><th>Effective portion</th><th>Reference</th></tr>
+                <tr><td>Fair value</td><td>Change in fair value of a recognised asset, liability or firm commitment</td><td>Profit or loss, alongside the hedged item's remeasurement for the hedged risk</td><td>6.5.8</td></tr>
+                <tr><td>Cash flow</td><td>Variability in future cash flows (forecast transaction, variable-rate debt, forecast FX purchase)</td><td>OCI (cash flow hedge reserve); reclassified or basis-adjusted later</td><td>6.5.11</td></tr>
+                <tr><td>Net investment</td><td>FX exposure on the net assets of a foreign operation</td><td>OCI (foreign currency translation reserve); recycled on disposal</td><td>6.5.13</td></tr>
             </table>
 
-            <p class="example-box"><strong>Cash Flow Hedge Example: Variable-Rate Loan</strong><br>
-            <strong>Scenario:</strong> Company borrows £50m at LIBOR + 200 bps for 3 years. LIBOR is currently 5%. Concerned rates will rise.<br>
-            <strong>Hedge:</strong> Enters a 3-year interest rate swap: pays fixed 6.5%, receives LIBOR.<br><br>
-            <strong>Year 1: LIBOR rises to 6% (effective hedge)</strong><br>
-            — Loan interest cost increased: +£500k (1% on £50m)<br>
-            — Swap marked to fair value: £1.5m gain (fixed 6.5% is now cheaper than floating 7%)<br>
-            — Effective portion: ~£1.5m to OCI<br>
-            — Ineffective portion: ~£0k to P&L (the hedge is very effective)<br><br>
-            <strong>At maturity (Year 3): Loan is repaid</strong><br>
-            — Accumulated OCI (£1.5m cumulative gains) is reclassified to P&L as the loan is paid off<br>
-            — This matches the cash flow relief the company gained from the swap offsetting higher interest costs
-            </p>
+            <h3 id="fair-value-hedge">Fair value hedge</h3>
+            <p>A fair value hedge addresses the risk that the fair value of a recognised asset, liability or unrecognised firm commitment changes with a market variable such as interest rates. Under IFRS 9.6.5.8 the hedging instrument is remeasured to fair value through profit or loss, and — crucially — the carrying amount of the hedged item is also adjusted for the change attributable to the hedged risk, with that adjustment posted to profit or loss. A fixed-rate bond hedged with a pay-fixed/receive-floating swap is the classic case: if a perfect offset holds, the two profit-or-loss entries cancel and only ineffectiveness remains.</p>
 
-            <h2 id="fair-value">Fair Value Hedges: Fixed-Rate Asset Exposure</h2>
+            <h3 id="cash-flow-hedge">Cash flow hedge</h3>
+            <p>A cash flow hedge addresses variability in future cash flows attributable to a particular risk — a forecast FX purchase, a variable-rate borrowing, or a highly probable commodity purchase. Under IFRS 9.6.5.11 the effective portion of the instrument's fair value change is deferred in OCI within a separate cash flow hedge reserve, and released to profit or loss when the hedged cash flows affect profit or loss. Where the hedged item is a forecast purchase of a non-financial asset, IFRS 9.6.5.11(d)(i) requires the accumulated reserve to be removed from equity and included directly in the initial cost of that asset — a "basis adjustment" rather than a reclassification. The forecast transaction must remain highly probable for the hedge to continue.</p>
 
-            <h3 id="structure-2">Structure</h3>
+            <h3 id="net-investment-hedge">Net investment hedge</h3>
+            <p>A net investment hedge protects the parent's exposure to FX movements on the net assets of a foreign operation, and is accounted for like a cash flow hedge under IFRS 9.6.5.13: the effective portion goes to the foreign currency translation reserve in OCI and is reclassified to profit or loss only on disposal of the operation, consistent with IAS 21.48. The hedging instrument is often foreign-currency borrowing or an FX forward. IFRIC 16 constrains which entity within the group can hold the instrument and how much exposure can be designated, so the mechanics are more constrained than the other two types.</p>
+
+            <h2 id="qualifying">What must a hedge meet to qualify?</h2>
+            <p>IFRS 9.6.4.1 sets three cumulative gates: the relationship must involve only eligible instruments and items; it must be formally documented at inception; and it must meet the hedge effectiveness requirements. The effectiveness requirements in IFRS 9.6.4.1(c) are the headline change from IAS 39 — there is an economic relationship between hedged item and hedging instrument, credit risk does not dominate the value changes, and the hedge ratio equals the ratio of the quantities actually used to hedge. The historic 80-125% retrospective bright line is gone.</p>
+            <p>The economic-relationship condition, expanded in IFRS 9.B6.4.4-B6.4.6, asks whether the values of the hedged item and instrument move in opposite directions because of the same underlying risk — not whether they correlate statistically. The credit-risk condition (IFRS 9.B6.4.7-B6.4.8) fails where changes in the counterparty's or the entity's own credit standing swamp the offset the hedge is meant to deliver, which is why heavily out-of-the-money uncollateralised derivatives are scrutinised. The hedge-ratio condition (IFRS 9.B6.4.9) forbids deliberately weighting the ratio to create an accounting result inconsistent with the risk management objective.</p>
+
+            <h3 id="documentation">Inception documentation</h3>
+            <p>IFRS 9.6.4.1(b) requires formal designation and documentation at the inception of the hedge, covering the risk management objective and strategy, the hedging instrument, the hedged item, the nature of the risk being hedged, and how the entity will assess whether the effectiveness requirements are met — including the calculation of the hedge ratio and the sources of expected ineffectiveness. This is a completeness threshold: documentation assembled after inception, or missing any of these elements, means the relationship never qualified, and the derivative is measured at fair value through profit or loss from day one.</p>
+
+            <h3 id="effectiveness">Prospective effectiveness</h3>
+            <p>IFRS 9 requires effectiveness to be assessed prospectively — at inception and at each reporting date, or on a significant change in circumstances — under IFRS 9.6.4.1(c) and B6.4.12. There is no retrospective quantitative test. For simple hedges where the critical terms of the instrument and hedged item match, a qualitative assessment can suffice per IFRS 9.B6.4.13-B6.4.17; where they do not match, a quantitative method (for example a regression or scenario analysis) is used to demonstrate the offset and to quantify the hedge ratio. Any measured ineffectiveness is still recognised immediately in profit or loss under IFRS 9.6.5.11(c) even though the pass/fail test is prospective.</p>
+
+            <h2 id="worked">Worked example: cash flow hedge of forecast USD purchases</h2>
+            <p>This example works a cash flow hedge of a highly probable forecast foreign-currency purchase, showing the fair value movement through OCI and the basis adjustment on the hedged transaction under IFRS 9.6.5.11(d)(i). It is illustrative but the mechanics mirror how an importer or airline accounts for forward FX and fuel hedges.</p>
+
+            <h3 id="worked-setup">Setup</h3>
             <ul>
-                <li><strong>Hedged item:</strong> A fixed-rate asset or liability (bond, fixed-rate receivable)</li>
-                <li><strong>Hedging instrument:</strong> A swap, option, or forward that gains if the asset's FV declines</li>
-                <li><strong>Expected impact:</strong> If rates rise and the bond's value falls, the hedge instrument gains to offset</li>
+                <li><strong>Hedged item:</strong> a highly probable forecast purchase of inventory for USD 5,000,000, expected in 6 months.</li>
+                <li><strong>Hedging instrument:</strong> a 6-month FX forward to buy USD 5,000,000 at 1.2500 GBP/USD (contracted cost GBP 4,000,000).</li>
+                <li><strong>Designation:</strong> cash flow hedge; critical terms of the forward match the forecast purchase, so a qualitative effectiveness assessment applies (IFRS 9.B6.4.13). Hedge ratio 1:1.</li>
+                <li><strong>Spot move:</strong> the pound weakens; at settlement the spot is 1.1900, so the same USD 5,000,000 would otherwise cost GBP 4,201,681.</li>
             </ul>
 
-            <h3 id="key-difference-from-cash-flow-hedge">Key Difference from Cash Flow Hedge</h3>
-            <p>In a fair value hedge, <strong>both the hedged item and the hedging instrument are marked to fair value in P&L</strong> each period. If the hedge is perfectly effective, the gains/losses offset and P&L is neutral.</p>
-
-            <p class="example-box"><strong>Fair Value Hedge Example: Bond Portfolio</strong><br>
-            <strong>Scenario:</strong> Insurance company holds £100m of fixed-rate bonds (3% coupon). Expects rates to rise and wants to protect against FV decline.<br>
-            <strong>Hedge:</strong> Enters a 5-year interest rate swap: pays LIBOR, receives fixed 3%.<br><br>
-            <strong>Year 1: Interest rates rise 1% (bonds fall in value)</strong><br>
-            — Bond FV decline: ~£2.5m (assuming 2.5% duration effect)<br>
-            — Swap FV gain: ~£2.5m (now paying LIBOR + receiving fixed 3%, which is more attractive)<br>
-            — P&L impact: — £2.5m (bond FV loss) + £2.5m (swap FV gain) = £0 net<br>
-            — The hedge is perfectly effective; no P&L impact
-            </p>
-
-            <h2 id="net-investment">Net Investment Hedges: Foreign Currency Exposure</h2>
-            <p>When a parent company invests in a foreign subsidiary, it has an implicit foreign currency exposure: if the foreign currency weakens, the parent's consolidated equity is impaired.</p>
-
-            <h3 id="hedging-strategy">Hedging Strategy</h3>
-            <p>Parent borrows in the foreign currency (or enters a forward contract) to partially offset the net investment FV exposure.</p>
-
-            <p class="example-box"><strong>Net Investment Hedge Example</strong><br>
-            <strong>Scenario:</strong> US parent invests £100m in UK subsidiary (net assets).<br>
-            <strong>Hedge:</strong> Parent borrows £50m (50% of exposure).<br><br>
-            <strong>Year 1: £ weakens 10% vs $ (adverse to parent)</strong><br>
-            — Equity loss (unhedged portion): 10% × £50m = £5m (in $ terms)<br>
-            — Liability gain (hedged portion): 10% × £50m = £5m (the £50m debt is now "cheaper" to repay in $)<br>
-            — Net P&L impact: — £5m + £5m = neutral on the hedged portion<br>
-            — OCI impact: The £5m gain on the debt is recorded in OCI (hedging loss offset by FX gain)
-            </p>
-
-            <h2 id="effectiveness">Effectiveness Testing and Ineffectiveness</h2>
-
-            <h3 id="whats-effective">What's "Effective"?</h3>
-            <p>A hedge is effective if changes in the hedged item's value are substantially offset by the hedging instrument's value changes. IFRS 9 doesn't require a precise % (unlike IAS 39); instead, it requires an "economic relationship."</p>
-
-            <h3 id="testing-ineffectiveness">Testing Ineffectiveness</h3>
-            <p><strong>Ineffectiveness arises when:</strong></p>
-            <ul>
-                <li>The hedge ratio is imperfect (e.g., hedge 90 contracts to cover 100 contracts of exposure)</li>
-                <li>The hedged item and hedging instrument don't perfectly correlate (e.g., LIBOR rate moves 1% but the bond moves 0.8%)</li>
-                <li>Timing mismatches (e.g., hedge expires before the hedged item matures)</li>
-                <li>Counterparty credit risk (e.g., if the swap counterparty defaults, you lose the hedge)</li>
-            </ul>
-
-            <h3 id="accounting-for-ineffectiveness">Accounting for Ineffectiveness</h3>
-            <p>The ineffective portion of the hedge gain/loss is recognized immediately in P&L. Typically, this is 1— 10% of the total hedge gain/loss.</p>
-
-            <h2 id="worked">Worked Example: Interest Rate Swap Hedge</h2>
-
-            <h3 id="setup">Setup</h3>
-            <ul>
-                <li>Company has £20m variable-rate debt maturing in 5 years</li>
-                <li>Current rate: LIBOR + 200 bps (currently 6.5% total)</li>
-                <li>Company enters a 5-year pay-fixed swap: pays 6.5% fixed, receives LIBOR</li>
-                <li>Swap has £20m notional (50% of debt) — intentionally underhedged</li>
-            </ul>
-
-            <h3 id="year-1-journal-entries-libor-rises-from-45-to-55">Year 1 Journal Entries (LIBOR rises from 4.5% to 5.5%)</h3>
-            <p><strong>Loan interest expense:</strong></p>
+            <h3 id="worked-journals">Fair value movements and journals</h3>
+            <p>The forward gains value as sterling weakens, because it locks the cheaper 1.2500 rate. Assume the forward's fair value at the reporting date before settlement is a GBP 150,000 asset, rising to GBP 201,681 by settlement. The effective portion is deferred in the cash flow hedge reserve (IFRS 9.6.5.11); with matched critical terms, ineffectiveness is nil here.</p>
+            <table>
+                <tr><th>Date</th><th>Forward fair value (GBP)</th><th>Period movement</th><th>To OCI (effective)</th></tr>
+                <tr><td>Inception</td><td>0</td><td>—</td><td>—</td></tr>
+                <tr><td>Reporting date</td><td>150,000 asset</td><td>+150,000</td><td>150,000</td></tr>
+                <tr><td>Settlement</td><td>201,681 asset</td><td>+51,681</td><td>51,681</td></tr>
+            </table>
+            <p>At the reporting date, defer the effective gain in OCI:</p>
             <div style="background: #1a2f5a; color: #e8eef7; padding: 14px; border-radius: 4px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
-                Dr Interest Expense &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,300,000<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr Cash (interest paid) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,300,000
+                Dr Derivative asset (forward) &nbsp;&nbsp;&nbsp; 150,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr OCI &mdash; cash flow hedge reserve &nbsp;&nbsp;&nbsp; 150,000
+            </div>
+            <p>At settlement, record the remaining movement to OCI and close out the forward for cash of GBP 201,681:</p>
+            <div style="background: #1a2f5a; color: #e8eef7; padding: 14px; border-radius: 4px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
+                Dr Derivative asset (forward) &nbsp;&nbsp;&nbsp; 51,681<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr OCI &mdash; cash flow hedge reserve &nbsp;&nbsp;&nbsp; 51,681<br>
+                Dr Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 201,681<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Derivative asset (forward) &nbsp;&nbsp; 201,681
             </div>
 
-            <p><strong>Swap marked to fair value (swap gained because fixed 6.5% is now cheaper than floating 7.5%):</strong></p>
+            <h3 id="worked-basis">Basis adjustment on the hedged transaction</h3>
+            <p>Because the hedged item is a forecast purchase of a non-financial asset, IFRS 9.6.5.11(d)(i) requires the GBP 201,681 accumulated in the cash flow hedge reserve to be removed from equity and included directly in the initial cost of inventory (a basis adjustment, not a profit-or-loss reclassification). The inventory is bought at spot for GBP 4,201,681; the reserve reduces its carrying cost back to the GBP 4,000,000 the company economically locked in:</p>
             <div style="background: #1a2f5a; color: #e8eef7; padding: 14px; border-radius: 4px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
-                Dr Swap Asset (fair value) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 400,000<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr Other Comprehensive Income (OCI) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 400,000
+                Dr Inventory &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4,201,681<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 4,201,681<br>
+                Dr OCI &mdash; cash flow hedge reserve &nbsp; 201,681<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Inventory (basis adjustment) &nbsp;&nbsp; 201,681
             </div>
+            <p>Net inventory cost is GBP 4,000,000. Had the company instead not used hedge accounting, the forward's GBP 201,681 gain would have hit profit or loss over the two periods while inventory came in at full spot cost, distorting both periods' margins — the exact volatility the policy exists to remove (IFRS 9.6.1.1).</p>
 
-            <p><strong>P&L impact: Year 1</strong></p>
+            <h2 id="rebalancing">How do rebalancing and discontinuation work?</h2>
+            <p>Rebalancing and discontinuation are IFRS 9's two responses when a hedge stops behaving as designated, and they are not interchangeable. Rebalancing (IFRS 9.6.5.5 and B6.5.7-B6.5.21) adjusts the hedge ratio of a continuing relationship when the risk management objective is unchanged but the ratio no longer reflects the economic relationship — for example a proven 0.95 offset drifts and the entity adds or reduces the quantity of hedging instrument. Rebalancing is a continuation, not a fresh start: cumulative amounts in the hedge reserve stay, and any ineffectiveness up to the rebalancing date is recognised in profit or loss first.</p>
+            <p>Discontinuation is mandatory, not elective, under IFRS 9.6.5.6-6.5.7 and B6.5.22-B6.5.28. A hedge is discontinued when the qualifying criteria in IFRS 9.6.4.1 are no longer met (and rebalancing cannot fix them), when the instrument expires, is sold, terminated or exercised, or when the risk management objective itself changes. Voluntary de-designation while the objective persists is prohibited — a deliberate contrast with IAS 39. On discontinuation of a cash flow hedge, the amount already in the cash flow hedge reserve stays there and is released when the forecast transaction affects profit or loss, unless that transaction is no longer expected to occur, in which case IFRS 9.6.5.12 requires immediate reclassification to profit or loss.</p>
+
+            <h2 id="red-flags">Auditor red flags</h2>
+            <p>Hedge accounting concentrates audit risk in valuation and documentation, so the flags below each map to a specific ISA. These are the issues that most often move a hedge from "designated" to "de-designated" on the file.</p>
             <ul>
-                <li>Interest expense (debt): £1.3m</li>
-                <li>Swap gain (OCI): £0 (deferred)</li>
-                <li>P&L: £1.3m interest expense</li>
+                <li><strong>Fair values that cannot be corroborated (ISA 540).</strong> Derivative and hedged-item fair values are accounting estimates. Under ISA 540 (Revised) the auditor challenges the valuation model, the discount curve, credit and debit valuation adjustments, and the measurement of ineffectiveness. A red flag is management asserting nil ineffectiveness on a hedge whose critical terms do not match, with no quantitative support.</li>
+                <li><strong>Inception documentation assembled late or incomplete (ISA 500).</strong> ISA 500 requires sufficient appropriate audit evidence over the existence and completeness of designation. Documentation dated after the hedge began, silent on the hedge ratio, or missing the effectiveness method fails IFRS 9.6.4.1(b) — and the correct answer is fair value through profit or loss from inception, not a retrospective fix.</li>
+                <li><strong>Risk-management process and controls not understood (ISA 315).</strong> Under ISA 315 (Revised 2019) the auditor must understand the treasury process, the highly-probable assessment for forecast transactions, and the controls over designation and rebalancing. A red flag is a forecast transaction designated as "highly probable" that the entity's own forecasts no longer support, threatening reserve recycling under IFRS 9.6.5.12.</li>
             </ul>
 
-            <h2 id="audit-challenges">Audit Challenges in Hedge Accounting</h2>
-
-            <h3 id="challenge-1-ineffective-hedges">Challenge 1: Ineffective Hedges</h3>
-            <p><strong>Situation:</strong> Company claims a 50% hedge is 100% effective. Auditor finds the hedging instrument is under-notional or has timing mismatches.</p>
-            <p><strong>Auditor action:</strong> Reclassify to FVPL (stop using hedge accounting); recognize all gains/losses in P&L immediately.</p>
-
-            <h3 id="challenge-2-undocumented-hedge-intent">Challenge 2: Undocumented Hedge Intent</h3>
-            <p><strong>Situation:</strong> No documented hedging strategy; the hedge relationship is implied but not formally designated.</p>
-            <p><strong>Auditor action:</strong> Require documentation at hedge inception; if lacking, treat as a non-hedging derivative (FVPL).</p>
-
-            <h3 id="challenge-3-hedge-rebalancing">Challenge 3: Hedge Rebalancing</h3>
-            <p><strong>Situation:</strong> Company rebalances a hedge mid-way through the period, which breaks the economic relationship.</p>
-            <p><strong>Auditor action:</strong> Determine whether rebalancing reinstates the relationship or is a new hedge; may require P&L recognition of the old hedge's portion.</p>
+            <h2 id="case-study">Case study: easyJet fuel and FX cash flow hedges</h2>
+            <div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
+            <p><strong>The company.</strong> easyJet plc is a natural user of IFRS 9 cash flow hedge accounting: it buys jet fuel priced in US dollars and earns a large share of revenue in euros, so both commodity price and FX variability threaten future cash flows. Its Board-approved policy hedges up to roughly 18 months of forecast fuel and currency exposures using forwards and swaps, designated as cash flow hedges of highly probable forecast transactions (IFRS 9.6.5.11).</p>
+            <p><strong>Publicly filed figures (year ended 30 September 2023).</strong> easyJet's FY2023 results disclosed a net asset position on derivative financial instruments of GBP 153 million, down from GBP 442 million a year earlier — a decrease of GBP 289 million. The company attributed the fall largely to currency derivatives losing asset value as sterling strengthened against the US dollar and euro versus the prior year-end, partly offset by a gain on jet-fuel hedges as the forward fuel curve rose. Reported fuel costs were GBP 2,033 million (2022: GBP 1,279 million).</p>
+            <p><strong>Why hedge accounting matters here.</strong> The effective portion of those forward movements sits in easyJet's cash flow hedge reserve within OCI, not in profit or loss, until the hedged fuel is burned or the currency cash flows arise. Without designation, a GBP 289 million swing in derivative fair values would have flowed straight through earnings, overwhelming operating results. The disclosures illustrate the policy's purpose: deferral in OCI, recycling as the hedged transactions occur, and transparency over the reserve movement.</p>
+            <p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Figures are taken from easyJet plc's publicly filed FY2023 results announcement (year ended 30 September 2023). The commentary is our own analysis; any period-to-period bridge is illustrative and does not reproduce easyJet's full note disclosures. Not investment advice.</p>
+            </div>
 
             <div class="author-bio">
                 <h4 id="usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</h4>
-                <p>Hedge accounting is beautiful in theory and messy in practice. I've spent entire weeks on single hedge relationship questions during audit — testing effectiveness, rebalancing logic, and counterparty credit assumptions. IFRS 9's "economic relationship" test is simpler than IAS 39's quantitative % rules, but the judgment calls are just as tough.</p>
+                <p>Hedge accounting is elegant in theory and unforgiving in practice. On audit I have spent entire weeks on a single hedge relationship — testing the economic relationship, reperforming the hedge ratio, challenging the ineffectiveness calculation and confirming the inception documentation actually pre-dated the hedge. IFRS 9's principles-based test is simpler to describe than IAS 39's 80-125% rule, but the judgement calls under ISA 540 and ISA 500 are every bit as demanding.</p>
             </div>
 
-            
-<h2 id="real-life-case-study">Real-Life Case Study: A Cash Flow Hedge of Forecast USD Purchases</h2>
-<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A UK importer expects to pay USD 5m for inventory in six months and buys a forward to lock the rate, designating it a cash flow hedge.</p>
- <p><strong>Treatment.</strong> The effective portion of the forward's fair value change goes to OCI (cash flow hedge reserve), not P&amp;L. When the inventory purchase occurs, the accumulated reserve is reclassified, adjusting the cost of inventory (a basis adjustment). Any ineffective portion hits P&amp;L immediately.</p>
- <p><strong>Takeaway.</strong> Hedge accounting is optional but powerful: without designation, the forward's swings would hit profit every quarter while the hedged purchase sat off-book, creating artificial volatility. The price of using it is rigorous documentation at inception.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
-</div>
+            <h2 id="faq">Frequently asked questions</h2>
+            <h3>Is hedge accounting mandatory under IFRS 9?</h3>
+            <p>No. It is an accounting policy choice (IFRS 9.6.1.1). If a hedge is not designated, the derivative is still measured at fair value through profit or loss; designation only changes the timing and location of the gains and losses so they match the hedged item.</p>
+            <h3>Did IFRS 9 remove the 80-125% effectiveness test?</h3>
+            <p>Yes. IFRS 9.6.4.1(c) replaced the IAS 39 retrospective 80-125% bright line with three prospective conditions: an economic relationship exists, credit risk does not dominate the value changes, and the hedge ratio reflects the quantities actually hedged.</p>
+            <h3>Where does the effective portion of a cash flow hedge go?</h3>
+            <p>To OCI. Under IFRS 9.6.5.11 the effective portion accumulates in the cash flow hedge reserve, then is reclassified to profit or loss — or basis-adjusted into a non-financial asset's cost under IFRS 9.6.5.11(d)(i) — when the hedged item affects profit or loss.</p>
+            <h3>What is hedge rebalancing?</h3>
+            <p>Rebalancing (IFRS 9.6.5.5) adjusts the hedge ratio of an existing relationship when the risk management objective is unchanged but the ratio no longer reflects the economic relationship. It continues the hedge rather than discontinuing it, and any ineffectiveness to date is recognised first.</p>
+            <h3>When must a company discontinue hedge accounting?</h3>
+            <p>Discontinuation is required (IFRS 9.6.5.6-6.5.7) when the qualifying criteria are no longer met and cannot be fixed by rebalancing, the instrument expires or is sold, or the risk management objective changes. Voluntary de-designation is not allowed while the objective persists.</p>
+            <h3>What happens to the cash flow hedge reserve if the forecast transaction will not occur?</h3>
+            <p>Under IFRS 9.6.5.12 the accumulated amount in the reserve is reclassified from OCI to profit or loss immediately once the forecast transaction is no longer expected to occur.</p>
+            <h3>Can you hedge a non-financial item like jet fuel?</h3>
+            <p>Yes. IFRS 9.6.3.1 and 6.3.7 allow a non-financial item to be a hedged item, in whole or for a separately identifiable and reliably measurable risk component — which is why airlines and manufacturers apply cash flow hedge accounting to forecast commodity purchases.</p>
 
 <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>

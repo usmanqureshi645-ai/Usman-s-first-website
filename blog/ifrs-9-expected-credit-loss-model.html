@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <!-- Google Analytics (GA4) -->
@@ -7,8 +7,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IFRS 9 Expected Credit Loss (ECL) Model: Three-Stage Impairment Guide with Calculations</title>
-    <meta name="description" content="Master IFRS 9 Expected Credit Loss: 12-month ECL, lifetime ECL, Stage 1/2/3, SICR triggers, PD/LGD/EAD calculation, real worked examples, auditor challenges.">
-    <meta name="keywords" content="IFRS 9 ECL, expected credit loss, three-stage model, Stage 1 Stage 2 Stage 3, SICR significant increase credit risk, 12-month ECL lifetime ECL, PD LGD EAD, impairment calculation">
+    <meta name="description" content="Master IFRS 9 Expected Credit Loss: 12-month vs lifetime ECL, Stage 1/2/3 (IFRS 9.5.5.1-5.5.20), SICR, the simplified approach and provision matrix (5.5.15), PD/LGD/EAD, worked examples, journals and ISA 540 audit red flags.">
+    <meta name="keywords" content="IFRS 9 ECL, expected credit loss, three-stage model, Stage 1 Stage 2 Stage 3, SICR significant increase credit risk, 12-month ECL lifetime ECL, simplified approach provision matrix, PD LGD EAD, ISA 540 accounting estimate">
     <meta name="author" content="Usman Qureshi">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://www.uqconsulting.org/blog/ifrs-9-expected-credit-loss-model.html">
@@ -45,6 +45,7 @@
         tr:last-child td { border-bottom: none; }
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; border-radius: 4px; }
         .formula { background: #1a2f5a; color: #e8eef7; padding: 16px 20px; border-radius: 6px; margin: 24px 0; font-family: 'Courier New', monospace; font-size: 1em; text-align: center; }
+        .journal { background: #1a2f5a; color: #e8eef7; padding: 16px 20px; border-radius: 6px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 0.9em; overflow-x: auto; }
         .author-bio { display: flex; gap: 20px; align-items: flex-start; background: #fff; border-radius: 10px; padding: 24px 28px; margin: 44px 0 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
         .avatar { width: 64px; height: 64px; border-radius: 50%; background: #1a2f5a; color: #d4af37; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.3em; flex-shrink: 0; }
         .related { margin-top: 40px; padding-top: 30px; border-top: 2px solid #e4e9f0; }
@@ -53,9 +54,10 @@
         .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; display: block; margin-bottom: 8px; padding: 8px; border-radius: 4px; border: 1px solid #e4e9f0; }
         .related a:hover { background: #f4f6f9; color: #d4af37; }
         .disclaimer { font-size: 0.82em; color: #8593a8; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; font-style: italic; }
-    
+        .faq-item { margin-bottom: 22px; }
+        .faq-item h3 { margin-bottom: 8px; }
 
-    
+
 /*TOC_SIDEBAR_START*/
 .toc {
     background: #fff;
@@ -98,310 +100,277 @@
 </head>
 <body>
     <div class="topbar">
-        <a href="https://www.uqconsulting.org/home.html">→ Usman Qureshi — Free AI Tools for Audit &amp; CFO Advisory</a>
+        <a href="https://www.uqconsulting.org/home.html">&rarr; Usman Qureshi — Free AI Tools for Audit &amp; CFO Advisory</a>
     </div>
 
     <div class="article-container">
         <div class="breadcrumb">
-            <a href="https://www.uqconsulting.org/home.html">Home</a> &nbsp;›&nbsp;
-            <a href="https://www.uqconsulting.org/blog/">Blog</a> &nbsp;›&nbsp;
-            <a href="https://www.uqconsulting.org/blog/ifrs-9-financial-instruments-complete-guide.html">IFRS 9</a> &nbsp;›&nbsp;
+            <a href="https://www.uqconsulting.org/home.html">Home</a> &nbsp;&rsaquo;&nbsp;
+            <a href="https://www.uqconsulting.org/blog/">Blog</a> &nbsp;&rsaquo;&nbsp;
+            <a href="https://www.uqconsulting.org/blog/ifrs-9-financial-instruments-complete-guide.html">IFRS 9</a> &nbsp;&rsaquo;&nbsp;
             Expected Credit Loss
         </div>
 
         <h1>IFRS 9 Expected Credit Loss (ECL) Model: Three-Stage Impairment with Worked Examples</h1>
-        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed July 2026 · 14 min read</div>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed 13 July 2026 · 16 min read</div>
 
-        <p class="lead">The Expected Credit Loss (ECL) model is the heart of IFRS 9. It requires you to recognize losses before a borrower defaults — not after. This guide walks through the three-stage model, SICR identification, ECL calculation (PD × LGD × EAD), and real-world audit challenges including post-model adjustments, forward-looking info, and the common mistakes that cost auditors hundreds of hours.</p>
+        <p class="lead">The Expected Credit Loss model is the forward-looking core of IFRS 9 impairment. It forces you to book a loss allowance the day a loan is recognised — before any payment is missed — and to increase that allowance to a lifetime measure the moment credit risk rises significantly. This guide works through the three-stage general approach (IFRS 9.5.5.1–5.5.20), the simplified approach and provision matrix for trade receivables (IFRS 9.5.5.15), the PD/LGD/EAD mechanics with forward-looking scenarios (IFRS 9.B5.5.28–B5.5.55), and the ISA 540 audit red flags that make ECL the single most-challenged estimate in a bank audit.</p>
 
-                        <div class="toc">
+        <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#ecl-intro">What is ECL and Why It Matters</a></li><li class="toc-l1"><a href="#three-stages">The Three-Stage ECL Model</a></li><li class="toc-l1"><a href="#stage-1">Stage 1: Performing Assets (12-Month ECL)</a><ul><li class="toc-l2"><a href="#ecl-calculation-for-stage-1">ECL Calculation for Stage 1</a></li></ul></li><li class="toc-l1"><a href="#stage-2">Stage 2: Underperforming Assets (Lifetime ECL at SICR)</a><ul><li class="toc-l2"><a href="#ecl-calculation-for-stage-2">ECL Calculation for Stage 2</a></li><li class="toc-l2"><a href="#sicr-indicator-what-triggered-the-move">SICR Indicator: What Triggered the Move?</a></li></ul></li><li class="toc-l1"><a href="#stage-3">Stage 3: Credit-Impaired Assets (Default &amp; Lifetime ECL)</a><ul><li class="toc-l2"><a href="#ecl-calculation-for-stage-3">ECL Calculation for Stage 3</a></li></ul></li><li class="toc-l1"><a href="#sicr-deep">SICR Triggers and Thresholds</a><ul><li class="toc-l2"><a href="#quantitative-sicr-triggers">Quantitative SICR Triggers</a></li><li class="toc-l2"><a href="#qualitative-sicr-triggers">Qualitative SICR Triggers</a></li></ul></li><li class="toc-l1"><a href="#ecl-components">PD, LGD, EAD: The Three Components</a><ul><li class="toc-l2"><a href="#pd-probability-of-default">PD (Probability of Default)</a></li><li class="toc-l2"><a href="#lgd-loss-given-default">LGD (Loss Given Default)</a></li><li class="toc-l2"><a href="#ead-exposure-at-default">EAD (Exposure at Default)</a></li></ul></li><li class="toc-l1"><a href="#mortgage-calc">Worked Example: Mortgage Portfolio ECL</a><ul><li class="toc-l2"><a href="#banks-retail-mortgage-portfolio-31-dec-2025">Bank's Retail Mortgage Portfolio (31 Dec 2025)</a></li><li class="toc-l2"><a href="#stage-1-calculation">Stage 1 Calculation</a></li><li class="toc-l2"><a href="#stage-2-calculation">Stage 2 Calculation</a></li><li class="toc-l2"><a href="#stage-3-calculation">Stage 3 Calculation</a></li><li class="toc-l2"><a href="#total-ecl-allowance">Total ECL Allowance</a></li></ul></li><li class="toc-l1"><a href="#corporate-loan">Worked Example: Corporate Loan Portfolio Movement</a><ul><li class="toc-l2"><a href="#scenario-technology-company-loan-1year-period">Scenario: Technology Company Loan (1-Year Period)</a></li></ul></li><li class="toc-l1"><a href="#pma">Post-Model Adjustments (PMAs)</a></li><li class="toc-l1"><a href="#audit-red-flags">Audit Red Flags in ECL</a><ul><li class="toc-l2"><a href="#red-flag-1-stage-2-thresholds-too-high">Red Flag 1: Stage 2 Thresholds Too High</a></li><li class="toc-l2"><a href="#red-flag-2-lack-of-documentation">Red Flag 2: Lack of Documentation</a></li><li class="toc-l2"><a href="#red-flag-3-pmas-unexplained">Red Flag 3: PMAs Unexplained</a></li><li class="toc-l2"><a href="#red-flag-4-interest-income-misstatement-in-stage-3">Red Flag 4: Interest Income Misstatement in Stage 3</a><ul><li class="toc-l3"><a href="#usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</a></li></ul></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Staging a Loan Under the ECL Model</a></li></ul>
+            <ul>
+                <li class="toc-l1"><a href="#what-is-ecl">What is the ECL model and why did it replace incurred loss?</a></li>
+                <li class="toc-l1"><a href="#three-stages">How does the three-stage general approach work?</a>
+                    <ul>
+                        <li class="toc-l2"><a href="#stage-1">Stage 1 — 12-month ECL</a></li>
+                        <li class="toc-l2"><a href="#stage-2">Stage 2 — lifetime ECL on SICR</a></li>
+                        <li class="toc-l2"><a href="#stage-3">Stage 3 — credit-impaired</a></li>
+                    </ul>
+                </li>
+                <li class="toc-l1"><a href="#sicr">How do you assess a significant increase in credit risk (SICR)?</a>
+                    <ul>
+                        <li class="toc-l2"><a href="#low-credit-risk">The low-credit-risk exemption</a></li>
+                    </ul>
+                </li>
+                <li class="toc-l1"><a href="#simplified">When do you use the simplified approach and provision matrix?</a></li>
+                <li class="toc-l1"><a href="#pd-lgd-ead">PD, LGD, EAD and forward-looking scenarios</a></li>
+                <li class="toc-l1"><a href="#worked-migration">Worked example: Stage 1 to Stage 2 migration</a></li>
+                <li class="toc-l1"><a href="#audit-red-flags">Auditor red flags (ISA 540, 500, 315)</a></li>
+                <li class="toc-l1"><a href="#case-study">Case study: HSBC ECL disclosure</a></li>
+                <li class="toc-l1"><a href="#faq">Frequently asked questions</a></li>
+            </ul>
         </div>
 
         <article>
-            <h2 id="ecl-intro">What is ECL and Why It Matters</h2>
-            <p>Under IAS 39 (the old standard), you recognized losses only when evidence of impairment existed — typically when a payment was late or default occurred. This is the "incurred loss" model.</p>
-            <p>IFRS 9 flipped the model to forward-looking: you estimate the probability of default and recognize an allowance <strong>even for performing assets</strong>. This reflects economic reality: a loan made today has some probability of defaulting in the future, so that risk should be recognized now.</p>
+            <h2 id="what-is-ecl">What is the ECL model and why did it replace incurred loss?</h2>
+            <p>The Expected Credit Loss model is IFRS 9's requirement to recognise a probability-weighted estimate of credit losses on financial assets measured at amortised cost and FVOCI, plus loan commitments and financial guarantees, from the day of origination rather than only once a loss event has occurred (IFRS 9.5.5.1). It replaced the "incurred loss" model of IAS 39, which the G20 and the Financial Stability Board blamed for recognising loan losses "too little, too late" in the 2008 crisis — banks could only book a provision after objective evidence of impairment existed, so allowances lagged the deterioration in their books.</p>
+            <p>IFRS 9 fixes this by making the allowance forward-looking. Under IFRS 9.5.5.17, ECL must be measured in a way that reflects an unbiased and probability-weighted amount, the time value of money, and reasonable and supportable information about past events, current conditions and forecasts of future economic conditions that is available without undue cost or effort. In plain English: even a brand-new, perfectly performing loan carries a small allowance today because some borrowers in that pool will eventually default, and that expected loss belongs in the accounts now.</p>
+            <p>Two measurement bases sit at the heart of the model. "12-month ECL" is the portion of lifetime losses expected from default events possible within 12 months of the reporting date (IFRS 9.5.5.5 and Appendix A). "Lifetime ECL" captures expected losses from all possible default events over the whole expected life of the instrument (IFRS 9.5.5.3). The entire three-stage architecture is simply a set of rules deciding which of these two measures applies to a given exposure at a given date.</p>
 
-            <h2 id="three-stages">The Three-Stage ECL Model</h2>
-            <p>IFRS 9 uses three stages to determine how much ECL to recognize:</p>
+            <h2 id="three-stages">How does the three-stage general approach work?</h2>
+            <p>The general approach allocates every in-scope exposure to one of three stages based on how much its credit risk has changed since initial recognition, and the stage dictates both the ECL measure and how interest revenue is calculated (IFRS 9.5.5.1–5.5.13). Stage 1 holds performing assets on 12-month ECL; Stage 2 holds assets that have suffered a significant increase in credit risk (SICR) and moves them to lifetime ECL; Stage 3 holds credit-impaired assets, still on lifetime ECL but with interest recognised on the net rather than gross carrying amount.</p>
             <table>
-                <tr>
-                    <th>Stage</th>
-                    <th>Asset Status</th>
-                    <th>ECL Type</th>
-                    <th>Trigger</th>
-                </tr>
-                <tr>
-                    <td><strong>Stage 1</strong></td>
-                    <td>Performing (Low credit risk)</td>
-                    <td>12-month ECL</td>
-                    <td>No SICR since recognition</td>
-                </tr>
-                <tr>
-                    <td><strong>Stage 2</strong></td>
-                    <td>Underperforming (Increased risk)</td>
-                    <td>Lifetime ECL</td>
-                    <td>SICR occurred, but not in default</td>
-                </tr>
-                <tr>
-                    <td><strong>Stage 3</strong></td>
-                    <td>Credit-impaired (In default)</td>
-                    <td>Lifetime ECL</td>
-                    <td>Default criteria met (>90 days arrears, bankruptcy, etc.)</td>
-                </tr>
+                <tr><th>Stage</th><th>Condition</th><th>ECL measure</th><th>Interest revenue basis</th></tr>
+                <tr><td><strong>Stage 1</strong></td><td>No significant increase in credit risk since initial recognition</td><td>12-month ECL (5.5.5)</td><td>Effective interest on gross carrying amount</td></tr>
+                <tr><td><strong>Stage 2</strong></td><td>SICR since initial recognition, but not credit-impaired</td><td>Lifetime ECL (5.5.3)</td><td>Effective interest on gross carrying amount</td></tr>
+                <tr><td><strong>Stage 3</strong></td><td>Credit-impaired (default / loss event occurred)</td><td>Lifetime ECL (5.5.13)</td><td>Effective interest on net (amortised cost) amount (5.4.1(b))</td></tr>
             </table>
 
-            <h2 id="stage-1">Stage 1: Performing Assets (12-Month ECL)</h2>
-            <p>Most financial assets start in Stage 1 when initially recognized. The ECL allowance covers only the probability of default within the next 12 months.</p>
+            <h3 id="stage-1">Stage 1 — 12-month ECL</h3>
+            <p>Almost every asset enters Stage 1 at origination, and while credit risk stays broadly stable it stays there, carrying an allowance equal to 12-month ECL (IFRS 9.5.5.5). Twelve-month ECL is not the loss expected only within the next year; it is the lifetime cash shortfalls weighted by the probability of a default occurring within 12 months (IFRS 9.B5.5.43). Interest revenue in Stage 1 is calculated by applying the effective interest rate to the gross carrying amount, because the asset is still performing.</p>
 
-            <h3 id="ecl-calculation-for-stage-1">ECL Calculation for Stage 1</h3>
-            <div class="formula">ECL = PD (12-month) × LGD × EAD</div>
+            <h3 id="stage-2">Stage 2 — lifetime ECL on SICR</h3>
+            <p>When credit risk has increased significantly since initial recognition, the asset migrates to Stage 2 and the allowance jumps to full lifetime ECL (IFRS 9.5.5.3). This transfer is the single largest driver of P&amp;L volatility in the model, because for a long-dated loan the lifetime measure can be many multiples of the 12-month measure even though no payment has yet been missed. Crucially, the trigger is a relative deterioration in credit risk, not an absolute level: an asset that was originated as sub-investment-grade can remain in Stage 1 if its risk has not worsened, while a high-quality loan that deteriorates sharply moves to Stage 2 (IFRS 9.5.5.9).</p>
 
-            <p><strong>Example: Bank mortgage, Stage 1</strong></p>
-            <ul>
-                <li>Mortgage balance: £300,000</li>
-                <li>PD (12-month): 0.15% (0.0015) based on historical mortgage default rates</li>
-                <li>LGD: 25% (0.25) — property can be sold for ~75% of loan value</li>
-                <li>EAD: £300,000</li>
-            </ul>
-            <p><strong>ECL = 0.15% × 25% × £300,000 = £1,125</strong></p>
-            <p>The bank records a loss allowance of £1,125 against this mortgage, even though the borrower is current and paying on time.</p>
+            <h3 id="stage-3">Stage 3 — credit-impaired</h3>
+            <p>An asset becomes credit-impaired, and moves to Stage 3, when one or more events with a detrimental impact on estimated future cash flows have occurred — significant financial difficulty, a breach of contract such as default or past-due, a concession granted for economic or contractual reasons relating to the borrower's difficulty, probable bankruptcy, or the disappearance of an active market (IFRS 9 Appendix A, definition of "credit-impaired financial asset"). The ECL measure stays lifetime, but from Stage 3 onwards interest revenue is calculated on the net carrying amount (gross less loss allowance) under IFRS 9.5.4.1(b). Failing to make that interest switch is one of the most common errors auditors correct (see red flags below).</p>
 
-            <h2 id="stage-2">Stage 2: Underperforming Assets (Lifetime ECL at SICR)</h2>
-            <p>When credit risk increases significantly, the asset moves to Stage 2. Now you recognize the full lifetime ECL — the probability of default any time in the remaining life of the asset.</p>
+            <h2 id="sicr">How do you assess a significant increase in credit risk (SICR)?</h2>
+            <p>SICR is assessed by comparing the risk of a default occurring over the remaining life of the instrument at the reporting date with that same risk estimated at initial recognition — it is a change in lifetime PD, not a change in the amount of expected loss (IFRS 9.5.5.9 and B5.5.7). The assessment must use reasonable and supportable forward-looking information available without undue cost or effort, and it can be performed on an individual or a collective basis where shared credit-risk characteristics exist (IFRS 9.B5.5.1–B5.5.6).</p>
+            <p>The standard provides two important backstops. First, there is a rebuttable presumption that credit risk has increased significantly when contractual payments are more than 30 days past due, regardless of any other information (IFRS 9.5.5.11 and B5.5.19–B5.5.20). An entity may rebut it only with reasonable and supportable evidence that 30-day arrears do not correspond to a SICR — a high bar the auditor will test. Second, IFRS 9.B5.5.17 lists a wide menu of qualitative and quantitative indicators — changes in internal or external credit ratings, widening credit spreads, covenant breaches, deteriorating operating results, and expected forbearance — that must be considered before the 30-days backstop bites (IFRS 9.B5.5.21–B5.5.24).</p>
 
-            <h3 id="ecl-calculation-for-stage-2">ECL Calculation for Stage 2</h3>
-            <div class="formula">ECL = PD (lifetime) × LGD × EAD</div>
+            <h3 id="low-credit-risk">The low-credit-risk exemption</h3>
+            <p>As a practical expedient, an entity may assume there has been no significant increase in credit risk on an instrument that has low credit risk at the reporting date — broadly, the equivalent of an external "investment grade" rating (IFRS 9.5.5.10 and B5.5.22–B5.5.24). Using this exemption keeps the exposure in Stage 1 on 12-month ECL without a full historical comparison, but it is optional and, for retail lenders, frequently not used because most portfolios are not investment grade. Auditors scrutinise heavy reliance on this exemption, since misapplying "low credit risk" is an easy way to delay Stage 2 transfers and understate the allowance.</p>
 
-            <p><strong>Same mortgage, now in Stage 2 (SICR triggered)</strong></p>
-            <ul>
-                <li>Mortgage balance: £290,000 (£10k principal repaid)</li>
-                <li>PD (lifetime, 27 years remaining): 2.5% (0.025) — borrower's credit rating dropped; unemployment risk increased</li>
-                <li>LGD: 30% (0.30) — collateral slightly impaired</li>
-                <li>EAD: £290,000</li>
-            </ul>
-            <p><strong>ECL = 2.5% × 30% × £290,000 = £21,750</strong></p>
-            <p>The loss allowance jumped from £1,125 to £21,750. The increase (£20,625) is recognized as an impairment loss in P&L.</p>
-
-            <h3 id="sicr-indicator-what-triggered-the-move">SICR Indicator: What Triggered the Move?</h3>
-            <p>Possible triggers for this mortgage:</p>
-            <ul>
-                <li>Borrower's credit score dropped 100+ points</li>
-                <li>Payment was 30 days late (but not yet 90)</li>
-                <li>Borrower's employer issued a redundancy notice</li>
-                <li>Local unemployment spiked to 8%+</li>
-            </ul>
-
-            <h2 id="stage-3">Stage 3: Credit-Impaired Assets (Default &amp; Lifetime ECL)</h2>
-            <p>When an asset meets the default criteria (typically >90 days past due, bankruptcy filing, or unlikely to pay), it moves to Stage 3. The ECL remains lifetime, but recovery expectations are more pessimistic.</p>
-
-            <h3 id="ecl-calculation-for-stage-3">ECL Calculation for Stage 3</h3>
-            <div class="formula">ECL = PD (100%, assumed default) × LGD × EAD</div>
-
-            <p><strong>Same mortgage, now in Stage 3 (Default)</strong></p>
-            <ul>
-                <li>Mortgage balance: £280,000</li>
-                <li>PD: 100% (assumed defaulted; we're calculating loss, not probability)</li>
-                <li>LGD: 45% (0.45) — property market weakened; recovery expected at 55% of outstanding)</li>
-                <li>EAD: £280,000</li>
-            </ul>
-            <p><strong>ECL = 100% × 45% × £280,000 = £126,000</strong></p>
-            <p>The full loss allowance is £126,000. Interest income on this mortgage is now calculated on the net amount (£280,000 −’ £126,000 = £154,000), not the gross balance.</p>
-
-            <h2 id="sicr-deep">SICR Triggers and Thresholds</h2>
-            <p>SICR is the judgment call that determines when to move assets from Stage 1 to Stage 2. It's also where auditors spend the most time.</p>
-
-            <h3 id="quantitative-sicr-triggers">Quantitative SICR Triggers</h3>
+            <h2 id="simplified">When do you use the simplified approach and provision matrix?</h2>
+            <p>The simplified approach requires an entity to always measure the loss allowance at lifetime ECL — skipping the stage machinery entirely — and it is mandatory for trade receivables and contract assets without a significant financing component, and optional (by accounting-policy election) for those with a financing component and for lease receivables (IFRS 9.5.5.15). Because there is no 12-month measure and no SICR test, corporates outside the financial sector overwhelmingly apply this route to their receivables, which is why the provision matrix is the ECL tool most non-bank finance teams actually build.</p>
+            <p>A provision matrix groups receivables by shared credit-risk characteristics and days-past-due ageing, then applies a historical loss rate to each bucket, adjusted for forward-looking information (IFRS 9.B5.5.35). The worked matrix below shows a manufacturer with £4.6m of trade receivables. The historical default rates are scaled up for a forecast slowdown in the customer sector, and the resulting weighted allowance is the ECL provision.</p>
             <table>
-                <tr>
-                    <th>Portfolio Type</th>
-                    <th>SICR Threshold</th>
-                    <th>Example</th>
-                </tr>
-                <tr>
-                    <td>Retail mortgages</td>
-                    <td>30 days arrears OR PD →‘ 200 bps</td>
-                    <td>Payment 30+ days late; or PD from 0.5% to 2.5%</td>
-                </tr>
-                <tr>
-                    <td>Credit cards</td>
-                    <td>60 days arrears OR PD →‘ 150 bps</td>
-                    <td>Account delinquent; or risk premium increased</td>
-                </tr>
-                <tr>
-                    <td>Corporate loans</td>
-                    <td>Covenant breach OR credit rating downgrade ≥2 notches OR PD →‘ 300 bps</td>
-                    <td>Debt/EBITDA covenant breached; or S&P downgraded to speculative</td>
-                </tr>
+                <tr><th>Ageing bucket</th><th>Gross receivable (£)</th><th>Base loss rate</th><th>Forward-looking adj.</th><th>Applied ECL rate</th><th>Lifetime ECL (£)</th></tr>
+                <tr><td>Current</td><td>3,000,000</td><td>0.3%</td><td>+0.1%</td><td>0.4%</td><td>12,000</td></tr>
+                <tr><td>1–30 days</td><td>900,000</td><td>1.6%</td><td>+0.4%</td><td>2.0%</td><td>18,000</td></tr>
+                <tr><td>31–60 days</td><td>400,000</td><td>3.5%</td><td>+0.5%</td><td>4.0%</td><td>16,000</td></tr>
+                <tr><td>61–90 days</td><td>200,000</td><td>7.0%</td><td>+1.0%</td><td>8.0%</td><td>16,000</td></tr>
+                <tr><td>&gt;90 days</td><td>100,000</td><td>22.0%</td><td>+3.0%</td><td>25.0%</td><td>25,000</td></tr>
+                <tr><td><strong>Total</strong></td><td><strong>4,600,000</strong></td><td></td><td></td><td></td><td><strong>87,000</strong></td></tr>
             </table>
-
-            <h3 id="qualitative-sicr-triggers">Qualitative SICR Triggers</h3>
-            <ul>
-                <li><strong>Management change:</strong> CFO departed unexpectedly; board shake-up</li>
-                <li><strong>Regulatory action:</strong> License revoked; legal sanction</li>
-                <li><strong>Restructuring:</strong> Bankruptcy filing; debt-for-equity swap offered</li>
-                <li><strong>Industry decline:</strong> Oil price crash; retail sector downturn affecting borrower</li>
-                <li><strong>Collateral decline:</strong> Property value dropped 25%+; inventory obsolete</li>
-            </ul>
-
-            <p class="callout"><strong>Audit Challenge:</strong> Many banks set SICR thresholds too conservatively (e.g., 500 bps PD increase). Auditors push back: "Market guidance is 300 bps. Your higher threshold delays Stage 2 movement and understates ECL." Result: ECL increases by 5— 10%+ in final audit adjustments.</p>
-
-            <h2 id="ecl-components">PD, LGD, EAD: The Three Components</h2>
-
-            <h3 id="pd-probability-of-default">PD (Probability of Default)</h3>
-            <p><strong>Definition:</strong> The % probability that a borrower will default within a specified time frame (12 months for Stage 1, lifetime for Stage 2/3).</p>
-            <p><strong>Estimation methods:</strong></p>
-            <ul>
-                <li><strong>Historical default rates:</strong> "In the past 20 years, 0.5% of mortgages defaulted"</li>
-                <li><strong>Credit rating PD:</strong> S&P/Moody's publish PDs by rating (e.g., BBB = 0.3% 1-year PD)</li>
-                <li><strong>Market-implied PD:</strong> From CDS spreads or bond yields</li>
-                <li><strong>Borrower-specific:</strong> Internal risk models based on FICO scores, income, debt ratios</li>
-            </ul>
-
-            <h3 id="lgd-loss-given-default">LGD (Loss Given Default)</h3>
-            <p><strong>Definition:</strong> The % of exposure that is lost if the borrower defaults.</p>
-            <p><strong>Components:</strong> LGD = (EAD −’ Recovery) / EAD</p>
-            <p><strong>Estimation methods:</strong></p>
-            <ul>
-                <li><strong>Collateral value:</strong> If the loan is secured, LGD = 1 −’ (collateral value / loan value)</li>
-                <li><strong>Historical recovery rates:</strong> "We recovered 65% of mortgages in default"</li>
-                <li><strong>Seniority:</strong> Secured loans have lower LGD; unsecured have higher</li>
-                <li><strong>Industry benchmarks:</strong> Retail loans typically 40— 50% LGD; unsecured consumer 60— 80%</li>
-            </ul>
-
-            <h3 id="ead-exposure-at-default">EAD (Exposure at Default)</h3>
-            <p><strong>Definition:</strong> The total amount outstanding at the time of default.</p>
-            <p><strong>For a term loan:</strong> Simply the principal outstanding</p>
-            <p><strong>For a credit facility:</strong> Drawn amount + estimated future drawings</p>
-            <ul>
-                <li><strong>Example:</strong> £500k line of credit, £300k drawn, £200k undrawn. If default happens, bank may draw the remaining £200k before the default materializes. EAD = £500k, not £300k.</li>
-            </ul>
-
-            <h2 id="mortgage-calc">Worked Example: Mortgage Portfolio ECL</h2>
-
-            <h3 id="banks-retail-mortgage-portfolio-31-dec-2025">Bank's Retail Mortgage Portfolio (31 Dec 2025)</h3>
-            <ul>
-                <li><strong>Total mortgages:</strong> £2 billion</li>
-                <li><strong>Stage 1 (performing):</strong> £1.8bn</li>
-                <li><strong>Stage 2 (SICR):</strong> £160m</li>
-                <li><strong>Stage 3 (defaulted):</strong> £40m</li>
-            </ul>
-
-            <h3 id="stage-1-calculation">Stage 1 Calculation</h3>
-            <p><strong>Parameters:</strong> PD 12m = 0.18%, LGD = 25%, EAD = £1.8bn</p>
-            <p><strong>ECL = 0.18% × 25% × £1.8bn = £810,000</strong></p>
-
-            <h3 id="stage-2-calculation">Stage 2 Calculation</h3>
-            <p><strong>Parameters:</strong> PD lifetime = 2.2%, LGD = 28%, EAD = £160m</p>
-            <p><strong>ECL = 2.2% × 28% × £160m = £9,856,000</strong></p>
-
-            <h3 id="stage-3-calculation">Stage 3 Calculation</h3>
-            <p><strong>Parameters:</strong> PD = 100%, LGD = 42%, EAD = £40m</p>
-            <p><strong>ECL = 100% × 42% × £40m = £16,800,000</strong></p>
-
-            <h3 id="total-ecl-allowance">Total ECL Allowance</h3>
-            <div class="formula">£810k + £9,856k + £16,800k = £27,466,000</div>
-
-            <p><strong>Journal Entry (31 December 2025):</strong></p>
-            <div style="background: #1a2f5a; color: #e8eef7; padding: 16px 20px; border-radius: 6px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
-                Dr Impairment Loss on Financial Assets &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 27,466,000<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr Loss Allowance on Mortgages &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 27,466,000
+            <p>The journal simply records the allowance against P&amp;L, with the receivable presented net on the face of the balance sheet:</p>
+            <div class="journal">
+                Dr&nbsp; Impairment loss (P&amp;L) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 87,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr&nbsp; Loss allowance — trade receivables &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 87,000
             </div>
+            <p class="callout"><strong>Practical point:</strong> the forward-looking adjustment is where the judgement — and the audit scrutiny — sits. A matrix built purely on historical roll rates without any documented link to a macro forecast fails IFRS 9.5.5.17 and will be challenged. The adjustment must be supportable, not a round-number overlay.</p>
 
-            <h2 id="corporate-loan">Worked Example: Corporate Loan Portfolio Movement</h2>
-
-            <h3 id="scenario-technology-company-loan-1year-period">Scenario: Technology Company Loan (1-Year Period)</h3>
-
-            <p><strong>1 January 2025: Initial recognition (Stage 1)</strong></p>
+            <h2 id="pd-lgd-ead">PD, LGD, EAD and forward-looking scenarios</h2>
+            <p>For portfolios on the general approach, ECL is typically built from three parameters — probability of default (PD), loss given default (LGD) and exposure at default (EAD) — discounted to present value at the effective interest rate (IFRS 9.B5.5.28–B5.5.29). The multiplicative shorthand below is how most bank models express a single period's expected loss; lifetime ECL sums the discounted expected losses across all remaining periods.</p>
+            <div class="formula">ECL (period) = PD × LGD × EAD, discounted at the EIR</div>
             <ul>
-                <li>Loan balance: £10m</li>
-                <li>PD (12m): 0.8%</li>
-                <li>LGD: 35%</li>
-                <li>ECL = 0.8% × 35% × £10m = £28,000</li>
+                <li><strong>PD (probability of default):</strong> the likelihood of default over 12 months (Stage 1) or the remaining life (Stage 2/3). Sourced from internal rating models, external agency PDs or market-implied spreads.</li>
+                <li><strong>LGD (loss given default):</strong> the proportion of EAD not expected to be recovered after collateral, guarantees and recovery costs. A well-secured mortgage might carry 15–25%; unsecured consumer lending 60–80%.</li>
+                <li><strong>EAD (exposure at default):</strong> the expected balance outstanding at the point of default, including estimated future drawdowns on committed but undrawn facilities via a credit conversion factor.</li>
             </ul>
+            <p>Critically, IFRS 9 forbids estimating ECL on a single "most likely" outcome. The measurement must be an unbiased, probability-weighted amount evaluated across a range of possible outcomes, so banks run multiple macroeconomic scenarios — typically a baseline, an upside and one or more downsides — and weight the resulting ECLs by scenario probability (IFRS 9.5.5.17(a) and B5.5.41–B5.5.42). Because the loss-to-risk relationship is non-linear, this probability-weighting usually produces a higher allowance than the baseline scenario alone would, and the choice of scenarios and weights (IFRS 9.B5.5.49–B5.5.55) is one of the most judgemental — and most audited — inputs in the entire model.</p>
 
-            <p><strong>30 June 2025: SICR occurs (moves to Stage 2)</strong></p>
-            <ul>
-                <li>Borrower's credit rating downgraded from BB+ to BB−’ (2-notch decline)</li>
-                <li>Loan balance: £9.5m (£500k repaid)</li>
-                <li>PD (lifetime, 4.5 years): 4.5%</li>
-                <li>LGD: 38%</li>
-                <li>ECL = 4.5% × 38% × £9.5m = £1,620,750</li>
-            </ul>
-
-            <p><strong>Journal Entry (30 June 2025):</strong></p>
-            <div style="background: #1a2f5a; color: #e8eef7; padding: 16px 20px; border-radius: 6px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
-                Dr Impairment Loss (SICR adjustment) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,592,750<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr Loss Allowance on Loan &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,592,750
+            <h2 id="worked-migration">Worked example: Stage 1 to Stage 2 migration</h2>
+            <p>A bank originates a £10m five-year corporate term loan on 1 January 2025. It sits in Stage 1 on 12-month ECL. Eighteen months later the borrower breaches a leverage covenant and its internal rating is downgraded two notches — a clear SICR under IFRS 9.5.5.9 — so at 30 June 2026 the loan transfers to Stage 2 and the allowance is remeasured to lifetime ECL.</p>
+            <table>
+                <tr><th>Parameter</th><th>Stage 1 (1 Jan 2025)</th><th>Stage 2 (30 Jun 2026)</th></tr>
+                <tr><td>Measure</td><td>12-month ECL</td><td>Lifetime ECL</td></tr>
+                <tr><td>PD</td><td>0.80% (12-month)</td><td>9.00% (lifetime, 3.5 yrs remaining)</td></tr>
+                <tr><td>LGD</td><td>35%</td><td>40%</td></tr>
+                <tr><td>EAD</td><td>£10,000,000</td><td>£9,500,000</td></tr>
+                <tr><td><strong>ECL allowance</strong></td><td><strong>£28,000</strong></td><td><strong>£342,000</strong></td></tr>
+            </table>
+            <p>The allowance rises from £28,000 to £342,000. The incremental charge of £314,000 hits P&amp;L in the period of transfer even though the borrower has not missed a single payment — the classic "cliff effect" at the Stage 1 to Stage 2 boundary. The remeasurement journal is:</p>
+            <div class="journal">
+                Dr&nbsp; Impairment loss (P&amp;L) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 314,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr&nbsp; Loss allowance — corporate loan &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 314,000
             </div>
+            <p>Interest revenue does <em>not</em> change at this point: in both Stage 1 and Stage 2 the effective interest rate is still applied to the £9.5m gross carrying amount (IFRS 9.5.4.1(a)). Only if the loan later became credit-impaired and moved to Stage 3 would interest be recognised on the net amount — £9.5m less the allowance — under IFRS 9.5.4.1(b). That interest-basis switch, not the allowance itself, is where the Stage 3 accounting most often goes wrong.</p>
 
-            <p>(The increase from £28k to £1,620,750 is £1,592,750 of incremental impairment loss.)</p>
+            <h2 id="audit-red-flags">Auditor red flags (ISA 540, 500, 315)</h2>
+            <p>ECL is the textbook example of an accounting estimate with high estimation uncertainty, so it falls squarely within ISA 540 (Revised), <em>Auditing Accounting Estimates and Related Disclosures</em> — the auditor must evaluate the method, assumptions and data, and specifically challenge management bias. Three red flags recur in practice.</p>
+            <p><strong>Red flag 1 — SICR thresholds calibrated to suppress Stage 2 transfers (ISA 540).</strong> If a bank sets its quantitative SICR trigger far looser than peers (for example a 500bps PD-increase threshold where market practice is nearer 200–300bps) or leans heavily on the low-credit-risk exemption, exposures stay in Stage 1 on 12-month ECL for too long and the allowance is understated. ISA 540.18–.23 requires the auditor to test whether the method and assumptions are appropriate and applied consistently; a threshold that conveniently keeps the P&amp;L charge down is a classic indicator of management bias under ISA 540.32.</p>
+            <p><strong>Red flag 2 — post-model adjustments and overlays without an evidential basis (ISA 500).</strong> Management overlays — top-up provisions the core model does not capture — ballooned during recent economic uncertainty and are inherently subjective. Under ISA 500 the auditor must obtain sufficient appropriate audit evidence for the relevance and reliability of the information underpinning each overlay; a material "economic uncertainty" overlay supported only by a board narrative, with no data or recalculation, is unsupported and should be challenged, reduced or removed.</p>
+            <p><strong>Red flag 3 — forward-looking scenarios and weights that ignore the entity's own risk profile (ISA 315).</strong> ISA 315 (Revised 2019) requires the auditor to understand the entity, its environment and its IT-based models, including how macroeconomic forecasts feed the ECL engine. Where scenario weights are static year on year, or the downside scenario is implausibly benign relative to the entity's sector concentrations, the risk of material misstatement in the allowance is elevated and the auditor must respond with more granular testing of the model's data flows and controls.</p>
 
-            <h2 id="pma">Post-Model Adjustments (PMAs)</h2>
-            <p>Many banks don't rely solely on the mechanical ECL formula. They apply "post-model adjustments" for factors the model doesn't capture:</p>
-            <ul>
-                <li><strong>Macroeconomic scenarios:</strong> "Our model assumes baseline growth; recession is 30% likely, which would increase PD by 150 bps"</li>
-                <li><strong>Portfolio concentrations:</strong> "Retail portfolio is 40% real estate; commercial real estate downside is significant"</li>
-                <li><strong>Recent events:</strong> "Tech IPO market collapsed; our venture debt losses rose; lifetime PD increases 200 bps"</li>
-            </ul>
+            <h2 id="case-study">Case study: HSBC ECL disclosure</h2>
+            <p>HSBC Holdings plc is a useful public illustration because its Annual Report and Accounts disclose the ECL charge, its stage composition and coverage against gross loans in detail. For the year ended 31 December 2023, HSBC reported an ECL charge of <strong>US$3.4bn</strong>, down US$0.1bn on 2022, equivalent to <strong>33 basis points of average gross loans</strong> (including a 3bps reduction from balances classified as held for sale). The group disclosed that the 2023 net charge was driven principally by Stage 3 charges, notably relating to mainland China commercial real estate exposures, alongside continued economic uncertainty, and guided that ECL as a percentage of average gross loans would rise to around <strong>40bps in 2024</strong>.</p>
+            <p>What makes HSBC instructive for students of the model is the visible interaction of the three stages: a relatively small Stage 3 sector-specific deterioration (Chinese CRE) can dominate the headline charge even while the vast Stage 1 book sits on modest 12-month ECL, and management's forward guidance to a higher coverage ratio reflects exactly the forward-looking, probability-weighted mechanics of IFRS 9.5.5.17. The stage-migration and coverage tables in HSBC's own report (Report and Accounts 2023, "Summary of credit risk" and ECL disclosures) show the full Stage 1/2/3 gross-carrying-amount and allowance split that this article's worked examples replicate at micro scale.</p>
+            <p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Figures above are drawn only from HSBC Holdings plc's publicly filed Annual Results 2023 disclosures. No stage-level allowance figures have been estimated or invented here; any numerical bridge in the worked examples earlier in this article is illustrative and does not represent HSBC.</p>
 
-            <p class="callout"><strong>Audit Challenge:</strong> PMAs are subjective. Auditors scrutinize: "How did you justify a £5m PMA? Is it documented? Is it reversible or permanent? How does it correlate to your forward-looking info?"</p>
-
-            <h2 id="audit-red-flags">Audit Red Flags in ECL</h2>
-
-            <h3 id="red-flag-1-stage-2-thresholds-too-high">Red Flag 1: Stage 2 Thresholds Too High</h3>
-            <p><strong>Finding:</strong> Bank's SICR threshold is 500 bps PD increase; market standard is 300 bps.</p>
-            <p><strong>Auditor action:</strong> Recalculate ECL using 300 bps threshold; estimate the impact (+£8m); propose adjustment.</p>
-
-            <h3 id="red-flag-2-lack-of-documentation">Red Flag 2: Lack of Documentation</h3>
-            <p><strong>Finding:</strong> No written policy on how SICR is identified; asset reclassifications appear arbitrary.</p>
-            <p><strong>Auditor action:</strong> Require documented SICR policy, then retroactively reclassify assets under that policy.</p>
-
-            <h3 id="red-flag-3-pmas-unexplained">Red Flag 3: PMAs Unexplained</h3>
-            <p><strong>Finding:</strong> Management applied a £10m PMA for "general economic uncertainty" but provided no detailed justification.</p>
-            <p><strong>Auditor action:</strong> Challenge the PMA; often it's reduced or eliminated.</p>
-
-            <h3 id="red-flag-4-interest-income-misstatement-in-stage-3">Red Flag 4: Interest Income Misstatement in Stage 3</h3>
-            <p><strong>Finding:</strong> Bank continues to recognize interest on Stage 3 loans using the gross carrying amount, not the net amount (gross −’ allowance).</p>
-            <p><strong>Auditor action:</strong> Correct interest income; likely a £2— 5m adjustment for large Stage 3 portfolios.</p>
+            <h2 id="faq">Frequently asked questions</h2>
+            <div class="faq-item">
+                <h3>What is the difference between 12-month ECL and lifetime ECL?</h3>
+                <p>12-month ECL is the portion of lifetime credit losses expected from default events that are possible within 12 months of the reporting date (IFRS 9.5.5.5); it is not the loss expected over the next year only. Lifetime ECL captures expected losses from all possible defaults over the instrument's whole expected life (IFRS 9.5.5.3). Stage 1 uses the 12-month measure; Stages 2 and 3 use the lifetime measure.</p>
+            </div>
+            <div class="faq-item">
+                <h3>When does an asset move from Stage 1 to Stage 2?</h3>
+                <p>When there has been a significant increase in credit risk since initial recognition — a relative rise in the lifetime probability of default (IFRS 9.5.5.9). There is a rebuttable presumption of SICR once payments are more than 30 days past due (IFRS 9.5.5.11), but qualitative and quantitative indicators such as rating downgrades and covenant breaches (IFRS 9.B5.5.17) usually trigger the move earlier.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is the simplified approach and who uses it?</h3>
+                <p>The simplified approach measures the loss allowance at lifetime ECL at all times, with no staging or SICR assessment (IFRS 9.5.5.15). It is mandatory for trade receivables and contract assets without a significant financing component, and optional for those with a financing component and for lease receivables. Most non-financial corporates apply it to their receivables using a provision matrix.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is a provision matrix?</h3>
+                <p>A provision matrix groups receivables by shared credit-risk characteristics and days-past-due ageing, then applies historical loss rates adjusted for forward-looking information to each bucket (IFRS 9.B5.5.35). The sum of the buckets is the lifetime ECL allowance. It is the standard practical tool under the simplified approach.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What is the low-credit-risk exemption?</h3>
+                <p>An optional practical expedient allowing an entity to assume no significant increase in credit risk — and so keep an exposure in Stage 1 on 12-month ECL — where the instrument has low credit risk at the reporting date, broadly equivalent to an investment-grade external rating (IFRS 9.5.5.10, B5.5.22–B5.5.24). It is optional and heavily scrutinised because misuse delays Stage 2 transfers.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How does interest income change in Stage 3?</h3>
+                <p>In Stages 1 and 2, effective interest is applied to the gross carrying amount. Once an asset becomes credit-impaired and enters Stage 3, interest revenue is calculated on the net amortised cost — gross carrying amount less the loss allowance (IFRS 9.5.4.1(b)). Continuing to accrue interest on the gross amount in Stage 3 is a common misstatement.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Why is ECL such a focus for auditors?</h3>
+                <p>ECL is an accounting estimate with high estimation uncertainty, so it falls directly under ISA 540 (Revised). Auditors challenge the SICR thresholds, the reasonableness of PD/LGD/EAD inputs, the support for post-model overlays (ISA 500) and the design of the forward-looking scenario framework and its models (ISA 315). For banks it is typically the largest and most judgemental figure in the accounts.</p>
+            </div>
 
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
-                    <h4 id="usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</h4>
-                    <p>ECL is where Big 4 auditors spend the most time on financial instruments. I've audited bank portfolios with £500m+ in ECL allowances. The three-stage model is elegant in theory but brutal in judgment-call battles during audit execution.</p>
+                    <h4 id="author">Usman Qureshi (ACCA, ACA)</h4>
+                    <p>ECL is where Big 4 audit teams spend the most time on financial instruments. Having worked on bank portfolios with material ECL allowances, I can confirm the three-stage model is elegant in theory but brutal in the judgement-call battles of audit execution — SICR calibration and post-model overlays consume the hours.</p>
                 </div>
             </div>
 
-            
-<h2 id="real-life-case-study">Real-Life Case Study: Staging a Loan Under the ECL Model</h2>
-<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A lender advances &pound;1m to a corporate borrower. Over 18 months the borrower's credit deteriorates.</p>
- <ul>
-   <li><strong>Origination (Stage 1):</strong> 12-month ECL, say &pound;5k provision.</li>
-   <li><strong>Significant increase in credit risk (Stage 2):</strong> after two covenant breaches, lifetime ECL, provision jumps to &pound;60k, even though no payment is missed.</li>
-   <li><strong>Credit-impaired (Stage 3):</strong> borrower misses payments, interest now recognised on the net (post-provision) carrying amount.</li>
- </ul>
- <p><strong>Takeaway.</strong> The big P&amp;L hit comes at the Stage 1&rarr;2 move, driven by <em>change in risk since origination</em>, not by an actual default. Auditors focus hard on the SICR triggers because that is where judgement, and provision size, is greatest.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
-</div>
+            <div class="related">
+                <h3>Related articles in this cluster</h3>
+                <div class="related-grid">
+                    <a href="ifrs-9-financial-instruments-complete-guide.html">&rarr; IFRS 9 Financial Instruments Hub</a>
+                    <a href="ifrs-9-classification-measurement.html">IFRS 9 Classification &amp; Measurement: Business Model Test &amp; SPPI</a>
+                    <a href="ifrs-9-impairment-accounting.html">IFRS 9 Impairment Accounting: Lifetime vs 12-Month ECL &amp; Stage Movements</a>
+                    <a href="ifrs-9-hedge-accounting.html">IFRS 9 Hedge Accounting: Cash Flow &amp; Fair Value Hedges</a>
+                    <a href="ifrs-9-modification-derecognition.html">IFRS 9 Modification &amp; Derecognition: Loan Changes &amp; Exit Accounting</a>
+                </div>
+            </div>
 
-<div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
-    <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>
-    <p style="margin-bottom: 12px; color: #4a5568;"><a href="ifrs-9-financial-instruments-complete-guide.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">→ IFRS 9 Financial Instruments Hub</a></p>
-    <p style="margin-bottom: 8px; color: #4a5568;"><a href="ifrs-9-classification-measurement.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• IFRS 9 Classification & Measurement: Business Model Test & SPPI Explained</a></p>
-    <p style="margin-bottom: 8px; color: #4a5568;"><a href="ifrs-9-hedge-accounting.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• IFRS 9 Hedge Accounting: Cash Flow & Fair Value Hedges with Effectiveness Testing</a></p>
-    <p style="margin-bottom: 8px; color: #4a5568;"><a href="ifrs-9-impairment-accounting.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• IFRS 9 Impairment Accounting: Lifetime ECL vs 12-Month ECL & Stage Movements</a></p>
-    <p style="margin-bottom: 8px; color: #4a5568;"><a href="ifrs-9-modification-derecognition.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• IFRS 9 Modification & Derecognition: Loan Changes, Forgiveness & Exit Accounting</a></p>
-</div>
-
-<div class="disclaimer">
-                <strong>Disclaimer:</strong> This is educational content. IFRS 9 ECL application is highly fact-specific and requires professional judgment. Consult a qualified accountant or auditor for your specific circumstances.
+            <div class="disclaimer">
+                <strong>Disclaimer:</strong> This is educational content, not professional advice. IFRS 9 ECL application is highly fact-specific and requires professional judgement. HSBC figures are from publicly filed disclosures; illustrative examples do not represent any specific entity. Consult a qualified accountant or auditor for your circumstances.
             </div>
         </article>
     </div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "IFRS 9 Expected Credit Loss (ECL) Model: Three-Stage Impairment with Worked Examples",
+  "description": "A Big-4-grade guide to the IFRS 9 ECL model: the three-stage general approach, 12-month vs lifetime ECL, SICR assessment, the simplified approach and provision matrix, PD/LGD/EAD with forward-looking scenarios, worked journals and ISA 540 audit red flags.",
+  "author": {
+    "@type": "Person",
+    "name": "Usman Qureshi",
+    "jobTitle": "Chartered Accountant (ACCA, ACA)"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "UQ Consulting",
+    "url": "https://www.uqconsulting.org"
+  },
+  "datePublished": "2026-07-01",
+  "dateModified": "2026-07-13",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.uqconsulting.org/blog/ifrs-9-expected-credit-loss-model.html"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the difference between 12-month ECL and lifetime ECL?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "12-month ECL is the portion of lifetime credit losses expected from default events possible within 12 months of the reporting date (IFRS 9.5.5.5); it is not the loss expected over the next year only. Lifetime ECL captures expected losses from all possible defaults over the instrument's whole expected life (IFRS 9.5.5.3). Stage 1 uses the 12-month measure; Stages 2 and 3 use the lifetime measure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When does an asset move from Stage 1 to Stage 2?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "When there has been a significant increase in credit risk since initial recognition, a relative rise in the lifetime probability of default (IFRS 9.5.5.9). There is a rebuttable presumption of SICR once payments are more than 30 days past due (IFRS 9.5.5.11), but qualitative and quantitative indicators such as rating downgrades and covenant breaches usually trigger the move earlier."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the simplified approach and who uses it?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The simplified approach measures the loss allowance at lifetime ECL at all times, with no staging or SICR assessment (IFRS 9.5.5.15). It is mandatory for trade receivables and contract assets without a significant financing component, and optional for those with a financing component and for lease receivables. Most non-financial corporates apply it to their receivables using a provision matrix."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is a provision matrix?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A provision matrix groups receivables by shared credit-risk characteristics and days-past-due ageing, then applies historical loss rates adjusted for forward-looking information to each bucket (IFRS 9.B5.5.35). The sum of the buckets is the lifetime ECL allowance. It is the standard practical tool under the simplified approach."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the low-credit-risk exemption?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "An optional practical expedient allowing an entity to assume no significant increase in credit risk, keeping an exposure in Stage 1 on 12-month ECL, where the instrument has low credit risk at the reporting date, broadly equivalent to an investment-grade external rating (IFRS 9.5.5.10, B5.5.22-B5.5.24). It is optional and heavily scrutinised because misuse delays Stage 2 transfers."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does interest income change in Stage 3?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In Stages 1 and 2, effective interest is applied to the gross carrying amount. Once an asset becomes credit-impaired and enters Stage 3, interest revenue is calculated on the net amortised cost, gross carrying amount less the loss allowance (IFRS 9.5.4.1(b)). Continuing to accrue interest on the gross amount in Stage 3 is a common misstatement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why is ECL such a focus for auditors?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ECL is an accounting estimate with high estimation uncertainty, so it falls directly under ISA 540 (Revised). Auditors challenge the SICR thresholds, the reasonableness of PD/LGD/EAD inputs, the support for post-model overlays (ISA 500) and the design of the forward-looking scenario framework and its models (ISA 315). For banks it is typically the largest and most judgemental figure in the accounts."
+      }
+    }
+  ]
+}
+</script>
 </body>
 </html>
-

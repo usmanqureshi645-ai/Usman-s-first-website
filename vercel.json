@@ -5,7 +5,8 @@
     { "source": "/blog/goodwill-impairment-ifrs-36-vs-asc-350-deep-dive.html", "destination": "/blog/goodwill-impairment-ias-36-vs-asc-350-deep-dive.html", "permanent": true },
     { "source": "/blog/provisions-contingencies-ifrs-37-vs-asc-450-deep-dive.html", "destination": "/blog/provisions-contingencies-ias-37-vs-asc-450-deep-dive.html", "permanent": true },
     { "source": "/blog/ifrs-37-provisions-contingencies-complete-guide.html", "destination": "/blog/ias-37-provisions-contingencies-complete-guide.html", "permanent": true },
-    { "source": "/blog/ifrs-37-provisions-cluster.html", "destination": "/blog/ias-37-provisions-cluster.html", "permanent": true }
+    { "source": "/blog/ifrs-37-provisions-cluster.html", "destination": "/blog/ias-37-provisions-cluster.html", "permanent": true },
+    { "source": "/blog/ifrs-18-presentation-guide.html", "destination": "/blog/ifrs-18-presentation-of-financial-statements-complete-guide.html", "permanent": true }
   ],
   "crons": [
     {

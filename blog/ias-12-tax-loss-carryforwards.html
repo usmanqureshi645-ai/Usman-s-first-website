@@ -70,6 +70,95 @@
 }
 /*TOC_SIDEBAR_END*/
     </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "IAS 12 Tax Loss Carryforwards: DTA Recognition & Utilization",
+  "description": "How IAS 12 recognises deferred tax assets on unused tax losses and credits only to the extent probable future taxable profit is available, the extra scrutiny under IAS 12.35, convincing other evidence, and US GAAP valuation-allowance treatment under ASC 740 and IRC 172.",
+  "datePublished": "2026-05-01",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "name": "Usman Qureshi",
+    "jobTitle": "Audit & CFO Advisory (ACCA, ACA)",
+    "image": "https://www.uqconsulting.org/images/usman-qureshi.jpg"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "UQ Consulting",
+    "url": "https://www.uqconsulting.org"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.uqconsulting.org/blog/ias-12-tax-loss-carryforwards.html"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Does a tax loss automatically create a deferred tax asset?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. A loss creates a potential DTA, but IAS 12.34 recognises it only to the extent that future taxable profit is probable. The unsupported portion is not recognised and is disclosed under IAS 12.81(e)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is convincing other evidence under IAS 12.35?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Objective evidence beyond management's own forecast, chiefly reversing taxable temporary differences in the same entity and jurisdiction, an identifiable non-recurring cause of the loss, contracted future revenue, or executable tax-planning opportunities (IAS 12.36)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is a DTA on losses measured?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "At the amount of loss expected to be utilised, multiplied by the tax rate expected to apply when the loss is used (IAS 12.47). A change in the enacted rate before utilisation remeasures the asset through the tax charge."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does US GAAP differ from IFRS on loss carryforwards?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ASC 740-10-30-5 recognises the DTA in full and then records a valuation allowance to reduce it to the more-likely-than-not realisable amount, whereas IAS 12 never recognises the unsupported portion. The net asset is usually the same; the gross-versus-net presentation differs."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do US tax losses still expire?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Net operating losses arising after 2017 carry forward indefinitely under IRC 172, but their use is capped at 80% of taxable income each year, so utilisation is slower even though expiry is removed."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can a previously unrecognised loss be recognised later?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. IAS 12.37 requires reassessment each period; when it becomes probable that future taxable profit will allow the loss to be used, the DTA is recognised at that point, with the credit running through the tax charge."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What must be disclosed about unrecognised losses?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IAS 12.81(e) requires disclosure of the amount and expiry date of deductible temporary differences, unused tax losses and unused tax credits for which no DTA is recognised, and IAS 12.82 requires disclosure of the evidence supporting a DTA where the entity has recent losses."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
     <div class="topbar">
@@ -87,160 +176,134 @@
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#tax-loss-carryforward-basics">Tax Loss Carryforward Basics</a><ul><li class="toc-l2"><a href="#carryforward-periods-by-jurisdiction">Carryforward Periods by Jurisdiction</a></li></ul></li><li class="toc-l1"><a href="#dta-recognition-the-probable-test">DTA Recognition: The "Probable" Test</a><ul><li class="toc-l2"><a href="#factors-supporting-dta-recognition">Factors Supporting DTA Recognition</a></li><li class="toc-l2"><a href="#factors-against-dta-recognition">Factors Against DTA Recognition</a></li></ul></li><li class="toc-l1"><a href="#valuation-allowance">Valuation Allowance</a></li><li class="toc-l1"><a href="#change-in-ownership-rules-section-382-similar">Change in Ownership Rules (Section 382 / Similar)</a><ul><li class="toc-l2"><a href="#us-section-382-limitation">US Section 382 Limitation</a></li><li class="toc-l2"><a href="#example-section-382-limitation">Example: Section 382 Limitation</a></li></ul></li><li class="toc-l1"><a href="#acquisitionrelated-loss-restrictions">Acquisition-Related Loss Restrictions</a></li><li class="toc-l1"><a href="#worked-example-tech-startup-with-loss-carryforward">Worked Example: Tech Startup with Loss Carryforward</a><ul><li class="toc-l2"><a href="#scenario">Scenario</a></li><li class="toc-l2"><a href="#dta-assessment">DTA Assessment</a></li><li class="toc-l2"><a href="#tax-benefit-in-current-year">Tax Benefit in Current Year</a></li></ul></li><li class="toc-l1"><a href="#audit-red-flags-tax-loss-dta">Audit Red Flags: Tax Loss DTA</a><ul><li class="toc-l2"><a href="#red-flag-1-dta-recognized-despite-sustained-losses">Red Flag 1: DTA Recognized Despite Sustained Losses</a></li><li class="toc-l2"><a href="#red-flag-2-section-382-limitation-not-assessed">Red Flag 2: Section 382 Limitation Not Assessed</a></li><li class="toc-l2"><a href="#red-flag-3-valuation-allowance-not-adjusted">Red Flag 3: Valuation Allowance Not Adjusted</a></li><li class="toc-l2"><a href="#red-flag-4-changeofbusiness-not-documented">Red Flag 4: Change-of-Business Not Documented</a></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Recognising a Deferred Tax Asset on Losses</a></li></ul>
+            <ul><li class="toc-l1"><a href="#when-recognise-dta-losses">When can you recognise a DTA on unused tax losses?</a><ul><li class="toc-l2"><a href="#carryforward-periods-by-jurisdiction">Carryforward periods by jurisdiction</a></li></ul></li><li class="toc-l1"><a href="#recent-losses-convincing-evidence">Why does a history of recent losses raise the bar, and what is convincing evidence?</a><ul><li class="toc-l2"><a href="#factors-supporting-dta-recognition">What counts as convincing other evidence</a></li></ul></li><li class="toc-l1"><a href="#us-gaap-valuation-allowance">How does US GAAP treat loss carryforwards differently?</a><ul><li class="toc-l2"><a href="#irc-172-limitation">IRC §172, indefinite carryforward and the 80% limit</a></li></ul></li><li class="toc-l1"><a href="#worked-examples-dta-losses">How do you book a DTA on losses — full and partial recognition?</a><ul><li class="toc-l2"><a href="#example-full-recognition">Example 1: full recognition</a></li><li class="toc-l2"><a href="#example-partial-recognition">Example 2: partial recognition</a></li></ul></li><li class="toc-l1"><a href="#audit-red-flags-tax-loss-dta">Auditor red flags on loss-carryforward DTAs</a></li><li class="toc-l1"><a href="#real-life-case-study">Case study: recognising and derecognising a DTA on COVID losses</a></li><li class="toc-l1"><a href="#faq">Frequently asked questions</a></li></ul>
         </div>
 
 
         <article>
-            <p>Tax losses create deferred tax assets (DTA) if the company expects to earn future profits to offset them. However, many losses expire unused. This guide covers loss carryforward mechanics, DTA recognition criteria, valuation allowances, and the audit scrutiny around realizability.</p>
+            <p>Unused tax losses and credits are among the most heavily scrutinised deferred tax positions in any set of financial statements. A loss carryforward is only worth something if the company can earn future profits to absorb it, and IAS 12 refuses to let a company book that value unless the evidence supports it. This guide sets out the IAS 12 recognition threshold, the extra evidential bar imposed by a history of recent losses, the mechanics of two worked bookings, the auditor red flags, and how US GAAP under ASC 740 reaches a similar destination by a different route.</p>
 
-            <h2 id="tax-loss-carryforward-basics">Tax Loss Carryforward Basics</h2>
-            <p>When a company has a loss in a tax year, most jurisdictions allow:</p>
-            <ul>
-                <li><strong>Carryback:</strong> Apply loss to prior years' profits (refund claim) — limited period, often 1 year</li>
-                <li><strong>Carryforward:</strong> Apply loss to future years' profits — often indefinite or 10+ years (varies by jurisdiction)</li>
-            </ul>
+            <h2 id="when-recognise-dta-losses">When can you recognise a DTA on unused tax losses?</h2>
+            <p>A deferred tax asset for unused tax losses and unused tax credits is recognised only to the extent that it is probable that future taxable profit will be available against which the losses or credits can be utilised (IAS 12.34). "Probable" is the same more-likely-than-not threshold used elsewhere in IAS 12, and it applies asset-by-asset to the specific tax entity and tax jurisdiction that carries the loss. The measurement, once recognition is cleared, is the loss multiplied by the tax rate expected to apply when the loss is used (IAS 12.47), so a change in enacted rate between now and utilisation directly changes the carrying amount.</p>
+            <p>Crucially, the existence of a deductible temporary difference or an unused loss is a source of evidence but not, on its own, a basis for recognition. IAS 12.36 lists the criteria an entity must consider: whether it has sufficient taxable temporary differences that will reverse in the same period as the losses expire, whether taxable profit is probable before the losses lapse, whether the losses arose from identifiable causes unlikely to recur, and whether tax-planning opportunities are available to the entity that would create taxable profit in the period the losses can be used (IAS 12.36). Taxable temporary differences of the same taxable entity, relating to the same taxation authority and reversing in the right period, are the strongest form of evidence because their reversal is a scheduled, near-mechanical source of future taxable profit against which the loss can be set (IAS 12.28, IAS 12.36(a)).</p>
+            <p>Where those reversing differences are insufficient, the entity falls back on forecast future taxable profit and on tax-planning opportunities — actions management could and would take to create or accelerate taxable income in a particular period, such as electing to treat certain income as taxable, or disposing of and leasing back an asset that has appreciated (IAS 12.30, IAS 12.36(d)). The forecast must exclude the reversal of deductible temporary differences and the very losses being tested, otherwise the analysis becomes circular (IAS 12.29). Any portion of an unused loss for which recognition is not supported is simply not recognised, and the unrecognised amount is disclosed (IAS 12.34, IAS 12.81(e)).</p>
 
-            <h3 id="carryforward-periods-by-jurisdiction">Carryforward Periods by Jurisdiction</h3>
+            <h3 id="carryforward-periods-by-jurisdiction">Carryforward periods by jurisdiction</h3>
+            <p>The carryforward window is set by tax law, not by IAS 12, and it directly shapes recognition: an indefinite window gives forecasts more room to deliver, whereas a fixed expiry forces the "before the losses lapse" test in IAS 12.36(b) to bite hard.</p>
             <table>
                 <tr>
-                    <th>Country</th>
-                    <th>Carryforward Period</th>
-                    <th>Notes</th>
+                    <th>Jurisdiction</th>
+                    <th>Carryforward period</th>
+                    <th>Utilisation notes</th>
                 </tr>
                 <tr>
                     <td>UK</td>
-                    <td>Indefinite (as of 2023)</td>
-                    <td>Trading losses carry forward indefinitely; no time limit</td>
+                    <td>Indefinite</td>
+                    <td>Post-2017 losses carry forward indefinitely, but a £5m allowance plus a 50% restriction caps annual offset above that threshold</td>
                 </tr>
                 <tr>
                     <td>US (Federal)</td>
-                    <td>Indefinite (as of 2018 TCJA)</td>
-                    <td>NOL offset capped at 80% of taxable income (limiting utilization)</td>
+                    <td>Indefinite (post-2018 TCJA)</td>
+                    <td>Offset of post-2017 NOLs capped at 80% of taxable income (IRC §172)</td>
                 </tr>
                 <tr>
                     <td>Germany</td>
                     <td>Indefinite</td>
-                    <td>Trade tax losses carryforward indefinitely</td>
+                    <td>Minimum-taxation ("Mindestbesteuerung") restricts annual use above €1m</td>
                 </tr>
                 <tr>
                     <td>France</td>
                     <td>Indefinite</td>
-                    <td>General rule; certain restrictions on M&A</td>
+                    <td>Annual offset capped at €1m plus 50% of profit above that</td>
                 </tr>
             </table>
 
-            <h2 id="dta-recognition-the-probable-test">DTA Recognition: The "Probable" Test</h2>
-            <p>Recognize a DTA for unused tax losses <strong>if it is probable that future taxable income will be available to use the loss.</strong></p>
+            <h2 id="recent-losses-convincing-evidence">Why does a history of recent losses raise the bar, and what is convincing evidence?</h2>
+            <p>A history of recent losses is strong evidence that future taxable profit may not be available, so IAS 12.35 requires an entity to recognise a DTA on unused losses only to the extent it has sufficient taxable temporary differences, or convincing other evidence that sufficient taxable profit will exist against which the losses can be used. This is a deliberately higher hurdle than the plain "probable" test in IAS 12.34: where an entity has been loss-making, its own profit forecast is no longer, by itself, persuasive, because the recent track record undercuts the forecast's credibility (IAS 12.35). The auditor and the preparer must therefore ask what pushes the evidence past management's optimism.</p>
+            <p>Convincing other evidence is objective and largely outside management's discretion. The most robust is a stock of taxable temporary differences — for example accelerated tax depreciation, or a pension surplus — that will reverse into taxable profit in the same periods and the same jurisdiction as the losses can be used (IAS 12.36(a)). Next comes evidence that the losses arose from a specific, non-recurring cause: a one-off restructuring, an impairment, or a discrete event such as a pandemic-driven demand collapse, rather than structural, ongoing under-performance (IAS 12.36(c)). Firm order books, contracted future revenue, and available tax-planning opportunities that management can and will execute round out the picture (IAS 12.36(b), IAS 12.36(d)). The evidence-weighting mechanics — how positive and negative evidence are balanced and how much objectively verifiable evidence is needed to overcome recent losses — are covered in depth in our companion article on <a href="ias-12-valuation-allowances.html" style="color:#2a4a7a;">IAS 12 valuation allowances and DTA realizability</a> rather than repeated here.</p>
 
-            <h3 id="factors-supporting-dta-recognition">Factors Supporting DTA Recognition</h3>
+            <h3 id="factors-supporting-dta-recognition">What counts as convincing other evidence</h3>
             <ul>
-                <li><strong>Recent profitability:</strong> Company was profitable in prior years; loss is temporary</li>
-                <li><strong>Industry visibility:</strong> Orders/contracts on hand suggest future revenue</li>
-                <li><strong>Turnaround plan:</strong> Management credible plan to return to profit (with evidence)</li>
-                <li><strong>Cyclical business:</strong> Industry cycle suggests recovery (validated by history)</li>
+                <li><strong>Reversing taxable temporary differences:</strong> Scheduled reversals in the same entity, authority and period as the loss expiry — the strongest evidence (IAS 12.36(a)).</li>
+                <li><strong>Identifiable non-recurring cause:</strong> The loss stems from a discrete event unlikely to recur, not structural decline (IAS 12.36(c)).</li>
+                <li><strong>Contracted future revenue:</strong> Firm backlog or long-term contracts that make future taxable profit near-certain rather than forecast.</li>
+                <li><strong>Executable tax-planning opportunities:</strong> Actions within the entity's control that shift taxable profit into the utilisation window (IAS 12.36(d)).</li>
             </ul>
+            <p class="callout"><strong>Disclosure trigger.</strong> When a DTA is recognised, its realisation depends on future profit exceeding the effect of reversing taxable temporary differences, <em>and</em> the entity has suffered a loss in the current or preceding period in that tax jurisdiction, IAS 12.82 requires disclosure of the amount of the DTA and the nature of the evidence supporting it. The amount and expiry of unrecognised losses and credits must also be disclosed under IAS 12.81(e).</p>
 
-            <h3 id="factors-against-dta-recognition">Factors Against DTA Recognition</h3>
-            <ul>
-                <li><strong>Sustained losses:</strong> 3+ years of consecutive losses with no improvement</li>
-                <li><strong>Deteriorating industry:</strong> Structural decline with no recovery visibility</li>
-                <li><strong>No specific turnaround plan:</strong> Or plan is aspirational, not credible</li>
-                <li><strong>Management credibility:</strong> Prior failed recovery attempts</li>
-                <li><strong>Ownership change restrictions:</strong> Acquisition triggers change-of-ownership rules that limit loss usage</li>
-            </ul>
+            <h2 id="us-gaap-valuation-allowance">How does US GAAP treat loss carryforwards differently?</h2>
+            <p>US GAAP reaches a broadly similar answer but by an opposite mechanism: ASC 740 always recognises the deferred tax asset in full ("gross"), then reduces it by a valuation allowance to the amount that is more likely than not to be realised (ASC 740-10-30-5(e)). IAS 12 instead never puts the unsupported portion on the balance sheet at all. The reported net asset is usually the same; the gross-versus-net presentation, and the disclosure of the allowance, is where the two frameworks visibly diverge. Under both frameworks, a cumulative loss in recent years is significant negative evidence that is difficult to overcome (ASC 740-10-30-21 mirrors the thrust of IAS 12.35).</p>
+            <p>The US carryforward rules themselves changed materially with the 2017 Tax Cuts and Jobs Act. Net operating losses arising in tax years beginning after 31 December 2017 carry forward indefinitely under IRC §172, removing the old 20-year expiry, but their use in any year is capped at 80% of taxable income (computed before the NOL deduction). The practical effect is that even a profitable US company can no longer wipe out its entire tax bill with brought-forward losses — a minimum 20% of taxable income remains taxable — which lengthens the realisation horizon and feeds directly into both the ASC 740 valuation-allowance assessment and, for IFRS filers with US operations, the IAS 12.36(b) "before the losses lapse" analysis. Indefinite carryforward plus the 80% cap means losses rarely expire, but they also unwind more slowly, so scheduling matters.</p>
 
-            <h2 id="valuation-allowance">Valuation Allowance</h2>
-            <p>If recognition is uncertain, offset the DTA with a valuation allowance:</p>
-            <div style="background: #1a2f5a; color: #e8eef7; padding: 12px; border-radius: 6px; margin: 14px 0; text-align: center;">
-                Reported DTA = Gross DTA −’ Valuation Allowance
+            <h2 id="worked-examples-dta-losses">How do you book a DTA on losses — full and partial recognition?</h2>
+            <p>The two examples below use a 25% tax rate and show the accounting entry, which is a debit to the deferred tax asset and a credit to the tax charge in profit or loss (a deferred tax credit that reduces the total tax expense). The difference between them is entirely the strength of evidence about future taxable profit (IAS 12.34, IAS 12.35).</p>
+
+            <h3 id="example-full-recognition">Example 1: full recognition supported by reversing differences</h3>
+            <p>Delphin Ltd has £8m of unused trading losses. It also has £10m of taxable temporary differences (accelerated capital allowances) that will reverse over the next four years in the same entity and jurisdiction. Because the reversing taxable differences (£10m) exceed the losses (£8m) and reverse within the carryforward window, there is sufficient objective evidence to support the full loss (IAS 12.36(a)). The forecast is not even needed.</p>
+            <table>
+                <tr><th>Item</th><th>Amount</th><th>Reference</th></tr>
+                <tr><td>Unused tax losses</td><td>£8.0m</td><td>IAS 12.34</td></tr>
+                <tr><td>Reversing taxable temporary differences</td><td>£10.0m</td><td>IAS 12.36(a)</td></tr>
+                <tr><td>Gross DTA (£8.0m × 25%)</td><td>£2.0m</td><td>IAS 12.47</td></tr>
+                <tr><td>Unrecognised portion</td><td>£nil</td><td>IAS 12.35</td></tr>
+                <tr><td><strong>DTA recognised</strong></td><td><strong>£2.0m</strong></td><td>IAS 12.34</td></tr>
+            </table>
+            <p class="example-box"><strong>Journal entry:</strong><br>
+            Dr Deferred tax asset (SOFP) &nbsp; £2.0m<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Cr Deferred tax credit — tax charge (P&amp;L) &nbsp; £2.0m<br>
+            <em>Recognising a deferred tax asset on unused losses to the extent recovery is probable (IAS 12.34, .36(a)).</em></p>
+
+            <h3 id="example-partial-recognition">Example 2: partial recognition against a loss history</h3>
+            <p>Marrick Ltd also has £8m of unused losses but no reversing taxable temporary differences, and it has been loss-making for three consecutive years. Because of that recent loss history, IAS 12.35 demands convincing other evidence. The board-approved forecast — supported by a signed multi-year supply contract — shows £3m of taxable profit over the next four years, which the auditor accepts as sufficiently objective. Recognition is therefore capped at £3m of losses; the remaining £5m is unrecognised and disclosed (IAS 12.81(e)).</p>
+            <table>
+                <tr><th>Item</th><th>Amount</th><th>Reference</th></tr>
+                <tr><td>Unused tax losses</td><td>£8.0m</td><td>IAS 12.34</td></tr>
+                <tr><td>Probable future taxable profit (contracted)</td><td>£3.0m</td><td>IAS 12.35</td></tr>
+                <tr><td>Losses supported</td><td>£3.0m</td><td>IAS 12.34</td></tr>
+                <tr><td>DTA recognised (£3.0m × 25%)</td><td>£0.75m</td><td>IAS 12.47</td></tr>
+                <tr><td>Unrecognised losses (£5.0m); potential DTA</td><td>£1.25m</td><td>IAS 12.81(e)</td></tr>
+            </table>
+            <p class="example-box"><strong>Journal entry:</strong><br>
+            Dr Deferred tax asset (SOFP) &nbsp; £0.75m<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;Cr Deferred tax credit — tax charge (P&amp;L) &nbsp; £0.75m<br>
+            <em>Partial recognition limited to the profit supported by convincing evidence (IAS 12.35). £1.25m of potential DTA remains off balance sheet.</em></p>
+            <p>Reassessment is continuous. If in a later year Marrick's forecasts become more robust — for example the contract is extended — previously unrecognised losses are recognised at that point (IAS 12.37). Conversely, if a recognised DTA is no longer probable of recovery, its carrying amount is reduced (IAS 12.56). Both movements run through the tax charge and both must be explained in the tax reconciliation (IAS 12.81(g)).</p>
+
+            <h2 id="audit-red-flags-tax-loss-dta">Auditor red flags on loss-carryforward DTAs</h2>
+            <p>A DTA on losses is an accounting estimate built on management's forecast of future taxable profit, so it falls squarely within ISA 540 (Revised) on auditing accounting estimates. The three red flags below are the ones that most often turn a routine review into a significant risk.</p>
+
+            <h3 id="red-flag-1">Red flag 1: an optimistic forecast against a loss history</h3>
+            <p><strong>Finding.</strong> A company loss-making for several years recognises the full DTA on the strength of a hockey-stick forecast that assumes a sharp return to profit with no contracted backing. <strong>Standard.</strong> Under ISA 540.15–.18 the auditor must evaluate whether the assumptions are realistic and challenge management's estimation methods and data. Where recent losses exist, IAS 12.35 requires convincing <em>other</em> evidence, so a forecast alone is insufficient. <strong>Action.</strong> Obtain the board-approved plan, test the assumptions against historical accuracy of prior forecasts, and reduce recognition to the profit that is objectively supported.</p>
+
+            <h3 id="red-flag-2">Red flag 2: going-concern tension ignored in the DTA</h3>
+            <p><strong>Finding.</strong> Management discloses material uncertainty over going concern yet simultaneously recognises a large DTA that depends on years of future profit. <strong>Standard.</strong> ISA 570 (Revised) requires the auditor to evaluate whether events cast significant doubt on the entity's ability to continue as a going concern; a DTA premised on long-run profitability is internally inconsistent with going-concern doubt. <strong>Action.</strong> Reconcile the DTA forecast to the going-concern cash-flow model; if they conflict, one of the two is wrong and the DTA is usually the softer number.</p>
+
+            <h3 id="red-flag-3">Red flag 3: forecast not corroborated by external evidence</h3>
+            <p><strong>Finding.</strong> The future-profit forecast rests entirely on internally generated schedules with no external corroboration. <strong>Standard.</strong> ISA 500 requires the auditor to obtain sufficient appropriate audit evidence, and evidence from independent external sources is more reliable than internal representations. <strong>Action.</strong> Seek contracted order books, signed customer agreements, or industry data that corroborate the revenue assumptions, and treat an uncorroborated forecast supporting a material DTA as a probable adjustment.</p>
+
+            <h2 id="real-life-case-study">Case study: recognising and derecognising a DTA on COVID losses</h2>
+            <div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
+            <p><strong>The company.</strong> Rolls-Royce Holdings plc, the FTSE 100 aero-engine group, is a textbook illustration of IAS 12.35 in action. Its civil aerospace division depends on engine flying hours, which collapsed when global aviation shut down in 2020. The group reported a very large pre-tax loss for the year to 31 December 2020, and its financial statements disclosed a substantial pool of unused tax losses and other unrecognised deferred tax assets under IAS 12.81(e).</p>
+            <p><strong>The IAS 12 judgement.</strong> Faced with heavy recent losses, the group did not recognise deferred tax assets on the bulk of those losses. Under IAS 12.35 the recent loss history was strong evidence against recognition, and without sufficient reversing taxable temporary differences or convincing other evidence of near-term taxable profit in the relevant jurisdictions, the losses were carried as unrecognised — disclosed by amount and, where applicable, expiry (IAS 12.81(e)). This is exactly the partial-or-nil recognition pattern of Example 2 above, at national scale.</p>
+            <p><strong>Why it matters.</strong> The case shows that a profitable, blue-chip history does not entitle a company to book DTAs during a downturn: recognition tracks <em>probable future</em> taxable profit in each tax entity, tested afresh each period (IAS 12.37, IAS 12.56). As trading recovered in later years, the same losses became candidates for recognition once the forecast evidence firmed up — the mirror image of the 2020 write-down.</p>
+            <p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Based on Rolls-Royce Holdings plc publicly filed Annual Report 2020 (deferred tax and taxation notes). Figures are described qualitatively; readers should consult the filed accounts for exact amounts. Any illustrative bridge to the worked examples above is labelled as illustrative and is not drawn from the accounts.</p>
             </div>
 
-            <p class="example-box">
-                <strong>Example:</strong> Unused tax losses £30m<br>
-                — Gross DTA at 19% tax rate: £5.7m<br>
-                — Company has been loss-making for 4 years; recovery plan is weak<br>
-                — Valuation allowance (100%): £5.7m<br>
-                <strong>Reported DTA on balance sheet: £0</strong>
-            </p>
-
-            <h2 id="change-in-ownership-rules-section-382-similar">Change in Ownership Rules (Section 382 / Similar)</h2>
-
-            <h3 id="us-section-382-limitation">US Section 382 Limitation</h3>
-            <p>If a company undergoes a substantial ownership change (>50% ownership change in 3-year period), use of prior losses is severely limited to:</p>
-            <div style="background: #1a2f5a; color: #e8eef7; padding: 12px; border-radius: 6px; margin: 14px 0; text-align: center;">
-                Annual Loss Usage = Fair Value of Company × IRS Long-Term Rate (~5%)
-            </div>
-
-            <h3 id="example-section-382-limitation">Example: Section 382 Limitation</h3>
-            <ul>
-                <li><strong>Unused NOL (tax losses):</strong> £100m</li>
-                <li><strong>Company value (pre-acquisition):</strong> £50m</li>
-                <li><strong>Ownership change occurs:</strong> New owner acquires >50% stake</li>
-                <li><strong>Annual usage limitation:</strong> £50m × 5% = £2.5m per year (max)</li>
-                <li><strong>Implication:</strong> 40-year carryforward period (£100m / £2.5m/year), not indefinite</li>
-            </ul>
-
-            <p class="callout"><strong>Audit impact:</strong> After an acquisition, auditors carefully assess whether Section 382 applies. If losses are limited, valuation allowance may be appropriate (losses will expire before utilization).</p>
-
-            <h2 id="acquisitionrelated-loss-restrictions">Acquisition-Related Loss Restrictions</h2>
-            <p>Many jurisdictions (UK, EU, US) have anti-abuse rules limiting loss usage after acquisition:</p>
-            <ul>
-                <li><strong>Change-of-ownership rules:</strong> Similar to Section 382 (US) or similar in other countries</li>
-                <li><strong>Change-of-business rules:</strong> If acquired company fundamentally changes business, losses may not be usable</li>
-                <li><strong>Earnings-stripping rules:</strong> Limit interest deductions (not losses directly, but affects future income available to absorb losses)</li>
-            </ul>
-
-            <h2 id="worked-example-tech-startup-with-loss-carryforward">Worked Example: Tech Startup with Loss Carryforward</h2>
-
-            <h3 id="scenario">Scenario</h3>
-            <p><strong>Company:</strong> TechStart Ltd (private)<br>
-            <strong>Tax loss carryforward:</strong> £8m (from prior 3 loss-making years)<br>
-            <strong>Current year profit:</strong> £2m (just turned profitable)<br>
-            <strong>5-year forecast:</strong> £2m, £3m, £4m, £3m, £2m (declining after peak)</p>
-
-            <h3 id="dta-assessment">DTA Assessment</h3>
-            <ul>
-                <li><strong>Gross DTA:</strong> £8m × 19% = £1.52m</li>
-                <li><strong>Probable future income?</strong> YES — company just returned to profit; 5-year forecast shows £14m cumulative profit</li>
-                <li><strong>Valuation allowance:</strong> 0% (no allowance; full DTA recognized)</li>
-                <li><strong>Reported DTA:</strong> £1.52m</li>
-            </ul>
-
-            <h3 id="tax-benefit-in-current-year">Tax Benefit in Current Year</h3>
-            <ul>
-                <li><strong>Pre-tax profit:</strong> £2m</li>
-                <li><strong>Tax at statutory rate (19%):</strong> £380k</li>
-                <li><strong>Loss offset (£2m × 19%):</strong> £380k (reduces tax liability)</li>
-                <li><strong>Cash tax:</strong> £0 (current year loss offset by carryforward)</li>
-            </ul>
-
-            <h2 id="audit-red-flags-tax-loss-dta">Audit Red Flags: Tax Loss DTA</h2>
-
-            <h3 id="red-flag-1-dta-recognized-despite-sustained-losses">Red Flag 1: DTA Recognized Despite Sustained Losses</h3>
-            <p><strong>Finding:</strong> Company with 6-year loss history recognizes full DTA on £20m loss carryforward; no credible turnaround plan.</p>
-            <p><strong>Auditor action:</strong> Require substantial valuation allowance (80— 100%); if company can't articulate specific path to profit, limit DTA recognition.</p>
-
-            <h3 id="red-flag-2-section-382-limitation-not-assessed">Red Flag 2: Section 382 Limitation Not Assessed</h3>
-            <p><strong>Finding:</strong> Acquisition closes; £50m unused losses; no evaluation of Section 382 (US) or similar restrictions.</p>
-            <p><strong>Auditor action:</strong> Assess ownership change; calculate annual limitation; apply valuation allowance if losses will expire before usage.</p>
-
-            <h3 id="red-flag-3-valuation-allowance-not-adjusted">Red Flag 3: Valuation Allowance Not Adjusted</h3>
-            <p><strong>Finding:</strong> Prior year: 100% valuation allowance on £5m DTA (loss-making). Current year: Company returns to profit and forecasts £20m profit over 5 years. Valuation allowance still 100%.</p>
-            <p><strong>Auditor action:</strong> Reassess; likely reduce valuation allowance materially, increasing reported DTA and reducing tax expense.</p>
-
-            <h3 id="red-flag-4-changeofbusiness-not-documented">Red Flag 4: Change-of-Business Not Documented</h3>
-            <p><strong>Finding:</strong> Acquired company had £10m loss carryforward; post-acquisition, business model changes materially. Losses may be restricted.</p>
-            <p><strong>Auditor action:</strong> Evaluate whether change-of-business rules apply; apply valuation allowance if losses are at risk.</p>
-
-            
-<h2 id="real-life-case-study">Real-Life Case Study: Recognising a Deferred Tax Asset on Losses</h2>
-<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A start-up has accumulated &pound;4m of tax losses. Tax rate 25%, so a potential &pound;1m deferred tax asset. Should it be recognised?</p>
- <p><strong>Judgement.</strong> A DTA on losses is recognised only to the extent future taxable profits are probable. With a credible, board-approved forecast showing &pound;2.4m of taxable profit within the carry-forward window, the company recognises a DTA on &pound;2.4m of losses (&pound;600k), not the full &pound;1m.</p>
- <p><strong>Takeaway.</strong> Losses do not automatically create an asset, evidence of future profits does. A history of recent losses is "strong evidence" against recognition, so auditors scrutinise the forecast supporting any DTA on losses.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
-</div>
+            <h2 id="faq">Frequently asked questions</h2>
+            <h3>Does a tax loss automatically create a deferred tax asset?</h3>
+            <p>No. A loss creates a <em>potential</em> DTA, but IAS 12.34 recognises it only to the extent that future taxable profit is probable. The unsupported portion is not recognised and is disclosed under IAS 12.81(e).</p>
+            <h3>What is "convincing other evidence" under IAS 12.35?</h3>
+            <p>Objective evidence beyond management's own forecast — chiefly reversing taxable temporary differences in the same entity and jurisdiction, an identifiable non-recurring cause of the loss, contracted future revenue, or executable tax-planning opportunities (IAS 12.36).</p>
+            <h3>How is a DTA on losses measured?</h3>
+            <p>At the amount of loss expected to be utilised, multiplied by the tax rate expected to apply when the loss is used (IAS 12.47). A change in the enacted rate before utilisation remeasures the asset through the tax charge.</p>
+            <h3>How does US GAAP differ from IFRS here?</h3>
+            <p>ASC 740-10-30-5 recognises the DTA in full and then records a valuation allowance to reduce it to the more-likely-than-not realisable amount, whereas IAS 12 never recognises the unsupported portion. The net asset is usually the same; the gross-versus-net presentation differs.</p>
+            <h3>Do US tax losses still expire?</h3>
+            <p>Net operating losses arising after 2017 carry forward indefinitely under IRC §172, but their use is capped at 80% of taxable income each year, so utilisation is slower even though expiry is removed.</p>
+            <h3>Can a previously unrecognised loss be recognised later?</h3>
+            <p>Yes. IAS 12.37 requires reassessment each period; when it becomes probable that future taxable profit will allow the loss to be used, the DTA is recognised at that point, with the credit running through the tax charge.</p>
+            <h3>What must be disclosed about unrecognised losses?</h3>
+            <p>IAS 12.81(e) requires disclosure of the amount (and expiry date, if any) of deductible temporary differences, unused tax losses and unused tax credits for which no DTA is recognised, and IAS 12.82 requires disclosure of the evidence supporting a DTA where the entity has recent losses.</p>
 
 <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>

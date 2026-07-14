@@ -52,6 +52,21 @@
           "@type": "Question",
           "name": "What is the difference between FRS 102 and FRS 105?",
           "acceptedAnswer": { "@type": "Answer", "text": "FRS 105 is the micro-entities standard, a further-simplified version of FRS 102 with no fair value accounting, no deferred tax and minimal disclosures. FRS 102 is the fuller standard for small, medium and large private entities that do not use full IFRS." }
+        },
+        {
+          "@type": "Question",
+          "name": "Did FRS 102 adopt the IFRS 9 expected-credit-loss model?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. The FRC deliberately retained the incurred-loss impairment model in Sections 11 and 12, so provisions are recognised only when there is objective evidence of impairment at the reporting date. This is a significant, intentional simplification versus IFRS 9." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can a small company using FRS 102 avoid a cash flow statement?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. A small entity applying the Section 1A regime is exempt from presenting a statement of cash flows and may give abbreviated notes, but it must still provide any additional disclosure necessary for the accounts to give a true and fair view." }
+        },
+        {
+          "@type": "Question",
+          "name": "How is goodwill treated under FRS 102?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Purchased goodwill is amortised over its useful life under Section 19; where the life cannot be reliably estimated it must not exceed ten years. It is tested for impairment only when Section 27 indicators exist, unlike the mandatory annual test under IAS 36." }
         }
       ]
     }
@@ -141,157 +156,186 @@
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#scope">What is FRS 102 and where does it sit in UK GAAP?</a></li><li class="toc-l1"><a href="#who-applies">Who must apply FRS 102, and who is exempt?</a></li><li class="toc-l1"><a href="#structure">How is FRS 102 structured across its 35 sections?</a></li><li class="toc-l1"><a href="#key-differences">How does FRS 102 differ from full IFRS on measurement?</a></li><li class="toc-l1"><a href="#periodic-review">What did the FRC Periodic Review 2024 change?</a></li><li class="toc-l1"><a href="#new-leases">How does the new FRS 102 lease model work?</a></li><li class="toc-l1"><a href="#new-revenue">How does the new five-step revenue model change Section 23?</a></li><li class="toc-l1"><a href="#impairment">Why does FRS 102 keep the incurred-loss impairment model?</a></li><li class="toc-l1"><a href="#small-entities">What reduced disclosures apply to small and micro-entities?</a></li><li class="toc-l1"><a href="#audit">What are the auditor red flags on FRS 102?</a></li><li class="toc-l1"><a href="#case-studies">Case studies: FRS 102 in practice</a></li><li class="toc-l1"><a href="#faq">Frequently asked questions</a></li></ul>
+            <ul>
+                <li class="toc-l1"><a href="#what-is-frs-102">What is FRS 102 and where does it sit in UK GAAP?</a></li>
+                <li class="toc-l1"><a href="#uk-gaap-hierarchy">How is the UK GAAP hierarchy structured (FRS 100/101/102/105)?</a></li>
+                <li class="toc-l1"><a href="#who-applies">Who must apply FRS 102, and who is exempt?</a></li>
+                <li class="toc-l1"><a href="#structure">How is FRS 102 structured across Sections 1&ndash;35?</a></li>
+                <li class="toc-l1"><a href="#vs-ifrs">How does FRS 102 differ from full IFRS?</a></li>
+                <li class="toc-l1"><a href="#periodic-review-2024">What did the FRC Periodic Review 2024 change?</a></li>
+                <li class="toc-l1"><a href="#new-lease-model">How does the new on-balance-sheet lease model work?</a></li>
+                <li class="toc-l1"><a href="#new-revenue-model">How does the new five-step revenue model work?</a></li>
+                <li class="toc-l1"><a href="#small-micro">What relief do small and micro-entities get?</a></li>
+                <li class="toc-l1"><a href="#audit-red-flags">What are the top auditor red flags on FRS 102 engagements?</a></li>
+                <li class="toc-l1"><a href="#case-studies">Worked case studies</a></li>
+                <li class="toc-l1"><a href="#faq">Frequently asked questions</a></li>
+            </ul>
         </div>
 
         <article>
-            <h2 id="scope">FRS 102 Scope and Status</h2>
-            <p>FRS 102 has been the UK-adopted GAAP standard since January 2015 (replacing old UK GAAP). It's based on IFRS for SMEs but incorporates additional UK-specific requirements and disclosure concessions for smaller entities.</p>
+            <h2 id="what-is-frs-102">What is FRS 102 and where does it sit in UK GAAP?</h2>
+            <p>FRS 102 is the single, self-contained financial reporting standard issued by the Financial Reporting Council (FRC) that forms the core of generally accepted accounting practice in the United Kingdom and the Republic of Ireland. It has applied to accounting periods beginning on or after 1 January 2015, when it replaced the previous patchwork of SSAPs and older FRSs known as "old UK GAAP".</p>
+            <p>The standard is built on the structure of the IFRS for SMEs but the FRC re-drafted it extensively to keep the Companies Act 2006 legal framework, to retain measurement options UK preparers relied on (such as fair value for investment property), and to add reduced-disclosure tiers for smaller entities. The result is a proportionate framework: broadly IFRS-shaped in its principles, but shorter, less prescriptive on disclosure, and deliberately simpler on measurement in a handful of high-cost areas.</p>
+            <p>Crucially, FRS 102 is not "IFRS with fewer notes". It diverges on substance in several places, and the FRC's Periodic Review 2024 has now narrowed &mdash; but not eliminated &mdash; those gaps. The overriding legal requirement is unchanged: accounts prepared under FRS 102 must give a true and fair view, and section 393 of the Companies Act 2006 preserves the override that requires additional disclosure, or departure from a specific rule, where compliance would not achieve that view (mirrored in FRS 102 paragraphs 3.4&ndash;3.5).</p>
 
-            <p class="callout"><strong>Current status (2026):</strong> FRS 102 remains the standard for UK companies not required to report under IFRS. The FCA requires IFRS for listed companies; unlisted entities use FRS 102 unless they are micro-entities (FRS 105).</p>
+            <p class="callout"><strong>Citation anchors.</strong> Legal framework: Companies Act 2006 s.393 (true and fair) and s.396 (form and content of accounts). Standard scope and concepts: FRS 102 Section 1 (Scope) and Section 2 (Concepts and Pervasive Principles). Amendment source: FRC <em>Amendments to FRS 102 &mdash; Periodic Review 2024</em>, issued March 2024, effective for periods beginning on or after 1 January 2026.</p>
 
-            <h2 id="who-applies">Who Applies FRS 102?</h2>
+            <h2 id="uk-gaap-hierarchy">How is the UK GAAP hierarchy structured (FRS 100/101/102/105)?</h2>
+            <p>UK and Irish GAAP is a four-standard family sitting under FRS 100, which acts as the "application" standard that tells a preparer which framework to use. An entity first checks whether it is required or chooses to use full UK-adopted IFRS; if not, FRS 100 routes it to FRS 101, FRS 102 or FRS 105 according to its size and group position.</p>
+            <p>FRS 101 (the "reduced disclosure framework") lets a qualifying subsidiary or parent apply full IFRS recognition and measurement in its individual accounts while taking specified disclosure exemptions &mdash; useful where a group reports under IFRS and wants consistent numbers in each entity. FRS 102 is the main standard for the great majority of private companies, groups, charities and pension schemes. FRS 105 is the micro-entities standard: a heavily cut-down version of FRS 102 with no fair value, no deferred tax, no revaluation and a legally-fixed minimum set of disclosures.</p>
+            <p>Choosing the wrong tier is a recurring error. An entity that breaches the micro thresholds must move up to FRS 102 (small-entities regime), and a group that becomes ineligible for the small regime loses the reduced disclosures. Because the tiers carry very different measurement consequences &mdash; most visibly on financial instruments and deferred tax &mdash; the framework decision should be documented and revisited every year.</p>
 
-            <h3 id="mandatory-frs-102-users">Mandatory FRS 102 Users</h3>
-            <ul>
-                <li><strong>Private companies:</strong> Most UK private companies (by definition, unlisted)</li>
-                <li><strong>Public unlisted companies:</strong> UK-listed entities NOT on the Premium segment (often use IFRS, but could choose FRS 102)</li>
-                <li><strong>Charities:</strong> Many charities use FRS 102 (though some follow Charities SORP)</li>
-                <li><strong>Large unlisted groups:</strong> May voluntarily adopt FRS 102 unless group consolidated over thresholds</li>
-            </ul>
-
-            <h3 id="exemptions">Exemptions</h3>
-            <ul>
-                <li><strong>Micro-entities (FRS 105):</strong> Turnover <£6.5m, assets <£3.26m, employees <10 (small entity exemption available)</li>
-                <li><strong>Listed entities:</strong> Must use IFRS (FCA requirement for premium listing)</li>
-                <li><strong>Banking/insurance:</strong> Specific sector standards may override</li>
-            </ul>
-
-            <h2 id="small-entities">Small Entities Exemption (SE Regime)</h2>
-            <p>FRS 102 includes <strong>significant disclosure and measurement reliefs</strong> for entities meeting size thresholds:</p>
-
-            <h3 id="qualification-thresholds-2-of-3">Qualification Thresholds (2 of 3)</h3>
-            <ul>
-                <li>Turnover ≤ £10.2m (previously £8.8m; increased 2023)</li>
-                <li>Balance sheet assets ≤ £5.1m (previously £4.4m)</li>
-                <li>Employees ≤ 50</li>
-            </ul>
-
-            <h3 id="small-entity-exemptions">Small Entity Exemptions</h3>
-            <ul>
-                <li><strong>Cash flow statement:</strong> Not required</li>
-                <li><strong>Related party disclosures:</strong> Minimal (only key management)</li>
-                <li><strong>Segmental reporting:</strong> Not required</li>
-                <li><strong>Fair value measurements:</strong> Simplified (cost may be proxy; no fair value for investment property if no market)</li>
-                <li><strong>Deferred tax:</strong> No recognition of DTA (simplifies provision estimates)</li>
-            </ul>
-
-            <h2 id="key-differences">FRS 102 vs IFRS: Key Differences</h2>
-
-            <h3 id="1-financial-instruments">1. Financial Instruments</h3>
             <table>
-                <tr>
-                    <th>Aspect</th>
-                    <th>IFRS 9</th>
-                    <th>FRS 102</th>
-                </tr>
-                <tr>
-                    <td><strong>Classification</strong></td>
-                    <td>SPPI test; business model test</td>
-                    <td>Simpler: Available-for-Sale (AFS), Loans & Receivables, FVPL</td>
-                </tr>
-                <tr>
-                    <td><strong>Impairment</strong></td>
-                    <td>ECL model (3-stage; SICR triggers)</td>
-                    <td>Simpler: Incurred loss model; indicators of impairment</td>
-                </tr>
-                <tr>
-                    <td><strong>Fair value option</strong></td>
-                    <td>FVPL allowed; strict criteria</td>
-                    <td>FVPL more readily available for equities; AFS if no control</td>
-                </tr>
+                <tr><th>Standard</th><th>Who uses it</th><th>Recognition &amp; measurement</th><th>Disclosure</th></tr>
+                <tr><td><strong>FRS 100</strong></td><td>All UK GAAP preparers</td><td>N/A &mdash; application/framework selector</td><td>Directs to the right standard</td></tr>
+                <tr><td><strong>FRS 101</strong></td><td>Qualifying IFRS-group subsidiaries/parents</td><td>Full IFRS recognition &amp; measurement</td><td>IFRS with stated exemptions</td></tr>
+                <tr><td><strong>FRS 102</strong></td><td>Most private companies, groups, charities</td><td>FRS 102 (IFRS-for-SMEs derived)</td><td>Full, or reduced for small entities (Section 1A)</td></tr>
+                <tr><td><strong>FRS 105</strong></td><td>Micro-entities within statutory limits</td><td>Simplified &mdash; no fair value, no deferred tax</td><td>Legally-fixed minimum</td></tr>
             </table>
 
-            <h3 id="2-leases-ifrs-16-vs-frs-102">2. Leases (IFRS 16 vs FRS 102)</h3>
-            <ul>
-                <li><strong>IFRS 16:</strong> All leases > 12 months capitalized as ROU assets</li>
-                <li><strong>FRS 102:</strong> Operating vs finance lease distinction (narrower capitalization)</li>
-            </ul>
+            <h2 id="who-applies">Who must apply FRS 102, and who is exempt?</h2>
+            <p>FRS 102 is the default UK GAAP standard for any entity that is not required to use IFRS and does not qualify for, or elect into, FRS 101 or FRS 105. In practice that captures the large majority of UK private companies, most groups preparing consolidated accounts outside the listed markets, and a wide range of charities, LLPs, pension schemes and co-operatives (each typically read alongside the relevant SORP).</p>
+            <p>Entities with securities admitted to a UK regulated market must prepare consolidated accounts under UK-adopted IFRS, so they sit outside FRS 102 for those statements. At the other end, an entity that meets two of the three micro thresholds (turnover not more than &pound;632,000, balance-sheet total not more than &pound;316,000, and not more than 10 employees) may elect into FRS 105 instead. Between those poles, a company meeting the small-company thresholds applies FRS 102 but may take the reduced-disclosure Section 1A regime.</p>
+            <p>Sector regulation can override the default: banks, building societies and insurers are subject to additional FRC and regulator requirements, and pension schemes and charities follow their SORPs. The scope boundary is set by FRS 102 Section 1 read with FRS 100; the size thresholds come from the Companies Act 2006 and its statutory instruments, which were uprated for periods beginning on or after 6 April 2025. Because the FRS 102 small-entity thresholds now stand at turnover &pound;15m and balance-sheet total &pound;7.5m, more entities qualify for reduced disclosure than under the old &pound;10.2m/&pound;5.1m limits.</p>
 
-            <h3 id="3-property-revaluation">3. Property Revaluation</h3>
-            <ul>
-                <li><strong>IFRS:</strong> Revaluation through OCI (or P&L); reversals matched by reversals</li>
-                <li><strong>FRS 102:</strong> Revaluation through P&L (simpler); reversal to P&L only</li>
-            </ul>
+            <div class="callout"><strong>Sibling deep-dives.</strong> This hub summarises the small-entity boundary and financial-instrument classification at a high level. For the detailed thresholds, Section 1A disclosure map and worked reliefs see the <a href="frs-102-small-entities-exemptions.html">FRS 102 Small Entities Exemption</a> satellite, and for classification, amortised cost and the retained incurred-loss impairment model see the <a href="frs-102-financial-instruments.html">FRS 102 Financial Instruments</a> satellite. For entities moving between frameworks, see <a href="frs-102-transition-from-ifrs.html">FRS 102 Transition from IFRS</a>.</div>
 
-            <h2 id="fvpl">FVPL Investments in FRS 102</h2>
+            <h2 id="structure">How is FRS 102 structured across Sections 1&ndash;35?</h2>
+            <p>FRS 102 is organised into 35 numbered Sections, each dealing with one topic, rather than into separate standards as under IFRS. A user navigates by section number: Section 1 sets scope, Section 2 sets the concepts, and the remaining sections work through the primary statements, assets, liabilities, income and specialised topics.</p>
+            <p>The most heavily used sections in a typical audit are the ones that changed least historically and the handful that the Periodic Review has now rewritten. Section 2 (Concepts and Pervasive Principles) supplies the recognition and measurement logic; Sections 4&ndash;7 cover the primary statements; Sections 11 and 12 cover basic and other financial instruments; Section 17 covers property, plant and equipment; Sections 18 and 19 cover intangibles and business combinations/goodwill; Section 20 covers leases; Section 23 covers revenue; Section 27 covers impairment of assets; Section 29 covers income tax (including deferred tax on a timing-difference-plus basis); and Section 35 governs first-time transition.</p>
+            <p>Knowing the section map matters because cross-references are pervasive. For example, an acquirer applies Section 19 to recognise goodwill, Section 18 to the acquired intangibles, Section 27 to test carrying amounts for impairment indicators, and Section 29 to the deferred tax that arises on the fair-value uplifts &mdash; four sections for one transaction.</p>
 
-            <p>FRS 102 permits more liberal use of FVPL for equity investments, especially when held as part of a trading portfolio or when fair value is readily available.</p>
+            <table>
+                <tr><th>Section</th><th>Topic</th><th>Notable FRS 102 position</th></tr>
+                <tr><td>1 / 1A</td><td>Scope / Small entities</td><td>Small-entity reduced disclosure regime</td></tr>
+                <tr><td>2</td><td>Concepts &amp; pervasive principles</td><td>Recognition, measurement, true and fair</td></tr>
+                <tr><td>11 / 12</td><td>Basic / other financial instruments</td><td>Amortised cost default; incurred-loss impairment retained</td></tr>
+                <tr><td>17</td><td>Property, plant and equipment</td><td>Cost or revaluation model available</td></tr>
+                <tr><td>18 / 19</td><td>Intangibles / business combinations &amp; goodwill</td><td>Goodwill and intangibles amortised over finite life</td></tr>
+                <tr><td>20</td><td>Leases</td><td>New on-balance-sheet lessee model from 2026</td></tr>
+                <tr><td>23</td><td>Revenue</td><td>New five-step model from 2026</td></tr>
+                <tr><td>27</td><td>Impairment of assets</td><td>Indicator-based; goodwill not tested annually by default</td></tr>
+                <tr><td>29</td><td>Income tax</td><td>Timing-difference-plus deferred tax</td></tr>
+                <tr><td>35</td><td>Transition to FRS 102</td><td>First-time adoption reliefs and deemed cost</td></tr>
+            </table>
 
-            <h3 id="when-fvpl-is-permitted">When FVPL is Permitted</h3>
-            <ul>
-                <li><strong>Investments held for trading:</strong> Re-measured at fair value each period</li>
-                <li><strong>Investments in associates (no significant influence):</strong> Can use FVPL instead of equity method</li>
-                <li><strong>Financial liabilities:</strong> FVPL available for derivatives and fair value hedges</li>
-            </ul>
+            <h2 id="vs-ifrs">How does FRS 102 differ from full IFRS?</h2>
+            <p>FRS 102 and full IFRS share the same conceptual DNA but diverge on measurement in areas the FRC judged too costly for private entities. The four differences that most change reported profit and net assets are goodwill and intangibles (amortised, not impairment-only), the absence of a held-for-sale classification, the retained incurred-loss impairment model for financial instruments, and the historically lighter lease and revenue models &mdash; the last two now being brought closer to IFRS by the Periodic Review.</p>
+            <p>Under Section 19, purchased goodwill is amortised over its useful life; where that life cannot be estimated reliably it must not exceed ten years, and it is tested for impairment only when indicators exist under Section 27. Full IFRS (IFRS 3 / IAS 36) prohibits goodwill amortisation and requires an annual impairment test. This single difference systematically lowers post-acquisition profit under FRS 102 relative to IFRS and removes the "big bath" volatility of IFRS impairment. FRS 102 also has no equivalent of IFRS 5: assets earmarked for sale are not reclassified or frozen from depreciation, so they continue to be measured under their normal section until disposed.</p>
+            <p>On financial instruments, FRS 102 keeps most instruments at amortised cost with an incurred-loss impairment trigger &mdash; the FRC explicitly chose <em>not</em> to import the IFRS 9 expected-credit-loss model in the Periodic Review, which is a significant simplification for entities with trade receivables and intercompany loans. The measurement detail is covered in the financial-instruments satellite rather than duplicated here.</p>
 
-            <h3 id="fair-value-measurement">Fair Value Measurement</h3>
-            <p>FRS 102 uses simpler fair value hierarchy (quoted prices > observable inputs > unobservable), but less detailed than IFRS 13.</p>
+            <table>
+                <tr><th>Area</th><th>Full IFRS</th><th>FRS 102 (post-2026)</th><th>Effect on the numbers</th></tr>
+                <tr><td>Goodwill</td><td>No amortisation; annual impairment test (IAS 36)</td><td>Amortised over useful life; &le;10 yrs if not estimable (S.19)</td><td>Lower, smoother post-acquisition profit</td></tr>
+                <tr><td>Intangibles</td><td>Indefinite-life intangibles possible</td><td>Finite life assumed; amortised (S.18)</td><td>Amortisation charge every year</td></tr>
+                <tr><td>Held-for-sale</td><td>IFRS 5 reclassification &amp; measurement</td><td>No equivalent classification</td><td>Depreciation continues to disposal</td></tr>
+                <tr><td>FI impairment</td><td>Expected credit loss (IFRS 9)</td><td>Incurred loss retained (S.11/12)</td><td>Losses recognised later; simpler model</td></tr>
+                <tr><td>Leases (lessee)</td><td>Single ROU model (IFRS 16)</td><td>ROU model, IFRS-16 aligned with reliefs (S.20)</td><td>Gap now largely closed from 2026</td></tr>
+                <tr><td>Revenue</td><td>Five-step model (IFRS 15)</td><td>Five-step model, simplified (S.23)</td><td>Gap now largely closed from 2026</td></tr>
+            </table>
 
-            <h2 id="amendments-2026">FRS 102 2026/27 Amendments</h2>
+            <h2 id="periodic-review-2024">What did the FRC Periodic Review 2024 change?</h2>
+            <p>The FRC's Periodic Review 2024, issued in March 2024, is the most significant set of amendments to FRS 102 since the standard was introduced. Its two headline changes are a new on-balance-sheet lease model in Section 20, aligned to IFRS 16 concepts, and a new five-step revenue recognition model in Section 23, aligned to IFRS 15 &mdash; both effective for accounting periods beginning on or after 1 January 2026, with early application permitted only if all the amendments are adopted together.</p>
+            <p>Beyond leases and revenue, the review made a series of smaller improvements: clarified requirements on uncertain tax positions, a revised description of the concept of control for consolidation, enhanced disclosures for small entities to support a true and fair view, and various drafting fixes. Importantly, the FRC considered and then declined to move financial-instrument impairment to an expected-credit-loss basis, so the incurred-loss model in Sections 11 and 12 is retained &mdash; a deliberate proportionality decision that keeps FRS 102 meaningfully simpler than IFRS 9.</p>
+            <p>For preparers, the practical message is that the two big projects &mdash; leases and revenue &mdash; require lead time. Both need contract-by-contract data gathering, and the lease change in particular grosses up the balance sheet, which can affect borrowing covenants, distributable-profit calculations and key ratios. The transition provisions differ by topic and are set out below.</p>
 
-            <h3 id="amendment-1-lease-accounting-alignment">Amendment 1: Lease Accounting Alignment</h3>
-            <p>Ongoing harmonization with IFRS 16 principles (though full alignment may not occur; finance lease tests tightening).</p>
+            <div class="example-box"><strong>Effective date, confirmed.</strong> The amendments apply to periods beginning on or after 1 January 2026. A company with a 31 December year-end first reports under the new Sections 20 and 23 in its year ending 31 December 2026; a 31 March year-end first applies them for the year ending 31 March 2027. Comparatives are handled under each topic's specified transition method (see below).</div>
 
-            <h3 id="amendment-2-climaterelated-disclosures">Amendment 2: Climate-Related Disclosures</h3>
-            <p>New guidance on climate risk disclosures (in line with UK TCFD requirements); applies to larger entities.</p>
+            <h2 id="new-lease-model">How does the new on-balance-sheet lease model work?</h2>
+            <p>From periods beginning on or after 1 January 2026, revised Section 20 removes the operating-versus-finance-lease split for lessees and requires most leases to be recognised on the balance sheet as a right-of-use (ROU) asset and a matching lease liability. This mirrors the core mechanics of IFRS 16, with FRS 102 retaining optional exemptions for short-term leases (12 months or less) and leases of low-value underlying assets.</p>
+            <p>At commencement the lessee measures the lease liability at the present value of the future lease payments, discounted at the rate implicit in the lease or, if that is not readily determinable, the lessee's incremental borrowing rate. The ROU asset is initially the liability plus any initial direct costs, prepaid lease payments and estimated restoration costs. After commencement, the liability unwinds with an interest charge and reduces as payments are made, while the ROU asset is depreciated &mdash; so the former single straight-line "rent" expense is replaced by depreciation plus front-loaded interest.</p>
+            <p>On transition, lessees apply a modified retrospective approach and do <em>not</em> restate comparatives; instead the cumulative effect is recognised as an adjustment to the opening balance of retained earnings at the date of initial application. Lessor accounting is largely unchanged, retaining the operating/finance distinction.</p>
 
-            <h3 id="amendment-3-going-concern-liquidity">Amendment 3: Going Concern & Liquidity</h3>
-            <p>Enhanced guidance on assessing going concern beyond 12 months and liquidity disclosures (especially post-pandemic volatility).</p>
+            <div class="example-box">
+            <strong>Worked example &mdash; new lessee model preview.</strong>
+            <p>A UK company signs a 5-year property lease at &pound;50,000 per year, paid annually in arrears, with an incremental borrowing rate of 6%. It does not qualify for the short-term or low-value exemption.</p>
+            <table>
+                <tr><th>Item</th><th>Measurement</th><th>Amount</th></tr>
+                <tr><td>Lease liability at commencement</td><td>PV of 5 &times; &pound;50,000 at 6%</td><td>&pound;210,618</td></tr>
+                <tr><td>ROU asset at commencement</td><td>= liability (no direct costs)</td><td>&pound;210,618</td></tr>
+                <tr><td>Year 1 depreciation</td><td>&pound;210,618 &divide; 5 (straight line)</td><td>&pound;42,124</td></tr>
+                <tr><td>Year 1 interest</td><td>&pound;210,618 &times; 6%</td><td>&pound;12,637</td></tr>
+                <tr><td>Year 1 total P&amp;L charge</td><td>Depreciation + interest</td><td>&pound;54,761</td></tr>
+                <tr><td>Old Section 20 charge (operating)</td><td>Straight-line rent</td><td>&pound;50,000</td></tr>
+            </table>
+            <p>The new model front-loads the total charge (&pound;54,761 in year 1 versus &pound;50,000 straight-line) and puts a &pound;210,618 asset and liability on a balance sheet that previously showed neither. Illustrative figures for educational purposes only.</p>
+            </div>
 
-            <h2 id="transition">Transition from IFRS to FRS 102</h2>
+            <h2 id="new-revenue-model">How does the new five-step revenue model work?</h2>
+            <p>Revised Section 23 replaces the old sale-of-goods / rendering-of-services split with a single five-step model aligned to IFRS 15, effective for periods beginning on or after 1 January 2026. Revenue is recognised as an entity satisfies performance obligations by transferring control of goods or services, rather than on the transfer of risks and rewards.</p>
+            <p>The five steps are: (1) identify the contract with the customer; (2) identify the performance obligations in the contract; (3) determine the transaction price; (4) allocate the transaction price to the performance obligations; and (5) recognise revenue when (or as) each performance obligation is satisfied. FRS 102 keeps some simplifications relative to IFRS 15 &mdash; for example, more practical expedients and lighter disclosure &mdash; but the recognition logic is the same, which matters most for bundled contracts, variable consideration and contracts with distinct services.</p>
+            <p>The effect is largest for entities with multi-element arrangements: software plus support, goods plus installation, or long-term contracts with milestones. Under the new model these are unbundled into separate performance obligations, and consideration is allocated on a stand-alone-selling-price basis, which can shift the timing of revenue between periods. Entities apply the amendments using the transition provisions in the standard, again without the burden of full retrospective restatement in most cases.</p>
 
-            <p>Some entities (e.g., de-listing) move from IFRS to FRS 102. Key audit areas:</p>
+            <h2 id="small-micro">What relief do small and micro-entities get?</h2>
+            <p>Small entities applying FRS 102 use the Section 1A regime, which keeps the full recognition and measurement rules but strips back the notes to a legally-driven minimum, and micro-entities can step down to FRS 105 for even greater simplification. The size thresholds were uprated for periods beginning on or after 6 April 2025, so the small-company limits are now turnover &pound;15m, balance-sheet total &pound;7.5m and 50 employees (meet two of three).</p>
+            <p>Under Section 1A a small entity is not required to present a cash flow statement, may give abbreviated related-party and financial-instrument disclosures, and prepares a much shorter set of notes &mdash; though it must still provide whatever additional disclosure is necessary for the accounts to give a true and fair view, a point the Periodic Review reinforced. FRS 105 micro-entities go further: no fair value, no deferred tax, no revaluation, no capitalised borrowing or development costs, and a fixed statutory note set that is presumed in law to give a true and fair view.</p>
+            <p>The trade-off is comparability and information content: the further an entity simplifies, the less its accounts tell lenders and investors, and stepping down can trigger restatement when the entity later grows past a threshold. Because the thresholds, the Section 1A note map and the micro reliefs are detailed and change with each uprating, they are covered fully in the dedicated satellite rather than reproduced here &mdash; see <a href="frs-102-small-entities-exemptions.html">FRS 102 Small Entities Exemption</a>.</p>
 
-            <h3 id="asset-reclassifications">Asset Reclassifications</h3>
-            <ul>
-                <li>PP&E: Revaluation to cost-only (if using revaluation model under IFRS)</li>
-                <li>Investment property: Reclassification if no active market</li>
-                <li>Financial instruments: AFS/FVPL reclassification</li>
-            </ul>
+            <h2 id="audit-red-flags">What are the top auditor red flags on FRS 102 engagements?</h2>
+            <p>The highest-risk FRS 102 areas for an auditor are goodwill useful-life judgements, the 2026 lease and revenue transitions, incurred-loss impairment of receivables, and mis-selection of the reporting tier. Each maps to a specific ISA (UK) procedure, and each has been a recurring source of restatements and FRC review findings.</p>
 
-            <h3 id="provision-adjustments">Provision Adjustments</h3>
-            <ul>
-                <li>IAS 37 restructuring provisions may not meet FRS 102 criteria (no liability if plan not finalized)</li>
-                <li>Deferred tax: May not be recognized (simplification)</li>
-            </ul>
+            <h3 id="red-flag-goodwill">Red flag 1 &mdash; goodwill amortised over an unsupported long life</h3>
+            <p><strong>Finding:</strong> An acquisitive group amortises goodwill over 20 years with no useful-life analysis, understating the annual charge. FRS 102 Section 19 caps the life at 10 years where it cannot be reliably estimated.</p>
+            <p><strong>ISA (UK) 540 (Revised)</strong> on auditing accounting estimates requires the auditor to challenge the useful-life assumption, test management's supporting analysis, and evaluate indicators of management bias. Absent evidence, the default 10-year cap applies and the charge is understated.</p>
 
-            <h2 id="audit">Audit Red Flags: FRS 102 Conversions</h2>
+            <h3 id="red-flag-leases">Red flag 2 &mdash; incomplete lease population on 2026 transition</h3>
+            <p><strong>Finding:</strong> The lease register omits embedded leases and short cancellable arrangements, so the ROU asset and liability are understated on first application of revised Section 20.</p>
+            <p><strong>ISA (UK) 330</strong> (the auditor's responses to assessed risks) drives completeness testing: reconcile the lease register to the property and expense ledgers, inspect contracts for embedded leases, and recompute a sample of ROU/liability balances against the discount rate used.</p>
 
-            <h3 id="red-flag-1-ifrs-revaluations-not-reversed">Red Flag 1: IFRS Revaluations Not Reversed</h3>
-            <p><strong>Finding:</strong> Entity transitions from IFRS (used revaluation model for PP&E) to FRS 102 (cost model). Carrying values remain at revalued amounts without reversal.</p>
-            <p><strong>Auditor action:</strong> Decide on deemed cost method (retain revalued amount as new cost) or actual reversal. Impact goodwill/impairment testing.</p>
+            <h3 id="red-flag-revenue">Red flag 3 &mdash; revenue recognised on the old model after 1 January 2026</h3>
+            <p><strong>Finding:</strong> A software-plus-support contract is recognised wholly on delivery, ignoring the new Section 23 requirement to unbundle performance obligations and defer the support element.</p>
+            <p><strong>ISA (UK) 240</strong> treats revenue recognition as a presumed fraud risk. The auditor tests cut-off, examines bundled contracts for distinct performance obligations, and evaluates whether the transaction price has been allocated on a stand-alone-selling-price basis under the five-step model.</p>
 
-            <h3 id="red-flag-2-investment-property-fair-value-estimates-unsupported">Red Flag 2: Investment Property Fair Value Estimates Unsupported</h3>
-            <p><strong>Finding:</strong> Investment property valued at £5m under IFRS (fair value hierarchy, market approach). Under FRS 102, no active market exists; valuation becomes cost-based, significantly lower.</p>
-            <p><strong>Auditor action:</strong> Reassess fair value basis; if cost is more appropriate, write down; recognize impairment loss.</p>
+            <h3 id="red-flag-receivables">Red flag 4 &mdash; incurred-loss impairment not evidenced on receivables</h3>
+            <p><strong>Finding:</strong> Trade and intercompany receivables carry no impairment despite aged balances and a counterparty in difficulty; management assumes FRS 102's incurred-loss model needs no provision.</p>
+            <p><strong>ISA (UK) 505</strong> (external confirmations) combined with <strong>ISA (UK) 540</strong> supports the work: confirm balances, review post-year-end cash receipts, and challenge whether an objective indicator of impairment existed at the reporting date under Sections 11/12.</p>
 
-            <h3 id="red-flag-3-provisions-overstated">Red Flag 3: Provisions Overstated</h3>
-            <p><strong>Finding:</strong> Under IFRS, £10m restructuring provision recognized (IAS 37, detailed plan). Transitioning to FRS 102, no finalized board approval for restructuring; FRS 102 does not require provision.</p>
-            <p><strong>Auditor action:</strong> Reverse provision; adjust P&L; reclassify to contingent liability (if probable outflow).</p>
+            <h2 id="case-studies">Worked case studies</h2>
 
-            <h3 id="red-flag-4-deferred-tax-not-derecognized">Red Flag 4: Deferred Tax Not De-Recognized</h3>
-            <p><strong>Finding:</strong> Deferred tax of £3m (on temporary differences) carried forward from IFRS. FRS 102 micro/small entities exemption exempts DTA recognition.</p>
-            <p><strong>Auditor action:</strong> Reverse DTA; adjust retained earnings; no tax expense adjustment (simplified).</p>
+            <div class="example-box">
+            <strong>Case study 1 &mdash; acquisitive manufacturer, goodwill and the IFRS gap.</strong>
+            <p><strong>Scenario.</strong> A UK manufacturer with turnover of about &pound;30m acquires a competitor, recognising &pound;6m of goodwill. Under FRS 102 it amortises over a supported 8-year life (&pound;750,000 per year) and tests only when Section 27 indicators arise.</p>
+            <p><strong>Analysis.</strong> Had the group reported under full IFRS, no amortisation would be charged and goodwill would face an annual IAS 36 test, so FRS 102 profit is &pound;750,000 lower each year but far less exposed to a sudden impairment "big bath". The acquired customer relationships are recognised as a finite-life intangible under Section 18 and amortised, and deferred tax on the fair-value uplifts is measured under Section 29. Investment property held by the group remains at fair value through profit or loss, close to the IFRS answer.</p>
+            <p><strong>Takeaway.</strong> The goodwill-amortisation difference alone reshapes the profit profile of any acquisitive group; four sections (18, 19, 27, 29) interact in a single business combination.</p>
+            <p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
+            </div>
 
-            
-<h2 id="real-life-case-study">Real-Life Case Study: A Company Reporting Under FRS 102</h2>
-<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A mid-sized UK manufacturer (turnover &pound;30m) prepares its accounts under FRS 102, the main UK GAAP standard.</p>
- <p><strong>Key differences from IFRS it must manage.</strong> Goodwill and intangibles are amortised over a finite life (default up to 10 years if unreliable estimate) rather than impairment-only; development costs may be capitalised but need not be; and it takes the reduced disclosure regime available to qualifying entities. Investment property, though, is still at fair value through P&amp;L, much like IFRS.</p>
- <p><strong>Takeaway.</strong> FRS 102 is "IFRS-lite" but not IFRS: the goodwill-amortisation difference alone changes the profit profile of any acquisitive group. Know which specific sections diverge before assuming an IFRS answer applies.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
-</div>
+            <div class="example-box">
+            <strong>Case study 2 &mdash; distribution company facing the 2026 lease transition.</strong>
+            <p><strong>Scenario.</strong> A private distribution company leases three warehouses and a vehicle fleet, all previously treated as operating leases with a straight-line rent charge and nothing on the balance sheet. Total annual rentals are &pound;900,000 across leases with 4&ndash;7 years remaining.</p>
+            <p><strong>Analysis.</strong> On first applying revised Section 20 for the year beginning 1 January 2026, the company recognises ROU assets and lease liabilities of roughly &pound;3.4m (present value of remaining payments), taking the cumulative effect to opening retained earnings under the modified retrospective approach without restating comparatives. Gearing rises sharply, EBITDA improves (rent becomes depreciation plus interest below the line), and the finance director must check loan covenants defined on old-GAAP net debt before the transition date.</p>
+            <p><strong>Takeaway.</strong> The lease change is as much a treasury and covenant issue as an accounting one; early data-gathering and lender conversations are essential well before the first reporting date.</p>
+            <p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
+            </div>
+
+            <h2 id="faq">Frequently asked questions</h2>
+
+            <h3>Is FRS 102 the same as IFRS?</h3>
+            <p>No. FRS 102 is a single self-contained UK and Irish GAAP standard derived from the IFRS for SMEs, not full IFRS. It amortises goodwill and intangibles, retains an incurred-loss impairment model for financial instruments, has no held-for-sale classification, and offers reduced disclosures &mdash; so an IFRS answer cannot be assumed to hold under FRS 102.</p>
+
+            <h3>When do the FRC Periodic Review 2024 amendments take effect?</h3>
+            <p>They apply to accounting periods beginning on or after 1 January 2026, with early application permitted only if all amendments are adopted together. The headline changes are the new on-balance-sheet lease model in Section 20 and the five-step revenue model in Section 23.</p>
+
+            <h3>Does FRS 102 now require leases on the balance sheet like IFRS 16?</h3>
+            <p>Yes, for lessees from periods beginning on or after 1 January 2026. Revised Section 20 removes the operating/finance split for lessees and requires most leases to be recognised as a right-of-use asset and lease liability, with exemptions for short-term and low-value leases. Lessor accounting is largely unchanged.</p>
+
+            <h3>Did FRS 102 adopt the IFRS 9 expected-credit-loss model?</h3>
+            <p>No. The FRC deliberately retained the incurred-loss impairment model in Sections 11 and 12, so provisions are recognised only when there is objective evidence of impairment at the reporting date. This is a significant, intentional simplification versus IFRS 9.</p>
+
+            <h3>What is the difference between FRS 102 and FRS 105?</h3>
+            <p>FRS 105 is the micro-entities standard: a further-simplified version of FRS 102 with no fair value, no deferred tax and a legally-fixed minimum of disclosures. FRS 102 is the fuller standard for small, medium and large private entities that do not use full IFRS, and it retains options such as fair value for investment property.</p>
+
+            <h3>Can a small company using FRS 102 avoid a cash flow statement?</h3>
+            <p>Yes. A small entity applying the Section 1A regime is exempt from presenting a statement of cash flows and may give abbreviated notes, but it must still provide any additional disclosure necessary for the accounts to give a true and fair view.</p>
+
+            <h3>How is goodwill treated under FRS 102?</h3>
+            <p>Purchased goodwill is amortised over its useful life under Section 19; where the life cannot be reliably estimated it must not exceed ten years. It is tested for impairment only when Section 27 indicators exist, unlike the mandatory annual test under IAS 36.</p>
+
+            <h3>What are the current small-company size thresholds for FRS 102?</h3>
+            <p>For periods beginning on or after 6 April 2025 the small-company limits are turnover &pound;15m, balance-sheet total &pound;7.5m and 50 employees, meeting two of the three. The dedicated small-entities satellite covers the thresholds and Section 1A disclosures in full.</p>
+
+            <h3>How does an entity transition to the new lease model?</h3>
+            <p>Lessees apply a modified retrospective approach and do not restate comparatives; the cumulative effect is recognised as an adjustment to opening retained earnings at the date of initial application. Short-term and low-value lease exemptions can be taken to reduce the population.</p>
 
 <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>

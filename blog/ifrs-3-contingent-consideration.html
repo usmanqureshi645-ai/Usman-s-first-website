@@ -10,6 +10,95 @@
     <meta name="keywords" content="IFRS 3 contingent consideration, earnout, earn-in, fair value, remeasurement, acquisition">
     <meta name="author" content="Usman Qureshi">
     <link rel="canonical" href="https://www.uqconsulting.org/blog/ifrs-3-contingent-consideration.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "IFRS 3 Contingent Consideration: Earnouts, Remeasurement & Accounting",
+      "description": "IFRS 3 contingent consideration: earnout fair value at the acquisition date, liability vs equity classification, remeasurement through P&L under IFRS 9, measurement-period adjustments vs changes in estimate, and the B55(a) remuneration trap.",
+      "datePublished": "2026-05-01",
+      "dateModified": "2026-07-13",
+      "author": {
+        "@type": "Person",
+        "name": "Usman Qureshi",
+        "jobTitle": "Audit & CFO Advisory (ACCA, ACA)",
+        "image": "https://www.uqconsulting.org/images/team/usman-qureshi.png"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "UQ Consulting",
+        "url": "https://www.uqconsulting.org"
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.uqconsulting.org/blog/ifrs-3-contingent-consideration.html"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does a change in the fair value of contingent consideration adjust goodwill?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Almost never. Once the acquisition-date fair value is set, later changes in a liability-classified earnout go to profit or loss under IFRS 3.58(b). The only exception is a measurement-period adjustment - new information about facts that existed at the acquisition date, obtained within twelve months - which is recognised retrospectively against goodwill (IFRS 3.45-.49)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is contingent consideration classified as a liability or equity?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on how it will be settled (IFRS 3.40, applying IAS 32). Cash settlement, or settlement in a variable number of shares equal to a fixed value, makes it a financial liability. Settlement in a fixed number of the acquirer's own shares makes it equity. Liabilities are remeasured through P&L; equity is not remeasured at all."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why does a successful acquisition create an accounting expense?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Because a liability-classified earnout is carried at fair value through profit or loss (IFRS 9, IFRS 3.58(b)). When the target outperforms, the expected payout rises, the liability increases, and that increase is an expense - even though the business is doing well. Conversely, underperformance shrinks the liability and produces a gain."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long is the measurement period?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It ends when the acquirer has obtained the information it was seeking about acquisition-date facts, and cannot exceed one year from the acquisition date (IFRS 3.45). After it closes, all earnout movements are changes in estimate recognised in profit or loss, regardless of cause."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When is an earnout treated as remuneration instead of consideration?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "When the payment is automatically forfeited if the selling shareholder leaves employment, it is compensation for post-combination services under IFRS 3.B55(a) - expensed over the service period, outside the business-combination accounting and outside goodwill."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What discount rate should be used for an earnout?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A rate that reflects both the time value of money and the risk specific to the payout (IFRS 13). Higher-risk, further-dated earnouts warrant higher rates. The rate and the probability distribution are the two inputs auditors challenge most under ISA 540."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do equity-classified earnouts ever get remeasured?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Under IFRS 3.58(a) an earnout classified as equity is not remeasured; its subsequent settlement is accounted for within equity. Whatever the fixed number of shares is ultimately worth does not affect profit or loss."
+          }
+        }
+      ]
+    }
+    </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
@@ -84,152 +173,142 @@
     &gt; <a href="ifrs-3-business-combinations-complete-guide.html" style="color: #2a4a7a; text-decoration: none;">IFRS 3 Business Combinations</a> 
     &gt; <span style="color: #1a2f5a;">IFRS 3 Contingent Consideration: Earnouts, Remeasurement & Accounting</span>
 </div>
-        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 10 min read</div>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published May 2026 · Updated July 2026 · 13 min read</div>
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#what-is-contingent-consideration">What is Contingent Consideration?</a></li><li class="toc-l1"><a href="#initial-recognition-acquisition-date">Initial Recognition (Acquisition Date)</a><ul><li class="toc-l2"><a href="#probabilityweighted-approach">Probability-Weighted Approach</a></li><li class="toc-l2"><a href="#most-likely-amount-approach">Most Likely Amount Approach</a></li></ul></li><li class="toc-l1"><a href="#time-value-of-money">Time Value of Money</a><ul><li class="toc-l2"><a href="#discount-rate-selection">Discount Rate Selection</a></li></ul></li><li class="toc-l1"><a href="#remeasurement-after-acquisition-subsequent-reporting-periods">Remeasurement After Acquisition (Subsequent Reporting Periods)</a><ul><li class="toc-l2"><a href="#key-rule-not-goodwill">Key Rule: Not Goodwill</a></li><li class="toc-l2"><a href="#remeasurement-timing">Remeasurement Timing</a></li></ul></li><li class="toc-l1"><a href="#worked-example-software-acquisition-earnout-accounting">Worked Example: Software Acquisition Earnout Accounting</a><ul><li class="toc-l2"><a href="#deal-details">Deal Details</a></li><li class="toc-l2"><a href="#initial-recognition-1-jan-2025">Initial Recognition (1 Jan 2025)</a></li><li class="toc-l2"><a href="#midyear-reassessment-30-june-2025">Mid-Year Reassessment (30 June 2025)</a></li><li class="toc-l2"><a href="#yearend-31-dec-2025">Year-End (31 Dec 2025)</a></li><li class="toc-l2"><a href="#payment-january-2026">Payment (January 2026)</a></li></ul></li><li class="toc-l1"><a href="#audit-red-flags-contingent-consideration">Audit Red Flags: Contingent Consideration</a><ul><li class="toc-l2"><a href="#red-flag-1-unrealistic-probability-estimates">Red Flag 1: Unrealistic Probability Estimates</a></li><li class="toc-l2"><a href="#red-flag-2-contingent-liability-not-remeasured">Red Flag 2: Contingent Liability Not Remeasured</a></li><li class="toc-l2"><a href="#red-flag-3-time-value-not-considered">Red Flag 3: Time Value Not Considered</a></li><li class="toc-l2"><a href="#red-flag-4-measurement-period-confusion">Red Flag 4: Measurement Period Confusion</a></li></ul></li><li class="toc-l1"><a href="#earnout-accounting-summary">Earnout Accounting Summary</a></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: An Earn-Out That Moves After the Deal</a></li></ul>
+            <ul><li class="toc-l1"><a href="#what-is-contingent-consideration">What Is Contingent Consideration Under IFRS 3?</a></li><li class="toc-l1"><a href="#liability-vs-equity">Is an Earnout a Liability or Equity?</a><ul><li class="toc-l2"><a href="#classification-test">The IAS 32 Classification Test</a></li><li class="toc-l2"><a href="#why-it-matters">Why Classification Drives Everything</a></li></ul></li><li class="toc-l1"><a href="#initial-recognition">How Is an Earnout Measured at the Acquisition Date?</a><ul><li class="toc-l2"><a href="#worked-example-initial">Worked Example 1: Initial Recognition</a></li></ul></li><li class="toc-l1"><a href="#subsequent-remeasurement">How Is a Liability-Classified Earnout Remeasured Afterwards?</a><ul><li class="toc-l2"><a href="#worked-example-remeasurement">Worked Example 2: Subsequent Remeasurement Through P&amp;L</a></li></ul></li><li class="toc-l1"><a href="#measurement-period-vs-estimate">Measurement-Period True-Up vs Change in Estimate</a><ul><li class="toc-l2"><a href="#worked-example-contrast">Worked Example 3: The Contrast That Trips People Up</a></li></ul></li><li class="toc-l1"><a href="#remuneration-trap">When Is an Earnout Actually Remuneration (B55(a))?</a></li><li class="toc-l1"><a href="#audit-red-flags">Auditor Red Flags &amp; ISA Focus</a></li><li class="toc-l1"><a href="#case-study">Case Study: Hologic / Acessa Earnout Remeasurement</a></li><li class="toc-l1"><a href="#faq">Frequently Asked Questions</a></li></ul>
         </div>
 
 
         <article>
-            <p>Contingent consideration (earnouts) are future payments tied to acquisition targets being met. They increase the initial consideration, then are remeasured each reporting period— creating post-acquisition volatility that auditors scrutinize heavily. This guide covers measurement, remeasurement mechanics, and the audit challenges.</p>
+            <p>Contingent consideration is any obligation of the acquirer to transfer additional assets or equity to the former owners of an acquired business if specified future events occur or conditions are met &mdash; the classic "earnout". IFRS 3.39 requires the acquirer to recognise it at its <strong>acquisition-date fair value</strong> as part of the consideration transferred, exactly like the cash and shares paid up front. The hard part is not day one; it is what happens afterwards. Whether a rising earnout becomes an expense that punishes the buyer for the target's <em>success</em>, or disappears into goodwill, or never hits earnings at all, depends entirely on two upfront decisions: how the arrangement is classified (liability versus equity, IAS 32), and whether a later movement reflects new information about acquisition-date facts (a measurement-period adjustment) or a genuine change in estimate. This guide works through the mechanics, three worked examples with journals, the ISA-anchored audit red flags, and a real earnout remeasurement disclosed in a public filing.</p>
 
-            <h2 id="what-is-contingent-consideration">What is Contingent Consideration?</h2>
-            <p>Payment obligations that depend on future events or conditions:</p>
-            <ul>
-                <li><strong>Revenue earnout:</strong> "Pay additional £10m if revenue hits £50m in Year 1"</li>
-                <li><strong>EBITDA earnout:</strong> "Pay 2× EBITDA over £5m in Year 2"</li>
-                <li><strong>Milestone:</strong> "Pay £5m on FDA approval of drug"</li>
-                <li><strong>Closing balance sheet adjustment:</strong> "Pay/receive £1m per £1m variation in net working capital"</li>
-            </ul>
+            <h2 id="what-is-contingent-consideration">What Is Contingent Consideration Under IFRS 3?</h2>
+            <p>Contingent consideration is an acquirer's obligation (or, occasionally, right) to transfer additional consideration to the former owners of a business if future events occur or conditions are met. Under IFRS 3.39 the acquirer includes the <strong>acquisition-date fair value</strong> of that obligation in the consideration transferred, which in turn feeds the goodwill calculation; and under IFRS 3.40 that obligation is classified as either a liability or equity at the outset. Common forms include revenue or EBITDA earnouts ("pay a further &pound;10m if Year&nbsp;1 revenue exceeds &pound;50m"), milestone payments ("pay &pound;5m on regulatory approval"), and share-based earnouts settled in the acquirer's own equity instruments.</p>
+            <p>The measurement itself follows IFRS 13. Because most earnouts have no observable market, they are Level&nbsp;3 fair values built from unobservable inputs &mdash; typically a probability-weighted expected payout, discounted for the time value of money and for the risk that the target is missed (IFRS 13.B). The two building blocks that dominate every subsequent debate are therefore the <em>probability distribution</em> of outcomes and the <em>discount rate</em>, both of which are management estimates that an auditor will challenge hard under ISA 540. A probability-weighted expected value &mdash; not a single "most likely" number &mdash; is the default technique where the payout varies continuously with performance, because only the full distribution captures the option-like asymmetry of a capped earnout.</p>
 
-            <h2 id="initial-recognition-acquisition-date">Initial Recognition (Acquisition Date)</h2>
-            <p>Measure contingent consideration at fair value, using one of two approaches:</p>
+            <h2 id="liability-vs-equity">Is an Earnout a Liability or Equity?</h2>
+            <p>An earnout is classified as a <strong>liability</strong> if it obliges the acquirer to deliver cash, other assets, or a variable number of its own shares; it is classified as <strong>equity</strong> only if it will be settled by delivering a <em>fixed</em> number of the acquirer's own shares and meets the "fixed-for-fixed" condition (IFRS 3.40, applying the definitions in IAS 32). This single decision, made once at the acquisition date, determines whether the arrangement is ever remeasured again.</p>
 
-            <h3 id="probabilityweighted-approach">Probability-Weighted Approach</h3>
-            <p class="formula">
-                Fair Value = (Scenario 1 Payout × Probability 1) + (Scenario 2 Payout × Probability 2) + ...
-            </p>
+            <h3 id="classification-test">The IAS 32 Classification Test</h3>
+            <p>IFRS 3.40 sends you straight to IAS 32. If the acquirer has a contractual obligation to pay cash, or to issue whatever number of shares equals a fixed monetary amount, the arrangement fails the fixed-for-fixed test and is a financial liability. If instead the seller will receive a set number of shares regardless of the acquirer's share price &mdash; a fixed-for-fixed exchange &mdash; the arrangement is equity. A "pay &pound;5m in shares" clause is a <em>liability</em> (variable number of shares for a fixed value); a "issue 500,000 shares if the target is hit" clause is <em>equity</em> (fixed number of shares).</p>
 
-            <p class="example-box">
-                <strong>Example:</strong> Earnout of £10m if revenue ≥ £50m in Year 1<br>
-                — 70% probability of hitting target: £10m<br>
-                — 30% probability of missing: £0m<br>
-                <strong>Fair value = (£10m × 70%) + (£0m × 30%) = £7m</strong>
-            </p>
-
-            <h3 id="most-likely-amount-approach">Most Likely Amount Approach</h3>
-            <p>Used when only two outcomes likely and one significantly more probable. Less common but acceptable.</p>
-
-            <h2 id="time-value-of-money">Time Value of Money</h2>
-            <p>If contingent consideration won't be paid for >1 year, discount to present value:</p>
-            <div class="formula">
-                PV = Estimated Payment / (1 + Discount Rate)^Years
-            </div>
-
-            <h3 id="discount-rate-selection">Discount Rate Selection</h3>
-            <ul>
-                <li><strong>Probability-weighted expected rate:</strong> Discount rate reflecting the specific risk of that payment</li>
-                <li>Typically 5— 10% depending on certainty of outcome</li>
-                <li>Lower rate for high-probability items; higher for uncertain outcomes</li>
-            </ul>
-
-            <h2 id="remeasurement-after-acquisition-subsequent-reporting-periods">Remeasurement After Acquisition (Subsequent Reporting Periods)</h2>
-
-            <h3 id="key-rule-not-goodwill">Key Rule: Not Goodwill</h3>
-            <p class="callout"><strong>Critical:</strong> Changes in fair value of contingent consideration do NOT adjust goodwill. Remeasurement gains/losses go to P&L (or OCI if equity-settled).</p>
-
-            <h3 id="remeasurement-timing">Remeasurement Timing</h3>
-            <ul>
-                <li><strong>Each reporting date (quarterly/annually):</strong> Remeasure at fair value</li>
-                <li><strong>Recognition:</strong> Gain or loss in P&L (line item: "Contingent consideration remeasurement")</li>
-            </ul>
-
-            <h2 id="worked-example-software-acquisition-earnout-accounting">Worked Example: Software Acquisition Earnout Accounting</h2>
-
-            <h3 id="deal-details">Deal Details</h3>
-            <p><strong>Acquisition date:</strong> 1 January 2025<br>
-            <strong>Base consideration:</strong> £80m cash<br>
-            <strong>Contingent consideration (earnout):</strong> "Pay additional £20m if ARR (annual recurring revenue) reaches £15m by 31 Dec 2025"<br>
-            <strong>Current ARR:</strong> £12m<br>
-            <strong>Management estimate of likelihood:</strong> 60% probability</p>
-
-            <h3 id="initial-recognition-1-jan-2025">Initial Recognition (1 Jan 2025)</h3>
-            <p><strong>Fair value of contingent consideration:</strong> £20m × 60% = £12m<br>
-            <strong>No time value discount needed (due within 1 year, but still discount at say 4%)</strong><br>
-            <strong>PV = £12m / 1.04 = £11.54m</strong><br><br>
-            <strong>Consideration transferred:</strong> £80m + £11.54m = £91.54m</p>
-
-            <h3 id="midyear-reassessment-30-june-2025">Mid-Year Reassessment (30 June 2025)</h3>
-            <p>ARR tracking suggests 75% probability of hitting £15m target by year-end.</p>
-            <ul>
-                <li>New fair value: £20m × 75% = £15m</li>
-                <li>PV discount (6 months remaining): £15m / 1.02 = £14.71m</li>
-                <li>Increase from opening balance: £14.71m −’ £11.54m = £3.17m</li>
-                <li><strong>P&L Entry:</strong> Dr Contingent Consideration Liability £3.17m / Cr Contingent Consideration Remeasurement Gain £3.17m</li>
-            </ul>
-
-            <h3 id="yearend-31-dec-2025">Year-End (31 Dec 2025)</h3>
-            <p>ARR confirmed at £15.2m. Target met. Fair value = £20m (cash payment imminent).</p>
-            <ul>
-                <li>Change from 30 June: £20m −’ £14.71m = £5.29m</li>
-                <li><strong>P&L Entry:</strong> Dr Contingent Consideration Liability £5.29m / Cr Contingent Consideration Remeasurement Gain £5.29m</li>
-            </ul>
-
-            <h3 id="payment-january-2026">Payment (January 2026)</h3>
-            <p>Cash paid £20m against the liability. No P&L impact (already accrued).</p>
-
-            <h2 id="audit-red-flags-contingent-consideration">Audit Red Flags: Contingent Consideration</h2>
-
-            <h3 id="red-flag-1-unrealistic-probability-estimates">Red Flag 1: Unrealistic Probability Estimates</h3>
-            <p><strong>Finding:</strong> Management estimates 90% probability of hitting ambitious EBITDA target with no supporting analysis.</p>
-            <p><strong>Auditor action:</strong> Review historical performance of acquired company, industry benchmarks, management credibility. Adjust probability downward if unsupported.</p>
-
-            <h3 id="red-flag-2-contingent-liability-not-remeasured">Red Flag 2: Contingent Liability Not Remeasured</h3>
-            <p><strong>Finding:</strong> Contingent consideration recognized at £10m on acquisition date, but not remeasured in subsequent quarters despite changing market conditions.</p>
-            <p><strong>Auditor action:</strong> Require remeasurement; significant P&L impact likely.</p>
-
-            <h3 id="red-flag-3-time-value-not-considered">Red Flag 3: Time Value Not Considered</h3>
-            <p><strong>Finding:</strong> Earnout of £50m due in 3 years recognized at nominal £50m without discounting.</p>
-            <p><strong>Auditor action:</strong> Apply present value discount (5% = £43.1m); adjust liability and goodwill (if within the measurement period) or P&L (if after measurement period closes).</p>
-
-            <h3 id="red-flag-4-measurement-period-confusion">Red Flag 4: Measurement Period Confusion</h3>
-            <p><strong>Finding:</strong> Adjustment for earnout reversal booked to goodwill 18 months post-acquisition (outside the 12-month measurement period).</p>
-            <p><strong>Auditor action:</strong> Measurement period is 12 months only. After that, remeasurement goes to P&L, not goodwill.</p>
-
-            <h2 id="earnout-accounting-summary">Earnout Accounting Summary</h2>
+            <h3 id="why-it-matters">Why Classification Drives Everything</h3>
+            <p>A liability-classified earnout is remeasured to fair value at every subsequent reporting date, with the change recognised in profit or loss (IFRS 3.58(b)); a financial-liability earnout is measured at fair value through profit or loss under IFRS 9, so the remeasurement never touches goodwill after day one. An equity-classified earnout, by contrast, is <strong>not remeasured at all</strong> (IFRS 3.58(a)) &mdash; its subsequent settlement is accounted for within equity, and whatever the shares are ultimately worth on settlement is irrelevant to profit or loss. The same commercial deal can therefore produce years of earnings volatility or none whatsoever, purely on the classification.</p>
             <table>
-                <tr>
-                    <th>Event</th>
-                    <th>Accounting</th>
-                </tr>
-                <tr>
-                    <td>Initial recognition (acquisition date)</td>
-                    <td>Fair value (PW or most likely) in consideration; affects goodwill</td>
-                </tr>
-                <tr>
-                    <td>Remeasurement within 12-month measurement period</td>
-                    <td>Adjust contingent liability AND goodwill (if probability/PV changes)</td>
-                </tr>
-                <tr>
-                    <td>Remeasurement after 12-month period</td>
-                    <td>Adjust contingent liability; remeasurement gain/loss to P&L</td>
-                </tr>
-                <tr>
-                    <td>Payment</td>
-                    <td>Cash out; reduce liability (no P&L impact if previously accrued)</td>
-                </tr>
+                <tr><th>Feature</th><th>Liability-classified</th><th>Equity-classified</th></tr>
+                <tr><td>IAS 32 condition</td><td>Cash / variable number of shares</td><td>Fixed number of shares (fixed-for-fixed)</td></tr>
+                <tr><td>Subsequent measurement</td><td>Fair value each period (IFRS 9 FVTPL)</td><td>Not remeasured (IFRS 3.58(a))</td></tr>
+                <tr><td>Where changes go</td><td>Profit or loss (IFRS 3.58(b))</td><td>Nowhere &mdash; stays within equity</td></tr>
+                <tr><td>Earnings volatility</td><td>Yes, potentially large</td><td>None</td></tr>
             </table>
 
-            
-<h2 id="real-life-case-study">Real-Life Case Study: An Earn-Out That Moves After the Deal</h2>
-<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> An acquirer agrees &pound;20m upfront plus up to &pound;5m if the target hits profit targets over two years. At acquisition, the earn-out's fair value is estimated at &pound;3m.</p>
- <p><strong>Treatment.</strong> Consideration is &pound;23m; the &pound;3m contingent element is a liability. Because it is classified as a financial liability (cash-settled), later remeasurement to fair value goes through <em>profit or loss</em>, not goodwill. When performance exceeds expectations and the payout rises to &pound;4.5m, the extra &pound;1.5m is a P&amp;L expense.</p>
- <p><strong>Takeaway.</strong> Post-acquisition changes in a cash-settled earn-out hit earnings, they do not adjust goodwill. Buyers are sometimes surprised that a target's <em>success</em> creates an accounting charge.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
-</div>
+            <h2 id="initial-recognition">How Is an Earnout Measured at the Acquisition Date?</h2>
+            <p>At the acquisition date, contingent consideration is measured at fair value and added to the consideration transferred (IFRS 3.39), which increases goodwill by the same amount. Fair value is normally a probability-weighted expected payout discounted to present value using a rate that reflects both the time value of money and the risk of the specific payout (IFRS 13). Where the earnout is settled after more than a year, or the probability of the outcome is itself uncertain, both discounting and risk-adjustment are mandatory, not optional refinements.</p>
+            <div class="formula">Fair value = &Sigma; (Scenario payout &times; Probability) &divide; (1 + discount rate)<sup>n</sup></div>
+
+            <h3 id="worked-example-initial">Worked Example 1: Initial Recognition</h3>
+            <div class="example-box">
+                <p><strong>Facts.</strong> On 1 January 2025, Buyer plc acquires SoftCo for &pound;80m cash plus an earnout: a further &pound;20m in cash if SoftCo's annual recurring revenue (ARR) reaches &pound;15m by 31 December 2026 (two years out). Management assesses a 60% probability of hitting the target. A risk-adjusted discount rate of 8% is appropriate for a two-year, revenue-linked payout.</p>
+                <p><strong>Fair value of the earnout (cash-settled &rarr; financial liability, IAS 32):</strong></p>
+                <ul>
+                    <li>Expected payout = &pound;20m &times; 60% = &pound;12.0m</li>
+                    <li>Discounted 2 years at 8% = &pound;12.0m &divide; 1.08&sup2; = &pound;10.29m</li>
+                    <li>Consideration transferred = &pound;80m + &pound;10.29m = &pound;90.29m</li>
+                </ul>
+                <table>
+                    <tr><th>Acquisition-date journal (1 Jan 2025)</th><th>Dr (&pound;m)</th><th>Cr (&pound;m)</th></tr>
+                    <tr><td>Net identifiable assets / goodwill (balancing)</td><td>90.29</td><td></td></tr>
+                    <tr><td>Cash</td><td></td><td>80.00</td></tr>
+                    <tr><td>Contingent consideration liability</td><td></td><td>10.29</td></tr>
+                </table>
+                <p style="font-size:0.85em;color:#8593a8;">Illustrative figures. Goodwill is the excess of &pound;90.29m consideration over the fair value of SoftCo's identifiable net assets; the earnout does not sit in goodwill as a separate item.</p>
+            </div>
+
+            <h2 id="subsequent-remeasurement">How Is a Liability-Classified Earnout Remeasured Afterwards?</h2>
+            <p>A liability-classified earnout is remeasured to fair value at each reporting date and the movement is recognised in profit or loss, never in goodwill (IFRS 3.58(b)). Because it meets the definition of a financial liability, IFRS 9 governs the mechanics: it is carried at fair value through profit or loss, so both the unwinding of the discount and revisions to the probability of payout flow through earnings. The line is often labelled "change in fair value of contingent consideration" and is one of the most volatile numbers in an acquisitive group's income statement.</p>
+            <p class="callout"><strong>The counter-intuitive result:</strong> when an acquired business performs <em>better</em> than expected, the earnout liability rises, and the increase is an <strong>expense</strong>. The buyer is, in accounting terms, penalised for the target's success &mdash; and rewarded (a gain) when the target underperforms and the liability shrinks. This is exactly what caught out many buyers and is a frequent source of "why did our great acquisition create a charge?" conversations.</p>
+
+            <h3 id="worked-example-remeasurement">Worked Example 2: Subsequent Remeasurement Through P&amp;L</h3>
+            <div class="example-box">
+                <p><strong>Continuing Worked Example 1.</strong> The &pound;10.29m opening liability is remeasured at each year end. All movements are outside the measurement period (they reflect genuine trading performance after the acquisition), so they go entirely to profit or loss.</p>
+                <table>
+                    <tr><th>Date</th><th>Basis</th><th>Fair value (&pound;m)</th><th>Movement (&pound;m)</th><th>P&amp;L</th></tr>
+                    <tr><td>1 Jan 2025</td><td>60% &times; &pound;20m, 2yr @ 8%</td><td>10.29</td><td>&mdash;</td><td>&mdash;</td></tr>
+                    <tr><td>31 Dec 2025</td><td>80% &times; &pound;20m, 1yr @ 8%</td><td>14.81</td><td>+4.52</td><td>Expense 4.52</td></tr>
+                    <tr><td>31 Dec 2026</td><td>Target met, &pound;20m due</td><td>20.00</td><td>+5.19</td><td>Expense 5.19</td></tr>
+                </table>
+                <table>
+                    <tr><th>Remeasurement journal (31 Dec 2025)</th><th>Dr (&pound;m)</th><th>Cr (&pound;m)</th></tr>
+                    <tr><td>Change in FV of contingent consideration (P&amp;L)</td><td>4.52</td><td></td></tr>
+                    <tr><td>Contingent consideration liability</td><td></td><td>4.52</td></tr>
+                </table>
+                <p>On settlement in early 2027, Buyer pays &pound;20m cash against the &pound;20m liability &mdash; no further P&amp;L impact. Over the deal's life the total &pound;9.71m of remeasurement expense (&pound;4.52m + &pound;5.19m) is simply the difference between the &pound;10.29m first recognised and the &pound;20m actually paid, spread across the periods in which the estimate improved.</p>
+            </div>
+
+            <h2 id="measurement-period-vs-estimate">Measurement-Period True-Up vs Change in Estimate</h2>
+            <p>The single most-litigated distinction in earnout accounting is whether a post-acquisition movement is a <strong>measurement-period adjustment</strong> or a <strong>change in estimate</strong>. A measurement-period adjustment (IFRS 3.45&ndash;.49) arises only when the acquirer obtains <em>new information about facts and circumstances that existed at the acquisition date</em> &mdash; and it is recognised retrospectively against goodwill, as if the acquisition accounting had been correct from the start. Anything else &mdash; a change driven by events or performance <em>after</em> the acquisition date &mdash; is a change in estimate that goes to profit or loss (IFRS 3.58), full stop.</p>
+            <p>The measurement period ends as soon as the acquirer has the information it was seeking, and in any case cannot exceed <strong>one year</strong> from the acquisition date (IFRS 3.45). The distinction is not about <em>when</em> the adjustment is made but <em>why</em>: even inside the twelve months, a movement caused by the target's post-acquisition trading is a P&amp;L change in estimate, not a goodwill true-up. Conflating "within 12 months" with "goes to goodwill" is one of the most common errors auditors correct.</p>
+
+            <h3 id="worked-example-contrast">Worked Example 3: The Contrast That Trips People Up</h3>
+            <div class="example-box">
+                <p><strong>Same &pound;10.29m opening earnout liability. Two different reasons for a &pound;2m increase, six months after acquisition:</strong></p>
+                <table>
+                    <tr><th></th><th>Case A &mdash; new fact about day one</th><th>Case B &mdash; change in estimate</th></tr>
+                    <tr><td>What happened</td><td>A valuation report received in June, prepared using data that <em>existed</em> at 1 Jan, shows the acquisition-date probability was really 72%, not 60%.</td><td>SoftCo lands a major new customer in May &mdash; a post-acquisition event &mdash; lifting the probability of hitting the target.</td></tr>
+                    <tr><td>Nature</td><td>Measurement-period adjustment (IFRS 3.45&ndash;.49)</td><td>Change in estimate (IFRS 3.58)</td></tr>
+                    <tr><td>Accounting</td><td>Dr Goodwill &pound;2m / Cr Liability &pound;2m (retrospective)</td><td>Dr P&amp;L &pound;2m / Cr Liability &pound;2m</td></tr>
+                    <tr><td>Earnings impact</td><td>None</td><td>&pound;2m expense</td></tr>
+                </table>
+                <p>Identical liability, identical timing, opposite accounting &mdash; because Case A reflects information about acquisition-date circumstances and Case B reflects something that happened afterwards. After the measurement period closes, <em>every</em> movement is treated like Case B.</p>
+            </div>
+
+            <h2 id="remuneration-trap">When Is an Earnout Actually Remuneration (B55(a))?</h2>
+            <p>Not every "earnout" is consideration for the business. IFRS 3.B55(a) says that a contingent payment which is automatically <strong>forfeited if the selling shareholder leaves employment</strong> is remuneration for post-combination services, not part of the consideration transferred &mdash; and it is expensed in profit or loss over the service period, outside the business-combination accounting altogether. The clause "you get &pound;5m if you stay and hit targets for three years, but nothing if you resign" is compensation, however it is labelled in the sale agreement.</p>
+            <p>This matters in both directions. Structuring a genuine deferred purchase price as employment-linked lets a buyer keep it out of goodwill and spread it as an expense; dressing up what is really compensation as "consideration" avoids the P&amp;L charge and inflates goodwill instead. IFRS 3.B55 lists further indicators &mdash; the linkage to continued employment being decisive (B55(a)) &mdash; alongside factors such as the level of payment relative to other employees, and whether the payment per share exceeds what non-employee sellers receive. Getting this wrong is a favourite target of both auditors and regulators, because the two treatments look nothing alike in the accounts.</p>
+
+            <h2 id="audit-red-flags">Auditor Red Flags &amp; ISA Focus</h2>
+            <p>Contingent consideration is a fair-value accounting estimate, so ISA 540 (<em>Auditing Accounting Estimates</em>) is the primary standard in play, supported by ISA 500 (<em>Audit Evidence</em>) and ISA 315 (<em>Risk Assessment</em>). The following are the recurring findings.</p>
+
+            <h3 id="rf1">Red flag 1 &mdash; Optimistic probabilities with no evidence (ISA 540)</h3>
+            <p>Management assigns a 90% probability to an ambitious EBITDA target with nothing behind it. Under ISA 540 the auditor evaluates the method, assumptions and data behind the estimate, tests management's point estimate against the target company's historical performance, the deal model used to justify the price, and industry benchmarks, and develops an independent range or point estimate to challenge management bias. An unsupported probability that conveniently minimises the day-one liability (and maximises reported earnings later, when the liability is written down) is a classic indicator of management bias.</p>
+
+            <h3 id="rf2">Red flag 2 &mdash; Misclassifying an earnout as remuneration, or vice versa (ISA 500 / ISA 315)</h3>
+            <p>The most consequential error is on the B55(a) fence. A group facing a volatile liability-classified earnout has an incentive to re-characterise it as consideration that never touches profit, or to push a genuine deferred price into employment-linked remuneration to smooth it as an expense. Under ISA 500 the auditor reads the actual sale-and-purchase agreement &mdash; the forfeiture-on-leaving clause is the evidence, not management's label &mdash; and under ISA 315 identifies the arrangement as a significant risk requiring specific procedures. Misclassification here can move tens of millions between goodwill and expense.</p>
+
+            <h3 id="rf3">Red flag 3 &mdash; Goodwill used as a dumping ground after the measurement period (ISA 540 / ISA 315)</h3>
+            <p>An adjustment to the earnout is booked against goodwill eighteen months after acquisition, or a movement caused by post-acquisition trading is routed to goodwill inside the twelve months to avoid an earnings hit. Either is wrong: only new information about acquisition-date facts, obtained within the measurement period, may adjust goodwill (IFRS 3.45&ndash;.49). The auditor traces each adjustment to its underlying cause and confirms that performance-driven changes hit profit or loss (IFRS 3.58), because misrouting them protects earnings improperly.</p>
+
+            <h2 id="case-study">Case Study: Hologic / Acessa Earnout Remeasurement</h2>
+            <div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
+                <p><strong>The deal.</strong> Hologic, Inc. acquired Acessa Health in August 2020. Part of the consideration was a contingent earnout based on a multiple of annual incremental revenue growth of the acquired business, measured over a three-year period ending in December 2021, 2022 and 2023 &mdash; a cash-settled, liability-classified earnout remeasured to fair value each period.</p>
+                <p><strong>What was disclosed.</strong> In its Form 10-K for the year ended 30 September 2023, Hologic disclosed a <strong>gain of $14.9 million</strong> recorded to remeasure the Acessa contingent consideration liability to fair value. The company attributed the reduction in the liability to a <em>decrease in forecasted revenues</em> over the remaining measurement period.</p>
+                <p><strong>The lesson.</strong> This is the counter-intuitive mechanic in a real filing: because forecast performance of the acquired business <em>fell</em>, the earnout liability shrank, and the reduction was booked as a <strong>gain</strong> in profit or loss &mdash; not against goodwill. The mirror image is equally true: had Acessa's forecast revenue risen, Hologic would have booked a charge. Hologic reports under US GAAP (ASC 805), but the mechanics are identical to IFRS 3.58(b): a liability-classified earnout is remeasured through earnings, and its movements are driven by revisions to the forecast payout.</p>
+                <p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Figures are drawn from Hologic, Inc.'s Form 10-K for the fiscal year ended 30 September 2023 (SEC EDGAR, CIK 0000859737). Referenced for illustration of publicly disclosed earnout remeasurement; not a representation about the company.</p>
+            </div>
+
+            <h2 id="faq">Frequently Asked Questions</h2>
+            <h3>Does a change in the fair value of contingent consideration adjust goodwill?</h3>
+            <p>Almost never. Once the acquisition-date fair value is set, later changes in a liability-classified earnout go to profit or loss under IFRS 3.58(b). The only exception is a measurement-period adjustment &mdash; new information about facts that existed at the acquisition date, obtained within twelve months &mdash; which is recognised retrospectively against goodwill (IFRS 3.45&ndash;.49).</p>
+
+            <h3>Is contingent consideration classified as a liability or equity?</h3>
+            <p>It depends on how it will be settled (IFRS 3.40, applying IAS 32). Cash settlement, or settlement in a variable number of shares equal to a fixed value, makes it a financial liability. Settlement in a fixed number of the acquirer's own shares makes it equity. Liabilities are remeasured through P&amp;L; equity is not remeasured at all.</p>
+
+            <h3>Why does a successful acquisition create an accounting expense?</h3>
+            <p>Because a liability-classified earnout is carried at fair value through profit or loss (IFRS 9, IFRS 3.58(b)). When the target outperforms, the expected payout rises, the liability increases, and that increase is an expense &mdash; even though the business is doing well. Conversely, underperformance shrinks the liability and produces a gain.</p>
+
+            <h3>How long is the measurement period?</h3>
+            <p>It ends when the acquirer has obtained the information it was seeking about acquisition-date facts, and cannot exceed one year from the acquisition date (IFRS 3.45). After it closes, all earnout movements are changes in estimate recognised in profit or loss, regardless of cause.</p>
+
+            <h3>When is an earnout treated as remuneration instead of consideration?</h3>
+            <p>When the payment is automatically forfeited if the selling shareholder leaves employment, it is compensation for post-combination services under IFRS 3.B55(a) &mdash; expensed over the service period, outside the business-combination accounting and outside goodwill.</p>
+
+            <h3>What discount rate should be used for an earnout?</h3>
+            <p>A rate that reflects both the time value of money and the risk specific to the payout (IFRS 13). Higher-risk, further-dated earnouts warrant higher rates. The rate and the probability distribution are the two inputs auditors challenge most under ISA 540.</p>
+
+            <h3>Do equity-classified earnouts ever get remeasured?</h3>
+            <p>No. Under IFRS 3.58(a) an earnout classified as equity is not remeasured; its subsequent settlement is accounted for within equity. Whatever the fixed number of shares is ultimately worth does not affect profit or loss.</p>
 
 <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>

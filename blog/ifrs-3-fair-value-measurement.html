@@ -5,9 +5,9 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9LKFW8QCC8');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IFRS 3 Fair Value Measurement: Valuing Intangible Assets in Acquisition Accounting</title>
-    <meta name="description" content="IFRS 3 fair value: intangible asset valuation, customer lists, trade names, technology, IFRS 13 framework, audit procedures.">
-    <meta name="keywords" content="IFRS 3 fair value, intangible assets, IFRS 13, customer list valuation, trade names, technology valuation">
+    <title>IFRS 3 Fair Value of Intangible Assets in a Business Combination (IFRS 13)</title>
+    <meta name="description" content="How to recognise and fair-value acquired intangibles under IFRS 3 and IFRS 13: separability vs contractual-legal, MPEEM, relief-from-royalty, with-and-without, goodwill residual, worked examples, ISA 540/620 audit red flags and a real Salesforce/Slack PPA case study.">
+    <meta name="keywords" content="IFRS 3 intangible assets, IFRS 13 fair value, MPEEM multi-period excess earnings, relief-from-royalty, customer relationships valuation, IPR&D, goodwill residual, ISA 540 auditing estimates">
     <meta name="author" content="Usman Qureshi">
     <link rel="canonical" href="https://www.uqconsulting.org/blog/ifrs-3-fair-value-measurement.html">
     <style>
@@ -83,173 +83,139 @@
     &gt; <a href="ifrs-3-business-combinations-complete-guide.html" style="color: #2a4a7a; text-decoration: none;">IFRS 3 Business Combinations</a> 
     &gt; <span style="color: #1a2f5a;">IFRS 3 Fair Value Measurement: Valuing Intangible Assets</span>
 </div>
-        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 11 min read</div>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 16 min read</div>
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#ifrs-13-fair-value-hierarchy">IFRS 13 Fair Value Hierarchy</a><ul><li class="toc-l2"><a href="#level-1-quoted-market-prices-observable">Level 1: Quoted Market Prices (Observable)</a></li><li class="toc-l2"><a href="#level-2-observable-market-data-comparable-transactions">Level 2: Observable Market Data (Comparable Transactions)</a></li><li class="toc-l2"><a href="#level-3-valuation-models-unobservable-inputs">Level 3: Valuation Models (Unobservable Inputs)</a></li></ul></li><li class="toc-l1"><a href="#common-intangible-assets-and-valuation-methods">Common Intangible Assets and Valuation Methods</a><ul><li class="toc-l2"><a href="#customer-listsrelationships">Customer Lists/Relationships</a></li><li class="toc-l2"><a href="#trade-namesbrands">Trade Names/Brands</a></li><li class="toc-l2"><a href="#technologysoftware">Technology/Software</a></li><li class="toc-l2"><a href="#noncompete-agreements">Non-Compete Agreements</a></li></ul></li><li class="toc-l1"><a href="#worked-example-saas-company-acquisition-fair-values">Worked Example: SaaS Company Acquisition Fair Values</a><ul><li class="toc-l2"><a href="#acquisition-clouddata-inc">Acquisition: CloudData Inc.</a></li><li class="toc-l2"><a href="#intangible-asset-fair-values">Intangible Asset Fair Values</a><ul><li class="toc-l3"><a href="#1-customer-relationships">1. Customer Relationships</a></li><li class="toc-l3"><a href="#2-softwaretechnology">2. Software/Technology</a></li><li class="toc-l3"><a href="#3-trade-name">3. Trade Name</a></li><li class="toc-l3"><a href="#4-noncompete-agreement">4. Non-Compete Agreement</a></li></ul></li><li class="toc-l2"><a href="#summary-of-intangible-assets">Summary of Intangible Assets</a></li></ul></li><li class="toc-l1"><a href="#audit-red-flags-in-fair-value-measurement">Audit Red Flags in Fair Value Measurement</a><ul><li class="toc-l2"><a href="#red-flag-1-overstated-customer-list-values">Red Flag 1: Overstated Customer List Values</a></li><li class="toc-l2"><a href="#red-flag-2-excessively-long-useful-lives">Red Flag 2: Excessively Long Useful Lives</a></li><li class="toc-l2"><a href="#red-flag-3-no-valuation-support">Red Flag 3: No Valuation Support</a></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Fair-Valuing an Acquired Brand</a></li></ul>
+            <ul><li class="toc-l1"><a href="#recognise-separately">When must an intangible be recognised separately from goodwill?</a></li><li class="toc-l1"><a href="#ifrs-13-measure">How is an acquired intangible measured at fair value under IFRS 13?</a><ul><li class="toc-l2"><a href="#hierarchy">The fair value hierarchy for intangibles</a></li><li class="toc-l2"><a href="#techniques">MPEEM, relief-from-royalty and with-and-without</a></li></ul></li><li class="toc-l1"><a href="#worked-examples">Worked examples: brand and customer relationships</a><ul><li class="toc-l2"><a href="#example-brand">Relief-from-royalty: acquired brand</a></li><li class="toc-l2"><a href="#example-mpeem">MPEEM: customer relationships</a></li><li class="toc-l2"><a href="#journal">Acquisition-date recognition journal</a></li></ul></li><li class="toc-l1"><a href="#audit-red-flags">What are the auditor red flags in intangible fair value?</a></li><li class="toc-l1"><a href="#case-study">Real case study: Salesforce / Slack PPA</a></li><li class="toc-l1"><a href="#faq">Frequently asked questions</a></li></ul>
         </div>
 
 
         <article>
-            <p>In IFRS 3 acquisitions, the most contentious fair value measurements are intangible assets: customer lists, trade names, technology, non-compete agreements. These have no market price and require specialist valuation. This guide covers the three valuation approaches, common intangibles, and audit red flags.</p>
+            <p>When an entity acquires a business under IFRS 3, the acquirer must identify and recognise the acquiree's identifiable intangible assets separately from goodwill and measure each at its acquisition-date fair value under IFRS 13. This is where most purchase price allocation (PPA) disputes arise: customer relationships, brands, developed technology and in-process research and development (IPR&D) have no quoted price, sit almost entirely in the unobservable Level 3 band, and directly reduce the goodwill residual. Get the recognition test or the valuation technique wrong and goodwill is misstated for the life of the combination.</p>
 
-            <h2 id="ifrs-13-fair-value-hierarchy">IFRS 13 Fair Value Hierarchy</h2>
-            <p>Fair value measurement follows IFRS 13, which mandates using one of three approaches (in order of preference):</p>
+            <p>This guide works through the recognition threshold (IFRS 3.10–14 and B31–B40), the IFRS 13 measurement mechanics for each major intangible class, two fully worked examples with an acquisition-date journal, three auditor red flags anchored to specific ISAs, and a real, publicly filed case study drawn from Salesforce's acquisition of Slack.</p>
 
-            <h3 id="level-1-quoted-market-prices-observable">Level 1: Quoted Market Prices (Observable)</h3>
+            <h2 id="recognise-separately">When must an intangible be recognised separately from goodwill?</h2>
+            <p>An acquired intangible is recognised apart from goodwill if it is <em>identifiable</em> — meaning it meets either the contractual-legal criterion or the separability criterion (IFRS 3.10–14; IAS 38.11–12 as referenced by IFRS 3.B31). It does not have to meet the IAS 38 probability and reliable-measurement recognition criteria that apply outside a combination, because IFRS 3.B31–B40 presumes those are satisfied for identifiable acquired intangibles. The consequence is that many more intangibles are recognised in a PPA than the acquiree ever carried on its own balance sheet.</p>
+
+            <p>The <strong>contractual-legal criterion</strong> is met when the intangible arises from contractual or other legal rights, regardless of whether it is transferable or separable — licences, franchise agreements, order backlog, patents and registered trademarks all qualify (IFRS 3.B32). The <strong>separability criterion</strong> is met when the asset is capable of being separated and sold, transferred, licensed, rented or exchanged, either on its own or together with a related contract, asset or liability, even if the acquirer has no intention of doing so (IFRS 3.B33). Customer relationships are the classic case: a non-contractual customer relationship is recognised if there is evidence that the entity sells or otherwise transfers such relationships in the same or similar transactions (IFRS 3.B34).</p>
+
+            <p>IFRS 3.B37–B40 gives worked illustrations across five families — marketing-related (trademarks, internet domain names, non-compete agreements), customer-related (customer lists, order backlog, customer relationships), artistic-related, contract-based (licences, franchise, lease and employment contracts) and technology-based (patented and unpatented technology, software, databases, trade secrets). Two things are explicitly <em>not</em> separable and therefore fall into goodwill: an assembled workforce and any expected synergies not underpinned by an identifiable right (IFRS 3.B37 and B40). This is why acquirers of talent-heavy or synergy-driven targets report very large goodwill balances — the value is real but not identifiable.</p>
+
+            <div class="callout"><strong>Recognition trap.</strong> A customer list the acquiree is contractually prohibited from selling or exchanging (for example under a confidentiality or data-protection clause) fails the separability test on its own, but a <em>customer relationship</em> supporting recurring revenue can still qualify under B34. Auditors should trace the recognised asset back to the specific criterion — contractual-legal or separability — not to a generic "it has value" assertion.</div>
+
+            <h2 id="ifrs-13-measure">How is an acquired intangible measured at fair value under IFRS 13?</h2>
+            <p>Every identifiable intangible is measured at acquisition-date fair value — the price to sell the asset in an orderly transaction between market participants (IFRS 13.9; IFRS 3.18). Fair value is a market-participant exit price, not the acquirer's entity-specific value, so acquirer-only synergies are excluded from the intangible and land in goodwill instead (IFRS 13.22–24). Because active markets for brands, customer relationships and technology essentially do not exist, these measurements almost always rely on unobservable, Level 3 inputs.</p>
+
+            <h3 id="hierarchy">The fair value hierarchy for intangibles</h3>
+            <p>IFRS 13.72–90 ranks inputs into three levels and requires maximum use of observable inputs and minimum use of unobservable ones. Level 1 (quoted prices in active markets for identical assets, IFRS 13.76) is effectively never available for a bespoke intangible. Level 2 (observable inputs other than quoted prices, IFRS 13.81 — for example royalty rates or transaction multiples from comparable deals) can inform an assumption but rarely values the asset outright. Level 3 (unobservable inputs, IFRS 13.86–90 — projected cash flows, churn, attrition, obsolescence and the discount rate) is the reality for the great majority of acquired intangibles, which is precisely why IFRS 13.91–99 imposes the heaviest disclosure burden on Level 3 measurements.</p>
+
+            <h3 id="techniques">MPEEM, relief-from-royalty and with-and-without</h3>
+            <p>Under the IFRS 13.61–66 valuation-technique framework, three income-approach methods dominate intangible PPAs, each matched to how the asset actually earns:</p>
             <ul>
-                <li>Used when identical assets trade in active markets</li>
-                <li>Rare for intangibles (no market exists for most)</li>
-                <li>Example: publicly-traded patent from a patent exchange (rare)</li>
+                <li><strong>Multi-period excess earnings method (MPEEM)</strong> — used for the single most important cash-generating intangible, usually customer relationships or, in tech deals, developed technology. It isolates the after-tax cash flow attributable to that asset and deducts <em>contributory asset charges</em> (economic rents on the working capital, fixed assets, workforce and other intangibles that help generate those cash flows), then discounts the residual excess earnings and adds a tax amortisation benefit (TAB).</li>
+                <li><strong>Relief-from-royalty</strong> — used for brands, trade names and licensable technology. It values the asset as the present value of the after-tax royalties the entity is <em>relieved</em> from paying because it owns rather than licenses the asset, using a market-participant royalty rate benchmarked to comparable licensing deals (a Level 2 anchor within a Level 3 model).</li>
+                <li><strong>With-and-without (incremental) method</strong> — used for non-compete agreements and some customer relationships. It models two cash-flow scenarios (with the asset in place and without it) and values the asset as the present value of the difference, weighted for the probability the harm would actually occur.</li>
             </ul>
+            <p>A disciplined PPA cross-checks the sum of the parts: the weighted average return on assets (WARA) implied by the individual discount rates should reconcile to the weighted average cost of capital (WACC) and the internal rate of return (IRR) of the deal. A material WARA-WACC-IRR gap signals that intangible values, discount rates or the goodwill residual are internally inconsistent — a standard first challenge from any reviewing auditor.</p>
 
-            <h3 id="level-2-observable-market-data-comparable-transactions">Level 2: Observable Market Data (Comparable Transactions)</h3>
-            <ul>
-                <li>Recent M&A transactions with similar assets</li>
-                <li>Example: Customer list valuations from similar software acquisitions</li>
-                <li>Adjust for differences in size, product line, churn rates</li>
-            </ul>
+            <h2 id="worked-examples">Worked examples: brand and customer relationships</h2>
+            <p>The two examples below use the two most common techniques. Figures are illustrative and rounded for clarity.</p>
 
-            <h3 id="level-3-valuation-models-unobservable-inputs">Level 3: Valuation Models (Unobservable Inputs)</h3>
-            <ul>
-                <li>When no market data exists; use DCF or similar</li>
-                <li>Most common for intangibles (software, customer relationships)</li>
-                <li>Requires detailed assumptions and sensitivity analysis</li>
-            </ul>
-
-            <h2 id="common-intangible-assets-and-valuation-methods">Common Intangible Assets and Valuation Methods</h2>
-
-            <h3 id="customer-listsrelationships">Customer Lists/Relationships</h3>
-            <p><strong>Valuation method:</strong> Relief-from-royalty or income approach</p>
-            <ul>
-                <li><strong>Relief-from-royalty:</strong> What royalty would you pay to license this customer list? Typical range: 2— 5% of revenue</li>
-                <li><strong>Income approach:</strong> PV of incremental cash flows from customer retention, adjusted for churn</li>
-            </ul>
-
-            <p class="example-box">
-                <strong>Example:</strong> Customer list acquired in software company acquisition<br>
-                — Annual revenue from customer base: £10m<br>
-                — Estimated useful life: 5 years (average customer lifetime)<br>
-                — Churn rate: 10% per year<br>
-                — Royalty rate: 3%<br>
-                <strong>Fair value = £10m × 3% × 3.79 (PV factor for 5 years at 8%) = £1.14m</strong>
-            </p>
-
-            <h3 id="trade-namesbrands">Trade Names/Brands</h3>
-            <p><strong>Valuation method:</strong> Income approach (excess profit method)</p>
-            <ul>
-                <li>How much extra profit does the brand generate vs a generic competitor?</li>
-                <li>PV of that "brand premium" profit</li>
-            </ul>
-
-            <h3 id="technologysoftware">Technology/Software</h3>
-            <p><strong>Valuation method:</strong> Income approach or cost-to-recreate</p>
-            <ul>
-                <li><strong>Income approach:</strong> PV of incremental cash flows from proprietary technology</li>
-                <li><strong>Cost approach:</strong> Cost to recreate the software (useful as a floor)</li>
-            </ul>
-
-            <h3 id="noncompete-agreements">Non-Compete Agreements</h3>
-            <p><strong>Valuation method:</strong> Lost revenue approach</p>
-            <ul>
-                <li>Revenue the buyer would lose if forced to compete against the former owner (who is restricted from competing)</li>
-                <li>Duration: typically 3— 5 years post-acquisition</li>
-                <li>Probability that former owner would have re-entered market</li>
-            </ul>
-
-            <h2 id="worked-example-saas-company-acquisition-fair-values">Worked Example: SaaS Company Acquisition Fair Values</h2>
-
-            <h3 id="acquisition-clouddata-inc">Acquisition: CloudData Inc.</h3>
-            <p><strong>Target:</strong> Cloud-based accounting software<br>
-            <strong>ARR (annual recurring revenue):</strong> £5m<br>
-            <strong>Customers:</strong> 200 mid-market firms<br>
-            <strong>Customer churn:</strong> 8% annually<br>
-            <strong>Gross margin:</strong> 75%</p>
-
-            <h3 id="intangible-asset-fair-values">Intangible Asset Fair Values</h3>
-
-            <h4 id="1-customer-relationships">1. Customer Relationships</h4>
-            <ul>
-                <li>Gross profit on ARR: £5m × 75% = £3.75m/year</li>
-                <li>Relief-from-royalty rate: 3.5% of revenue</li>
-                <li>Fair value = £5m × 3.5% × PV factor (8% for 7 years) = £0.98m</li>
-            </ul>
-
-            <h4 id="2-softwaretechnology">2. Software/Technology</h4>
-            <ul>
-                <li>Proprietary algorithms, cloud infrastructure, unique features</li>
-                <li>Cost-to-recreate estimate: £2.5m (3 years of development)</li>
-                <li>Income approach: PV of technology-driven profit premium</li>
-                <li>Fair value: £2.8m (uses income approach, slightly above recreation cost)</li>
-            </ul>
-
-            <h4 id="3-trade-name">3. Trade Name</h4>
-            <ul>
-                <li>"CloudData" is recognized in mid-market segment</li>
-                <li>Brand premium: Customers willing to pay 8% premium for CloudData vs white-label competitor</li>
-                <li>Annual brand-driven profit: £3.75m × 8% = £0.3m</li>
-                <li>Fair value = £0.3m × 5.2 (PV factor) = £1.56m</li>
-            </ul>
-
-            <h4 id="4-noncompete-agreement">4. Non-Compete Agreement</h4>
-            <ul>
-                <li>Founder restricted from competing for 5 years post-acquisition</li>
-                <li>Estimated probability founder would re-enter market: 30%</li>
-                <li>Revenue at risk if founder competed: £2.5m (half the customer base)</li>
-                <li>Fair value = £2.5m × 30% × 4.0 (PV factor) = £3.0m</li>
-            </ul>
-
-            <h3 id="summary-of-intangible-assets">Summary of Intangible Assets</h3>
+            <h3 id="example-brand">Relief-from-royalty: acquired brand</h3>
+            <p>The acquirer buys a consumer-products business whose trade name generates £40m of attributable revenue. A market-participant royalty rate of 3% is benchmarked from comparable brand-licensing agreements (IFRS 13.81 observable anchor). Revenue is assumed to grow 3% a year, the tax rate is 25%, and the discount rate is 11%. The brand is judged to have an indefinite useful life, so a five-year explicit projection is capitalised into a terminal value.</p>
             <table>
-                <tr>
-                    <th>Intangible</th>
-                    <th>Fair Value (£m)</th>
-                </tr>
-                <tr>
-                    <td>Customer relationships</td>
-                    <td>0.98</td>
-                </tr>
-                <tr>
-                    <td>Software/technology</td>
-                    <td>2.80</td>
-                </tr>
-                <tr>
-                    <td>Trade name</td>
-                    <td>1.56</td>
-                </tr>
-                <tr>
-                    <td>Non-compete</td>
-                    <td>3.00</td>
-                </tr>
-                <tr>
-                    <td><strong>Total intangibles</strong></td>
-                    <td><strong>8.34</strong></td>
-                </tr>
+                <tr><th>Year</th><th>Revenue (£m)</th><th>Royalty @3% (£m)</th><th>After-tax @75% (£m)</th><th>PV @11% (£m)</th></tr>
+                <tr><td>1</td><td>40.0</td><td>1.20</td><td>0.90</td><td>0.81</td></tr>
+                <tr><td>2</td><td>41.2</td><td>1.24</td><td>0.93</td><td>0.75</td></tr>
+                <tr><td>3</td><td>42.4</td><td>1.27</td><td>0.95</td><td>0.70</td></tr>
+                <tr><td>4</td><td>43.7</td><td>1.31</td><td>0.98</td><td>0.65</td></tr>
+                <tr><td>5</td><td>45.0</td><td>1.35</td><td>1.01</td><td>0.60</td></tr>
+                <tr><td>Terminal (Yr5 ÷ (11%−3%))</td><td>—</td><td>—</td><td>13.00</td><td>7.71</td></tr>
+                <tr><td><strong>Brand fair value (before TAB)</strong></td><td></td><td></td><td></td><td><strong>≈ 11.2</strong></td></tr>
             </table>
+            <p>A tax amortisation benefit is then added to reflect that a market participant would obtain tax relief on amortising the asset, typically lifting the value by a further 15–25% depending on the tax rate and asset life. The auditor's focus is the royalty rate, the growth rate embedded in the terminal value, and whether an indefinite life is genuinely supportable (IFRS 13.87–89 require disclosure of these unobservable inputs).</p>
 
-            <h2 id="audit-red-flags-in-fair-value-measurement">Audit Red Flags in Fair Value Measurement</h2>
+            <h3 id="example-mpeem">MPEEM: customer relationships</h3>
+            <p>The same target has a recurring customer base producing £30m of revenue in year 1, a 40% EBITDA margin, and an annual customer attrition rate of 15% (so the surviving revenue decays geometrically). Contributory asset charges for working capital, fixed assets and the assembled workforce total 8% of revenue. Tax is 25% and the discount rate is 12%.</p>
+            <table>
+                <tr><th>Year</th><th>Surviving revenue (£m)</th><th>EBITDA @40% (£m)</th><th>Less CAC 8% (£m)</th><th>Excess earnings after tax (£m)</th><th>PV @12% (£m)</th></tr>
+                <tr><td>1</td><td>30.0</td><td>12.0</td><td>(2.4)</td><td>7.20</td><td>6.43</td></tr>
+                <tr><td>2</td><td>25.5</td><td>10.2</td><td>(2.0)</td><td>6.12</td><td>4.88</td></tr>
+                <tr><td>3</td><td>21.7</td><td>8.7</td><td>(1.7)</td><td>5.20</td><td>3.70</td></tr>
+                <tr><td>4</td><td>18.4</td><td>7.4</td><td>(1.5)</td><td>4.42</td><td>2.81</td></tr>
+                <tr><td>5</td><td>15.6</td><td>6.3</td><td>(1.2)</td><td>3.76</td><td>2.13</td></tr>
+                <tr><td>6+</td><td>tail</td><td>—</td><td>—</td><td>—</td><td>3.05</td></tr>
+                <tr><td><strong>Customer relationships fair value (before TAB)</strong></td><td></td><td></td><td></td><td></td><td><strong>≈ 23.0</strong></td></tr>
+            </table>
+            <p>The attrition rate is the single most sensitive input: a shift from 15% to 10% attrition materially extends the revenue tail and can move the value by 20% or more. This is exactly the kind of assumption ISA 540 flags as a significant judgement warranting focused challenge.</p>
 
-            <h3 id="red-flag-1-overstated-customer-list-values">Red Flag 1: Overstated Customer List Values</h3>
-            <p><strong>Finding:</strong> Valuation assumes 2% royalty rate, but industry standard is 3— 4% (lower rates = higher values).</p>
-            <p><strong>Auditor action:</strong> Use comparable transactions from similar SaaS acquisitions; adjust downward.</p>
+            <h3 id="journal">Acquisition-date recognition journal</h3>
+            <p>Assume total consideration transferred is £100m, and the PPA identifies the £11.2m brand, £23.0m customer relationships, £15.0m developed technology, £6.0m of net tangible assets, and a £8.5m deferred tax liability on the taxable-temporary differences the intangibles create (IAS 12.19 / IFRS 3.24). Goodwill is the residual (IFRS 3.32):</p>
+            <table>
+                <tr><th>Account</th><th>Dr (£m)</th><th>Cr (£m)</th></tr>
+                <tr><td>Brand (intangible)</td><td>11.2</td><td></td></tr>
+                <tr><td>Customer relationships (intangible)</td><td>23.0</td><td></td></tr>
+                <tr><td>Developed technology (intangible)</td><td>15.0</td><td></td></tr>
+                <tr><td>Net tangible assets</td><td>6.0</td><td></td></tr>
+                <tr><td>Goodwill (residual)</td><td>53.3</td><td></td></tr>
+                <tr><td>Deferred tax liability</td><td></td><td>8.5</td></tr>
+                <tr><td>Consideration (cash / equity)</td><td></td><td>100.0</td></tr>
+                <tr><td><strong>Total</strong></td><td><strong>108.5</strong></td><td><strong>108.5</strong></td></tr>
+            </table>
+            <p>Note the deferred tax mechanics: recognising £49.2m of intangibles that carry no tax base creates a DTL, which itself increases goodwill by the same amount (IFRS 3.32 residual arithmetic). Every additional pound of identified intangible reduces goodwill by roughly (1 − tax rate) pounds after the offsetting DTL — a point acquirers sometimes exploit to keep amortisation charges out of profit or loss.</p>
 
-            <h3 id="red-flag-2-excessively-long-useful-lives">Red Flag 2: Excessively Long Useful Lives</h3>
-            <p><strong>Finding:</strong> Technology assumed to have 10-year life, but product roadmap shows replacement planned in 3 years.</p>
-            <p><strong>Auditor action:</strong> Reduce useful life; recalculate fair value downward.</p>
+            <h2 id="audit-red-flags">What are the auditor red flags in intangible fair value?</h2>
+            <p>Acquired-intangible fair values are accounting estimates with high estimation uncertainty, so they fall squarely within ISA 540 (Revised). The three findings below recur across real PPA audits and each ties to a specific standard.</p>
 
-            <h3 id="red-flag-3-no-valuation-support">Red Flag 3: No Valuation Support</h3>
-            <p><strong>Finding:</strong> £15m trade name intangible, but no valuation report or specialist input.</p>
-            <p><strong>Auditor action:</strong> Require independent valuation report; significant adjustments often result.</p>
+            <h3>Red flag 1 — goodwill is implausibly large relative to identifiable intangibles</h3>
+            <p><strong>Finding:</strong> A knowledge- or brand-heavy target is acquired at a large premium, yet the PPA recognises minimal customer relationships or technology and dumps almost the entire premium into goodwill. Under ISA 540.13–15 the auditor challenges whether identifiable intangibles have been under-recognised to avoid future amortisation. <strong>Action:</strong> test whether the separability and contractual-legal criteria (IFRS 3.B31–B40) were properly applied, and reperform the WARA-WACC-IRR reconciliation to expose a mismatch.</p>
 
-            
-<h2 id="real-life-case-study">Real-Life Case Study: Fair-Valuing an Acquired Brand</h2>
-<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> An acquirer must fair-value a well-known consumer brand it has bought. There is no market price for a brand.</p>
- <p><strong>Method.</strong> The valuer uses the relief-from-royalty approach: estimate the royalty (say 3% of &pound;40m annual revenue) the company would otherwise pay to license the brand, project it, and discount it. Result: a &pound;9m brand intangible with an indefinite useful life, tested annually for impairment rather than amortised.</p>
- <p><strong>Takeaway.</strong> Acquisition fair values sit on the IFRS 13 hierarchy, and brands/customer lists are almost always Level 3 (unobservable inputs). That is why auditors bring in valuation specialists and probe the royalty rate, growth, and discount assumptions.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
-</div>
+            <h3>Red flag 2 — assumptions are unsupported or internally inconsistent</h3>
+            <p><strong>Finding:</strong> The royalty rate, attrition rate or discount rate is asserted with no market benchmarking, or the growth rate in a terminal value exceeds long-run GDP. ISA 500.6–9 requires sufficient appropriate audit evidence over the source data and management's assumptions; ISA 540.23 requires evaluating whether assumptions are consistent with each other and with market-participant behaviour. <strong>Action:</strong> obtain the valuation specialist's comparable-royalty and comparable-transaction support, and vouch the cash-flow drivers to the board-approved deal model, not a later reverse-engineered file.</p>
+
+            <h3>Red flag 3 — the valuation specialist's work is not properly evaluated</h3>
+            <p><strong>Finding:</strong> Management engaged a valuation expert but the audit file simply attaches the report without assessing the expert's competence, objectivity or the appropriateness of the methods and assumptions. ISA 500.8 (management's expert) and ISA 620 (auditor's expert) both require the engagement team to evaluate the specialist's work rather than rely on it blindly. <strong>Action:</strong> where estimation uncertainty is high, engage an auditor's valuation specialist under ISA 620 to independently challenge the MPEEM contributory asset charges and the relief-from-royalty rate, and document the evaluation.</p>
+
+            <h2 id="case-study">Real case study: Salesforce / Slack purchase price allocation</h2>
+            <div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
+            <p><strong>The deal.</strong> On 21 July 2021 Salesforce completed its acquisition of Slack Technologies for total consideration of approximately US$27.1 billion (cash of about US$15.8bn, common stock of about US$11.1bn and US$205m of assumed equity awards). Salesforce reports under US GAAP (ASC 805), whose recognition-and-fair-value model is substantially converged with IFRS 3, so the allocation is directly instructive for IFRS preparers.</p>
+            <p><strong>The disclosed allocation.</strong> Per Salesforce's Form 10-K business-combination note, the identifiable intangibles and goodwill were:</p>
+            <table>
+                <tr><th>Component</th><th>Fair value (US$m)</th><th>Useful life</th></tr>
+                <tr><td>Customer relationships</td><td>3,480</td><td>8 years</td></tr>
+                <tr><td>Developed technology</td><td>2,360</td><td>5 years</td></tr>
+                <tr><td>Other purchased intangibles</td><td>300</td><td>6 years</td></tr>
+                <tr><td><strong>Total identifiable intangibles</strong></td><td><strong>6,140</strong></td><td></td></tr>
+                <tr><td>Goodwill</td><td>21,161</td><td>Not amortised</td></tr>
+            </table>
+            <p><strong>What it teaches.</strong> Two features stand out. First, <em>customer relationships (US$3.48bn) exceeded developed technology (US$2.36bn)</em> even for a technology platform — a reminder that in subscription businesses the recurring customer base, valued by MPEEM, is often the largest identifiable intangible. Second, goodwill of US$21.2bn was roughly 78% of consideration; Salesforce attributed it primarily to the assembled workforce and expected market synergies — neither of which is separable, so both correctly fall into goodwill rather than an identifiable asset (IFRS 3.B37/B40). Salesforce also recorded a measurement-period adjustment during the following year, mostly to the customer-relationships intangible and its related deferred tax — a real-world illustration of the IFRS 3.45–49 provisional-accounting window.</p>
+            <p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Figures are taken from Salesforce's publicly filed Form 10-K business-combination disclosures for the Slack acquisition (fiscal year ended 31 January 2022). US GAAP figures used to illustrate an IFRS 3-equivalent allocation; not a representation of IFRS reporting by Salesforce.</p>
+            </div>
+
+            <h2 id="faq">Frequently asked questions</h2>
+
+            <h3>Do acquired intangibles have to meet the IAS 38 recognition criteria?</h3>
+            <p>No. IFRS 3.B31 states that the acquirer recognises identifiable intangibles separately from goodwill if they meet the contractual-legal or separability criterion, and presumes the IAS 38 probability and reliable-measurement tests are met. That is why a PPA typically recognises more intangibles than the acquiree carried on its own books.</p>
+
+            <h3>Why does recognising more intangibles reduce goodwill?</h3>
+            <p>Goodwill is the residual — consideration transferred plus any non-controlling interest, less the net of identifiable assets acquired and liabilities assumed at fair value (IFRS 3.32). Every additional identified intangible increases identifiable net assets, so the residual goodwill falls (partly offset by the deferred tax liability the intangible creates).</p>
+
+            <h3>Which valuation method applies to which intangible?</h3>
+            <p>Customer relationships and the primary technology are usually valued using the multi-period excess earnings method (MPEEM); brands, trade names and licensable technology by relief-from-royalty; and non-compete agreements by the with-and-without method. All three are income-approach techniques permitted under IFRS 13.61–66.</p>
+
+            <h3>Are acquired brands amortised?</h3>
+            <p>It depends on the useful life assessed under IAS 38. A brand judged to have an indefinite useful life is not amortised but is tested for impairment at least annually; a finite-life brand is amortised over that life. The Salesforce/Slack customer relationships, by contrast, were assigned an eight-year finite life and amortised.</p>
+
+            <h3>What is IPR&D and how is it treated?</h3>
+            <p>In-process research and development acquired in a business combination is recognised as an identifiable intangible at fair value even though the underlying project is incomplete (IFRS 3.B31 and IAS 38.34). It is treated as an indefinite-life asset (not amortised, impairment-tested) until the project is completed or abandoned, at which point amortisation begins or it is written off.</p>
+
+            <h3>How does IFRS 13 fair value differ from the acquirer's own value?</h3>
+            <p>IFRS 13 fair value is a market-participant exit price (IFRS 13.22–24). Synergies or cost savings available only to the specific acquirer are excluded from the intangible's fair value and instead form part of goodwill. This keeps identifiable intangibles at what any market participant would pay, not what the deal was worth to the buyer.</p>
+
+            <h3>What disclosures does a Level 3 intangible attract?</h3>
+            <p>Because acquired intangibles are almost always Level 3, IFRS 13.91–99 requires disclosure of the valuation techniques, the significant unobservable inputs (royalty rate, attrition, discount rate, growth), and quantitative sensitivity information — the very assumptions auditors challenge under ISA 540.</p>
 
 <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>
@@ -265,5 +231,97 @@
             </div>
         </article>
     </div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "IFRS 3 Fair Value of Intangible Assets in a Business Combination (IFRS 13)",
+  "description": "How to recognise and fair-value acquired intangibles under IFRS 3 and IFRS 13: separability vs contractual-legal, MPEEM, relief-from-royalty, with-and-without, the goodwill residual, worked examples, ISA 540/620 audit red flags and a real Salesforce/Slack PPA case study.",
+  "datePublished": "2026-05-01",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "name": "Usman Qureshi",
+    "jobTitle": "Audit & CFO Advisory (ACCA, ACA)",
+    "image": "https://www.uqconsulting.org/images/team/usman-qureshi.png"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "UQ Consulting",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.uqconsulting.org/images/team/usman-qureshi.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.uqconsulting.org/blog/ifrs-3-fair-value-measurement.html"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do acquired intangibles have to meet the IAS 38 recognition criteria?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. IFRS 3.B31 recognises identifiable intangibles separately from goodwill if they meet the contractual-legal or separability criterion, and presumes the IAS 38 probability and reliable-measurement tests are met. A PPA typically recognises more intangibles than the acquiree carried on its own books."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does recognising more intangibles reduce goodwill?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Goodwill is the residual: consideration transferred plus any non-controlling interest, less the fair value of identifiable net assets acquired (IFRS 3.32). Every additional identified intangible increases identifiable net assets, so residual goodwill falls, partly offset by the deferred tax liability the intangible creates."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which valuation method applies to which intangible?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Customer relationships and primary technology are usually valued by the multi-period excess earnings method (MPEEM); brands, trade names and licensable technology by relief-from-royalty; and non-compete agreements by the with-and-without method. All are income-approach techniques permitted under IFRS 13.61-66."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Are acquired brands amortised?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It depends on the useful life assessed under IAS 38. A brand judged to have an indefinite useful life is not amortised but is impairment-tested at least annually; a finite-life brand is amortised over that life."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is IPR&D and how is it treated?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In-process research and development acquired in a business combination is recognised as an identifiable intangible at fair value even though the project is incomplete (IFRS 3.B31, IAS 38.34). It is treated as indefinite-life (not amortised, impairment-tested) until the project is completed, when amortisation begins, or abandoned, when it is written off."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does IFRS 13 fair value differ from the acquirer's own value?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IFRS 13 fair value is a market-participant exit price (IFRS 13.22-24). Synergies available only to the specific acquirer are excluded from the intangible's fair value and instead form part of goodwill."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What disclosures does a Level 3 intangible attract?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because acquired intangibles are almost always Level 3, IFRS 13.91-99 requires disclosure of the valuation techniques, the significant unobservable inputs (royalty rate, attrition, discount rate, growth) and quantitative sensitivity information."
+      }
+    }
+  ]
+}
+</script>
 </body>
 </html>

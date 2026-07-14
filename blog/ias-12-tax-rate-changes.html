@@ -88,167 +88,154 @@
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#tax-rate-changes-when-they-occur">Tax Rate Changes: When They Occur</a></li><li class="toc-l1"><a href="#ias-12-requirement-enacted-vs-substantively-enacted">IAS 12 Requirement: Enacted vs Substantively Enacted</a><ul><li class="toc-l2"><a href="#enacted-rate">Enacted Rate</a></li><li class="toc-l2"><a href="#substantively-enacted-rate">Substantively Enacted Rate</a></li></ul></li><li class="toc-l1"><a href="#remeasurement-mechanics">Remeasurement Mechanics</a><ul><li class="toc-l2"><a href="#step-1-identify-all-deferred-tax-balances">Step 1: Identify All Deferred Tax Balances</a></li><li class="toc-l2"><a href="#step-2-recalculate-at-new-rate">Step 2: Recalculate at New Rate</a></li><li class="toc-l2"><a href="#step-3-recognize-change-in-pl-or-oci">Step 3: Recognize Change in P&L or OCI</a></li></ul></li><li class="toc-l1"><a href="#worked-example-uk-tax-rate-increase">Worked Example: UK Tax Rate Increase</a><ul><li class="toc-l2"><a href="#scenario">Scenario</a></li><li class="toc-l2"><a href="#deferred-tax-position-before-remeasurement">Deferred Tax Position (Before Remeasurement)</a></li><li class="toc-l2"><a href="#remeasurement-at-new-25-rate">Remeasurement at New 25% Rate</a></li><li class="toc-l2"><a href="#pl-impact">P&L Impact</a></li><li class="toc-l2"><a href="#balance-sheet">Balance Sheet</a></li></ul></li><li class="toc-l1"><a href="#phased-rate-changes">Phased Rate Changes</a><ul><li class="toc-l2"><a href="#example-phased-rate-change">Example: Phased Rate Change</a></li></ul></li><li class="toc-l1"><a href="#oci-items-deferred-tax-remeasurement">OCI Items: Deferred Tax Remeasurement</a><ul><li class="toc-l2"><a href="#example-property-revaluation-with-tax-rate-change">Example: Property Revaluation with Tax Rate Change</a></li></ul></li><li class="toc-l1"><a href="#audit-considerations">Audit Considerations</a><ul><li class="toc-l2"><a href="#common-audit-challenges">Common Audit Challenges</a><ul><li class="toc-l3"><a href="#challenge-1-missed-rate-change-finding-tax-rate-enacted-deferred-tax-not-remeasured-auditor-action-identify-all-deferred-tax-balances-recalculate-at-enacted-rate-adjust-pl-and-oci-accordingly-challenge-2-wrong-rate-used">Challenge 1: Missed Rate Change Finding: Tax rate enacted; deferred tax not remeasured. Auditor action: Identify all deferred tax balances; recalculate at enacted rate; adjust P&L and OCI accordingly. Challenge 2: Wrong Rate Used</a></li><li class="toc-l3"><a href="#challenge-3-oci-items-misclassified">Challenge 3: OCI Items Misclassified</a></li></ul></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: A Rate Change Hitting Deferred Balances</a></li></ul>
+            <ul>
+                <li class="toc-l1"><a href="#what-rate">What rate does IAS 12 use when tax rates change?</a></li>
+                <li class="toc-l1"><a href="#enacted-vs-substantive">Enacted vs substantively enacted: what is the difference?</a><ul>
+                    <li class="toc-l2"><a href="#uk-substantive">The UK test: Ways and Means and Royal Assent</a></li>
+                    <li class="toc-l2"><a href="#us-enacted">The US test: enacted only</a></li>
+                </ul></li>
+                <li class="toc-l1"><a href="#where-does-it-hit">Where does the rate-change effect hit — P&amp;L, OCI or equity?</a><ul>
+                    <li class="toc-l2"><a href="#backwards-tracing">Backwards tracing under IAS 12.61A</a></li>
+                    <li class="toc-l2"><a href="#no-backwards-tracing">No backwards tracing under ASC 740</a></li>
+                </ul></li>
+                <li class="toc-l1"><a href="#worked-example">Worked example: remeasuring a DTL from 19% to 25%</a><ul>
+                    <li class="toc-l2"><a href="#split-pl-oci">Splitting the charge between P&amp;L and OCI</a></li>
+                    <li class="toc-l2"><a href="#journals">Journal entries — IAS 12 vs ASC 740</a></li>
+                </ul></li>
+                <li class="toc-l1"><a href="#auditor-red-flags">Auditor red flags</a></li>
+                <li class="toc-l1"><a href="#case-study">Case study: Citigroup and the 2017 US rate cut</a></li>
+                <li class="toc-l1"><a href="#faq">Frequently asked questions</a></li>
+            </ul>
         </div>
 
 
         <article>
-            <p>When tax rates change, all deferred tax balances must be remeasured at the new rate. This creates sometimes-material gains or losses in P&L. This guide covers the mechanics, when to recognize the impact, and audit considerations.</p>
+            <p>When a corporate tax rate changes, every deferred tax balance on the statement of financial position must be remeasured, and the remeasurement can move reported profit even though pre-tax profit and cash tax are unchanged. This satellite guide sets out exactly which rate to use, when the change is recognised, where the effect lands (profit or loss, other comprehensive income or equity), and how the answer differs between IAS 12 and US GAAP. The running example throughout is the UK increase in the main corporation tax rate from 19% to 25%, which was substantively enacted on 24 May 2021 and took effect on 1 April 2023.</p>
 
-            <h2 id="tax-rate-changes-when-they-occur">Tax Rate Changes: When They Occur</h2>
-            <p>Governments change tax rates periodically. Common scenarios:</p>
-            <ul>
-                <li><strong>Statutory rate increase/decrease:</strong> Change in headline corporate tax rate (e.g., 19% →’ 25%)</li>
-                <li><strong>Temporary surcharge:</strong> Temporary tax on high earners or specific industries</li>
-                <li><strong>Phased changes:</strong> Rate changes over multiple years (e.g., 18% in 2025, 19% in 2026, 20% in 2027)</li>
-                <li><strong>Regional rate change:</strong> Sub-national rate changes (state/provincial)</li>
-            </ul>
+            <h2 id="what-rate">What rate does IAS 12 use when tax rates change?</h2>
+            <p>IAS 12 requires deferred tax assets and liabilities to be measured at the tax rates <em>expected to apply</em> to the period when the asset is realised or the liability is settled, based on rates (and laws) that have been <strong>enacted or substantively enacted</strong> by the end of the reporting period (IAS 12.47). Current tax is measured on the same enacted/substantively-enacted basis (IAS 12.46). The measurement is not the rate in force during the current year — it is the rate expected to apply in the year each temporary difference reverses.</p>
+            <p>This forward-looking rule (IAS 12.47&ndash;.48) is why a rate change already legislated but not yet effective still bites immediately. At 31 December 2021, a UK company measuring a temporary difference expected to reverse after 1 April 2023 had to use 25%, because the 25% rate was substantively enacted on 24 May 2021, even though 19% was still the rate actually being paid on 2021 profits. Where different rates apply to different levels of taxable income, IAS 12.49 requires an average rate expected to apply; where reversals are spread across years with different rates (a phased change), each slice of the temporary difference is measured at the rate expected in its year of reversal.</p>
+            <p>IAS 12 also fixes the timing of the catch-up. The effect of a change in tax rate on an existing deferred tax balance is recognised in the period the new rate becomes enacted or substantively enacted, not the period it takes effect (IAS 12.60). So the whole remeasurement of the opening deferred tax position hits the accounts of the reporting period that straddles the substantive-enactment date. Deferred tax is never discounted (IAS 12.53), so the phased-rate calculation is a simple undiscounted sum of each year's reversal at that year's rate, not a present-value exercise.</p>
 
-            <h2 id="ias-12-requirement-enacted-vs-substantively-enacted">IAS 12 Requirement: Enacted vs Substantively Enacted</h2>
+            <h2 id="enacted-vs-substantive">Enacted vs substantively enacted: what is the difference?</h2>
+            <p>"Enacted" means the legislation has completed the full legislative process and become law; "substantively enacted" means the remaining steps are formalities outside the government's control and the outcome is effectively certain. IAS 12.46&ndash;.48 permits the substantively-enacted rate, whereas US GAAP (ASC 740-10-30-2 and 740-10-35-4) requires the rate to be <strong>enacted</strong> — there is no substantive-enactment concept in ASC 740. This single-word difference can put the same rate change into two different reporting periods under the two frameworks.</p>
 
-            <h3 id="enacted-rate">Enacted Rate</h3>
-            <p>Law has been passed; tax authority has full approval.</p>
+            <h3 id="uk-substantive">The UK test: Ways and Means and Royal Assent</h3>
+            <p>Under UK IFRS and FRS 102, a Finance Bill is treated as substantively enacted once it has passed its Third Reading in the House of Commons (for a rate set by a Ways and Means resolution the trigger can be earlier, when the resolution is passed). For the 19%&nbsp;&rarr;&nbsp;25% change, Finance (No. 2) Bill 2021 was substantively enacted on 24 May 2021 and received Royal Assent on 10 June 2021. A UK reporting entity with a period end on or after 24 May 2021 therefore had to reflect 25% in deferred tax on temporary differences expected to reverse on or after 1 April 2023; a period end before 24 May 2021 continued at 19%, with the later change disclosed as a non-adjusting event after the reporting period under IAS 10 if material.</p>
 
-            <h3 id="substantively-enacted-rate">Substantively Enacted Rate</h3>
-            <p>Law passes final legislative hurdle (awaits only formality, such as royal assent) but all substantive approval is complete.</p>
+            <h3 id="us-enacted">The US test: enacted only</h3>
+            <p>For the identical UK law, US GAAP could not recognise 25% until 10 June 2021 (Royal Assent), because ASC 740-10-30-2 fixes measurement to enacted rates only. A dual-reporting group therefore books the remeasurement on 24 May under IFRS but potentially in a later period under US GAAP — a classic reconciling item that ISA 500 evidence work should tie out. The US Tax Cuts and Jobs Act is the mirror image: signed into law on 22 December 2017, so calendar-year filers remeasured in Q4 2017, the enactment quarter.</p>
 
-            <p class="callout"><strong>Rule:</strong> Use the rate that is enacted or substantively enacted at the reporting date. If a rate change is proposed but not enacted, <strong>do NOT remeasure</strong> (too much uncertainty).</p>
+            <h2 id="where-does-it-hit">Where does the rate-change effect hit — P&amp;L, OCI or equity?</h2>
+            <p>The remeasurement follows the item it relates to: if the underlying deferred tax was originally recognised in profit or loss, its rate-change effect goes to profit or loss; if it was recognised in other comprehensive income or directly in equity, the effect goes there instead (IAS 12.61A). This is <strong>backwards tracing</strong>, and it is one of the sharpest IAS 12 / ASC 740 divergences, because ASC 740 prohibits backwards tracing and puts almost the entire rate-change effect through continuing-operations tax expense (ASC 740-20-45).</p>
 
-            <h2 id="remeasurement-mechanics">Remeasurement Mechanics</h2>
+            <h3 id="backwards-tracing">Backwards tracing under IAS 12.61A</h3>
+            <p>IAS 12.61A requires current and deferred tax to be recognised outside profit or loss — in OCI or in equity — to the extent the tax relates to items themselves recognised outside profit or loss, in the same or a different period. A remeasurement of deferred tax on a revalued property (revaluation surplus in OCI) is therefore taken to OCI, and a remeasurement of deferred tax on a cash flow hedge reserve is taken to OCI, matching the original transaction. IAS 12.81(d) then requires disclosure of the amount of income tax relating to each component of OCI, so the split must be traceable, not merely asserted.</p>
 
-            <h3 id="step-1-identify-all-deferred-tax-balances">Step 1: Identify All Deferred Tax Balances</h3>
-            <ul>
-                <li>Deferred tax liabilities (typically: fair value adjustments, accelerated depreciation)</li>
-                <li>Deferred tax assets (typically: provisions, loss carryforwards)</li>
-            </ul>
+            <h3 id="no-backwards-tracing">No backwards tracing under ASC 740</h3>
+            <p>ASC 740-20-45 records the effect of a change in enacted tax rate on deferred tax as a component of income tax expense from continuing operations, even where the deferred tax originally arose on an item reported in OCI. The result is a "stranded tax effect" left in accumulated OCI — the very problem that prompted ASU 2018-02, which allowed a one-time reclassification of the stranded TCJA effects from AOCI to retained earnings. Under IFRS that stranding cannot occur, because backwards tracing keeps the OCI and its tax effect aligned.</p>
 
-            <h3 id="step-2-recalculate-at-new-rate">Step 2: Recalculate at New Rate</h3>
-            <div class="formula">
-                New Deferred Tax Balance = Temporary Difference × New Tax Rate
-            </div>
+            <h2 id="worked-example">Worked example: remeasuring a DTL from 19% to 25%</h2>
+            <p>ABC Ltd, a UK company with a 31 December 2021 year end, holds two deferred tax positions expected to reverse after 1 April 2023. Both were previously measured at 19%; both must now move to 25% because the rate was substantively enacted on 24 May 2021 (IAS 12.47, .60). One position arose in profit or loss (accelerated capital allowances on plant), the other in OCI (a property revaluation surplus).</p>
 
-            <h3 id="step-3-recognize-change-in-pl-or-oci">Step 3: Recognize Change in P&L or OCI</h3>
-            <ul>
-                <li><strong>P&L items:</strong> Remeasurement gain/loss goes to P&L (line: "Impact of tax rate change")</li>
-                <li><strong>OCI items:</strong> Remeasurement gain/loss goes to OCI (matching the original transaction)</li>
-            </ul>
-
-            <h2 id="worked-example-uk-tax-rate-increase">Worked Example: UK Tax Rate Increase</h2>
-
-            <h3 id="scenario">Scenario</h3>
-            <p><strong>Company ABC Ltd (UK):</strong> Year-end 31 Dec 2024<br>
-            <strong>Current tax rate:</strong> 19% (enacted)<br>
-            <strong>Announced change:</strong> Rate increases to 25% effective 1 April 2025 (substantively enacted Dec 2024)</p>
-
-            <h3 id="deferred-tax-position-before-remeasurement">Deferred Tax Position (Before Remeasurement)</h3>
             <table>
                 <tr>
-                    <th>Item</th>
-                    <th>Temp Diff £m</th>
-                    <th>Old DTL/DTA @ 19%</th>
+                    <th>Temporary difference</th>
+                    <th>Amount &pound;m</th>
+                    <th>DTL @ 19%</th>
+                    <th>DTL @ 25%</th>
+                    <th>Remeasurement &pound;m</th>
+                    <th>Recognised in</th>
                 </tr>
                 <tr>
-                    <td>PP&E fair value adjustment (DTL)</td>
+                    <td>Accelerated capital allowances (plant)</td>
                     <td>100</td>
                     <td>19.0</td>
-                </tr>
-                <tr>
-                    <td>Provisions (DTA)</td>
-                    <td>(40)</td>
-                    <td>(7.6)</td>
-                </tr>
-                <tr>
-                    <td><strong>Net DTL</strong></td>
-                    <td><strong>60</strong></td>
-                    <td><strong>11.4</strong></td>
-                </tr>
-            </table>
-
-            <h3 id="remeasurement-at-new-25-rate">Remeasurement at New 25% Rate</h3>
-            <table>
-                <tr>
-                    <th>Item</th>
-                    <th>Temp Diff £m</th>
-                    <th>New DTA/DTL @ 25%</th>
-                </tr>
-                <tr>
-                    <td>PP&E fair value adjustment (DTL)</td>
-                    <td>100</td>
                     <td>25.0</td>
+                    <td>6.0</td>
+                    <td>Profit or loss</td>
                 </tr>
                 <tr>
-                    <td>Provisions (DTA)</td>
-                    <td>(40)</td>
-                    <td>(10.0)</td>
+                    <td>Property revaluation surplus</td>
+                    <td>40</td>
+                    <td>7.6</td>
+                    <td>10.0</td>
+                    <td>2.4</td>
+                    <td>OCI</td>
                 </tr>
                 <tr>
-                    <td><strong>Net DTL</strong></td>
-                    <td><strong>60</strong></td>
-                    <td><strong>15.0</strong></td>
+                    <td><strong>Total DTL</strong></td>
+                    <td><strong>140</strong></td>
+                    <td><strong>26.6</strong></td>
+                    <td><strong>35.0</strong></td>
+                    <td><strong>8.4</strong></td>
+                    <td>&mdash;</td>
                 </tr>
             </table>
 
-            <h3 id="pl-impact">P&L Impact</h3>
+            <h3 id="split-pl-oci">Splitting the charge between P&amp;L and OCI</h3>
+            <p>The total remeasurement is &pound;8.4m, but IAS 12.61A does not allow it to sit as a single P&amp;L line. The &pound;6.0m on the plant temporary difference originated in profit or loss and stays there; the &pound;2.4m on the revaluation originated in OCI and is charged to OCI, reducing the net-of-tax revaluation surplus. The disclosure of the &pound;2.4m as tax relating to a component of OCI is required by IAS 12.81(d). Only the &pound;6.0m increases the tax expense line and therefore depresses the effective tax rate reconciliation via a "change in tax rate" reconciling item.</p>
+
+            <h3 id="journals">Journal entries — IAS 12 vs ASC 740</h3>
+            <p>The contrast below shows the same &pound;8.4m rate change under the two frameworks. Under IAS 12 the effect is split by origin; under ASC 740-20-45 the whole &pound;8.4m is routed through income tax expense, leaving a stranded &pound;2.4m in accumulated OCI.</p>
+
+            <div class="example-box">
+            <strong>IAS 12 (backwards tracing, IAS 12.61A):</strong>
+            <table>
+                <tr><th>Account</th><th>Dr &pound;m</th><th>Cr &pound;m</th></tr>
+                <tr><td>Tax expense (P&amp;L)</td><td>6.0</td><td></td></tr>
+                <tr><td>Tax charged to OCI (revaluation reserve)</td><td>2.4</td><td></td></tr>
+                <tr><td>Deferred tax liability</td><td></td><td>8.4</td></tr>
+            </table>
+            <strong>US GAAP (no backwards tracing, ASC 740-20-45):</strong>
+            <table>
+                <tr><th>Account</th><th>Dr &pound;m</th><th>Cr &pound;m</th></tr>
+                <tr><td>Income tax expense (continuing operations)</td><td>8.4</td><td></td></tr>
+                <tr><td>Deferred tax liability</td><td></td><td>8.4</td></tr>
+            </table>
+            <p style="margin:8px 0 0;">Under US GAAP the &pound;2.4m relating to the revaluation is <em>not</em> re-routed to OCI; it becomes a stranded tax effect in AOCI unless a policy reclassification (per ASU 2018-02, TCJA-specific) is applied.</p>
+            </div>
+
+            <p class="callout"><strong>Rule of thumb:</strong> use the rate enacted or substantively enacted at the reporting date (IAS 12.47); recognise the catch-up in the period of enactment/substantive enactment (IAS 12.60); and route it to P&amp;L, OCI or equity by tracing the origin of the underlying deferred tax (IAS 12.61A). A merely <em>proposed</em> rate — announced but not through Third Reading — must not be used.</p>
+
+            <h2 id="auditor-red-flags">Auditor red flags</h2>
+            <p>Deferred tax remeasurement is an accounting estimate driven by management's forecast of reversal timing and applicable rate, so it falls squarely within ISA 540 (auditing accounting estimates), with the underlying rate and legislation status corroborated under ISA 500 (audit evidence). Three recurring findings:</p>
             <ul>
-                <li><strong>Change in net DTL:</strong> £15.0m −’ £11.4m = £3.6m increase (cost to profit)</li>
-                <li><strong>P&L line:</strong> "Tax expense — impact of tax rate change" = £3.6m</li>
-                <li><strong>Effective tax rate impact:</strong> Higher tax expense despite no change in pre-tax profit</li>
+                <li><strong>Wrong or stale rate (ISA 540).</strong> Deferred tax still measured at the old 19% for differences reversing after April 2023, or measured at a rate that was only <em>proposed</em> and never substantively enacted. The auditor recomputes the balance at the correct enacted/substantively-enacted rate and challenges management's scheduling of reversals, since the rate depends on <em>when</em> each difference unwinds (IAS 12.47&ndash;.49).</li>
+                <li><strong>Misallocation between P&amp;L and OCI/equity (ISA 540 / ISA 500).</strong> The entire rate-change effect pushed through tax expense when part of it relates to OCI items such as revaluations, hedges or actuarial remeasurements — an IAS 12.61A backwards-tracing failure that overstates the tax charge and misstates OCI. The auditor traces each deferred tax component back to the transaction that created it and vouches the split disclosed under IAS 12.81(d).</li>
+                <li><strong>Enactment-date evidence gap (ISA 500).</strong> Management asserts substantive enactment without evidence of the specific parliamentary stage or Royal Assent date, or applies the IFRS substantive-enactment date to a US-GAAP reporting package that requires full enactment. The auditor obtains the legislative timeline (Third Reading / Ways and Means resolution / Royal Assent) as corroborating evidence and confirms the correct threshold for each framework.</li>
             </ul>
 
-            <h3 id="balance-sheet">Balance Sheet</h3>
-            <ul>
-                <li><strong>Deferred tax liability (non-current):</strong> Increased from £11.4m to £15.0m</li>
-                <li><strong>Equity:</strong> Reduced by £3.6m (due to higher tax expense)</li>
-            </ul>
+            <h2 id="case-study">Case study: Citigroup and the 2017 US rate cut</h2>
+            <div class="example-box">
+            <p><strong>Facts (publicly filed).</strong> The US Tax Cuts and Jobs Act was signed into law on 22 December 2017, cutting the federal corporate rate from 35% to 21%. In its Q4 2017 results (Business Wire release, 16 January 2018, and Form 10-K for FY2017), Citigroup reported a one-time, non-cash charge of approximately <strong>$22 billion</strong> in the fourth quarter, of which about <strong>$19 billion</strong> related to the remeasurement of its deferred tax assets at the lower 21% rate and about <strong>$3 billion</strong> related to the deemed repatriation of unremitted foreign earnings.</p>
+            <p><strong>Why it lands in Q4 2017.</strong> ASC 740-10-30-2 measures deferred tax at the enacted rate, and the Act was enacted (signed) on 22 December 2017, so the remeasurement fell entirely in the December quarter. Citi held large deferred tax <em>assets</em> (loss carryforwards and other), so a rate <em>cut</em> reduced their value and produced a charge — the mirror image of the UK, where a rate <em>rise</em> increases a deferred tax <em>liability</em> and also produces a charge.</p>
+            <p><strong>The backwards-tracing contrast.</strong> Under ASC 740-20-45 the whole remeasurement ran through income tax expense from continuing operations, and the portion relating to items originally in OCI became a stranded effect in AOCI — precisely the issue the FASB later addressed with ASU 2018-02. Under IAS 12.61A the OCI-related portion would instead have been traced back to OCI.</p>
+            <p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Figures are as publicly disclosed by Citigroup (Q4 2017 earnings release, 16 January 2018; Form 10-K, FY2017). The UK 19%&ndash;25% figures in the worked example above are illustrative and do not represent any specific company.</p>
+            </div>
 
-            <h2 id="phased-rate-changes">Phased Rate Changes</h2>
-            <p>If rate change is phased (e.g., 25% in 2025, 26% in 2026, 27% in 2027), use the rate applicable when the temporary difference reverses:</p>
+            <h2 id="faq">Frequently asked questions</h2>
 
-            <h3 id="example-phased-rate-change">Example: Phased Rate Change</h3>
-            <ul>
-                <li><strong>PP&E depreciation schedule:</strong> £10m per year for 10 years</li>
-                <li><strong>Reversal timeline:</strong> Years 2025— 2034 (10-year reversal)</li>
-                <li><strong>Tax rates by year:</strong> 2025: 25%, 2026: 26%, 2027: 27%, etc.</li>
-                <li><strong>Deferred tax calculation:</strong> Sum of (£10m × applicable year rate) / (1 + discount rate)^n</li>
-            </ul>
+            <h3>Do I remeasure deferred tax when a rate change is announced or when it takes effect?</h3>
+            <p>Neither exactly — you remeasure when the change is enacted or substantively enacted (IAS 12.60), which is usually before it takes legal effect and after it is merely announced. A Budget announcement alone is not enough; the legislation must clear its substantive legislative hurdle (Third Reading in the UK).</p>
 
-            <h2 id="oci-items-deferred-tax-remeasurement">OCI Items: Deferred Tax Remeasurement</h2>
+            <h3>Which rate do I use if a temporary difference reverses over several years at different rates?</h3>
+            <p>Each portion of the temporary difference is measured at the rate expected to apply in the year it reverses (IAS 12.47&ndash;.49), using enacted or substantively enacted rates. Deferred tax is not discounted (IAS 12.53), so you simply sum the undiscounted amounts, not present-value them.</p>
 
-            <p>If a temporary difference relates to an OCI item (e.g., revaluation of property), remeasure deferred tax and recognize in OCI:</p>
+            <h3>What is "substantively enacted" in the UK?</h3>
+            <p>A UK tax rate is substantively enacted once the Finance Bill has passed its Third Reading in the House of Commons, or when a Ways and Means resolution setting the rate is passed. Royal Assent that follows is the point of full enactment, which matters for US GAAP but not for IFRS/FRS 102.</p>
 
-            <h3 id="example-property-revaluation-with-tax-rate-change">Example: Property Revaluation with Tax Rate Change</h3>
-            <ul>
-                <li><strong>Property revalued upward:</strong> £5m (recognized in OCI)</li>
-                <li><strong>Deferred tax on revaluation (@ 19%):</strong> £0.95m (recognized in OCI)</li>
-                <li><strong>Tax rate enacted to increase to 25%:</strong> Later in same year</li>
-                <li><strong>Remeasured deferred tax (@ 25%):</strong> £1.25m</li>
-                <li><strong>Adjustment:</strong> £1.25m −’ £0.95m = £0.3m (recognized in OCI, not P&L)</li>
-            </ul>
+            <h3>Why does US GAAP treat the same UK rate change in a different period from IFRS?</h3>
+            <p>ASC 740-10-30-2 requires an <em>enacted</em> rate, so US GAAP cannot recognise a UK change until Royal Assent, whereas IAS 12.47 allows the earlier substantively-enacted date. For the 19%&ndash;25% change that is 10 June 2021 (US GAAP) versus 24 May 2021 (IFRS).</p>
 
-            <h2 id="audit-considerations">Audit Considerations</h2>
+            <h3>Where does the rate-change effect on a revalued asset's deferred tax go?</h3>
+            <p>Under IAS 12.61A it goes to OCI, because the deferred tax was originally recognised in OCI (backwards tracing). Under ASC 740-20-45 it goes to income tax expense instead, potentially stranding a tax effect in accumulated OCI.</p>
 
-            <h3 id="common-audit-challenges">Common Audit Challenges</h3>
+            <h3>Does a rate change affect the effective tax rate reconciliation?</h3>
+            <p>Yes — the P&amp;L portion of the remeasurement appears as a separate "effect of change in tax rate" reconciling item, so the effective tax rate can move materially even though pre-tax profit and the current-year statutory rate are unchanged. Only the portion traced to P&amp;L appears there; OCI-traced amounts are disclosed under IAS 12.81(d).</p>
 
-            <h4 id="challenge-1-missed-rate-change-finding-tax-rate-enacted-deferred-tax-not-remeasured-auditor-action-identify-all-deferred-tax-balances-recalculate-at-enacted-rate-adjust-pl-and-oci-accordingly-challenge-2-wrong-rate-used">Challenge 1: Missed Rate Change</h3>
-            <p><strong>Finding:</strong> Tax rate enacted; deferred tax not remeasured.</p>
-            <p><strong>Auditor action:</strong> Identify all deferred tax balances; recalculate at enacted rate; adjust P&L and OCI accordingly.</p>
-
-            <h4>Challenge 2: Wrong Rate Used</h4>
-            <p><strong>Finding:</strong> Proposed rate change (not yet enacted) used; or old rate applied post-enactment.</p>
-            <p><strong>Auditor action:</strong> Use only enacted or substantively enacted rates; restate to correct rate.</p>
-
-            <h4 id="challenge-3-oci-items-misclassified">Challenge 3: OCI Items Misclassified</h4>
-            <p><strong>Finding:</strong> Deferred tax on OCI revaluation remeasured and adjustment sent to P&L (incorrect).</p>
-            <p><strong>Auditor action:</strong> Reclassify adjustment to OCI (match the original transaction).</p>
-
-            
-<h2 id="real-life-case-study">Real-Life Case Study: A Rate Change Hitting Deferred Balances</h2>
-<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A company carries a &pound;2m deferred tax liability measured at 19%. A tax rise to 25% is substantively enacted before year end.</p>
- <p><strong>Treatment.</strong> Deferred tax is remeasured at the rate expected when the difference reverses, 25%. The liability jumps from &pound;2m to about &pound;2.63m, and the &pound;0.63m increase is charged to P&amp;L (unless the underlying item is in OCI/equity, where the remeasurement follows it).</p>
- <p><strong>Takeaway.</strong> Rate changes are recognised when <em>substantively enacted</em>, not when they take legal effect. A budget announcement can therefore move this year's deferred tax charge before a single pound of the new rate is actually paid.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
-</div>
+            <h3>Is the remeasurement a cash item?</h3>
+            <p>No. Remeasuring deferred tax is a non-cash accounting adjustment to a balance sheet estimate; it changes reported tax expense and the deferred tax balance but does not change the cash tax paid in the period. Citigroup expressly described its ~$22bn TCJA charge as one-time and non-cash.</p>
 
 <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>
@@ -257,6 +244,7 @@
     <p style="margin-bottom: 8px; color: #4a5568;"><a href="ias-12-valuation-allowances.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• IAS 12 Valuation Allowances: DTA Realizability Assessment</a></p>
     <p style="margin-bottom: 8px; color: #4a5568;"><a href="ias-12-deferred-tax-sorie.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• IAS 12 Deferred Tax on OCI: Recognizing Tax Effects in Other Comprehensive Income</a></p>
     <p style="margin-bottom: 8px; color: #4a5568;"><a href="ias-12-acquisition-deferred-tax.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• IAS 12 in M&A: Deferred Tax on Acquisition Fair Value Adjustments</a></p>
+    <p style="margin-bottom: 8px; color: #4a5568;"><a href="ifrs-vs-us-gaap-comparison.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• IFRS vs US GAAP: Key Differences (incl. Income Taxes, IAS 12 vs ASC 740)</a></p>
 </div>
 
 <div class="disclaimer">
@@ -264,5 +252,94 @@
             </div>
         </article>
     </div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "IAS 12 Tax Rate Changes: Remeasuring Deferred Tax Balances",
+  "description": "How IAS 12 and US GAAP (ASC 740) remeasure deferred tax when rates change: enacted vs substantively enacted, backwards tracing to P&L/OCI, and the UK 19% to 25% worked example.",
+  "datePublished": "2026-05-01",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "name": "Usman Qureshi",
+    "jobTitle": "Audit & CFO Advisory (ACCA, ACA)",
+    "image": "https://www.uqconsulting.org/images/team/usman-qureshi.png"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "UQ Consulting",
+    "url": "https://www.uqconsulting.org"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.uqconsulting.org/blog/ias-12-tax-rate-changes.html"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do I remeasure deferred tax when a rate change is announced or when it takes effect?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "You remeasure when the change is enacted or substantively enacted (IAS 12.60), which is usually before it takes legal effect and after it is merely announced. A Budget announcement alone is not enough; the legislation must clear its substantive legislative hurdle (Third Reading in the UK)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which rate do I use if a temporary difference reverses over several years at different rates?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Each portion of the temporary difference is measured at the rate expected to apply in the year it reverses (IAS 12.47-.49), using enacted or substantively enacted rates. Deferred tax is not discounted (IAS 12.53), so you sum the undiscounted amounts."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is 'substantively enacted' in the UK?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A UK tax rate is substantively enacted once the Finance Bill has passed its Third Reading in the House of Commons, or when a Ways and Means resolution setting the rate is passed. Royal Assent that follows is full enactment, which matters for US GAAP but not for IFRS/FRS 102."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does US GAAP treat the same UK rate change in a different period from IFRS?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ASC 740-10-30-2 requires an enacted rate, so US GAAP cannot recognise a UK change until Royal Assent, whereas IAS 12.47 allows the earlier substantively-enacted date. For the 19% to 25% change that is 10 June 2021 (US GAAP) versus 24 May 2021 (IFRS)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Where does the rate-change effect on a revalued asset's deferred tax go?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Under IAS 12.61A it goes to OCI, because the deferred tax was originally recognised in OCI (backwards tracing). Under ASC 740-20-45 it goes to income tax expense instead, potentially stranding a tax effect in accumulated OCI."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a rate change affect the effective tax rate reconciliation?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. The P&L portion of the remeasurement appears as a separate 'effect of change in tax rate' reconciling item, so the effective tax rate can move materially even though pre-tax profit and the current-year statutory rate are unchanged. OCI-traced amounts are disclosed under IAS 12.81(d)."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is the deferred tax remeasurement a cash item?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Remeasuring deferred tax is a non-cash adjustment to a balance sheet estimate; it changes reported tax expense and the deferred tax balance but does not change cash tax paid. Citigroup described its ~$22bn TCJA charge as one-time and non-cash."
+      }
+    }
+  ]
+}
+</script>
 </body>
 </html>

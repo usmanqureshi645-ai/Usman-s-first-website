@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <!-- Google Analytics (GA4) -->
@@ -7,15 +7,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Financial Instruments: IFRS 9 vs ASC 320/321 Deep Dive (2026)</title>
-    <meta name="description" content="IFRS 9 vs ASC 320 ASC 321 financial instruments. Classification, impairment, held-to-maturity securities, expected credit losses, worked examples.">
-    <meta name="keywords" content="IFRS 9 financial instruments, ASC 320 investments, ASC 321 debt securities, CECL expected credit loss, held-to-maturity, fair value through OCI">
+    <meta name="description" content="IFRS 9 vs ASC 320 ASC 321 financial instruments. SPPI and business model tests, FVOCI debt recycling, equity FVOCI election vs ASC 321 FV-through-NI, ECL vs CECL, worked journal entries.">
+    <meta name="keywords" content="IFRS 9 financial instruments, ASC 320 investments, ASC 321 equity securities, CECL expected credit loss, held-to-maturity, fair value through OCI, SPPI test, business model test">
     <meta name="author" content="Usman Qureshi">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://www.uqconsulting.org/blog/financial-instruments-ifrs-9-vs-asc-320-321-deep-dive.html">
 
     <meta property="og:type" content="article">
     <meta property="og:title" content="Financial Instruments: IFRS 9 vs ASC 320/321 Deep Dive">
-    <meta property="og:description" content="Detailed comparison of IFRS 9 and US GAAP financial instruments standards.">
+    <meta property="og:description" content="Detailed comparison of IFRS 9 and US GAAP financial instruments standards with worked journal entries and real filings.">
     <meta property="og:image" content="https://www.uqconsulting.org/images/og-image.png">
     <meta property="og:url" content="https://www.uqconsulting.org/blog/financial-instruments-ifrs-9-vs-asc-320-321-deep-dive.html">
     <meta name="twitter:card" content="summary_large_image">
@@ -25,12 +25,61 @@
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": "Financial Instruments: IFRS 9 vs ASC 320/321 Deep Dive",
-      "description": "Comprehensive comparison of IFRS 9 and ASC 320/321 financial instruments standards.",
+      "description": "Comprehensive comparison of IFRS 9 and ASC 320/321 financial instruments standards, covering the SPPI and business model tests, FVOCI debt recycling, the equity FVOCI election versus ASC 321 fair-value-through-net-income, ECL versus CECL, reclassification, worked journal entries and real filings.",
       "image": "https://www.uqconsulting.org/images/og-image.png",
       "datePublished": "2026-07-04",
-      "dateModified": "2026-07-04",
-      "author": { "@type": "Person", "name": "Usman Qureshi", "jobTitle": "Chartered Accountant (ACCA, ACA)" },
+      "dateModified": "2026-07-13",
+      "author": { "@type": "Person", "name": "Usman Qureshi", "jobTitle": "Chartered Accountant (ACCA, ACA)", "image": "https://www.uqconsulting.org/images/usman-qureshi.jpg" },
       "publisher": { "@type": "Person", "name": "Usman Qureshi" }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are IFRS 9 and ASC 320/321 the same?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. They share fair value measurement but differ structurally. IFRS 9 uses a single classification model driven by the SPPI test and business model test, abolished the available-for-sale category, and lets an entity elect FVOCI for equities with no recycling. ASC 320 keeps a rule-based debt model (held-to-maturity, available-for-sale, trading) and ASC 321 measures equities at fair value through net income." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the SPPI test under IFRS 9?",
+          "acceptedAnswer": { "@type": "Answer", "text": "SPPI stands for solely payments of principal and interest. Under IFRS 9 paragraph 4.1.2, a financial asset can only be measured at amortised cost or FVOCI if its contractual cash flows are solely payments of principal and interest on the principal outstanding. If the cash flows fail SPPI, for example because of an equity conversion feature or leverage, the asset is measured at fair value through profit or loss." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does the IFRS 9 equity FVOCI election allow recycling?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. Under IFRS 9 paragraph 5.7.5 an entity may make an irrevocable election, instrument by instrument, to present fair value changes on a non-held-for-trading equity investment in OCI. Those amounts are never recycled to profit or loss on disposal (IFRS 9 B5.7.1); the cumulative gain or loss may only be transferred within equity." }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between ECL and CECL?",
+          "acceptedAnswer": { "@type": "Answer", "text": "IFRS 9 uses a three-stage expected credit loss model: 12-month ECL at initial recognition (Stage 1), moving to lifetime ECL when credit risk has increased significantly (Stages 2 and 3). US GAAP ASC 326 (CECL) requires lifetime expected credit losses from day one for almost all in-scope assets, with no staging. IFRS impairment is therefore typically lower on origination; the two converge over a full credit cycle." }
+        },
+        {
+          "@type": "Question",
+          "name": "Did US GAAP keep the available-for-sale category?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes, for debt securities only. ASC 320 retains held-to-maturity, available-for-sale and trading categories for debt. Available-for-sale debt is carried at fair value with changes in OCI, similar to IFRS 9 FVOCI debt. ASU 2016-01 removed the available-for-sale category for equity securities, which now sit under ASC 321 at fair value through net income." }
+        },
+        {
+          "@type": "Question",
+          "name": "How are equity securities measured under ASC 321?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Under ASC 321-10-35-1 (as introduced by ASU 2016-01), equity investments are measured at fair value with changes recognised in net income. Entities without readily determinable fair values may elect a measurement alternative: cost less impairment, adjusted for observable price changes in orderly transactions for identical or similar instruments." }
+        },
+        {
+          "@type": "Question",
+          "name": "When can financial assets be reclassified under IFRS 9?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Only when the entity changes its business model for managing the assets, which IFRS 9 paragraph 4.4.1 states is expected to be very infrequent. Reclassification is applied prospectively from the first day of the next reporting period. Equity investments and assets designated at fair value through profit or loss can never be reclassified." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can held-to-maturity securities be reclassified under US GAAP?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Only in narrow circumstances. Selling or transferring held-to-maturity securities under ASC 320 taints the whole portfolio, forcing reclassification to available-for-sale and generally barring the held-to-maturity classification for two years, unless the sale falls within limited exceptions such as being near maturity or resulting from an isolated, non-recurring event beyond the entity's control." }
+        }
+      ]
     }
     </script>
 
@@ -62,9 +111,9 @@
         .related { margin-top: 32px; padding-top: 20px; border-top: 2px solid #e4e9f0; }
         .related a { color: #2a4a7a; text-decoration: none; font-weight: 600; display: block; margin-bottom: 6px; }
         .disclaimer { font-size: 0.8em; color: #8593a8; margin-top: 32px; padding-top: 16px; font-style: italic; }
-    
 
-    
+
+
 /*TOC_SIDEBAR_START*/
 .toc {
     background: #fff;
@@ -112,121 +161,185 @@
 
     <div class="article-container">
         <h1>Financial Instruments: IFRS 9 vs ASC 320/321 Deep Dive</h1>
-        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed July 2026 · 9 min read</div>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Last reviewed July 2026 · 16 min read</div>
 
-        <p class="lead">IFRS 9 and US GAAP (ASC 320/321) both classifyfinancial instruments as amortised cost, fair value through OCI, or fair value through P&amp;L. They largely converged, but differences exist in held-to-maturity classification, reclassification, impairment (expected credit losses vs current expected credit losses), and debt modification accounting. For banks and insurers, these differences materially affect balance sheet and profitability. This guide explains both standards with examples.</p>
+        <p class="lead">IFRS 9 and US GAAP classify financial assets into the same three measurement buckets — amortised cost, fair value through other comprehensive income (FVOCI), and fair value through profit or loss (FVTPL) — but they get there by very different routes. IFRS 9 drives everything from two tests (SPPI plus business model) and abolished available-for-sale entirely; US GAAP splits the world between debt (ASC 320, keeping held-to-maturity, available-for-sale and trading) and equity (ASC 321, fair value through net income). The gaps that remain — the equity FVOCI election with no recycling, the AFS category, held-to-maturity tainting, and the ECL-versus-CECL impairment split — change reported profit, equity and volatility by billions for banks, insurers and any dual reporter. This guide works through each difference with exact paragraph citations, journal entries, auditor red flags and real filings.</p>
 
-                        <div class="toc">
+        <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#overview">The Headline: Substantial Convergence, Small Gaps</a></li><li class="toc-l1"><a href="#classification">Classification: Business Model and Cash Flows</a></li><li class="toc-l1"><a href="#htm">Held-to-Maturity (HTM): The Strictest Category</a></li><li class="toc-l1"><a href="#impairment">Impairment: ECL vs CECL</a></li><li class="toc-l1"><a href="#reclassification">Reclassification: When and How</a></li><li class="toc-l1"><a href="#modification">Debt Modification Accounting</a></li><li class="toc-l1"><a href="#audit">Audit Implications</a><ul><li class="toc-l2"><a href="#need-help-with-financial-instrument-classification">Need help with financial instrument classification?</a></li></ul></li><li class="toc-l1"><a href="#faq">FAQs</a><ul><li class="toc-l2"><a href="#are-ifrs-9-and-asc-320321-the-same">Are IFRS 9 and ASC 320/321 the same?</a></li><li class="toc-l2"><a href="#what-is-heldtomaturity-accounting">What is held-to-maturity accounting?</a></li><li class="toc-l2"><a href="#what-is-the-difference-between-ecl-and-cecl">What is the difference between ECL and CECL?</a><ul><li class="toc-l3"><a href="#about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</a></li></ul></li><li class="toc-l2"><a href="#related-resources">Related resources</a></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Classifying an Equity Investment, IFRS 9 vs US GAAP</a></li></ul>
+            <ul>
+              <li class="toc-l1"><a href="#overview">How do IFRS 9 and ASC 320/321 classify financial assets?</a></li>
+              <li class="toc-l1"><a href="#sppi">What are the SPPI and business model tests under IFRS 9?</a></li>
+              <li class="toc-l1"><a href="#fvoci-debt">How does FVOCI for debt work, and what happens on disposal?</a></li>
+              <li class="toc-l1"><a href="#equity">How does the IFRS 9 equity FVOCI election differ from ASC 321?</a></li>
+              <li class="toc-l1"><a href="#afs">Why did US GAAP keep available-for-sale when IFRS 9 abolished it?</a></li>
+              <li class="toc-l1"><a href="#htm">How does held-to-maturity classification differ?</a></li>
+              <li class="toc-l1"><a href="#impairment">How do ECL (IFRS 9) and CECL (ASC 326) compare?</a></li>
+              <li class="toc-l1"><a href="#reclassification">When can financial assets be reclassified?</a></li>
+              <li class="toc-l1"><a href="#audit">What are the auditor red flags?</a></li>
+              <li class="toc-l1"><a href="#cases">What do real filings show?</a>
+                <ul>
+                  <li class="toc-l2"><a href="#case-hsbc">HSBC — FVOCI debt and the OCI reserve</a></li>
+                  <li class="toc-l2"><a href="#case-berkshire">Berkshire Hathaway — ASC 321 volatility</a></li>
+                </ul>
+              </li>
+              <li class="toc-l1"><a href="#faq">FAQs</a></li>
+            </ul>
         </div>
 
         <article>
-            <h2 id="overview">The Headline: Substantial Convergence, Small Gaps</h2>
-            <p><strong>Good news:</strong> IFRS 9 and ASC 320/321 use the same classification framework. Financial assets are classified based on:</p>
-            <ol>
-                <li>Business model (hold-to-collect, hold-to-collect-and-sell, or trading)</li>
-                <li>Contractual cash flow characteristics (fixed payments, no equity features)</li>
-            </ol>
-            <p><strong>Both produce three categories:</strong></p>
+            <h2 id="overview">How do IFRS 9 and ASC 320/321 classify financial assets?</h2>
+            <p>Both frameworks end with the same three measurement categories — amortised cost, fair value through OCI, and fair value through profit or loss — but IFRS 9 reaches them through a single principles-based model while US GAAP splits debt (ASC 320) from equity (ASC 321). Under IFRS 9 paragraph 4.1.1, a financial asset is classified on the basis of both the entity's business model for managing the asset and the contractual cash flow characteristics of the asset. Paragraphs 4.1.2, 4.1.2A and 4.1.4 then map the combinations onto amortised cost, FVOCI and FVTPL respectively.</p>
+            <p>US GAAP has no unifying test. Debt securities fall under ASC 320-10-25, which retains the pre-existing held-to-maturity, available-for-sale and trading classifications; equity investments fall under ASC 321-10-35-1, which since ASU 2016-01 requires fair value through net income unless a narrow measurement alternative applies. There is no business model test and no SPPI screen in US GAAP — classification of a debt security turns instead on management's documented intent and ability to hold, sell or trade.</p>
+            <p>The practical consequence is that the same instrument can land in different places. A portfolio of government bonds an entity both collects and sells is FVOCI debt under IFRS 9 paragraph 4.1.2A and available-for-sale under ASC 320; the balance-sheet carrying amount is identical, but the surrounding mechanics — impairment model, recycling, tainting rules — diverge. The rest of this guide walks through where.</p>
+
+            <div class="callout">
+              <strong>Category map at a glance.</strong>
+              <table>
+                <tr><th>Instrument / model</th><th>IFRS 9</th><th>US GAAP (ASC 320/321)</th></tr>
+                <tr><td>Debt, hold-to-collect, passes SPPI</td><td>Amortised cost (4.1.2)</td><td>Held-to-maturity (ASC 320)</td></tr>
+                <tr><td>Debt, hold-to-collect-and-sell, passes SPPI</td><td>FVOCI debt (4.1.2A)</td><td>Available-for-sale (ASC 320)</td></tr>
+                <tr><td>Debt, trading / fails SPPI</td><td>FVTPL (4.1.4)</td><td>Trading (ASC 320)</td></tr>
+                <tr><td>Equity, not held for trading</td><td>FVTPL, or irrevocable FVOCI election (5.7.5)</td><td>FV through net income (ASC 321)</td></tr>
+                <tr><td>Equity, no readily determinable FV</td><td>FVTPL / FVOCI election</td><td>Measurement alternative (ASC 321-10-35-2)</td></tr>
+              </table>
+            </div>
+
+            <h2 id="sppi">What are the SPPI and business model tests under IFRS 9?</h2>
+            <p>The SPPI test asks whether the contractual cash flows are solely payments of principal and interest on the principal outstanding; the business model test asks how the entity manages the asset to generate cash. Under IFRS 9 paragraph 4.1.2, amortised cost applies only if the asset is held within a business model whose objective is to collect contractual cash flows <em>and</em> those cash flows are SPPI. Both conditions must hold — fail either and the asset cannot sit at amortised cost.</p>
+            <p>Interest, for SPPI purposes, is consideration for the time value of money, credit risk, other basic lending risks, a profit margin and (per the 2018 amendment) may include reasonable prepayment compensation. Features that break SPPI include equity conversion options, leverage, and interest tied to something other than a basic lending return. Application guidance in IFRS 9 paragraphs B4.1.7 to B4.1.26 works through the harder cases: regulated interest rates, non-recourse assets, contractually linked instruments and prepayment or extension terms. When cash flows fail SPPI — a convertible bond held as an asset is the classic example — the whole instrument goes to FVTPL under paragraph 4.1.4, regardless of the business model.</p>
+            <p>The business model is assessed at a portfolio level, not instrument by instrument, and reflects how key management personnel actually run the book — evidenced by how performance is reported, how risks are managed, and how managers are compensated (IFRS 9 paragraphs B4.1.2 to B4.1.2B). A "hold-to-collect" model tolerates some selling — for credit deterioration, or infrequent and insignificant sales — without becoming "hold-to-collect-and-sell" (IFRS 9 paragraphs B4.1.3 to B4.1.3B). The "hold-to-collect-and-sell" model, which underpins FVOCI debt, expects both collecting and selling to be integral. Everything else, including trading books and portfolios managed on a fair value basis, falls to FVTPL (IFRS 9 paragraph B4.1.5). US GAAP requires none of this analysis, which is why an IFRS 9 conversion project spends most of its effort here.</p>
+
+            <h2 id="fvoci-debt">How does FVOCI for debt work, and what happens on disposal?</h2>
+            <p>FVOCI debt is carried on the balance sheet at fair value, but profit or loss sees only what amortised cost would have shown — interest on the effective-interest basis, expected credit losses and FX — while the residual fair value movement parks in OCI until disposal, when it recycles. IFRS 9 paragraph 5.7.10 requires that gain or loss on a FVOCI debt asset be recognised in OCI, except for impairment gains and losses (paragraph 5.5) and foreign exchange gains and losses (paragraph B5.7.2A), which go to profit or loss. On derecognition, paragraph 5.7.10 and B5.7.1A require the cumulative amount previously recognised in OCI to be reclassified — "recycled" — from equity to profit or loss.</p>
+            <p>This is the category where IFRS 9 FVOCI debt and US GAAP available-for-sale debt behave almost identically: both carry at fair value, both route the unrealised movement through OCI, and both recycle the cumulative reserve to income on sale. The main mechanical difference is impairment — IFRS 9 runs a full ECL model against the FVOCI debt (with the loss allowance in OCI, not reducing the carrying amount, per paragraph 5.5.2), whereas US GAAP applies the ASC 326-30 available-for-sale credit loss model, which is a fair-value-floor allowance rather than a lifetime ECL from day one.</p>
+            <h3>Worked example 1 — FVOCI debt: OCI movement and recycling on disposal</h3>
+            <p>An entity buys a bond for CU 1,000 (par, so no premium or discount; assume interest already accounted for). At the reporting date fair value is CU 1,050. Early in the next year the entity sells it for CU 1,070. Under IFRS 9 paragraph 5.7.10 the CU 50 uplift goes to OCI at year end; on disposal the full cumulative CU 70 recycles to profit or loss.</p>
+            <table>
+              <tr><th>Date / event</th><th>Dr</th><th>Cr</th><th>CU</th></tr>
+              <tr><td>Year-end remeasurement</td><td>FVOCI debt asset</td><td>OCI — fair value reserve</td><td>50</td></tr>
+              <tr><td>Disposal — update to FV 1,070</td><td>FVOCI debt asset</td><td>OCI — fair value reserve</td><td>20</td></tr>
+              <tr><td>Disposal — receive cash</td><td>Cash</td><td>FVOCI debt asset</td><td>1,070</td></tr>
+              <tr><td>Recycling on derecognition (5.7.10)</td><td>OCI — fair value reserve</td><td>Profit or loss — gain on disposal</td><td>70</td></tr>
+            </table>
+            <p>The net effect is a CU 70 gain recognised in profit or loss in the year of sale, with equity returning to nil in the fair value reserve for that instrument. Available-for-sale debt under ASC 320 produces the same set of entries and the same recycled gain. The contrast that matters comes next, with equities.</p>
+
+            <h2 id="equity">How does the IFRS 9 equity FVOCI election differ from ASC 321?</h2>
+            <p>The two frameworks are diametrically opposed on equity investments: IFRS 9 lets you elect to bury fair value changes permanently in OCI with no recycling, while ASC 321 forces every fair value change straight through net income. Under IFRS 9 paragraph 5.7.5, at initial recognition an entity may make an irrevocable, instrument-by-instrument election to present in OCI subsequent changes in the fair value of an equity investment that is not held for trading and is not contingent consideration in a business combination. Critically, IFRS 9 paragraph B5.7.1 confirms those amounts are <em>never</em> reclassified to profit or loss — not even on disposal — although dividends still hit profit or loss under paragraph 5.7.6, and the cumulative gain may be transferred within equity.</p>
+            <p>US GAAP has no such door. ASC 321-10-35-1, introduced by ASU 2016-01 and effective for public entities from 2018, requires equity investments to be measured at fair value with changes recognised in net income. The only relief is the measurement alternative in ASC 321-10-35-2 for investments without a readily determinable fair value: cost less impairment, adjusted for observable price changes in orderly transactions for the identical or a similar investment. There is no OCI presentation option for equities under US GAAP at all, which is exactly why Berkshire Hathaway's earnings swing with the stock market (see the case study below).</p>
+            <h3>Worked example 2 — equity FVOCI (IFRS 9) versus FV through net income (ASC 321)</h3>
+            <p>An entity buys an unlisted-strategic 4% stake for CU 1,000. It rises to CU 1,400 by year 1, then the entity sells for CU 1,500 in year 2. Under IFRS 9 it has made the paragraph 5.7.5 election; under ASC 321 it has no choice.</p>
+            <table>
+              <tr><th>Event</th><th>IFRS 9 FVOCI election (5.7.5)</th><th>ASC 321 FV through NI</th></tr>
+              <tr><td>Year 1 gain CU 400</td><td>Dr Investment 400 / Cr OCI 400 — no P&amp;L impact</td><td>Dr Investment 400 / Cr Net income 400</td></tr>
+              <tr><td>Year 2 further gain CU 100</td><td>Dr Investment 100 / Cr OCI 100</td><td>Dr Investment 100 / Cr Net income 100</td></tr>
+              <tr><td>Disposal proceeds CU 1,500</td><td>Dr Cash 1,500 / Cr Investment 1,500</td><td>Dr Cash 1,500 / Cr Investment 1,500</td></tr>
+              <tr><td>Cumulative CU 500 gain</td><td>Stays in OCI forever; may move within equity — never in P&amp;L (B5.7.1)</td><td>CU 500 recognised in net income across the two years</td></tr>
+            </table>
+            <p>Same shareholding, same cash outcome, radically different income statement. Over the two years the IFRS 9 preparer reports zero gain in profit or loss (only OCI and equity move), while the ASC 321 preparer reports the entire CU 500 in net income — CU 400 in year 1 and CU 100 in year 2. A dual reporter reconciling US GAAP to IFRS on the same stake books a CU 500 difference in profit but nil difference in total equity. This is the single largest classification-driven earnings difference between the two frameworks for a non-financial corporate holding strategic equity stakes.</p>
+
+            <h2 id="afs">Why did US GAAP keep available-for-sale when IFRS 9 abolished it?</h2>
+            <p>The available-for-sale category survived in US GAAP for debt securities because the FASB never fully converged its classification model with the IASB, whereas IFRS 9 deliberately replaced the old IAS 39 AFS bucket with a business-model-driven FVOCI category. Under ASC 320-10-25-1, a debt security is available-for-sale if it is neither held-to-maturity (the entity has the positive intent and ability to hold to maturity) nor trading (bought principally to sell in the near term). AFS debt is measured at fair value with unrealised changes in OCI (ASC 320-10-35-1), recycled to earnings on sale — mechanically close to IFRS 9 FVOCI debt.</p>
+            <p>The differences are two. First, scope: US GAAP AFS is a debt-only category — ASU 2016-01 stripped equities out of AFS and pushed them to ASC 321 fair-value-through-net-income, whereas under IFRS 9 an equity can reach OCI only through the separate paragraph 5.7.5 election that never recycles. Second, the entry criterion: AFS is a default residual driven by management intent ("not HTM, not trading"), while IFRS 9 FVOCI debt requires an affirmative "hold-to-collect-and-sell" business model plus an SPPI pass (IFRS 9 paragraph 4.1.2A). So the label "AFS equals FVOCI" is a useful shortcut for debt only; for equities the categories point in opposite directions, and an analyst comparing a US bank's AFS book with a European bank's FVOCI book must confirm they are comparing debt-to-debt.</p>
+
+            <h2 id="htm">How does held-to-maturity classification differ?</h2>
+            <p>IFRS 9 has no held-to-maturity label — amortised cost is a business-model outcome, not an intent assertion — while ASC 320 keeps a formal, rules-heavy held-to-maturity category policed by tainting provisions. Under IFRS 9 paragraph 4.1.2, a debt asset sits at amortised cost when the entity's business model is to collect contractual cash flows and the asset passes SPPI; "intent to hold to maturity" as such is not the test, and infrequent, insignificant or credit-driven sales do not automatically break the model (IFRS 9 paragraphs B4.1.3 to B4.1.3B).</p>
+            <p>ASC 320-10-25-1 instead requires the entity to have the positive intent and ability to hold the security to maturity, documented at acquisition. The sting is in ASC 320-10-25-9 onward: if the entity sells or transfers HTM securities other than in narrow permitted circumstances (near enough to maturity that rate risk is eliminated, after collecting a substantial portion of principal, or an isolated, non-recurring event beyond the entity's control such as a major credit deterioration), it "taints" the entire HTM portfolio, must reclassify remaining HTM securities to available-for-sale, and is generally barred from using HTM classification for two years. There is no equivalent two-year penalty box in IFRS 9. This is why HTM classification under US GAAP became a governance flashpoint during the 2023 US regional-bank stress — moving securities out of HTM to raise liquidity threatened to taint the whole book and crystallise fair value losses previously hidden from the balance sheet.</p>
+
+            <h2 id="impairment">How do ECL (IFRS 9) and CECL (ASC 326) compare?</h2>
+            <p>IFRS 9 uses a forward-looking three-stage expected credit loss model that starts at 12-month ECL, while ASC 326 (CECL) requires lifetime expected credit losses from day one for almost all in-scope assets — so US GAAP typically front-loads more impairment on origination. Under IFRS 9 paragraph 5.5.5, an entity measures the loss allowance at 12-month ECL at initial recognition (Stage 1); when credit risk has increased significantly since initial recognition (paragraph 5.5.3), it moves to lifetime ECL (Stage 2), and on objective evidence of credit impairment to Stage 3, where interest revenue is calculated on the net carrying amount. For FVOCI debt, the allowance is recognised in OCI and does not reduce the carrying amount (IFRS 9 paragraph 5.5.2).</p>
+            <p>ASC 326-20 (CECL) for amortised-cost assets requires a lifetime current-expected-credit-loss allowance immediately, with no staging and no "significant increase in credit risk" trigger — the day-one allowance is generally larger than an IFRS 9 Stage 1 12-month figure. For available-for-sale debt, US GAAP applies a different model again (ASC 326-30): a credit loss allowance limited to the amount by which fair value is below amortised cost, recognised through earnings, rather than a full lifetime ECL. Over a complete credit cycle the two models converge in aggregate loss recognised, but their <em>timing</em> differs sharply, and the point-in-time coverage ratios that analysts compare across a European and a US bank are not like-for-like. This impairment split is the natural companion to the classification analysis; for the credit-loss mechanics in depth see the dedicated <a href="https://www.uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">IFRS vs US GAAP comparison hub</a>.</p>
+
+            <h2 id="reclassification">When can financial assets be reclassified?</h2>
+            <p>IFRS 9 permits reclassification of debt assets only when the business model changes — an event it expects to be very infrequent — and never for equities or FVTPL-designated items; US GAAP allows debt transfers between categories but polices HTM with tainting. IFRS 9 paragraph 4.4.1 requires that when, and only when, an entity changes its business model for managing financial assets, it reclassifies all affected assets prospectively from the first day of the first reporting period following the change (the "reclassification date"). Paragraph 4.4.2 confirms equity investments are never reclassified, and assets designated at FVTPL under the fair value option cannot be reclassified either.</p>
+            <p>The remeasurement mechanics are set out in IFRS 9 paragraphs 5.6.1 to 5.6.7. Moving from amortised cost to FVTPL, the asset is remeasured to fair value with the difference in profit or loss; from amortised cost to FVOCI, the difference goes to OCI; from FVOCI to amortised cost, the cumulative OCI is removed and adjusted against the asset so it is carried as if always at amortised cost. Under US GAAP, transfers between trading, AFS and HTM are accounted for at fair value on the transfer date (ASC 320-10-35-10), but the HTM tainting rules described above effectively make voluntary reclassification out of HTM punitive. In both frameworks, reclassification is a red-flag area for auditors because its timing can shift where gains and losses land.</p>
+
+            <h2 id="audit">What are the auditor red flags?</h2>
+            <p>Financial-instrument classification and measurement sit squarely in the estimate and fair value zone, so the auditor's response is anchored in ISA 540 (auditing accounting estimates), ISA 500 (audit evidence) and ISA 330 (responses to assessed risks). The four flags below recur across bank, insurer and corporate audits.</p>
             <ul>
-                <li>Amortised cost (hold-to-collect)</li>
-                <li>Fair value through OCI (hold-to-collect-and-sell)</li>
-                <li>Fair value through P&amp;L (trading or mixed)</li>
-            </ul>
-            <p><strong>But differences exist:</strong> Held-to-maturity classification, reclassification rules, impairment triggers, and debt modification.</p>
-            <p class="ref">Reference: IFRS 9 paragraphs 4.1— .7; ASC 320-10-1, ASC 321-10-1.</p>
-
-            <h2 id="classification">Classification: Business Model and Cash Flows</h2>
-            <p><strong>Business model:</strong> Both standards assess whether the entity's objective is to:</p>
-            <ul>
-                <li><strong>Collect contractual cash flows:</strong> Hold asset to maturity (amortised cost)</li>
-                <li><strong>Collect cash flows AND sell:</strong> Manage credit risk or interest rate risk (FVOCI)</li>
-                <li><strong>Trade:</strong> Generate profit from price changes (FVPL)</li>
-            </ul>
-            <p><strong>Cash flow test:</strong> Does the asset have solely payments of principal and interest (SPPI)? If not, it goes to FVPL by default.</p>
-            <p><strong>Both standards use this test similarly. No major divergence here.</strong></p>
-
-            <h2 id="htm">Held-to-Maturity (HTM): The Strictest Category</h2>
-            <p><strong>IFRS 9:</strong> No formal HTM category. Instead, amortised cost applies if business model is hold-to-collect. Reclassifications are rare but permitted if business model changes.</p>
-            <p><strong>ASC 320:</strong> HTM is a formal category with stricter rules. Assets classified as HTM cannot be reclassified. Only in rare "sell-all" circumstances (e.g., bank failing regulatory capital requirements) can HTM securities be reclassified.</p>
-            <p><strong>Audit implication:</strong> ASC HTM classification is sticky — once classified, assets stay on amortised cost even if the environment changes. IFRS is more flexible.</p>
-
-            <h2 id="impairment">Impairment: ECL vs CECL</h2>
-            <p><strong>IFRS 9: Expected Credit Loss (ECL)</strong></p>
-            <p>Recognise impairment for credit losses <em>expected</em> over the life of the asset, based on forward-looking assumptions. Three stages:</p>
-            <ul>
-                <li>Stage 1: Initial recognition (12-month ECL)</li>
-                <li>Stage 2: Credit risk increased significantly (lifetime ECL)</li>
-                <li>Stage 3: Credit-impaired asset (lifetime ECL)</li>
-            </ul>
-            <p><strong>ASC 320/321: Current Expected Credit Loss (CECL)</strong></p>
-            <p>Similar to ECL but implementation differs. CECL is lifetime expected losses from day one for most financial assets. Less "stagey" than IFRS.</p>
-            <p><strong>Practical difference:</strong> IFRS may produce lower impairments initially (12-month ECL at Stage 1). ASC is upfront (lifetime CECL). Over a full economic cycle, totals converge.</p>
-
-            <h2 id="reclassification">Reclassification: When and How</h2>
-            <p><strong>IFRS 9:</strong> Permits reclassification if business model changes. Rare, but allowed. When reclassifying to amortised cost, the asset is remeasured at fair value, with the difference going through equity or P&amp;L.</p>
-            <p><strong>ASC 320/321:</strong> Reclassification is <em>very</em> restricted. HTM securities cannot be reclassified (except in rare circumstances). Available-for-sale (FVOCI equivalent) can be reclassified to HTM, but that locks them in forever.</p>
-            <p><strong>Audit implication:</strong> IFRS allows flexibility; ASC is rigid. Locking assets into HTM under ASC is a long-term commitment.</p>
-
-            <h2 id="modification">Debt Modification Accounting</h2>
-            <p>When a lender modifies a loan's terms (rate reduction, extension), both standards assess whether to derecognise the old loan or adjust it.</p>
-            <p><strong>IFRS 9:</strong> If modification is <em>substantial</em> (cash flows change materially), derecognise old loan and recognise new one. Otherwise, adjust the carrying amount.</p>
-            <p><strong>ASC 320:</strong> Uses "troubled debt restructuring" (TDR) rules. If the borrower is in financial difficulty and the creditor concedes, the old debt is adjusted, not derecognised. This can result in no gain/loss recognised.</p>
-            <p><strong>Outcome:</strong> IFRS may produce derecognition gains; ASC may not.</p>
-
-            <h2 id="audit">Audit Implications</h2>
-            <ul>
-                <li><strong>Classification:</strong> Challenge business model assumption. Is "hold-to-collect" really the model, or is the company open to selling?</li>
-                <li><strong>Impairment:</strong> IFRS Stage 2 triggers and CECL quantification are complex. Verify management's credit risk assessments.</li>
-                <li><strong>HTM securities (ASC only):</strong> Question whether classification is appropriate. Once locked in, it's permanent.</li>
-                <li><strong>Reclassifications:</strong> Rare under both, but audit carefully. Reclassification timing can affect P&amp;L.</li>
+              <li><strong>Business model asserted but behaviour contradicts it (ISA 540).</strong> Management claims "hold-to-collect" (amortised cost) yet the portfolio shows frequent or significant sales. ISA 540 paragraph 13 requires the auditor to evaluate whether the method and assumptions are appropriate; here that means testing actual sales frequency and volume against the asserted model under IFRS 9 paragraphs B4.1.3–B4.1.3B, not accepting the classification memo at face value.</li>
+              <li><strong>Level 3 fair values with thin evidence (ISA 500 / ISA 540).</strong> Unquoted equities and illiquid debt measured with unobservable inputs are the highest-risk fair values. ISA 500 paragraph 6 demands sufficient appropriate evidence over the valuation inputs; ISA 540 requires evaluating estimation uncertainty and, where high, considering whether a range or a written representation is enough. Watch for stale broker quotes, single-source pricing, and models never back-tested to observed transactions (relevant to the ASC 321-10-35-2 measurement alternative and IFRS 9 FVOCI equities).</li>
+              <li><strong>Suspicious reclassification or HTM tainting timing (ISA 330).</strong> A reclassification booked just before a fair value swing, or an HTM sale dressed up as an ASC 320 permitted exception, can move gains and losses between OCI and profit or loss. ISA 330 requires designing responses to the assessed risk — substantive testing of the business-model change date under IFRS 9 paragraph 4.4.1, or of the HTM exception claimed under ASC 320-10-25-9, with corroborating board minutes and treasury records.</li>
+              <li><strong>ECL / CECL model overlays and management adjustments (ISA 540).</strong> Post-model adjustments and forward-looking scenario weightings are where impairment is most malleable. ISA 540 requires the auditor to stand back and assess whether the estimate is reasonable or indicates possible management bias; unsupported overlays that conveniently smooth earnings are the classic indicator.</li>
             </ul>
 
             <div class="cta-box">
                 <h3 id="need-help-with-financial-instrument-classification">Need help with financial instrument classification?</h3>
-                <p>Use GAAP Compare to research IFRS 9 vs ASC 320/321, or ask an expert.</p>
+                <p>Use GAAP Compare to research IFRS 9 vs ASC 320/321 side by side, or run a statement through our Financial Statement Review tool.</p>
                 <a href="https://www.uqconsulting.org/gaap-compare.html" class="cta-button">Compare Standards →</a>
             </div>
+
+            <h2 id="cases">What do real filings show?</h2>
+            <p>Two publicly filed examples make the classification differences concrete: a bank running a large FVOCI debt book under IFRS 9, and a US conglomerate whose equity portfolio flows through net income under ASC 321.</p>
+
+            <h3 id="case-hsbc">Case study 1 — HSBC: FVOCI debt and the OCI reserve (IFRS 9)</h3>
+            <p>HSBC Holdings plc reports under IFRS and holds a large "hold-to-collect-and-sell" debt portfolio measured at FVOCI. Its own accounting policy states that assets managed to both collect contractual cash flows and sell, and passing SPPI, are measured at FVOCI, with fair value changes (other than impairment, interest income and FX) recognised in OCI until sale, when the cumulative OCI gain or loss recycles to the income statement as "Gains less losses from financial instruments" — exactly the IFRS 9 paragraph 5.7.10 mechanic in Worked example 1.</p>
+            <p>The size of that OCI reserve moves with interest rates. In its 2024 interim reporting HSBC disclosed a pre-tax cumulative unrealised loss reserve in OCI of about US$4.2bn on hold-to-collect-and-sell (FVOCI) debt positions as at 30 June 2024 — a real illustration of how rising rates depress FVOCI debt fair values and sit in equity rather than profit or loss until disposal. The point for a US comparison: this is the IFRS 9 twin of an ASC 320 available-for-sale debt reserve, and the two banks' books are only comparable debt-to-debt.</p>
+            <p style="font-size:0.85em;color:#8593a8;">Sources: HSBC Holdings plc Annual Report and Accounts 2023 (accounting policies, financial statements) and 2024 interim disclosures, hsbc.com/investors. Figures are as reported by HSBC; any narrative bridge is labelled as such.</p>
+
+            <h3 id="case-berkshire">Case study 2 — Berkshire Hathaway: ASC 321 and earnings volatility</h3>
+            <p>Berkshire Hathaway reports under US GAAP and holds one of the world's largest equity portfolios, measured at fair value through net income under ASC 321. Berkshire itself warns in its filings that including unrealised gains and losses on equity securities in reported earnings "significantly increases the volatility" of periodic net earnings, given the size of the portfolio and the inherent volatility of equity prices — precisely the ASC 321-10-35-1 outcome (and the mirror image of Worked example 2's IFRS 9 column, where the same movements would sit in OCI).</p>
+            <p>The reported figures show the swing starkly. Net earnings attributable to Berkshire shareholders were about US$89.8bn in 2021, a loss of about US$(22.8)bn in 2022, and about US$58.9bn in 2023. The dominant driver was the change in unrealised gains and losses on equity securities recognised in net income: roughly +US$58.6bn (2021), around -US$53.8bn (2022), and a large positive swing in 2023, with the year including about US$53.0bn of gains from changes in unrealised equity positions (Berkshire also cited roughly US$69bn of unrealised gains on equities held at year-end 2023). Under IFRS 9's equity FVOCI election these movements would never touch profit or loss; ASC 321 puts them front and centre.</p>
+            <table>
+              <tr><th>Year</th><th>Net earnings to shareholders (US$bn)</th><th>Change in unrealised equity gains/(losses) in NI (US$bn, approx.)</th></tr>
+              <tr><td>2021</td><td>89.8</td><td>+58.6</td></tr>
+              <tr><td>2022</td><td>(22.8)</td><td>(53.8)</td></tr>
+              <tr><td>2023</td><td>58.9</td><td>+53.0</td></tr>
+            </table>
+            <p style="font-size:0.85em;color:#8593a8;">Sources: Berkshire Hathaway Inc. news releases (24 Feb 2024, 25 Feb 2023) and Form 10-K/Annual Report FY2022–FY2023, berkshirehathaway.com and SEC EDGAR. Figures are as reported by Berkshire; amounts are rounded and any comparison to IFRS 9 is illustrative.</p>
 
             <h2 id="faq">FAQs</h2>
             <div class="faq-item">
                 <h3 id="are-ifrs-9-and-asc-320321-the-same">Are IFRS 9 and ASC 320/321 the same?</h3>
-                <p>Largely yes. Both use business model + cash flow classification. But differences exist in HTM strictness, ECL vs CECL timing, reclassification rules, and debt modification.</p>
+                <p>No. They share fair value measurement but differ structurally. IFRS 9 uses one classification model driven by the SPPI and business model tests, abolished available-for-sale, and lets an entity elect FVOCI for equities with no recycling. ASC 320 keeps a rule-based debt model (HTM, AFS, trading) and ASC 321 measures equities at fair value through net income.</p>
             </div>
             <div class="faq-item">
-                <h3 id="what-is-heldtomaturity-accounting">What is held-to-maturity accounting?</h3>
-                <p>ASC 320: formal HTM category with strict reclassification rules. IFRS 9: amortised cost applies if business model is hold-to-collect (more flexible).</p>
+                <h3 id="what-is-the-sppi-test-under-ifrs-9">What is the SPPI test under IFRS 9?</h3>
+                <p>SPPI means solely payments of principal and interest. Under IFRS 9 paragraph 4.1.2 an asset can only be amortised cost or FVOCI if its contractual cash flows are solely principal and interest on the amount outstanding. Features like conversion options or leverage fail SPPI and push the asset to FVTPL under paragraph 4.1.4.</p>
+            </div>
+            <div class="faq-item">
+                <h3 id="does-the-ifrs-9-equity-fvoci-election-allow-recycling">Does the IFRS 9 equity FVOCI election allow recycling?</h3>
+                <p>No. Under IFRS 9 paragraph 5.7.5 the election is irrevocable and instrument-by-instrument, and paragraph B5.7.1 confirms the amounts in OCI are never reclassified to profit or loss, even on disposal. Only dividends hit profit or loss; the cumulative gain may be transferred within equity.</p>
             </div>
             <div class="faq-item">
                 <h3 id="what-is-the-difference-between-ecl-and-cecl">What is the difference between ECL and CECL?</h3>
-                <p>IFRS ECL: 12-month losses initially (Stage 1), lifetime on upgrade. ASC CECL: lifetime losses from day one. IFRS is lower initially; ASC is immediate.</p>
+                <p>IFRS 9 uses a three-stage ECL model starting at 12-month expected loss, moving to lifetime on a significant increase in credit risk. US GAAP ASC 326 (CECL) requires lifetime expected credit losses from day one with no staging. IFRS impairment is usually lower on origination; the two converge over a full credit cycle.</p>
+            </div>
+            <div class="faq-item">
+                <h3 id="did-us-gaap-keep-the-available-for-sale-category">Did US GAAP keep the available-for-sale category?</h3>
+                <p>Yes, for debt securities only. ASC 320 retains HTM, AFS and trading for debt; AFS debt is at fair value with changes in OCI, similar to IFRS 9 FVOCI debt. ASU 2016-01 removed AFS for equities, which now sit under ASC 321 at fair value through net income.</p>
+            </div>
+            <div class="faq-item">
+                <h3 id="how-are-equity-securities-measured-under-asc-321">How are equity securities measured under ASC 321?</h3>
+                <p>Under ASC 321-10-35-1 (from ASU 2016-01), equity investments are at fair value with changes in net income. Entities without readily determinable fair values may elect the measurement alternative: cost less impairment, adjusted for observable price changes in orderly transactions for identical or similar instruments.</p>
+            </div>
+            <div class="faq-item">
+                <h3 id="when-can-financial-assets-be-reclassified-under-ifrs-9">When can financial assets be reclassified under IFRS 9?</h3>
+                <p>Only when the entity changes its business model, which IFRS 9 paragraph 4.4.1 expects to be very infrequent, applied prospectively from the next period. Equity investments and FVTPL-designated assets can never be reclassified (paragraph 4.4.2).</p>
+            </div>
+            <div class="faq-item">
+                <h3 id="can-htm-securities-be-reclassified-under-us-gaap">Can held-to-maturity securities be reclassified under US GAAP?</h3>
+                <p>Only in narrow circumstances. Selling HTM securities under ASC 320 taints the whole portfolio, forcing reclassification to AFS and generally barring HTM classification for two years, unless the sale falls within limited exceptions (near maturity, after collecting most principal, or an isolated event beyond the entity's control).</p>
             </div>
 
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
                     <h4 id="about-the-author-usman-qureshi-acca-aca">About the author — Usman Qureshi (ACCA, ACA)</h4>
-                    <p>Usman has audited investment portfolios and debt securities for banks and insurers. He specialises in IFRS 9 and ASC 320/321 classification and impairment.</p>
+                    <p>Usman has audited investment portfolios and debt securities for banks and insurers across IFRS, UK GAAP and US GAAP. He specialises in IFRS 9 and ASC 320/321 classification, measurement and impairment, and in the audit of fair value estimates under ISA 540.</p>
                 </div>
             </div>
 
             <div class="related">
                 <h3 id="related-resources">Related resources</h3>
-                <a href="https://www.uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">→ Back to IFRS vs US GAAP Comparison</a>
+                <a href="https://www.uqconsulting.org/blog/ifrs-vs-us-gaap-comparison.html">→ IFRS vs US GAAP: the full comparison hub</a>
+                <a href="https://www.uqconsulting.org/gaap-compare.html">→ GAAP Compare tool — IFRS 9 vs ASC 320/321 side by side</a>
+                <a href="https://www.uqconsulting.org/blog/revenue-recognition-ifrs-15-vs-asc-606-deep-dive.html">→ Revenue: IFRS 15 vs ASC 606 deep dive</a>
+                <a href="https://www.uqconsulting.org/index.html">→ Free AI audit &amp; accounting tools</a>
             </div>
 
-            <p class="disclaimer">This guide is simplified. Financial instruments are complex; outcomes depend on specific facts and judgments. Consult IFRS 9 and ASC 320/321 full text, and your own advisors.</p>
-        
-<h2 id="real-life-case-study">Real-Life Case Study: Classifying an Equity Investment, IFRS 9 vs US GAAP</h2>
-<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A company holds a minority equity stake (no significant influence) it does not trade. How is it measured under IFRS 9 vs ASC 320/321?</p>
- <p><strong>The difference.</strong> Under IFRS 9, equities are FVTPL by default, but the entity can make an irrevocable election to present fair-value changes in OCI (with no recycling to P&amp;L on disposal). Under ASC 321, most equity investments are FVTPL with no OCI option, though a measurement alternative exists for those without readily determinable fair values.</p>
- <p><strong>Takeaway.</strong> The FVOCI-for-equities election is an IFRS-only tool, and crucially those OCI gains never recycle to profit, unlike FVOCI debt. A dual reporter can show very different volatility on the same shareholding.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
-</div>
-
-</article>
+            <p class="disclaimer">This guide is a technical overview, not advice. Financial instrument accounting is fact-specific and judgemental; outcomes depend on the individual instrument, business model and framework. Always consult the full text of IFRS 9, ASC 320, ASC 321 and ASC 326, and your own advisors. Company figures are drawn from public filings as cited and are rounded; cross-framework comparisons are illustrative.</p>
+        </article>
     </div>
 </body>
 </html>

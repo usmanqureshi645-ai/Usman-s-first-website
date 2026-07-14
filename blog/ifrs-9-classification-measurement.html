@@ -91,188 +91,270 @@
     &gt; <a href="ifrs-9-financial-instruments-complete-guide.html" style="color: #2a4a7a; text-decoration: none;">IFRS 9 Financial Instruments</a> 
     &gt; <span style="color: #1a2f5a;">IFRS 9 Classification & Measurement: Business Model Test & SPPI Explained</span>
 </div>
-        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 10 min read</div>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 16 min read</div>
 
-        <p class="lead">IFRS 9 classification determines whether a financial asset is measured at amortised cost, fair value through OCI, or fair value through P&L. The decision hinges on two gates: the business model test (what does management intend?) and the SPPI test (do cash flows consist solely of principal + interest?). This guide walks you through both tests with decision trees and real examples.</p>
+        <p class="lead">IFRS 9 classification determines whether a financial asset is measured at amortised cost, fair value through other comprehensive income (FVOCI), or fair value through profit or loss (FVTPL). The decision hinges on two sequential gates in IFRS 9.4.1.1: the business model test (how does the entity manage the asset to generate cash?) and the SPPI test (are the contractual cash flows solely payments of principal and interest?). This guide walks through both tests, the equity FVOCI election, reclassification triggers, and the cash-flow edge cases that catch preparers out, with decision trees, journals and a real bank case study.</p>
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#classification-gateway">Classification: The Gateway Decision</a></li><li class="toc-l1"><a href="#business-model-test">Business Model Test: What's Management's Intention?</a><ul><li class="toc-l2"><a href="#model-1-hold-to-collect-htc">Model 1: Hold to Collect (HTC)</a></li><li class="toc-l2"><a href="#model-2-hold-to-collect-and-sell-htcs">Model 2: Hold to Collect and Sell (HTCS)</a></li><li class="toc-l2"><a href="#model-3-other-active-trading">Model 3: Other (Active Trading)</a></li></ul></li><li class="toc-l1"><a href="#sppi-test">SPPI Test: Solely Payments of Principal and Interest?</a><ul><li class="toc-l2"><a href="#what-passes-sppi">What Passes SPPI</a></li><li class="toc-l2"><a href="#what-fails-sppi">What Fails SPPI</a></li></ul></li><li class="toc-l1"><a href="#measurement-outcomes">Measurement Outcomes: Test Combinations</a></li><li class="toc-l1"><a href="#worked">Worked Examples by Asset Type</a><ul><li class="toc-l2"><a href="#example-1-corporate-bond-amortised-cost">Example 1: Corporate Bond (Amortised Cost)</a></li><li class="toc-l2"><a href="#example-2-bond-portfolio-with-sales-fvoci">Example 2: Bond Portfolio with Sales (FVOCI)</a></li><li class="toc-l2"><a href="#example-3-convertible-bond-fvpl">Example 3: Convertible Bond (FVPL)</a></li></ul></li><li class="toc-l1"><a href="#audit-challenges">Audit Challenges in Classification</a><ul><li class="toc-l2"><a href="#challenge-1-business-model-misclassification">Challenge 1: Business Model Misclassification</a></li><li class="toc-l2"><a href="#challenge-2-undocumented-business-model">Challenge 2: Undocumented Business Model</a></li><li class="toc-l2"><a href="#challenge-3-sppi-edge-cases">Challenge 3: SPPI Edge Cases</a><ul><li class="toc-l3"><a href="#usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</a></li></ul></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Does a Loan Pass the SPPI Test?</a></li></ul>
+            <ul><li class="toc-l1"><a href="#classification-gateway">How does IFRS 9 classify a financial asset?</a></li><li class="toc-l1"><a href="#business-model-test">What is the business model test?</a><ul><li class="toc-l2"><a href="#model-1-hold-to-collect-htc">Hold to Collect (HTC)</a></li><li class="toc-l2"><a href="#model-2-hold-to-collect-and-sell-htcs">Hold to Collect and Sell (HTCS)</a></li><li class="toc-l2"><a href="#model-3-other-active-trading">Other business models</a></li><li class="toc-l2"><a href="#equity-fvoci-election">Equity FVOCI election (no recycling)</a></li></ul></li><li class="toc-l1"><a href="#sppi-test">What is the SPPI test?</a><ul><li class="toc-l2"><a href="#what-passes-sppi">What passes SPPI</a></li><li class="toc-l2"><a href="#what-fails-sppi">What fails SPPI</a></li><li class="toc-l2"><a href="#sppi-edge-cases">Edge cases: MTVM, non-recourse, CLIs</a></li></ul></li><li class="toc-l1"><a href="#measurement-outcomes">How do the two tests combine?</a></li><li class="toc-l1"><a href="#worked">Worked examples & reclassification journal</a><ul><li class="toc-l2"><a href="#example-1-sppi-decision-tree">SPPI decision tree (4 instruments)</a></li><li class="toc-l2"><a href="#example-2-reclassification-journal">Reclassification journal</a></li></ul></li><li class="toc-l1"><a href="#audit-challenges">What are the auditor red flags?</a><ul><li class="toc-l2"><a href="#challenge-1-business-model-misclassification">Red flag 1: sales vs HTC (ISA 500)</a></li><li class="toc-l2"><a href="#challenge-2-undocumented-business-model">Red flag 2: undocumented policy (ISA 315)</a></li><li class="toc-l2"><a href="#challenge-3-sppi-edge-cases">Red flag 3: optimistic SPPI (ISA 540)</a></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Case study: Barclays business-model policy</a></li><li class="toc-l1"><a href="#faq">Frequently asked questions</a></li></ul>
         </div>
 
         <article>
-            <h2 id="classification-gateway">Classification: The Gateway Decision</h2>
-            <p>The first step in IFRS 9 is classifying every financial asset into one of three measurement categories:</p>
+            <h2 id="classification-gateway">How does IFRS 9 classify a financial asset?</h2>
+            <p>IFRS 9 classifies every financial asset into one of three measurement categories, amortised cost, FVOCI or FVTPL, by applying two tests together under IFRS 9.4.1.1: the entity's business model for managing the asset and the contractual cash-flow (SPPI) characteristics of the instrument. A debt instrument reaches amortised cost only if it is held to collect and its cash flows are solely principal and interest; it reaches FVOCI if it is held to collect and sell and passes SPPI; everything else, including all instruments that fail SPPI, defaults to FVTPL (IFRS 9.4.1.2, 4.1.2A, 4.1.4).</p>
+            <p>The order of operations matters. IFRS 9.4.1.1 frames classification as a single assessment made "on the basis of both" the business model and the cash-flow characteristics, but in practice preparers screen SPPI first because a failing instrument cannot reach amortised cost or FVOCI under any business model. The business model is assessed at a level that reflects how groups of assets are managed together to achieve a business objective (IFRS 9.B4.1.2), not instrument by instrument, and not on management's intent for an individual asset (IFRS 9.B4.1.2). The table below fixes the vocabulary used throughout this guide.</p>
             <table>
                 <tr>
                     <th>Category</th>
-                    <th>Measurement</th>
-                    <th>When Changes in FV Go</th>
+                    <th>Balance sheet measurement</th>
+                    <th>Where movements go</th>
+                    <th>Reference</th>
                 </tr>
                 <tr>
                     <td><strong>Amortised Cost (AC)</strong></td>
-                    <td>Book value (cost −’ repayments −’ impairment)</td>
-                    <td>Fair value changes are not recognized</td>
+                    <td>Cost using the effective interest method, less repayments and ECL impairment</td>
+                    <td>Interest and impairment to P&amp;L; no fair-value remeasurement</td>
+                    <td>IFRS 9.4.1.2, 5.4.1</td>
                 </tr>
                 <tr>
-                    <td><strong>FVOCI</strong></td>
-                    <td>Fair value (balance sheet)</td>
-                    <td>Changes in fair value go to OCI; reclassified to P&L when sold</td>
+                    <td><strong>FVOCI (debt)</strong></td>
+                    <td>Fair value on the balance sheet</td>
+                    <td>Fair-value changes to OCI; interest, ECL and FX to P&amp;L; OCI recycled to P&amp;L on derecognition</td>
+                    <td>IFRS 9.4.1.2A, 5.7.10-5.7.11</td>
                 </tr>
                 <tr>
-                    <td><strong>FVPL</strong></td>
-                    <td>Fair value (balance sheet)</td>
-                    <td>Changes in fair value go immediately to P&L</td>
+                    <td><strong>FVOCI (equity election)</strong></td>
+                    <td>Fair value on the balance sheet</td>
+                    <td>Fair-value changes to OCI, <em>never recycled</em>; only dividends to P&amp;L</td>
+                    <td>IFRS 9.5.7.5-5.7.6</td>
+                </tr>
+                <tr>
+                    <td><strong>FVTPL</strong></td>
+                    <td>Fair value on the balance sheet</td>
+                    <td>All fair-value changes straight to P&amp;L</td>
+                    <td>IFRS 9.4.1.4, 5.7.1</td>
                 </tr>
             </table>
+            <p class="callout"><strong>Two exceptions to the mechanical outcome.</strong> First, an entity may make an irrevocable election at initial recognition to present changes in the fair value of a non-held-for-trading equity investment in OCI (IFRS 9.5.7.5). Second, an entity may irrevocably designate a debt asset at FVTPL at initial recognition if doing so eliminates or significantly reduces an accounting mismatch, the "fair value option" (IFRS 9.4.1.5). Both are one-way doors, decided on day one.</p>
 
-            <h2 id="business-model-test">Business Model Test: What's Management's Intention?</h2>
-            <p>IFRS 9 recognizes three business models for holding financial assets:</p>
+            <h2 id="business-model-test">What is the business model test under IFRS 9?</h2>
+            <p>The business model test asks how an entity manages a group of financial assets to generate cash, not what it intends to do with any single asset (IFRS 9.4.1.1(a), B4.1.1-B4.1.2). It is a matter of fact, evidenced by how the business is managed and information reported to key management personnel, how performance is evaluated, and how risks are managed and managers are compensated (IFRS 9.B4.1.2B). Because it is factual rather than aspirational, the assessment must be supportable by observable activity, past sales frequency and value, the reasons for sales, and expectations about future sales (IFRS 9.B4.1.2A, B4.1.2C).</p>
 
-            <h3 id="model-1-hold-to-collect-htc">Model 1: Hold to Collect (HTC)</h3>
-            <p><strong>Objective:</strong> Hold the asset to maturity to collect contractual cash flows</p>
-            <p><strong>Key indicators:</strong></p>
+            <h3 id="model-1-hold-to-collect-htc">Hold to Collect (HTC) &rarr; amortised cost</h3>
+            <p>In a hold-to-collect model the objective is to hold assets to collect contractual cash flows, and selling is incidental to that objective (IFRS 9.B4.1.2C, B4.1.3). Sales are not automatically inconsistent with HTC: sales due to a deterioration in credit quality are consistent with the model regardless of frequency and value, as are sales that are infrequent (even if significant) or insignificant individually and in aggregate (IFRS 9.B4.1.3-B4.1.3B). The judgement is whether sales, viewed against the collection objective, are more than "incidental."</p>
             <ul>
-                <li>No active trading or frequent exits</li>
-                <li>Sales are exceptional or for liquidity/credit quality reasons</li>
-                <li>Portfolio is held for fixed, predictable cash flows (e.g., pension fund matching liabilities)</li>
-            </ul>
-            <p><strong>Measurement potential:</strong> Amortised Cost (if SPPI passes)</p>
-
-            <h3 id="model-2-hold-to-collect-and-sell-htcs">Model 2: Hold to Collect and Sell (HTCS)</h3>
-            <p><strong>Objective:</strong> Collect contractual cash flows AND manage the portfolio by selling assets as needed</p>
-            <p><strong>Key indicators:</strong></p>
-            <ul>
-                <li>Sales are expected and significant (e.g., 10— 30% per year)</li>
-                <li>Sales are part of the management strategy (e.g., rebalancing, interest rate management)</li>
-                <li>Asset is typically held to maturity, but not exclusively</li>
-            </ul>
-            <p><strong>Measurement potential:</strong> FVOCI (if SPPI passes)</p>
-
-            <h3 id="model-3-other-active-trading">Model 3: Other (Active Trading)</h3>
-            <p><strong>Objective:</strong> Manage the portfolio for trading profits, not primarily for cash flows</p>
-            <p><strong>Key indicators:</strong></p>
-            <ul>
-                <li>Frequent buying and selling</li>
-                <li>Performance evaluated by fair value changes</li>
-                <li>Asset is a trading position (e.g., derivatives, trading desk holdings)</li>
-            </ul>
-            <p><strong>Measurement potential:</strong> FVPL (always)</p>
-
-            <h2 id="sppi-test">SPPI Test: Solely Payments of Principal and Interest?</h2>
-            <p>This test asks: <strong>Do the contractual cash flows consist solely of principal and interest?</strong></p>
-            <p>If YES →’ can be classified AC or FVOCI (depending on business model)</p>
-            <p>If NO →’ must be classified FVPL</p>
-
-            <h3 id="what-passes-sppi">What Passes SPPI</h3>
-            <ul>
-                <li>Fixed-rate bonds ✓</li>
-                <li>Variable-rate loans (interest resets per market rates) ✓</li>
-                <li>Mortgages with standard terms ✓</li>
-                <li>Trade receivables (with normal credit terms) ✓</li>
+                <li>Objective: collect the contractual coupon and principal to maturity (IFRS 9.B4.1.2C).</li>
+                <li>Sales are exceptional, credit-driven, or infrequent (IFRS 9.B4.1.3-B4.1.4).</li>
+                <li>Typical holdings: a bank's core loan book, held-to-maturity treasury bonds, trade receivables.</li>
+                <li>Outcome if SPPI passes: <strong>amortised cost</strong>.</li>
             </ul>
 
-            <h3 id="what-fails-sppi">What Fails SPPI</h3>
+            <h3 id="model-2-hold-to-collect-and-sell-htcs">Hold to Collect and Sell (HTCS) &rarr; FVOCI</h3>
+            <p>In a hold-to-collect-and-sell model, both collecting contractual cash flows and selling are integral to achieving the objective (IFRS 9.4.1.2A, B4.1.4A-B4.1.4B). Compared with HTC, selling here is more frequent and greater in value and is fundamental rather than incidental, for example managing liquidity, matching the duration of assets to liabilities, or maintaining a yield profile (IFRS 9.B4.1.4A-B4.1.4C). There is no bright-line sales threshold; a 15%-of-portfolio annual turnover is not a rule, it is illustrative of a pattern that is greater than incidental.</p>
             <ul>
-                <li>Equities (no principal repayment) ✗</li>
-                <li>Convertible bonds (embedded equity option changes the cash flows) ✗</li>
-                <li>Structured products with leveraged returns ✗</li>
-                <li>Loans with contingent payments tied to EBITDA or stock price ✗</li>
-                <li>Loans where prepayment penalties compensate lender for lost interest (judgment) ✗</li>
+                <li>Objective: collect cash flows <em>and</em> sell as part of managing the portfolio (IFRS 9.B4.1.4A).</li>
+                <li>Sales are expected, integral, and often material in value and frequency (IFRS 9.B4.1.4B).</li>
+                <li>Typical holdings: an insurer's or bank's liquidity buffer of high-quality bonds.</li>
+                <li>Outcome if SPPI passes: <strong>FVOCI (debt)</strong>.</li>
             </ul>
 
-            <h2 id="measurement-outcomes">Measurement Outcomes: Test Combinations</h2>
+            <h3 id="model-3-other-active-trading">Other business models &rarr; FVTPL</h3>
+            <p>Any business model that is neither HTC nor HTCS is a residual "other" model, and assets in it are measured at FVTPL (IFRS 9.B4.1.5-B4.1.6). This captures portfolios managed and evaluated on a fair-value basis, held for trading, or where cash flows are realised through sale rather than collection (IFRS 9.B4.1.5-B4.1.6). Held-for-trading positions and stand-alone derivatives fall here by definition, and because the outcome is FVTPL, the SPPI test is largely moot for these assets.</p>
+            <ul>
+                <li>Objective: realise fair-value changes, not collect contractual cash flows (IFRS 9.B4.1.5).</li>
+                <li>Performance managed and reported on a fair-value basis (IFRS 9.B4.1.6).</li>
+                <li>Typical holdings: trading-desk inventory, derivatives, actively managed fair-value portfolios.</li>
+                <li>Outcome regardless of SPPI: <strong>FVTPL</strong>.</li>
+            </ul>
+
+            <h3 id="equity-fvoci-election">The equity FVOCI election (no recycling)</h3>
+            <p>Equity investments do not have contractual cash flows, so they always fail SPPI and default to FVTPL, unless the entity makes the irrevocable FVOCI presentation election at initial recognition for an investment that is not held for trading and not contingent consideration under IFRS 3 (IFRS 9.5.7.5). The critical feature is that amounts presented in OCI are <em>never</em> recycled to profit or loss, not on sale, not on impairment; only dividends that represent a return on investment go through P&amp;L, and any cumulative gain or loss may be transferred within equity on derecognition (IFRS 9.5.7.6, B5.7.1). This is the single sharpest difference from the debt FVOCI category, where recycling <em>is</em> required, and mixing the two up is one of the most common technical errors in practice.</p>
+
+            <h2 id="sppi-test">What is the SPPI test and what passes or fails it?</h2>
+            <p>The SPPI test asks whether the contractual terms give rise, on specified dates, to cash flows that are solely payments of principal and interest on the principal amount outstanding (IFRS 9.4.1.2(b), 4.1.3, B4.1.7). Principal is the fair value of the asset at initial recognition, and interest is consideration for the time value of money, credit risk, other basic lending risks and costs (liquidity, administration), and a profit margin (IFRS 9.4.1.3(a)-(b), B4.1.7A). If the terms introduce exposure to risks or volatility unrelated to a basic lending arrangement, for example equity or commodity prices, the asset fails SPPI and is measured at FVTPL (IFRS 9.B4.1.7-B4.1.9).</p>
+
+            <h3 id="what-passes-sppi">What passes SPPI</h3>
+            <ul>
+                <li>Fixed-rate bonds and loans, and standard variable-rate loans that reset to a market benchmark (IFRS 9.B4.1.9).</li>
+                <li>Loans with a cap, floor, or collar on a floating rate, provided the feature only reduces cash-flow variability and does not introduce leverage (IFRS 9.B4.1.11(b)).</li>
+                <li>Prepayment and extension features where the prepayment amount substantially represents unpaid principal and interest plus reasonable compensation for early termination (IFRS 9.B4.1.11(b), B4.1.12).</li>
+                <li>Full-recourse residential mortgages and trade receivables on normal terms (IFRS 9.B4.1.7-B4.1.9).</li>
+            </ul>
+
+            <h3 id="what-fails-sppi">What fails SPPI</h3>
+            <ul>
+                <li>Equity instruments, which have no principal to repay (IFRS 9.4.1.4, B4.1.9).</li>
+                <li>Convertible bonds held as assets, because the equity conversion right introduces returns unrelated to a basic lending arrangement (IFRS 9.B4.1.14 instrument F).</li>
+                <li>Loans with interest linked to the borrower's profit, EBITDA, revenue, or an equity/commodity index, i.e. contingent leverage-linked returns (IFRS 9.B4.1.7-B4.1.8).</li>
+                <li>Inverse-floating or leveraged interest terms that magnify cash-flow variability (IFRS 9.B4.1.9, B4.1.14 instrument D).</li>
+                <li>Instruments where a bail-in or write-down clause can extinguish principal outside insolvency (IFRS 9.B4.1.13 instrument A vs constant-monitoring cases).</li>
+            </ul>
+
+            <h3 id="sppi-edge-cases">Edge cases: modified time value of money, non-recourse and contractually linked instruments</h3>
+            <p><strong>Modified time value of money.</strong> When the interest rate is reset but its tenor is mismatched to the reset frequency, for example a rate that resets monthly to a one-year rate, the time value of money element is "modified," and the entity must assess whether the modification could result in contractual cash flows significantly different from a benchmark instrument with a perfectly matched rate (IFRS 9.B4.1.9A-B4.1.9E). If the difference could be significant in any reasonably possible scenario, SPPI fails (IFRS 9.B4.1.9C-B4.1.9D). Regulated rates set by government can be treated as a proxy for the time-value-of-money element if they provide consideration broadly consistent with the passage of time and no leverage (IFRS 9.B4.1.9E).</p>
+            <p><strong>Non-recourse assets.</strong> The fact that an asset is non-recourse, i.e. the holder's claim is limited to specified assets or cash flows, does not by itself fail SPPI, but the holder must "look through" to the underlying assets or cash flows to check they are consistent with a basic lending return (IFRS 9.B4.1.16-B4.1.17). If repayment ultimately depends on the performance of, say, an underlying property or project's equity-like upside, SPPI fails.</p>
+            <p><strong>Contractually linked instruments (tranched structures).</strong> For securitisation tranches that create concentrations of credit risk, IFRS 9 requires a three-condition look-through: the tranche passes SPPI only if (i) its own terms give rise to SPPI cash flows, (ii) the underlying pool of instruments itself contains SPPI-consistent instruments (plus permitted risk-reducing derivatives), and (iii) the tranche's exposure to credit risk in the underlying pool is equal to or lower than that of the underlying pool (IFRS 9.B4.1.20-B4.1.26). A junior/equity tranche typically fails condition (iii) because it absorbs first losses and is more exposed than the pool average, forcing FVTPL.</p>
+
+            <h2 id="measurement-outcomes">How do the two tests combine into a measurement category?</h2>
+            <p>The two tests intersect in a simple matrix, but the residual "other" model and the FVTPL default for SPPI failures mean fair value is the catch-all. The following table combines both gates with the relevant references.</p>
             <table>
                 <tr>
-                    <th>Business Model</th>
-                    <th>SPPI Pass?</th>
-                    <th>Measurement Category</th>
+                    <th>Business model</th>
+                    <th>SPPI pass?</th>
+                    <th>Measurement category</th>
+                    <th>Reference</th>
                 </tr>
                 <tr>
-                    <td>HTC</td>
+                    <td>Hold to collect (HTC)</td>
                     <td>Yes</td>
-                    <td>Amortised Cost (AC)</td>
+                    <td>Amortised cost</td>
+                    <td>IFRS 9.4.1.2</td>
                 </tr>
                 <tr>
-                    <td>HTC</td>
+                    <td>Hold to collect (HTC)</td>
                     <td>No</td>
-                    <td>FVPL</td>
+                    <td>FVTPL</td>
+                    <td>IFRS 9.4.1.4</td>
                 </tr>
                 <tr>
-                    <td>HTCS</td>
+                    <td>Hold to collect and sell (HTCS)</td>
                     <td>Yes</td>
-                    <td>FVOCI</td>
+                    <td>FVOCI (debt, with recycling)</td>
+                    <td>IFRS 9.4.1.2A</td>
                 </tr>
                 <tr>
-                    <td>HTCS</td>
+                    <td>Hold to collect and sell (HTCS)</td>
                     <td>No</td>
-                    <td>FVPL</td>
+                    <td>FVTPL</td>
+                    <td>IFRS 9.4.1.4</td>
                 </tr>
                 <tr>
-                    <td>Other (Trading)</td>
+                    <td>Other / trading</td>
                     <td>Yes or No</td>
-                    <td>FVPL</td>
+                    <td>FVTPL</td>
+                    <td>IFRS 9.4.1.4, B4.1.6</td>
+                </tr>
+                <tr>
+                    <td>Any (equity, election made)</td>
+                    <td>n/a</td>
+                    <td>FVOCI (no recycling)</td>
+                    <td>IFRS 9.5.7.5</td>
                 </tr>
             </table>
 
-            <h2 id="worked">Worked Examples by Asset Type</h2>
+            <h2 id="worked">Worked examples: SPPI decision tree and a reclassification journal</h2>
+            <p>The first worked example applies the SPPI decision tree to four instrument types held within an HTC business model, so the business-model gate is constant and the classification turns entirely on the cash-flow characteristics (IFRS 9.4.1.2, B4.1.7-B4.1.26). The second walks through the journals when a change in business model triggers a reclassification out of amortised cost into FVOCI (IFRS 9.4.4.1, 5.6.5).</p>
 
-            <h3 id="example-1-corporate-bond-amortised-cost">Example 1: Corporate Bond (Amortised Cost)</h3>
-            <p><strong>Scenario:</strong> Bank purchases a 5-year £10m corporate bond at par, 4% fixed coupon, held to maturity</p>
-            <ul>
-                <li><strong>Business model:</strong> HTC (held to maturity)</li>
-                <li><strong>SPPI test:</strong> Cash flows = £4m annual coupon + £10m principal. Solely principal + interest? YES</li>
-                <li><strong>Classification:</strong> Amortised Cost</li>
-                <li><strong>Measurement:</strong> £10m on balance sheet (adjusted for amortization and any impairment). Interest income £400k/year. Fair value changes are not recognized.</li>
-            </ul>
+            <h3 id="example-1-sppi-decision-tree">Example 1: SPPI decision tree applied to four instruments</h3>
+            <table>
+                <tr>
+                    <th>Instrument (all HTC)</th>
+                    <th>Cash-flow feature</th>
+                    <th>SPPI?</th>
+                    <th>Classification</th>
+                </tr>
+                <tr>
+                    <td>5-year £10m corporate bond, 4% fixed</td>
+                    <td>Coupon + principal only</td>
+                    <td>Pass (B4.1.7-B4.1.9)</td>
+                    <td>Amortised cost</td>
+                </tr>
+                <tr>
+                    <td>£5m floating loan, 3-month SONIA + 150bps, 0% floor</td>
+                    <td>Market rate + margin; floor only reduces variability</td>
+                    <td>Pass (B4.1.11(b))</td>
+                    <td>Amortised cost</td>
+                </tr>
+                <tr>
+                    <td>£4m loan, margin steps up if EBITDA &lt; threshold</td>
+                    <td>Return varies with a non-credit performance metric</td>
+                    <td>Fail (B4.1.7-B4.1.8)</td>
+                    <td>FVTPL</td>
+                </tr>
+                <tr>
+                    <td>£2m junior securitisation tranche</td>
+                    <td>First-loss; credit exposure &gt; underlying pool</td>
+                    <td>Fail (B4.1.20-B4.1.26)</td>
+                    <td>FVTPL</td>
+                </tr>
+            </table>
+            <p>The two passing instruments reach amortised cost because a market-linked rate and a variability-reducing floor are consistent with a basic lending return (IFRS 9.B4.1.9, B4.1.11(b)). The EBITDA-linked margin fails because it exposes the lender to the borrower's operating performance beyond credit risk (IFRS 9.B4.1.7-B4.1.8), and the junior tranche fails condition (iii) of the contractually linked instruments look-through because it is more exposed to pool credit risk than the pool itself (IFRS 9.B4.1.24-B4.1.26). Both failures are measured at FVTPL regardless of the HTC objective, because SPPI is a contractual, not a behavioural, test (IFRS 9.4.1.4).</p>
 
-            <h3 id="example-2-bond-portfolio-with-sales-fvoci">Example 2: Bond Portfolio with Sales (FVOCI)</h3>
-            <p><strong>Scenario:</strong> Insurance company holds a £50m bond portfolio. Usually holds to maturity, but sells ~15% annually to rebalance</p>
-            <ul>
-                <li><strong>Business model:</strong> HTCS (hold to collect and sell)</li>
-                <li><strong>SPPI test:</strong> Bonds are standard; SPPI passes YES</li>
-                <li><strong>Classification:</strong> FVOCI</li>
-                <li><strong>Measurement:</strong> Fair value on balance sheet (updated each period). Gains/losses sit in OCI. When sold, OCI is reclassified to P&L (reclassification adjustment).</li>
-            </ul>
+            <h3 id="example-2-reclassification-journal">Example 2: business-model reclassification journal</h3>
+            <p>Reclassification is prohibited except when, and only when, an entity changes its business model for managing financial assets, which IFRS 9 expects to be very infrequent (IFRS 9.4.4.1, B4.4.1-B4.4.3). It is applied prospectively from the first day of the next reporting period (the reclassification date), with no restatement of previously recognised gains, losses or interest (IFRS 9.5.6.1). Suppose a bank reclassifies a £100m bond portfolio from amortised cost (carrying amount £100m) to FVOCI because it has shifted the portfolio into a hold-to-collect-and-sell liquidity model; fair value at the reclassification date is £97m.</p>
+            <p>Under IFRS 9.5.6.4, the asset is remeasured to fair value at the reclassification date and the difference between amortised cost and fair value is recognised in OCI; the effective interest rate and ECL measurement are unaffected by the reclassification.</p>
+            <table>
+                <tr>
+                    <th>Account</th>
+                    <th>Dr (£m)</th>
+                    <th>Cr (£m)</th>
+                </tr>
+                <tr>
+                    <td>OCI (fair-value reserve) &mdash; remeasurement loss</td>
+                    <td>3</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Financial assets &mdash; FVOCI (fair value £97m)</td>
+                    <td>97</td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Financial assets &mdash; amortised cost (derecognise carrying £100m)</td>
+                    <td></td>
+                    <td>100</td>
+                </tr>
+            </table>
+            <p>The £3m sits in OCI and unwinds to zero as the bonds approach par at maturity, or recycles to P&amp;L if sold, because this is <em>debt</em> FVOCI (IFRS 9.5.7.10-5.7.11). Had the reclassification been out of FVTPL into amortised cost, the fair value at the reclassification date would become the new gross carrying amount and a fresh effective interest rate would be determined (IFRS 9.5.6.3). Contrast this with the equity FVOCI election, which can never be reclassified because it is irrevocable (IFRS 9.4.4.1, 5.7.5).</p>
 
-            <h3 id="example-3-convertible-bond-fvpl">Example 3: Convertible Bond (FVPL)</h3>
-            <p><strong>Scenario:</strong> Company purchases a convertible bond with coupon + embedded call option</p>
-            <ul>
-                <li><strong>Business model:</strong> Assume HTC</li>
-                <li><strong>SPPI test:</strong> Cash flows include principal + coupon, but ALSO an embedded equity conversion option. Is this solely principal + interest? NO</li>
-                <li><strong>Classification:</strong> FVPL (SPPI failed, so FVPL regardless of business model)</li>
-                <li><strong>Measurement:</strong> Fair value on balance sheet. All gains/losses go directly to P&L.</li>
-            </ul>
+            <h2 id="audit-challenges">What are the auditor red flags in classification?</h2>
+            <p>Classification is a judgement-heavy area, and three red flags recur in audit. Each ties to a specific ISA and each has moved real numbers between measurement categories.</p>
 
-            <p class="callout"><strong>Key Point:</strong> If SPPI fails, the asset goes to FVPL even if management intends to hold it to maturity. SPPI is a contractual test, not a behavioral test.</p>
+            <h3 id="challenge-1-business-model-misclassification">Red flag 1: sales activity inconsistent with the stated HTC model (ISA 500)</h3>
+            <p>When an entity asserts a hold-to-collect model but the portfolio shows frequent, material sales, the audit evidence contradicts the assertion, and under ISA 500 the auditor must evaluate the relevance and reliability of that evidence rather than accept management's label. Analysing the frequency, value and timing of sales, and the stated reasons, is the primary substantive test (IFRS 9.B4.1.2A, B4.1.3B). Reclassifying a portfolio from amortised cost to FVOCI or FVTPL can inject fair-value volatility into OCI or P&amp;L that was previously invisible, so the misstatement is often material by nature even where the day-one carrying amount barely moves.</p>
 
-            <h2 id="audit-challenges">Audit Challenges in Classification</h2>
+            <h3 id="challenge-2-undocumented-business-model">Red flag 2: undocumented or after-the-fact business model policy (ISA 315)</h3>
+            <p>An absent or generic business-model policy is a control deficiency: ISA 315 (Revised) requires the auditor to understand the entity's process for classifying financial assets and to identify risks of material misstatement where that process is informal or inconsistently applied. If classification is decided instrument-by-instrument with no portfolio-level policy, or is documented only when the auditor asks, the risk of management bias rises and the auditor should treat classification as a significant risk requiring more persuasive evidence.</p>
 
-            <h3 id="challenge-1-business-model-misclassification">Challenge 1: Business Model Misclassification</h3>
-            <p><strong>Situation:</strong> Bank classifies a loan portfolio as HTC, but auditors find that 20% of the portfolio is sold each year for profit.</p>
-            <p><strong>Auditor action:</strong> Reclassify to HTCS (FVOCI). This can increase fair value volatility in OCI by £5— 10m+.</p>
-
-            <h3 id="challenge-2-undocumented-business-model">Challenge 2: Undocumented Business Model</h3>
-            <p><strong>Situation:</strong> No written policy on business model determination; classification appears arbitrary.</p>
-            <p><strong>Auditor action:</strong> Require documented policy and retroactive support for classifications.</p>
-
-            <h3 id="challenge-3-sppi-edge-cases">Challenge 3: SPPI Edge Cases</h3>
-            <p><strong>Situation:</strong> Company claims a structured product with partial capital protection (e.g., "100% principal guaranteed, but upside capped at 5%") passes SPPI.</p>
-            <p><strong>Auditor challenge:</strong> "The cap is not an interest rate component; it's a contingent payment feature. SPPI fails." Result: must be FVPL.</p>
+            <h3 id="challenge-3-sppi-edge-cases">Red flag 3: optimistic SPPI conclusions on structured or contingent terms (ISA 540)</h3>
+            <p>SPPI conclusions on modified-time-value, non-recourse, contingent-margin or tranched instruments are accounting estimates and judgements that fall squarely within ISA 540 (Revised), which requires the auditor to assess the reasonableness of significant assumptions and to challenge indicators of management bias. A recurring example is a partially capital-protected structured note asserted to pass SPPI because "principal is guaranteed": the cap and the participation feature introduce non-lending returns, so SPPI fails and the note is FVTPL (IFRS 9.B4.1.7-B4.1.9). The auditor tests the benchmark comparison for modified time value of money and the look-through for non-recourse and contractually linked instruments (IFRS 9.B4.1.9A-B4.1.9E, B4.1.16-B4.1.26).</p>
 
             <div class="author-bio">
                 <h4 id="usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</h4>
-                <p>Classification is the foundation of IFRS 9 accounting. Get it wrong, and everything downstream is wrong. I've seen misclassifications move entire portfolios to FVPL, creating 10-figure OCI volatility swings during audit.</p>
+                <p>Classification is the foundation of IFRS 9, get it wrong and every downstream number, ECL, hedge accounting, interest recognition, is built on sand. In practice the two failure modes I see most are treating the business model as management's intent for a single bond (it is a factual, portfolio-level assessment) and assuming a "principal-guaranteed" structured note passes SPPI. Read the interest and prepayment clauses of the actual contract before you assume amortised cost.</p>
             </div>
 
-            
-<h2 id="real-life-case-study">Real-Life Case Study: Does a Loan Pass the SPPI Test?</h2>
+<h2 id="real-life-case-study">Case study: how Barclays discloses its business-model and SPPI policy</h2>
 <div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A company holds two loans: Loan A pays principal plus interest linked to LIBOR; Loan B pays principal plus interest that steps up if the borrower's EBITDA falls below a threshold (a leverage-linked margin).</p>
- <p><strong>Analysis.</strong> Loan A's cash flows are solely payments of principal and interest, so SPPI is met, amortised cost is available. Loan B's margin varies with a non-credit performance metric, introducing exposure beyond a basic lending return, so it fails SPPI and must be measured at FVTPL.</p>
- <p><strong>Takeaway.</strong> Exotic pricing terms, profit-linked interest, equity conversion, leverage kickers, break the SPPI test and force fair value. Read the loan agreement's interest clause before assuming amortised cost.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
+<p><strong>Publicly disclosed policy.</strong> Barclays' published accounting policy states that financial assets are measured at amortised cost where they are held within a business model whose objective is to hold assets to collect contractual cash flows (a "hold to collect" model), and at fair value through other comprehensive income where the objective is achieved by both collecting contractual cash flows and selling financial assets (a "hold to collect and sell" model). Barclays discloses that classification is determined by both the SPPI ("solely payments of principal and interest") contractual cash-flow test and the business model test, and that it assesses the business model at a portfolio level rather than instrument by instrument.</p>
+<p><strong>Why it matters.</strong> This mirrors the IFRS 9.4.1.1-4.1.2A architecture exactly: the portfolio-level assessment is the point ISA 500 and ISA 315 test hardest, because it is where audit evidence (actual sales activity) must corroborate the stated objective. Barclays' liquidity buffer of high-quality bonds is the archetypal hold-to-collect-and-sell portfolio (FVOCI, debt, with recycling), while its core loan book is the archetypal hold-to-collect portfolio (amortised cost).</p>
+<p><strong>Illustrative bridge (not Barclays figures).</strong> To show the mechanics, if a bank reclassified a £100m hold-to-collect bond book into a hold-to-collect-and-sell model at a reclassification-date fair value of £97m, the £3m remeasurement would land in OCI per IFRS 9.5.6.4, exactly the journal in Example 2 above. This bridge is illustrative and does not represent any Barclays balance.</p>
+<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Source: Barclays PLC published accounting policies for classification of financial assets (annual report / IFRS 9 disclosures, home.barclays investor relations). Policy wording paraphrased, not reproduced. The numerical bridge is illustrative only and is not a Barclays figure.</p>
 </div>
+
+<h2 id="faq">Frequently asked questions</h2>
+
+<h3 id="faq-order">Do you apply the SPPI test or the business model test first?</h3>
+<p>IFRS 9.4.1.1 treats them as a single combined assessment, but in practice most preparers screen SPPI first: an instrument that fails SPPI is measured at FVTPL under every business model (IFRS 9.4.1.4), so there is no point assessing the business model for it. The business model then distinguishes amortised cost from FVOCI for the instruments that pass SPPI.</p>
+
+<h3 id="faq-sales-htc">Can you sell assets and still be in a hold-to-collect model?</h3>
+<p>Yes. Sales driven by an increase in credit risk are consistent with HTC regardless of frequency or value, and sales that are infrequent (even if significant) or individually and cumulatively insignificant are also consistent (IFRS 9.B4.1.3-B4.1.3B). What breaks HTC is a pattern of frequent, material sales that is integral to the objective, which points to a hold-to-collect-and-sell model instead (IFRS 9.B4.1.4A).</p>
+
+<h3 id="faq-equity-recycling">Does the equity FVOCI election allow recycling to profit or loss?</h3>
+<p>No. The equity FVOCI election under IFRS 9.5.7.5 is irrevocable and amounts in OCI are never recycled to P&amp;L, not on sale and not on impairment; only dividends representing a return on investment go through P&amp;L (IFRS 9.5.7.6). This is the opposite of debt FVOCI (IFRS 9.4.1.2A), where the OCI reserve <em>is</em> recycled on derecognition (IFRS 9.5.7.10-5.7.11).</p>
+
+<h3 id="faq-reclassify">When can a financial asset be reclassified?</h3>
+<p>Only when the entity changes the business model for managing the assets, which IFRS 9 expects to be very infrequent and requires to be determined by senior management as a result of external or internal changes significant to operations (IFRS 9.4.4.1, B4.4.1). Reclassification is applied prospectively from the reclassification date, the first day of the next reporting period, with no restatement (IFRS 9.5.6.1). A change in intent for a single asset, a temporary disappearance of a market, or a transfer between existing business models is <em>not</em> a change in business model (IFRS 9.B4.4.3).</p>
+
+<h3 id="faq-convertible">Why does a convertible bond held as an asset fail SPPI?</h3>
+<p>The embedded right to convert into the issuer's equity exposes the holder to returns unrelated to a basic lending arrangement, so the contractual cash flows are not solely principal and interest (IFRS 9.B4.1.14 instrument F). The whole instrument is measured at FVTPL; IFRS 9 does not permit separating the host debt from the embedded derivative for financial <em>assets</em>, unlike IAS 39.</p>
+
+<h3 id="faq-non-recourse">Does a non-recourse loan automatically fail SPPI?</h3>
+<p>No. Non-recourse status alone does not fail SPPI, but the holder must "look through" to the underlying assets or cash flows to confirm they are consistent with a basic lending return (IFRS 9.B4.1.16-B4.1.17). If ultimate repayment depends on equity-like performance of the underlying project or asset, SPPI fails and the loan is FVTPL.</p>
+
+<h3 id="faq-modified-tvm">What is "modified time value of money" and when does it fail SPPI?</h3>
+<p>It arises when the interest rate's reset frequency is mismatched to its tenor, for example a rate that resets monthly but references a one-year rate (IFRS 9.B4.1.9A-B4.1.9B). The entity compares the instrument's undiscounted cash flows to a benchmark instrument with a perfectly matched rate; if the difference could be significant in any reasonably possible scenario, SPPI fails (IFRS 9.B4.1.9C-B4.1.9D).</p>
 
 <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>
@@ -281,6 +363,7 @@
     <p style="margin-bottom: 8px; color: #4a5568;"><a href="ifrs-9-hedge-accounting.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• IFRS 9 Hedge Accounting: Cash Flow & Fair Value Hedges with Effectiveness Testing</a></p>
     <p style="margin-bottom: 8px; color: #4a5568;"><a href="ifrs-9-impairment-accounting.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• IFRS 9 Impairment Accounting: Lifetime ECL vs 12-Month ECL & Stage Movements</a></p>
     <p style="margin-bottom: 8px; color: #4a5568;"><a href="ifrs-9-modification-derecognition.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• IFRS 9 Modification & Derecognition: Loan Changes, Forgiveness & Exit Accounting</a></p>
+    <p style="margin-bottom: 8px; color: #4a5568;"><a href="financial-instruments-ifrs-9-vs-asc-320-321-deep-dive.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• Financial Instruments: IFRS 9 vs US GAAP (ASC 320/321) Deep-Dive</a></p>
 </div>
 
 <div class="disclaimer">
@@ -288,5 +371,94 @@
             </div>
         </article>
     </div>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "IFRS 9 Classification & Measurement: Business Model Test & SPPI Explained",
+  "description": "How IFRS 9 classifies financial assets into amortised cost, FVOCI or FVTPL via the business model test and the SPPI test, with worked examples, a reclassification journal, auditor red flags and a Barclays case study.",
+  "datePublished": "2026-05-01",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "name": "Usman Qureshi",
+    "jobTitle": "Audit & CFO Advisory (ACCA, ACA)",
+    "image": "https://www.uqconsulting.org/assets/usman-qureshi.jpg"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "UQ Consulting",
+    "url": "https://www.uqconsulting.org/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.uqconsulting.org/blog/ifrs-9-classification-measurement.html"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Do you apply the SPPI test or the business model test first?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IFRS 9.4.1.1 treats them as a single combined assessment, but in practice most preparers screen SPPI first because an instrument that fails SPPI is measured at FVTPL under every business model (IFRS 9.4.1.4). The business model then distinguishes amortised cost from FVOCI for instruments that pass SPPI."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you sell assets and still be in a hold-to-collect model?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Sales driven by an increase in credit risk are consistent with hold-to-collect regardless of frequency or value, and sales that are infrequent (even if significant) or individually and cumulatively insignificant are also consistent (IFRS 9.B4.1.3-B4.1.3B). Frequent material sales integral to the objective point instead to a hold-to-collect-and-sell model."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the equity FVOCI election allow recycling to profit or loss?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The equity FVOCI election under IFRS 9.5.7.5 is irrevocable and amounts in OCI are never recycled to profit or loss, not on sale and not on impairment; only dividends representing a return on investment go through profit or loss. This is the opposite of debt FVOCI, where the OCI reserve is recycled on derecognition."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When can a financial asset be reclassified?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Only when the entity changes its business model for managing the assets, which IFRS 9.4.4.1 expects to be very infrequent. Reclassification is applied prospectively from the reclassification date (the first day of the next reporting period) with no restatement. A change in intent for a single asset, a temporary market disappearance, or a transfer between existing business models is not a change in business model."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does a convertible bond held as an asset fail SPPI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The embedded right to convert into the issuer's equity exposes the holder to returns unrelated to a basic lending arrangement, so the contractual cash flows are not solely principal and interest (IFRS 9.B4.1.14 instrument F). The whole instrument is measured at FVTPL; IFRS 9 does not permit separating the host debt from the embedded derivative for financial assets."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a non-recourse loan automatically fail SPPI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Non-recourse status alone does not fail SPPI, but the holder must look through to the underlying assets or cash flows to confirm they are consistent with a basic lending return (IFRS 9.B4.1.16-B4.1.17). If ultimate repayment depends on equity-like performance of the underlying project or asset, SPPI fails and the loan is FVTPL."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is modified time value of money and when does it fail SPPI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "It arises when the interest rate's reset frequency is mismatched to its tenor, for example a rate that resets monthly but references a one-year rate (IFRS 9.B4.1.9A-B4.1.9B). The entity compares the instrument's undiscounted cash flows to a benchmark instrument with a perfectly matched rate; if the difference could be significant in any reasonably possible scenario, SPPI fails."
+      }
+    }
+  ]
+}
+</script>
 </body>
 </html>

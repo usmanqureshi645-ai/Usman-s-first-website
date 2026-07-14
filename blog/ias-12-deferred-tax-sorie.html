@@ -5,9 +5,9 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9LKFW8QCC8');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IAS 12 Deferred Tax on OCI: Recognizing Tax Effects in Other Comprehensive Income</title>
-    <meta name="description" content="IAS 12 SORIE: deferred tax on OCI items, revaluation, foreign currency, financial instruments, matching principle.">
-    <meta name="keywords" content="IAS 12 SORIE, deferred tax OCI, revaluation tax, other comprehensive income, matching principle">
+    <title>IAS 12 Deferred Tax on OCI and Equity Items (61A): SORIE, Revaluation, Pensions</title>
+    <meta name="description" content="IAS 12.61A: deferred tax on items recognised outside profit or loss follows the item to OCI or equity — revaluation surplus, cash flow hedges, FVOCI, pension remeasurements. Worked journals, auditor red flags (ISA 540), BT Group case study.">
+    <meta name="keywords" content="IAS 12.61A, deferred tax OCI, deferred tax equity, revaluation surplus tax, pension remeasurement deferred tax, SORIE, backward tracing, other comprehensive income tax">
     <meta name="author" content="Usman Qureshi">
     <link rel="canonical" href="https://www.uqconsulting.org/blog/ias-12-deferred-tax-sorie.html">
     <style>
@@ -70,6 +70,95 @@
 }
 /*TOC_SIDEBAR_END*/
     </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "IAS 12 Deferred Tax on OCI and Equity Items (61A): SORIE, Revaluation, Pensions",
+  "description": "IAS 12.61A requires deferred tax on items recognised outside profit or loss to be recognised in OCI or equity, following the item it relates to. Worked journals, auditor red flags and a BT Group case study.",
+  "datePublished": "2026-05-01",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "name": "Usman Qureshi",
+    "jobTitle": "Audit & CFO Advisory Consultant (ACCA, ACA)",
+    "image": "https://www.uqconsulting.org/images/usman-qureshi.jpg"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "UQ Consulting",
+    "url": "https://www.uqconsulting.org"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.uqconsulting.org/blog/ias-12-deferred-tax-sorie.html"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is deferred tax always a profit or loss item?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. IAS 12.58 makes profit or loss the default, but IAS 12.61A requires deferred tax to be recognised in OCI or directly in equity when it relates to an item recognised there. Revaluation surpluses, pension remeasurements, cash flow hedge reserves and FVOCI movements all carry their deferred tax outside profit or loss."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is backward tracing under IAS 12?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Backward tracing is the requirement to recognise a change in deferred tax in the same statement as the transaction that originally created the temporary difference. Under IAS 12.61A, if the original item went to OCI, the later movement in its deferred tax also goes to OCI, not profit or loss. IFRS retains backward tracing; US GAAP under ASC 740 generally does not."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does the revaluation surplus get shown gross or net of deferred tax?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "IAS 1.91 lets an entity present OCI components either net of tax or gross with a single aggregate tax line, but IAS 12.81(ab) requires the tax on each OCI component to be disclosed either way. The revaluation surplus in equity is commonly carried net of the related deferred tax liability."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is there deferred tax on the foreign currency translation reserve?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Usually not. IAS 12.39 to 12.44 exempt temporary differences on investments in foreign subsidiaries where the parent controls the timing of reversal and reversal is not probable in the foreseeable future, so most groups recognise no deferred tax on the translation reserve. Where a reversal such as a planned disposal is expected, the resulting deferred tax is recognised in OCI to match the reserve."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What happens to the deferred tax when a cash flow hedge reserve recycles to profit or loss?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The tax follows the item. While the effective portion of the hedge sits in the cash flow hedge reserve under IFRS 9.6.5.11 its deferred tax sits in OCI; when the reserve is reclassified into profit or loss or into the cost of a non-financial asset, the associated tax is reclassified with it, keeping tax matched to the underlying gain or loss throughout."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How did the old SORIE relate to today's OCI?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The pre-2009 statement of recognised income and expense collected items taken directly to equity. The 2009 IAS 1 revision replaced it with the statement of comprehensive income containing OCI and the statement of changes in equity. The IAS 12.61A principle, that tax follows its item outside profit or loss, did not change; only the presentation did."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Which auditing standard governs the tax on a pension remeasurement estimate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "ISA 540 (Revised) governs the audit of accounting estimates, including the actuarial remeasurement and its deferred tax effect, while ISA 500 governs obtaining sufficient appropriate audit evidence, for example agreeing the disclosed tax on each OCI component under IAS 12.81(ab) to the underlying movement."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
     <div class="topbar">
@@ -83,133 +172,136 @@
     &gt; <a href="ias-12-deferred-tax-complete-guide.html" style="color: #2a4a7a; text-decoration: none;">IAS 12 Deferred Tax</a> 
     &gt; <span style="color: #1a2f5a;">IAS 12 Deferred Tax on OCI: Recognizing Tax Effects in Other Comprehensive Income</span>
 </div>
-        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 10 min read</div>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published May 2026 · Updated July 2026 · 12 min read</div>
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#the-matching-principle-for-deferred-tax">The Matching Principle for Deferred Tax</a></li><li class="toc-l1"><a href="#common-oci-items-with-deferred-tax-effects">Common OCI Items with Deferred Tax Effects</a><ul><li class="toc-l2"><a href="#1-property-revaluation-ias-16">1. Property Revaluation (IAS 16)</a></li><li class="toc-l2"><a href="#2-foreign-currency-translation-ias-21">2. Foreign Currency Translation (IAS 21)</a></li><li class="toc-l2"><a href="#3-financial-instruments-ifrs-9">3. Financial Instruments (IFRS 9)</a></li><li class="toc-l2"><a href="#4-defined-benefit-pension-ias-19">4. Defined Benefit Pension (IAS 19)</a></li></ul></li><li class="toc-l1"><a href="#worked-example-property-revaluation">Worked Example: Property Revaluation</a><ul><li class="toc-l2"><a href="#scenario">Scenario</a></li><li class="toc-l2"><a href="#journal-entries-incorrect-common-error">Journal Entries (Incorrect — Common Error)</a></li><li class="toc-l2"><a href="#journal-entries-correct">Journal Entries (Correct)</a></li></ul></li><li class="toc-l1"><a href="#worked-example-foreign-subsidiary-consolidation-scenario-us-parent-consolidates-uk-subsidiary-uk-subsidiary-equity-10m-gbp-usd-exchange-rate-movement-130-120-usdgbp-translation-loss-10m-1120-1130-064m-uk-tax-rate-19-is-translation-difference-taxdeductible-no-foreign-translation-not-taxdeductible-journal-entry-consolidation-dr-oci-translation-reserve-064m-cr-consolidated-equity-064m-note-no-deferred-tax-adjustment-translation-differences-are-not-taxdeductible-in-most-jurisdictions-deferred-tax-on-oci-when-not-to-apply">Worked Example: Foreign Subsidiary Consolidation Scenario US parent consolidates UK subsidiary: — UK subsidiary equity: £10m (GBP) — USD exchange rate movement: 1.30 →’ 1.20 USD/GBP — Translation loss: £10m × (1/1.20 −’ 1/1.30) ≈ £0.64m — UK tax rate: 19% — Is translation difference tax-deductible? NO (foreign translation not tax-deductible) Journal Entry (Consolidation) Dr OCI (translation reserve) £0.64m &nbsp;&nbsp;&nbsp;&nbsp;Cr Consolidated equity £0.64m Note: No deferred tax adjustment (translation differences are not tax-deductible in most jurisdictions). Deferred Tax on OCI: When Not to Apply</a><ul><li class="toc-l2"><a href="#translation-differences">Translation Differences</a></li><li class="toc-l2"><a href="#reclassification-adjustments">Reclassification Adjustments</a></li></ul></li><li class="toc-l1"><a href="#audit-red-flags-sorie-deferred-tax">Audit Red Flags: SORIE Deferred Tax</a><ul><li class="toc-l2"><a href="#red-flag-1-tax-effect-in-wrong-location">Red Flag 1: Tax Effect in Wrong Location</a></li><li class="toc-l2"><a href="#red-flag-2-nondeductible-revaluation-taxed">Red Flag 2: Non-Deductible Revaluation Taxed</a></li><li class="toc-l2"><a href="#red-flag-3-tax-rate-applied-to-nontax-item">Red Flag 3: Tax Rate Applied to Non-Tax Item</a></li></ul></li><li class="toc-l1"><a href="#sorie-presentation">SORIE Presentation</a></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Deferred Tax That Follows Its Item to OCI</a></li></ul>
+            <ul><li class="toc-l1"><a href="#what-does-ias-12-61a-require">What does IAS 12.61A require for tax on OCI and equity items?</a></li><li class="toc-l1"><a href="#which-items-trigger-deferred-tax-in-oci">Which items trigger deferred tax outside profit or loss?</a><ul><li class="toc-l2"><a href="#revaluation-surplus-ias-16-38">Revaluation surplus (IAS 16 / IAS 38)</a></li><li class="toc-l2"><a href="#pension-remeasurements-ias-19">Pension remeasurements (IAS 19)</a></li><li class="toc-l2"><a href="#cash-flow-hedges-and-fvoci-ifrs-9">Cash flow hedges and FVOCI (IFRS 9)</a></li><li class="toc-l2"><a href="#translation-reserve-ias-21">Foreign currency translation reserve (IAS 21)</a></li></ul></li><li class="toc-l1"><a href="#worked-example-revaluation-surplus">Worked example: deferred tax on a property revaluation surplus</a></li><li class="toc-l1"><a href="#worked-example-pension-actuarial-loss">Worked example: deferred tax on a pension actuarial loss</a></li><li class="toc-l1"><a href="#sorie-to-oci-terminology">From SORIE to today's OCI: what changed?</a></li><li class="toc-l1"><a href="#audit-red-flags">Auditor red flags on deferred tax in OCI</a></li><li class="toc-l1"><a href="#real-life-case-study">Case study: BT Group pension remeasurement tax</a></li><li class="toc-l1"><a href="#faq">Frequently asked questions</a></li></ul>
         </div>
 
 
         <article>
-            <p>Many transactions flow through Other Comprehensive Income (OCI) rather than P&L— revaluations, foreign currency translations, gains/losses on financial instruments. IAS 12 requires recognizing the tax effect of these items in OCI (not P&L), a "matching" principle that is frequently misstated. This guide covers the mechanics and audit red flags.</p>
+            <p>Deferred tax is not automatically a profit-or-loss (P&amp;L) item. Under <strong>IAS 12.61A</strong>, current and deferred tax must be recognised outside profit or loss — in other comprehensive income (OCI) or directly in equity — whenever the tax relates to an item that is itself recognised in OCI or equity. The tax follows its item. A revaluation surplus sits in OCI, so the deferred tax on it sits in OCI; an actuarial loss on a defined benefit pension sits in OCI, so its deferred tax sits in OCI. This guide sets out the mechanics of IAS 12.61A, the five recurring triggers, two fully worked journals, the auditor red flags that catch this in practice, and a case study drawn only from BT Group's publicly filed figures. It is part of our <a href="ias-12-deferred-tax-complete-guide.html">IAS 12 deferred tax hub</a>.</p>
 
-            <h2 id="the-matching-principle-for-deferred-tax">The Matching Principle for Deferred Tax</h2>
+            <h2 id="what-does-ias-12-61a-require">What does IAS 12.61A require for tax on OCI and equity items?</h2>
 
-            <p class="callout"><strong>Rule:</strong> Recognize the tax effect of a transaction in the same location (P&L or OCI) as the pre-tax transaction itself. A revaluation gain in OCI should have its tax effect in OCI, not P&L.</strong></p>
+            <p>IAS 12.61A requires that current and deferred tax be recognised outside profit or loss if the tax relates to items that are recognised, in the same or a different period, outside profit or loss. The standard splits this into two limbs: tax on items recognised in <strong>other comprehensive income</strong> is itself recognised in OCI (IAS 12.61A(a)), and tax on items recognised <strong>directly in equity</strong> is itself recognised directly in equity (IAS 12.61A(b)). This is the "matching" or "backward tracing" principle, and it is one of the most frequently misstated areas of the standard.</p>
 
-            <h2 id="common-oci-items-with-deferred-tax-effects">Common OCI Items with Deferred Tax Effects</h2>
+            <p class="callout"><strong>The rule in one line:</strong> recognise the tax effect in the same statement — P&amp;L, OCI, or equity — as the pre-tax transaction that gave rise to it. Never route deferred tax on a revaluation surplus, a hedge reserve, or a pension remeasurement through the P&amp;L tax charge.</p>
 
-            <h3 id="1-property-revaluation-ias-16">1. Property Revaluation (IAS 16)</h3>
-            <p>Upward revaluation recognized in OCI (or equity). Deferred tax on the revaluation goes to OCI.</p>
+            <p>The wider architecture matters here. IAS 12.58 sets the default: current and deferred tax is recognised as income or expense in profit or loss, <em>except</em> to the extent it arises from a transaction recognised in OCI or equity (IAS 12.58(a)), or from a business combination (IAS 12.58(b)). IAS 12.61A then makes the exception operational. Because the tax cannot always be identified with a single line, IAS 12.63 permits a reasonable pro-rata allocation where a jurisdiction applies more than one rate or where the amount is otherwise not directly attributable. And IAS 12.68C creates a narrow but important carve-out: the tax benefit of share-based payments, where the deductible amount exceeds the cumulative remuneration expense, is split — the excess goes to equity, not P&amp;L.</p>
 
-            <h3 id="2-foreign-currency-translation-ias-21">2. Foreign Currency Translation (IAS 21)</h3>
-            <p>Translation differences on consolidating foreign subsidiaries go to OCI. Deferred tax effect goes to OCI.</p>
+            <p>Disclosure is not optional. IAS 12.81(a) requires the aggregate current and deferred tax relating to items charged or credited <em>directly to equity</em> to be disclosed, and IAS 12.81(ab) requires the amount of income tax relating to <em>each component of other comprehensive income</em> to be disclosed. IAS 1.90 and IAS 1.91 then let the entity choose whether to present OCI components net of tax on the face of the statement, or gross with a single aggregate tax line — either way the tax on each component must be traceable in the notes. This is why every set of IFRS accounts carries a "tax on items that will / will not be reclassified" analysis inside the statement of comprehensive income or its notes.</p>
 
-            <h3 id="3-financial-instruments-ifrs-9">3. Financial Instruments (IFRS 9)</h3>
-            <p>Fair value gains/losses on FVOCI instruments recognized in OCI. Deferred tax effects go to OCI.</p>
+            <h2 id="which-items-trigger-deferred-tax-in-oci">Which items trigger deferred tax outside profit or loss?</h2>
 
-            <h3 id="4-defined-benefit-pension-ias-19">4. Defined Benefit Pension (IAS 19)</h3>
-            <p>Remeasurement gains/losses (actuarial gains/losses) go to OCI. Deferred tax effects go to OCI.</p>
+            <p>Five recurring transactions push deferred tax out of the P&amp;L and into OCI or equity: revaluation surpluses on property and intangibles, defined benefit pension remeasurements, cash flow hedge reserves, fair value movements on FVOCI financial assets, and — in limited cases — the foreign currency translation reserve. Each creates or reverses a temporary difference while the underlying gain or loss is parked outside profit or loss, so IAS 12.61A drags the tax to the same place.</p>
 
-            <h2 id="worked-example-property-revaluation">Worked Example: Property Revaluation</h2>
+            <h3 id="revaluation-surplus-ias-16-38">Revaluation surplus (IAS 16 / IAS 38)</h3>
+            <p>When an entity adopts the revaluation model, an upward revaluation is credited to a revaluation surplus in OCI under IAS 16.39 (property, plant and equipment) or IAS 38.85 (intangibles). Because the carrying amount rises but the tax base usually does not, a taxable temporary difference arises and a deferred tax liability is recognised. IAS 12.61A sends that deferred tax charge to OCI, against the same surplus. IAS 16.41–42 then govern the surplus as the asset is used or sold: as the revalued asset is depreciated, an entity may transfer the "excess depreciation" from revaluation surplus to retained earnings, and the deferred tax follows that movement within equity rather than hitting P&amp;L.</p>
 
-            <h3 id="scenario">Scenario</h3>
-            <p><strong>Company revalues its office building:</strong><br>
-            — Cost: £5m (historical)<br>
-            — Fair value: £8m (current)<br>
-            — Revaluation gain: £3m<br>
-            — Tax base: £5m (still)</br>
-            — Tax rate: 19%</p>
+            <h3 id="pension-remeasurements-ias-19">Pension remeasurements (IAS 19)</h3>
+            <p>Under IAS 19.120 and IAS 19.122, remeasurements of the net defined benefit liability or asset — actuarial gains and losses from changes in demographic and financial assumptions, plus the return on plan assets excluding amounts in net interest — are recognised in OCI and, per IAS 19.122, are <em>never</em> reclassified to profit or loss (though they may be transferred within equity). The deferred tax on those remeasurements is therefore also permanent OCI, recognised under IAS 12.61A. This is the single largest source of OCI deferred tax for most large UK and European defined benefit sponsors.</p>
 
-            <h3 id="journal-entries-incorrect-common-error">Journal Entries (Incorrect — Common Error)</h3>
-            <div style="background: #fee; padding: 12px; border-radius: 4px; margin: 12px 0; font-family: 'Courier New';">
-                <strong style="color: red;">Œ WRONG:</strong><br>
-                Dr Property (balance sheet) £3m<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr OCI £3m (gross revaluation)<br><br>
-                Dr Tax expense (P&L) £0.57m<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr Deferred tax liability £0.57m (tax on revaluation)
+            <h3 id="cash-flow-hedges-and-fvoci-ifrs-9">Cash flow hedges and FVOCI (IFRS 9)</h3>
+            <p>IFRS 9.6.5.11 puts the effective portion of a cash flow hedge gain or loss into a cash flow hedge reserve in OCI, and IFRS 9.4.1.2A / 5.7.10 route fair value movements on debt instruments measured at fair value through OCI (FVOCI) to OCI as well. Both create temporary differences whose deferred tax is recognised in OCI under IAS 12.61A. The complication is the reclassification mechanics: the cash flow hedge reserve is later recycled to P&amp;L (or into the initial cost of a non-financial asset), and the FVOCI debt reserve recycles on derecognition — when the underlying gain moves to P&amp;L, the associated tax moves with it, so the tax stays matched to its item throughout.</p>
+
+            <h3 id="translation-reserve-ias-21">Foreign currency translation reserve (IAS 21)</h3>
+            <p>Exchange differences on translating a foreign operation are recognised in OCI under IAS 21.32 and accumulate in a foreign currency translation reserve. Whether they carry deferred tax depends entirely on local law: IAS 12.39–.44 exempt temporary differences on investments in subsidiaries and branches where the parent controls the timing of reversal and reversal is not probable in the foreseeable future. In most groups no deferred tax is recognised on the translation reserve for that reason — but where an outside basis difference is expected to reverse (for example a planned disposal), any resulting deferred tax is recognised in OCI to match the reserve.</p>
+
+            <h2 id="worked-example-revaluation-surplus">Worked example: deferred tax on a property revaluation surplus</h2>
+
+            <p>A company holds an office building at historical cost of £5.0m with a tax base of £5.0m. It adopts the revaluation model and the building is independently valued at £8.0m, a £3.0m upward revaluation. The tax base is unchanged, so a £3.0m taxable temporary difference arises. The enacted tax rate is 25%.</p>
+
+            <table>
+                <tr><th>Step</th><th>Amount (£)</th><th>Where recognised</th></tr>
+                <tr><td>Gross revaluation surplus (IAS 16.39)</td><td>3,000,000</td><td>OCI — revaluation surplus</td></tr>
+                <tr><td>Taxable temporary difference (£8.0m − £5.0m)</td><td>3,000,000</td><td>—</td></tr>
+                <tr><td>Deferred tax liability at 25% (IAS 12.61A)</td><td>750,000</td><td>OCI — against the surplus</td></tr>
+                <tr><td><strong>Net revaluation surplus after tax</strong></td><td><strong>2,250,000</strong></td><td>OCI / equity</td></tr>
+            </table>
+
+            <div class="example-box">
+                <strong>Correct journals</strong><br>
+                Dr Property (SOFP) £3,000,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Revaluation surplus (OCI) £3,000,000<br>
+                <em>— to record the gross upward revaluation (IAS 16.39)</em><br><br>
+                Dr Revaluation surplus (OCI) £750,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Deferred tax liability (SOFP) £750,000<br>
+                <em>— to record deferred tax on the surplus in OCI (IAS 12.61A(a)), NOT in the P&amp;L tax charge</em>
             </div>
 
-            <p><strong>Problem:</strong> Revaluation gain in OCI, but tax effect in P&L (mismatched locations).</p>
+            <p>The common error is to debit the P&amp;L tax expense for the £750,000 while crediting the deferred tax liability. That overstates the tax charge in profit or loss, understates OCI, and distorts the effective tax rate reconciliation — precisely the mismatch IAS 12.61A exists to prevent. If the rate later changes (say to 23%), the remeasurement of this liability is <em>also</em> traced back to OCI, not P&amp;L; see our dedicated guide on <a href="ias-12-tax-rate-changes.html">remeasuring deferred tax when rates change</a> for the subsequent-tracing mechanics.</p>
 
-            <h3 id="journal-entries-correct">Journal Entries (Correct)</h3>
-            <div style=”background: #efe; padding: 12px; border-radius: 4px; margin: 12px 0; font-family: 'Courier New';”>
-                <strong style=”color: green;”>✓ CORRECT:</strong><br>
-                Dr Property (balance sheet) £3m<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr OCI £3m (gross revaluation)<br><br>
-                Dr OCI £0.57m<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr Deferred tax liability £0.57m (tax effect in OCI, matching)
+            <h2 id="worked-example-pension-actuarial-loss">Worked example: deferred tax on a pension actuarial loss</h2>
+
+            <p>A defined benefit scheme reports an actuarial loss of £2.0m for the year, driven by a fall in the discount rate. Under IAS 19.120 and IAS 19.122 the loss is a remeasurement recognised in OCI and will never be reclassified to P&amp;L. Assume the loss increases the entity's deductible temporary difference (contributions are deductible when paid) and a deferred tax asset is recognised at 25%, and that recovery of the asset is supported by future taxable profits.</p>
+
+            <table>
+                <tr><th>Step</th><th>Amount (£)</th><th>Where recognised</th></tr>
+                <tr><td>Actuarial loss — remeasurement (IAS 19.120)</td><td>(2,000,000)</td><td>OCI — will not be reclassified</td></tr>
+                <tr><td>Deferred tax asset at 25% (IAS 12.61A)</td><td>500,000</td><td>OCI — credit against the loss</td></tr>
+                <tr><td><strong>Net remeasurement loss after tax</strong></td><td><strong>(1,500,000)</strong></td><td>OCI</td></tr>
+            </table>
+
+            <div class="example-box">
+                <strong>Correct journals</strong><br>
+                Dr Remeasurement loss (OCI) £2,000,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Net defined benefit liability (SOFP) £2,000,000<br>
+                <em>— actuarial loss recognised in OCI (IAS 19.120)</em><br><br>
+                Dr Deferred tax asset (SOFP) £500,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Remeasurement — tax (OCI) £500,000<br>
+                <em>— deferred tax on the remeasurement credited to OCI (IAS 12.61A(a)), matching its item</em>
             </div>
 
-            <p><strong>Result:</strong> Net OCI effect: £3m −’ £0.57m = £2.43m (after-tax revaluation).</p>
+            <p>The recoverability judgement is critical. If the entity is loss-making with a full valuation allowance against its deferred tax assets, no net deferred tax asset can be recognised on the actuarial loss either — the £500,000 credit would be reversed. This is where IAS 12 recognition tests intersect with OCI presentation; see <a href="ias-12-valuation-allowances.html">IAS 12 valuation allowances and DTA realisability</a>.</p>
 
-            <h2 id="worked-example-foreign-subsidiary-consolidation-scenario-us-parent-consolidates-uk-subsidiary-uk-subsidiary-equity-10m-gbp-usd-exchange-rate-movement-130-120-usdgbp-translation-loss-10m-1120-1130-064m-uk-tax-rate-19-is-translation-difference-taxdeductible-no-foreign-translation-not-taxdeductible-journal-entry-consolidation-dr-oci-translation-reserve-064m-cr-consolidated-equity-064m-note-no-deferred-tax-adjustment-translation-differences-are-not-taxdeductible-in-most-jurisdictions-deferred-tax-on-oci-when-not-to-apply">Worked Example: Foreign Subsidiary Consolidation</h3>
+            <h2 id="sorie-to-oci-terminology">From SORIE to today's OCI: what changed?</h2>
 
-            <h3 id="scenario">Scenario</h3>
-            <p><strong>US parent consolidates UK subsidiary:</strong><br>
-            — UK subsidiary equity: £10m (GBP)<br>
-            — USD exchange rate movement: 1.30 →’ 1.20 USD/GBP<br>
-            — Translation loss: £10m × (1/1.20 −’ 1/1.30) ≈ £0.64m<br>
-            — UK tax rate: 19%<br>
-            — Is translation difference tax-deductible? NO (foreign translation not tax-deductible)</p>
+            <p>SORIE — the "statement of recognised income and expense" — was a pre-2009 IAS 1 primary statement that collected items taken directly to equity, and it is where accountants first learned to park deferred tax "outside the income statement." It has since been replaced, not by a change in principle but by a change in presentation. The IAS 1 revision effective from 1 January 2009 abolished the SORIE and introduced the statement of comprehensive income (with its "other comprehensive income" section) alongside the statement of changes in equity.</p>
 
-            <h3 id="journal-entry-consolidation">Journal Entry (Consolidation)</h3>
-            <div style="background: #efe; padding: 12px; border-radius: 4px; margin: 12px 0; font-family: 'Courier New';">
-                Dr OCI (translation reserve) £0.64m<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr Consolidated equity £0.64m
-            </div>
+            <p>The substance under IAS 12.61A is identical: tax follows its item outside profit or loss. What changed is where you look. Items that used to appear in the SORIE now appear either in the OCI section of the statement of comprehensive income (revaluation surplus, pension remeasurements, hedge and FVOCI reserves, translation differences) or, for genuine equity transactions such as the equity component of a compound instrument or certain share-based payment tax benefits, directly in the statement of changes in equity. The 2009 revision also introduced the split — now embedded in IAS 1.82A — between OCI items that <em>will</em> be reclassified to P&amp;L (cash flow hedges, FVOCI debt, translation) and those that <em>will not</em> (revaluation surplus, pension remeasurements, FVOCI equity), each shown with its related tax. Older readers who still say "SORIE" are pointing at exactly this analysis.</p>
 
-            <p><strong>Note:</strong> No deferred tax adjustment (translation differences are not tax-deductible in most jurisdictions).</p>
+            <h2 id="audit-red-flags">Auditor red flags on deferred tax in OCI</h2>
 
-            <h2 id="deferred-tax-on-oci-when-not-to-apply">Deferred Tax on OCI: When Not to Apply</h2>
+            <p>Because the numbers are large, judgemental and easy to mis-route, deferred tax in OCI is a recurring audit exception. Three red flags recur, each tied to a specific ISA.</p>
 
-            <h3 id="translation-differences">Translation Differences</h3>
-            <p>Foreign currency translation differences are <strong>not</strong> deductible for tax; no deferred tax.</p>
-
-            <h3 id="reclassification-adjustments">Reclassification Adjustments</h3>
-            <p>When an OCI item reclassifies to P&L (e.g., selling an FVOCI investment), the OCI item doesn't "reverse" from a tax perspective; no deferred tax reversal.</p>
-
-            <h2 id="audit-red-flags-sorie-deferred-tax">Audit Red Flags: SORIE Deferred Tax</h2>
-
-            <h3 id="red-flag-1-tax-effect-in-wrong-location">Red Flag 1: Tax Effect in Wrong Location</h3>
-            <p><strong>Finding:</strong> Property revalued upward £5m (OCI); deferred tax on revaluation sent to P&L tax expense.</strong></p>
-            <p><strong>Auditor action:</strong> Reclassify deferred tax adjustment to OCI; adjust P&L tax expense and equity.</p>
-
-            <h3 id="red-flag-2-nondeductible-revaluation-taxed">Red Flag 2: Non-Deductible Revaluation Taxed</h3>
-            <p><strong>Finding:</strong> Goodwill impairment of £10m recorded in OCI; deferred tax of £1.9m (@ 19%) recognized. But goodwill is non-deductible; no tax effect exists.</p>
-            <p><strong>Auditor action:</strong> Remove deferred tax on non-deductible items; reverse the OCI tax adjustment.</p>
-
-            <h3 id="red-flag-3-tax-rate-applied-to-nontax-item">Red Flag 3: Tax Rate Applied to Non-Tax Item</h3>
-            <p><strong>Finding:</strong> Actuarial gain on pension (OCI) of £2m; deferred tax effect of £0.38m applied. But company is loss-making with full valuation allowance on DTA.</p>
-            <p><strong>Auditor action:</strong> If DTA is fully valuation-allowed, no deferred tax effect on OCI items either (tax rate irrelevant). Reverse the deferred tax.</p>
-
-            <h2 id="sorie-presentation">SORIE Presentation</h2>
-            <p>The Statement of Changes in Equity (SOCIE) or Statement of Comprehensive Income (OCI statement) must separately identify:</p>
             <ul>
-                <li>OCI items before deferred tax (gross)</li>
-                <li>Deferred tax effects</li>
-                <li>OCI items after deferred tax (net)</li>
+                <li><strong>Tax effect in the wrong statement (ISA 500).</strong> Deferred tax on a revaluation surplus or pension remeasurement is charged to the P&amp;L tax line instead of OCI. This inflates the reported tax charge and corrupts the effective tax rate reconciliation. Under ISA 500 the auditor obtains sufficient appropriate evidence by agreeing the tax on each OCI component (IAS 12.81(ab) disclosure) back to the OCI movement it relates to, recalculating rate × pre-tax OCI, and confirming nothing leaked into the P&amp;L charge. A reconciliation that only ties in aggregate — not component by component — is a signal to dig deeper.</li>
+                <li><strong>Unsupported estimate feeding the tax (ISA 540).</strong> The revaluation and the actuarial remeasurement are both accounting estimates, and their tax effect is only as reliable as the estimate underneath it. ISA 540 (Revised) requires the auditor to challenge the valuer's assumptions on the property and the actuary's discount rate, mortality and inflation assumptions, then test that the tax rate and temporary difference applied to the OCI movement are internally consistent with those assumptions. A deferred tax figure that does not move in step with a large swing in the pension deficit is a classic ISA 540 finding.</li>
+                <li><strong>Tax recognised on a non-deductible or unrecoverable item (ISA 540 / ISA 500).</strong> Two variants: deferred tax booked on an item that carries no tax base at all (goodwill impairment, most foreign translation differences — see IAS 12.15 and IAS 12.39), or a deferred tax asset on an actuarial loss recognised when the entity has no future taxable profits to support it. Both require the auditor to test recoverability and deductibility, not just arithmetic. If a full valuation allowance applies to the entity's DTAs, the OCI tax credit on the actuarial loss should generally be nil.</li>
             </ul>
 
-            <p class="example-box">
-                <strong>Example SORIE Presentation:</strong><br>
-                OCI items (before deferred tax):<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Property revaluation £5.0m<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Foreign exchange difference (0.8m)<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Financial instruments FVOCI £1.2m<br>
-                Deferred tax on above £0.71m<br>
-                <strong>OCI (net of tax): £5.6m</strong>
-            </p>
-
-            
-<h2 id="real-life-case-study">Real-Life Case Study: Deferred Tax That Follows Its Item to OCI</h2>
+            <h2 id="real-life-case-study">Case study: BT Group pension remeasurement tax</h2>
 <div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A company revalues a property upward by &pound;2m (recognised in OCI/revaluation surplus) and has an actuarial loss of &pound;400k on its pension (also OCI). Tax rate 25%.</p>
- <p><strong>Treatment.</strong> The deferred tax on each item follows the item: a &pound;500k deferred tax liability on the revaluation is charged to OCI (not P&amp;L), and a &pound;100k deferred tax asset on the actuarial loss is credited to OCI.</p>
- <p><strong>Takeaway.</strong> Deferred tax is not automatically a P&amp;L item, it is presented wherever the underlying transaction sits. "Backward tracing" to OCI or equity is easy to miss and distorts the effective tax rate reconciliation if done wrong.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
+<p><strong>Why BT Group.</strong> BT sponsors one of the UK's largest private defined benefit schemes, so its statement of comprehensive income is a clean illustration of IAS 12.61A in action on IAS 19 remeasurements.</p>
+<p><strong>Publicly filed figures.</strong> In BT Group plc's financial statements for the year ended 31 March 2025, remeasurements of the net pension obligation are presented in OCI as items that <em>will not</em> be reclassified to the income statement, shown with the tax on pension remeasurements of <strong>£22m</strong> recognised in OCI alongside the gross remeasurement. BT also disclosed an IAS 19 gross retirement benefit deficit of about <strong>£4.1bn</strong> at 31 March 2025, equivalent to roughly <strong>£3.2bn</strong> net of the related deferred tax — the £0.9bn difference being deferred tax recognised in OCI, not P&amp;L, exactly as IAS 12.61A(a) requires.</p>
+<p><strong>What it shows.</strong> The tax on the remeasurement never touches BT's income statement tax charge. It is disclosed as a discrete component of OCI tax (IAS 12.81(ab)) and moves the net-of-tax deficit reported in equity. Read alongside prior years — where the OCI pension tax has run to several hundred million pounds as the deficit swung — it demonstrates how material this "outside P&amp;L" tax can be for a large DB sponsor.</p>
+<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Figures are taken from BT Group plc's publicly filed Annual Report and Financial Statements for the year ended 31 March 2025. Rounded as reported. This commentary is illustrative and educational; it is not affiliated with or endorsed by BT Group plc. Always refer to the primary filing.</p>
 </div>
+
+            <h2 id="faq">Frequently asked questions</h2>
+
+            <h3>Is deferred tax always a profit or loss item?</h3>
+            <p>No. IAS 12.58 makes P&amp;L the default, but IAS 12.61A requires deferred tax to be recognised in OCI or directly in equity when it relates to an item recognised there. Revaluation surpluses, pension remeasurements, cash flow hedge reserves and FVOCI movements all carry their deferred tax outside profit or loss.</p>
+
+            <h3>What is "backward tracing" under IAS 12?</h3>
+            <p>Backward tracing is the requirement to recognise a change in deferred tax in the same statement as the transaction that originally created the temporary difference. Under IAS 12.61A, if the original item went to OCI, the later movement in its deferred tax — including remeasurement for a tax rate change — also goes to OCI, not P&amp;L. IFRS retains backward tracing; US GAAP under ASC 740 generally does not.</p>
+
+            <h3>Does the revaluation surplus get shown gross or net of deferred tax?</h3>
+            <p>IAS 1.91 lets an entity present OCI components either net of tax or gross with a single aggregate tax line, but IAS 12.81(ab) requires the tax on each OCI component to be disclosed either way. The revaluation surplus in equity is commonly carried net of the related deferred tax liability.</p>
+
+            <h3>Is there deferred tax on the foreign currency translation reserve?</h3>
+            <p>Usually not. IAS 12.39–.44 exempt temporary differences on investments in foreign subsidiaries where the parent controls the timing of reversal and reversal is not probable in the foreseeable future, so most groups recognise no deferred tax on the translation reserve. Where a reversal (e.g. a planned disposal) is expected, the resulting deferred tax is recognised in OCI to match the reserve.</p>
+
+            <h3>What happens to the deferred tax when a cash flow hedge reserve recycles to P&amp;L?</h3>
+            <p>The tax follows the item. While the effective portion of the hedge sits in the cash flow hedge reserve (IFRS 9.6.5.11) its deferred tax sits in OCI; when the reserve is reclassified into profit or loss (or into the cost of a non-financial asset), the associated tax is reclassified with it, keeping tax matched to the underlying gain or loss throughout.</p>
+
+            <h3>How did the old SORIE relate to today's OCI?</h3>
+            <p>The pre-2009 "statement of recognised income and expense" collected items taken directly to equity. The 2009 IAS 1 revision replaced it with the statement of comprehensive income (containing OCI) and the statement of changes in equity. The IAS 12.61A principle — tax follows its item outside profit or loss — did not change; only the presentation did.</p>
+
+            <h3>Which auditing standard governs the tax on a pension remeasurement estimate?</h3>
+            <p>ISA 540 (Revised) governs the audit of accounting estimates, including the actuarial remeasurement and its deferred tax effect, while ISA 500 governs obtaining sufficient appropriate audit evidence — for example agreeing the disclosed tax on each OCI component (IAS 12.81(ab)) to the underlying movement.</p>
 
 <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>

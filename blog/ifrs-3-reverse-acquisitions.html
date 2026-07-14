@@ -70,6 +70,95 @@
 }
 /*TOC_SIDEBAR_END*/
     </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "IFRS 3 Reverse Acquisitions: Accounting for Control Transfers",
+  "description": "Audit-grade guide to reverse acquisitions under IFRS 3 (B13-B27): identifying the accounting acquirer, deemed consideration, consolidated equity, reverse-acquisition EPS, NCI, and the IFRS 2 listing-expense fork for SPAC and shell transactions.",
+  "datePublished": "2026-05-01",
+  "dateModified": "2026-07-13",
+  "author": {
+    "@type": "Person",
+    "name": "Usman Qureshi",
+    "jobTitle": "Audit & CFO Advisory (ACCA, ACA)",
+    "image": "https://www.uqconsulting.org/images/team/usman-qureshi.png"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "UQ Consulting",
+    "url": "https://www.uqconsulting.org"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://www.uqconsulting.org/blog/ifrs-3-reverse-acquisitions.html"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Is a reverse acquisition the same as a reverse takeover?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "In substance, yes. Reverse takeover is the market and listing-rules term and reverse acquisition is the IFRS 3 accounting term for the same economics: a private company becoming listed by being legally acquired by a smaller listed entity while its owners take control (IFRS 3.B19). Whether it is accounted for under IFRS 3 or IFRS 2 depends on whether the listed vehicle is a business."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Does a reverse acquisition always create goodwill?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. Goodwill arises only when the accounting acquiree (the legal parent) is a business under IFRS 3 and the deemed consideration exceeds its identifiable net assets (IFRS 3.32). If the acquiree is a non-operating shell or SPAC, the transaction is outside IFRS 3 and the excess is expensed as an IFRS 2 listing cost rather than capitalised as goodwill."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Whose retained earnings appear in the consolidated statements?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The accounting acquirer's. IFRS 3.B22(d) requires the consolidated statements to carry forward the retained earnings and other equity balances of the legal subsidiary (accounting acquirer), even though the legal share capital shown is that of the legal parent."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How is EPS calculated in the year of a reverse acquisition?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The comparative and pre-acquisition weighted-average share count is the accounting acquirer's historical count restated by the merger exchange ratio (IFRS 3.B25); from the acquisition date the denominator is the legal parent's actual shares outstanding (IFRS 3.B26). Comparative EPS is retrospectively re-based to the legal parent's structure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Why does a reverse-acquisition NCI use book value, not fair value?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Because the NCI represents legal-subsidiary shareholders who did not exchange their shares, a continuing interest in the accounting acquirer's pre-combination net assets. IFRS 3.B24 measures it at the proportionate share of those pre-combination carrying amounts, not at acquisition-date fair value."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can comparatives be the listed shell's figures?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. The comparatives are the accounting acquirer's (the private operating company's) figures, because the consolidated statements are a continuation of its financial history (IFRS 3.B21). Presenting the shell's comparatives is a common and material error."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What is the biggest audit risk in these deals?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Mis-identifying the acquirer or mis-classifying a cash-shell acquiree as a business, because that judgement flips a large listing expense between P&L and the balance sheet. Auditors treat it as a significant risk under ISA 315 and scrutinise the deemed-consideration estimate under ISA 540."
+      }
+    }
+  ]
+}
+</script>
 </head>
 <body>
     <div class="topbar">
@@ -83,158 +172,122 @@
     &gt; <a href="ifrs-3-business-combinations-complete-guide.html" style="color: #2a4a7a; text-decoration: none;">IFRS 3 Business Combinations</a> 
     &gt; <span style="color: #1a2f5a;">IFRS 3 Reverse Acquisitions: Accounting for Control Transfers</span>
 </div>
-        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 10 min read</div>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 14 min read</div>
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#what-is-a-reverse-acquisition">What is a Reverse Acquisition?</a><ul><li class="toc-l2"><a href="#classic-scenario">Classic Scenario</a></li></ul></li><li class="toc-l1"><a href="#control-assessment-under-ifrs-10">Control Assessment Under IFRS 10</a><ul><li class="toc-l2"><a href="#voting-analysis">Voting Analysis</a></li></ul></li><li class="toc-l1"><a href="#identifying-the-acquirer-in-a-reverse-acquisition">Identifying the Acquirer in a Reverse Acquisition</a><ul><li class="toc-l2"><a href="#red-flags-suggesting-a-reverse-not-forward-acquisition">Red Flags Suggesting a Reverse (Not Forward) Acquisition</a></li></ul></li><li class="toc-l1"><a href="#accounting-treatment-reverse-acquisition">Accounting Treatment: Reverse Acquisition</a><ul><li class="toc-l2"><a href="#step-1-identify-the-acquirer">Step 1: Identify the Acquirer</a></li><li class="toc-l2"><a href="#step-2-consolidated-financial-statements">Step 2: Consolidated Financial Statements</a></li><li class="toc-l2"><a href="#step-3-goodwill-calculation">Step 3: Goodwill Calculation</a></li><li class="toc-l2"><a href="#step-4-consolidation">Step 4: Consolidation</a></li></ul></li><li class="toc-l1"><a href="#worked-example-technology-reverse-merger">Worked Example: Technology Reverse Merger</a><ul><li class="toc-l2"><a href="#deal-structure">Deal Structure</a></li><li class="toc-l2"><a href="#control-analysis">Control Analysis</a></li><li class="toc-l2"><a href="#fair-value-of-consideration">Fair Value of Consideration</a></li><li class="toc-l2"><a href="#fair-value-of-techshells-identifiable-assets">Fair Value of TechShell's Identifiable Assets</a></li><li class="toc-l2"><a href="#goodwill-calculation">Goodwill Calculation</a></li><li class="toc-l2"><a href="#consolidated-balance-sheet-acquisition-date">Consolidated Balance Sheet (Acquisition Date)</a></li></ul></li><li class="toc-l1"><a href="#audit-red-flags-reverse-acquisitions">Audit Red Flags: Reverse Acquisitions</a><ul><li class="toc-l2"><a href="#red-flag-1-misidentified-acquirer">Red Flag 1: Misidentified Acquirer</a></li><li class="toc-l2"><a href="#red-flag-2-omitted-goodwill">Red Flag 2: Omitted Goodwill</a></li><li class="toc-l2"><a href="#red-flag-3-comparatives-not-restated">Red Flag 3: Comparatives Not Restated</a></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: A Reverse Takeover via a Listed Shell</a></li></ul>
+            <ul><li class="toc-l1"><a href="#what-is-a-reverse-acquisition">What is a reverse acquisition under IFRS 3?</a><ul><li class="toc-l2"><a href="#classic-scenario">The classic shell-and-operating-company pattern</a></li><li class="toc-l2"><a href="#legal-vs-accounting-acquirer">Legal acquirer vs accounting acquirer</a></li></ul></li><li class="toc-l1"><a href="#identifying-the-accounting-acquirer">How do you identify the accounting acquirer?</a><ul><li class="toc-l2"><a href="#b13-b18-indicators">The IFRS 3.B14–B18 indicators</a></li></ul></li><li class="toc-l1"><a href="#deemed-consideration">How is the deemed consideration measured?</a><ul><li class="toc-l2"><a href="#deemed-consideration-worked">Worked example: deemed consideration</a></li></ul></li><li class="toc-l1"><a href="#consolidation-mechanics-and-eps">What do the consolidated statements and EPS look like?</a><ul><li class="toc-l2"><a href="#equity-structure">Equity structure and retained earnings (B22)</a></li><li class="toc-l2"><a href="#eps-worked">Worked example: reverse-acquisition EPS (B25–B27)</a></li><li class="toc-l2"><a href="#nci">Non-controlling interests (B23–B24)</a></li></ul></li><li class="toc-l1"><a href="#spac-ifrs-2">When is it IFRS 2 and not IFRS 3? (SPACs and shells)</a></li><li class="toc-l1"><a href="#audit-red-flags-reverse-acquisitions">Audit red flags and ISA focus</a><ul><li class="toc-l2"><a href="#red-flag-1-misidentified-acquirer">Red flag 1: acquirer chosen to dodge a listing expense</a></li><li class="toc-l2"><a href="#red-flag-2-deemed-consideration">Red flag 2: unsupported deemed-consideration fair value</a></li><li class="toc-l2"><a href="#red-flag-3-eps-comparatives">Red flag 3: EPS and comparatives not re-based</a></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Real case study: Nexters / Kismet de-SPAC</a></li><li class="toc-l1"><a href="#faq">Frequently asked questions</a></li></ul>
         </div>
 
 
         <article>
-            <p>A reverse acquisition occurs when the legal "acquiree" actually obtains control over the legal "acquirer— ”typically when a smaller company issues shares to acquire a larger one. IFRS 3 requires identifying the true acquirer based on control, not legal form. This guide covers control assessment, accounting mechanics, and common pitfalls.</p>
+            <p>A reverse acquisition occurs when the entity that issues shares — the legal acquirer — is identified as the accounting acquiree, while the legal subsidiary is identified as the accounting acquirer (IFRS 3.B19). The textbook case is a private operating company that "goes public" by being legally acquired by a smaller listed shell or SPAC: the shell issues so many new shares to the private company's owners that they end up controlling the combined group. IFRS 3.B15 requires the acquirer to be identified on the substance of who obtains control under IFRS 10, not on which entity signed as legal parent. This satellite walks through identifying the accounting acquirer (IFRS 3.B13–B18), measuring the deemed consideration (B19–B20), building the consolidated statements and reverse-acquisition earnings per share (B21–B27), the non-controlling-interest wrinkle, and the crucial fork where the "acquiree" is not a business and the transaction becomes an IFRS 2 listing expense instead.</p>
 
-            <h2 id="what-is-a-reverse-acquisition">What is a Reverse Acquisition?</h2>
-            <p>A transaction where control transfers despite the legal structure suggesting otherwise:</p>
+            <h2 id="what-is-a-reverse-acquisition">What is a reverse acquisition under IFRS 3?</h2>
+            <p>A reverse acquisition is a business combination in which the entity that issues securities (the legal parent) is the accounting acquiree, and the entity whose equity interests are acquired (the legal subsidiary) is the accounting acquirer (IFRS 3.B19). It arises whenever applying the IFRS 3.B14–B18 acquirer-identification guidance points to the legal subsidiary as the party that obtained control of the combined entity. The label "reverse" simply signals that the legal and accounting directions of the deal point opposite ways.</p>
+            <p>The mechanics of measuring and recognising the combination are unchanged — the acquisition method of IFRS 3 still applies, goodwill is still recognised, and the acquiree's identifiable assets and liabilities are still fair-valued (IFRS 3.B19). What differs is the direction of travel: the accounting acquirer is the entity that did not, in law, issue the shares. Because of that inversion, IFRS 3 sets out a bespoke set of application-guidance paragraphs (B19–B27) that govern how consideration is imputed, how the consolidated equity is presented, and how earnings per share is computed.</p>
 
-            <h3 id="classic-scenario">Classic Scenario</h3>
+            <h3 id="classic-scenario">The classic shell-and-operating-company pattern</h3>
             <ul>
-                <li><strong>Legal acquirer:</strong> Small, publicly-listed shell company ("SpacCo")</li>
-                <li><strong>Legal acquiree:</strong> Large operating company ("BigOp")</li>
-                <li><strong>Transaction:</strong> SpacCo issues 80% of its new shares to BigOp shareholders</li>
-                <li><strong>Control:</strong> BigOp shareholders now control SpacCo (80% > 50%)</li>
-                <li><strong>IFRS 3 treatment:</strong> BigOp is the acquirer; SpacCo is the acquiree (despite legal form)</li>
+                <li><strong>Legal acquirer / accounting acquiree:</strong> a small, publicly listed shell or SPAC ("ListCo")</li>
+                <li><strong>Legal acquiree / accounting acquirer:</strong> a large private operating company ("OpCo")</li>
+                <li><strong>Transaction:</strong> ListCo issues a large block of new shares to OpCo's owners in exchange for their OpCo shares</li>
+                <li><strong>Control outcome:</strong> OpCo's former owners hold the majority of the combined entity's votes — so OpCo controls ListCo</li>
+                <li><strong>IFRS 3.B19 conclusion:</strong> OpCo is the accounting acquirer; ListCo is the accounting acquiree</li>
             </ul>
+            <p class="callout"><strong>Key principle (IFRS 3.B13/B15):</strong> identify the acquirer as the combining entity that obtains control of the other. Legal form — which entity issued the shares — is only a starting point and can be overridden by the substance of control.</p>
 
-            <p class="callout"><strong>Key principle:</strong> IFRS 3 looks at substance over form. Who controls the combined entity post-transaction? That is the acquirer.</p>
+            <h3 id="legal-vs-accounting-acquirer">Legal acquirer vs accounting acquirer</h3>
+            <p>Keeping the two roles distinct is the single most important discipline in these deals. The <em>legal parent</em> (ListCo) remains the reporting entity whose name is on the consolidated financial statements and whose share capital, share premium and legal structure are shown on the face of the balance sheet (IFRS 3.B22(a)). The <em>accounting acquirer</em> (OpCo) is the entity whose financial history the consolidated statements actually continue: its assets and liabilities are carried at pre-combination book value, its retained earnings roll forward, and its results form the comparative figures (IFRS 3.B21–B22). Confusing the two produces a set of accounts that look internally consistent but present the wrong entity's performance — precisely the error auditors probe hardest.</p>
 
-            <h2 id="control-assessment-under-ifrs-10">Control Assessment Under IFRS 10</h2>
-            <p>Control requires three elements (all must be present):</p>
-            <ul>
-                <li><strong>Power over the investee:</strong> Ability to direct relevant activities (voting, board seats)</li>
-                <li><strong>Exposure to variable returns:</strong> Benefits or losses from the investment</li>
-                <li><strong>Link between power and returns:</strong> Ability to affect returns via power</li>
-            </ul>
+            <h2 id="identifying-the-accounting-acquirer">How do you identify the accounting acquirer?</h2>
+            <p>You identify the accounting acquirer as the combining entity that obtains control of the combined business, applying IFRS 10's control model first and then the supplementary factors in IFRS 3.B14–B18 (IFRS 3.B13). Control — power, exposure to variable returns, and the ability to use power to affect those returns — is the decisive test; the B14–B18 factors resolve cases where the control analysis is not clear-cut. In a reverse acquisition these factors will consistently point away from the share-issuing entity.</p>
 
-            <h3 id="voting-analysis">Voting Analysis</h3>
-            <p>Voting power >50% is a strong indicator, but not conclusive:</p>
-            <ul>
-                <li>Substantive voting rights (can be exercised in practice)</li>
-                <li>Actual voting patterns and shareholder history</li>
-                <li>Potential voting rights (convertible shares, options)</li>
-            </ul>
+            <h3 id="b13-b18-indicators">The IFRS 3.B14–B18 indicators</h3>
+            <p>IFRS 3.B14–B18 lists factors to weigh when control alone is ambiguous. The relative voting rights in the combined entity after the deal (B15(a)) usually dominate a reverse acquisition: if the legal subsidiary's former owners receive the majority of the votes, they are the acquirer. The existence of a large minority voting interest where no other holder has a significant stake (B15(b)), the composition of the governing body (B15(c)), the composition of senior management (B15(d)), and the terms of the share exchange — in particular whether one entity paid a premium (B15(e)) — all reinforce the assessment. IFRS 3.B16 adds that the acquirer is usually the combining entity whose relative size (measured by assets, revenue or profit) is significantly larger, and B18 notes that the acquirer is usually the entity that <em>issues</em> the consideration in a straightforward combination — which is exactly the presumption a reverse acquisition rebuts. When the factors conflict, they must be weighed holistically rather than counted; the direction indicated by relative voting power and relative size normally prevails.</p>
+            <p>Applied to the classic pattern, every substantive indicator lines up behind OpCo: its former owners hold the majority of post-deal votes (B15(a)), OpCo's management runs the group (B15(d)), and OpCo dwarfs the shell on revenue, assets and profit (B16). ListCo issued the shares (B18), but that legal-form indicator is outweighed. The conclusion — OpCo is the accounting acquirer — is documented in a formal acquirer-identification memorandum that auditors will expect to see and challenge.</p>
 
-            <h2 id="identifying-the-acquirer-in-a-reverse-acquisition">Identifying the Acquirer in a Reverse Acquisition</h2>
+            <h2 id="deemed-consideration">How is the deemed consideration measured?</h2>
+            <p>Because the accounting acquirer (OpCo) did not legally issue any shares, IFRS 3.B20 requires the consideration to be <em>imputed</em>: it is the fair value of the number of equity instruments the legal subsidiary would have had to issue to give the owners of the legal parent the same percentage equity interest in the combined entity that they actually hold after the reverse acquisition. In practice the fair value is more reliably measured by reference to the quoted market price of the legal parent's shares, which is usually the more clearly evidenced input (IFRS 3.B20). The consideration is therefore built from the acquiree's (ListCo's) real market value, but expressed through a hypothetical issuance by the acquirer (OpCo).</p>
+            <p>Goodwill is then measured conventionally under IFRS 3.32: deemed consideration transferred, plus any non-controlling interest, less the net of the acquisition-date fair values of the accounting acquiree's (ListCo's) identifiable assets and liabilities (IFRS 3.B19). Where the acquiree is a genuine operating business this produces real goodwill; where it is a cash shell, the excess is not goodwill at all — it is an IFRS 2 listing expense, addressed below.</p>
 
-            <h3 id="red-flags-suggesting-a-reverse-not-forward-acquisition">Red Flags Suggesting a Reverse (Not Forward) Acquisition</h3>
-            <ul>
-                <li>Smaller (by revenue, assets) entity is legal acquirer</li>
-                <li>Larger entity receives significant voting control post-closing</li>
-                <li>Pre-closing, there's agreement on governance (board composition) favoring the larger entity</li>
-                <li>Management of larger entity runs the combined company</li>
-            </ul>
-
-            <h2 id="accounting-treatment-reverse-acquisition">Accounting Treatment: Reverse Acquisition</h2>
-
-            <h3 id="step-1-identify-the-acquirer">Step 1: Identify the Acquirer</h3>
-            <p>Use control assessment above to determine true acquirer.</p>
-
-            <h3 id="step-2-consolidated-financial-statements">Step 2: Consolidated Financial Statements</h3>
-            <p>The acquirer (BigOp, the substance) is consolidated from acquisition date forward. The legal acquirer (SpacCo) is consolidated as a subsidiary of the true acquirer.</p>
-
-            <h3 id="step-3-goodwill-calculation">Step 3: Goodwill Calculation</h3>
-            <p>Based on the true acquirer's perspective:</p>
-            <ul>
-                <li><strong>Consideration:</strong> Fair value of the legal acquirer (SpacCo shares issued to BigOp shareholders)</li>
-                <li><strong>Identifiable assets/liabilities:</strong> Fair values of SpacCo's assets (usually nominal)</li>
-                <li><strong>Goodwill:</strong> Typically large (legal entity has few assets; goodwill for the control of the operating business)</li>
-            </ul>
-
-            <h3 id="step-4-consolidation">Step 4: Consolidation</h3>
-            <p>Present consolidated financials from acquisition date onward, with comparative periods <strong>not restated</strong> (unlike a forward acquisition, where comparatives are often restated).</p>
-
-            <h2 id="worked-example-technology-reverse-merger">Worked Example: Technology Reverse Merger</h2>
-
-            <h3 id="deal-structure">Deal Structure</h3>
-            <p><strong>Legal acquirer:</strong> TechShell plc (public, UK-listed, 10 employees, £2m assets)<br>
-            <strong>Legal acquiree:</strong> DataOps Ltd (private, 200 employees, £80m revenue, £40m EBITDA)<br>
-            <strong>Transaction:</strong> TechShell issues 80m new shares (at £3/share) to DataOps shareholders</strong></p>
-
-            <h3 id="control-analysis">Control Analysis</h3>
-            <ul>
-                <li>Pre-acquisition: TechShell shareholders owned 100% of TechShell</li>
-                <li>Post-acquisition: DataOps shareholders own 80m / 100m total = 80%</li>
-                <li><strong>Conclusion:</strong> DataOps shareholders control the combined entity</li>
-                <li><strong>Acquirer (substance):</strong> DataOps</li>
-                <li><strong>Acquiree (substance):</strong> TechShell</li>
-            </ul>
-
-            <h3 id="fair-value-of-consideration">Fair Value of Consideration</h3>
-            <p>Fair value of TechShell shares issued to DataOps shareholders:<br>
-            80m shares × £3/share = £240m</p>
-
-            <h3 id="fair-value-of-techshells-identifiable-assets">Fair Value of TechShell's Identifiable Assets</h3>
+            <h3 id="deemed-consideration-worked">Worked example: deemed consideration</h3>
+            <p>OpCo Ltd (private, 12,000 shares in issue, £360m equity fair value) combines with ListCo plc (listed shell, 2,000 shares in issue trading at £5.00 each). ListCo issues 8,000 new shares to OpCo's owners in exchange for 100% of OpCo. After the deal there are 10,000 ListCo shares in issue: OpCo's former owners hold 8,000 (80%) and ListCo's original owners hold 2,000 (20%). To leave ListCo's original owners with that same 20% of the combined entity, OpCo would notionally have had to issue shares such that its existing owners held 80% — i.e. OpCo issues 3,000 new shares on its 12,000 base (12,000 / 15,000 = 80%).</p>
             <table>
-                <tr>
-                    <th>Item</th>
-                    <th>Amount (£m)</th>
-                </tr>
-                <tr>
-                    <td>Cash</td>
-                    <td>0.5</td>
-                </tr>
-                <tr>
-                    <td>Receivables</td>
-                    <td>0.3</td>
-                </tr>
-                <tr>
-                    <td>PP&E</td>
-                    <td>1.0</td>
-                </tr>
-                <tr>
-                    <td>Payables</td>
-                    <td>(0.2)</td>
-                </tr>
-                <tr>
-                    <td><strong>Net identifiable assets</strong></td>
-                    <td><strong>1.6</strong></td>
-                </tr>
+                <tr><th>Deemed-consideration input (IFRS 3.B20)</th><th>Figure</th></tr>
+                <tr><td>ListCo's original shareholders' post-deal interest</td><td>20% (2,000 of 10,000 shares)</td></tr>
+                <tr><td>Notional OpCo shares to leave them 20%</td><td>3,000 shares (on a 12,000 base)</td></tr>
+                <tr><td>Fair value per OpCo share (£360m / 12,000)</td><td>£30,000</td></tr>
+                <tr><td><strong>Deemed consideration (3,000 × £30,000)</strong></td><td><strong>£90m</strong></td></tr>
+                <tr><td>Cross-check: ListCo market value (2,000 × £5.00 → grossed for the exchange ratio)</td><td>~£90m</td></tr>
             </table>
+            <p>The £90m deemed consideration is compared with the fair value of ListCo's identifiable net assets. If ListCo is an operating business with net identifiable assets of, say, £72m, goodwill of £18m is recognised (IFRS 3.32). If ListCo is a non-operating cash shell holding £70m of cash, the £20m excess over its net assets is expensed as a listing cost under IFRS 2, not capitalised as goodwill.</p>
 
-            <h3 id="goodwill-calculation">Goodwill Calculation</h3>
-            <p>Goodwill = £240m (consideration) −’ £1.6m (net assets) = £238.4m<br>
-            <strong>Why so high?</strong> The consideration is for DataOps's assets (£40m+), which stay on DataOps's books. TechShell's goodwill merely represents the cost to acquire the shell structure; most value is in DataOps's continuing business.</p>
+            <h2 id="consolidation-mechanics-and-eps">What do the consolidated statements and EPS look like?</h2>
+            <p>The consolidated financial statements are issued in the name of the legal parent (ListCo) but are, in substance, a continuation of the accounting acquirer's (OpCo's) financial statements (IFRS 3.B21). OpCo's assets and liabilities are recognised and measured at their pre-combination carrying amounts; ListCo's identifiable assets and liabilities are recognised and measured at fair value under the acquisition method (IFRS 3.B22(b)–(c)). Retained earnings and other equity balances carried forward are those of the accounting acquirer, OpCo (IFRS 3.B22(d)).</p>
 
-            <h3 id="consolidated-balance-sheet-acquisition-date">Consolidated Balance Sheet (Acquisition Date)</h3>
-            <ul>
-                <li>DataOps assets (£40m) — carried forward</li>
-                <li>TechShell assets (£2m) — carried forward</li>
-                <li>Goodwill on DataOps merger (£238.4m) — recorded</li>
-                <li><strong>Total assets:</strong> ~£280m</li>
-            </ul>
+            <h3 id="equity-structure">Equity structure and retained earnings (B22)</h3>
+            <p>The equity section is the trickiest presentation point. The amount recognised as issued equity interests is OpCo's pre-combination equity plus the deemed consideration, but the <em>legal</em> equity structure — the number and type of shares shown as issued — must be that of the legal parent, ListCo (IFRS 3.B22(d)–(e)). So the balance sheet shows ListCo's share capital and share premium in law, while retained earnings and reserves are OpCo's history. IFRS 3.B22(d) is explicit that the retained earnings and other equity balances are the accounting acquirer's. This is why a reverse-acquisition balance sheet can show a listed parent's ordinary share structure sitting on top of a private operating company's accumulated reserves — a combination that is correct, not an error.</p>
 
-            <h2 id="audit-red-flags-reverse-acquisitions">Audit Red Flags: Reverse Acquisitions</h2>
+            <h3 id="eps-worked">Worked example: reverse-acquisition EPS (B25–B27)</h3>
+            <p>For all periods before the acquisition date, the weighted-average number of shares outstanding used in basic EPS is the historical weighted-average number of the accounting acquirer's shares, multiplied by the exchange ratio in the merger agreement (IFRS 3.B25). From the acquisition date onward, the denominator is the actual number of the legal parent's shares outstanding (IFRS 3.B26). Comparative EPS is therefore retrospectively adjusted to the legal parent's capital structure by applying the exchange ratio — the accounting acquirer's history, re-expressed in the legal parent's shares.</p>
+            <table>
+                <tr><th>EPS input</th><th>Prior year (comparative)</th><th>Current year</th></tr>
+                <tr><td>Accounting acquirer profit attributable (OpCo)</td><td>£24.0m</td><td>£30.0m</td></tr>
+                <tr><td>OpCo historical weighted-average shares</td><td>12,000</td><td>n/a after acq. date</td></tr>
+                <tr><td>Exchange ratio (ListCo shares per OpCo share = 8,000 / 12,000)</td><td>0.6667</td><td>0.6667</td></tr>
+                <tr><td>Restated denominator (B25): 12,000 × (10,000/8,000)*</td><td>15,000</td><td>—</td></tr>
+                <tr><td>Post-acquisition legal-parent shares (B26)</td><td>—</td><td>10,000</td></tr>
+                <tr><td><strong>Basic EPS</strong></td><td><strong>£1,600</strong> (£24.0m / 15,000)</td><td><strong>£3,000</strong> (£30.0m / 10,000)</td></tr>
+            </table>
+            <p>*The restatement re-expresses OpCo's 12,000 historical shares into the equivalent number that, at the merger exchange ratio, produces the combined 10,000-share structure — giving a consistent per-share basis across the comparative and current periods (IFRS 3.B25/IE-guidance). The point auditors test is that the comparative EPS is <em>not</em> simply OpCo's old EPS on its old share count, nor ListCo's shell EPS; it is OpCo's earnings on a re-based denominator.</p>
 
-            <h3 id="red-flag-1-misidentified-acquirer">Red Flag 1: Misidentified Acquirer</h3>
-            <p><strong>Finding:</strong> Company accounts treat legal form as substance; records a forward acquisition when control actually transferred via reverse structure.</p>
-            <p><strong>Auditor action:</strong> Reidentify based on control; reclassify acquisition method. Often requires restatement.</p>
+            <h3 id="nci">Non-controlling interests (B23–B24)</h3>
+            <p>A reverse-acquisition non-controlling interest is unusual: it represents the interest of those owners of the legal subsidiary (the accounting acquirer, OpCo) who did <em>not</em> exchange their shares for shares of the legal parent (IFRS 3.B23). Even though those holders own shares in the accounting acquirer — the entity whose results the group reports — they are treated as non-controlling because the combined statements are presented from the legal parent's perspective. IFRS 3.B24 requires that NCI to be measured at its proportionate share of the accounting acquirer's pre-combination carrying amounts of net assets, not at fair value, because the reverse-acquisition NCI reflects a continuing interest in the acquirer's book-value equity rather than a stake acquired in the acquiree.</p>
 
-            <h3 id="red-flag-2-omitted-goodwill">Red Flag 2: Omitted Goodwill</h3>
-            <p><strong>Finding:</strong> Reverse merger with large goodwill figure omitted or understated in consolidated statements.</p>
-            <p><strong>Auditor action:</strong> Calculate goodwill; ensure disclosed. Goodwill impairment testing required if value appears unreasonable.</p>
+            <h2 id="spac-ifrs-2">When is it IFRS 2 and not IFRS 3? (SPACs and shells)</h2>
+            <p>The reverse-acquisition guidance in IFRS 3 applies only if the accounting acquiree is a <em>business</em> as defined in IFRS 3 Appendix A and B7–B12. If the legal parent is a non-operating shell or SPAC that holds little more than cash and a stock-exchange listing, it fails the "business" definition, the transaction falls outside IFRS 3, and it is accounted for under IFRS 2 Share-based Payment instead. The IFRS Interpretations Committee has confirmed this analysis: where a private operating company arranges to have its shares "acquired" by a listed non-business shell, the private company is deemed to have issued shares in exchange for the shell's net assets <em>and</em> for the service of obtaining a stock-exchange listing.</p>
+            <p>The accounting consequence is stark. The excess of the fair value of the shares deemed issued over the fair value of the shell's identifiable net assets is not goodwill — it is an expense for the listing service, recognised immediately in profit or loss (IFRS 2). There is no asset to carry forward and no annual impairment test; the whole excess hits the income statement in the period of the transaction. This is why acquirer identification is never a purely technical exercise: get the "business" test wrong in the acquiree's favour and a large day-one listing expense either appears or vanishes. The distinction between an IFRS 3 reverse acquisition (goodwill on the balance sheet) and an IFRS 2 capital-market transaction (listing expense in P&L) is the highest-stakes judgement in the whole area.</p>
+            <p class="callout"><strong>Decision rule:</strong> Is the legal parent a business (inputs + substantive processes)? <strong>Yes →</strong> IFRS 3 reverse acquisition, goodwill recognised. <strong>No (cash shell / SPAC) →</strong> outside IFRS 3, IFRS 2 share-based payment, excess expensed as a listing cost.</p>
 
-            <h3 id="red-flag-3-comparatives-not-restated">Red Flag 3: Comparatives Not Restated</h3>
-            <p><strong>Finding:</strong> Prior-year comparatives presented for the legal acquirer (shell) only, not the combined entity.</p>
-            <p><strong>Auditor action:</strong> Clarify whether acquisition is reverse or forward. Accounting presentation should reflect substance.</p>
+            <h2 id="audit-red-flags-reverse-acquisitions">Audit red flags and ISA focus</h2>
 
-            
-<h2 id="real-life-case-study">Real-Life Case Study: A Reverse Takeover via a Listed Shell</h2>
+            <h3 id="red-flag-1-misidentified-acquirer">Red flag 1: acquirer chosen to dodge a listing expense</h3>
+            <p><strong>Finding.</strong> Management identifies the listed shell as the accounting acquirer (a "forward" acquisition producing goodwill) when the substance — post-deal voting control and relative size under IFRS 3.B15–B16 — points to the private operating company, and where treating it correctly as an IFRS 2 transaction would force a large listing expense into P&L. Mis-identifying the acquirer conveniently converts a day-one expense into a capitalised, impairment-tested asset.</p>
+            <p><strong>Auditor response (ISA 315).</strong> Under ISA 315 (Revised), the engagement team identifies the acquirer-identification and business-versus-shell judgements as significant risks, obtains the acquirer-identification memorandum, and independently re-performs the B14–B18 and B7–B12 analyses rather than accepting management's conclusion. A misclassification typically requires prior-period restatement.</p>
+
+            <h3 id="red-flag-2-deemed-consideration">Red flag 2: unsupported deemed-consideration fair value</h3>
+            <p><strong>Finding.</strong> The deemed consideration (IFRS 3.B20) is measured off a stale, thinly traded, or internally derived share price, materially changing the goodwill or listing-expense figure. SPAC and shell shares are often illiquid around the deal, so the quoted-price input demands scrutiny.</p>
+            <p><strong>Auditor response (ISA 540).</strong> As a fair-value accounting estimate, the deemed consideration falls squarely within ISA 540 (Revised): the auditor evaluates the method, the significance of the quoted-price input, the valuation date, and management's assumptions, and considers whether an auditor's expert is needed. Where the legal parent's price is unreliable, the auditor tests the alternative measurement based on the acquirer's own equity fair value.</p>
+
+            <h3 id="red-flag-3-eps-comparatives">Red flag 3: EPS and comparatives not re-based</h3>
+            <p><strong>Finding.</strong> Comparative EPS and the equity structure are presented on the shell's historical share count, or on OpCo's un-restated share count, rather than the re-based denominator required by IFRS 3.B25–B27. The retained earnings carried forward are the shell's rather than the accounting acquirer's (a B22(d) breach).</p>
+            <p><strong>Auditor response (ISA 500).</strong> Under ISA 500 the auditor obtains sufficient appropriate evidence over the exchange ratio, the historical share counts, and the recomputed weighted-average denominators, re-performing the B25 restatement and agreeing carried-forward reserves to the accounting acquirer's ledgers. EPS is a headline metric, so a re-basing error is often material by nature.</p>
+
+
+<h2 id="real-life-case-study">Real case study: Nexters / Kismet de-SPAC</h2>
 <div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A large private operating company merges into a smaller listed shell. Legally the shell issues shares and "acquires" the private company, but the private company's former owners end up with 80% of the combined entity.</p>
- <p><strong>Treatment.</strong> Substance over form: the <em>private company</em> is the accounting acquirer even though the shell is the legal parent. The consolidated financials are a continuation of the private company's, and the "cost" is based on the notional shares it would have issued to give the shell owners their 20%.</p>
- <p><strong>Takeaway.</strong> Follow the control, not the share certificates. Reverse acquisitions are counter-intuitive because the legal and accounting acquirers are opposite, and the comparatives shown are the private company's, not the listed shell's.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
+<p><strong>The transaction.</strong> On 26 August 2021, Nexters (a private mobile-games developer, owner of <em>Hero Wars</em>) completed its business combination with Kismet Acquisition One Corp, a Nasdaq-listed SPAC, with the combined group trading as GDEV Inc. Legally the SPAC issued shares to acquire Nexters; in substance Nexters' owners obtained control, so Nexters was the accounting acquirer in a reverse transaction.</p>
+<p><strong>Why IFRS 2, not IFRS 3.</strong> Nexters disclosed that it treated the deal as a capital transaction equivalent to the issue of Nexters shares in exchange for the net monetary assets of Kismet, and that it <em>did not</em> constitute a business combination under IFRS 3 because Kismet was a non-operating entity — consisting predominantly of cash in its trust account — that did not meet the IFRS 3 definition of a business. The excess of the fair value of the shares deemed issued over Kismet's identifiable net assets was recognised as a <strong>share listing expense of approximately US$125 million</strong>, a non-cash, non-recurring charge, disclosed as the predominant driver of the group's third-quarter 2021 net loss.</p>
+<p><strong>Takeaway.</strong> This is the IFRS 2 branch of the decision tree in action. Because the listed vehicle was a cash shell rather than a business, there was no goodwill to capitalise; the entire premium for the listing hit profit or loss on day one. Follow control to find the accounting acquirer, then test whether the acquiree is a business — the answer determines whether a nine-figure charge lands on the balance sheet or the income statement.</p>
+<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Figures above are drawn from Nexters Inc./GDEV Inc. publicly filed SEC disclosures (Form 6-K, Q3 2021, and Form 20-F). The ~US$125m share listing expense is as disclosed by the company; no figures are estimated or fabricated. Sources: Nexters Q3 2021 results (globenewswire.com); GDEV Inc. Form 20-F (sec.gov); Businesswire completion announcement, 27 Aug 2021.</p>
 </div>
+
+<h2 id="faq">Frequently asked questions</h2>
+<h3>Is a reverse acquisition the same as a reverse takeover?</h3>
+<p>In substance, yes — "reverse takeover" is the market/listing-rules term and "reverse acquisition" is the IFRS 3 accounting term for the same economics: a private company becoming listed by being legally acquired by a smaller listed entity while its owners take control (IFRS 3.B19). Whether it is accounted for under IFRS 3 or IFRS 2 depends on whether the listed vehicle is a business.</p>
+<h3>Does a reverse acquisition always create goodwill?</h3>
+<p>No. Goodwill arises only when the accounting acquiree (the legal parent) is a business under IFRS 3 and the deemed consideration exceeds its identifiable net assets (IFRS 3.32). If the acquiree is a non-operating shell or SPAC, the transaction is outside IFRS 3, and the excess is expensed as an IFRS 2 listing cost rather than capitalised as goodwill.</p>
+<h3>Whose retained earnings appear in the consolidated statements?</h3>
+<p>The accounting acquirer's. IFRS 3.B22(d) requires the consolidated statements to carry forward the retained earnings and other equity balances of the legal subsidiary (accounting acquirer), even though the legal share capital shown is that of the legal parent.</p>
+<h3>How is EPS calculated in the year of a reverse acquisition?</h3>
+<p>The comparative and pre-acquisition weighted-average share count is the accounting acquirer's historical count restated by the merger exchange ratio (IFRS 3.B25); from the acquisition date the denominator is the legal parent's actual shares outstanding (IFRS 3.B26). Comparative EPS is retrospectively re-based to the legal parent's structure.</p>
+<h3>Why does a reverse-acquisition NCI use book value, not fair value?</h3>
+<p>Because the NCI represents legal-subsidiary shareholders who did not exchange their shares — a continuing interest in the accounting acquirer's pre-combination net assets. IFRS 3.B24 measures it at the proportionate share of those pre-combination carrying amounts, not at acquisition-date fair value.</p>
+<h3>Can comparatives be the listed shell's figures?</h3>
+<p>No. The comparatives are the accounting acquirer's (the private operating company's) figures, because the consolidated statements are a continuation of its financial history (IFRS 3.B21). Presenting the shell's comparatives is a common and material error.</p>
+<h3>What is the biggest audit risk in these deals?</h3>
+<p>Mis-identifying the acquirer or mis-classifying a cash-shell acquiree as a business, because that judgement flips a large listing expense between P&L and the balance sheet. Auditors treat it as a significant risk under ISA 315 and scrutinise the deemed-consideration estimate under ISA 540.</p>
 
 <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>

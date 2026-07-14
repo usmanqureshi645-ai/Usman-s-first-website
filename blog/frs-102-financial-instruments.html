@@ -5,9 +5,9 @@
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-9LKFW8QCC8');</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FRS 102 Financial Instruments: Classification, Measurement & Impairment</title>
-    <meta name="description" content="FRS 102 financial instruments: classification (AFS/Loans/FVPL), measurement, impairment (incurred loss), derivatives.">
-    <meta name="keywords" content="FRS 102 financial instruments, available-for-sale, loans and receivables, FVPL, impairment, incurred loss">
+    <title>FRS 102 Financial Instruments: Sections 11 & 12, Basic vs Other, Amortised Cost & Incurred-Loss Impairment</title>
+    <meta name="description" content="FRS 102 financial instruments: the Section 11/12 basic-vs-other model, amortised cost, FVTPL, the IFRS 9/IAS 39 policy choice (11.2), imputed interest on related-party loans, and incurred-loss impairment (11.21-11.24) retained after the FRC Periodic Review 2024.">
+    <meta name="keywords" content="FRS 102 financial instruments, Section 11 basic financial instruments, Section 12 other financial instruments, amortised cost, FVTPL, incurred loss impairment, FRS 102 11.2 policy choice, Periodic Review 2024">
     <meta name="author" content="Usman Qureshi">
     <link rel="canonical" href="https://www.uqconsulting.org/blog/frs-102-financial-instruments.html">
     <style>
@@ -77,219 +77,269 @@
     </div>
 
     <div class="article-container">
-        <h1>FRS 102 Financial Instruments: Classification, Measurement & Impairment</h1>
+        <h1>FRS 102 Financial Instruments: Sections 11 & 12, Basic vs Other, Amortised Cost & Incurred-Loss Impairment</h1>
 <div class="breadcrumb" style="color: #8593a8; font-size: 0.9em; margin-bottom: 20px;">
     <a href="index.html" style="color: #2a4a7a; text-decoration: none;">Blog</a> 
     &gt; <a href="frs-102-uk-gaap-complete-guide.html" style="color: #2a4a7a; text-decoration: none;">FRS 102 UK GAAP</a> 
     &gt; <span style="color: #1a2f5a;">FRS 102 Financial Instruments: Classification, Measurement & Impairment</span>
 </div>
-        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 10 min read</div>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published May 2026 · Updated 13 July 2026 · 14 min read</div>
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#frs-102-financial-instrument-classification">FRS 102 Financial Instrument Classification</a><ul><li class="toc-l2"><a href="#three-categories-not-ifrs-9s-four">Three Categories (Not IFRS 9's Four)</a></li></ul></li><li class="toc-l1"><a href="#classification-guidance-simpler-than-ifrs-9">Classification Guidance (Simpler than IFRS 9)</a><ul><li class="toc-l2"><a href="#availableforsale-default">Available-for-Sale (Default)</a></li><li class="toc-l2"><a href="#loans-receivables">Loans & Receivables</a></li><li class="toc-l2"><a href="#fvpl-wider-availability-in-frs-102">FVPL (Wider Availability in FRS 102)</a></li></ul></li><li class="toc-l1"><a href="#measurement">Measurement</a><ul><li class="toc-l2"><a href="#afs-measurement">AFS Measurement</a></li><li class="toc-l2"><a href="#lr-measurement">L&R Measurement</a></li></ul></li><li class="toc-l1"><a href="#impairment-incurred-loss-model-simpler-than-ifrs-9-ecl">Impairment: Incurred Loss Model (Simpler than IFRS 9 ECL)</a><ul><li class="toc-l2"><a href="#recognition-criterion">Recognition Criterion</a></li><li class="toc-l2"><a href="#measurement">Measurement</a></li><li class="toc-l2"><a href="#frs-102-vs-ifrs-9-impairment">FRS 102 vs IFRS 9 Impairment</a></li></ul></li><li class="toc-l1"><a href="#derivatives-and-hedging">Derivatives and Hedging</a><ul><li class="toc-l2"><a href="#derivatives">Derivatives</a></li><li class="toc-l2"><a href="#hedge-accounting">Hedge Accounting</a></li></ul></li><li class="toc-l1"><a href="#worked-example-frs-102-vs-ifrs-9-comparison">Worked Example: FRS 102 vs IFRS 9 Comparison</a><ul><li class="toc-l2"><a href="#scenario-held-debt-securities">Scenario: Held Debt Securities</a></li><li class="toc-l2"><a href="#ifrs-9-classification">IFRS 9 Classification</a></li><li class="toc-l2"><a href="#frs-102-classification">FRS 102 Classification</a></li><li class="toc-l2"><a href="#impairment-assessment-year-2">Impairment Assessment (Year 2)</a><ul><li class="toc-l3"><a href="#ifrs-9-ecl-model">IFRS 9 (ECL Model)</a></li><li class="toc-l3"><a href="#frs-102-incurred-loss">FRS 102 (Incurred Loss)</a></li></ul></li></ul></li><li class="toc-l1"><a href="#audit-red-flags-frs-102-financial-instruments">Audit Red Flags: FRS 102 Financial Instruments</a><ul><li class="toc-l2"><a href="#red-flag-1-misclassification-fvpl-vs-afs">Red Flag 1: Misclassification (FVPL vs AFS)</a></li><li class="toc-l2"><a href="#red-flag-2-impairment-not-recognized">Red Flag 2: Impairment Not Recognized</a></li><li class="toc-l2"><a href="#red-flag-3-effective-interest-not-calculated">Red Flag 3: Effective Interest Not Calculated</a></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Basic vs Other Financial Instruments Under FRS 102</a></li></ul>
+            <ul><li class="toc-l1"><a href="#how-does-frs-102-classify-financial-instruments">How does FRS 102 classify financial instruments?</a><ul><li class="toc-l2"><a href="#the-three-category-simplified-model">The three-category simplified model</a></li><li class="toc-l2"><a href="#the-1121122-accounting-policy-choice">The 11.2 accounting policy choice (IFRS 9/IAS 39)</a></li></ul></li><li class="toc-l1"><a href="#what-makes-an-instrument-basic-versus-other">What makes an instrument "basic" versus "other"?</a><ul><li class="toc-l2"><a href="#the-119-basic-conditions">The 11.9 basic conditions</a></li><li class="toc-l2"><a href="#basic-vs-other-decision-table">Basic vs other decision table</a></li></ul></li><li class="toc-l1"><a href="#how-are-basic-instruments-measured-under-section-11">How are basic instruments measured under Section 11?</a><ul><li class="toc-l2"><a href="#initial-and-subsequent-measurement-1113-1114">Initial and subsequent measurement (11.13-11.14)</a></li><li class="toc-l2"><a href="#worked-example-below-market-related-party-loan">Worked example: below-market related-party loan</a></li><li class="toc-l2"><a href="#section-12-other-instruments-at-fvtpl">Section 12: other instruments at FVTPL</a></li></ul></li><li class="toc-l1"><a href="#how-does-frs-102-impairment-work-and-why-is-it-still-incurred-loss">How does FRS 102 impairment work, and why is it still incurred-loss?</a><ul><li class="toc-l2"><a href="#the-1121-1124-incurred-loss-mechanics">The 11.21-11.24 incurred-loss mechanics</a></li><li class="toc-l2"><a href="#periodic-review-2024-incurred-loss-retained">Periodic Review 2024: incurred loss retained</a></li><li class="toc-l2"><a href="#frs-102-vs-ifrs-9-impairment">FRS 102 vs IFRS 9 impairment</a></li></ul></li><li class="toc-l1"><a href="#audit-red-flags-frs-102-financial-instruments">Audit red flags: FRS 102 financial instruments</a></li><li class="toc-l1"><a href="#worked-case-study-basic-vs-other">Illustrative case study: basic vs other and swap volatility</a></li><li class="toc-l1"><a href="#frequently-asked-questions">Frequently asked questions</a></li></ul>
         </div>
 
 
         <article>
-            <p>FRS 102 financial instrument accounting is simpler than IFRS 9, using a three-category model (Available-for-Sale, Loans & Receivables, FVPL) instead of IFRS's complex SPPI + business model tests. This guide covers classification, measurement, and the incurred loss impairment model.</p>
+            <p>FRS 102 accounts for financial instruments through a deliberately simplified two-section, three-category model. Section 11 (Basic Financial Instruments) carries "basic" instruments — trade receivables and payables, ordinary bank loans, and simple bonds — at amortised cost; Section 12 (Other Financial Instruments) carries everything else, principally derivatives, at fair value through profit or loss (FVTPL). An entity may instead elect, as an accounting policy under FRS 102.11.2, to apply the recognition and measurement provisions of IFRS 9 or IAS 39. Impairment of amortised-cost assets uses an <em>incurred-loss</em> model (FRS 102.11.21-11.24), which the FRC Periodic Review 2024 explicitly retained — financial instruments were <strong>not</strong> aligned to the IFRS 9 expected-credit-loss (ECL) model, unlike leases and revenue.</p>
 
-            <h2 id="frs-102-financial-instrument-classification">FRS 102 Financial Instrument Classification</h2>
+            <h2 id="how-does-frs-102-classify-financial-instruments">How does FRS 102 classify financial instruments?</h2>
+            <p>FRS 102 classifies financial instruments into three measurement outcomes across two sections: basic instruments at amortised cost (Section 11), basic instruments that are equity investments or publicly traded/reliably measurable at fair value through profit or loss, and all "other" instruments at fair value through profit or loss (Section 12). There is no available-for-sale category, no other-comprehensive-income recycling bucket, and no SPPI-plus-business-model matrix — the deliberate simplification over IFRS 9 that makes the standard workable for the small and medium private companies it serves.</p>
+            <p>The single most important structural point is that Section 11 and Section 12 are complementary, not alternatives you pick between per instrument. Section 11 tells you how to account for a defined universe of "basic" instruments; Section 12 catches everything that falls outside that universe. So the operative question for every instrument is a binary one: does it meet the Section 11 "basic" conditions? If yes, amortised cost (or, for a handful of equity investments, fair value). If no, Section 12 applies and the default answer is fair value through profit or loss.</p>
 
-            <h3 id="three-categories-not-ifrs-9s-four">Three Categories (Not IFRS 9's Four)</h3>
+            <h3 id="the-three-category-simplified-model">The three-category simplified model</h3>
             <table>
                 <tr>
                     <th>Category</th>
+                    <th>Typical instruments</th>
                     <th>Measurement</th>
-                    <th>Gain/Loss Recognition</th>
+                    <th>Reference</th>
                 </tr>
                 <tr>
-                    <td><strong>Available-for-Sale (AFS)</strong></td>
-                    <td>Fair value</td>
-                    <td>OCI (unrealised); P&L (realised on sale)</td>
+                    <td><strong>Basic — debt</strong></td>
+                    <td>Trade receivables/payables, market-rate bank loans, simple bonds, intercompany loans on normal terms</td>
+                    <td>Amortised cost using the effective interest method (short-term trade items at transaction price)</td>
+                    <td>11.8(a)-(b), 11.9, 11.14(a)</td>
                 </tr>
                 <tr>
-                    <td><strong>Loans & Receivables (L&R)</strong></td>
-                    <td>Amortized cost</td>
-                    <td>P&L (interest, impairment)</td>
+                    <td><strong>Basic — investments</strong></td>
+                    <td>Investments in non-convertible/non-puttable preference and ordinary shares</td>
+                    <td>Fair value through P&amp;L if publicly traded or fair value reliably measurable; otherwise cost less impairment</td>
+                    <td>11.8(d), 11.14(b)-(c)</td>
                 </tr>
                 <tr>
-                    <td><strong>FVPL (Fair Value Through P&L)</strong></td>
-                    <td>Fair value</td>
-                    <td>P&L (all gains/losses)</td>
+                    <td><strong>Other — FVTPL</strong></td>
+                    <td>Derivatives (swaps, forwards, options), instruments failing the 11.9 test, most complex/structured debt</td>
+                    <td>Fair value through profit or loss (unless qualifying hedge accounting applies)</td>
+                    <td>12.3, 12.7, 12.8</td>
                 </tr>
             </table>
 
-            <h2 id="classification-guidance-simpler-than-ifrs-9">Classification Guidance (Simpler than IFRS 9)</h2>
+            <h3 id="the-1121122-accounting-policy-choice">The 11.2 accounting policy choice (IFRS 9/IAS 39)</h3>
+            <p>FRS 102.11.2 offers an entity a policy choice for <em>all</em> of its financial instruments. It may apply: (a) the provisions of both Section 11 and Section 12 in full; (b) the recognition and measurement provisions of IAS 39 <em>Financial Instruments: Recognition and Measurement</em> (as adopted for use in the UK) and the disclosure requirements of Sections 11 and 12; or (c) the recognition and measurement provisions of IFRS 9 <em>Financial Instruments</em> and the disclosures of Sections 11 and 12. FRS 102.12.2 mirrors this for Section 12.</p>
+            <p>The choice is all-or-nothing at the recognition-and-measurement level — an entity cannot cherry-pick IFRS 9 hedge accounting while keeping Section 11 impairment. In practice the IFRS 9/IAS 39 option is taken by entities with material derivative books, sophisticated treasury operations, or a parent that reports under EU-adopted IFRS and wants group-wide consistency. Electing IFRS 9 pulls the entity into the ECL impairment model for those instruments, so the "incurred versus expected" distinction below is itself a consequence of the 11.2 policy choice, not a fixed feature of every FRS 102 reporter.</p>
 
-            <h3 id="availableforsale-default">Available-for-Sale (Default)</h3>
-            <p><strong>Use AFS for:</strong></p>
+            <p class="callout"><strong>Contrast with IFRS 9:</strong> IFRS 9 classifies debt via the SPPI (solely payments of principal and interest) test combined with the business model assessment, producing amortised cost, FVOCI, or FVTPL. FRS 102's Section 11 "basic" conditions achieve a broadly similar amortised-cost/fair-value split with far less machinery, and — crucially — no FVOCI category and no expected-loss impairment unless the 11.2 policy choice imports IFRS 9.</p>
+
+            <h2 id="what-makes-an-instrument-basic-versus-other">What makes an instrument "basic" versus "other"?</h2>
+            <p>An instrument is "basic" if it is a cash instrument, a simple debt instrument meeting the conditions in FRS 102.11.9, a commitment to receive/make a basic loan, or a qualifying non-derivative equity investment listed in 11.8(d). Everything failing those conditions — every derivative by definition — is an "other" instrument under Section 12 and defaults to fair value through profit or loss. The 11.9 conditions are the classification engine, and misapplying them is the single most common FRS 102 financial-instrument error.</p>
+
+            <h3 id="the-119-basic-conditions">The 11.9 basic conditions</h3>
+            <p>Under FRS 102.11.9, a debt instrument is basic if it satisfies all of the following (paraphrased):</p>
             <ul>
-                <li>Equity investments (no control/significant influence)</li>
-                <li>Debt securities held for medium term (not held-to-maturity, not trading)</li>
-                <li>Marketable securities with no specific intent to hold or sell</li>
+                <li><strong>11.9(a) — returns:</strong> the return to the holder is a fixed amount, a positive fixed rate, a positive variable rate (e.g. LIBOR/SONIA-linked), or a combination of positive fixed and variable rates.</li>
+                <li><strong>11.9(b) — no adverse contingent terms:</strong> there is no contractual provision that could result in the holder losing principal or interest, or that permits the issuer to prepay in a way that is not a reasonable approximation of unpaid principal and interest.</li>
+                <li><strong>11.9(c) — prepayment/extension:</strong> any prepayment, extension, call or put provisions are not contingent on future events (other than to protect the holder against credit deterioration, a change in control, or changes in relevant tax/law).</li>
+                <li><strong>11.9(d) — no conditional returns or repayment other than as above.</strong></li>
             </ul>
+            <p>The commercial punchline: a plain vanilla loan at a market rate with straightforward prepayment terms is basic. Add a term that leverages the return (e.g. an inverse floater, an equity-linked coupon, a cap/collar embedded so it is no longer a positive rate) and the whole instrument fails 11.9 and moves to Section 12 at full fair value. Convertible debt held as an asset routinely fails 11.9 because the conversion feature is not a basic return.</p>
 
+            <h3 id="basic-vs-other-decision-table">Basic vs other decision table</h3>
+            <table>
+                <tr>
+                    <th>Instrument</th>
+                    <th>Basic (S11) or Other (S12)?</th>
+                    <th>Why / key 11.9 test</th>
+                    <th>Measurement</th>
+                </tr>
+                <tr>
+                    <td>Trade receivable / payable, normal credit terms</td>
+                    <td><strong>Basic</strong></td>
+                    <td>Fixed determinable amount; 11.9 met</td>
+                    <td>Transaction price (undiscounted if short-term)</td>
+                </tr>
+                <tr>
+                    <td>Bank loan at market floating rate (SONIA + margin)</td>
+                    <td><strong>Basic</strong></td>
+                    <td>Positive variable rate; 11.9(a) met</td>
+                    <td>Amortised cost, effective interest</td>
+                </tr>
+                <tr>
+                    <td>Below-market or interest-free related-party loan</td>
+                    <td><strong>Basic</strong> (but off-market)</td>
+                    <td>11.9 met; initial measurement needs imputed interest (11.13)</td>
+                    <td>PV of future cash flows at a market rate</td>
+                </tr>
+                <tr>
+                    <td>Interest-rate swap over the loan</td>
+                    <td><strong>Other</strong></td>
+                    <td>Derivative — fails 11.9 by definition</td>
+                    <td>FVTPL (12.8) unless hedge accounting</td>
+                </tr>
+                <tr>
+                    <td>Forward FX contract</td>
+                    <td><strong>Other</strong></td>
+                    <td>Derivative</td>
+                    <td>FVTPL (12.8)</td>
+                </tr>
+                <tr>
+                    <td>Convertible loan note (as holder)</td>
+                    <td><strong>Other</strong></td>
+                    <td>Conversion feature fails 11.9(b)/(d)</td>
+                    <td>FVTPL, or split accounting per 12.5-12.6</td>
+                </tr>
+                <tr>
+                    <td>Investment in listed ordinary shares (no significant influence)</td>
+                    <td><strong>Basic</strong> (11.8(d))</td>
+                    <td>Non-derivative equity; publicly traded</td>
+                    <td>FVTPL (11.14(c))</td>
+                </tr>
+                <tr>
+                    <td>Investment in unquoted shares, fair value not reliably measurable</td>
+                    <td><strong>Basic</strong> (11.8(d))</td>
+                    <td>Equity; FV not reliable</td>
+                    <td>Cost less impairment (11.14(c)(ii))</td>
+                </tr>
+            </table>
+
+            <h2 id="how-are-basic-instruments-measured-under-section-11">How are basic instruments measured under Section 11?</h2>
+            <p>Basic debt is measured initially at the transaction price including transaction costs (FRS 102.11.13), except where the arrangement constitutes a financing transaction, in which case it is measured at the present value of future payments discounted at a market rate of interest for a similar debt instrument. Subsequently, basic debt is held at amortised cost using the effective interest method (11.14(a)), while qualifying equity investments are held at fair value through profit or loss or, where fair value is not reliably measurable, at cost less impairment (11.14(b)-(c)).</p>
+
+            <h3 id="initial-and-subsequent-measurement-1113-1114">Initial and subsequent measurement (11.13-11.14)</h3>
+            <p>The financing-transaction carve-out in 11.13 is where most private-company adjustments arise. A "financing transaction" is any arrangement where payment is deferred beyond normal business terms or financed at a rate that is not a market rate — the textbook case being an interest-free or below-market intercompany or director's loan. The standard requires you to look through the stated terms and account for the substance: recognise the loan at the present value of the contractual cash flows using a market rate, and unwind the discount as interest income/expense over the life of the loan. Public benefit entities apply the equivalent PBE requirements (FRS 102 Section 34/PBE paragraphs) which similarly require imputed interest on concessionary loans, subject to the specific PBE reliefs.</p>
+
+            <h3 id="worked-example-below-market-related-party-loan">Worked example: below-market related-party loan (imputed interest)</h3>
             <p class="example-box">
-                <strong>Example:</strong> Company owns 100 shares of publicly-listed FTSE 100 company. No control/influence. Fair value = £5,000. Classify as AFS.<br>
-                — Fair value changes: Through OCI (equity)
+                <strong>Facts.</strong> On 1 January 2026 Parent Ltd lends £100,000 to its trading subsidiary, interest-free, repayable in full after 3 years. This is not a public-benefit or basic-financing exemption case, so it is a financing transaction under 11.13. A market rate for a similar 3-year unsecured loan to the subsidiary is assessed at 8%.<br><br>
+                <strong>Step 1 — initial measurement (PV of £100,000 in 3 years at 8%):</strong><br>
+                £100,000 × 1 / (1.08)<sup>3</sup> = £100,000 × 0.7938 = <strong>£79,383</strong>.<br><br>
+                <strong>Step 2 — day-one difference:</strong> £100,000 − £79,383 = £20,617. In the separate financial statements this day-one debit is typically treated as a capital contribution / increase in the cost of investment in the subsidiary (parent), with the mirror as a credit to equity in the subsidiary — judgement and the nature of the relationship drive the exact posting.<br><br>
+                <strong>Step 3 — unwind at 8% effective interest over 3 years:</strong>
             </p>
-
-            <h3 id="loans-receivables">Loans & Receivables</h3>
-            <p><strong>Use L&R for:</strong></p>
-            <ul>
-                <li>Trade receivables (customer invoices)</li>
-                <li>Loans originated by the entity</li>
-                <li>Held-to-maturity debt (if intent + ability exist)</li>
-                <li>Fixed or determinable payments; not quoted in active market</li>
-            </ul>
-
-            <h3 id="fvpl-wider-availability-in-frs-102">FVPL (Wider Availability in FRS 102)</h3>
-            <p>FRS 102 permits FVPL more liberally than IFRS for:</p>
-            <ul>
-                <li>Equity investments held as part of trading portfolio</li>
-                <li>Investments in associates (if no significant influence and FVPL applied consistently)</li>
-                <li>Financial liabilities: Derivatives and hedging instruments</li>
-            </ul>
-
-            <p class="callout"><strong>FRS 102 vs IFRS 9 difference:</strong> FRS 102 doesn't require fair value option election (negative list); AFS is default. IFRS 9 uses business model + SPPI tests (more complex).</p>
-
-            <h2 id="measurement">Measurement</h2>
-
-            <h3 id="afs-measurement">AFS Measurement</h3>
-            <ul>
-                <li><strong>Quoted security:</strong> Closing bid price (market observable)</li>
-                <li><strong>Unquoted security:</strong> Fair value via comparable transactions, discounted cash flow, or cost if no other method</li>
-            </ul>
-
-            <h3 id="lr-measurement">L&R Measurement</h3>
-            <ul>
-                <li><strong>Amortized cost:</strong> Original cost + effective interest, less impairment</li>
-                <li><strong>Effective interest method:</strong> Spreads loan income over the loan life</li>
-            </ul>
-
-            <h2 id="impairment-incurred-loss-model-simpler-than-ifrs-9-ecl">Impairment: Incurred Loss Model (Simpler than IFRS 9 ECL)</h2>
-
-            <h3 id="recognition-criterion">Recognition Criterion</h3>
-            <p>Recognize impairment when <strong>objective evidence of loss</strong> exists (incurred, not expected):</p>
-            <ul>
-                <li>Debtor in financial difficulty (late payments, covenant breach)</li>
-                <li>Collectability deteriorated due to economic factors</li>
-                <li>Debtor bankruptcy or restructuring</li>
-            </ul>
-
-            <h3 id="measurement">Measurement</h3>
-            <div style="background: #1a2f5a; color: #e8eef7; padding: 12px; border-radius: 6px; margin: 14px 0; text-align: center;">
-                Impairment Loss = Carrying Amount −’ PV of Expected Future Cash Flows
+            <table>
+                <tr><th>Year</th><th>Opening carrying amount</th><th>Interest income @ 8%</th><th>Closing carrying amount</th></tr>
+                <tr><td>2026</td><td>£79,383</td><td>£6,351</td><td>£85,734</td></tr>
+                <tr><td>2027</td><td>£85,734</td><td>£6,859</td><td>£92,593</td></tr>
+                <tr><td>2028</td><td>£92,593</td><td>£7,407</td><td>£100,000</td></tr>
+            </table>
+            <p><strong>Illustrative journals (Parent Ltd, lender):</strong></p>
+            <div style="background:#1a2f5a;color:#e8eef7;padding:14px 16px;border-radius:6px;margin:14px 0;font-family:Consolas,Menlo,monospace;font-size:0.86em;overflow-x:auto;">
+1 Jan 2026 — advance the loan and recognise at fair value<br>
+&nbsp;&nbsp;Dr Loan receivable (financial asset) &nbsp;&nbsp;&nbsp;£79,383<br>
+&nbsp;&nbsp;Dr Cost of investment in subsidiary &nbsp;&nbsp;£20,617<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Cr Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;£100,000<br><br>
+31 Dec 2026 — unwind discount (year 1)<br>
+&nbsp;&nbsp;Dr Loan receivable &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;£6,351<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Cr Interest income (P&amp;L) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;£6,351
             </div>
+            <p style="font-size:0.85em;color:#8593a8;">Illustrative figures for educational purposes only; the equity/investment leg depends on the specific relationship and requires judgement.</p>
 
+            <h3 id="section-12-other-instruments-at-fvtpl">Section 12: other instruments at FVTPL</h3>
+            <p>Section 12 applies to all financial instruments outside the basic universe. Under FRS 102.12.3 such instruments are recognised when the entity becomes a party to the contract, and under 12.8 are measured at fair value at each reporting date with changes recognised in profit or loss. Every derivative — an interest-rate swap, an FX forward, a commodity option — is therefore marked to market through P&amp;L unless the entity applies the hedge accounting requirements in 12.15-12.29 and has contemporaneous, formal hedge documentation in place. There is no "cost model" hiding place for a derivative under FRS 102: even a swap with nil initial fair value must be recognised and remeasured.</p>
+
+            <h2 id="how-does-frs-102-impairment-work-and-why-is-it-still-incurred-loss">How does FRS 102 impairment work, and why is it still incurred-loss?</h2>
+            <p>FRS 102 impairs amortised-cost and cost-model financial assets using an <em>incurred-loss</em> model: an entity assesses at each reporting date whether there is <strong>objective evidence</strong> of impairment (FRS 102.11.21-11.22) and, only if such evidence exists, measures and recognises a loss (11.25-11.26). It is not a forward-looking expected-loss model — no loss is booked in anticipation of a downturn that has not yet produced observable evidence of impairment on the specific asset or group of assets. This is the defining difference from IFRS 9, and the FRC's Periodic Review 2024 deliberately left it in place.</p>
+
+            <h3 id="the-1121-1124-incurred-loss-mechanics">The 11.21-11.24 incurred-loss mechanics</h3>
+            <p>The mechanics run as follows. FRS 102.11.21 requires an assessment at the end of each reporting period. FRS 102.11.22 lists the objective-evidence triggers — significant financial difficulty of the debtor, a breach of contract such as default or delinquency, the lender granting a concession it would not otherwise consider, probability of bankruptcy/administration, and observable data indicating a measurable decrease in estimated future cash flows for a group of assets. FRS 102.11.25 then sets the measurement: for an amortised-cost asset, the loss is the difference between the carrying amount and the present value of estimated future cash flows discounted at the asset's <em>original</em> effective interest rate. For a cost-model instrument (11.14(c) equity at cost), the loss is carrying amount less best estimate of the amount recoverable.</p>
+            <div style="background: #1a2f5a; color: #e8eef7; padding: 12px; border-radius: 6px; margin: 14px 0; text-align: center;">
+                Impairment loss = Carrying amount − PV of estimated future cash flows (discounted at the original effective interest rate)
+            </div>
             <p class="example-box">
-                <strong>Example:</strong> Trade receivable of £10,000; customer in financial difficulty.<br>
-                — Expected future collection (PV): £6,000<br>
-                — Impairment loss: £10,000 −’ £6,000 = £4,000<br>
-                — Expense: Impairment loss (P&L)
+                <strong>Example.</strong> A trade receivable of £10,000 is due from a customer who has entered a formal payment plan after breaching terms (objective evidence per 11.22). The entity now expects to recover £6,000, in twelve months, and the receivable is short-term so discounting is immaterial.<br>
+                — Impairment loss = £10,000 − £6,000 = <strong>£4,000</strong>, recognised in profit or loss (11.26).<br>
+                — If circumstances later improve, FRS 102.11.26 <em>requires</em> the reversal of the impairment (unlike some non-financial assets), capped at what the amortised cost would have been absent the impairment.
             </p>
 
-            <h3 id="frs-102-vs-ifrs-9-impairment">FRS 102 vs IFRS 9 Impairment</h3>
+            <h3 id="periodic-review-2024-incurred-loss-retained">Periodic Review 2024: incurred loss retained</h3>
+            <p>The FRC's second triennial (now periodic) review, finalised in 2024 with amendments broadly effective for periods beginning on or after 1 January 2026, made headline changes to Section 20 <em>Leases</em> (an on-balance-sheet, IFRS 16-style model) and Section 23 <em>Revenue</em> (an IFRS 15-style five-step model). It did <strong>not</strong> change the impairment model for financial instruments. The incurred-loss approach in Section 11 is retained; the FRC has stated it will consider an expected-credit-loss model for FRS 102 separately and consult on it in due course. Preparers and auditors should therefore not assume that the leases/revenue "alignment with IFRS" theme extends to financial-instrument impairment — for now it explicitly does not.</p>
+
+            <h3 id="frs-102-vs-ifrs-9-impairment">FRS 102 vs IFRS 9 impairment</h3>
             <table>
                 <tr>
                     <th>Aspect</th>
-                    <th>FRS 102 (Incurred Loss)</th>
-                    <th>IFRS 9 (ECL)</th>
+                    <th>FRS 102 (incurred loss)</th>
+                    <th>IFRS 9 (expected credit loss)</th>
                 </tr>
                 <tr>
                     <td><strong>Trigger</strong></td>
-                    <td>Objective evidence of loss</td>
-                    <td>SICR (significant change in credit risk)</td>
+                    <td>Objective evidence of impairment already exists (11.22)</td>
+                    <td>Recognised from day one; staged on significant increase in credit risk</td>
                 </tr>
                 <tr>
-                    <td><strong>Recognition timing</strong></td>
-                    <td>Later (after loss incurred)</td>
-                    <td>Earlier (forward-looking)</td>
+                    <td><strong>Timing</strong></td>
+                    <td>Later — a loss event must have occurred</td>
+                    <td>Earlier — forward-looking, before a loss event</td>
                 </tr>
                 <tr>
-                    <td><strong>Complexity</strong></td>
-                    <td>Simpler; more subjective</td>
-                    <td>Complex; model-driven</td>
+                    <td><strong>Day-one provision</strong></td>
+                    <td>None on a performing asset</td>
+                    <td>12-month ECL on performing assets (Stage 1)</td>
+                </tr>
+                <tr>
+                    <td><strong>Reversal</strong></td>
+                    <td>Required if evidence improves (11.26)</td>
+                    <td>Remeasured each period</td>
+                </tr>
+                <tr>
+                    <td><strong>Applies under FRS 102 when</strong></td>
+                    <td>Default (Sections 11/12)</td>
+                    <td>Only if the 11.2 policy choice imports IFRS 9</td>
                 </tr>
             </table>
 
-            <h2 id="derivatives-and-hedging">Derivatives and Hedging</h2>
+            <h2 id="audit-red-flags-frs-102-financial-instruments">Audit red flags: FRS 102 financial instruments</h2>
+            <p>Financial instruments are a recurring source of FRS 102 restatements and audit findings. The three below are the ones an experienced UK auditor tests first, each anchored to the relevant ISA (UK).</p>
 
-            <h3 id="derivatives">Derivatives</h3>
-            <p><strong>Always measured at FVPL.</strong> No choice; fair value remeasured each period.</p>
+            <h3 id="red-flag-1-derivative-misclassified-as-basic">Red flag 1 — a derivative dressed up as "basic" to avoid FV volatility (ISA (UK) 315)</h3>
+            <p><strong>Finding:</strong> Management classifies an interest-rate swap, or a loan with an embedded equity-linked return, as a "basic" instrument at amortised cost, keeping fair-value movements out of profit or loss. This fails the 11.9 conditions and should sit in Section 12 at FVTPL. The motive is usually earnings smoothing.</p>
+            <p><strong>Auditor response:</strong> ISA (UK) 315 (Identifying and Assessing the Risks of Material Misstatement) requires the auditor to understand the entity's instruments and the design of controls over classification. Walk the 11.9 conditions against the actual contract terms, treat classification as a significant risk where derivatives exist, and reclassify to Section 12 with fair value through P&amp;L and comparative restatement where misclassification is confirmed.</p>
 
-            <h3 id="hedge-accounting">Hedge Accounting</h3>
-            <p>FRS 102 permits hedge accounting (simpler than IFRS 9):</p>
-            <ul>
-                <li><strong>Cash flow hedges:</strong> Effective portion in OCI; ineffective in P&L</li>
-                <li><strong>Fair value hedges:</strong> Both hedged item and hedge instrument in P&L (matching)</li>
-            </ul>
+            <h3 id="red-flag-2-incurred-loss-judgement">Red flag 2 — impairment not recognised despite objective evidence (ISA (UK) 540)</h3>
+            <p><strong>Finding:</strong> A trade receivable is 180+ days overdue and the debtor is in administration, yet no impairment is booked; or, conversely, management applies a generic percentage provision with no link to the 11.22 objective-evidence triggers.</p>
+            <p><strong>Auditor response:</strong> ISA (UK) 540 (Auditing Accounting Estimates and Related Disclosures) governs the incurred-loss impairment estimate. Assess management's method, the reasonableness of the recovery and cash-flow assumptions, and whether the original effective interest rate was used for discounting. Because the incurred-loss model is more subjective than a mechanical ECL calculation, 540 demands specific challenge of the point estimate and consideration of management bias.</p>
 
-            <h2 id="worked-example-frs-102-vs-ifrs-9-comparison">Worked Example: FRS 102 vs IFRS 9 Comparison</h2>
+            <h3 id="red-flag-3-imputed-interest-omitted">Red flag 3 — off-market loans recorded at face value (ISA (UK) 500)</h3>
+            <p><strong>Finding:</strong> An interest-free or below-market related-party/director's loan is carried at the cash amount advanced, with no financing-transaction adjustment under 11.13 and no imputed interest, understating (or overstating) the asset/liability and misstating interest.</p>
+            <p><strong>Auditor response:</strong> ISA (UK) 500 (Audit Evidence) requires sufficient appropriate evidence over the discount rate and the present-value calculation. Obtain the loan agreement, corroborate the market rate used, recompute the amortised-cost schedule, and confirm the day-one equity/investment leg is accounted for consistently in both entities where the group is audited.</p>
 
-            <h3 id="scenario-held-debt-securities">Scenario: Held Debt Securities</h3>
-            <p><strong>Company holds £1m of corporate bonds (3-year maturity, 4% coupon). No active market.</strong></p>
+            <h2 id="worked-case-study-basic-vs-other">Illustrative case study: basic vs other and swap volatility</h2>
+            <div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
+            <p><strong>Scenario.</strong> An owner-managed manufacturer reporting under FRS 102 holds (1) a £2m five-year bank loan at SONIA + 2.5%, plus routine trade debtors and creditors, and (2) a £2m-notional pay-fixed/receive-floating interest-rate swap it took out to fix its interest cost. It has not prepared hedge documentation.</p>
+            <p><strong>Analysis.</strong> The bank loan and trade balances are basic (Section 11): the loan carries a positive variable rate and meets 11.9, so it sits at amortised cost. The swap is a derivative and therefore an "other" instrument (Section 12), measured at fair value through profit or loss under 12.8. Because no formal hedge relationship was designated and documented at inception, the entity <em>cannot</em> apply cash-flow hedge accounting under 12.18. When interest rates fall, the swap moves to a liability position and its full fair-value loss hits profit or loss — even though the economic hedge is working exactly as intended.</p>
+            <p><strong>Takeaway.</strong> The classification split is not academic: it decides whether interest-rate movements smooth through amortised cost or whiplash through P&amp;L. Owner-managed businesses are repeatedly caught out when a "simple" swap introduces earnings volatility. The fix is prospective hedge documentation at inception; retrospective designation is not permitted.</p>
+            <p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
+            </div>
 
-            <h3 id="ifrs-9-classification">IFRS 9 Classification</h3>
-            <ul>
-                <li>SPPI test: Passes (fixed coupon + principal)</li>
-                <li>Business model: HTM (held-to-maturity)</li>
-                <li>Result: <strong>Amortized cost (AC)</strong></li>
-            </ul>
+            <h2 id="frequently-asked-questions">Frequently asked questions</h2>
+            <h3>Does FRS 102 use the same four categories as IAS 39 (AFS, held-to-maturity, loans and receivables, FVTPL)?</h3>
+            <p>No. That four-category structure is IAS 39 (and the older FRS 26). FRS 102 replaced it with the two-section model: basic instruments under Section 11 (mostly amortised cost) and other instruments under Section 12 (fair value through profit or loss). There is no available-for-sale category and no FVOCI recycling under the default FRS 102 model.</p>
 
-            <h3 id="frs-102-classification">FRS 102 Classification</h3>
-            <ul>
-                <li>Fixed payments, not quoted market: <strong>Loans & Receivables (L&R)</strong></li>
-                <li>Measurement: Amortized cost (same result as IFRS)</li>
-            </ul>
+            <h3>Can I choose to apply IFRS 9 within FRS 102?</h3>
+            <p>Yes. FRS 102.11.2 lets an entity apply the recognition and measurement provisions of IFRS 9 (or IAS 39) instead of Sections 11 and 12, while still using the FRS 102 disclosure requirements. The choice applies to all of the entity's financial instruments, not instrument by instrument, and electing IFRS 9 brings the expected-credit-loss impairment model with it.</p>
 
-            <h3 id="impairment-assessment-year-2">Impairment Assessment (Year 2)</h3>
-            <p><strong>Scenario:</strong> Bond issuer's credit deteriorates; market value drops to £800k.</p>
+            <h3>Did the FRC Periodic Review 2024 move FRS 102 to expected credit losses?</h3>
+            <p>No. The 2024 amendments overhauled leases (Section 20) and revenue (Section 23) to align with IFRS 16 and IFRS 15, but deliberately retained the incurred-loss impairment model for financial instruments. The FRC has said it will consider an ECL model separately and consult on it in due course.</p>
 
-            <h4 id="ifrs-9-ecl-model">IFRS 9 (ECL Model)</h4>
-            <ul>
-                <li>SICR assessment: Credit rating downgraded →’ Stage 2</li>
-                <li>Lifetime ECL: 2% × £1m = £20k provision</li>
-                <li>P&L: Impairment loss £20k (recognized early)</li>
-            </ul>
+            <h3>Is an interest-free intercompany loan just recorded at the amount lent?</h3>
+            <p>Not usually. If it is a financing transaction (payment deferred beyond normal terms or below a market rate), FRS 102.11.13 requires initial measurement at the present value of the future cash flows discounted at a market rate, with the discount unwound as interest over the loan's life. The day-one difference is typically treated as a capital contribution or investment adjustment, depending on the relationship.</p>
 
-            <h4 id="frs-102-incurred-loss">FRS 102 (Incurred Loss)</h4>
-            <ul>
-                <li>Objective evidence test: Price decline + credit downgrade →’ objective evidence</li>
-                <li>PV of future cash flows: £850k (discounted at original rate)</li>
-                <li>Impairment loss: £1m −’ £850k = £150k</li>
-                <li>P&L: Impairment loss £150k (recognized later, higher amount)</li>
-            </ul>
+            <h3>Are all derivatives measured at fair value under FRS 102?</h3>
+            <p>Yes. Every derivative fails the Section 11 "basic" test and falls into Section 12, measured at fair value through profit or loss under 12.8. The only way to keep fair-value movements out of profit or loss is to apply the hedge accounting requirements in 12.15-12.29 with contemporaneous formal documentation.</p>
 
-            <h2 id="audit-red-flags-frs-102-financial-instruments">Audit Red Flags: FRS 102 Financial Instruments</h2>
+            <h3>How is a FRS 102 impairment loss measured on a loan asset?</h3>
+            <p>For an amortised-cost asset it is the carrying amount less the present value of estimated future cash flows discounted at the asset's original effective interest rate (FRS 102.11.25). Impairment losses can — and must — be reversed if the evidence later improves, capped at the amortised cost that would have existed without the impairment.</p>
 
-            <h3 id="red-flag-1-misclassification-fvpl-vs-afs">Red Flag 1: Misclassification (FVPL vs AFS)</h3>
-            <p><strong>Finding:</strong> AFS investment remeasured at fair value; gains through OCI. But investment is part of trading portfolio (should be FVPL).</p>
-            <p><strong>Auditor action:</strong> Reclassify to FVPL; reroute gain to P&L; restate comparatives.</p>
-
-            <h3 id="red-flag-2-impairment-not-recognized">Red Flag 2: Impairment Not Recognized</h3>
-            <p><strong>Finding:</strong> Trade receivable 180+ days overdue; debtor in administration. No impairment recognized.</p>
-            <p><strong>Auditor action:</strong> Recognize impairment loss; adjust allowance; P&L impact.</p>
-
-            <h3 id="red-flag-3-effective-interest-not-calculated">Red Flag 3: Effective Interest Not Calculated</h3>
-            <p><strong>Finding:</strong> Loan originated at discount; charged fees. Effective interest rate not calculated; straight-line interest taken instead.</p>
-            <p><strong>Auditor action:</strong> Recalculate effective rate; adjust interest income; L&R measurement.</p>
-
-            
-<h2 id="real-life-case-study">Real-Life Case Study: Basic vs Other Financial Instruments Under FRS 102</h2>
-<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A company holds (1) a normal bank loan and trade debtors, and (2) an interest-rate swap hedging that loan.</p>
- <p><strong>Treatment.</strong> The loan and debtors are "basic" financial instruments (Section 11), measured at amortised cost. The swap is a derivative, an "other" financial instrument (Section 12), measured at fair value through profit or loss unless hedge accounting is formally applied. Many owner-managed businesses are caught out when a "simple" swap suddenly introduces P&amp;L volatility.</p>
- <p><strong>Takeaway.</strong> FRS 102 splits financial instruments into basic (amortised cost) and other (fair value). A vanilla loan is basic; the swap over it is not, and without hedge documentation its fair-value swings hit profit.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
-</div>
+            <h3>What if fair value of an equity investment cannot be measured reliably?</h3>
+            <p>A qualifying basic equity investment (11.8(d)) is normally at fair value through profit or loss, but where fair value cannot be measured reliably without undue cost or effort, FRS 102.11.14(c)(ii) permits measurement at cost less impairment. Impairment then follows the cost-model rule in 11.25 (carrying amount less best estimate of recoverable amount).</p>
 
 <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>
     <p style="margin-bottom: 12px; color: #4a5568;"><a href="frs-102-uk-gaap-complete-guide.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">→ FRS 102 UK GAAP Hub</a></p>
     <p style="margin-bottom: 8px; color: #4a5568;"><a href="frs-102-small-entities-exemptions.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• FRS 102 Small Entities Exemption: Disclosure & Measurement Relief</a></p>
     <p style="margin-bottom: 8px; color: #4a5568;"><a href="frs-102-transition-from-ifrs.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• FRS 102 Transition from IFRS: Accounting Changes & Restatement</a></p>
+    <p style="margin-bottom: 8px; color: #4a5568;"><a href="frs-102-gaap-cluster.html" style="color: #2a4a7a; font-weight: 600; text-decoration: none;">• FRS 102 GAAP Topic Cluster: all sections & satellites</a></p>
 </div>
 
 <div class="disclaimer">
@@ -297,5 +347,99 @@
             </div>
         </article>
     </div>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "FRS 102 Financial Instruments: Sections 11 & 12, Basic vs Other, Amortised Cost & Incurred-Loss Impairment",
+      "description": "The FRS 102 Section 11/12 basic-vs-other model, amortised cost, FVTPL, the IFRS 9/IAS 39 accounting policy choice (11.2), imputed interest on below-market related-party loans, and incurred-loss impairment (11.21-11.24) retained after the FRC Periodic Review 2024.",
+      "datePublished": "2026-05-01",
+      "dateModified": "2026-07-13",
+      "author": {
+        "@type": "Person",
+        "name": "Usman Qureshi",
+        "jobTitle": "Audit & CFO Advisory Consultant (ACCA, ACA)",
+        "image": "https://www.uqconsulting.org/images/usman-qureshi.jpg"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "UQ Consulting",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.uqconsulting.org/images/logo.png"
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.uqconsulting.org/blog/frs-102-financial-instruments.html"
+      }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does FRS 102 use the same four categories as IAS 39 (AFS, held-to-maturity, loans and receivables, FVTPL)?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. That four-category structure is IAS 39 (and the older FRS 26). FRS 102 replaced it with the two-section model: basic instruments under Section 11 (mostly amortised cost) and other instruments under Section 12 (fair value through profit or loss). There is no available-for-sale category and no FVOCI recycling under the default FRS 102 model."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I choose to apply IFRS 9 within FRS 102?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. FRS 102.11.2 lets an entity apply the recognition and measurement provisions of IFRS 9 (or IAS 39) instead of Sections 11 and 12, while still using the FRS 102 disclosure requirements. The choice applies to all of the entity's financial instruments, not instrument by instrument, and electing IFRS 9 brings the expected-credit-loss impairment model with it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Did the FRC Periodic Review 2024 move FRS 102 to expected credit losses?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. The 2024 amendments overhauled leases (Section 20) and revenue (Section 23) to align with IFRS 16 and IFRS 15, but deliberately retained the incurred-loss impairment model for financial instruments. The FRC has said it will consider an ECL model separately and consult on it in due course."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is an interest-free intercompany loan just recorded at the amount lent?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not usually. If it is a financing transaction (payment deferred beyond normal terms or below a market rate), FRS 102.11.13 requires initial measurement at the present value of the future cash flows discounted at a market rate, with the discount unwound as interest over the loan's life. The day-one difference is typically treated as a capital contribution or investment adjustment, depending on the relationship."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are all derivatives measured at fair value under FRS 102?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Every derivative fails the Section 11 basic test and falls into Section 12, measured at fair value through profit or loss under 12.8. The only way to keep fair-value movements out of profit or loss is to apply the hedge accounting requirements in 12.15-12.29 with contemporaneous formal documentation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is a FRS 102 impairment loss measured on a loan asset?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For an amortised-cost asset it is the carrying amount less the present value of estimated future cash flows discounted at the asset's original effective interest rate (FRS 102.11.25). Impairment losses can and must be reversed if the evidence later improves, capped at the amortised cost that would have existed without the impairment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if fair value of an equity investment cannot be measured reliably?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A qualifying basic equity investment (11.8(d)) is normally at fair value through profit or loss, but where fair value cannot be measured reliably without undue cost or effort, FRS 102.11.14(c)(ii) permits measurement at cost less impairment. Impairment then follows the cost-model rule in 11.25 (carrying amount less best estimate of recoverable amount)."
+          }
+        }
+      ]
+    }
+    </script>
 </body>
 </html>

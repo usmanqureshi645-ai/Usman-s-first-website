@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <!-- Google Analytics (GA4) -->
@@ -12,6 +12,85 @@
     <meta name="author" content="Usman Qureshi">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://www.uqconsulting.org/blog/ifrs-9-impairment-accounting.html">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": "IFRS 9 Impairment Reversals & Provision Matrix for Trade Receivables",
+      "description": "How IFRS 9 impairment reversals flow to profit or loss with no cost-recovery floor, the simplified-approach provision matrix for trade receivables, SICR cure reassessment, a published case study and ISA-linked auditor red flags.",
+      "author": {
+        "@type": "Person",
+        "name": "Usman Qureshi",
+        "jobTitle": "Audit & CFO Advisory (ACCA, ACA)"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "UQ Consulting"
+      },
+      "datePublished": "2026-05-01",
+      "dateModified": "2026-07-01",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://www.uqconsulting.org/blog/ifrs-9-impairment-accounting.html"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can you reverse an IFRS 9 impairment loss through profit or loss?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Under IFRS 9.5.5.8 the loss allowance is remeasured at each reporting date, and any decrease in expected credit losses is recognised immediately in profit or loss as an impairment gain. There is no cost-recovery floor: unlike the old IAS 39 incurred-loss model, IFRS 9 does not cap the reversal by reference to what would have been amortised cost had no impairment ever been recognised."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is there a limit on how much impairment can be reversed under IFRS 9?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The loss allowance cannot go below zero, because it is measured as expected credit losses, which cannot be negative. You can reverse the allowance down to nil when the asset returns to performing, but you cannot recognise a net asset for expected recoveries. Amounts already written off can only be recovered through the separate recoveries line, not by reinstating the receivable."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who must use the simplified approach and provision matrix under IFRS 9?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The simplified approach is mandatory for trade receivables and contract assets that do not contain a significant financing component (IFRS 9.5.5.15). It is an optional accounting-policy election for trade receivables and contract assets that do contain a significant financing component, and for lease receivables. Under it the loss allowance is always measured at lifetime expected credit losses, with no staging assessment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does a provision matrix based only on historical loss rates comply with IFRS 9?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. IFRS 9 requires expected credit losses to reflect reasonable and supportable forward-looking information. A matrix built purely on historical observed default rates must be adjusted for current conditions and forecasts of future economic conditions, for example expected changes in unemployment, GDP or sector-specific stress. A backward-looking-only matrix is a common audit finding."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do trade receivables use the three-stage model?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Trade receivables under the simplified approach sit permanently on lifetime expected credit losses from initial recognition. There is no Stage 1 versus Stage 2 assessment and no significant-increase-in-credit-risk trigger to monitor. The three-stage general model applies to loans and other debt instruments, not to simplified-approach trade receivables."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you calculate the loss rate for a provision matrix?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Take historical write-offs for each ageing bucket and divide by the receivables that were outstanding at the start of that bucket period, giving a historical loss rate per bucket (the IFRS 9.B5.5.35 practical expedient). Then adjust each rate for forward-looking macroeconomic factors and apply the adjusted rate to the current gross carrying amount in each bucket to get lifetime ECL."
+          }
+        }
+      ]
+    }
+    </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: #f4f6f9; color: #2a3342; line-height: 1.7; }
@@ -34,11 +113,12 @@
         th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #e4e9f0; }
         th { background: #1a2f5a; color: #fff; font-weight: 600; }
         .example-box { background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px 24px; margin: 28px 0; }
+        .journal { background: #1a2f5a; color: #e8eef7; padding: 16px 18px; border-radius: 4px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.9em; white-space: pre; overflow-x: auto; }
         .author-bio { background: #fff; border-radius: 10px; padding: 24px; margin: 44px 0; }
         .disclaimer { font-size: 0.82em; color: #8593a8; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e4e9f0; font-style: italic; }
-    
 
-    
+
+
 /*TOC_SIDEBAR_START*/
 .toc {
     background: #fff;
@@ -81,214 +161,166 @@
 </head>
 <body>
     <div class="topbar">
-        <a href="https://www.uqconsulting.org/home.html">→ Usman Qureshi — Audit &amp; CFO Advisory</a>
+        <a href="https://www.uqconsulting.org/home.html">→ Usman Qureshi — Audit &amp; CFO Advisory</a>
     </div>
 
     <div class="article-container">
         <h1>IFRS 9 Impairment Reversals & Provision Matrix for Trade Receivables</h1>
 <div class="breadcrumb" style="color: #8593a8; font-size: 0.9em; margin-bottom: 20px;">
-    <a href="index.html" style="color: #2a4a7a; text-decoration: none;">Blog</a> 
-    &gt; <a href="ifrs-9-financial-instruments-complete-guide.html" style="color: #2a4a7a; text-decoration: none;">IFRS 9 Financial Instruments</a> 
+    <a href="index.html" style="color: #2a4a7a; text-decoration: none;">Blog</a>
+    &gt; <a href="ifrs-9-financial-instruments-complete-guide.html" style="color: #2a4a7a; text-decoration: none;">IFRS 9 Financial Instruments</a>
     &gt; <span style="color: #1a2f5a;">IFRS 9 Impairment Reversals & Provision Matrix for Trade Receivables</span>
 </div>
-        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 11 min read</div>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published May 2026 · Updated July 2026 · 12 min read</div>
 
-        <p class="lead">IFRS 9's impairment model hinges on a simple but powerful distinction: Stage 1 assets use 12-month ECL (optimistic), while Stage 2/3 assets use lifetime ECL (conservative). This guide covers stage movements, when to reclassify assets, low-credit-risk exemptions, reversal of allowances, and the audit challenges around borderline determinations.</p>
+        <p class="lead">Two IFRS 9 mechanics get far less attention than the three-stage staging debate, yet they drive most real audit adjustments: the <strong>reversal</strong> of an expected-credit-loss (ECL) allowance when credit quality improves, and the <strong>simplified-approach provision matrix</strong> used for trade receivables. Unlike the old incurred-loss model, IFRS 9 reversals flow straight to profit or loss with no "cost recovery floor," and trade receivables sit permanently on lifetime ECL with no staging at all. This guide covers both, with worked tables, journals, a published case study, and the ISA-linked red flags auditors chase.</p>
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#12m-vs-lifetime">12-Month ECL vs Lifetime ECL: The Difference</a><ul><li class="toc-l2"><a href="#stage-1-12month-ecl-performing-assets">Stage 1: 12-Month ECL (Performing Assets)</a></li><li class="toc-l2"><a href="#stage-2-3-lifetime-ecl-underperforming-or-defaulted">Stage 2 & 3: Lifetime ECL (Underperforming or Defaulted)</a></li><li class="toc-l2"><a href="#why-the-jump">Why the Jump?</a></li></ul></li><li class="toc-l1"><a href="#stage-movements">Stage Movements and Reclassification</a><ul><li class="toc-l2"><a href="#forward-movements-stage-1-2-3">Forward Movements (Stage 1 →’ 2 →’ 3)</a></li><li class="toc-l2"><a href="#backward-movements-reversal">Backward Movements (Reversal)</a></li></ul></li><li class="toc-l1"><a href="#low-credit-risk">Low Credit Risk Exemption</a><ul><li class="toc-l2"><a href="#what-qualifies-as-low-credit-risk">What Qualifies as Low Credit Risk?</a></li></ul></li><li class="toc-l1"><a href="#reversals">Reversal of Impairment Losses</a><ul><li class="toc-l2"><a href="#journal-entry-for-reversal">Journal Entry for Reversal</a></li><li class="toc-l2"><a href="#reversal-limits">Reversal Limits</a></li></ul></li><li class="toc-l1"><a href="#practical-example">Practical Example: Loan Portfolio Stage Movements</a><ul><li class="toc-l2"><a href="#q1-2025-initial-portfolio">Q1 2025: Initial Portfolio</a></li><li class="toc-l2"><a href="#q2-2025-sicr-occurs-on-loan-a">Q2 2025: SICR Occurs on Loan A</a></li><li class="toc-l2"><a href="#q3-2025-loan-b-default-recovery">Q3 2025: Loan B Default & Recovery</a></li><li class="toc-l2"><a href="#q4-2025-loan-c-recovery">Q4 2025: Loan C Recovery</a></li></ul></li><li class="toc-l1"><a href="#audit-challenges">Audit Challenges in Impairment Accounting</a><ul><li class="toc-l2"><a href="#challenge-1-borderline-sicr-assessments">Challenge 1: Borderline SICR Assessments</a></li><li class="toc-l2"><a href="#challenge-2-forgotten-reversals">Challenge 2: Forgotten Reversals</a></li><li class="toc-l2"><a href="#challenge-3-low-credit-risk-abuse">Challenge 3: Low Credit Risk Abuse</a><ul><li class="toc-l3"><a href="#usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</a></li></ul></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: ECL on Trade Receivables (Simplified Approach)</a></li></ul>
+            <ul><li class="toc-l1"><a href="#reversals">How do IFRS 9 impairment reversals work?</a><ul><li class="toc-l2"><a href="#no-cost-recovery-floor">No cost-recovery floor (vs IAS 39)</a></li><li class="toc-l2"><a href="#reversal-journal">Worked journal: a Stage 3 loan cures to Stage 1</a></li><li class="toc-l2"><a href="#reversal-limits">The one limit on reversals</a></li></ul></li><li class="toc-l1"><a href="#provision-matrix">What is the simplified-approach provision matrix?</a><ul><li class="toc-l2"><a href="#who-uses-simplified">Who must (or may) use the simplified approach</a></li><li class="toc-l2"><a href="#matrix-worked">Worked provision matrix with ageing buckets</a></li><li class="toc-l2"><a href="#forward-looking">The mandatory forward-looking overlay</a></li></ul></li><li class="toc-l1"><a href="#sicr-reassessment">When must staging be reassessed and cured back?</a></li><li class="toc-l1"><a href="#case-study">Case study: a published provision matrix</a></li><li class="toc-l1"><a href="#audit-red-flags">Auditor red flags (ISA 540 / 500 / 315)</a><ul><li class="toc-l2"><a href="#usman-qureshi-acca-aca">About the author</a></li></ul></li><li class="toc-l1"><a href="#faq">Frequently asked questions</a></li></ul>
         </div>
 
         <article>
-            <h2 id="12m-vs-lifetime">12-Month ECL vs Lifetime ECL: The Difference</h2>
+            <h2 id="reversals">How do IFRS 9 impairment reversals work?</h2>
+            <p>An IFRS 9 impairment reversal happens when the expected-credit-loss allowance is reduced because credit quality has improved, and the reduction is recognised immediately as a gain in profit or loss. IFRS 9.5.5.8 requires the loss allowance to be remeasured at each reporting date so that it always equals the current best estimate of expected credit losses; if that estimate falls, the allowance falls with it and the difference is an impairment gain.</p>
+            <p>This matters because impairment under IFRS 9 is symmetric. The same mechanism that pushes an allowance up when a borrower deteriorates pulls it back down when the borrower recovers, and it does so through the same P&L line. There is no separate "recovery" gate, no waiting period, and no requirement that cash actually be received before the gain is booked. A reduction in the probability of default, the loss given default, or the exposure at default all feed straight into a lower allowance and an immediate credit to profit or loss.</p>
+            <p>The one thing IFRS 9 does not let you do is confuse a reversal of the <em>allowance</em> with a reversal of a <em>write-off</em>. If a gross receivable has already been written off because there was no reasonable expectation of recovery (IFRS 9.5.4.4), the asset is derecognised. Later cash from that customer is a recovery recognised in profit or loss, not a reinstatement of the old balance. The reversal mechanics in this section deal with the allowance account, not with resurrecting derecognised gross assets.</p>
 
-            <h3 id="stage-1-12month-ecl-performing-assets">Stage 1: 12-Month ECL (Performing Assets)</h3>
-            <p><strong>Assumption:</strong> Asset is in good health; no SICR since recognition.</p>
-            <p><strong>ECL scope:</strong> Only losses expected in the next 12 months</p>
-            <p><strong>Formula:</strong> ECL = PD (12-month) × LGD × EAD</p>
-            <p><strong>Impact:</strong> Most assets are Stage 1; lower impairment allowance overall</p>
-            <p><strong>Example:</strong> New mortgage (month 3, borrower paying on time): 12-month PD = 0.15%, ECL = £1,200 on £500k mortgage</p>
+            <h3 id="no-cost-recovery-floor">No cost-recovery floor (vs IAS 39)</h3>
+            <p>IFRS 9 has no cost-recovery floor, so a reversal is not capped by what the carrying amount would have been if the asset had never been impaired. Under the old IAS 39 incurred-loss model this cap existed: for assets carried at amortised cost you could reverse an impairment loss, but only to the extent that the revised carrying amount did not exceed the amortised cost that would have been reported had no impairment been recognised in the first place.</p>
+            <p>The expected-loss architecture makes that cap unnecessary. Because the allowance is simply the current estimate of expected credit losses on the instrument, it moves freely up and down between zero and the full expected loss. There is no "shadow" amortised-cost schedule to compare against, so a good year of collections can wipe out a prior allowance entirely and in the same reporting period. For preparers migrating mental models from IAS 39, this is the single most common error: assuming reversals are somehow constrained by original cost, when in fact they are constrained only by zero.</p>
 
-            <h3 id="stage-2-3-lifetime-ecl-underperforming-or-defaulted">Stage 2 & 3: Lifetime ECL (Underperforming or Defaulted)</h3>
-            <p><strong>Assumption:</strong> Asset is deteriorating or in default; recognize full lifetime losses</p>
-            <p><strong>ECL scope:</strong> All losses expected over the remaining life of the asset</p>
-            <p><strong>Formula:</strong> ECL = PD (lifetime) × LGD × EAD</p>
-            <p><strong>Impact:</strong> Significantly higher allowance; can be 5— 10× Stage 1 ECL</p>
-            <p><strong>Example:</strong> Mortgage with 30-day arrears (moves to Stage 2): lifetime PD = 3%, ECL = £15,000 on same £500k mortgage</p>
+            <h3 id="reversal-journal">Worked journal: a Stage 3 loan cures to Stage 1</h3>
+            <p>Consider a corporate loan of £5m that defaulted, moved to Stage 3, and carried a lifetime ECL allowance of £1,000,000 (a 20% loss given default estimate). During the following year the borrower refinances, clears the arrears, and remains current for the full probation period the entity uses for cures. Credit risk is no longer significantly increased, so the loan moves Stage 3 → Stage 1 and reverts to a 12-month ECL of, say, £15,000.</p>
+            <p>The allowance falls from £1,000,000 to £15,000, a reduction of £985,000. The journal is:</p>
+            <div class="journal">Dr  Loss allowance (balance sheet)      985,000
+    Cr  Impairment gain (profit or loss)      985,000</div>
+            <p>The gain hits profit or loss in the period the improvement is identified. Note that curing a Stage 3 exposure straight to Stage 1 is only appropriate where the entity's cure policy and the evidence support it; many portfolios require an exposure to pass through Stage 2 and complete a probation period before returning to Stage 1. The staging mechanics themselves are covered in depth in the sibling article on the <a href="ifrs-9-expected-credit-loss-model.html">three-stage expected credit loss model</a>; here the point is simply that the allowance reduction is recognised in full and immediately.</p>
 
-            <h3 id="why-the-jump">Why the Jump?</h3>
-            <p>The move to lifetime ECL reflects the SICR trigger: credit risk has increased significantly, so it's no longer reasonable to assume the asset will perform over the remaining 27 years. Instead, you must plan for higher probability of eventual default.</p>
+            <h3 id="reversal-limits">The one limit on reversals</h3>
+            <p>The single hard limit on an IFRS 9 reversal is that the loss allowance cannot fall below zero. Expected credit losses are, by definition, a non-negative number, so the allowance can be reversed all the way down to nil when an asset returns to fully performing, but it cannot become a negative allowance, that is, an asset representing expected recoveries. You never recognise a "negative provision" or a gain in excess of the cumulative losses previously charged.</p>
+            <p>Two related points often get muddled with this limit. First, own credit risk on financial liabilities designated at fair value through profit or loss is a different topic entirely: changes attributable to the entity's own credit risk go to other comprehensive income under IFRS 9.5.7.7, and are not part of the asset-side impairment reversal at all. Second, amounts already written off are gone from the gross carrying amount; recoveries on them are presented as recoveries, not as a reversal that pushes the allowance negative. So the boundary is clean: reverse the allowance to zero if warranted, never below, and keep write-off recoveries in their own line.</p>
 
-            <h2 id="stage-movements">Stage Movements and Reclassification</h2>
+            <h2 id="provision-matrix">What is the simplified-approach provision matrix?</h2>
+            <p>A provision matrix is a table that groups trade receivables into ageing buckets and applies a lifetime expected-credit-loss rate to each bucket, giving the loss allowance. It is the practical tool most non-financial entities use to apply the IFRS 9 simplified approach, under which the allowance is always measured at lifetime ECL and there is no staging assessment to perform.</p>
+            <p>The appeal is proportionality. A manufacturer or retailer with tens of thousands of small, short-dated invoices cannot realistically run a probability-of-default model on each customer. IFRS 9.B5.5.35 provides a practical expedient: use historical credit-loss experience, organised by ageing bucket (and, where useful, by customer segment or geography), as the starting point for the lifetime ECL estimate, then adjust it for current and forecast conditions. The matrix operationalises exactly that.</p>
 
-            <h3 id="forward-movements-stage-1-2-3">Forward Movements (Stage 1 →’ 2 →’ 3)</h3>
+            <h3 id="who-uses-simplified">Who must (or may) use the simplified approach</h3>
+            <p>The simplified approach is mandatory for trade receivables and contract assets that do not contain a significant financing component, and optional for those that do. IFRS 9.5.5.15 sets out three populations: it must be applied to trade receivables and contract assets without a significant financing component; it may be applied, as an accounting-policy choice, to trade receivables and contract assets that do have a significant financing component; and it may also be elected for lease receivables in the scope of IFRS 16.</p>
+            <p>The consequence of being in the simplified approach is that the loss allowance is measured at lifetime expected credit losses from initial recognition, every reporting date, with no Stage 1 versus Stage 2 line to police. In practical terms:</p>
+            <ul>
+                <li><strong>Standard trade debtors</strong> (invoice due in 30–90 days, no financing element): simplified approach is compulsory.</li>
+                <li><strong>Long-dated receivables with a financing component</strong> (for example, extended vendor-financed sales): the entity chooses, as a policy, between the simplified approach and the general three-stage model.</li>
+                <li><strong>Operating and finance lease receivables</strong>: simplified approach is available by election.</li>
+            </ul>
+            <p>Because everything sits on lifetime ECL, the entire significant-increase-in-credit-risk (SICR) debate that dominates the general model simply does not arise for standard trade receivables. That is what makes the matrix so much lighter to run than a staged loan book.</p>
+
+            <h3 id="matrix-worked">Worked provision matrix with ageing buckets</h3>
+            <p>The mechanics are best seen in numbers. Take a distributor with £3.0m of gross trade receivables at year end. The finance team has calculated historical loss rates by ageing bucket and applied a forward-looking uplift (covered below) to arrive at the rates in the table. Each rate is applied to the gross carrying amount in its bucket to produce the lifetime ECL.</p>
             <table>
                 <tr>
-                    <th>From Stage</th>
-                    <th>To Stage</th>
-                    <th>Trigger</th>
-                    <th>ECL Change</th>
+                    <th>Ageing bucket</th>
+                    <th>Gross carrying amount</th>
+                    <th>Loss rate</th>
+                    <th>Lifetime ECL</th>
                 </tr>
                 <tr>
-                    <td>Stage 1</td>
-                    <td>Stage 2</td>
-                    <td>SICR (credit rating →“, arrears 30+, covenant breach)</td>
-                    <td>12M ECL →’ Lifetime ECL (jump of 5— 10×)</td>
+                    <td>Current (not past due)</td>
+                    <td>£2,100,000</td>
+                    <td>0.4%</td>
+                    <td>£8,400</td>
                 </tr>
                 <tr>
-                    <td>Stage 2</td>
-                    <td>Stage 3</td>
-                    <td>Default (>90 days arrears, bankruptcy)</td>
-                    <td>Lifetime ECL unchanged but with pessimistic recovery</td>
+                    <td>1–30 days past due</td>
+                    <td>£520,000</td>
+                    <td>1.8%</td>
+                    <td>£9,360</td>
                 </tr>
                 <tr>
-                    <td>Stage 1</td>
-                    <td>Stage 3</td>
-                    <td>Direct default (rare; sudden collapse)</td>
-                    <td>12M ECL →’ Lifetime ECL with full loss</td>
-                </tr>
-            </table>
-
-            <h3 id="backward-movements-reversal">Backward Movements (Reversal)</h3>
-            <p>Assets can move backward if the credit condition improves:</p>
-            <ul>
-                <li><strong>Stage 2 →’ Stage 1:</strong> Arrears cured; credit rating restored</li>
-                <li><strong>Stage 3 →’ Stage 2:</strong> Default resolved; payment arrangement established (rare)</li>
-            </ul>
-
-            <p class="callout"><strong>Common mistake:</strong> Companies rarely move assets backward. Auditors often find that Stage 2 assets meeting recovery criteria should have moved back to Stage 1, understating the ECL relief available.</p>
-
-            <h2 id="low-credit-risk">Low Credit Risk Exemption</h2>
-            <p>IFRS 9 allows an optional exemption: if a financial asset is in "low credit risk" at the balance sheet date, you can continue to use 12-month ECL even if it would otherwise be in Stage 2.</p>
-
-            <h3 id="what-qualifies-as-low-credit-risk">What Qualifies as Low Credit Risk?</h3>
-            <ul>
-                <li><strong>Investment-grade debt:</strong> Credit rating BBB−’ or higher (S&P/Moody's)</li>
-                <li><strong>Sovereign debt:</strong> Low default probability (e.g., UK, US, Germany government bonds)</li>
-                <li><strong>Short-term trade receivables:</strong> <3 months old and no indicators of impairment</li>
-            </ul>
-
-            <p class="example-box"><strong>Low Credit Risk Example</strong><br>
-            Bank holds £50m of US Treasury bonds rated AAA. A technical indicator (internal risk score) suggests SICR, but the credit rating remains AAA.<br>
-            — Bank can elect the low-credit-risk exemption<br>
-            — Continue using 12-month ECL despite the SICR indicator<br>
-            — Avoids mechanical Stage 2 movement when credit quality hasn't truly deteriorated
-            </p>
-
-            <h2 id="reversals">Reversal of Impairment Losses</h2>
-            <p>When an asset's credit condition improves, the impairment allowance should be reduced (reversed).</p>
-
-            <h3 id="journal-entry-for-reversal">Journal Entry for Reversal</h3>
-            <div style="background: #1a2f5a; color: #e8eef7; padding: 14px; border-radius: 4px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
-                Dr Loss Allowance on Loans &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5,000,000<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr Impairment Gain (P&L) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5,000,000
-            </div>
-
-            <p>(The loss allowance decreases; the gain flows to P&L.)</p>
-
-            <h3 id="reversal-limits">Reversal Limits</h3>
-            <p>You can reverse an allowance, but <strong>not beyond zero</strong>. The revised allowance cannot be lower than the balance at the start of the period minus any write-offs during the period.</p>
-
-            <h2 id="practical-example">Practical Example: Loan Portfolio Stage Movements</h2>
-
-            <h3 id="q1-2025-initial-portfolio">Q1 2025: Initial Portfolio</h3>
-            <table>
-                <tr>
-                    <th>Loan</th>
-                    <th>Outstanding</th>
-                    <th>Stage</th>
-                    <th>ECL Allowance</th>
+                    <td>31–60 days past due</td>
+                    <td>£210,000</td>
+                    <td>6.0%</td>
+                    <td>£12,600</td>
                 </tr>
                 <tr>
-                    <td>Loan A (€5m, retail mortgage)</td>
-                    <td>€5m</td>
-                    <td>Stage 1</td>
-                    <td>€10k (12M, 0.2%)</td>
+                    <td>61–90 days past due</td>
+                    <td>£110,000</td>
+                    <td>18.0%</td>
+                    <td>£19,800</td>
                 </tr>
                 <tr>
-                    <td>Loan B (€3m, small business)</td>
-                    <td>€3m</td>
-                    <td>Stage 1</td>
-                    <td>€6k (12M, 0.2%)</td>
-                </tr>
-                <tr>
-                    <td>Loan C (€2m, corporate)</td>
-                    <td>€2m</td>
-                    <td>Stage 2</td>
-                    <td>€60k (Lifetime, 3%)</td>
+                    <td>More than 90 days past due</td>
+                    <td>£60,000</td>
+                    <td>55.0%</td>
+                    <td>£33,000</td>
                 </tr>
                 <tr>
                     <td><strong>Total</strong></td>
-                    <td><strong>€10m</strong></td>
-                    <td></td>
-                    <td><strong>€76k</strong></td>
+                    <td><strong>£3,000,000</strong></td>
+                    <td><strong>2.77%</strong></td>
+                    <td><strong>£83,160</strong></td>
                 </tr>
             </table>
+            <p>The loss allowance recognised is £83,160, and the blended loss rate across the book is 2.77%. The shape is what you expect: rates rise steeply with age because the further past due an invoice is, the more likely it is never to be collected. To calculate each historical loss rate you take the write-offs that ultimately arose from receivables that entered that bucket and divide by the amount that was in the bucket at the start of the measurement window, then carry that percentage forward to the current balances.</p>
 
-            <h3 id="q2-2025-sicr-occurs-on-loan-a">Q2 2025: SICR Occurs on Loan A</h3>
-            <p><strong>Event:</strong> Borrower's employer downsizes; income drops 20%; SICR triggered</p>
-            <p><strong>Reclassification:</strong> Loan A moves Stage 1 →’ Stage 2</p>
-            <p><strong>New ECL (Lifetime, 2.8%):</strong> €5m × 2.8% = €140k</p>
-            <p><strong>Journal Entry:</strong></p>
-            <div style="background: #1a2f5a; color: #e8eef7; padding: 14px; border-radius: 4px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
-                Dr Impairment Loss &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 130,000<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr Loss Allowance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 130,000
+            <h3 id="forward-looking">The mandatory forward-looking overlay</h3>
+            <p>A provision matrix built only on historical loss rates does not comply with IFRS 9 on its own; the historical rates must be adjusted for reasonable and supportable forward-looking information. IFRS 9.5.5.17 requires ECL to reflect an unbiased, probability-weighted estimate that incorporates information about current conditions and forecasts of future economic conditions, not just what happened in the past.</p>
+            <p>In practice the overlay means taking the raw historical loss rate for each bucket and flexing it for the macroeconomic outlook that bears on the customer base. If unemployment or insolvencies in the relevant sector are forecast to rise, the loss rates are scaled up; if conditions are improving, they may be scaled down. Entities typically anchor this to one or two observable drivers, for example a correlation between the sector's default experience and GDP growth or an industry insolvency index. The key audit expectation is that the adjustment is evidenced and directional-correct, not a token percentage bolted on to satisfy the wording of the standard. A matrix that has never moved despite a visibly deteriorating economy is a classic finding.</p>
+
+            <h2 id="sicr-reassessment">When must staging be reassessed and cured back?</h2>
+            <p>For instruments on the general model, staging must be reassessed at every reporting date, in both directions, so an exposure that has recovered is moved back down the stages just as promptly as a deteriorating one is moved up. Trade receivables under the simplified approach are exempt from this entirely because they never leave lifetime ECL; the reassessment discipline applies to loans and other debt instruments measured under the three-stage general model.</p>
+            <p>The symmetry is the part entities get wrong. IFRS 9 requires the SICR assessment to be revisited each period, and where the conditions that triggered a move to Stage 2 (or the default that triggered Stage 3) no longer hold, the exposure cures back. Many portfolios apply a probation period, a run of consecutive on-time payments, before allowing a cure, which is acceptable provided the policy is consistent and evidence-based. What is not acceptable is a de facto one-way ratchet where exposures climb into Stage 2 on the first sign of stress but are never assessed for cure, leaving the allowance permanently overstated.</p>
+            <p>Because the mechanics of the SICR trigger, the 30-days-past-due rebuttable presumption, the low-credit-risk exemption and the Stage 1/2/3 boundaries are covered in full in the <a href="ifrs-9-expected-credit-loss-model.html">three-stage ECL model article</a>, this guide does not re-derive them. The point relevant here is that reassessment is a two-way obligation, and the reversals mechanics from the first section are exactly how a cure is given accounting effect.</p>
+
+            <h2 id="case-study">Case study: a published provision matrix</h2>
+            <p>A useful real-world illustration is SoftwareOne Holding AG, the Swiss-listed software and cloud services group, whose 2023 Annual Report discloses a full provision matrix for trade receivables in Note 11. SoftwareOne applies the IFRS 9 simplified approach and measures lifetime ECL using a matrix organised by days past due for customer segments with similar loss patterns, adjusted for forward-looking economic conditions.</p>
+            <div class="example-box">
+                <p><strong>SoftwareOne Holding AG — trade receivables provision matrix, 31 December 2023 (CHF 000s)</strong></p>
+                <table>
+                    <tr>
+                        <th>Ageing bucket</th>
+                        <th>Gross carrying amount</th>
+                        <th>ECL rate</th>
+                        <th>Loss allowance</th>
+                    </tr>
+                    <tr><td>Not past due</td><td>1,939,721</td><td>0.1%</td><td>1,351</td></tr>
+                    <tr><td>Past due 1–90 days</td><td>294,933</td><td>0.3%</td><td>853</td></tr>
+                    <tr><td>Past due 91–180 days</td><td>56,614</td><td>4.3%</td><td>2,435</td></tr>
+                    <tr><td>Past due 181–360 days</td><td>24,802</td><td>24.1%</td><td>5,967</td></tr>
+                    <tr><td>Past due more than 360 days</td><td>27,437</td><td>57.3%</td><td>15,714</td></tr>
+                    <tr><td><strong>Total</strong></td><td><strong>2,343,507</strong></td><td><strong>1.1%</strong></td><td><strong>26,320</strong></td></tr>
+                </table>
+                <p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Source: SoftwareOne Holding AG, Annual Report 2023, Note 11 "Trade receivables". Figures in CHF thousands as published; column labels condensed for presentation.</p>
             </div>
+            <p>The disclosure shows the textbook shape of a compliant matrix. Loss rates climb from 0.1% on current balances to 57.3% on receivables more than 360 days overdue, and the blended rate across the CHF 2,343.5m book is 1.1%, giving a total loss allowance of CHF 26.3m. SoftwareOne explicitly states that it calibrates the historical default rates for forward-looking information, which is precisely the overlay described above. It is a clean, auditable example of the simplified approach in a real set of accounts, and a helpful benchmark for the granularity of buckets and the steepness of loss-rate escalation that auditors expect to see.</p>
 
-            <h3 id="q3-2025-loan-b-default-recovery">Q3 2025: Loan B Default & Recovery</h3>
-            <p><strong>Event:</strong> Business fails; loan defaults (>90 days arrears)</p>
-            <p><strong>Reclassification:</strong> Loan B moves Stage 1 →’ Stage 3</p>
-            <p><strong>New ECL (Lifetime, 40% loss):</strong> €3m × 40% = €1,200k</p>
-            <p><strong>Journal Entry:</strong></p>
-            <div style="background: #1a2f5a; color: #e8eef7; padding: 14px; border-radius: 4px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
-                Dr Impairment Loss &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,194,000<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr Loss Allowance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,194,000
-            </div>
-
-            <h3 id="q4-2025-loan-c-recovery">Q4 2025: Loan C Recovery</h3>
-            <p><strong>Event:</strong> Loan C's borrower reorganizes; covenant breach resolved; credit rating restored</p>
-            <p><strong>Reclassification:</strong> Loan C moves Stage 2 →’ Stage 1</p>
-            <p><strong>New ECL (12M, 0.5%):</strong> €2m × 0.5% = €10k</p>
-            <p><strong>Journal Entry (Reversal):</strong></p>
-            <div style="background: #1a2f5a; color: #e8eef7; padding: 14px; border-radius: 4px; margin: 16px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
-                Dr Loss Allowance &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 50,000<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr Impairment Gain (P&L) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 50,000
-            </div>
-
-            <h2 id="audit-challenges">Audit Challenges in Impairment Accounting</h2>
-
-            <h3 id="challenge-1-borderline-sicr-assessments">Challenge 1: Borderline SICR Assessments</h3>
-            <p><strong>Situation:</strong> Asset is 31 days overdue (just past the 30-day SICR threshold). Bank argues it's still Stage 1; auditor pushes for Stage 2.</p>
-            <p><strong>Impact:</strong> Difference of £500k+ in ECL allowance</p>
-
-            <h3 id="challenge-2-forgotten-reversals">Challenge 2: Forgotten Reversals</h3>
-            <p><strong>Situation:</strong> Asset in Stage 2 with £100k allowance was cured 6 months ago but never moved back to Stage 1.</p>
-            <p><strong>Impact:</strong> ECL overstated by £90k (should be £10k at Stage 1)</p>
-
-            <h3 id="challenge-3-low-credit-risk-abuse">Challenge 3: Low Credit Risk Abuse</h3>
-            <p><strong>Situation:</strong> Bank applies low-credit-risk exemption to an asset with technical SICR indicators to avoid Stage 2 movement.</p>
-            <p><strong>Auditor action:</strong> Challenge the exemption; require proof that credit risk is genuinely low (e.g., credit rating upgrade or economic improvement)</p>
+            <h2 id="audit-red-flags">Auditor red flags (ISA 540 / 500 / 315)</h2>
+            <p>ECL is an accounting estimate, so the audit is framed by ISA 540 (Auditing Accounting Estimates), supported by ISA 500 (Audit Evidence) and ISA 315 (Identifying and Assessing Risks of Material Misstatement). Three findings recur across engagements.</p>
+            <h3 id="flag-static-matrix">Red flag 1: a static matrix with no forward-looking overlay</h3>
+            <p>Under ISA 540, the auditor evaluates whether the methods, assumptions and data used are appropriate. A provision matrix whose loss rates are identical year on year, despite a changed economic outlook, signals that the mandatory forward-looking adjustment has not been applied or has not been revisited. The auditor challenges management for evidence of the macro drivers used and whether the adjustment moves in the correct direction.</p>
+            <h3 id="flag-loss-rate-evidence">Red flag 2: loss rates that cannot be traced to historical data</h3>
+            <p>ISA 500 requires sufficient appropriate evidence. Where the loss rates in the matrix cannot be reconciled to actual historical write-off experience, they are effectively unsupported management assertions. The auditor recalculates a sample of bucket loss rates from the underlying receivables and write-off history and investigates any that appear rounded, smoothed, or set to a target allowance.</p>
+            <h3 id="flag-one-way-staging">Red flag 3: one-way staging and forgotten cures</h3>
+            <p>Under ISA 315 the auditor assesses the risk that management bias overstates or understates the allowance. Exposures that move into Stage 2 or Stage 3 but are never reassessed for cure, or reversals that management is reluctant to book because they flatter the current period's charge, both indicate a control weakness in the reassessment process and a possible indicator of management bias in the estimate.</p>
 
             <div class="author-bio">
                 <h4 id="usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</h4>
-                <p>The 12-month vs lifetime ECL distinction is elegant in theory but brutal in practice. A single SICR judgment call can swing ECL by millions. I've seen 6-figure audit adjustments result from a 10-day reclassification disagreement.</p>
+                <p>Reversals and provision matrices are where IFRS 9 impairment quietly generates most of the real audit adjustments I see, far more than the headline SICR debates. A matrix that never moves, or an allowance that only ever goes up, is usually the first thread I pull on a receivables file.</p>
             </div>
 
-            
-<h2 id="real-life-case-study">Real-Life Case Study: ECL on Trade Receivables (Simplified Approach)</h2>
-<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A wholesaler with &pound;2m of trade receivables uses the simplified approach and builds a provision matrix from historical loss rates.</p>
- <ul>
-   <li>Current: &pound;1.4m &times; 0.5% = &pound;7k</li>
-   <li>1&ndash;30 days: &pound;400k &times; 2% = &pound;8k</li>
-   <li>31&ndash;90 days: &pound;150k &times; 8% = &pound;12k</li>
-   <li>90+ days: &pound;50k &times; 40% = &pound;20k</li>
- </ul>
- <p>Total lifetime ECL &asymp; &pound;47k, adjusted upward for a forecast downturn in the customer sector.</p>
- <p><strong>Takeaway.</strong> Trade receivables use lifetime ECL from day one, no staging. The forward-looking overlay (macro forecast) is mandatory, so a matrix built only on past losses is incomplete.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
-</div>
+            <h2 id="faq">Frequently asked questions</h2>
+            <h3 id="faq-reverse">Can you reverse an IFRS 9 impairment loss through profit or loss?</h3>
+            <p>Yes. Under IFRS 9.5.5.8 the loss allowance is remeasured at each reporting date, and any decrease in expected credit losses is recognised immediately in profit or loss as an impairment gain. There is no cost-recovery floor: unlike the old IAS 39 incurred-loss model, the reversal is not capped by reference to what amortised cost would have been had no impairment ever been recognised.</p>
+            <h3 id="faq-limit">Is there a limit on how much impairment can be reversed?</h3>
+            <p>The loss allowance cannot go below zero, because expected credit losses cannot be negative. You can reverse the allowance down to nil when an asset returns to performing, but you cannot recognise a net asset for expected recoveries, and amounts already written off are recovered through the separate recoveries line rather than by reinstating the receivable.</p>
+            <h3 id="faq-who">Who must use the simplified approach and provision matrix?</h3>
+            <p>The simplified approach is mandatory for trade receivables and contract assets without a significant financing component (IFRS 9.5.5.15). It is an optional policy election for those with a significant financing component and for lease receivables. Under it the allowance is always lifetime ECL, with no staging assessment.</p>
+            <h3 id="faq-historical">Does a matrix based only on historical loss rates comply with IFRS 9?</h3>
+            <p>No. IFRS 9 requires ECL to reflect reasonable and supportable forward-looking information. A matrix built purely on historical observed default rates must be adjusted for current conditions and forecasts of future economic conditions. A backward-looking-only matrix is a common audit finding.</p>
+            <h3 id="faq-staging">Do trade receivables use the three-stage model?</h3>
+            <p>No. Trade receivables under the simplified approach sit permanently on lifetime ECL from initial recognition, with no Stage 1 versus Stage 2 assessment and no SICR trigger to monitor. The three-stage general model applies to loans and other debt instruments.</p>
+            <h3 id="faq-loss-rate">How do you calculate the loss rate for a provision matrix?</h3>
+            <p>Take historical write-offs for each ageing bucket and divide by the receivables outstanding at the start of that bucket period, giving a historical loss rate per bucket (the IFRS 9.B5.5.35 practical expedient). Then adjust each rate for forward-looking macroeconomic factors and apply it to the current gross carrying amount in each bucket to get lifetime ECL.</p>
 
 <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>

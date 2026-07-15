@@ -24,12 +24,78 @@
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": "IFRS 16 Lease Modifications: Every Scenario Explained with Journal Entries",
-      "description": "Complete guide to IFRS 16 lease modifications, scope changes, reassessments, and remeasurements with worked examples.",
+      "description": "How a lessee accounts for IFRS 16 lease modifications: the separate-lease test (16.44), partial termination (16.46(a)) and other modifications at a revised discount rate (16.46(b)), with worked examples and journals.",
       "image": "https://www.uqconsulting.org/images/og-image.png",
       "datePublished": "2026-07-04",
+      "dateModified": "2026-07-13",
       "author": { "@type": "Person", "name": "Usman Qureshi", "jobTitle": "Chartered Accountant (ACCA, ACA)" },
       "publisher": { "@type": "Person", "name": "Usman Qureshi" },
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.uqconsulting.org/blog/ifrs-16-lease-modifications.html" }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "When a lease is modified, do you use a new discount rate?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For a modification that is not a separate lease, yes. IFRS 16.45 requires the lessee to remeasure the lease liability by discounting the revised payments using a revised discount rate determined at the effective date of the modification. The original commencement-date rate is only retained for certain reassessments under IFRS 16.40-43, not for modifications."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between a lease modification and a reassessment?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A modification is a change to the contractual scope or consideration that was not part of the original terms and conditions (Appendix A) - the parties renegotiate. A reassessment updates an existing estimate the contract already contemplated, such as revising the lease term when a renewal option becomes reasonably certain (IFRS 16.40). Modifications follow IFRS 16.44-46; reassessments follow IFRS 16.39-43."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you account for a partial lease termination such as giving up a floor?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Under IFRS 16.46(a), a modification that decreases the scope is a partial termination. You decrease the carrying amount of the right-of-use asset to reflect the partial termination, decrease the lease liability, and recognise any difference between those two reductions as a gain or loss in profit or loss. The remaining liability is then remeasured at a revised discount rate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where does a gain on a lease modification go in the income statement?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "IFRS 16 does not prescribe a line item. A gain or loss on partial termination under IFRS 16.46(a) is recognised in profit or loss; presentation follows your accounting policy and materiality, often within other operating income or as an adjusting/exceptional item where a store-exit programme is material. Disclose the policy consistently."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can one modification be part new lease and part remeasurement?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. If a modification adds a right of use at a price commensurate with its stand-alone price, that added component is a separate lease under IFRS 16.44 and is accounted for on its own. Any other change to the existing lease in the same agreement is a non-separate modification under IFRS 16.45-46. Split the agreement into its components."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does an increase in lease payments always mean a modification?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. A payment change driven by a mechanism already in the contract - for example an index or rate reset under IFRS 16.42 - is a remeasurement using the unchanged discount rate, not a modification. Only a change in consideration that was not part of the original terms and conditions (Appendix A) is a modification requiring a revised discount rate under IFRS 16.45."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do lessees and lessors account for modifications the same way?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. This guide covers the lessee. A lessor accounts for a modification to a finance lease under IFRS 16.79-80 and to an operating lease under IFRS 16.87 (as a new lease from the effective date). The separate-lease test in IFRS 16.44 is a lessee requirement; lessor modification rules sit separately in the standard."
+          }
+        }
+      ]
     }
     </script>
 
@@ -129,237 +195,138 @@
         <h1>IFRS 16 Lease Modifications: Every Scenario Explained with Journal Entries</h1>
         <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 13 min read</div>
 
-        <p class="lead">Leases rarely stay the same. The landlord extends the term. Rent increases. The lessee adds a building section. Each change triggers IFRS 16 remeasurement rules. This guide covers every scenario: scope changes, payment changes, term reassessments, and the journal entries auditors expect.</p>
+        <p class="lead">A lease modification is a change in the scope or the consideration of a lease that was not part of the original terms and conditions. IFRS 16 forces a lessee down a decision tree: is the change a <em>separate</em> new lease, or a remeasurement of the existing one? Get the branch wrong and you misstate the lease liability, the right-of-use (ROU) asset, and any gain or loss. This guide walks the tree with exact clause references, two worked examples with journals, the auditor red flags, and a real filed disclosure.</p>
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#definition">What is a Lease Modification?</a><ul><li class="toc-l2"><a href="#modification-vs-reassessment">Modification vs. Reassessment</a></li></ul></li><li class="toc-l1"><a href="#separate">Step 1: Is It a Separate New Lease?</a></li><li class="toc-l1"><a href="#scope-change">Scope Changes: Adding or Removing an Asset</a><ul><li class="toc-l2"><a href="#adding-an-asset-increase-in-scope">Adding an Asset (Increase in Scope)</a></li><li class="toc-l2"><a href="#removing-an-asset-decrease-in-scope">Removing an Asset (Decrease in Scope)</a></li></ul></li><li class="toc-l1"><a href="#payment-change">Payment Changes: Increase or Decrease</a><ul><li class="toc-l2"><a href="#payment-increase-fixed-or-inflationlinked">Payment Increase (Fixed or Inflation-Linked)</a></li></ul></li><li class="toc-l1"><a href="#reassessment">Reassessments: When to Remeasure (vs. Modify)</a><ul><li class="toc-l2"><a href="#1-change-in-lease-term-assessment">1. Change in Lease Term Assessment</a></li><li class="toc-l2"><a href="#2-change-in-termination-option-assessment">2. Change in Termination Option Assessment</a></li><li class="toc-l2"><a href="#3-change-in-residual-value-guarantee">3. Change in Residual Value Guarantee</a></li></ul></li><li class="toc-l1"><a href="#journal">Journal Entries for Modifications</a><ul><li class="toc-l2"><a href="#template-1-increase-in-scope">Template 1: Increase in Scope</a></li><li class="toc-l2"><a href="#template-2-decrease-in-scope">Template 2: Decrease in Scope</a></li><li class="toc-l2"><a href="#template-3-payment-increase-with-same-term">Template 3: Payment Increase with Same Term</a></li></ul></li><li class="toc-l1"><a href="#worked">Worked Example: Complex Multi-Step Modification</a><ul><li class="toc-l2"><a href="#scenario">Scenario</a></li><li class="toc-l2"><a href="#step-1-identify-the-leases">Step 1: Identify the Lease(s)</a></li><li class="toc-l2"><a href="#step-2-calculate-new-lease-liability">Step 2: Calculate New Lease Liability</a></li><li class="toc-l2"><a href="#step-3-calculate-change-in-liability">Step 3: Calculate Change in Liability</a></li><li class="toc-l2"><a href="#step-4-journal-entry">Step 4: Journal Entry</a></li><li class="toc-l2"><a href="#step-5-going-forward">Step 5: Going Forward</a></li></ul></li><li class="toc-l1"><a href="#auditor">What Auditors Focus On</a><ul><li class="toc-l2"><a href="#1-was-it-a-modification">1. Was It a Modification?</a></li><li class="toc-l2"><a href="#2-was-the-calculation-correct">2. Was the Calculation Correct?</a></li><li class="toc-l2"><a href="#3-was-the-rou-asset-adjusted-appropriately">3. Was the ROU Asset Adjusted Appropriately?</a></li></ul></li><li class="toc-l1"><a href="#faq">FAQs</a><ul><li class="toc-l2"><a href="#when-a-lease-is-modified-do-i-use-a-new-ibr">When a lease is modified, do I use a new IBR?</a></li><li class="toc-l2"><a href="#if-rent-decreases-and-i-record-a-gain-is-it-operating-or-other-income">If rent decreases and I record a gain, is it operating or other income?</a></li><li class="toc-l2"><a href="#can-a-modification-be-partially-a-new-lease-and-partially-a-remeasurement">Can a modification be partially a new lease and partially a remeasurement?</a><ul><li class="toc-l3"><a href="#usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</a></li></ul></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Renegotiating Space Mid-Lease</a></li></ul>
+            <ul><li class="toc-l1"><a href="#definition">What counts as a lease modification under IFRS 16?</a><ul><li class="toc-l2"><a href="#modification-vs-reassessment">Modification vs. reassessment</a></li></ul></li><li class="toc-l1"><a href="#separate">When is a modification a separate new lease?</a></li><li class="toc-l1"><a href="#not-separate">How do you account for a modification that is not a separate lease?</a><ul><li class="toc-l2"><a href="#partial-termination">Decrease in scope: partial termination (16.46(a))</a></li><li class="toc-l2"><a href="#worked-partial">Worked example 1: giving up a floor</a></li><li class="toc-l2"><a href="#other-mods">All other modifications: revised rate (16.46(b))</a></li><li class="toc-l2"><a href="#worked-extension">Worked example 2: term extension at a new rate</a></li></ul></li><li class="toc-l1"><a href="#auditor">What do auditors test on lease modifications?</a><ul><li class="toc-l2"><a href="#flag-classification">Red flag 1: scope-increase misclassified</a></li><li class="toc-l2"><a href="#flag-rate">Red flag 2: the revised discount rate</a></li><li class="toc-l2"><a href="#flag-evidence">Red flag 3: evidence and the P&amp;L split</a></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Case study: a filed store-estate downsizing</a></li><li class="toc-l1"><a href="#faq">FAQs</a></li></ul>
         </div>
 
         <article>
-            <h2 id="definition">What is a Lease Modification?</h2>
-            <p>IFRS 16.44 defines it as "a change in the scope of a lease, or the consideration for a lease, that was not part of the original terms and conditions." Changes include:</p>
-            <ul>
-                <li>Adding or removing an asset</li>
-                <li>Increasing or decreasing lease payments</li>
-                <li>Extending or shortening the lease term</li>
-                <li>Changing the purchase option</li>
-            </ul>
+            <h2 id="definition">What counts as a lease modification under IFRS 16?</h2>
+            <p>A lease modification is a change in the scope of a lease, or in the consideration for a lease, that was not part of the original terms and conditions of the contract. That definition sits in IFRS 16 Appendix A, and it is the gateway to the whole modification model: if a change was already contemplated by the contract, it is not a modification at all. Adding or removing an underlying asset, extending or shortening the term, and re-pricing the rent by agreement are all modifications; exercising an option or applying an index reset the contract already contained is not.</p>
+            <p>Once you confirm a change meets the Appendix A definition, IFRS 16.44-46 governs the accounting. IFRS 16.44 asks a single gating question - is this a separate lease? - and IFRS 16.45-46 tells you what to do when the answer is no. There is no free choice here; the branch is determined by the facts of the renegotiation, and each branch produces a materially different set of numbers for the lease liability and the ROU asset.</p>
 
-            <h3 id="modification-vs-reassessment">Modification vs. Reassessment</h3>
-            <p>Important distinction:</p>
-            <ul>
-                <li><strong>Modification:</strong> A change in scope or consideration (deliberate renegotiation)</li>
-                <li><strong>Reassessment:</strong> A change in facts requiring you to update estimates (e.g., you now believe you'll exercise an extension option)</li>
-            </ul>
+            <h3 id="modification-vs-reassessment">Modification vs. reassessment</h3>
+            <p>The most common error is confusing a modification with a reassessment, because they can look identical on the face of a rent schedule. A reassessment (IFRS 16.39-43) updates an estimate the contract already contemplated - for example, the lease term changes because a renewal option becomes reasonably certain (16.40), or payments move on an index reset (16.42). A modification (16.44-46) is a fresh bargain: the parties agree something the original contract did not provide for. The distinction matters for the discount rate. A reassessment under 16.42 uses the unchanged discount rate; some reassessments under 16.40-41 and every non-separate modification under 16.45 use a revised rate. Misfiling one as the other is a classic misstatement.</p>
 
-            <h2 id="separate">Step 1: Is It a Separate New Lease?</h2>
-            <p>Not all modifications are treated the same. IFRS 16.44— 45 says if the modification is a "separate lease," account for it separately. A separate lease exists when:</p>
-            <ul>
-                <li>The modification adds an asset, AND</li>
-                <li>The lessee's right to use that asset is separately identifiable, AND</li>
-                <li>The price of that lease is commensurate with its standalone price</li>
-            </ul>
+            <h2 id="separate">When is a modification a separate new lease?</h2>
+            <p>A modification is a separate lease only when both conditions in IFRS 16.44 are met: the modification increases the scope of the lease by adding the right to use one or more underlying assets, and the consideration increases by an amount commensurate with the stand-alone price for that increase in scope (adjusted for the circumstances of the contract). Meet both and you have, in substance, signed a second lease - so you leave the original lease untouched and recognise the new component as a brand-new lease with its own commencement date, its own liability, and its own ROU asset (IFRS 16.44).</p>
+            <p>The commensurate-price test is where judgement bites. Adding 500 sq m of adjacent warehouse space at the going market rent per square metre is a separate lease; adding the same space at a steep bundled discount is not, because the price is not commensurate with its stand-alone value. If either limb of IFRS 16.44 fails - the scope does not increase, or the price is not commensurate - the change is a non-separate modification and falls into IFRS 16.45-46. Splitting a single agreement is legitimate and often required: a rent renegotiation plus a genuinely stand-alone-priced extra floor is part remeasurement, part separate lease.</p>
+            <p class="example-box"><strong>Separate lease (IFRS 16.44 met).</strong> A retailer leases a store. The landlord offers adjacent rooftop plant space at £50k a year, which independent evidence shows is its market stand-alone price. Scope increases and the price is commensurate, so the rooftop is a new separate lease. The original store lease is not remeasured.<br><br>
+            <strong>Not a separate lease (IFRS 16.44 failed).</strong> The same retailer adds more shelving space inside the existing unit at a discounted internal rate below market. The price is not commensurate with a stand-alone price, so this is a single non-separate modification remeasured under IFRS 16.45-46(b).</p>
 
-            <p class="example-box"><strong>Example 1 (Separate lease):</strong> A retail company leases a building. The lessor offers to add a rooftop advertising space (identifiable, separately priced at £50k/year). The company treats the original lease as modified (building rent increases), and the advertising space as a new, separate lease.</p>
+            <h2 id="not-separate">How do you account for a modification that is not a separate lease?</h2>
+            <p>For a modification that is not a separate lease, IFRS 16.45 requires the lessee to remeasure the lease liability by discounting the revised lease payments using a <strong>revised discount rate</strong> determined at the effective date of the modification. The revised rate is the interest rate implicit in the lease if it can be readily determined, or otherwise the lessee's incremental borrowing rate at the modification date - not the original commencement-date rate. What you do with the remeasurement then splits into two mutually exclusive cases set out in IFRS 16.46.</p>
+            <p>IFRS 16.46(a) covers modifications that <strong>decrease the scope</strong> of the lease - a partial (or full) termination. IFRS 16.46(b) covers <strong>all other</strong> modifications - a price rise, a term extension, an added asset that failed the separate-lease test. The two cases are handled very differently: 16.46(a) can crystallise a gain or loss in profit or loss today, whereas 16.46(b) is a balance-sheet-only adjustment that flows entirely through the ROU asset. Confusing the two is the single most consequential judgement in this area.</p>
 
-            <p class="example-box"><strong>Example 2 (Not separate, single modification):</strong> A company leases equipment. Midway through, it requests to add more equipment at the same rate per unit. This is not separately identifiable at a standalone price, so it's a modification to the original lease, not a new lease.</p>
+            <h3 id="partial-termination">Decrease in scope: partial termination (IFRS 16.46(a))</h3>
+            <p>Where the modification decreases the scope, IFRS 16.46(a) requires the lessee to decrease the carrying amount of the ROU asset to reflect the partial or full termination of the lease, and to recognise in profit or loss any gain or loss relating to the partial or full termination. In practice this is a two-part mechanic: first reduce the ROU asset and liability to reflect the portion of the right of use given up, booking the difference to P&amp;L; then remeasure the surviving liability for any change in the remaining payments using the revised discount rate under IFRS 16.45. The proportion given up is measured on a reasonable basis - commonly the change in the liability, or the change in floor area or remaining term.</p>
 
-            <h2 id="scope-change">Scope Changes: Adding or Removing an Asset</h2>
-
-            <h3 id="adding-an-asset-increase-in-scope">Adding an Asset (Increase in Scope)</h3>
-            <p>If the modification increases the scope and is not a separate lease, remeasure the lease:</p>
-            <ul>
-                <li>Calculate the new lease liability (PV of all remaining payments + new payments for the added asset)</li>
-                <li>Calculate the increase in ROU asset</li>
-                <li>Journal entry: Dr ROU Asset / Cr Lease Liability</li>
-            </ul>
-
-            <p class="example-box"><strong>Worked Example: Adding Parking Spaces</strong><br>
-            On 1 Jan 2026, a company leases an office building for £200k/year, 10-year term, IBR 5%.<br>
-            On 1 July 2026 (mid-year), the lessor agrees to add 10 parking spaces at £10k/year.<br><br>
-            <strong>Modification treatment:</strong><br>
-            — The parking spaces are not separately identifiable (bundled with building)<br>
-            — Recalculate lease liability: remaining building payments + parking payments<br>
-            — New lease liability = £1,680,000 (original balance: £1,550,000)<br>
-            — Increase = £130,000<br>
-            — ROU asset increases by £130,000<br><br>
-            <strong>Journal entry:</strong><br>
-            Dr ROU Asset £130,000 / Cr Lease Liability £130,000
-            </p>
-
-            <h3 id="removing-an-asset-decrease-in-scope">Removing an Asset (Decrease in Scope)</h3>
-            <p>If the modification decreases the scope, reduce the lease liability and ROU asset. The difference hits P&L as a gain or loss.</p>
-
-            <p class="example-box"><strong>Example: Early Lease Termination (Partial)</strong><br>
-            Company leases a 3-floor office building. On 1 July 2026, it surrenders the top floor early. Remaining payments reduce by £60k/year (3 years remaining).<br><br>
-            — Old lease liability: £180k<br>
-            — New lease liability (2 floors only): £120k<br>
-            — Reduction: £60k (gain, hits P&L)<br><br>
-            <strong>Journal entry:</strong><br>
-            Dr Lease Liability £60,000 / Cr Gain on Modification £60,000
-            </p>
-
-            <h2 id="payment-change">Payment Changes: Increase or Decrease</h2>
-
-            <h3 id="payment-increase-fixed-or-inflationlinked">Payment Increase (Fixed or Inflation-Linked)</h3>
-            <p>If the modification increases lease payments (e.g., rent goes from £100k to £110k/year), remeasure the lease:</p>
-            <ul>
-                <li>Recalculate the lease liability with the new payment amount</li>
-                <li>The difference adjusts the ROU asset</li>
-            </ul>
-
-            <p class="example-box"><strong>Example: Mid-Lease Rent Increase</strong><br>
-            Building lease at £500k/year, 10 years remaining, IBR 4%.<br>
-            Lessor offers: "Reduce your rent to £480k/year for the next 5 years if you renew for 10 additional years post-lease."<br><br>
-            This is a <strong>modification</strong> because the original lease didn't include the renewal at that price.<br><br>
-            — Old remaining liability: £4.1m<br>
-            — New liability (5 years at £480k + 10 years at original rate): £4.3m<br>
-            — Increase: £200k<br><br>
-            <strong>Journal entry:</strong><br>
-            Dr ROU Asset £200,000 / Cr Lease Liability £200,000
-            </p>
-
-            <h2 id="reassessment">Reassessments: When to Remeasure (vs. Modify)</h2>
-
-            <p>These are <strong>not modifications</strong> but require remeasurement:</p>
-
-            <h3 id="1-change-in-lease-term-assessment">1. Change in Lease Term Assessment</h3>
-            <p>You initially didn't include an extension option (thought you wouldn't exercise it). Later, you determine you <strong>will</strong> exercise it. Reassess and remeasure.</p>
-
-            <p class="example-box"><strong>Example:</strong> 5-year office lease with a 3-year renewal option at market rate. At inception, you thought: "Probably won't renew." Now (in year 3), your business is thriving and you're certain you'll renew. Reassess the lease term to 8 years, remeasure the liability, and adjust the ROU asset.</p>
-
-            <h3 id="2-change-in-termination-option-assessment">2. Change in Termination Option Assessment</h3>
-            <p>You originally included a termination option in the lease term because you thought you'd exercise it. Now you're certain you won't. Remove it from the term and remeasure.</p>
-
-            <h3 id="3-change-in-residual-value-guarantee">3. Change in Residual Value Guarantee</h3>
-            <p>Your estimate of the residual value you'll guarantee changes (e.g., market value of equipment drops). Update the lease liability if this affects the payment amount.</p>
-
-            <h2 id="journal">Journal Entries for Modifications</h2>
-
-            <h3 id="template-1-increase-in-scope">Template 1: Increase in Scope</h3>
+            <h3 id="worked-partial">Worked example 1: giving up a floor</h3>
+            <p>A lessee occupies two identical floors under a lease with three years remaining. On 1 July 2026 it surrenders one floor; rent falls from £200k to £100k a year. Carrying amounts immediately before the modification are an ROU asset of £520,000 and a lease liability of £560,000. The lessee measures the decrease in scope by the reduction in the liability: giving up one of two floors reduces the remaining right of use by 50%.</p>
+            <table>
+                <tr><th>Step (IFRS 16.46(a))</th><th>Working</th><th>£</th></tr>
+                <tr><td>ROU asset before modification</td><td>Given</td><td>520,000</td></tr>
+                <tr><td>Lease liability before modification</td><td>Given</td><td>560,000</td></tr>
+                <tr><td>Proportion of scope surrendered</td><td>1 of 2 floors</td><td>50%</td></tr>
+                <tr><td>ROU derecognised</td><td>£520,000 × 50%</td><td>(260,000)</td></tr>
+                <tr><td>Liability derecognised</td><td>£560,000 × 50%</td><td>(280,000)</td></tr>
+                <tr><td><strong>Gain to P&amp;L</strong></td><td>£280,000 − £260,000</td><td><strong>20,000</strong></td></tr>
+            </table>
+            <p>The liability is derecognised by more than the ROU asset because it was carrying a higher balance, so the difference is a £20,000 gain. After derecognition the surviving liability (£280,000) is remeasured against the revised remaining payments at the revised discount rate per IFRS 16.45; any further change is added to, or deducted from, the ROU asset under IFRS 16.46(b), not taken to P&amp;L. The termination journal is:</p>
             <div class="journal">
-                Dr ROU Asset (increase) [amount]<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr Lease Liability [amount]<br><br>
-                (To record lease modification — added asset)
+                1 July 2026 &mdash; partial termination (IFRS 16.46(a))<br>
+                Dr Lease liability &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;280,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr ROU asset &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;260,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Gain on partial termination &nbsp;20,000
             </div>
 
-            <h3 id="template-2-decrease-in-scope">Template 2: Decrease in Scope</h3>
+            <h3 id="other-mods">All other modifications: revised rate to the ROU asset (IFRS 16.46(b))</h3>
+            <p>For every modification that is not a decrease in scope, IFRS 16.46(b) requires the lessee to make a corresponding adjustment to the carrying amount of the ROU asset for the remeasurement of the lease liability. The liability is remeasured under IFRS 16.45 using the revised discount rate, and the entire change - up or down - is absorbed into the ROU asset. No gain or loss arises. This is the branch for rent increases, term extensions, and added assets that fail the IFRS 16.44 commensurate-price test.</p>
+            <p>One edge case: if a scope-reducing element and a price change occur together, deal with the scope decrease first under 16.46(a), then apply 16.46(b) to the rest. And where a downward remeasurement under 16.46(b) exceeds the carrying amount of the ROU asset, the ROU asset is reduced to nil and any remaining amount is recognised in profit or loss - the only way 16.46(b) touches the income statement.</p>
+
+            <h3 id="worked-extension">Worked example 2: term extension at a new rate</h3>
+            <p>On 1 January 2026 a lessee has an office lease with four years and £300k annual rent remaining; the liability stands at £1,063,000 (discounted at the original 5% rate). The parties agree to extend the term by three years (to seven years remaining) and raise rent to £320k a year from the modification date. This increases scope-by-consideration but was not priced at a stand-alone rate, so it fails IFRS 16.44 and is a non-separate modification under IFRS 16.46(b). The lessee determines a revised incremental borrowing rate of 6% at the modification date (IFRS 16.45).</p>
+            <table>
+                <tr><th>Item</th><th>Working</th><th>£</th></tr>
+                <tr><td>Revised payments</td><td>£320,000 × 7 years</td><td>2,240,000 (undiscounted)</td></tr>
+                <tr><td>Remeasured liability</td><td>7-year annuity, 6% revised rate</td><td>1,786,000</td></tr>
+                <tr><td>Liability before modification</td><td>Given</td><td>(1,063,000)</td></tr>
+                <tr><td><strong>Increase in liability</strong></td><td>Corresponding adjustment to ROU</td><td><strong>723,000</strong></td></tr>
+            </table>
+            <p>The whole £723,000 increase is added to the ROU asset - there is no day-one P&amp;L effect (IFRS 16.46(b)). The revised liability then accretes interest at the revised 6% rate and the grossed-up ROU asset is depreciated over the revised seven-year term.</p>
             <div class="journal">
-                Dr Lease Liability (reduction) [amount]<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr ROU Asset (reduction) [amount]<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr Gain on Lease Modification [remainder, if any]
+                1 January 2026 &mdash; extension and re-price (IFRS 16.46(b))<br>
+                Dr ROU asset &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;723,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr Lease liability &nbsp;&nbsp;&nbsp;&nbsp;723,000
             </div>
+            <p class="callout"><strong>The rate rule in one line.</strong> Reassessment under IFRS 16.42 (index/rate) &rarr; unchanged discount rate. Modification under IFRS 16.45 &rarr; revised discount rate at the modification date. Getting this backwards is the error auditors see most, and it flows straight into the liability and the ROU asset.</p>
 
-            <h3 id="template-3-payment-increase-with-same-term">Template 3: Payment Increase with Same Term</h3>
-            <div class="journal">
-                Dr ROU Asset (or Interest Expense if increase relates to accretion) [amount]<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr Lease Liability [amount]
-            </div>
+            <h2 id="auditor">What do auditors test on lease modifications?</h2>
+            <p>Auditors treat lease modifications as an estimate with a classification overlay, so testing runs on two fronts: was the change put down the right branch of IFRS 16.44-46, and were the inputs - chiefly the revised discount rate - reasonable. The three red flags below each map to a specific ISA and each has caused restatements in practice.</p>
 
-            <h2 id="worked">Worked Example: Complex Multi-Step Modification</h2>
+            <h3 id="flag-classification">Red flag 1: a scope-increase booked as part of the original lease</h3>
+            <p>Under <strong>ISA 315 (Revised)</strong>, the auditor identifies risks of material misstatement in how the entity classifies transactions. The prime risk here is a modification that adds a right of use being swept into the existing lease when IFRS 16.44 would make it a separate lease - or the reverse, a genuinely bundled add-on being carved out as a new lease to avoid remeasuring at a revised rate. Both distort the liability and the ROU asset. Auditors walk the IFRS 16.44 test explicitly: did scope increase, and was the added consideration commensurate with a stand-alone price? A missing stand-alone-price analysis is a control-design gap to flag.</p>
 
-            <h3 id="scenario">Scenario</h3>
-            <p><strong>Original lease (1 Jan 2025):</strong><br>
-            — Annual rent: £300k<br>
-            — Lease term: 10 years<br>
-            — IBR: 5%<br>
-            — ROU asset at inception: £2,318k<br>
-            — Lease liability at inception: £2,318k</p>
+            <h3 id="flag-rate">Red flag 2: the revised discount rate is stale or unsupported</h3>
+            <p>The revised discount rate is an accounting estimate, so <strong>ISA 540 (Revised)</strong> applies in full. The frequent failing is reusing the original commencement-date rate for a 16.45 remeasurement - which understates or overstates the liability - or pulling a revised IBR with no build-up (risk-free rate, credit spread, term and security adjustments) as at the modification date. Auditors challenge the point-in-time evidence for the rate, its sensitivity, and whether management applied a revised rate at all where IFRS 16.45 requires one. A one-percentage-point error on a multi-year liability is easily material.</p>
 
-            <p><strong>As of 1 Jan 2026 (1 year in):</strong><br>
-            — ROU asset (net of depreciation): £2,094k<br>
-            — Lease liability (after 1 payment): £1,990k</p>
+            <h3 id="flag-evidence">Red flag 3: weak evidence and a mis-split P&amp;L gain</h3>
+            <p>Under <strong>ISA 500</strong>, the auditor obtains sufficient appropriate evidence over both the existence of the modification and the split between P&amp;L and the ROU asset. Two things get tested: the signed modification agreement (does the contract actually support the revised payments and term?), and the IFRS 16.46(a) versus 16.46(b) split. A common overstatement is running a decrease in scope through the ROU asset only, suppressing a real termination gain or loss; a common error the other way is taking an ordinary 16.46(b) re-price to P&amp;L. Auditors recompute the proportionate derecognition and vouch the gain to the underlying calculation.</p>
 
-            <p><strong>Modification (1 Jan 2026):</strong><br>
-            — Lessor and lessee agree:<br>
-            — Rent increases to £330k/year (3% increase)<br>
-            — Lease term extended by 2 years (now 11 years remaining)<br>
-            — Company to add parking (identifiable, £25k/year)</p>
-
-            <h3 id="step-1-identify-the-leases">Step 1: Identify the Lease(s)</h3>
-            <p>This is a single modification of the original lease (parking is bundled, not separate; rent increase applies to original asset).</p>
-
-            <h3 id="step-2-calculate-new-lease-liability">Step 2: Calculate New Lease Liability</h3>
-            <p>Remaining 11 years:</p>
-            <ul>
-                <li>Building rent: £330k × 11 years = £3,630k (undiscounted)</li>
-                <li>Parking: £25k × 11 years = £275k (undiscounted)</li>
-                <li>Total: £3,905k</li>
-            </ul>
-            <p>Discounted at 5% over 11 years ≈ £3,020k</p>
-
-            <h3 id="step-3-calculate-change-in-liability">Step 3: Calculate Change in Liability</h3>
-            <ul>
-                <li>Old liability: £1,990k</li>
-                <li>New liability: £3,020k</li>
-                <li>Increase: £1,030k</li>
-            </ul>
-
-            <h3 id="step-4-journal-entry">Step 4: Journal Entry</h3>
-            <div class="journal">
-                1 January 2026<br>
-                Dr ROU Asset &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,030,000<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr Lease Liability &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1,030,000
-            </div>
-
-            <h3 id="step-5-going-forward">Step 5: Going Forward</h3>
-            <p>Year 2 (2026) expense:</p>
-            <ul>
-                <li>ROU depreciation: (£2,094k + £1,030k) Ã· 11 years = £281k</li>
-                <li>Interest expense: £3,020k × 5% = £151k</li>
-                <li>Total lease expense: £432k</li>
-            </ul>
-
-            <h2 id="auditor">What Auditors Focus On</h2>
-
-            <h3 id="1-was-it-a-modification">1. Was It a Modification?</h3>
-            <p>Auditors ask: "How did you identify this as a modification vs. a reassessment?" Document your reasoning. Review the lease agreement and the change letter. Be clear.</p>
-
-            <h3 id="2-was-the-calculation-correct">2. Was the Calculation Correct?</h3>
-            <p>Auditors recalculate the new lease liability and verify the adjustment. Common errors:</p>
-            <ul>
-                <li>Forgetting to include certain payments (parking, residual value changes)</li>
-                <li>Using the wrong IBR (should be the original IBR, not the current IBR at modification date)</li>
-                <li>Miscounting the remaining lease term</li>
-            </ul>
-
-            <h3 id="3-was-the-rou-asset-adjusted-appropriately">3. Was the ROU Asset Adjusted Appropriately?</h3>
-            <p>If the modification increases the liability, the ROU asset increases by the same amount (not a gain). If the liability decreases, the reduction could be partly a gain. Auditors verify the split.</p>
-
-            <h2 id="faq">FAQs</h2>
-
-            <div class="faq-item">
-                <h3 id="when-a-lease-is-modified-do-i-use-a-new-ibr">When a lease is modified, do I use a new IBR?</h3>
-                <p>No. You use the IBR at the <strong>original lease commencement date</strong>, not at the modification date. This preserves consistency.</p>
-            </div>
-
-            <div class="faq-item">
-                <h3 id="if-rent-decreases-and-i-record-a-gain-is-it-operating-or-other-income">If rent decreases and I record a gain, is it operating or other income?</h3>
-                <p>IFRS 16 doesn't specify. Your accounting policy determines this. If you classify it as an operating item, disclose it clearly. Most companies put it in "other income" to separate it from core business.</p>
-            </div>
-
-            <div class="faq-item">
-                <h3 id="can-a-modification-be-partially-a-new-lease-and-partially-a-remeasurement">Can a modification be partially a new lease and partially a remeasurement?</h3>
-                <p>Yes. If you add a separately identifiable asset at a standalone price, that's a new lease. The rest of the original lease is remeasured for any other changes. Account for each separately.</p>
+            <h2 id="real-life-case-study">Case study: a filed store-estate downsizing</h2>
+            <div class="example-box">
+            <p><strong>Company and source.</strong> Marks and Spencer Group plc, Annual Report and Financial Statements 2024 (leases disclosures, group financial statements). M&amp;S runs a multi-year store estate rotation programme - closing and downsizing older full-line stores - which is exactly the fact pattern IFRS 16.46(a) is written for.</p>
+            <p><strong>Filed figures.</strong> The 2024 financial statements disclose a net decrease in lease liabilities of <strong>£73.1m</strong> over the year, and identify <strong>£49.5m</strong> of food-store lease liabilities relating to stores within the store estate strategic programme. These are the actual reported amounts; where a store is exited early or reduced in size, the resulting partial terminations are the IFRS 16.46(a) mechanic applied at portfolio scale.</p>
+            <p><strong>How the standard maps.</strong> Each early store exit is a decrease in scope: derecognise the ROU asset and lease liability for the space given up and take the difference to profit or loss (IFRS 16.46(a)); where a store is downsized rather than closed, remeasure the surviving liability at a revised discount rate (IFRS 16.45) with any further adjustment to the ROU asset (IFRS 16.46(b)). Programme-level gains and losses on these modifications are the aggregate of many such per-lease calculations.</p>
+            <p style="font-size:0.85em;color:#8593a8;margin-top:12px;">The £73.1m and £49.5m figures are taken from M&amp;S's filed 2024 financial statements. Any per-store bridge is illustrative of the mechanic and is not a specific M&amp;S disclosure.</p>
             </div>
 
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
                     <h4 id="usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</h4>
-                    <p>Lease modifications are one of the trickiest areas of IFRS 16. In my audits, I've seen companies forget to record modifications entirely, or misclassify them as reassessments. This guide reflects the real-world complexity.</p>
+                    <p>Lease modifications are one of the trickiest areas of IFRS 16. On audits I have seen companies miss modifications entirely, misfile them as reassessments, and - most costly - run a decrease in scope through the ROU asset so a real termination gain never surfaces. Classify against IFRS 16.44 first, then pick 16.46(a) or 16.46(b), then evidence the revised rate.</p>
                 </div>
             </div>
 
-            
-<h2 id="real-life-case-study">Real-Life Case Study: Renegotiating Space Mid-Lease</h2>
-<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> Three years into a 10-year office lease, a company gives up one of its two floors. Rent falls from &pound;200k to &pound;120k for the remaining term.</p>
- <p><strong>Treatment.</strong> This is a decrease in scope, so it is a modification accounted for by partial termination: the company remeasures the liability using a revised discount rate, reduces the right-of-use asset proportionately to the decrease in scope, and takes any difference to profit or loss. Giving up 50% of the floor space led to a ~&pound;46k gain recognised on the derecognised portion.</p>
- <p><strong>Takeaway.</strong> Not every renegotiation is a new lease. Classify first: change in scope vs change in consideration only. A scope reduction hits P&amp;L today; a price-only change is absorbed into a remeasured liability against the ROU asset.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
-</div>
+            <h2 id="faq">FAQs</h2>
+
+            <div class="faq-item">
+                <h3 id="faq-rate">When a lease is modified, do you use a new discount rate?</h3>
+                <p>For a modification that is not a separate lease, yes. IFRS 16.45 requires you to remeasure the liability using a <strong>revised discount rate</strong> at the effective date of the modification - the implicit rate if readily determinable, otherwise the incremental borrowing rate at that date. The original commencement-date rate is only kept for certain reassessments under IFRS 16.40-43, never for modifications.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 id="faq-vs-reassessment">What is the difference between a modification and a reassessment?</h3>
+                <p>A modification changes the scope or consideration in a way the original contract did not provide for (Appendix A) - the parties renegotiate. A reassessment updates an estimate the contract already contemplated, such as revising the term when a renewal becomes reasonably certain (IFRS 16.40). Modifications follow IFRS 16.44-46; reassessments follow IFRS 16.39-43.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 id="faq-partial">How do you account for a partial termination such as giving up a floor?</h3>
+                <p>Under IFRS 16.46(a), decrease the ROU asset to reflect the partial termination, decrease the lease liability, and recognise the difference as a gain or loss in profit or loss. Then remeasure the surviving liability at a revised discount rate (IFRS 16.45). The proportion given up is measured on a reasonable basis - often the change in the liability, floor area, or remaining term.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 id="faq-gain-line">Where does a gain on a lease modification go in the income statement?</h3>
+                <p>IFRS 16 does not prescribe a line item. A gain or loss on partial termination under IFRS 16.46(a) goes to profit or loss; presentation follows your accounting policy and materiality - often within other operating income, or as an adjusting/exceptional item where a store-exit programme is material. Disclose the policy consistently.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 id="faq-split">Can one modification be part new lease and part remeasurement?</h3>
+                <p>Yes. If part of the change adds a right of use at a price commensurate with its stand-alone price, that part is a separate lease under IFRS 16.44 and stands alone. Any other change to the existing lease in the same agreement is a non-separate modification under IFRS 16.45-46. Split the agreement into its components and account for each on its own basis.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 id="faq-payment-change">Does an increase in lease payments always mean a modification?</h3>
+                <p>No. A payment change driven by a mechanism already in the contract - an index or rate reset under IFRS 16.42 - is a remeasurement using the <strong>unchanged</strong> discount rate, not a modification. Only a change in consideration that was not part of the original terms and conditions (Appendix A) is a modification requiring a revised discount rate under IFRS 16.45.</p>
+            </div>
+
+            <div class="faq-item">
+                <h3 id="faq-lessor">Do lessees and lessors account for modifications the same way?</h3>
+                <p>No - this guide is the lessee. A lessor accounts for a finance-lease modification under IFRS 16.79-80 and an operating-lease modification under IFRS 16.87 (as a new lease from the effective date). The separate-lease test in IFRS 16.44 is a lessee requirement; the lessor rules sit separately in the standard.</p>
+            </div>
 
 <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>

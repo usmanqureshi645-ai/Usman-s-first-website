@@ -24,12 +24,57 @@
       "@context": "https://schema.org",
       "@type": "Article",
       "headline": "IFRS 16 Short-Term & Low-Value Leases: Recognition Exemptions Explained with Examples",
-      "description": "Guide to IFRS 16 exemptions for short-term leases and low-value assets, including practical definitions, examples, and audit considerations.",
+      "description": "Guide to IFRS 16 exemptions for short-term leases and low-value assets, including practical definitions, worked examples, journal entries, and audit considerations.",
       "image": "https://www.uqconsulting.org/images/og-image.png",
       "datePublished": "2026-07-04",
+      "dateModified": "2026-07-13",
       "author": { "@type": "Person", "name": "Usman Qureshi", "jobTitle": "Chartered Accountant (ACCA, ACA)" },
       "publisher": { "@type": "Person", "name": "Usman Qureshi" },
       "mainEntityOfPage": { "@type": "WebPage", "@id": "https://www.uqconsulting.org/blog/ifrs-16-short-term-low-value.html" }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Can I apply the low-value exemption to 10 laptops but not 90 others?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. The low-value election is made on a lease-by-lease basis (IFRS 16.8). Each qualifying laptop is assessed individually against its value when new (IFRS 16.B3-B4), so you can expense some and capitalise others, provided each decision is supported. Aggregate contract size is irrelevant to the low-value test." }
+        },
+        {
+          "@type": "Question",
+          "name": "What if the asset's value is 4,500 in year 1 and depreciates to 1,500 by year 3?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Use the value of the asset when it is new, assessed once at commencement (IFRS 16.B3, B5). The test is absolute and is not reassessed for subsequent depreciation. If the asset when new is below the low-value threshold and is not highly dependent on other assets, it qualifies for the life of the lease." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can a single inexpensive car qualify as a low-value lease?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. IFRS 16.B3 and the Basis for Conclusions (BC100) are explicit that cars do not qualify, because a car when new is not of low value even if the monthly rental is small. The class of underlying asset, not the payment, drives the test." }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I elect not to use the exemptions and recognise all leases on balance sheet?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Yes. Both exemptions are optional (IFRS 16.5). Some groups, such as Vodafone, apply full IFRS 16 recognition to all leases for comparability. Document the policy and apply the short-term election consistently by class of asset (IFRS 16.8)." }
+        },
+        {
+          "@type": "Question",
+          "name": "If a lease is both short-term and low-value, which exemption applies?",
+          "acceptedAnswer": { "@type": "Answer", "text": "Either is sufficient; the lease is off balance sheet under IFRS 16.5. In practice you would apply the low-value exemption because it is elected lease-by-lease and does not require monitoring for a lease-term change, whereas a short-term lease that is modified or extended must be reassessed (IFRS 16.7)." }
+        },
+        {
+          "@type": "Question",
+          "name": "Does a lease with a purchase option ever qualify as short-term?",
+          "acceptedAnswer": { "@type": "Answer", "text": "No. By definition (IFRS 16 Appendix A), a short-term lease is a lease of 12 months or less that contains no purchase option. Any purchase option disqualifies it, regardless of term or price." }
+        },
+        {
+          "@type": "Question",
+          "name": "How are exempted lease costs disclosed?",
+          "acceptedAnswer": { "@type": "Answer", "text": "The expense relating to short-term leases and the expense relating to low-value asset leases are disclosed separately in the notes (IFRS 16.53(c)-(d)), along with the related cash outflow (IFRS 16.53(g)). Diageo, for example, disclosed 70m of such charges in FY2024." }
+        }
+      ]
     }
     </script>
 
@@ -125,194 +170,139 @@
         </div>
 
         <h1>IFRS 16 Short-Term & Low-Value Leases: Recognition Exemptions Explained with Examples</h1>
-        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · 11 min read</div>
+        <div class="meta">By Usman Qureshi (ACCA, ACA) · Published July 2026 · Updated 13 July 2026 · 12 min read</div>
 
-        <p class="lead">Not all leases go on the balance sheet. IFRS 16 provides two recognition exemptions: short-term leases (≤12 months) and low-value assets (roughly <$5,000). Many companies use these to simplify accounting. This guide explains when you can claim exemptions, what "low-value" actually means, and how auditors challenge these judgments.</p>
+        <p class="lead">Not every lease lands on the balance sheet. IFRS 16.5 lets a lessee elect out of right-of-use (ROU) asset and lease-liability recognition for two narrow categories: short-term leases of 12 months or less with no purchase option, and leases of low-value assets. This guide sets out exactly when each exemption applies, the traps that void it, worked schedules and journals, the ISA-linked questions auditors ask, and a real disclosure from Diageo's FY2024 accounts.</p>
 
                         <div class="toc">
             <strong>In this guide</strong>
-            <ul><li class="toc-l1"><a href="#overview">Overview: Two Recognition Exemptions</a></li><li class="toc-l1"><a href="#short-term">Short-Term Lease Exemption (‰¤12 Months)</a><ul><li class="toc-l2"><a href="#definition">Definition</a></li><li class="toc-l2"><a href="#examples">Examples</a></li><li class="toc-l2"><a href="#accounting-treatment">Accounting Treatment</a></li></ul></li><li class="toc-l1"><a href="#low-value">Low-Value Asset Exemption</a><ul><li class="toc-l2"><a href="#definition-2">Definition</a></li><li class="toc-l2"><a href="#what-qualifies">What Qualifies?</a></li><li class="toc-l2"><a href="#what-does-not-qualify">What Does NOT Qualify?</a></li></ul></li><li class="toc-l1"><a href="#definition">Determining "Low-Value": The Three Tests</a><ul><li class="toc-l2"><a href="#test-1-whats-the-new-replacement-cost">Test 1: What's the New Replacement Cost?</a></li><li class="toc-l2"><a href="#test-2-individual-or-aggregate">Test 2: Individual or Aggregate?</a></li><li class="toc-l2"><a href="#test-3-specialization">Test 3: Specialization</a></li></ul></li><li class="toc-l1"><a href="#practical">Practical Examples</a><ul><li class="toc-l2"><a href="#example-1-office-furniture-qualifies">Example 1: Office Furniture (Qualifies)</a></li><li class="toc-l2"><a href="#example-2-laptop-qualifies">Example 2: Laptop (Qualifies)</a></li><li class="toc-l2"><a href="#example-3-temporary-office-qualifies">Example 3: Temporary Office (Qualifies)</a></li><li class="toc-l2"><a href="#example-4-manufacturing-equipment-does-not-qualify">Example 4: Manufacturing Equipment (Does NOT Qualify)</a></li></ul></li><li class="toc-l1"><a href="#accounting">How to Account for Exemption Leases</a><ul><li class="toc-l2"><a href="#journal-entry">Journal Entry</a></li></ul></li><li class="toc-l1"><a href="#auditor">Auditor Red Flags and Challenges</a><ul><li class="toc-l2"><a href="#red-flag-1-borderline-lowvalue-claims">Red Flag 1: Borderline Low-Value Claims</a></li><li class="toc-l2"><a href="#red-flag-2-using-lowvalue-as-a-catchall">Red Flag 2: Using Low-Value as a Catch-All</a></li><li class="toc-l2"><a href="#red-flag-3-leases-that-are-renegotiated-annually">Red Flag 3: Leases That Are Re-negotiated Annually</a></li></ul></li><li class="toc-l1"><a href="#faq">FAQs</a><ul><li class="toc-l2"><a href="#can-i-apply-the-lowvalue-exemption-to-10-laptops-but-not-90-others">Can I apply the low-value exemption to 10 laptops but not 90 others?</a></li><li class="toc-l2"><a href="#what-if-the-asset-value-is-4500-in-year-1-and-depreciates-to-1500-by-year-3">What if the asset value is £4,500 in year 1 and depreciates to £1,500 by year 3?</a></li><li class="toc-l2"><a href="#can-i-elect-not-to-use-the-exemption-and-recognize-all-leases-on-the-balance-sheet">Can I elect not to use the exemption and recognize all leases on the balance sheet?</a></li><li class="toc-l2"><a href="#if-a-lease-is-both-shortterm-and-lowvalue-which-exemption-applies">If a lease is both short-term AND low-value, which exemption applies?</a><ul><li class="toc-l3"><a href="#usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</a></li></ul></li></ul></li><li class="toc-l1"><a href="#real-life-case-study">Real-Life Case Study: Applying the Recognition Exemptions</a></li></ul>
+            <ul><li class="toc-l1"><a href="#two-exemptions">What are the two IFRS 16 recognition exemptions?</a></li><li class="toc-l1"><a href="#short-term">When does a lease qualify as short-term?</a></li><li class="toc-l1"><a href="#low-value">How do you decide if an asset is "low-value"?</a></li><li class="toc-l1"><a href="#accounting">How do you account for exempted leases?</a><ul><li class="toc-l2"><a href="#example-short-term">Worked example 1: short-term straight-line schedule</a></li><li class="toc-l2"><a href="#example-low-value">Worked example 2: low-value laptops vs a fleet car</a></li></ul></li><li class="toc-l1"><a href="#red-flags">What do auditors challenge on exemption claims?</a></li><li class="toc-l1"><a href="#case-study">Case study: Diageo plc FY2024 disclosure</a></li><li class="toc-l1"><a href="#faq">Frequently asked questions</a></li></ul>
         </div>
 
         <article>
-            <h2 id="overview">Overview: Two Recognition Exemptions</h2>
-            <p>IFRS 16 allows entities to avoid recognizing a right-of-use (ROU) asset and lease liability for two types of leases:</p>
-            <ol>
-                <li><strong>Short-term leases:</strong> Lease term of 12 months or less with no purchase option</li>
-                <li><strong>Low-value asset leases:</strong> Underlying asset value is low (typically &lt;£5,000 USD equivalent)</li>
-            </ol>
-            <p>For these leases, you expense lease payments directly (like the old IAS 17 operating lease model). The exemption is <strong>optional</strong> — you can choose to apply IFRS 16 fully if you prefer.</p>
+            <h2 id="two-exemptions">What are the two IFRS 16 recognition exemptions?</h2>
+            <p>IFRS 16 forces almost every lease onto the balance sheet, but IFRS 16.5 permits a lessee to elect <em>not</em> to recognise a right-of-use asset and lease liability for two categories: leases that are short-term, and leases for which the underlying asset is of low value. For any lease that takes an exemption, the lessee instead recognises the payments as an expense on a straight-line basis over the lease term, or on another systematic basis if that is more representative of the pattern of the lessee's benefit (IFRS 16.6). This reproduces the old IAS 17 operating-lease outcome for a deliberately narrow slice of the portfolio.</p>
+            <p>The two elections operate differently. The short-term election is made <strong>by class of underlying asset</strong> — choose it for, say, all short-term IT hardware and you apply it to every short-term lease in that class (IFRS 16.8). The low-value election is made <strong>lease-by-lease</strong>, so within the same class you can capitalise one item and expense the next (IFRS 16.8). Both are optional accounting-policy choices; an entity that prefers a single balance-sheet-complete model can decline both, as Vodafone does, recognising every lease in full. Where the exemptions are used, IFRS 16.53(c)-(d) requires the short-term and low-value expense to be disclosed as separate note line items, with the related cash outflow under IFRS 16.53(g).</p>
 
-            <h2 id="short-term">Short-Term Lease Exemption (‰¤12 Months)</h2>
+            <p class="callout"><strong>The one-line summary.</strong> Short-term is about the <em>term</em> (≤12 months, no purchase option). Low-value is about the <em>asset when new</em> (an absolute size test, roughly USD 5,000). They are independent gates — a lease needs to pass only one to stay off balance sheet (IFRS 16.5).</p>
 
-            <h3 id="definition">Definition</h3>
-            <p>A short-term lease is one with:</p>
-            <ul>
-                <li>A lease term of 12 months or less, AND</li>
-                <li>No purchase option (if there were an option, you might be reasonably certain to buy, making it long-term)</li>
-            </ul>
-
-            <p class="callout"><strong>Critical:</strong> The lease term is assessed at commencement. A 13-month lease does NOT qualify, even if you plan to terminate early. A 12-month lease with a renewal option does NOT qualify if you're reasonably certain to renew.</p>
-
-            <h3 id="examples">Examples</h3>
+            <h2 id="short-term">When does a lease qualify as short-term?</h2>
+            <p>A short-term lease is defined in IFRS 16 Appendix A as a lease that, at the commencement date, has a lease term of 12 months or less and <strong>contains no purchase option</strong>. Both conditions are hard-edged. A 13-month lease fails even if the lessee genuinely intends to exit at month 12; a 12-month lease that carries any option to purchase the asset fails outright, regardless of the option price. The term test uses the IFRS 16 lease term, so it already folds in extension and termination options that the lessee is reasonably certain to exercise (IFRS 16.18-19) — a nominal 9-month lease with a renewal the lessee is reasonably certain to take is not short-term, because its lease term exceeds 12 months.</p>
+            <p>The election is made and disclosed by class of underlying asset (IFRS 16.8), which stops entities cherry-picking individual short-term leases within the same class. Critically, the assessment is fixed at commencement. If a short-term lease is later modified, or the lease term changes (for example the lessee becomes reasonably certain to exercise a renewal it had earlier excluded), IFRS 16.7 requires the lessee to treat it as a <em>new</em> lease at that date and re-test eligibility — which frequently pushes it onto the balance sheet. The examples below show how the two conditions bite.</p>
             <table>
-                <tr>
-                    <th>Lease</th>
-                    <th>Term</th>
-                    <th>Purchase Option?</th>
-                    <th>Qualifies for Exemption?</th>
-                </tr>
-                <tr>
-                    <td>Car rental (temporary replacement)</td>
-                    <td>3 months</td>
-                    <td>No</td>
-                    <td>✓ Yes</td>
-                </tr>
-                <tr>
-                    <td>Office space (with renewal option you might exercise)</td>
-                    <td>12 months</td>
-                    <td>Yes (renewal)</td>
-                    <td>✗ No</td>
-                </tr>
-                <tr>
-                    <td>Equipment lease (guaranteed purchase at end)</td>
-                    <td>2 years</td>
-                    <td>Yes (purchase)</td>
-                    <td>✗ No</td>
-                </tr>
-                <tr>
-                    <td>Temporary office (12 months, no renewal)</td>
-                    <td>12 months</td>
-                    <td>No</td>
-                    <td>✓ Yes</td>
-                </tr>
+                <tr><th>Lease</th><th>Term at commencement</th><th>Purchase option?</th><th>Short-term?</th></tr>
+                <tr><td>Replacement hire car while a company vehicle is repaired</td><td>3 months</td><td>No</td><td>Yes</td></tr>
+                <tr><td>Office space, 12-month term with a renewal the lessee is reasonably certain to take</td><td>&gt;12 months (renewal included)</td><td>No</td><td>No</td></tr>
+                <tr><td>Equipment lease with a bargain purchase option at the end</td><td>18 months</td><td>Yes</td><td>No</td></tr>
+                <tr><td>Pop-up retail unit for a seasonal campaign</td><td>12 months, no renewal</td><td>No</td><td>Yes</td></tr>
             </table>
 
-            <h3 id="accounting-treatment">Accounting Treatment</h3>
-            <p>You expense the lease payment as incurred (typically in P&L):</p>
-            <p><strong>Dr Lease Expense / Cr Cash</strong></p>
-            <p>No ROU asset, no lease liability. Simple.</p>
+            <h2 id="low-value">How do you decide if an asset is "low-value"?</h2>
+            <p>The low-value assessment is set out in IFRS 16.B3-B8 and rests on the value of the underlying asset <strong>when it is new</strong>, measured on an <strong>absolute basis</strong> — not relative to the lessee's size, not the discounted lease payments, and not the depreciated second-hand value (IFRS 16.B3-B5). The Board deliberately declined to specify a figure in the standard, but the Basis for Conclusions explains it had in mind assets with a value, when new, in the order of <strong>USD 5,000 or less</strong> (IFRS 16.BC100). Because the test is absolute, the conclusion is the same for a corner shop and a multinational, and it never changes over the life of the lease as the asset depreciates.</p>
+            <p>IFRS 16.B5 adds two gating conditions that must <em>both</em> hold. First, the lessee must be able to benefit from the asset on its own or with other readily available resources. Second — and this is the condition most often missed — the asset must <strong>not be highly dependent on, or highly interrelated with, other assets</strong> (IFRS 16.B5(b)). A telephone handset or a laptop stands alone; a bespoke sensor that only functions as part of a larger production line does not, and cannot be low-value even if the sensor's standalone price is tiny. The Basis for Conclusions offers indicative qualifying examples — tablets and personal computers, small items of office furniture, and telephones (IFRS 16.BC100) — and one hard exclusion.</p>
+            <p class="callout"><strong>The class trap (IFRS 16.B3, BC100).</strong> Low value is judged on the type of asset, not the size of the individual payment. The Board specifically states a <strong>car does not qualify</strong>, because a car when new is not of low value, even where an individual monthly rental is small. Leasing one vehicle out of a fleet at £300 a month is a full ROU asset and liability, not a low-value expense.</p>
+            <p>Two further points settle common arguments. Aggregation is a red herring: the low-value test is applied to each underlying asset individually (IFRS 16.B3), so a contract for 200 laptops is 200 low-value assessments, not one £120,000 "high-value" contract. And a lessee cannot claim the exemption for an asset it subleases or intends to sublease — IFRS 16.B7 treats such a head lease as not low value.</p>
 
-            <h2 id="low-value">Low-Value Asset Exemption</h2>
+            <h2 id="accounting">How do you account for exempted leases?</h2>
+            <p>For any exempted lease the mechanics are simple: no ROU asset, no lease liability, no depreciation and no interest. The lessee recognises the lease payments as an expense on a straight-line basis over the lease term, unless another systematic basis better represents the pattern of benefit (IFRS 16.6). The subtlety is that <em>straight-line</em> is measured against the total contractual payments, so an uneven or rent-free payment profile produces a smoothing accrual or prepayment even though nothing sits in non-current assets. The two worked examples below show a short-term lease with uneven cash, and the decisive contrast between a qualifying low-value fleet of laptops and a non-qualifying fleet car.</p>
 
-            <h3 id="definition-2">Definition</h3>
-            <p>A lease of a low-value asset is one where the underlying asset is of low value. IFRS 16 doesn't define "low-value" precisely, but practice generally considers assets under £5,000 (USD equivalent) or in rare cases up to £10,000 for large multinational companies.</p>
-
-            <p class="callout"><strong>Important:</strong> "Low-value" refers to the <strong>asset's new replacement cost</strong>, not the lease payment or residual value. A new laptop costs ~£1,200; a 5-year-old refurbished laptop might cost £300 used. For exemption purposes, use the new replacement cost (£1,200).</p>
-
-            <h3 id="what-qualifies">What Qualifies?</h3>
-            <ul>
-                <li><strong>Office equipment:</strong> Laptops, printers, monitors, office chairs</li>
-                <li><strong>Small tools:</strong> Power drills, saws, measuring equipment</li>
-                <li><strong>Furniture:</strong> Desks, filing cabinets, small shelving units</li>
-                <li><strong>Low-value vehicles:</strong> Rarely, if the replacement cost is genuinely low</li>
-                <li><strong>Software:</strong> Some SaaS licenses (though these may not meet the "lease" definition anyway)</li>
-            </ul>
-
-            <h3 id="what-does-not-qualify">What Does NOT Qualify?</h3>
-            <ul>
-                <li>Buildings, office space, commercial property (always high-value)</li>
-                <li>Expensive machinery or production equipment (typically &gt;£5k new)</li>
-                <li>Fleet vehicles (expensive; replacement cost is high)</li>
-                <li>Land (always considered significant)</li>
-            </ul>
-
-            <h2 id="definition">Determining "Low-Value": The Three Tests</h2>
-
-            <h3 id="test-1-whats-the-new-replacement-cost">Test 1: What's the New Replacement Cost?</h3>
-            <p>Look up the current retail/wholesale price of a new version of the asset. For a 2024 Dell laptop, that's ~£1,000— £1,500. Even if you're leasing a used or refurbished version, use the new replacement cost.</p>
-
-            <h3 id="test-2-individual-or-aggregate">Test 2: Individual or Aggregate?</h3>
-            <p>If a company leases 100 keyboards at £50 each, the aggregate is £5,000, which might push it above the low-value threshold. However, IFRS doesn't require aggregation unless the leases are part of a single transaction. Use judgment.</p>
-
-            <h3 id="test-3-specialization">Test 3: Specialization</h3>
-            <p>A specialized piece of equipment (custom-made for your business) might be low-value initially but high-value in use. Use the replacement cost test, not the specialized-value test.</p>
-
-            <h2 id="practical">Practical Examples</h2>
-
-            <h3 id="example-1-office-furniture-qualifies">Example 1: Office Furniture (Qualifies)</h3>
-            <p><strong>Lease:</strong> 3 office desks + chairs for 3 years at £100/month per desk.<br>
-            <strong>New replacement cost:</strong> £400 per desk = £1,200 total<br>
-            <strong>Decision:</strong> Qualifies for low-value exemption. Expense £100/month per desk; no ROU asset needed.</p>
-
-            <h3 id="example-2-laptop-qualifies">Example 2: Laptop (Qualifies)</h3>
-            <p><strong>Lease:</strong> 50 employee laptops for 2 years at £30/month per laptop.<br>
-            <strong>New replacement cost:</strong> £1,000 per laptop = £50,000 total<br>
-            <strong>Decision:</strong> Does NOT qualify. Aggregate is £50k, well above £5k threshold. Must recognize ROU asset and lease liability.</p>
-
-            <h3 id="example-3-temporary-office-qualifies">Example 3: Temporary Office (Qualifies)</h3>
-            <p><strong>Lease:</strong> Temp office space for 6 months while building renovation occurs.<br>
-            <strong>New replacement cost:</strong> N/A; qualifies as short-term instead<br>
-            <strong>Decision:</strong> Qualifies for short-term exemption. Expense rent monthly.</p>
-
-            <h3 id="example-4-manufacturing-equipment-does-not-qualify">Example 4: Manufacturing Equipment (Does NOT Qualify)</h3>
-            <p><strong>Lease:</strong> Specialized industrial drill press for 5 years at £5,000/month.<br>
-            <strong>New replacement cost:</strong> £200,000 (new drill presses are expensive)<br>
-            <strong>Decision:</strong> Does NOT qualify. Recognize ROU asset and lease liability.</p>
-
-            <h2 id="accounting">How to Account for Exemption Leases</h2>
-
-            <h3 id="journal-entry">Journal Entry</h3>
-            <div style="background: #1a2f5a; color: #e8eef7; padding: 20px; border-radius: 6px; margin: 24px 0; font-family: 'Courier New', monospace; font-size: 0.9em;">
-                Dr Lease Expense &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [monthly payment]<br>
-                &nbsp;&nbsp;&nbsp;&nbsp;Cr Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [monthly payment]
+            <h3 id="example-short-term">Worked example 1: short-term straight-line schedule (IFRS 16.5-6)</h3>
+            <div class="example-box">
+                <p><strong>Facts.</strong> On 1 Jan 20X1 an entity leases a packaging machine for a fixed 12-month term with no purchase option. It elects the short-term exemption for the "plant and equipment" class (IFRS 16.8). Payments are back-loaded: £800/month for months 1-6, then £1,200/month for months 7-12. Total contractual payments £12,000. Straight-line expense = £12,000 ÷ 12 = <strong>£1,000/month</strong> (IFRS 16.6).</p>
             </div>
-
-            <p>That's it. No depreciation, no interest, no ROU asset tracking.</p>
-
-            <h2 id="auditor">Auditor Red Flags and Challenges</h2>
-
-            <h3 id="red-flag-1-borderline-lowvalue-claims">Red Flag 1: Borderline Low-Value Claims</h3>
-            <p><strong>Auditor:</strong> "You claimed 100 keyboards at £50 each are low-value. What's the new replacement cost?"<br>
-            <strong>You:</strong> "£60 per keyboard = £6,000 total."<br>
-            <strong>Auditor:</strong> "That's above the £5,000 threshold. You must recognize ROU assets for the entire bundle."</p>
-
-            <h3 id="red-flag-2-using-lowvalue-as-a-catchall">Red Flag 2: Using Low-Value as a Catch-All</h3>
-            <p><strong>Auditor:</strong> "You've classified 15 different asset types (furniture, equipment, software) as low-value. What's your policy? How did you assess each one?"<br>
-            <strong>Expected response:</strong> "We have a documented policy: new replacement cost &lt;£5,000. Here's the assessment for each asset category."</p>
-
-            <h3 id="red-flag-3-leases-that-are-renegotiated-annually">Red Flag 3: Leases That Are Re-negotiated Annually</h3>
-            <p><strong>Auditor:</strong> "Your 'short-term' office lease is 12 months, but you've renewed it every year for 5 years. Is this really short-term, or should you account for the expected 5-year renewal as a single long-term lease?"<br>
-            <strong>Key issue:</strong> Assessment at commencement is what matters. If you didn't expect to renew at day 1, the exemption is valid even if you did renew later.</p>
-
-            <h2 id="faq">FAQs</h2>
-
-            <div class="faq-item">
-                <h3 id="can-i-apply-the-lowvalue-exemption-to-10-laptops-but-not-90-others">Can I apply the low-value exemption to 10 laptops but not 90 others?</h3>
-                <p>You can apply the exemption on a lease-by-lease basis. If each lease is separate (different lessors, different terms), you can exempt some and recognize others. However, if all 100 laptops are under a single lease agreement, you must treat them consistently.</p>
+            <table>
+                <tr><th>Period</th><th>Cash paid (£)</th><th>SL expense (£)</th><th>Accrual movement (£)</th><th>Accrual balance (£)</th></tr>
+                <tr><td>Months 1-6 (each)</td><td>800</td><td>1,000</td><td>+200</td><td>rising to 1,200</td></tr>
+                <tr><td>Months 7-12 (each)</td><td>1,200</td><td>1,000</td><td>−200</td><td>unwinding to 0</td></tr>
+                <tr><td><strong>Full year</strong></td><td><strong>12,000</strong></td><td><strong>12,000</strong></td><td><strong>0</strong></td><td><strong>0</strong></td></tr>
+            </table>
+            <p>Monthly journal in months 1-6 (expense exceeds cash, so an accrual builds):</p>
+            <div style="background:#1a2f5a;color:#e8eef7;padding:18px 22px;border-radius:6px;margin:20px 0;font-family:'Courier New',monospace;font-size:0.9em;line-height:1.9;">
+                Dr&nbsp; Lease expense (P&amp;L) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr&nbsp; Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;800<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr&nbsp; Accrued lease liability &nbsp;&nbsp;200
             </div>
+            <p>In months 7-12 the accrual reverses (Dr Lease expense 1,000, Dr Accrued lease liability 200, Cr Cash 1,200). The accrual is an ordinary payables item, not a lease liability, and no interest is imputed. Total P&amp;L charge is a flat £1,000 a month, satisfying IFRS 16.6.</p>
 
-            <div class="faq-item">
-                <h3 id="what-if-the-asset-value-is-4500-in-year-1-and-depreciates-to-1500-by-year-3">What if the asset value is £4,500 in year 1 and depreciates to £1,500 by year 3?</h3>
-                <p>Use the new replacement cost at lease commencement (£4,500 in year 1). The exemption is assessed at day 1, not reassessed annually based on residual value.</p>
+            <h3 id="example-low-value">Worked example 2: low-value laptops vs a fleet car (IFRS 16.B3-B5)</h3>
+            <div class="example-box">
+                <p><strong>Facts.</strong> The same entity signs two 3-year leases: (A) 40 laptops, each worth £900 when new, at £25/laptop/month; and (B) one pool car worth £24,000 when new, at £300/month. Neither contains a purchase option, but both terms exceed 12 months, so the short-term exemption is unavailable — the low-value test decides each.</p>
             </div>
+            <table>
+                <tr><th></th><th>(A) 40 laptops</th><th>(B) Pool car</th></tr>
+                <tr><td>Value when new (per asset)</td><td>£900</td><td>£24,000</td></tr>
+                <tr><td>Standalone / not interrelated? (B5)</td><td>Yes</td><td>Yes</td></tr>
+                <tr><td>Class typically low value? (B3, BC100)</td><td>Yes — PCs cited in BC100</td><td>No — cars excluded in BC100</td></tr>
+                <tr><td>Low-value exemption available?</td><td><strong>Yes</strong></td><td><strong>No</strong></td></tr>
+                <tr><td>Accounting</td><td>Expense £1,000/month (40 × £25)</td><td>Recognise ROU asset + lease liability</td></tr>
+            </table>
+            <p>Lease A is expensed lease-by-lease under IFRS 16.5-6, even though the aggregate contract is £120,000 over three years — because each £900 laptop is assessed individually (IFRS 16.B3):</p>
+            <div style="background:#1a2f5a;color:#e8eef7;padding:18px 22px;border-radius:6px;margin:20px 0;font-family:'Courier New',monospace;font-size:0.9em;line-height:1.9;">
+                Dr&nbsp; Lease expense (P&amp;L) &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1,000<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr&nbsp; Cash &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1,000
+            </div>
+            <p>Lease B fails the class test in IFRS 16.B3 / BC100, so at commencement the entity recognises a lease liability at the present value of the £300 monthly payments and an equal ROU asset (initial-measurement journal below), then depreciates the asset and unwinds interest on the liability in the normal way:</p>
+            <div style="background:#1a2f5a;color:#e8eef7;padding:18px 22px;border-radius:6px;margin:20px 0;font-family:'Courier New',monospace;font-size:0.9em;line-height:1.9;">
+                Dr&nbsp; Right-of-use asset &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9,650<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;Cr&nbsp; Lease liability &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;9,650
+            </div>
+            <p style="font-size:0.85em;color:#8593a8;">ROU/liability figure illustrative: PV of 36 × £300 at ~7% IBR ≈ £9,650. See the <a href="ifrs-16-discount-rate-ibr.html" style="color:#2a4a7a;">IBR guide</a> for the discounting.</p>
 
-            <div class="faq-item">
-                <h3 id="can-i-elect-not-to-use-the-exemption-and-recognize-all-leases-on-the-balance-sheet">Can I elect not to use the exemption and recognize all leases on the balance sheet?</h3>
-                <p>Yes. The exemptions are optional. Some large companies opt to apply IFRS 16 to all leases (including short-term and low-value) for consistency and enhanced transparency. Document your policy choice and apply it consistently.</p>
-            </div>
+            <h2 id="red-flags">What do auditors challenge on exemption claims?</h2>
+            <p>Exemption claims are a favourite audit target because they are policy-driven, high-volume, and easy to over-apply. Three challenges recur, each tied to a specific ISA.</p>
+            <h3 id="rf-splitting">Red flag 1 — splitting a long lease into consecutive short-term leases (ISA 240 / ISA 315)</h3>
+            <p>The classic abuse is signing a genuine multi-year arrangement as a rolling series of 12-month contracts to keep it off balance sheet. Under ISA 315 (Revised) the auditor identifies this at the risk-assessment stage by understanding the business rationale of related contracts, and ISA 240 frames it as a possible management bias / structuring risk. The standard's own defence is the lease-term definition: where the lessee is reasonably certain to keep renewing the same asset, the substantive lease term exceeds 12 months and the short-term exemption is unavailable (IFRS 16.18-19, and the re-test on term changes in IFRS 16.7). A five-times-renewed "annual" office lease is the textbook trigger.</p>
+            <h3 id="rf-threshold">Red flag 2 — low-value claims that ignore the class and dependency tests (ISA 500)</h3>
+            <p>ISA 500 requires sufficient appropriate evidence for the amounts expensed. Auditors ask for the value-when-new support behind each asset class and probe two failure modes: an asset that is cheap per unit but belongs to an excluded class (a single fleet car at £300/month — disqualified by IFRS 16.B3 / BC100), and an asset that is inexpensive standalone but highly interrelated with other assets (IFRS 16.B5(b)). A schedule that lists diverse asset types under one "low-value" policy line, with no per-class replacement-cost evidence, is an ISA 500 evidence gap.</p>
+            <h3 id="rf-estimate">Red flag 3 — the smoothing accrual and disclosure completeness (ISA 540)</h3>
+            <p>Even off-balance-sheet leases involve an estimate: the straight-line accrual on uneven payment profiles (IFRS 16.6) and the completeness of the disclosed short-term and low-value expense (IFRS 16.53(c)-(d)). ISA 540 (Revised) governs the auditor's testing of that accrual and the underlying data. A common finding is that the general ledger expense reconciles, but the note disclosure omits leases expensed directly by operating units, understating the IFRS 16.53 line items.</p>
 
-            <div class="faq-item">
-                <h3 id="if-a-lease-is-both-shortterm-and-lowvalue-which-exemption-applies">If a lease is both short-term AND low-value, which exemption applies?</h3>
-                <p>Either one qualifies, so the lease is exempt. You don't need both conditions; one is sufficient. (A 6-month lease of a £10,000 laptop qualifies for the short-term exemption, even though it's not low-value.)</p>
+            <h2 id="case-study">Case study: Diageo plc FY2024 disclosure</h2>
+            <div class="example-box">
+                <p><strong>Source.</strong> Diageo plc, Annual Report / consolidated financial statements for the year ended 30 June 2024, Note 12 "Leases" (publicly filed).</p>
+                <p><strong>Policy.</strong> Diageo states that "payments associated with leases where the value of the asset when it is new is lower than $5,000 (leases of low value assets) and leases with a lease term of 12 months or less (short-term leases) are recognised as other operating expenses" — a textbook application of IFRS 16.5, B3-B5 and the BC100 USD 5,000 order of magnitude.</p>
+                <p><strong>Figures (as disclosed).</strong> Other external charges for the year included <strong>$70 million (2023: $69 million)</strong> in respect of leases of low-value assets and short-term leases, plus $8 million (2023: $5 million) of variable lease payments. Total cash outflow for leases in the year was $209 million (2023: $209 million). Diageo also discloses future minimum payments for short-term and low-value leases of $23 million.</p>
             </div>
+            <p>The disclosure illustrates IFRS 16.53(c)-(d) and 53(g) in practice: the exemption expense is quantified separately from the on-balance-sheet lease charge, and it is material enough ($70m) to be a genuine analytical item rather than a rounding footnote. Note that these amounts are the exempted expense only — the vast majority of Diageo's lease commitment (warehouses, offices, plant, distribution vehicles) is recognised as ROU assets and liabilities, because those classes fail both exemption gates.</p>
 
             <div class="author-bio">
                 <div class="avatar">UQ</div>
                 <div>
-                    <h4 id="usman-qureshi-acca-aca">Usman Qureshi (ACCA, ACA)</h4>
-                    <p>In audits, exemption decisions are often the first things questioned. Companies claim items are low-value without documenting the new replacement cost assessment. This guide includes the documentation framework auditors expect.</p>
+                    <h4 id="author">Usman Qureshi (ACCA, ACA)</h4>
+                    <p>In audits, exemption decisions are often the first things challenged. Entities call items low-value without documenting the value-when-new and the dependency test in IFRS 16.B5, or run consecutive short-term leases that are really one long lease. This guide gives the evidence trail auditors expect under ISA 500 and ISA 315.</p>
                 </div>
             </div>
 
-            
-<h2 id="real-life-case-study">Real-Life Case Study: Applying the Recognition Exemptions</h2>
-<div style="background:#f9f5f0;border-left:4px solid #d4af37;padding:18px 22px;margin:22px 0;border-radius:6px;">
-<p><strong>Scenario.</strong> A services firm has (a) a 9-month temporary office lease and (b) 200 leased laptops at ~&pound;600 each and a fleet of printers.</p>
- <p><strong>Treatment.</strong> The 9-month office qualifies for the short-term exemption (term &le; 12 months, no purchase option), so it is expensed straight-line, no ROU asset. The laptops qualify as low-value assets (assessed when new, on an asset-by-asset basis) and are also expensed. The result: &pound;0 on the balance sheet for these items, with disclosure of the expense recognised.</p>
- <p><strong>Takeaway.</strong> The low-value test is judged on the asset's value <em>when new</em> and per individual asset, not the total contract. A 200-laptop contract is not "high value", it is 200 low-value assets. But a lease of cars never qualifies, regardless of the monthly cost.</p>
-<p style="font-size:0.85em;color:#8593a8;margin-top:12px;">Illustrative composite scenario for educational purposes. Figures are indicative and do not represent any specific company.</p>
-</div>
+            <h2 id="faq">Frequently asked questions</h2>
+
+            <div class="faq-item">
+                <h3>Can I apply the low-value exemption to 10 laptops but not 90 others?</h3>
+                <p>Yes. The low-value election is lease-by-lease (IFRS 16.8), and each laptop is assessed individually against its value when new (IFRS 16.B3-B4). You can expense some and capitalise others as long as each decision is supported. The size of the overall contract is irrelevant to the test.</p>
+            </div>
+            <div class="faq-item">
+                <h3>What if the asset's value is £4,500 in year 1 and depreciates to £1,500 by year 3?</h3>
+                <p>Use the value of the asset when it is new, assessed once at commencement (IFRS 16.B3, B5). The test is absolute and is not revisited for subsequent depreciation. If the asset when new is below the threshold and is not highly interrelated with other assets, it stays exempt for the whole lease.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can a single inexpensive car qualify as a low-value lease?</h3>
+                <p>No. IFRS 16.B3 and the Basis for Conclusions (BC100) are explicit that cars do not qualify — a car when new is not of low value, even if an individual monthly rental is small. The class of asset, not the payment, drives the test, so a fleet vehicle is a full ROU asset and liability.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I elect not to use the exemptions and recognise all leases on balance sheet?</h3>
+                <p>Yes. Both exemptions are optional accounting-policy choices (IFRS 16.5). Some groups, including Vodafone, apply full recognition to every lease for comparability. Document the policy and apply the short-term election consistently by class of underlying asset (IFRS 16.8).</p>
+            </div>
+            <div class="faq-item">
+                <h3>If a lease is both short-term and low-value, which exemption applies?</h3>
+                <p>Either is sufficient to keep it off balance sheet (IFRS 16.5). In practice apply the low-value exemption, because it is elected lease-by-lease and does not need monitoring for a lease-term change, whereas a short-term lease that is modified or extended must be re-tested and often becomes recognisable (IFRS 16.7).</p>
+            </div>
+            <div class="faq-item">
+                <h3>Does a lease with a purchase option ever qualify as short-term?</h3>
+                <p>No. A short-term lease is defined (IFRS 16 Appendix A) as a lease of 12 months or less that contains no purchase option. Any purchase option disqualifies it, whatever the term or option price.</p>
+            </div>
+            <div class="faq-item">
+                <h3>How are the exempted lease costs disclosed?</h3>
+                <p>The short-term lease expense and the low-value asset lease expense are shown as separate note line items (IFRS 16.53(c)-(d)), with the related cash outflow under IFRS 16.53(g). Diageo, for instance, disclosed $70m of such charges for FY2024.</p>
+            </div>
 
 <div style="background: #f9f5f0; border-left: 4px solid #d4af37; padding: 20px; margin: 28px 0; border-radius: 4px;">
     <strong style="color: #1a2f5a; display: block; margin-bottom: 12px;"> Related Articles in This Cluster</strong>

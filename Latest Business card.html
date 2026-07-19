@@ -2165,7 +2165,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
   </div>
 
   <div class="mr-chat" id="mrChatWrap">
-    <div class="mr-chat-topbar"><button class="mr-maximize-btn" type="button" onclick="mrToggleMaximize('mrChatWrap')" title="Maximize">â›¶</button></div>
+    <div class="mr-chat-topbar"><button class="mr-maximize-btn" type="button" onclick="mrToggleMaximize('mrChatWrap')" title="Maximize">⛶</button></div>
     <div class="mr-messages" id="mrMessages"></div>
     <div class="mr-chips" id="mrChips" style="display:none">
       <span id="mrTopicChips" style="display:contents">
@@ -2265,7 +2265,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
       <option value="Intermediate">Intermediate</option>
       <option value="Expert">Expert</option>
     </select>
-    <button class="mr-maximize-btn" type="button" onclick="mrToggleMaximize('qzChatWrap')" title="Maximize" style="margin-left:.4rem">â›¶</button>
+    <button class="mr-maximize-btn" type="button" onclick="mrToggleMaximize('qzChatWrap')" title="Maximize" style="margin-left:.4rem">⛶</button>
   </div>
   <div class="mr-messages" id="qzMessages"></div>
   <div class="mr-chips">
@@ -2456,7 +2456,7 @@ body.mr-fullscreen #backToTopBtn{display:none!important}
   <div style="display:flex;align-items:center;gap:.6rem;padding:.85rem 1rem;border-bottom:1px solid rgba(255,255,255,.08)">
     <div class="mr-avatar photo av-ga" style="width:34px;height:34px;border-radius:8px">GA</div>
     <span style="font-size:.85rem;font-weight:700;color:var(--gold)">GAAP Champion</span>
-    <button class="mr-maximize-btn" type="button" onclick="mrToggleMaximize('gaapChatWrap')" title="Maximize" style="margin-left:auto">â›¶</button>
+    <button class="mr-maximize-btn" type="button" onclick="mrToggleMaximize('gaapChatWrap')" title="Maximize" style="margin-left:auto">⛶</button>
   </div>
   <div class="mr-messages" id="gaapMessages"></div>
   <div class="mr-chips" id="gaapChips">
@@ -5701,7 +5701,7 @@ function mrToggleMaximize(id){
   const maximized=el.classList.toggle('mr-maximized');
   document.body.classList.toggle('mr-fullscreen', maximized);
   const btn=el.querySelector('.mr-maximize-btn');
-  if(btn){ btn.textContent = maximized ? '⤡' : 'â›¶'; btn.title = maximized ? 'Minimize' : 'Maximize'; }
+  if(btn){ btn.textContent = maximized ? '⤡' : '⛶'; btn.title = maximized ? 'Minimize' : 'Maximize'; }
   if(maximized){
     // Reparent to <body> so an ancestor's transform/filter (section reveal animation) doesn't
     // break position:fixed and clamp the panel inside the section instead of the viewport.
